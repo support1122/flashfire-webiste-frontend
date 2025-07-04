@@ -1,0 +1,214 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-scroll {
+  animation: scroll 5s linear infinite;
+}
+
+/* Smooth scrolling for anchor links */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* Universal Mobile Optimizations for ALL Phone Sizes */
+@media (max-width: 640px) {
+  /* Ensure all interactive elements are touch-friendly */
+  button, input, select, textarea, a {
+    min-height: 44px;
+    font-size: 16px; /* Prevents zoom on iOS */
+  }
+  
+  /* Better spacing for small screens */
+  .space-y-4 > * + * {
+    margin-top: 1rem;
+  }
+  
+  /* Calendly mobile optimization */
+  .calendly-inline-widget {
+    min-height: 400px !important;
+  }
+  
+  /* Ensure text is readable on all devices */
+  body {
+    font-size: 16px;
+    line-height: 1.5;
+  }
+}
+
+/* Extra Small Phones (320px - 374px) */
+@media (max-width: 374px) {
+  /* Ultra compact layout for very small screens */
+  .modal-content {
+    padding: 8px;
+  }
+  
+  /* Smaller text for tiny screens */
+  .text-responsive {
+    font-size: 13px;
+  }
+  
+  /* Ensure Calendly widget works on smallest phones */
+  .calendly-inline-widget iframe {
+    min-height: 350px !important;
+  }
+  
+  /* Compact navigation */
+  nav {
+    padding: 0.5rem 1rem;
+  }
+  
+  /* Smaller buttons for tiny screens */
+  button {
+    padding: 0.75rem 1rem;
+    font-size: 14px;
+  }
+}
+
+/* Small Phones (375px - 413px) - iPhone SE, iPhone 12 mini */
+@media (min-width: 375px) and (max-width: 413px) {
+  .calendly-inline-widget iframe {
+    min-height: 400px !important;
+  }
+  
+  /* Better spacing for small phones */
+  .container {
+    padding: 1rem;
+  }
+}
+
+/* Medium Phones (414px - 479px) - iPhone 6/7/8 Plus, iPhone 11 Pro */
+@media (min-width: 414px) and (max-width: 479px) {
+  .calendly-inline-widget iframe {
+    min-height: 450px !important;
+  }
+}
+
+/* Large Phones (480px - 639px) - iPhone 11, iPhone 12/13/14 Pro Max */
+@media (min-width: 480px) and (max-width: 639px) {
+  .calendly-inline-widget iframe {
+    min-height: 500px !important;
+  }
+  
+  /* Better use of space on larger phones */
+  .grid-cols-1 {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+  }
+}
+
+/* Landscape mode optimizations for ALL mobile devices */
+@media (max-height: 500px) and (orientation: landscape) {
+  .modal-content {
+    padding: 4px 8px;
+  }
+  
+  .calendly-inline-widget {
+    min-height: 300px !important;
+  }
+  
+  /* Compact header in landscape */
+  .mobile-header {
+    padding: 0.5rem;
+  }
+  
+  /* Hide unnecessary elements in landscape */
+  .landscape-hide {
+    display: none;
+  }
+}
+
+/* Tablet Portrait (640px - 767px) */
+@media (min-width: 640px) and (max-width: 767px) {
+  .calendly-inline-widget iframe {
+    min-height: 550px !important;
+  }
+}
+
+/* Tablet Landscape (768px - 1023px) */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .calendly-inline-widget iframe {
+    min-height: 600px !important;
+  }
+}
+
+/* High DPI / Retina Display Optimizations */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  /* Sharper text rendering on high DPI displays */
+  body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+/* Dark Mode Support (if user prefers) */
+@media (prefers-color-scheme: dark) {
+  /* Respect user's dark mode preference for better accessibility */
+  .calendly-inline-widget {
+    filter: invert(0); /* Keep Calendly in light mode for consistency */
+  }
+}
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+  /* Disable animations for users who prefer reduced motion */
+  .animate-scroll {
+    animation: none;
+  }
+  
+  .transition-all {
+    transition: none;
+  }
+}
+
+/* Print Styles */
+@media print {
+  /* Hide interactive elements when printing */
+  .fixed, .sticky, .modal, .calendly-inline-widget {
+    display: none !important;
+  }
+}
+
+/* Focus Styles for Better Accessibility */
+button:focus,
+input:focus,
+select:focus,
+textarea:focus {
+  outline: 2px solid #f97316;
+  outline-offset: 2px;
+}
+
+/* Ensure proper contrast ratios */
+.text-gray-600 {
+  color: #4b5563; /* Ensures WCAG AA compliance */
+}
+
+.text-gray-500 {
+  color: #6b7280; /* Ensures WCAG AA compliance */
+}
