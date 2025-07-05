@@ -42,7 +42,7 @@ const HowItWorks = () => {
           </h2>
           <p className="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto">
             Our proven process that gets you hired while you save{' '}
-            <span className="text-orange-600 font-semibold">220+ hours every month</span>
+            <span className="text-orange-600 font-semibold">150+ hours every month</span>
           </p>
         </div>
 
@@ -101,7 +101,7 @@ const HowItWorks = () => {
               Ready to Start Your Success Journey?
             </h3>
             <p className="text-orange-100 mb-6 sm:mb-8 text-lg sm:text-xl max-w-2xl mx-auto">
-              Join thousands of professionals who've accelerated their careers with FlashFire's proven 4-step process.
+              Join thousands of professionals who've accelerated their careers with Flashfire's proven 4-step process.
             </p>
             <button
               onClick={() => {

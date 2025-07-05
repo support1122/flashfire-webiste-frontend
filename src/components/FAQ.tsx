@@ -14,15 +14,15 @@ const FAQ = () => {
       answer: "If you don't receive any interview calls by the end of your plan, we'll send 100+ extra applications and provide a free resume update. This promise is exclusive to our Premium Plan users. Your career is our priority — we won't leave you hanging."
     },
     {
-      question: "Why should I pay for FlashFire when I can apply to jobs on my own?",
-      answer: "FlashFire automates your entire job application process — from resume tailoring to mass applications and tracking. While you focus on interviews and skill-building, we apply to 1000+ high-matching roles on your behalf. Clients save ~200 hours and double their callback rate with us."
+      question: "Why should I pay for Flashfire when I can apply to jobs on my own?",
+      answer: "Flashfire automates your entire job application process — from resume tailoring to mass applications and tracking. While you focus on interviews and skill-building, we apply to 1000+ high-matching roles on your behalf. Clients save ~200 hours and double their callback rate with us."
     },
     {
-      question: "What is FlashFire's success rate?",
-      answer: "Our users have a 90%+ chance of receiving interview calls within the first 4 weeks of using FlashFire. With targeted applications and optimized resumes, most land interviews faster than expected. Premium users see even stronger results."
+      question: "What is Flashfire's success rate?",
+      answer: "Our users have a 90%+ chance of receiving interview calls within the first 4 weeks of using Flashfire. With targeted applications and optimized resumes, most land interviews faster than expected. Premium users see even stronger results."
     },
     {
-      question: "How is FlashFire different from other job platforms?",
+      question: "How is Flashfire different from other job platforms?",
       answer: "Unlike typical job boards, we don't wait for you to apply — we apply for you, daily. Our AI + human experts personalize every resume and track each submission in your dashboard. No spam, no guessing, just results."
     },
     {
@@ -30,8 +30,8 @@ const FAQ = () => {
       answer: "Yes! Your personalized dashboard shows live updates on all job applications, statuses, and interview alerts. You'll always know where things stand, without chasing emails or spreadsheets."
     },
     {
-      question: "Is FlashFire right for U.S. students and job seekers?",
-      answer: "Absolutely. FlashFire is designed for OPT/CPT/H1B holders and international students. We know every application matters, and our team ensures you maximize your chances in a competitive U.S. market."
+      question: "Is Flashfire right for U.S. students and job seekers?",
+      answer: "Absolutely. Flashfire is designed for OPT/CPT/H1B holders and international students. We know every application matters, and our team ensures you maximize your chances in a competitive U.S. market."
     }
   ];
 
@@ -51,7 +51,7 @@ const FAQ = () => {
             Got Questions? We've Got Answers
           </h2>
           <p className="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto">
-            Everything you need to know about FlashFire's AI-powered job search automation.
+            Everything you need to know about Flashfire's AI-powered job search automation.
           </p>
         </div>
 
@@ -93,7 +93,7 @@ const FAQ = () => {
               Still Have Questions?
             </h3>
             <p className="text-orange-100 mb-6 sm:mb-8 text-lg sm:text-xl max-w-2xl mx-auto">
-              Our team is here to help you understand how FlashFire can transform your job search and save you 220+ hours every month.
+              Our team is here to help you understand how Flashfire can transform your job search and save you 150+ hours every month.
             </p>
             <button
               onClick={() => {

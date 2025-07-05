@@ -21,7 +21,7 @@ const Hero = () => {
           {/* Badge */}
           <div className="inline-flex items-center space-x-2 bg-orange-100 border border-orange-200 rounded-full px-3 sm:px-4 py-2 mb-6 sm:mb-8">
             <Sparkles className="w-3 h-3 sm:w-4 sm:h-4 text-orange-600" />
-            <span className="text-orange-800 text-xs sm:text-sm font-medium">Save 220+ Hours Every Month</span>
+            <span className="text-orange-800 text-xs sm:text-sm font-medium">Save 150+ Hours Every Month</span>
           </div>
 
           {/* Main Headline */}

@@ -230,7 +230,7 @@ const SignupModal = () => {
                       <Calendar className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
                     </div>
                     <div>
-                      <h2 className="text-base sm:text-lg font-bold">Schedule Your FlashFire Consultation</h2>
+                      <h2 className="text-base sm:text-lg font-bold">Schedule Your Flashfire Consultation</h2>
                       <p className="text-orange-100 text-xs sm:text-sm">30 Minutes • Free</p>
                     </div>
                   </div>
@@ -240,7 +240,8 @@ const SignupModal = () => {
               {/* Calendar Section - Maximum Available Height */}
               <div className="bg-white overflow-hidden" style={{ height: 'calc(100vh - 100px)' }}>
                 <InlineWidget
-                  url='https://calendly.com/biswajitshrm6/meet-with-me' //'https://calendly.com/adit-jain606/30min'   //"https://calendly.com/tripathipranjal01/flashfire"
+                   url='https://calendly.com/feedback-flashfire/30min'
+// 'https://calendly.com/biswajitshrm6/meet-with-me' //'https://calendly.com/adit-jain606/30min'   //"https://calendly.com/tripathipranjal01/flashfire"
                   prefill={{
                     name: formData.fullName,
                     email: formData.email
@@ -272,12 +273,12 @@ const SignupModal = () => {
                         <Calendar className="w-8 h-8 text-white" />
                       </div>
                       <div>
-                        <h2 className="text-2xl font-bold">Schedule Your FlashFire Consultation</h2>
+                        <h2 className="text-2xl font-bold">Schedule Your Flashfire Consultation</h2>
                         <p className="text-orange-100">30 Minutes • Free</p>
                       </div>
                     </div>
                     <p className="text-orange-100 text-lg leading-relaxed">
-                      Book your personalized consultation to learn how FlashFire can automate your job search and land interviews faster.
+                      Book your personalized consultation to learn how Flashfire can automate your job search and land interviews faster.
                     </p>
                   </div>
 

@@ -79,7 +79,7 @@ const Pricing = () => {
           </h2>
           <p className="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto mb-6 sm:mb-8">
             All plans include our AI-powered job matching and application automation. 
-            <span className="text-orange-600 font-semibold"> Save 220+ hours monthly</span> while we work for you 24/7.
+            <span className="text-orange-600 font-semibold"> Save 150+ hours monthly</span> while we work for you 24/7.
           </p>
           
           {/* Discount Banner */}

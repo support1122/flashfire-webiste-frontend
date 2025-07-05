@@ -2,8 +2,8 @@ import React from 'react';
 
 const WhatsAppButton = () => {
   const handleWhatsAppClick = () => {
-    const phoneNumber = '917217209666'; // Your phone number with country code
-    const message = encodeURIComponent('Hi! I\'m interested in FlashFire\'s AI-powered job search automation. Can you help me get started?');
+    const phoneNumber = '919817349846'; // Your phone number with country code
+    const message = encodeURIComponent('Hi! I\'m interested in Flashfire\'s AI-powered job search automation. Can you help me get started?');
     const whatsappUrl = `https://wa.me/${phoneNumber}?text=${message}`;
     window.open(whatsappUrl, '_blank');
   };

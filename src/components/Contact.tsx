@@ -75,7 +75,7 @@ const Contact = () => {
                   </div>
                   <div>
                     <p className="text-gray-900 font-semibold">Email Us</p>
-                    <p className="text-gray-600 text-sm sm:text-base">feedback.flashfire@gmail.com</p>
+                    <p className="text-gray-600 text-sm sm:text-base">support@flashfirejobs.com</p>
                   </div>
                 </div>
                 <div className="flex items-center space-x-4">
@@ -98,7 +98,7 @@ const Contact = () => {
                   <div className="text-orange-100 text-xs sm:text-sm">Success Rate</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-2xl sm:text-3xl font-bold">220+</div>
+                  <div className="text-2xl sm:text-3xl font-bold">150+</div>
                   <div className="text-orange-100 text-xs sm:text-sm">Hours Saved</div>
                 </div>
                 <div className="text-center">
