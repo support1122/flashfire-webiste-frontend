@@ -29,7 +29,7 @@ const SignupModal = () => {
 
   async function SaveDetailsToDB() {
     try {
-        let reqToServer = await fetch(`http://localhost:8086`, {
+        let reqToServer = await fetch('https://api.flashfirejobs.com/', {
                               method: 'POST',
                               headers: { 'Content-Type': 'application/json' },
                               body: JSON.stringify({name : formData?.fullName,
@@ -340,7 +340,7 @@ const SignupModal = () => {
               {/* Calendar Section - 3 columns */}
               <div className="lg:col-span-3 bg-white">
                 <InlineWidget
-                  url='https://calendly.com/biswajitshrm6/meet-with-me'  //'https://calendly.com/adit-jain606/30min' //"https://calendly.com/tripathipranjal01/flashfire"
+                  url='https://calendly.com/feedback-flashfire/30min'  //'https://calendly.com/adit-jain606/30min' //"https://calendly.com/tripathipranjal01/flashfire"
                   prefill={{
                     name: formData.fullName,
                     email: formData.email
