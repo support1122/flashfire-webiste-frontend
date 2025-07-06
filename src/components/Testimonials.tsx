@@ -30,14 +30,14 @@ avatar: "/images/aryan.jpg"  },
 avatar: "/images/rudraksh.jpg"  },
   {
     text: "I’ve tried other job platforms, but nothing compares to Flashfire’s speed and accuracy. Plus, I finally stopped editing my resume manually.",
-    name: "Rijul J.",
-    role: "Bresy",
-avatar: "/images/rijul.jpg"  },
+    name: "Sanju G.",
+    role: "Wood Mackenzie",
+avatar: "/images/sanju.jpg"  },
   {
     text: "Honestly, I was skeptical. But Flashfire delivered—within a week, I had interviews booked. The insights and AI help made a huge difference.",
-    name: "Chiraj J.",
+    name: "Utkarsh T.",
     role: "Mastercard",
-avatar: "/images/chirag.jpg"  },
+avatar: "/images/utkarsh.jpg"  },
 ];
 
 
