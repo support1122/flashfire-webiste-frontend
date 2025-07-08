@@ -15,8 +15,8 @@ const testimonials = [
     avatar: "/images/amit.jpg"  },
   {
     text: "What really impressed me was how personalized everything felt. The AI knew exactly which jobs suited me and why.",
-    name: "Harkirat S.",
-    role: "Amazon",
+    name: "Anjali S.",
+    role: "Skyworks Solutions, Inc.",
 avatar: "/images/harkirat.jpg"  },
   {
     text: "This saved me hours every week. The resume targeting feature alone is worth it—and I actually enjoy job hunting now!",
@@ -35,8 +35,8 @@ avatar: "/images/rudraksh.jpg"  },
 avatar: "/images/sanju.jpg"  },
   {
     text: "Honestly, I was skeptical. But Flashfire delivered—within a week, I had interviews booked. The insights and AI help made a huge difference.",
-    name: "Utkarsh T.",
-    role: "Mastercard",
+    name: "Rijul J.",
+    // role: "Mastercard",
 avatar: "/images/utkarsh.jpg"  },
 ];
 
