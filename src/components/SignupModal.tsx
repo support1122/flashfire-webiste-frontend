@@ -202,7 +202,7 @@ const SignupModal = () => {
                 disabled={formData.phone.length !== 10} 
                 className="w-full bg-gradient-to-r from-orange-500 to-orange-600 text-white py-4 px-6 rounded-xl font-bold hover:from-orange-600 hover:to-orange-700 transition-all duration-200 shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed text-base"
               >
-                Continue to Schedule Call
+                Submit
               </button>
             </form>
 
