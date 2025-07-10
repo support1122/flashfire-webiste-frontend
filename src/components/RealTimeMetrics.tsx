@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { TrendingUp, Users, Clock, Briefcase } from 'lucide-react';
 
-const RealTimeMetrics = () => {
+const RealTimeMetrics = ({openModal}) => {
   const [metrics, setMetrics] = useState({
     jobsApplying: 24,
     interviewsToday: 6,
@@ -98,10 +98,7 @@ const RealTimeMetrics = () => {
               While you read this, our AI is applying to jobs for hundreds of professionals
             </p>
             <button
-              onClick={() => {
-                const modal = document.getElementById('signup-modal');
-                if (modal) modal.classList.remove('hidden');
-              }}
+              onClick={()=>openModal(1)}
               className="bg-gradient-to-r from-orange-500 to-orange-600 text-white px-6 sm:px-8 py-3 rounded-full font-bold hover:from-orange-600 hover:to-orange-700 transition-all duration-200 shadow-lg hover:scale-105 text-sm sm:text-base"
             >
               Start Your Free Trial
@@ -113,12 +110,12 @@ const RealTimeMetrics = () => {
   );
 };
 
-function App() {
-  return (
-    <div className="min-h-screen bg-gray-100">
-      <RealTimeMetrics />
-    </div>
-  );
-}
+// function App() {
+//   return (
+//     <div className="min-h-screen bg-gray-100">
+//       <RealTimeMetrics openModal={openModal} />
+//     </div>
+//   );
+// }
 
-export default App;
+export default RealTimeMetrics;

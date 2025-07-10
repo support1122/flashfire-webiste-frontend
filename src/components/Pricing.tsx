@@ -1,11 +1,11 @@
 import React from 'react';
 import { Check, Zap, Crown, Rocket } from 'lucide-react';
 
-const Pricing = () => {
-  const openModal = () => {
-    const modal = document.getElementById('signup-modal');
-    if (modal) modal.classList.remove('hidden');
-  };
+const Pricing = ({openModal}) => {
+  // const openModal = () => {
+  //   const modal = document.getElementById('signup-modal');
+  //   if (modal) modal.classList.remove('hidden');
+  // };
 
   const plans = [
     {
@@ -150,7 +150,7 @@ const Pricing = () => {
                 </ul>
 
                 <button
-                  onClick={openModal}
+                  onClick={()=>openModal(1)}
                   className={`w-full py-3 sm:py-4 px-6 rounded-xl sm:rounded-2xl font-bold text-base sm:text-lg transition-all duration-200 ${
                     plan.popular
                       ? 'bg-gradient-to-r from-orange-500 to-red-500 text-white hover:from-orange-600 hover:to-red-600 shadow-lg hover:shadow-xl hover:scale-105'
