@@ -1,6 +1,6 @@
 import React from 'react';
 
-const MovingJobs = ({openModal}) => {
+const MovingJobs = () => {
   const jobs = [
     {
       company: "Redfin",
@@ -104,7 +104,10 @@ const MovingJobs = ({openModal}) => {
 
         <div className="text-center mt-8 sm:mt-12">
           <button
-            onClick={()=>openModal(1)}
+            onClick={() => {
+              const modal = document.getElementById('signup-modal');
+              if (modal) modal.classList.remove('hidden');
+            }}
             className="bg-gradient-to-r from-orange-500 to-orange-600 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-full font-bold hover:from-orange-600 hover:to-orange-700 transition-all duration-200 shadow-lg hover:scale-105 text-sm sm:text-base"
           >
             Apply to These Jobs Automatically
