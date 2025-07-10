@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 
-const Navigation = () => {
+const Navigation = ({openModal}) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
@@ -22,11 +22,11 @@ const Navigation = () => {
     { name: 'Contact', href: '#contact' },
   ];
 
-  const openModal = () => {
-    const modal = document.getElementById('signup-modal');
-    if (modal) modal.classList.remove('hidden');
-    setIsMenuOpen(false);
-  };
+  // const openModal = () => {
+  //   const modal = document.getElementById('signup-modal');
+  //   if (modal) modal.classList.remove('hidden');
+  //   setIsMenuOpen(false);
+  // };
 
   return (
     <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${
@@ -60,7 +60,7 @@ const Navigation = () => {
           {/* CTA Button */}
           <div className="hidden md:block">
             <button
-              onClick={openModal}
+              onClick={()=>openModal(1)}
               className="bg-gradient-to-r from-orange-500 to-orange-600 text-white px-4 lg:px-6 py-2 lg:py-2.5 rounded-full font-semibold hover:from-orange-600 hover:to-orange-700 transition-all duration-200 shadow-lg hover:shadow-xl hover:scale-105 text-sm lg:text-base"
             >
               Try 7 Days Free 
@@ -93,7 +93,7 @@ const Navigation = () => {
                 </a>
               ))}
               <button
-                onClick={openModal}
+                onClick={()=>openModal(1)}
                 className="bg-gradient-to-r from-orange-500 to-orange-600 text-white px-3 py-3 rounded-lg font-semibold hover:from-orange-600 hover:to-orange-700 transition-all duration-200 block text-center mt-4 w-full text-base"
               >
                 Start Free Trial
