@@ -235,7 +235,7 @@ import { Mail, Calendar, MessageCircle, Zap, CheckCircle } from 'lucide-react';
 
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
-const Contact = ({openModal}) => {
+const Contact = () => {
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -448,12 +448,12 @@ const Contact = ({openModal}) => {
             <p className="text-lg sm:text-xl text-gray-600 mb-6 sm:mb-8 max-w-2xl mx-auto">
               Join thousands of professionals who've accelerated their careers with FLASHFIRE's AI-powered job search automation.
             </p>
-             <button
-                onClick={()=>openModal(1)}
+            <a
+              href="#pricing"
               className="inline-block bg-gradient-to-r from-orange-500 to-red-500 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-full font-bold hover:from-orange-600 hover:to-red-600 transition-all duration-200 shadow-lg hover:scale-105"
             >
               Start Your Free Trial Today
-            </button>
+            </a>
           </div>
         </div>
       </div>

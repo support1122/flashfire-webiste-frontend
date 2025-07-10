@@ -1,56 +1,41 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { X, Calendar, User, Phone, Mail, CheckCircle, ArrowLeft } from 'lucide-react';
 import { InlineWidget } from 'react-calendly';
-import AOS from 'aos';
-import 'aos/dist/aos.css';
 
 
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
-const SignupModal = ({openModal, whichState, closeModal }) => {
-  const [step, setStep] = useState(whichState); // Default to step 1 if not provided
+const SignupModal = () => {
+  const [step, setStep] = useState(1);
   const [formData, setFormData] = useState({
-    // fullName: '',
-    phone:  '',
+    fullName: '',
+    phone: '',
     countryCode: '+1',
-    // email: '',
-    // workAuthorization: ''
+    email: '',
+    workAuthorization: ''
   });
-
-
-  useEffect(() => {
-  if (whichState) setStep(whichState);
-  else setStep(1);
-}, [whichState]);
- useEffect(() => {
-    AOS.init({
-      duration: 1000,   // animation duration in ms
-      once: true,       // animate only once
-    });
-  }, []);
-
 
   const countryCodes = [
     { code: '+1', country: 'USA', pattern: /^1/ },
     { code: '+91', country: 'India', pattern: /^91/ }
   ];
 
-//   const closeModal = () => {
-//   if (onClose) onClose();
-//   setStep(1);
-//   setFormData({ countryCode: '+1', phone: '' });
-// };
+  const closeModal = () => {
+    const modal = document.getElementById('signup-modal');
+    if (modal) modal.classList.add('hidden');
+    setStep(1);
+    setFormData({ fullName: '', phone: '', countryCode: '+1', email: '', workAuthorization: '' });
+  };
 
   async function SaveDetailsToDB() {
     try {
-        let reqToServer = await fetch('https://api.flashfirejobs.com/', { //
+        let reqToServer = await fetch('https://api.flashfirejobs.com/', {
                               method: 'POST',
                               headers: { 'Content-Type': 'application/json' },
-                              body: JSON.stringify({//name : formData?.fullName,
-                                                    //email: formData?.email,
+                              body: JSON.stringify({name : formData?.fullName,
+                                                    email: formData?.email,
                                                     mobile:formData?.countryCode + formData.phone,
-                                                    //workAuthorization: formData.workAuthorization
-                                                  })
+                                                    workAuthorization: formData.workAuthorization})
                             })
                             console.log(formData.countryCode + formData.phone);
         let responseFromServer = await reqToServer?.json();
@@ -58,7 +43,9 @@ const SignupModal = ({openModal, whichState, closeModal }) => {
       
     } catch (error) {
       console.log(error)
-    }   
+    }
+
+    
   }
 
  const handleSubmit = async (e: React.FormEvent) => {
@@ -66,17 +53,15 @@ const SignupModal = ({openModal, whichState, closeModal }) => {
   try {
     setStep(2);
     if (
-      // formData.fullName &&
+      formData.fullName &&
       formData.phone &&
-      // formData.email &&
-      // formData.workAuthorization &&
+      formData.email &&
+      formData.workAuthorization &&
       formData.phone.length === 10
     ) {
       await SaveDetailsToDB();
       
     }
-    else
-      return;
   } catch (error) {
     console.log('Error during form submission:', error);
     // Optionally, show an error message to the user here
@@ -93,34 +78,31 @@ const SignupModal = ({openModal, whichState, closeModal }) => {
     return '+1';
   };
 
- const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-  const { name, value } = e.target;
-
-  if (name === 'phone') {
-    const numericValue = value.replace(/\D/g, '').slice(0, 10); // keep max 10 digits
-    setFormData(prev => ({
-      ...prev,
-      phone: numericValue,
-    }));
-  } else {
-    setFormData(prev => ({
-      ...prev,
-      [name]: value,
-    }));
-  }
-};
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    if (name === 'phone') {
+      const numericValue = value.replace(/\D/g, '');
+      if (numericValue.length <= 10) {
+        setFormData({
+          ...formData,
+          [name]: numericValue,
+          // countryCode: detectedCountry
+        });
+      }
+    } else {
+      setFormData({ ...formData, [name]: value });
+    }
+  };
 
   const goBack = () => {
     setStep(1);
   };
 
-  
-
   return (
-    <div  className="sm:top-[20vh] top-[15vh] mt-2 fixed inset-0 h-[100%] bg-opacity-50 z-50 flex items-center justify-center">
+    <div id="signup-modal" className="hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center">
       <div className="bg-white w-full h-full sm:rounded-2xl lg:rounded-3xl sm:w-[95vw] sm:h-[95vh] lg:max-w-7xl lg:max-h-[90vh] overflow-hidden shadow-2xl">
         {step === 1 ? (
-          <div data-aos='fade-left' className="top-[30%] h-[60%] p-4 sm:p-6 lg:p-8 " id='step1'>
+          <div className="p-4 sm:p-6 lg:p-8 overflow-y-auto h-full">
             <div className="flex justify-between items-start mb-6 sm:mb-8">
               <div className="flex-1 pr-4">
                 <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900">Get Started for Free</h2>
@@ -132,22 +114,22 @@ const SignupModal = ({openModal, whichState, closeModal }) => {
             </div>
 
             <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6 max-w-2xl mx-auto">
-               {/* <div>
-                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                   <User className="w-4 h-4 inline mr-2" /> Full Name
-                 </label>
-                 <input 
-                   type="text" 
-                   name="fullName" 
-                   value={formData.fullName} 
-                   onChange={handleInputChange} 
-                   className="w-full px-4 py-4 bg-gray-50 border border-gray-200 rounded-xl text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent text-base" 
-                   placeholder="Enter your full name" 
-                   required 
-                 />
-               </div> */}
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <User className="w-4 h-4 inline mr-2" /> Full Name
+                </label>
+                <input 
+                  type="text" 
+                  name="fullName" 
+                  value={formData.fullName} 
+                  onChange={handleInputChange} 
+                  className="w-full px-4 py-4 bg-gray-50 border border-gray-200 rounded-xl text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent text-base" 
+                  placeholder="Enter your full name" 
+                  required 
+                />
+              </div>
 
-              <div >
+              <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
                   <Phone className="w-4 h-4 inline mr-2" /> Phone Number (10 digits only)
                 </label>
@@ -182,7 +164,7 @@ const SignupModal = ({openModal, whichState, closeModal }) => {
                 )}
               </div>
 
-              {/* <div>
+              <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
                   <Mail className="w-4 h-4 inline mr-2" /> Email Address
                 </label>
@@ -195,9 +177,9 @@ const SignupModal = ({openModal, whichState, closeModal }) => {
                   placeholder="Enter your email address" 
                   required 
                 />
-              </div> */}
+              </div>
 
-              {/* <div>
+              <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
                   Are you authorized to work in USA?
                 </label>
@@ -212,7 +194,7 @@ const SignupModal = ({openModal, whichState, closeModal }) => {
                   <option value="yes">Yes</option>
                   <option value="no">No</option>
                 </select>
-              </div> */}
+              </div>
 
               <button 
                
@@ -227,7 +209,7 @@ const SignupModal = ({openModal, whichState, closeModal }) => {
             <p className="text-center text-sm text-gray-500 mt-6">No spam, ever. We respect your privacy.</p>
           </div>
         ) : (
-          <div  className="relative h-full top-[15vh]" id='calendly-booker'>
+          <div className="relative h-full">
             {/* Close button - fixed position */}
             <button onClick={closeModal} className="absolute top-4 right-4 sm:top-6 sm:right-6 text-gray-400 hover:text-gray-600 transition-colors z-20 bg-white/90 rounded-full p-2 shadow-lg">
               <X className="w-5 h-5 sm:w-6 sm:h-6" />
@@ -260,10 +242,10 @@ const SignupModal = ({openModal, whichState, closeModal }) => {
                 <InlineWidget
                    url='https://calendly.com/feedback-flashfire/30min'
 // 'https://calendly.com/biswajitshrm6/meet-with-me' //'https://calendly.com/adit-jain606/30min'   //"https://calendly.com/tripathipranjal01/flashfire"
-                  // prefill={{
-                  //   name: formData.fullName,
-                  //   email: formData.email
-                  // }}
+                  prefill={{
+                    name: formData.fullName,
+                    email: formData.email
+                  }}
                   styles={{
                     height: '100%',
                     width: '100%',
@@ -360,9 +342,8 @@ const SignupModal = ({openModal, whichState, closeModal }) => {
                 <InlineWidget
                   url='https://calendly.com/feedback-flashfire/30min'  //'https://calendly.com/adit-jain606/30min' //"https://calendly.com/tripathipranjal01/flashfire"
                   prefill={{
-                    // name: formData.fullName,
-                    // email: formData.email,
-                    mobile : formData.countryCode + formData.phone
+                    name: formData.fullName,
+                    email: formData.email
                   }}
                   styles={{
                     height: '100%',

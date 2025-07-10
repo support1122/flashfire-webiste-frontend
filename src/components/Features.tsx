@@ -1,7 +1,7 @@
 import React from 'react';
 import { Bot, FileText, Target, Zap, Shield, BarChart3, Linkedin } from 'lucide-react';
 
-const Features = ({openModal}) => {
+const Features = () => {
   const features = [
     {
       icon: <Bot className="w-8 h-8 text-orange-500" />,
@@ -94,7 +94,10 @@ const Features = ({openModal}) => {
             While our AI handles job applications, resume optimization, and tracking, you focus on interviews, skill-building, and networking.
           </p>
           <button
-            onClick={()=>openModal(1)}
+            onClick={() => {
+              const modal = document.getElementById('signup-modal');
+              if (modal) modal.classList.remove('hidden');
+            }}
             className="bg-white text-orange-600 px-6 sm:px-8 py-3 sm:py-4 rounded-full font-bold hover:bg-gray-50 transition-colors duration-200 shadow-lg"
           >
             Start Saving Time Today

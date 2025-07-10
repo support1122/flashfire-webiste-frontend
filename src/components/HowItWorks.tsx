@@ -123,7 +123,7 @@
 import React from 'react';
 import { Linkedin, FileText, Rocket, Phone } from 'lucide-react';
 
-const HowItWorks = ({openModal}) => {
+const HowItWorks = () => {
   const steps = [
     {
       icon: <Linkedin className="w-8 h-8 text-orange-600" />,
@@ -197,11 +197,11 @@ const HowItWorks = ({openModal}) => {
                   <div className="p-3 bg-gray-50 rounded-xl group-hover:bg-orange-50 transition-colors duration-300">
                     {step.icon}
                   </div>
-                  {/* <div className="ml-4">
+                  <div className="ml-4">
                     <span className="inline-block bg-gradient-to-r from-orange-500 to-orange-600 text-white text-xs px-3 py-1 rounded-full font-medium">
                       {step.step}
                     </span>
-                  </div> */}
+                  </div>
                 </div>
                 
                 <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-4">
@@ -226,7 +226,10 @@ const HowItWorks = ({openModal}) => {
               Join thousands of professionals who've accelerated their careers with Flashfire's proven 4-step process.
             </p>
             <button
-              onClick={()=>openModal(1)}
+              onClick={() => {
+                const modal = document.getElementById('signup-modal');
+                if (modal) modal.classList.remove('hidden');
+              }}
               className="bg-white text-orange-600 px-6 sm:px-8 py-3 sm:py-4 rounded-full font-bold hover:bg-gray-50 transition-all duration-200 shadow-lg hover:scale-105"
             >
               Start Free Trial

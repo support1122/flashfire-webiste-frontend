@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { ChevronDown, ChevronUp, HelpCircle } from 'lucide-react';
 
-const FAQ = ({openModal}) => {
+const FAQ = () => {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   const faqs = [
@@ -96,7 +96,10 @@ const FAQ = ({openModal}) => {
               Our team is here to help you understand how Flashfire can transform your job search and save you 150+ hours every month.
             </p>
             <button
-              onClick={()=>openModal(1)}
+              onClick={() => {
+                const modal = document.getElementById('signup-modal');
+                if (modal) modal.classList.remove('hidden');
+              }}
               className="bg-white text-orange-600 px-6 sm:px-8 py-3 sm:py-4 rounded-full font-bold hover:bg-gray-50 transition-colors duration-200 shadow-lg hover:scale-105"
             >
               Schedule a Free Consultation
