@@ -256,7 +256,7 @@ const Contact = () => {
     setIsSubmitting(true);
     
     try {
-      let requestToServer = await fetch('https://api.flashfirejobs.com/api/contact', {
+      let requestToServer = await fetch('https://api.flashfirejobs.com/api/contact', {//
         method: 'POST',
         headers: {'Content-Type': 'application/json' },
         body: JSON.stringify(formData)

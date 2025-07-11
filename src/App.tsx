@@ -20,7 +20,7 @@ function App() {
       <MovingJobs />
       <RealTimeMetrics />
       <Features />
-      {/* <HowItWorks /> */}
+      <HowItWorks />
       <Testimonials />
       <Pricing />
       <FAQ />
