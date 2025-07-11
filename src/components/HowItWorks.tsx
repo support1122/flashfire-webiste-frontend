@@ -197,11 +197,11 @@ const HowItWorks = () => {
                   <div className="p-3 bg-gray-50 rounded-xl group-hover:bg-orange-50 transition-colors duration-300">
                     {step.icon}
                   </div>
-                  <div className="ml-4">
+                  {/* <div className="ml-4">
                     <span className="inline-block bg-gradient-to-r from-orange-500 to-orange-600 text-white text-xs px-3 py-1 rounded-full font-medium">
                       {step.step}
                     </span>
-                  </div>
+                  </div> */}
                 </div>
                 
                 <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-4">
