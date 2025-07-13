@@ -2,26 +2,43 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.png" />
+
+    <!-- Primary favicon: SVG -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- PNG & ICO fallbacks for wider browser support -->
+    <link rel="alternate icon" href="/favicon.ico" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>FLASHFIRE - AI-Powered Job Search Automation | Land Your Dream Job Faster</title>
-    <meta name="description" content="We apply to 1000+ jobs on your behalf with tailored resumes for every role.
+    <title>FLASHFIRE – AI-Powered Job Search Automation | Land Your Dream Job Faster</title>
+    <meta
+      name="description"
+      content="We apply to 1000+ jobs on your behalf with tailored resumes for every role.
 Save 150+ hours, skip the grunt work, and stay in control with real-time updates.
-Your job hunt—automated." />
+Your job hunt—automated."
+    />
 
     <!-- ✅ Google Analytics Tag -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-4P890VGD8D"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-4P890VGD8D');
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-4P890VGD8D");
     </script>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Preconnect & Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
   </head>
+
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
