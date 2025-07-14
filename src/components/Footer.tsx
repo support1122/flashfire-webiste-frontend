@@ -21,33 +21,41 @@ const Footer = () => {
             </div>
             
             <div className="flex items-center space-x-4 text-xs sm:text-sm">
-              <button
-                onClick={() => handleLinkClick('/termsofservice')}
-                className="hover:text-orange-200 transition-colors duration-200 cursor-pointer"
+              <a
+              href="/termsofservice"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-orange-200 transition-colors duration-200 cursor-pointer"
               >
-                TERMS OF SERVICE
-              </button>
+              TERMS OF SERVICE
+            </a>
               <span className="text-orange-200">|</span>
-              <button
-                onClick={() => handleLinkClick('/privacypolicy')}
-                className="hover:text-orange-200 transition-colors duration-200 cursor-pointer"
-              >
-                PRIVACY POLICY
-              </button>
+              <a
+              href="/privacypolicy"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-orange-200 transition-colors duration-200 cursor-pointer"
+            >
+              PRIVACY POLICY
+            </a>
               <span className="text-orange-200">|</span>
-              <button
-                onClick={() => handleLinkClick('/refundpolicy')}
-                className="hover:text-orange-200 transition-colors duration-200 cursor-pointer"
-              >
-                REFUND POLICY
-              </button>
+              <a
+              href="/refundpolicy"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-orange-200 transition-colors duration-200 cursor-pointer"
+            >
+              REFUND POLICY
+            </a>
               <span className="text-orange-200">|</span>
-              <button
-                onClick={() => handleLinkClick('/paymentpolicy')}
-                className="hover:text-orange-200 transition-colors duration-200 cursor-pointer"
-              >
-                PAYMENT POLICY
-              </button>
+              <a
+              href="/paymentpolicy"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-orange-200 transition-colors duration-200 cursor-pointer"
+            >
+              PAYMENT POLICY
+            </a>
             </div>
           </div>
 
