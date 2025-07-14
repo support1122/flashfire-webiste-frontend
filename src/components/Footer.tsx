@@ -21,33 +21,38 @@ const Footer = () => {
             </div>
             
             <div className="flex items-center space-x-4 text-xs sm:text-sm">
-              <button
-                onClick={() => handleLinkClick('/termsofservice')}
+              <a
+                href ='/termsofservice'
+                target="_blank" rel="noopener noreferrer"
                 className="hover:text-orange-200 transition-colors duration-200 cursor-pointer"
               >
                 TERMS OF SERVICE
-              </button>
+              </a>
               <span className="text-orange-200">|</span>
-              <button
-                onClick={() => handleLinkClick('/privacypolicy')}
+              <a
+                href ='/privacypolicy'
+                target="_blank" rel="noopener noreferrer"
                 className="hover:text-orange-200 transition-colors duration-200 cursor-pointer"
               >
                 PRIVACY POLICY
-              </button>
+              </a>
               <span className="text-orange-200">|</span>
-              <button
-                onClick={() => handleLinkClick('/refundpolicy')}
+              <a
+                href ='/refundpolicy'
+                target="_blank" rel="noopener noreferrer"
                 className="hover:text-orange-200 transition-colors duration-200 cursor-pointer"
               >
                 REFUND POLICY
-              </button>
+              </a>
               <span className="text-orange-200">|</span>
-              <button
-                onClick={() => handleLinkClick('/paymentpolicy')}
+              <a
+                // onClick={() => handleLinkClick('/paymentpolicy')}
+                href='/paymentpolicy'
+                target="_blank" rel="noopener noreferrer"                
                 className="hover:text-orange-200 transition-colors duration-200 cursor-pointer"
               >
                 PAYMENT POLICY
-              </button>
+              </a>
             </div>
           </div>
 
