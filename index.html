@@ -3,10 +3,12 @@
   <head>
     <meta charset="UTF-8" />
 
-    <!-- ✅ Favicons for all browser types -->
+    <!-- Primary favicon: SVG -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- PNG & ICO fallbacks for wider browser support -->
+    <link rel="alternate icon" href="/favicon.ico" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-    <link rel="shortcut icon" href="/favicon.ico" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>FLASHFIRE – AI-Powered Job Search Automation | Land Your Dream Job Faster</title>
@@ -17,7 +19,7 @@ Save 150+ hours, skip the grunt work, and stay in control with real-time updates
 Your job hunt—automated."
     />
 
-    <!-- ✅ Google Analytics -->
+    <!-- ✅ Google Analytics Tag -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-4P890VGD8D"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -28,18 +30,7 @@ Your job hunt—automated."
       gtag("config", "G-4P890VGD8D");
     </script>
 
-    <!-- ✅ Logo Schema.org (helps show logo in search results) -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Organization",
-      "name": "FLASHFIRE",
-      "url": "https://flashfirejobs.com",
-      "logo": "https://flashfirejobs.com/favicon.svg"
-    }
-    </script>
-
-    <!-- Fonts -->
+    <!-- Preconnect & Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link

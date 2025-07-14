@@ -169,7 +169,7 @@ const Pricing = () => {
         </div>
 
         {/* Money Back Guarantee */}
-{/*         <div className="mt-12 sm:mt-20 text-center">
+        <div className="mt-12 sm:mt-20 text-center">
           <div className="bg-gray-900 rounded-2xl sm:rounded-3xl p-8 sm:p-12 text-white">
             <h3 className="text-2xl sm:text-3xl font-bold mb-4">
               💯 30-Day Money-Back Guarantee
@@ -192,7 +192,7 @@ const Pricing = () => {
               </a>
             </div>
           </div>
-        </div> */}
+        </div>
       </div>
     </section>
   );
