@@ -131,7 +131,7 @@ const Pricing = () => {
                       <span className="text-3xl sm:text-4xl font-bold text-gray-900">{plan.price}</span>
                       <div className="text-left">
                         <div className="text-gray-400 line-through text-sm">{plan.originalPrice}</div>
-                        <div className="text-gray-600 text-sm">per month</div>
+{/*                         <div className="text-gray-600 text-sm">per month</div> */}
                       </div>
                     </div>
                     <p className="text-orange-600 font-semibold text-sm mt-1">
