@@ -1,0 +1,9 @@
+// vercel.json
+{
+  "rewrites": [
+    {
+      "source": "/(.*)",        // any path
+      "destination": "/"        // serve your index.html
+    }
+  ]
+}
