@@ -1,13 +1,10 @@
 import React from 'react';
-import { Mail, MapPin, Zap } from 'lucide-react';
+import { Zap } from 'lucide-react';
 
 const Footer = () => {
   const handleLinkClick = (path: string) => {
-    // Update the URL without page reload
-    window.history.pushState({}, '', path);
-    
-    // Dispatch a custom event to notify about route change
-    window.dispatchEvent(new CustomEvent('routechange', { detail: { path } }));
+    // Open in new tab
+    window.open(path, '_blank', 'noopener,noreferrer');
   };
 
   return (
