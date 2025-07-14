@@ -45,4 +45,3 @@ const Router = () => {
 };
 
 export default Router;
-src/components/Router.tsx
