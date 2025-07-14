@@ -11,6 +11,7 @@ import SignupModal from './components/SignupModal';
 import RealTimeMetrics from './components/RealTimeMetrics';
 import MovingJobs from './components/MovingJobs';
 import WhatsAppButton from './components/WhatsAppButton';
+import Footer from './components/Footer';
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
       <Pricing />
       <FAQ />
       <Contact />
+      <Footer />
       <SignupModal />
       <WhatsAppButton />
     </div>
