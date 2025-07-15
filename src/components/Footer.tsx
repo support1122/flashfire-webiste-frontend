@@ -23,7 +23,7 @@ const Footer = () => {
             </div>
             
             <div className="flex items-center space-x-4 text-xs sm:text-sm">
-              <Link to={'/termsofservice'} rel="noopener noreferrer" >
+              <Link to={'/termsofservice'} target ='_blank' rel="noopener noreferrer" >
               <button
                 // href ='/termsofservice'
                 // target="_blank" rel="noopener noreferrer"
@@ -33,7 +33,7 @@ const Footer = () => {
               </button>
               </Link>
               <span className="text-orange-200">|</span>
-              <Link to={'/privacypolicy'} rel="noopener noreferrer">
+              <Link to={'/privacypolicy'} target ='_blank' rel="noopener noreferrer">
               <button
                 // href ='/privacypolicy'
                 // target="_blank" rel="noopener noreferrer"
@@ -43,7 +43,7 @@ const Footer = () => {
               </button>
               </Link>
               <span className="text-orange-200">|</span>
-              <Link to={'/refundpolicy'} rel="noopener noreferrer">
+              <Link to={'/refundpolicy'} target ='_blank' rel="noopener noreferrer">
               <button
                 // href ='/refundpolicy'
                 // target="_blank" rel="noopener noreferrer"
