@@ -23,31 +23,37 @@ const Footer = () => {
             </div>
             
             <div className="flex items-center space-x-4 text-xs sm:text-sm">
-              <a
-                href ='/termsofservice'
-                target="_blank" rel="noopener noreferrer"
-                className="hover:text-orange-200 transition-colors duration-200 cursor-pointer"
+              <Link to={'/termsofservice'} rel="noopener noreferrer" >
+              <button
+                // href ='/termsofservice'
+                // target="_blank" rel="noopener noreferrer"
+                // className="hover:text-orange-200 transition-colors duration-200 cursor-pointer"
               >
                 TERMS OF SERVICE
-              </a>
+              </button>
+              </Link>
               <span className="text-orange-200">|</span>
-              <a
-                href ='/privacypolicy'
-                target="_blank" rel="noopener noreferrer"
-                className="hover:text-orange-200 transition-colors duration-200 cursor-pointer"
+              <Link to={'/privacypolicy'} rel="noopener noreferrer">
+              <button
+                // href ='/privacypolicy'
+                // target="_blank" rel="noopener noreferrer"
+                // className="hover:text-orange-200 transition-colors duration-200 cursor-pointer"
               >
                 PRIVACY POLICY
-              </a>
+              </button>
+              </Link>
               <span className="text-orange-200">|</span>
-              <a
-                href ='/refundpolicy'
-                target="_blank" rel="noopener noreferrer"
-                className="hover:text-orange-200 transition-colors duration-200 cursor-pointer"
+              <Link to={'/refundpolicy'} rel="noopener noreferrer">
+              <button
+                // href ='/refundpolicy'
+                // target="_blank" rel="noopener noreferrer"
+                // className="hover:text-orange-200 transition-colors duration-200 cursor-pointer"
               >
                 REFUND POLICY
-              </a>
+              </button>
+              </Link>
               <span className="text-orange-200">|</span>
-              <Link to={'https://flashfire-frontend-hoisted-niqkz80c6.vercel.app/paymentpolicy'} target ='_blank' rel="noopener noreferrer">
+              <Link to={'/paymentpolicy'} target ='_blank' rel="noopener noreferrer">
               <button
                 // onClick={() => handleLinkClick('/paymentpolicy')}
                 // href='/paymentpolicy'
