@@ -47,7 +47,7 @@ const Footer = () => {
                 REFUND POLICY
               </a>
               <span className="text-orange-200">|</span>
-              <Link to={'/paymentpolicy'} target ='_blank'>
+              <Link to={'flashfirejobs.com/paymentpolicy'} target ='_blank' rel="noopener noreferrer">
               <button
                 // onClick={() => handleLinkClick('/paymentpolicy')}
                 // href='/paymentpolicy'
