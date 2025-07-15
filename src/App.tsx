@@ -12,6 +12,8 @@ import RealTimeMetrics from './components/RealTimeMetrics';
 import MovingJobs from './components/MovingJobs';
 import WhatsAppButton from './components/WhatsAppButton';
 import Footer from './components/Footer';
+// import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+
 
 function App() {
   return (

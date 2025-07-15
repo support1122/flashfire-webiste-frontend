@@ -1,6 +1,7 @@
 import React from 'react';
 import { Mail, MapPin, Zap } from 'lucide-react';
-import {Link} from 'react-router-dom';
+import {RouterProvider, createBrowserRouter, BrowserRouter, Routes, Route, Link} from 'react-router-dom';
+
 
 const Footer = () => {
   const handleLinkClick = (path: string) => {
