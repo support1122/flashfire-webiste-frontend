@@ -1,5 +1,6 @@
 import React from 'react';
 import { Mail, MapPin, Zap } from 'lucide-react';
+import {Link} from 'react-router-dom';
 
 const Footer = () => {
   const handleLinkClick = (path: string) => {
@@ -45,14 +46,16 @@ const Footer = () => {
                 REFUND POLICY
               </a>
               <span className="text-orange-200">|</span>
-              <a
+              <Link to={'/paymentpolicy'} target ='_blank'>
+              <button
                 // onClick={() => handleLinkClick('/paymentpolicy')}
-                href='/paymentpolicy'
-                target="_blank" rel="noopener noreferrer"                
-                className="hover:text-orange-200 transition-colors duration-200 cursor-pointer"
+                // href='/paymentpolicy'
+                // target="_blank" rel="noopener noreferrer"                
+                // className="hover:text-orange-200 transition-colors duration-200 cursor-pointer"
               >
                 PAYMENT POLICY
-              </a>
+              </button>
+              </Link>
             </div>
           </div>
 
