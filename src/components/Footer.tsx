@@ -1,5 +1,7 @@
 import React from 'react';
 import { Mail, MapPin, Zap } from 'lucide-react';
+import {RouterProvider, createBrowserRouter, BrowserRouter, Routes, Route, Link} from 'react-router-dom';
+
 
 const Footer = () => {
   const handleLinkClick = (path: string) => {
@@ -21,33 +23,46 @@ const Footer = () => {
             </div>
             
             <div className="flex items-center space-x-4 text-xs sm:text-sm">
+              <Link to={'/termsofservice'} target ='_blank' rel="noopener noreferrer" >
               <button
-                onClick={() => handleLinkClick('/termsofservice')}
-                className="hover:text-orange-200 transition-colors duration-200 cursor-pointer"
+                // href ='/termsofservice'
+                // target="_blank" rel="noopener noreferrer"
+                // className="hover:text-orange-200 transition-colors duration-200 cursor-pointer"
               >
                 TERMS OF SERVICE
               </button>
+              </Link>
               <span className="text-orange-200">|</span>
+              <Link to={'/privacypolicy'} target ='_blank' rel="noopener noreferrer">
               <button
-                onClick={() => handleLinkClick('/privacypolicy')}
-                className="hover:text-orange-200 transition-colors duration-200 cursor-pointer"
+                // href ='/privacypolicy'
+                // target="_blank" rel="noopener noreferrer"
+                // className="hover:text-orange-200 transition-colors duration-200 cursor-pointer"
               >
                 PRIVACY POLICY
               </button>
+              </Link>
               <span className="text-orange-200">|</span>
+              <Link to={'/refundpolicy'} target ='_blank' rel="noopener noreferrer">
               <button
-                onClick={() => handleLinkClick('/refundpolicy')}
-                className="hover:text-orange-200 transition-colors duration-200 cursor-pointer"
+                // href ='/refundpolicy'
+                // target="_blank" rel="noopener noreferrer"
+                // className="hover:text-orange-200 transition-colors duration-200 cursor-pointer"
               >
                 REFUND POLICY
               </button>
+              </Link>
               <span className="text-orange-200">|</span>
+              <Link to={'/paymentpolicy'} target ='_blank' rel="noopener noreferrer">
               <button
-                onClick={() => handleLinkClick('/paymentpolicy')}
-                className="hover:text-orange-200 transition-colors duration-200 cursor-pointer"
+                // onClick={() => handleLinkClick('/paymentpolicy')}
+                // href='/paymentpolicy'
+                // target="_blank" rel="noopener noreferrer"                
+                // className="hover:text-orange-200 transition-colors duration-200 cursor-pointer"
               >
                 PAYMENT POLICY
               </button>
+              </Link>
             </div>
           </div>
 

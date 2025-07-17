@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const Navigation = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -14,7 +15,7 @@ const Navigation = () => {
   }, []);
 
   const navItems = [
-    { name: 'Home', href: '#home' },
+    { name: 'Home', href: '#' },
     { name: 'Features', href: '#features' },
     { name: 'Testimonials', href: '#testimonials' },
     { name: 'Pricing', href: '#pricing' },
@@ -47,6 +48,7 @@ const Navigation = () => {
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-6 lg:space-x-8">
             {navItems.map((item) => (
+              
               <a
                 key={item.name}
                 href={item.href}
@@ -54,6 +56,7 @@ const Navigation = () => {
               >
                 {item.name}
               </a>
+              
             ))}
           </div>
 
