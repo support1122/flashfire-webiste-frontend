@@ -168,31 +168,7 @@ const Pricing = () => {
           ))}
         </div>
 
-        {/* Money Back Guarantee */}
-        <div className="mt-12 sm:mt-20 text-center">
-          <div className="bg-gray-900 rounded-2xl sm:rounded-3xl p-8 sm:p-12 text-white">
-            <h3 className="text-2xl sm:text-3xl font-bold mb-4">
-              💯 30-Day Money-Back Guarantee
-            </h3>
-            <p className="text-lg sm:text-xl text-gray-300 mb-6 sm:mb-8 max-w-2xl mx-auto">
-              Not satisfied with your results? Get a full refund within 30 days. We're confident FLASHFIRE will transform your job search.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a
-                href="#contact"
-                className="bg-white text-gray-900 px-6 sm:px-8 py-3 sm:py-4 rounded-full font-bold hover:bg-gray-100 transition-colors duration-200"
-              >
-                Have Questions? Contact Us
-              </a>
-              <a
-                href="#features"
-                className="border-2 border-white text-white px-6 sm:px-8 py-3 sm:py-4 rounded-full font-bold hover:bg-white hover:text-gray-900 transition-all duration-200"
-              >
-                Learn More About Features
-              </a>
-            </div>
-          </div>
-        </div>
+        
       </div>
     </section>
   );
