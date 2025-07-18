@@ -12,6 +12,7 @@ import RealTimeMetrics from './RealTimeMetrics';
 import MovingJobs from './MovingJobs';
 import WhatsAppButton from './WhatsAppButton';
 import Footer from './Footer';
+import Blog from './Blog';
 
 function Home() {
   return (
@@ -21,6 +22,7 @@ function Home() {
             <MovingJobs />
             <RealTimeMetrics />
             <Features />
+            <Blog />
             <HowItWorks />
             <Testimonials />
             <Pricing />
