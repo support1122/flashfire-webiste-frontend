@@ -1,7 +1,10 @@
-import React from 'react';
-import { Calendar, Clock, User, ArrowRight } from 'lucide-react';
+import React, { useState } from 'react';
+import { Calendar, Clock, User, ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react';
 
 const Blog = () => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const postsPerPage = 3;
+
   const blogPosts = [
     {
       id: 1,
@@ -570,8 +573,126 @@ const Blog = () => {
 
         <p><strong>From 0 to Offer — Flashfire gets it done.</strong></p>
       `
+    },
+    {
+      id: 4,
+      title: "From CPT to H-1B: A Simple Game Plan for Navigating Job Search as an International Student",
+      excerpt: "The no-nonsense guide to writing a resume that doesn't just sit in a database — it lands interviews. Learn precision-crafted strategies that make your 6-8 seconds count.",
+      author: "Shubham Shukla",
+      date: "Jan 5, 2025",
+      readTime: "10 min",
+      category: "Career Advice",
+      image: "https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=800",
+      categoryColor: "bg-blue-100 text-blue-600",
+      content: `
+        <p>If you're an international student in the U.S., the journey doesn't end at graduation — that's when the real challenge begins. Between CPT, OPT, and the elusive H-1B sponsorship lies a path filled with deadlines, job boards, and uncertainty. <strong><a href="https://www.flashfirejobs.com" target="_blank" rel="noopener noreferrer" style="color: #f97316; text-decoration: underline;">flashfirejobs.com</a></strong> simplifies that path.</p>
+
+        <p>This is your no-fluff guide to turning CPT into a full-time job and maximizing your shot at H-1B — with speed, purpose, and strategy.</p>
+
+        <h2>Step 1: Make CPT Count Beyond the Internship</h2>
+        <p>Don't treat CPT like a checkbox. Even if it's unpaid, part-time, or remote — relevance is everything.</p>
+        <ul>
+          <li>Choose roles in sponsor-friendly sectors: tech, finance, analytics, healthcare</li>
+          <li>Build credibility and early U.S. market experience</li>
+          <li>Use it as a bridge to strong professional relationships</li>
+        </ul>
+        <p><strong><a href="https://www.flashfirejobs.com" target="_blank" rel="noopener noreferrer" style="color: #f97316; text-decoration: underline;">flashfirejobs.com</a></strong> helps you find CPT roles that feed directly into H-1B opportunities.</p>
+
+        <h2>Step 2: Begin OPT Job Prep While Still on CPT</h2>
+        <p>Don't wait for your EAD card. Start 3–4 months before graduation:</p>
+        <ul>
+          <li>Polish your resume using keyword insights</li>
+          <li>Optimize your LinkedIn for recruiter visibility</li>
+          <li>Identify companies with real sponsorship records</li>
+          <li>Track sponsor-ready roles tailored to your skillset</li>
+        </ul>
+        <p>Start your <strong>7-day free trial</strong> at <a href="https://www.flashfirejobs.com" target="_blank" rel="noopener noreferrer" style="color: #f97316; text-decoration: underline;">flashfirejobs.com</a> to see your true match rate instantly.</p>
+
+        <h2>Step 3: Use Your OPT Time Like a Pro</h2>
+        <p>OPT gives you 90 days to find employment. Every day counts.</p>
+        <ul>
+          <li>Target with precision, not volume</li>
+          <li>Tailor your resume for each job</li>
+          <li>Track every app with real-time dashboards</li>
+        </ul>
+        <p><strong>flashfirejobs.com</strong> automates 1,000+ sponsor-ready job applications in just 6–7 weeks — each one role-specific and data-driven.</p>
+
+        <h2>Step 4: Apply Only Where Sponsorship is Likely</h2>
+        <p>Not all companies sponsor. Don't waste energy applying everywhere.</p>
+        <ul>
+          <li>Access curated company sponsorship data</li>
+          <li>Focus on sectors that align with your visa timeline</li>
+          <li>Build a roadmap that works with your CPT > OPT > H-1B path</li>
+        </ul>
+        <p><a href="https://www.flashfirejobs.com" target="_blank" rel="noopener noreferrer" style="color: #f97316; text-decoration: underline;">flashfirejobs.com</a> helps you filter out non-sponsoring dead ends — and focus where it matters.</p>
+
+        <h2>Step 5: Track Everything — Like a Startup</h2>
+        <p>You can't improve what you don't measure.</p>
+        <ul>
+          <li>Monitor resume performance by job and industry</li>
+          <li>See where you're getting interviews — and where you're not</li>
+          <li>Track employer response times and job status</li>
+        </ul>
+        <p>The <strong>flashfirejobs.com dashboard</strong> replaces guesswork with real-time analytics.</p>
+
+        <h2>Step 6: Nail the Interviews, Land the Offer</h2>
+        <p>Once the interviews begin, strategy shifts to execution.</p>
+        <ul>
+          <li>Prep with company-specific Q&As</li>
+          <li>Practice using STAR frameworks</li>
+          <li>Get salary benchmarks and offer negotiation tips</li>
+        </ul>
+        <p>From application to offer — <strong><a href="https://www.flashfirejobs.com" target="_blank" rel="noopener noreferrer" style="color: #f97316; text-decoration: underline;">flashfirejobs.com</a></strong> supports you through every round.</p>
+
+        <h2>Bonus: Use LinkedIn to Attract, Not Just Apply</h2>
+        <p>Inbound leads > Cold applications. Let recruiters come to you.</p>
+        <ul>
+          <li>Post your wins: projects, growth, milestones</li>
+          <li>Craft short, punchy posts with real outcomes</li>
+          <li>Use keywords recruiters are actually searching</li>
+        </ul>
+        <p>Get AI-generated LinkedIn prompts and templates inside your <strong>flashfirejobs.com</strong> account.</p>
+
+        <h2>Bonus: Crush the STEM OPT Window (24 Extra Months!)</h2>
+        <p>STEM OPT gives you a second shot — with more experience and better alignment.</p>
+        <ul>
+          <li>Reevaluate goals based on growth so far</li>
+          <li>Apply to cap-exempt employers & research institutions</li>
+          <li>Get sharper with each job cycle using platform learning</li>
+        </ul>
+        <p><a href="https://www.flashfirejobs.com" target="_blank" rel="noopener noreferrer" style="color: #f97316; text-decoration: underline;">flashfirejobs.com</a> evolves your search strategy every 30 days — automatically.</p>
+
+        <h2>What Flashfire Users Are Saying</h2>
+        <blockquote>"I didn't think it was possible to get this many interviews without cold emailing. flashfirejobs.com made the job hunt 10x easier." — <strong>Rijul J.</strong></blockquote>
+        <blockquote>"I finally stopped second-guessing my resume. I knew flashfirejobs.com was optimizing every single one of my applications." — <strong>Anjali S.</strong></blockquote>
+        <blockquote>"I had no referrals and still got calls from IBM and Goldman Sachs. I didn't believe it until it happened." — <strong>Aman G.</strong></blockquote>
+        <blockquote>"Without flashfirejobs.com, I'd have spent six months scrolling job boards. I got my first offer in 3 weeks." — <strong>Amit G.</strong></blockquote>
+
+        <h2>Final Thoughts: Build Your Own Momentum</h2>
+        <p><strong>flashfirejobs.com</strong> is built for international students — from CPT to H-1B.</p>
+        <ul>
+          <li>Smart job targeting with real-time sponsor data</li>
+          <li>ATS-optimized resumes generated in seconds</li>
+          <li>Track interviews, offers, and feedback all in one place</li>
+        </ul>
+        <p><strong><a href="https://www.flashfirejobs.com" target="_blank" rel="noopener noreferrer" style="color: #f97316; text-decoration: underline;">Start your free trial today</a></strong> and watch the job search flip in your favor.</p>
+        <p>Your degree opened the door. Now let flashfirejobs.com help you walk through it — fast, smart, and sponsor-ready.</p>
+      `
     }
   ];
+
+  const totalPosts = blogPosts.length;
+  const maxIndex = Math.max(0, totalPosts - postsPerPage);
+
+  const nextSlide = () => {
+    setCurrentIndex(prev => Math.min(prev + 1, maxIndex));
+  };
+
+  const prevSlide = () => {
+    setCurrentIndex(prev => Math.max(prev - 1, 0));
+  };
+
+  const visiblePosts = blogPosts.slice(currentIndex, currentIndex + postsPerPage);
 
   const openBlogPost = (post) => {
     // Get the current origin to properly reference local assets
@@ -821,70 +942,134 @@ const Blog = () => {
           </p>
         </div>
 
-        {/* Blog Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {blogPosts.map((post) => (
-            <article
-              key={post.id}
-              className="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden group cursor-pointer transform hover:-translate-y-1"
-              onClick={() => openBlogPost(post)}
+        {/* Carousel Container */}
+        <div className="relative">
+          {/* Left Arrow */}
+          {currentIndex > 0 && (
+            <button
+              onClick={prevSlide}
+              className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 z-10 bg-white rounded-full p-3 shadow-lg hover:shadow-xl transition-all duration-300 hover:bg-orange-50 group"
+              aria-label="Previous articles"
             >
-              {/* Image */}
-              <div className="relative overflow-hidden">
-                <img
-                  src={post.image}
-                  alt={post.title}
-                  className="w-full h-56 object-cover group-hover:scale-105 transition-transform duration-300"
-                />
-                <div className="absolute top-4 left-4">
-                  <span className={`px-3 py-1 rounded-full text-sm font-medium ${post.categoryColor}`}>
-                    {post.category}
-                  </span>
-                </div>
-              </div>
+              <ChevronLeft className="w-6 h-6 text-gray-600 group-hover:text-orange-600 transition-colors duration-200" />
+            </button>
+          )}
 
-              {/* Content */}
-              <div className="p-6">
-                {/* Meta Info */}
-                <div className="flex items-center text-sm text-gray-500 mb-3 space-x-4">
-                  <div className="flex items-center">
-                    <Calendar className="w-4 h-4 mr-1" />
-                    {post.date}
+          {/* Right Arrow */}
+          {currentIndex < maxIndex && (
+            <button
+              onClick={nextSlide}
+              className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 z-10 bg-white rounded-full p-3 shadow-lg hover:shadow-xl transition-all duration-300 hover:bg-orange-50 group"
+              aria-label="Next articles"
+            >
+              <ChevronRight className="w-6 h-6 text-gray-600 group-hover:text-orange-600 transition-colors duration-200" />
+            </button>
+          )}
+
+          {/* Blog Grid with Smooth Transition */}
+          <div className="overflow-hidden">
+            <div 
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 transition-all duration-500 ease-in-out"
+              style={{ 
+                transform: `translateX(0)`,
+                opacity: 1
+              }}
+            >
+              {visiblePosts.map((post, index) => (
+                <article
+                  key={post.id}
+                  className="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden group cursor-pointer transform hover:-translate-y-1"
+                  onClick={() => openBlogPost(post)}
+                  style={{
+                    animationDelay: `${index * 100}ms`,
+                    animation: 'fadeInUp 0.6s ease-out forwards'
+                  }}
+                >
+                  {/* Image */}
+                  <div className="relative overflow-hidden">
+                    <img
+                      src={post.image}
+                      alt={post.title}
+                      className="w-full h-56 object-cover group-hover:scale-105 transition-transform duration-300"
+                    />
+                    <div className="absolute top-4 left-4">
+                      <span className={`px-3 py-1 rounded-full text-sm font-medium ${post.categoryColor}`}>
+                        {post.category}
+                      </span>
+                    </div>
                   </div>
-                  <div className="flex items-center">
-                    <Clock className="w-4 h-4 mr-1" />
-                    {post.readTime}
+
+                  {/* Content */}
+                  <div className="p-6">
+                    {/* Meta Info */}
+                    <div className="flex items-center text-sm text-gray-500 mb-3 space-x-4">
+                      <div className="flex items-center">
+                        <Calendar className="w-4 h-4 mr-1" />
+                        {post.date}
+                      </div>
+                      <div className="flex items-center">
+                        <Clock className="w-4 h-4 mr-1" />
+                        {post.readTime}
+                      </div>
+                    </div>
+
+                    {/* Title */}
+                    <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-orange-600 transition-colors duration-200 line-clamp-2">
+                      {post.title}
+                    </h3>
+
+                    {/* Excerpt */}
+                    <p className="text-gray-600 mb-4 line-clamp-3 leading-relaxed">
+                      {post.excerpt}
+                    </p>
+
+                    {/* Author & Read More */}
+                    <div className="flex items-center justify-between pt-4 border-t border-gray-100">
+                      <div className="flex items-center">
+                        <User className="w-4 h-4 text-gray-400 mr-2" />
+                        <span className="text-sm text-gray-600 font-medium">{post.author}</span>
+                      </div>
+                      <div className="flex items-center text-orange-600 font-medium text-sm group-hover:text-orange-700 transition-colors duration-200">
+                        Read More
+                        <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform duration-200" />
+                      </div>
+                    </div>
                   </div>
-                </div>
+                </article>
+              ))}
+            </div>
+          </div>
 
-                {/* Title */}
-                <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-orange-600 transition-colors duration-200 line-clamp-2">
-                  {post.title}
-                </h3>
-
-                {/* Excerpt */}
-                <p className="text-gray-600 mb-4 line-clamp-3 leading-relaxed">
-                  {post.excerpt}
-                </p>
-
-                {/* Author & Read More */}
-                <div className="flex items-center justify-between pt-4 border-t border-gray-100">
-                  <div className="flex items-center">
-                    <User className="w-4 h-4 text-gray-400 mr-2" />
-                    <span className="text-sm text-gray-600 font-medium">{post.author}</span>
-                  </div>
-                  <div className="flex items-center text-orange-600 font-medium text-sm group-hover:text-orange-700 transition-colors duration-200">
-                    Read More
-                    <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform duration-200" />
-                  </div>
-                </div>
-              </div>
-
-
-            </article>
-          ))}
+          {/* Pagination Dots */}
+          <div className="flex justify-center mt-12 space-x-2">
+            {Array.from({ length: maxIndex + 1 }, (_, index) => (
+              <button
+                key={index}
+                onClick={() => setCurrentIndex(index)}
+                className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                  currentIndex === index 
+                    ? 'bg-orange-600 w-8' 
+                    : 'bg-gray-300 hover:bg-gray-400'
+                }`}
+                aria-label={`Go to slide ${index + 1}`}
+              />
+            ))}
+          </div>
         </div>
       </div>
+
+      <style jsx>{`
+        @keyframes fadeInUp {
+          from {
+            opacity: 0;
+            transform: translateY(30px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+      `}</style>
     </section>
   );
 };
