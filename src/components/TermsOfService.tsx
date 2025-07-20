@@ -35,21 +35,21 @@ const TermsOfService = () => {
         <div className="bg-white rounded-lg shadow-sm p-8">
           <div className="prose prose-lg max-w-none">
             <p className="text-gray-700 mb-6">
-              Welcome to FlashFire. These Terms and Conditions ("Terms") govern your access to and use of the FlashFire website, services, and technology platform (collectively, the "Service"). Please read these Terms carefully before using our Service.
+              Welcome to Flashfire. These Terms and Conditions ("Terms") govern your access to and use of the Flashfire website, services, and technology platform (collectively, the "Service"). Please read these Terms carefully before using our Service.
             </p>
             
             <p className="text-gray-700 mb-8">
-              By using FlashFire, you agree to be bound by these Terms. If you do not agree, you must not use the Service.
+              By using Flashfire, you agree to be bound by these Terms. If you do not agree, you must not use the Service.
             </p>
 
-            <h2 className="text-2xl font-bold text-gray-900 mb-4">1. About FlashFire</h2>
+            <h2 className="text-2xl font-bold text-gray-900 mb-4">1. About Flashfire</h2>
             <p className="text-gray-700 mb-6">
-              FlashFire is an AI-powered job application automation platform built to help international students and professionals find and apply to jobs in the United States. FlashFire provides resume optimization, job targeting, LinkedIn enhancement, and mass application services designed to reduce the time and complexity of job hunting.
+              Flashfire is an AI-powered job application automation platform built to help international students and professionals find and apply to jobs in the United States. Flashfire provides resume optimization, job targeting, LinkedIn enhancement, and mass application services designed to reduce the time and complexity of job hunting.
             </p>
 
             <h2 className="text-2xl font-bold text-gray-900 mb-4">2. Eligibility</h2>
             <p className="text-gray-700 mb-6">
-              To use FlashFire, you must be at least 18 years old or the legal age of majority in your jurisdiction. By registering, you confirm that you meet this requirement. The platform is intended only for job-seeking individuals and not for employer or commercial use unless explicitly authorized.
+              To use Flashfire, you must be at least 18 years old or the legal age of majority in your jurisdiction. By registering, you confirm that you meet this requirement. The platform is intended only for job-seeking individuals and not for employer or commercial use unless explicitly authorized.
             </p>
 
             <h2 className="text-2xl font-bold text-gray-900 mb-4">3. Account Registration</h2>
@@ -64,12 +64,12 @@ const TermsOfService = () => {
 
             <h2 className="text-2xl font-bold text-gray-900 mb-4">4. Trial Use & Payment Terms</h2>
             <p className="text-gray-700 mb-4">
-              We currently offer a limited-time free trial to help new users experience FlashFire's capabilities.
+              We currently offer a limited-time free trial to help new users experience Flashfire's capabilities.
             </p>
             <div className="bg-orange-50 border-l-4 border-orange-500 p-4 mb-6">
               <h3 className="font-semibold text-gray-900 mb-2">Trial Obligation:</h3>
               <p className="text-gray-700">
-                If you receive any interview call or recruiter response from applications submitted during the free trial period, you agree to pay FlashFire a one-time service fee of $50 per interview call.
+                If you receive any interview call or recruiter response from applications submitted during the free trial period, you agree to pay Flashfire a one-time service fee of $50 per interview call.
               </p>
             </div>
             <p className="text-gray-700 mb-6">
@@ -83,11 +83,11 @@ const TermsOfService = () => {
 
             <h2 className="text-2xl font-bold text-gray-900 mb-4">6. Service Limitations</h2>
             <p className="text-gray-700 mb-6">
-              FlashFire does not guarantee job offers, interview calls, hiring outcomes, or employer responses. Our service is designed to maximize your visibility and effectiveness, but we do not control third-party recruiter actions.
+              Flashfire does not guarantee job offers, interview calls, hiring outcomes, or employer responses. Our service is designed to maximize your visibility and effectiveness, but we do not control third-party recruiter actions.
             </p>
 
             <h2 className="text-2xl font-bold text-gray-900 mb-4">7. User Responsibilities</h2>
-            <p className="text-gray-700 mb-4">By using FlashFire, you agree to:</p>
+            <p className="text-gray-700 mb-4">By using Flashfire, you agree to:</p>
             <ul className="list-disc list-inside text-gray-700 mb-6 space-y-2">
               <li>Provide truthful and accurate information in your profile and resume</li>
               <li>Not impersonate or misrepresent your identity</li>
@@ -97,7 +97,7 @@ const TermsOfService = () => {
 
             <h2 className="text-2xl font-bold text-gray-900 mb-4">8. Intellectual Property</h2>
             <p className="text-gray-700 mb-6">
-              All FlashFire branding, content, graphics, designs, and platform code are the exclusive property of FlashFire. You may not reproduce, distribute, or modify any part of the platform without our written permission.
+              All Flashfire branding, content, graphics, designs, and platform code are the exclusive property of Flashfire. You may not reproduce, distribute, or modify any part of the platform without our written permission.
             </p>
 
             <h2 className="text-2xl font-bold text-gray-900 mb-4">9. Termination</h2>
@@ -107,12 +107,12 @@ const TermsOfService = () => {
 
             <h2 className="text-2xl font-bold text-gray-900 mb-4">10. Limitation of Liability</h2>
             <p className="text-gray-700 mb-6">
-              To the maximum extent permitted by law, FlashFire and its officers, employees, and partners shall not be liable for any indirect, incidental, special, or consequential damages, including but not limited to data loss, employment losses, or reputational damage.
+              To the maximum extent permitted by law, Flashfire and its officers, employees, and partners shall not be liable for any indirect, incidental, special, or consequential damages, including but not limited to data loss, employment losses, or reputational damage.
             </p>
 
             <h2 className="text-2xl font-bold text-gray-900 mb-4">11. Privacy Policy</h2>
             <p className="text-gray-700 mb-4">
-              FlashFire respects your privacy. By using the Service, you agree to the collection and use of your information as outlined below:
+              Flashfire respects your privacy. By using the Service, you agree to the collection and use of your information as outlined below:
             </p>
             
             <h3 className="text-xl font-semibold text-gray-900 mb-3">Data Collected:</h3>
@@ -148,7 +148,7 @@ const TermsOfService = () => {
 
             <h3 className="text-xl font-semibold text-gray-900 mb-3">User Control:</h3>
             <p className="text-gray-700 mb-6">
-              You may request access, correction, or deletion of your personal data by emailing support@flashfirejobs.com.
+              You may request access, correction, or deletion of your personal data by emailing support@Flashfirejobs.com.
             </p>
 
             <h2 className="text-2xl font-bold text-gray-900 mb-4">12. Changes to These Terms</h2>
@@ -166,14 +166,14 @@ const TermsOfService = () => {
               If you have questions about these Terms or our Privacy Policy, please contact us at:
             </p>
             <div className="bg-gray-50 p-4 rounded-lg">
-              <p className="text-gray-700"><strong>Email:</strong> support@flashfirejobs.com</p>
-              <p className="text-gray-700"><strong>Website:</strong> www.flashfirejobs.com</p>
-              <p className="text-gray-700"><strong>Address:</strong> FlashFire Inc., New York, NY, USA</p>
+              <p className="text-gray-700"><strong>Email:</strong> support@Flashfirejobs.com</p>
+              <p className="text-gray-700"><strong>Website:</strong> www.Flashfirejobs.com</p>
+              <p className="text-gray-700"><strong>Address:</strong> Flashfire Inc., New York, NY, USA</p>
             </div>
 
             <div className="mt-8 p-6 bg-orange-50 rounded-lg border border-orange-200">
               <p className="text-orange-800 font-medium">
-                Thank you for using FlashFire. We're committed to helping you land your dream job, faster and smarter.
+                Thank you for using Flashfire. We're committed to helping you land your dream job, faster and smarter.
               </p>
             </div>
           </div>
