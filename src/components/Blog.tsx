@@ -687,7 +687,7 @@ const Blog = () => {
       date: "Jan 1, 2025",
       readTime: "14 min",
       category: "Success Stories",
-      image: "https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=800",
+      image: "/images/blog5.jpeg",
       categoryColor: "bg-blue-100 text-blue-600",
       content: `
         <p>The U.S. job market isn’t easy. Especially if you're an international student.</p>
