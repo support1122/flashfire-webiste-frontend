@@ -1120,7 +1120,7 @@ const Blog = () => {
         <div class="max-w-4xl mx-auto px-4 py-8">
           <!-- Header -->
           <div class="bg-white rounded-lg shadow-lg overflow-hidden mb-8">
-            <img src="${post.image}" alt="${post.title}" class="w-full h-64 object-cover">
+<img src="${post.image.startsWith('/') ? currentOrigin + post.image : post.image}" alt="${post.title}" class="w-full h-64 object-cover">
             <div class="p-8">
               <div class="flex items-center mb-4">
                 <span class="px-3 py-1 rounded-full text-sm font-medium ${post.categoryColor}">
