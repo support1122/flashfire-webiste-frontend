@@ -203,7 +203,7 @@ const Pricing = () => {
         "Basic analytics dashboard",
         "Email support",
       ],
-      cta: "Get Started Now"
+      cta: "Start Now"
     },
     {
       name: "Professional",
@@ -223,7 +223,7 @@ const Pricing = () => {
         "Priority support",
         "Interview preparation tips",
       ],
-      cta: "Get Started Now"
+      cta: "Start Now"
     },
     {
       name: "Executive",
@@ -244,7 +244,7 @@ const Pricing = () => {
         "Custom cover letters",
         "Network introduction requests",
       ],
-      cta: "Get Started Now"
+      cta: "Start Now"
     }
   ];
 
