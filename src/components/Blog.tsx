@@ -686,7 +686,7 @@ const Blog = () => {
       author: "Sneha Dingra",
       date: "Jan 1, 2025",
       readTime: "14 min",
-      category: "Career Advice",
+      category: "Success Stories",
       image: "https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=800",
       categoryColor: "bg-blue-100 text-blue-600",
       content: `
