@@ -35,7 +35,7 @@ const PrivacyPolicy = () => {
         <div className="bg-white rounded-lg shadow-sm p-8">
           <div className="prose prose-lg max-w-none">
             <p className="text-gray-700 mb-8">
-              At FlashFire, we are committed to protecting your privacy and ensuring the security of your personal information. This Privacy Policy explains how we collect, use, store, and protect your data when you use our AI-powered job application automation platform.
+              At Flashfire, we are committed to protecting your privacy and ensuring the security of your personal information. This Privacy Policy explains how we collect, use, store, and protect your data when you use our AI-powered job application automation platform.
             </p>
 
             <h2 className="text-2xl font-bold text-gray-900 mb-4">Information We Collect</h2>
@@ -123,9 +123,9 @@ const PrivacyPolicy = () => {
               If you have any questions about this Privacy Policy or our data practices, please contact us:
             </p>
             <div className="bg-gray-50 p-4 rounded-lg">
-              <p className="text-gray-700"><strong>Email:</strong> support@flashfirejobs.com</p>
-              <p className="text-gray-700"><strong>Website:</strong> www.flashfirejobs.com</p>
-              <p className="text-gray-700"><strong>Address:</strong> FlashFire Inc., New York, NY, USA</p>
+              <p className="text-gray-700"><strong>Email:</strong> support@Flashfirejobs.com</p>
+              <p className="text-gray-700"><strong>Website:</strong> www.Flashfirejobs.com</p>
+              <p className="text-gray-700"><strong>Address:</strong> Flashfire Inc., New York, NY, USA</p>
             </div>
           </div>
         </div>
