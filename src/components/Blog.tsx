@@ -686,8 +686,8 @@ const Blog = () => {
       author: "Sneha Dingra",
       date: "Jan 1, 2025",
       readTime: "14 min",
-      category: "Success Stories",
-      image: "/images/blog5.jpeg",
+      category: "Career Advice",
+      image: "https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=800",
       categoryColor: "bg-blue-100 text-blue-600",
       content: `
         <p>The U.S. job market isn’t easy. Especially if you're an international student.</p>
@@ -839,6 +839,100 @@ const Blog = () => {
 <p><a href="https://www.flashfirejobs.com" target="_blank" class="underline text-primary">Start your own success story. Visit flashfirejobs.com and activate your trial today.</a></p>
 
 <p><strong>I signed up for the 1000-application plan on flashfirejobs.com — and that’s how I got 10 offers in just 6 weeks. What will you do in your next 6?</strong></p>
+`
+    },
+    {
+      id: 6,
+      title: "How to Land Your First Job in the U.S. with Zero Referrals — A Proven Strategy for International Students",
+      excerpt: "Landing your first U.S. job as an international student can feel impossible — unless you use the right system. Here's the exact playbook that worked for me.",
+      author: "Ira Verma",
+      date: "Dec 25, 2024",
+      readTime: "16 min",
+      category: "Job Search Tips",
+      image: "/images/blog6.jpeg",
+      categoryColor: "bg-blue-100 text-blue-600",
+      content: `
+        <p>The U.S. job market can feel like a locked door for international students. You’ve got the degree, the OPT window ticking, and the pressure to prove yourself fast. But unless you have an insider referral, Ivy League connections, or a visa-friendly employer lined up, landing your first job in the U.S. can feel almost impossible.</p>
+
+    <h2>Referrals help. But systems win.</h2>
+    <p>In this blog, I’m breaking down the <strong>exact playbook</strong> that helped me (and hundreds like me) land that crucial <strong>first U.S. offer</strong> — without referrals, connections, or costly recruiters. This is built specifically for F-1 students on OPT, STEM OPT, or recent graduates trying to get their foot in the door.</p>
+
+    <h3>Step 1: Stop Applying Blindly and Start Applying Strategically</h3>
+    <p>Most job seekers start by mass-applying to jobs on Indeed or LinkedIn. The result?</p>
+    <ul>
+      <li>No interview calls</li>
+      <li>Endless ghosting</li>
+      <li>Wasted energy on companies that don’t sponsor</li>
+    </ul>
+    <p><strong>The Fix:</strong> You need targeting + tailoring. This is where <a href="https://www.flashfirejobs.com">flashfirejobs.com</a> changed everything for me.</p>
+    <ul>
+      <li>Resume rebuilt & optimized for ATS</li>
+      <li>LinkedIn rewritten for product roles</li>
+      <li>Dashboard to track/manage apps</li>
+    </ul>
+
+    <h3>Step 2: Get Your Resume Built for Robots (and Humans)</h3>
+    <p>flashfirejobs.com helped me get:</p>
+    <ul>
+      <li>Custom resumes for each job</li>
+      <li>Keyword-optimized content</li>
+      <li>ATS-friendly formatting</li>
+      <li>Human review before final submission</li>
+    </ul>
+
+    <h3>Step 3: Apply at Scale, But Intelligently</h3>
+    <p>I didn’t apply manually. flashfirejobs.com applied to 1000+ roles filtered by:</p>
+    <ul>
+      <li>My background</li>
+      <li>Preferred location</li>
+      <li>Industry & level</li>
+    </ul>
+    <p>Each application was resume-matched and aligned within 1–2 days of posting.</p>
+
+    <h3>Step 4: Focus Your Time on Interview Readiness</h3>
+    <p>With job search handled, I focused on:</p>
+    <ul>
+      <li>STAR responses</li>
+      <li>Case prep</li>
+      <li>Product design/strategy questions</li>
+    </ul>
+    <p>By week 3, I was in multiple rounds of interviews.</p>
+
+    <h3>Step 5: Build Visibility While Others Wait</h3>
+    <p>LinkedIn activity made me visible:</p>
+    <ul>
+      <li>Posted projects weekly</li>
+      <li>Shared product breakdowns</li>
+      <li>Wrote about interview learnings</li>
+    </ul>
+    <p>This got me noticed by hiring managers — without referrals.</p>
+
+    <h3>Step 6: When Interviews Come, You’re Ready</h3>
+    <p>By week 4:</p>
+    <ul>
+      <li>7 interviews scheduled</li>
+      <li>3 in progress</li>
+      <li>2 final rounds locked in</li>
+    </ul>
+    <p>My dashboard tracked every app & interview stage.</p>
+
+    <h3>Step 7: Rinse, Optimize, Repeat</h3>
+    <p>If you don’t get an offer by week 6, don’t panic. The system keeps applying & learning:</p>
+    <ul>
+      <li>Shifts to higher-performing roles</li>
+      <li>Focuses on cities with higher callbacks</li>
+    </ul>
+
+    <h3>Final Thoughts: Your Job Search Isn’t Broken. Your System Is.</h3>
+    <p>You need:</p>
+    <ul>
+      <li>High-volume apps</li>
+      <li>Custom resumes</li>
+      <li>LinkedIn visibility</li>
+      <li>Tracking & momentum</li>
+    </ul>
+    <p><a href="https://www.flashfirejobs.com">flashfirejobs.com</a> delivers it all. You stay interview-ready while the machine works for you.</p>
+    <p><strong>No luck needed. Just the right system.</strong></p>
 `
     }
   ];
