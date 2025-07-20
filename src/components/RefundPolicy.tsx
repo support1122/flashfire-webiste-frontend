@@ -35,7 +35,7 @@ const RefundPolicy = () => {
         <div className="bg-white rounded-lg shadow-sm p-8">
           <div className="prose prose-lg max-w-none">
             <p className="text-gray-700 mb-8">
-              At FlashFire, we are committed to your satisfaction and success in finding your dream job. This Refund Policy outlines the terms and conditions under which refunds may be provided for our AI-powered job application automation services.
+              At Flashfire, we are committed to your satisfaction and success in finding your dream job. This Refund Policy outlines the terms and conditions under which refunds may be provided for our AI-powered job application automation services.
             </p>
 
             <h2 className="text-2xl font-bold text-gray-900 mb-4">Refund Eligibility</h2>
@@ -124,7 +124,7 @@ const RefundPolicy = () => {
 
             <h2 className="text-2xl font-bold text-gray-900 mb-4">Modifications to This Policy</h2>
             <p className="text-gray-700 mb-6">
-              FlashFire reserves the right to modify this Refund Policy at any time. Changes will be posted on our website and will apply to future transactions. Existing customers will be notified of significant changes via email.
+              Flashfire reserves the right to modify this Refund Policy at any time. Changes will be posted on our website and will apply to future transactions. Existing customers will be notified of significant changes via email.
             </p>
 
             <h2 className="text-2xl font-bold text-gray-900 mb-4">Contact Information</h2>
@@ -132,14 +132,14 @@ const RefundPolicy = () => {
               For refund requests or questions about this policy, please contact us:
             </p>
             <div className="bg-gray-50 p-4 rounded-lg">
-              <p className="text-gray-700"><strong>Email:</strong> support@flashfirejobs.com</p>
+              <p className="text-gray-700"><strong>Email:</strong> support@Flashfirejobs.com</p>
               <p className="text-gray-700"><strong>Subject Line:</strong> "Refund Request - [Your Name]"</p>
               <p className="text-gray-700"><strong>Response Time:</strong> Within 24 hours during business days</p>
             </div>
 
             <div className="mt-8 p-6 bg-green-50 rounded-lg border border-green-200">
               <p className="text-green-800 font-medium">
-                We value your trust in FlashFire and are committed to ensuring your satisfaction with our services. Our goal is to help you succeed in your job search while maintaining fair and transparent business practices.
+                We value your trust in Flashfire and are committed to ensuring your satisfaction with our services. Our goal is to help you succeed in your job search while maintaining fair and transparent business practices.
               </p>
             </div>
           </div>
