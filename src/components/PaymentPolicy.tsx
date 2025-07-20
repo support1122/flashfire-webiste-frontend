@@ -35,7 +35,7 @@ const PaymentPolicy = () => {
         <div className="bg-white rounded-lg shadow-sm p-8">
           <div className="prose prose-lg max-w-none">
             <p className="text-gray-700 mb-8">
-              This Payment Policy outlines the terms and conditions for all financial transactions related to FlashFire's AI-powered job application automation services. Please read this policy carefully before making any payments.
+              This Payment Policy outlines the terms and conditions for all financial transactions related to Flashfire's AI-powered job application automation services. Please read this policy carefully before making any payments.
             </p>
 
             <h2 className="text-2xl font-bold text-gray-900 mb-4">Payment Methods</h2>
@@ -129,7 +129,7 @@ const PaymentPolicy = () => {
 
             <h3 className="text-xl font-semibold text-gray-900 mb-3">Processing Fees</h3>
             <p className="text-gray-700 mb-6">
-              FlashFire absorbs standard payment processing fees. However, certain payment methods or international transactions may incur additional fees, which will be disclosed before payment.
+              Flashfire absorbs standard payment processing fees. However, certain payment methods or international transactions may incur additional fees, which will be disclosed before payment.
             </p>
 
             <h2 className="text-2xl font-bold text-gray-900 mb-4">Security and Privacy</h2>
@@ -163,7 +163,7 @@ const PaymentPolicy = () => {
 
             <h2 className="text-2xl font-bold text-gray-900 mb-4">Changes to Pricing</h2>
             <p className="text-gray-700 mb-6">
-              FlashFire reserves the right to modify pricing at any time. Existing customers will be notified of price changes at least 30 days in advance. Price changes will not affect current billing cycles but will apply to subsequent renewals.
+              Flashfire reserves the right to modify pricing at any time. Existing customers will be notified of price changes at least 30 days in advance. Price changes will not affect current billing cycles but will apply to subsequent renewals.
             </p>
 
             <h2 className="text-2xl font-bold text-gray-900 mb-4">Contact Information</h2>
