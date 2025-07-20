@@ -69,7 +69,7 @@ const Footer = () => {
           {/* Right side - Brand */}
           <div className="flex items-center space-x-2">
             <Zap className="w-4 h-4" />
-            <span className="font-bold text-sm sm:text-base">FLASHFIRE</span>
+            <span className="font-bold text-sm sm:text-base">FLASHFIRE Pvt. Ltd.</span>
           </div>
         </div>
       </div>
