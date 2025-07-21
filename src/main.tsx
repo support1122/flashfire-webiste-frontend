@@ -22,7 +22,6 @@ const routes=createBrowserRouter([
       { path: '/refundpolicy', element: <RefundPolicy /> },
       { path: '/privacypolicy', element: <PrivacyPolicy /> },
       { path: '/termsofservice', element: <TermsOfService /> },
-      { path: '/blog/:slug', element: <BlogPost /> },
      
     ]
   },

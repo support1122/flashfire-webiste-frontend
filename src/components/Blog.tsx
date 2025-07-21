@@ -1,6 +1,5 @@
 import React from 'react';
 import { Calendar, User, ArrowRight, BookOpen } from 'lucide-react';
-import { Link } from 'react-router-dom';
 
 const Blog = () => {
   const blogPosts = [
@@ -11,8 +10,7 @@ const Blog = () => {
       author: "Flashfire Team",
       date: "Dec 15, 2024",
       readTime: "5 min read",
-      image: "/images/blog4.jpeg",
-      slug: "ai-resume-tips-interviews"
+      image: "/images/blog4.jpeg"
     },
     {
       id: 2,
@@ -21,8 +19,7 @@ const Blog = () => {
       author: "Career Expert",
       date: "Dec 12, 2024",
       readTime: "7 min read",
-      image: "/images/blog5.jpeg",
-      slug: "job-application-automation-future"
+      image: "/images/blog5.jpeg"
     },
     {
       id: 3,
@@ -31,8 +28,7 @@ const Blog = () => {
       author: "LinkedIn Specialist",
       date: "Dec 10, 2024",
       readTime: "6 min read",
-      image: "/images/blog6.jpeg",
-      slug: "linkedin-optimization-us-market"
+      image: "/images/blog6.jpeg"
     },
     {
       id: 4,
@@ -41,8 +37,7 @@ const Blog = () => {
       author: "HR Technology Expert",
       date: "Dec 8, 2024",
       readTime: "8 min read",
-      image: "/images/blog7.jpeg",
-      slug: "understanding-ats-systems"
+      image: "/images/blog7.jpeg"
     },
     {
       id: 5,
@@ -51,8 +46,7 @@ const Blog = () => {
       author: "Negotiation Coach",
       date: "Dec 5, 2024",
       readTime: "10 min read",
-      image: "/images/blog8.jpeg",
-      slug: "salary-negotiation-new-graduates"
+      image: "/images/blog8.jpeg"
     },
     {
       id: 6,
@@ -61,8 +55,7 @@ const Blog = () => {
       author: "Remote Work Expert",
       date: "Dec 3, 2024",
       readTime: "6 min read",
-      image: "/images/blog9.jpeg",
-      slug: "remote-work-interview-tips"
+      image: "/images/blog9.jpeg"
     }
   ];
 
@@ -120,14 +113,13 @@ const Blog = () => {
                 <div className="flex items-center justify-between">
                   <span className="text-sm text-gray-500">{post.readTime}</span>
                   
-                  {/* Use Link for proper routing instead of blob URLs */}
-                  <Link
-                    to={`/blog/${post.slug}`}
+                  <a
+                    href="#"
                     className="inline-flex items-center space-x-2 text-blue-600 hover:text-blue-700 font-medium transition-colors duration-200"
                   >
                     <span>Read More</span>
                     <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-200" />
-                  </Link>
+                  </a>
                 </div>
               </div>
             </article>
