@@ -934,7 +934,285 @@ const Blog = () => {
     <p><a href="https://www.flashfirejobs.com">flashfirejobs.com</a> delivers it all. You stay interview-ready while the machine works for you.</p>
     <p><strong>No luck needed. Just the right system.</strong></p>
 `
-    }
+    },
+    {id: 7,
+  title: "10 Reasons International Students Fail to Land Jobs in the U.S. — And How to Fix Them",
+  excerpt: "You've studied hard, built projects, and dreamed big — yet the U.S. job market still feels impossible. Here's why most international students struggle, and how flashfirejobs.com turns it around.",
+  author: "Shubham Shukla",
+  date: "Jul 21, 2025",
+  readTime: "9 min",
+  category: "Career Advice",
+  image: "https://images.pexels.com/photos/3183197/pexels-photo-3183197.jpeg?auto=compress&cs=tinysrgb&w=800",
+  categoryColor: "bg-orange-100 text-orange-600",
+  content: `
+    <p>For many international students, landing a job in the U.S. is more than just a career move—it's a life goal. You've invested in your degree, worked on real-world projects, and learned to navigate a new culture. Yet, the job market feels like a locked maze, especially when you're competing without referrals, sponsorship certainty, or unlimited time on OPT.</p>
+
+    <p>So why do so many international students fail to land jobs in the U.S.?</p>
+
+    <p>Here are the 10 real reasons—and how <a href="https://www.flashfirejobs.com" target="_blank" rel="noopener noreferrer" style="color:#f97316; text-decoration:underline;">flashfirejobs.com</a> solves every one of them.</p>
+
+    <h2>1. They Apply to the Wrong Jobs</h2>
+    <p>Not every company hires international talent. Some don't sponsor, and others immediately reject applications with F-1 status. Many students waste hours applying to companies that were never an option to begin with.</p>
+    <p><strong>Fix it:</strong> <a href="https://www.flashfirejobs.com" target="_blank" rel="noopener noreferrer" style="color:#f97316;">flashfirejobs.com</a> filters out irrelevant roles. It uses intelligent criteria to target companies that match your OPT status, job function, experience level, and location.</p>
+
+    <h2>2. They Use the Same Resume for Every Role</h2>
+    <p>Using one generic resume across hundreds of applications might seem efficient, but it's the fastest route to being ignored by ATS (Applicant Tracking Systems).</p>
+    <p><strong>Fix it:</strong> <a href="https://www.flashfirejobs.com" target="_blank" rel="noopener noreferrer" style="color:#f97316;">flashfirejobs.com</a> generates a custom-tailored resume for every single job.</p>
+
+    <h2>3. They Start Too Late</h2>
+    <p>Students often wait until their OPT starts to begin the job search. By then, 1–2 months have already passed.</p>
+    <p><strong>Fix it:</strong> Start early with <a href="https://www.flashfirejobs.com" target="_blank" rel="noopener noreferrer" style="color:#f97316;">flashfirejobs.com</a>. You can begin optimizing your resume, testing formats, and applying before your OPT starts.</p>
+
+    <h2>4. They Manually Apply to 5 Jobs a Day</h2>
+    <p>Manual job searching feels productive—until you realize it’s painfully slow.</p>
+    <p><strong>Fix it:</strong> <a href="https://www.flashfirejobs.com" target="_blank" rel="noopener noreferrer" style="color:#f97316;">flashfirejobs.com</a> applies to 1000+ jobs on your behalf in 6–7 weeks, each tailored and relevant.</p>
+
+    <h2>5. They Don’t Track Their Applications</h2>
+    <p>You can’t improve what you don’t measure. Most students apply without knowing what’s working.</p>
+    <p><strong>Fix it:</strong> The real-time dashboard at <a href="https://www.flashfirejobs.com" target="_blank" rel="noopener noreferrer" style="color:#f97316;">flashfirejobs.com</a> tracks outcomes, interview rates, and more.</p>
+
+    <h2>6. They Neglect LinkedIn</h2>
+    <p>If your LinkedIn is outdated or inconsistent, you’re missing out on recruiter visibility.</p>
+    <p><strong>Fix it:</strong> <a href="https://www.flashfirejobs.com" target="_blank" rel="noopener noreferrer" style="color:#f97316;">flashfirejobs.com</a> professionally rewrites your LinkedIn to match high-performing keyword clusters.</p>
+
+    <h2>7. They Apply Without Strategy</h2>
+    <p>“Easy Apply” isn’t always smart apply. Blindly sending resumes rarely works.</p>
+    <p><strong>Fix it:</strong> Every application via <a href="https://www.flashfirejobs.com" target="_blank" rel="noopener noreferrer" style="color:#f97316;">flashfirejobs.com</a> is strategic, role-specific, and reviewed.</p>
+
+    <h2>8. They Burn Out Quickly</h2>
+    <p>The emotional toll of job hunting is real. Many students quit halfway.</p>
+    <p><strong>Fix it:</strong> Let <a href="https://www.flashfirejobs.com" target="_blank" rel="noopener noreferrer" style="color:#f97316;">flashfirejobs.com</a> handle the heavy lifting. You focus on interview prep and strategy — not daily clicks.</p>
+
+    <h2>9. They Rely Only on Job Boards</h2>
+    <p>Job boards weren’t built for international timelines. Many roles are outdated or irrelevant.</p>
+    <p><strong>Fix it:</strong> <a href="https://www.flashfirejobs.com" target="_blank" rel="noopener noreferrer" style="color:#f97316;">flashfirejobs.com</a> curates live, sponsor-friendly listings from trusted sources.</p>
+
+    <h2>10. They Quit Too Soon</h2>
+    <p>Most give up just before the results kick in. Job hunting requires consistency and momentum.</p>
+    <p><strong>Fix it:</strong> <a href="https://www.flashfirejobs.com" target="_blank" rel="noopener noreferrer" style="color:#f97316;">flashfirejobs.com</a> keeps going, so you don’t have to restart from zero. Momentum = interviews.</p>
+
+    <h2>What Makes flashfirejobs.com Different?</h2>
+    <ul>
+      <li>Submits 1000+ high-quality applications over 6–7 weeks</li>
+      <li>Tailors resumes for each role with ATS-ready formatting</li>
+      <li>Optimizes LinkedIn for recruiter discovery</li>
+      <li>Tracks results in real time via dashboards</li>
+      <li>Focuses on sponsor-friendly roles</li>
+      <li>Applies faster and more efficiently than manual effort</li>
+    </ul>
+
+    <h2>Real Results</h2>
+    <p><strong>Aman G.</strong> got 4+ interview rounds after 300 Flashfire applications.</p>
+    <p><strong>Anjali S.</strong> started getting recruiter messages after her LinkedIn was rewritten.</p>
+    <p><strong>Rijul J.</strong> landed Product Manager offers with no referrals, just volume + targeting.</p>
+
+    <h2>Final Words</h2>
+    <p>The job market isn’t broken — the traditional approach is.</p>
+    <p>If you’re tired of ghosting, rejections, and dead ends, let <a href="https://www.flashfirejobs.com" target="_blank" rel="noopener noreferrer" style="color:#f97316;">flashfirejobs.com</a> handle your search with precision and automation.</p>
+    <p><strong>Start your 7-day free trial today.</strong> Save time. Get interviews. Land your dream role.</p>
+  `
+  },
+  {
+    id: 8,
+  title: "The 7 Best Job Portals for International Students Applying in the U.S. (And Which One Actually Works)",
+  excerpt: "Not all job boards are created equal—especially for international students. This guide ranks the most popular platforms and reveals which one actually gets you results, fast.",
+  author: "Shubham Shukla",
+  date: "Jul 21, 2025",
+  readTime: "8 min",
+  category: "Career Advice",
+  image: "https://images.pexels.com/photos/4050287/pexels-photo-4050287.jpeg?auto=compress&cs=tinysrgb&w=800",
+  categoryColor: "bg-green-100 text-green-600",
+  content: `
+    <p>If you're an international student on F-1 or STEM OPT trying to land a job in the U.S., you've probably spent hours scrolling through job boards. But here’s the hard truth:</p>
+
+    <p><strong>Most job platforms aren't built for your situation.</strong> They don’t tell you if the company hires international talent. They don't filter for roles that align with your visa timeline. And they definitely don’t personalize each resume.</p>
+
+    <p>That’s why it’s not just <em>where</em> you apply, but <em>how</em> you apply.</p>
+
+    <p>In this blog, we’ll dive into the 7 most talked-about job platforms international students use—and reveal which one actually helps you land interviews, fast.</p>
+
+    <h2>1. LinkedIn</h2>
+    <p>LinkedIn is more than just a resume hub—it’s a dynamic job board, recruiter tool, and professional branding machine. But most students use it passively.</p>
+    <p><strong>What works:</strong> Combining LinkedIn’s reach with optimization tools like <a href="https://www.flashfirejobs.com" target="_blank" rel="noopener noreferrer" style="color:#f97316;">flashfirejobs.com</a> to boost visibility and inbound calls.</p>
+    <p>Applying directly? Risky. Sponsorship clarity is missing, and “Easy Apply” can mean your resume disappears.</p>
+
+    <h2>2. Indeed</h2>
+    <p>Indeed’s strength is its massive job listing volume. Its weakness? Expired roles, duplicates, and no sponsor filters.</p>
+    <p><strong>Tip:</strong> Use it for research. Let <a href="https://www.flashfirejobs.com" target="_blank" rel="noopener noreferrer" style="color:#f97316;">flashfirejobs.com</a> handle actual applications with tailored resumes and filters that matter.</p>
+
+    <h2>3. Jobright</h2>
+    <p>Jobright uses AI to recommend jobs. Great UX, smart suggestions. But it misses the mark on sponsorship filtering.</p>
+    <p><strong>For international students:</strong> Use it as a research tool. Use <a href="https://www.flashfirejobs.com" target="_blank" rel="noopener noreferrer" style="color:#f97316;">flashfirejobs.com</a> as your execution engine with sponsor-focused automation.</p>
+
+    <h2>4. Y Combinator Startup Jobs (Work at a Startup)</h2>
+    <p>Perfect for breaking into fast-moving startups. Startups are flexible and hire quickly—but rarely clarify sponsorship upfront.</p>
+    <p><strong>Better strategy:</strong> Let <a href="https://www.flashfirejobs.com" target="_blank" rel="noopener noreferrer" style="color:#f97316;">flashfirejobs.com</a> target YC roles and personalize resumes for each startup’s mission and stack.</p>
+
+    <h2>5. Wellfound (formerly AngelList Talent)</h2>
+    <p>Great for high-growth startups with transparent salary/equity data. But poor clarity on visa sponsorship.</p>
+    <p><strong>Fix it:</strong> <a href="https://www.flashfirejobs.com" target="_blank" rel="noopener noreferrer" style="color:#f97316;">flashfirejobs.com</a> crafts resumes specific to each startup’s product, stage, and team to stand out in founder inboxes.</p>
+
+    <h2>6. Startup.jobs</h2>
+    <p>Curated startup listings globally, with decent U.S. and remote roles. No sponsorship filters. No resume matching.</p>
+    <p><strong>Let flashfire handle it:</strong> With <a href="https://www.flashfirejobs.com" target="_blank" rel="noopener noreferrer" style="color:#f97316;">flashfirejobs.com</a>, your applications are strategic, fast, and tracked for performance.</p>
+
+    <h2>7. flashfirejobs.com (The One That Actually Works)</h2>
+    <p>This isn’t a job board. It’s a job search automation system <strong>built for international students</strong>.</p>
+    <ul>
+      <li>Applies to 1000+ sponsor-friendly jobs in 6–7 weeks</li>
+      <li>Generates a custom, ATS-optimized resume for every application</li>
+      <li>Tracks interview calls and app performance in real time</li>
+      <li>Optimizes your LinkedIn to attract recruiters</li>
+      <li>Eliminates 150+ hours of manual job hunting</li>
+    </ul>
+    <p>Every job is pre-filtered for sponsorship likelihood, visa timeline, and experience match. Even without referrals or a U.S. network, <strong><a href="https://www.flashfirejobs.com" target="_blank" rel="noopener noreferrer" style="color:#f97316;">flashfirejobs.com</a></strong> gets you real results.</p>
+
+    <h2>Final Thoughts: What Really Works</h2>
+    <p>Most international students:</p>
+    <ul>
+      <li>Apply in bulk with one resume</li>
+      <li>Use job boards without strategy</li>
+      <li>Don’t track what’s working</li>
+    </ul>
+    <p>Don’t make the same mistakes. Instead:</p>
+    <ol>
+      <li>Use LinkedIn, YC, and Jobright for research</li>
+      <li>Let <a href="https://www.flashfirejobs.com" target="_blank" rel="noopener noreferrer" style="color:#f97316;">flashfirejobs.com</a> handle the heavy lifting</li>
+    </ol>
+    <p>Thousands of users are already getting results. Now it’s your turn.</p>
+    <p><strong><a href="https://www.flashfirejobs.com" target="_blank" rel="noopener noreferrer" style="color:#f97316;">Start your job search today</a></strong> — the right way.</p>
+  `
+},
+{
+  id: 9,
+  title: "The Ultimate Job Search Strategy for OPT Students in the U.S. — What No One Tells You",
+  excerpt: "OPT job seekers aren’t just looking for roles—they’re racing against time. Here’s a step-by-step strategy to land a job in the U.S. as an international student, without wasting months.",
+  author: "Shubham Shukla",
+  date: "Jul 21, 2025",
+  readTime: "6 min",
+  category: "Career Advice",
+  image: "https://images.pexels.com/photos/6140676/pexels-photo-6140676.jpeg?auto=compress&cs=tinysrgb&w=800",
+  categoryColor: "bg-orange-100 text-orange-600",
+  content: `
+    <h1>The Ultimate Job Search Strategy for OPT Students in the U.S. — What No One Tells You</h1>
+
+    <p>Finding a job in the U.S. as an international student on OPT is nothing like a regular job search. It’s not just about finding a role that excites you. It’s about finding a company that understands visa timelines, moves fast, and actually replies. In a system built for domestic applicants, OPT job seekers face a game that feels rigged from the start.</p>
+
+    <p>But what if there was a proven strategy that bypassed the endless hours on job boards, avoided ghosted applications, and put your resume in the hands of real decision-makers?</p>
+
+    <h2>Step 1: Stop Applying Blindly</h2>
+    <p>Applying to 100s of jobs on LinkedIn and Indeed without targeting is a waste of time. Most companies won’t even view your resume if they don’t sponsor or understand OPT timelines.</p>
+    <p><strong>Instead:</strong> Only apply to companies that:</p>
+    <ul>
+      <li>Have hired international talent before</li>
+      <li>Can move fast on interviews</li>
+      <li>Match your experience and skill set</li>
+    </ul>
+
+    <h2>Step 2: Use a Job Search Automation System</h2>
+    <p>Platforms like <a href="https://www.flashfirejobs.com" target="_blank" rel="noopener noreferrer" style="color:#f97316;">flashfirejobs.com</a> are built for OPT/STEM students. They filter jobs based on sponsorship, timeline, and match score. Most importantly, they personalize each resume and apply on your behalf—fast.</p>
+    <p>This cuts down your manual effort from 150+ hours to a few minutes of onboarding.</p>
+
+    <h2>Step 3: Tailor Every Resume</h2>
+    <p>Generic resumes don’t get callbacks. Every resume should be tailored to the:</p>
+    <ul>
+      <li>Job description keywords</li>
+      <li>Company tech stack or tools</li>
+      <li>Specific responsibilities</li>
+    </ul>
+    <p><strong>Pro Tip:</strong> Tools like flashfire auto-generate custom resumes that beat ATS systems and increase your callback rate by 3x.</p>
+
+    <h2>Step 4: Track What’s Working</h2>
+    <p>Most students don’t know which jobs they applied to or which resumes performed well. That’s a massive blind spot.</p>
+    <p>Track every job applied, the resume used, and interview outcomes. A system like <a href="https://www.flashfirejobs.com" target="_blank" rel="noopener noreferrer" style="color:#f97316;">flashfirejobs.com</a> does this automatically for you.</p>
+
+    <h2>Step 5: Optimize LinkedIn</h2>
+    <p>Your LinkedIn profile can either bring you recruiters or repel them. Here's what matters:</p>
+    <ul>
+      <li>Clear title (e.g., “Data Analyst | OPT | Python | SQL | Tableau”)</li>
+      <li>Headline that includes OPT/STEM availability</li>
+      <li>Achievements + keywords in every section</li>
+    </ul>
+    <p>Flashfire’s LinkedIn optimization feature makes sure your profile shows up in recruiter searches.</p>
+
+    <h2>Final Takeaway</h2>
+    <p>You don’t need luck. You need leverage. OPT job search success is about:</p>
+    <ol>
+      <li>Targeted job filters</li>
+      <li>Resume personalization</li>
+      <li>Automated, strategic applications</li>
+      <li>Real-time performance tracking</li>
+    </ol>
+
+    <p><strong>Thousands of OPT/STEM students</strong> have used this strategy and landed jobs within 4–8 weeks—even without referrals.</p>
+
+    <p><a href="https://www.flashfirejobs.com" target="_blank" rel="noopener noreferrer" style="color:#f97316;"><strong>Start your job search smart — with flashfirejobs.com</strong></a></p>
+  `
+},
+{
+  id: 11,
+  title: "How to Land a U.S. Internship After 2 Semesters",
+  excerpt: "No U.S. experience? No referrals? No problem. Here's a step-by-step game plan for international students to land their first internship after just two semesters.",
+  author: "Shubham Shukla",
+  date: "Jul 21, 2025",
+  readTime: "5 min",
+  category: "Career Advice",
+  image: "https://images.pexels.com/photos/5825664/pexels-photo-5825664.jpeg?auto=compress&cs=tinysrgb&w=800",
+  categoryColor: "bg-blue-100 text-blue-600",
+  content: `
+    <h1>How to Land a U.S. Internship After 2 Semesters</h1>
+
+    <p>Securing your first U.S. internship as an international student can feel like climbing a mountain with a blindfold on. You’re new to the job market, still figuring out how to talk about your skills, and worse — every employer seems to want "U.S. experience" you don’t yet have.</p>
+
+    <p>But here’s the truth:</p>
+
+    <p><strong>You don’t need referrals, luck, or perfect timing to land your internship after two semesters.</strong> What you need is a clear, optimized strategy — and a system that does the heavy lifting.</p>
+
+    <h2>Step 1: Get Your Resume U.S.-Ready</h2>
+    <p>Your resume isn’t just a list of projects. It’s your marketing pitch. Most international students undersell themselves. Here’s how to fix that:</p>
+    <ul>
+      <li>Start with a strong headline (e.g., “CS Grad Student | Python | Data Analysis | SQL”)</li>
+      <li>Show outcome-driven bullet points, not responsibilities</li>
+      <li>Tailor your resume to each internship’s job description</li>
+    </ul>
+
+    <h2>Step 2: Apply Where You Have Leverage</h2>
+    <p>Stop applying on generic portals. Most Fortune 500 internships are already saturated or restricted to U.S. citizens. Focus instead on:</p>
+    <ul>
+      <li>Startups and mid-size firms open to diverse talent</li>
+      <li>Companies with prior history of hiring international students</li>
+      <li>Roles that match your exact skill set — not random job titles</li>
+    </ul>
+
+    <p>FlashfireJobs automatically filters such internships and even applies with custom resumes on your behalf.</p>
+
+    <h2>Step 3: Don’t Wait for a Referral — Create One</h2>
+    <p>Instead of cold messaging, try warm commenting:</p>
+    <ul>
+      <li>Follow hiring managers, recruiters, and team leads on LinkedIn</li>
+      <li>Comment on their posts for 7–10 days before messaging</li>
+      <li>Then send a short message referencing their post, not your resume</li>
+    </ul>
+    <p>This builds familiarity — and improves your reply rate by 5x.</p>
+
+    <h2>Step 4: Build Your Brand in Public</h2>
+    <p>Even a single post on LinkedIn about your journey, projects, or learnings can attract hiring interest. Bonus if you include visuals or metrics.</p>
+
+    <h2>Step 5: Track and Iterate</h2>
+    <p>Don’t guess. Know what’s working. Track:</p>
+    <ul>
+      <li>Which resumes got interviews</li>
+      <li>Which companies responded</li>
+      <li>Where to double down next</li>
+    </ul>
+    <p>Flashfire’s dashboard handles this automatically — giving you data-driven feedback each week.</p>
+
+    <h2>Final Words</h2>
+    <p>You don’t need to wait till your final semester to land something valuable. With the right targeting, branding, and automation — you can unlock real-world experience fast.</p>
+
+    <p><a href="https://www.flashfirejobs.com" target="_blank" rel="noopener noreferrer" style="color:#3b82f6;"><strong>Start your internship journey smart — with flashfirejobs.com</strong></a></p>
+  `}
+
   ];
 
   const totalPosts = blogPosts.length;
