@@ -10,6 +10,7 @@ import RefundPolicy from './components/RefundPolicy';
 import PrivacyPolicy from './components/PrivacyPolicy';
 import TermsOfService from './components/TermsOfService';
 import Home from './components/Home'
+import BlogPost from './components/BlogPost';
 
 const routes=createBrowserRouter([
   {
@@ -21,6 +22,7 @@ const routes=createBrowserRouter([
       { path: '/refundpolicy', element: <RefundPolicy /> },
       { path: '/privacypolicy', element: <PrivacyPolicy /> },
       { path: '/termsofservice', element: <TermsOfService /> },
+      { path: '/blog/:slug', element: <BlogPost /> },
      
     ]
   },
