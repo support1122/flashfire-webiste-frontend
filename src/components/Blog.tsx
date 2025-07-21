@@ -942,8 +942,8 @@ const Blog = () => {
   date: "Jul 21, 2025",
   readTime: "9 min",
   category: "Career Advice",
-  image: "https://images.pexels.com/photos/3183197/pexels-photo-3183197.jpeg?auto=compress&cs=tinysrgb&w=800",
-  categoryColor: "bg-orange-100 text-orange-600",
+image: "/images/blog7.jpeg",  
+     categoryColor: "bg-orange-100 text-orange-600",
   content: `
     <p>For many international students, landing a job in the U.S. is more than just a career move—it's a life goal. You've invested in your degree, worked on real-world projects, and learned to navigate a new culture. Yet, the job market feels like a locked maze, especially when you're competing without referrals, sponsorship certainty, or unlimited time on OPT.</p>
 
@@ -1020,8 +1020,8 @@ const Blog = () => {
   date: "Jul 21, 2025",
   readTime: "8 min",
   category: "Career Advice",
-  image: "https://images.pexels.com/photos/4050287/pexels-photo-4050287.jpeg?auto=compress&cs=tinysrgb&w=800",
-  categoryColor: "bg-green-100 text-green-600",
+image: "/images/blog8.jpeg",  
+    categoryColor: "bg-green-100 text-green-600",
   content: `
     <p>If you're an international student on F-1 or STEM OPT trying to land a job in the U.S., you've probably spent hours scrolling through job boards. But here’s the hard truth:</p>
 
@@ -1091,7 +1091,7 @@ const Blog = () => {
   date: "Jul 21, 2025",
   readTime: "6 min",
   category: "Career Advice",
-  image: "https://images.pexels.com/photos/6140676/pexels-photo-6140676.jpeg?auto=compress&cs=tinysrgb&w=800",
+image: "/images/blog9.jpeg",  
   categoryColor: "bg-orange-100 text-orange-600",
   content: `
     <h1>The Ultimate Job Search Strategy for OPT Students in the U.S. — What No One Tells You</h1>
@@ -1157,7 +1157,7 @@ const Blog = () => {
   date: "Jul 21, 2025",
   readTime: "5 min",
   category: "Career Advice",
-  image: "https://images.pexels.com/photos/5825664/pexels-photo-5825664.jpeg?auto=compress&cs=tinysrgb&w=800",
+image: "/images/blog10.jpeg",  
   categoryColor: "bg-blue-100 text-blue-600",
   content: `
     <h1>How to Land a U.S. Internship After 2 Semesters</h1>
