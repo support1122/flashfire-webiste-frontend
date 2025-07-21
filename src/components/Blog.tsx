@@ -1087,7 +1087,7 @@ const Blog = () => {
   id: 9,
   title: "The Ultimate Job Search Strategy for OPT Students in the U.S. — What No One Tells You",
   excerpt: "OPT job seekers aren’t just looking for roles—they’re racing against time. Here’s a step-by-step strategy to land a job in the U.S. as an international student, without wasting months.",
-  author: "Shubham Shukla",
+  author: "Gaurav Sharma",
   date: "Jul 21, 2025",
   readTime: "6 min",
   category: "Career Advice",
@@ -1150,10 +1150,10 @@ const Blog = () => {
   `
 },
 {
-  id: 11,
+  id: 10,
   title: "How to Land a U.S. Internship After 2 Semesters",
   excerpt: "No U.S. experience? No referrals? No problem. Here's a step-by-step game plan for international students to land their first internship after just two semesters.",
-  author: "Shubham Shukla",
+  author: "Amit Jain",
   date: "Jul 21, 2025",
   readTime: "5 min",
   category: "Career Advice",
