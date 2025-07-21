@@ -168,7 +168,7 @@ const TermsOfService = () => {
             <div className="bg-gray-50 p-4 rounded-lg">
               <p className="text-gray-700"><strong>Email:</strong> support@flashfirejobs.com</p>
               <p className="text-gray-700"><strong>Website:</strong> www.flashfirejobs.com</p>
-              <p className="text-gray-700"><strong>Address:</strong> Flashfire Inc., New York, NY, USA</p>
+{/*               <p className="text-gray-700"><strong>Address:</strong> Flashfire Inc., New York, NY, USA</p> */}
             </div>
 
             <div className="mt-8 p-6 bg-orange-50 rounded-lg border border-orange-200">
