@@ -687,14 +687,14 @@ const Blog = () => {
       date: "Jan 1, 2025",
       readTime: "14 min",
       category: "Career Advice",
-      image: "https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=800",
+      image: "/images/blog5.jpeg",
       categoryColor: "bg-blue-100 text-blue-600",
       content: `
-        <p>The U.S. job market isn't easy. Especially if you're an international student.</p>
+        <p>The U.S. job market isn’t easy. Especially if you're an international student.</p>
 
 <p>It took me months of frustration, rejections, and ghosting before I discovered a way to flip the script. In just 6 weeks, I went from being unsure and overwhelmed — to choosing between <strong>10 product management offers</strong>, all thanks to one tool: <strong>flashfirejobs.com</strong>.</p>
 
-<p>This isn't a fairytale. It's a system. And in this blog, I'll show you <strong>exactly</strong> how I used flashfirejobs.com to make it happen — step by step, without referrals, insider hookups, or paid recruiters.</p>
+<p>This isn’t a fairytale. It’s a system. And in this blog, I’ll show you <strong>exactly</strong> how I used flashfirejobs.com to make it happen — step by step, without referrals, insider hookups, or paid recruiters.</p>
 
 <hr />
 
@@ -712,7 +712,7 @@ const Blog = () => {
 
 <p>But none of it worked.</p>
 
-<p>I spent <strong>30+ hours/week</strong> applying manually, writing awkward cover letters, tracking everything in Google Sheets, and getting maybe one interview a week — often from jobs I wasn't even excited about.</p>
+<p>I spent <strong>30+ hours/week</strong> applying manually, writing awkward cover letters, tracking everything in Google Sheets, and getting maybe one interview a week — often from jobs I wasn’t even excited about.</p>
 
 <p>The worst part? <strong>No feedback. No visibility. No control.</strong></p>
 
@@ -722,7 +722,7 @@ const Blog = () => {
 
 <p>A friend recommended flashfirejobs.com. Skeptical but desperate, I signed up for the <strong>7-day free trial</strong>.</p>
 
-<p>Here's what happened within 48 hours:</p>
+<p>Here’s what happened within 48 hours:</p>
 
 <ul>
   <li>My resume was fully rebuilt using ATS-optimized formatting</li>
@@ -737,7 +737,7 @@ const Blog = () => {
 
 <h2>Week 2: Applications at Scale — Without the Spam</h2>
 
-<p>flashfirejobs.com doesn't just spray and pray.</p>
+<p>flashfirejobs.com doesn’t just spray and pray.</p>
 
 <p>They applied to <strong>300 product management jobs</strong> in my first week — each with a custom resume that reflected:</p>
 
@@ -747,7 +747,7 @@ const Blog = () => {
   <li>U.S.-friendly formatting that passed ATS scans</li>
 </ul>
 
-<p>I didn't lift a finger. Meanwhile, I used the time to:</p>
+<p>I didn’t lift a finger. Meanwhile, I used the time to:</p>
 
 <ul>
   <li>Prepare STAR stories</li>
@@ -761,10 +761,10 @@ const Blog = () => {
 
 <h2>Week 3–4: Interview Momentum and Role Targeting</h2>
 
-<p>Here's where flashfirejobs.com really separated itself:</p>
+<p>Here’s where flashfirejobs.com really separated itself:</p>
 
 <ul>
-  <li>I saw which roles got replies — and which didn't</li>
+  <li>I saw which roles got replies — and which didn’t</li>
   <li>The AI started prioritizing similar jobs</li>
   <li>My profile visibility went up — recruiters started noticing</li>
 </ul>
@@ -805,7 +805,7 @@ const Blog = () => {
   <li><strong>Smart Matching</strong> — Based on your skills, location, and goals</li>
   <li><strong>ATS-Optimized Everything</strong> — Resumes and profiles built to pass filters</li>
   <li><strong>Speed & Volume</strong> — 1000+ jobs in 6 weeks, no missed deadlines</li>
-  <li><strong>Real-Time Feedback</strong> — Dashboards show what's working</li>
+  <li><strong>Real-Time Feedback</strong> — Dashboards show what’s working</li>
   <li><strong>You Save 150+ Hours</strong> — Just prep for interviews, they handle the rest</li>
 </ol>
 
@@ -814,17 +814,17 @@ const Blog = () => {
 <h2>Testimonials Like Mine</h2>
 
 <blockquote>
-  "flashfirejobs.com made the job hunt 10x easier. I got calls from Amazon, Meta, and 2 SaaS startups — all within 3 weeks."<br />
+  “flashfirejobs.com made the job hunt 10x easier. I got calls from Amazon, Meta, and 2 SaaS startups — all within 3 weeks.”<br />
   <em>— Rijul J.</em>
 </blockquote>
 
 <blockquote>
-  "I finally stopped second-guessing my resume. I knew flashfirejobs.com was optimizing every single one of my applications."<br />
+  “I finally stopped second-guessing my resume. I knew flashfirejobs.com was optimizing every single one of my applications.”<br />
   <em>— Anjali S.</em>
 </blockquote>
 
 <blockquote>
-  "Without flashfirejobs.com, I'd have spent six months scrolling job boards. I got my first offer in 3 weeks."<br />
+  “Without flashfirejobs.com, I’d have spent six months scrolling job boards. I got my first offer in 3 weeks.”<br />
   <em>— Aman G.</em>
 </blockquote>
 
@@ -832,13 +832,13 @@ const Blog = () => {
 
 <h2>Final Thoughts: No More Guessing, No More Ghosting</h2>
 
-<p>This system didn't just help me get offers — it gave me back my confidence.</p>
+<p>This system didn’t just help me get offers — it gave me back my confidence.</p>
 
-<p>If you're an international student dreaming of a product manager role in the U.S., you don't need luck. You need a system that works <strong>for</strong> you — while you work on your craft.</p>
+<p>If you're an international student dreaming of a product manager role in the U.S., you don’t need luck. You need a system that works <strong>for</strong> you — while you work on your craft.</p>
 
 <p><a href="https://www.flashfirejobs.com" target="_blank" class="underline text-primary">Start your own success story. Visit flashfirejobs.com and activate your trial today.</a></p>
 
-<p><strong>I signed up for the 1000-application plan on flashfirejobs.com — and that's how I got 10 offers in just 6 weeks. What will you do in your next 6?</strong></p>
+<p><strong>I signed up for the 1000-application plan on flashfirejobs.com — and that’s how I got 10 offers in just 6 weeks. What will you do in your next 6?</strong></p>
 `
     },
     {
@@ -849,20 +849,20 @@ const Blog = () => {
       date: "Dec 25, 2024",
       readTime: "16 min",
       category: "Job Search Tips",
-      image: "https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=800",
+      image: "/images/blog6.jpeg",
       categoryColor: "bg-blue-100 text-blue-600",
       content: `
-        <p>The U.S. job market can feel like a locked door for international students. You've got the degree, the OPT window ticking, and the pressure to prove yourself fast. But unless you have an insider referral, Ivy League connections, or a visa-friendly employer lined up, landing your first job in the U.S. can feel almost impossible.</p>
+        <p>The U.S. job market can feel like a locked door for international students. You’ve got the degree, the OPT window ticking, and the pressure to prove yourself fast. But unless you have an insider referral, Ivy League connections, or a visa-friendly employer lined up, landing your first job in the U.S. can feel almost impossible.</p>
 
     <h2>Referrals help. But systems win.</h2>
-    <p>In this blog, I'm breaking down the <strong>exact playbook</strong> that helped me (and hundreds like me) land that crucial <strong>first U.S. offer</strong> — without referrals, connections, or costly recruiters. This is built specifically for F-1 students on OPT, STEM OPT, or recent graduates trying to get their foot in the door.</p>
+    <p>In this blog, I’m breaking down the <strong>exact playbook</strong> that helped me (and hundreds like me) land that crucial <strong>first U.S. offer</strong> — without referrals, connections, or costly recruiters. This is built specifically for F-1 students on OPT, STEM OPT, or recent graduates trying to get their foot in the door.</p>
 
     <h3>Step 1: Stop Applying Blindly and Start Applying Strategically</h3>
     <p>Most job seekers start by mass-applying to jobs on Indeed or LinkedIn. The result?</p>
     <ul>
       <li>No interview calls</li>
       <li>Endless ghosting</li>
-      <li>Wasted energy on companies that don't sponsor</li>
+      <li>Wasted energy on companies that don’t sponsor</li>
     </ul>
     <p><strong>The Fix:</strong> You need targeting + tailoring. This is where <a href="https://www.flashfirejobs.com">flashfirejobs.com</a> changed everything for me.</p>
     <ul>
@@ -881,7 +881,7 @@ const Blog = () => {
     </ul>
 
     <h3>Step 3: Apply at Scale, But Intelligently</h3>
-    <p>I didn't apply manually. flashfirejobs.com applied to 1000+ roles filtered by:</p>
+    <p>I didn’t apply manually. flashfirejobs.com applied to 1000+ roles filtered by:</p>
     <ul>
       <li>My background</li>
       <li>Preferred location</li>
@@ -907,7 +907,7 @@ const Blog = () => {
     </ul>
     <p>This got me noticed by hiring managers — without referrals.</p>
 
-    <h3>Step 6: When Interviews Come, You're Ready</h3>
+    <h3>Step 6: When Interviews Come, You’re Ready</h3>
     <p>By week 4:</p>
     <ul>
       <li>7 interviews scheduled</li>
@@ -917,13 +917,13 @@ const Blog = () => {
     <p>My dashboard tracked every app & interview stage.</p>
 
     <h3>Step 7: Rinse, Optimize, Repeat</h3>
-    <p>If you don't get an offer by week 6, don't panic. The system keeps applying & learning:</p>
+    <p>If you don’t get an offer by week 6, don’t panic. The system keeps applying & learning:</p>
     <ul>
       <li>Shifts to higher-performing roles</li>
       <li>Focuses on cities with higher callbacks</li>
     </ul>
 
-    <h3>Final Thoughts: Your Job Search Isn't Broken. Your System Is.</h3>
+    <h3>Final Thoughts: Your Job Search Isn’t Broken. Your System Is.</h3>
     <p>You need:</p>
     <ul>
       <li>High-volume apps</li>
@@ -942,7 +942,7 @@ const Blog = () => {
   date: "Jul 21, 2025",
   readTime: "9 min",
   category: "Career Advice",
-image: "https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=800",  
+image: "/images/blog7.jpeg",  
      categoryColor: "bg-orange-100 text-orange-600",
   content: `
     <p>For many international students, landing a job in the U.S. is more than just a career move—it's a life goal. You've invested in your degree, worked on real-world projects, and learned to navigate a new culture. Yet, the job market feels like a locked maze, especially when you're competing without referrals, sponsorship certainty, or unlimited time on OPT.</p>
@@ -964,19 +964,19 @@ image: "https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=
     <p><strong>Fix it:</strong> Start early with <a href="https://www.flashfirejobs.com" target="_blank" rel="noopener noreferrer" style="color:#f97316;">flashfirejobs.com</a>. You can begin optimizing your resume, testing formats, and applying before your OPT starts.</p>
 
     <h2>4. They Manually Apply to 5 Jobs a Day</h2>
-    <p>Manual job searching feels productive—until you realize it's painfully slow.</p>
+    <p>Manual job searching feels productive—until you realize it’s painfully slow.</p>
     <p><strong>Fix it:</strong> <a href="https://www.flashfirejobs.com" target="_blank" rel="noopener noreferrer" style="color:#f97316;">flashfirejobs.com</a> applies to 1000+ jobs on your behalf in 6–7 weeks, each tailored and relevant.</p>
 
-    <h2>5. They Don't Track Their Applications</h2>
-    <p>You can't improve what you don't measure. Most students apply without knowing what's working.</p>
+    <h2>5. They Don’t Track Their Applications</h2>
+    <p>You can’t improve what you don’t measure. Most students apply without knowing what’s working.</p>
     <p><strong>Fix it:</strong> The real-time dashboard at <a href="https://www.flashfirejobs.com" target="_blank" rel="noopener noreferrer" style="color:#f97316;">flashfirejobs.com</a> tracks outcomes, interview rates, and more.</p>
 
     <h2>6. They Neglect LinkedIn</h2>
-    <p>If your LinkedIn is outdated or inconsistent, you're missing out on recruiter visibility.</p>
+    <p>If your LinkedIn is outdated or inconsistent, you’re missing out on recruiter visibility.</p>
     <p><strong>Fix it:</strong> <a href="https://www.flashfirejobs.com" target="_blank" rel="noopener noreferrer" style="color:#f97316;">flashfirejobs.com</a> professionally rewrites your LinkedIn to match high-performing keyword clusters.</p>
 
     <h2>7. They Apply Without Strategy</h2>
-    <p>"Easy Apply" isn't always smart apply. Blindly sending resumes rarely works.</p>
+    <p>“Easy Apply” isn’t always smart apply. Blindly sending resumes rarely works.</p>
     <p><strong>Fix it:</strong> Every application via <a href="https://www.flashfirejobs.com" target="_blank" rel="noopener noreferrer" style="color:#f97316;">flashfirejobs.com</a> is strategic, role-specific, and reviewed.</p>
 
     <h2>8. They Burn Out Quickly</h2>
@@ -984,12 +984,12 @@ image: "https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=
     <p><strong>Fix it:</strong> Let <a href="https://www.flashfirejobs.com" target="_blank" rel="noopener noreferrer" style="color:#f97316;">flashfirejobs.com</a> handle the heavy lifting. You focus on interview prep and strategy — not daily clicks.</p>
 
     <h2>9. They Rely Only on Job Boards</h2>
-    <p>Job boards weren't built for international timelines. Many roles are outdated or irrelevant.</p>
+    <p>Job boards weren’t built for international timelines. Many roles are outdated or irrelevant.</p>
     <p><strong>Fix it:</strong> <a href="https://www.flashfirejobs.com" target="_blank" rel="noopener noreferrer" style="color:#f97316;">flashfirejobs.com</a> curates live, sponsor-friendly listings from trusted sources.</p>
 
     <h2>10. They Quit Too Soon</h2>
     <p>Most give up just before the results kick in. Job hunting requires consistency and momentum.</p>
-    <p><strong>Fix it:</strong> <a href="https://www.flashfirejobs.com" target="_blank" rel="noopener noreferrer" style="color:#f97316;">flashfirejobs.com</a> keeps going, so you don't have to restart from zero. Momentum = interviews.</p>
+    <p><strong>Fix it:</strong> <a href="https://www.flashfirejobs.com" target="_blank" rel="noopener noreferrer" style="color:#f97316;">flashfirejobs.com</a> keeps going, so you don’t have to restart from zero. Momentum = interviews.</p>
 
     <h2>What Makes flashfirejobs.com Different?</h2>
     <ul>
@@ -1007,8 +1007,8 @@ image: "https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=
     <p><strong>Rijul J.</strong> landed Product Manager offers with no referrals, just volume + targeting.</p>
 
     <h2>Final Words</h2>
-    <p>The job market isn't broken — the traditional approach is.</p>
-    <p>If you're tired of ghosting, rejections, and dead ends, let <a href="https://www.flashfirejobs.com" target="_blank" rel="noopener noreferrer" style="color:#f97316;">flashfirejobs.com</a> handle your search with precision and automation.</p>
+    <p>The job market isn’t broken — the traditional approach is.</p>
+    <p>If you’re tired of ghosting, rejections, and dead ends, let <a href="https://www.flashfirejobs.com" target="_blank" rel="noopener noreferrer" style="color:#f97316;">flashfirejobs.com</a> handle your search with precision and automation.</p>
     <p><strong>Start your 7-day free trial today.</strong> Save time. Get interviews. Land your dream role.</p>
   `
   },
@@ -1020,24 +1020,24 @@ image: "https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=
   date: "Jul 21, 2025",
   readTime: "8 min",
   category: "Career Advice",
-image: "https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=800",  
+image: "/images/blog8.jpeg",  
     categoryColor: "bg-green-100 text-green-600",
   content: `
-    <p>If you're an international student on F-1 or STEM OPT trying to land a job in the U.S., you've probably spent hours scrolling through job boards. But here's the hard truth:</p>
+    <p>If you're an international student on F-1 or STEM OPT trying to land a job in the U.S., you've probably spent hours scrolling through job boards. But here’s the hard truth:</p>
 
-    <p><strong>Most job platforms aren't built for your situation.</strong> They don't tell you if the company hires international talent. They don't filter for roles that align with your visa timeline. And they definitely don't personalize each resume.</p>
+    <p><strong>Most job platforms aren't built for your situation.</strong> They don’t tell you if the company hires international talent. They don't filter for roles that align with your visa timeline. And they definitely don’t personalize each resume.</p>
 
-    <p>That's why it's not just <em>where</em> you apply, but <em>how</em> you apply.</p>
+    <p>That’s why it’s not just <em>where</em> you apply, but <em>how</em> you apply.</p>
 
-    <p>In this blog, we'll dive into the 7 most talked-about job platforms international students use—and reveal which one actually helps you land interviews, fast.</p>
+    <p>In this blog, we’ll dive into the 7 most talked-about job platforms international students use—and reveal which one actually helps you land interviews, fast.</p>
 
     <h2>1. LinkedIn</h2>
-    <p>LinkedIn is more than just a resume hub—it's a dynamic job board, recruiter tool, and professional branding machine. But most students use it passively.</p>
-    <p><strong>What works:</strong> Combining LinkedIn's reach with optimization tools like <a href="https://www.flashfirejobs.com" target="_blank" rel="noopener noreferrer" style="color:#f97316;">flashfirejobs.com</a> to boost visibility and inbound calls.</p>
-    <p>Applying directly? Risky. Sponsorship clarity is missing, and "Easy Apply" can mean your resume disappears.</p>
+    <p>LinkedIn is more than just a resume hub—it’s a dynamic job board, recruiter tool, and professional branding machine. But most students use it passively.</p>
+    <p><strong>What works:</strong> Combining LinkedIn’s reach with optimization tools like <a href="https://www.flashfirejobs.com" target="_blank" rel="noopener noreferrer" style="color:#f97316;">flashfirejobs.com</a> to boost visibility and inbound calls.</p>
+    <p>Applying directly? Risky. Sponsorship clarity is missing, and “Easy Apply” can mean your resume disappears.</p>
 
     <h2>2. Indeed</h2>
-    <p>Indeed's strength is its massive job listing volume. Its weakness? Expired roles, duplicates, and no sponsor filters.</p>
+    <p>Indeed’s strength is its massive job listing volume. Its weakness? Expired roles, duplicates, and no sponsor filters.</p>
     <p><strong>Tip:</strong> Use it for research. Let <a href="https://www.flashfirejobs.com" target="_blank" rel="noopener noreferrer" style="color:#f97316;">flashfirejobs.com</a> handle actual applications with tailored resumes and filters that matter.</p>
 
     <h2>3. Jobright</h2>
@@ -1046,18 +1046,18 @@ image: "https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=
 
     <h2>4. Y Combinator Startup Jobs (Work at a Startup)</h2>
     <p>Perfect for breaking into fast-moving startups. Startups are flexible and hire quickly—but rarely clarify sponsorship upfront.</p>
-    <p><strong>Better strategy:</strong> Let <a href="https://www.flashfirejobs.com" target="_blank" rel="noopener noreferrer" style="color:#f97316;">flashfirejobs.com</a> target YC roles and personalize resumes for each startup's mission and stack.</p>
+    <p><strong>Better strategy:</strong> Let <a href="https://www.flashfirejobs.com" target="_blank" rel="noopener noreferrer" style="color:#f97316;">flashfirejobs.com</a> target YC roles and personalize resumes for each startup’s mission and stack.</p>
 
     <h2>5. Wellfound (formerly AngelList Talent)</h2>
     <p>Great for high-growth startups with transparent salary/equity data. But poor clarity on visa sponsorship.</p>
-    <p><strong>Fix it:</strong> <a href="https://www.flashfirejobs.com" target="_blank" rel="noopener noreferrer" style="color:#f97316;">flashfirejobs.com</a> crafts resumes specific to each startup's product, stage, and team to stand out in founder inboxes.</p>
+    <p><strong>Fix it:</strong> <a href="https://www.flashfirejobs.com" target="_blank" rel="noopener noreferrer" style="color:#f97316;">flashfirejobs.com</a> crafts resumes specific to each startup’s product, stage, and team to stand out in founder inboxes.</p>
 
     <h2>6. Startup.jobs</h2>
     <p>Curated startup listings globally, with decent U.S. and remote roles. No sponsorship filters. No resume matching.</p>
     <p><strong>Let flashfire handle it:</strong> With <a href="https://www.flashfirejobs.com" target="_blank" rel="noopener noreferrer" style="color:#f97316;">flashfirejobs.com</a>, your applications are strategic, fast, and tracked for performance.</p>
 
     <h2>7. flashfirejobs.com (The One That Actually Works)</h2>
-    <p>This isn't a job board. It's a job search automation system <strong>built for international students</strong>.</p>
+    <p>This isn’t a job board. It’s a job search automation system <strong>built for international students</strong>.</p>
     <ul>
       <li>Applies to 1000+ sponsor-friendly jobs in 6–7 weeks</li>
       <li>Generates a custom, ATS-optimized resume for every application</li>
@@ -1072,36 +1072,36 @@ image: "https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=
     <ul>
       <li>Apply in bulk with one resume</li>
       <li>Use job boards without strategy</li>
-      <li>Don't track what's working</li>
+      <li>Don’t track what’s working</li>
     </ul>
-    <p>Don't make the same mistakes. Instead:</p>
+    <p>Don’t make the same mistakes. Instead:</p>
     <ol>
       <li>Use LinkedIn, YC, and Jobright for research</li>
       <li>Let <a href="https://www.flashfirejobs.com" target="_blank" rel="noopener noreferrer" style="color:#f97316;">flashfirejobs.com</a> handle the heavy lifting</li>
     </ol>
-    <p>Thousands of users are already getting results. Now it's your turn.</p>
+    <p>Thousands of users are already getting results. Now it’s your turn.</p>
     <p><strong><a href="https://www.flashfirejobs.com" target="_blank" rel="noopener noreferrer" style="color:#f97316;">Start your job search today</a></strong> — the right way.</p>
   `
 },
 {
   id: 9,
   title: "The Ultimate Job Search Strategy for OPT Students in the U.S. — What No One Tells You",
-  excerpt: "OPT job seekers aren't just looking for roles—they're racing against time. Here's a step-by-step strategy to land a job in the U.S. as an international student, without wasting months.",
+  excerpt: "OPT job seekers aren’t just looking for roles—they’re racing against time. Here’s a step-by-step strategy to land a job in the U.S. as an international student, without wasting months.",
   author: "Gaurav Sharma",
   date: "Jul 21, 2025",
   readTime: "6 min",
   category: "Career Advice",
-image: "https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=800",  
+image: "/images/blog9.jpeg",  
   categoryColor: "bg-orange-100 text-orange-600",
   content: `
     <h1>The Ultimate Job Search Strategy for OPT Students in the U.S. — What No One Tells You</h1>
 
-    <p>Finding a job in the U.S. as an international student on OPT is nothing like a regular job search. It's not just about finding a role that excites you. It's about finding a company that understands visa timelines, moves fast, and actually replies. In a system built for domestic applicants, OPT job seekers face a game that feels rigged from the start.</p>
+    <p>Finding a job in the U.S. as an international student on OPT is nothing like a regular job search. It’s not just about finding a role that excites you. It’s about finding a company that understands visa timelines, moves fast, and actually replies. In a system built for domestic applicants, OPT job seekers face a game that feels rigged from the start.</p>
 
     <p>But what if there was a proven strategy that bypassed the endless hours on job boards, avoided ghosted applications, and put your resume in the hands of real decision-makers?</p>
 
     <h2>Step 1: Stop Applying Blindly</h2>
-    <p>Applying to 100s of jobs on LinkedIn and Indeed without targeting is a waste of time. Most companies won't even view your resume if they don't sponsor or understand OPT timelines.</p>
+    <p>Applying to 100s of jobs on LinkedIn and Indeed without targeting is a waste of time. Most companies won’t even view your resume if they don’t sponsor or understand OPT timelines.</p>
     <p><strong>Instead:</strong> Only apply to companies that:</p>
     <ul>
       <li>Have hired international talent before</li>
@@ -1114,7 +1114,7 @@ image: "https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=
     <p>This cuts down your manual effort from 150+ hours to a few minutes of onboarding.</p>
 
     <h2>Step 3: Tailor Every Resume</h2>
-    <p>Generic resumes don't get callbacks. Every resume should be tailored to the:</p>
+    <p>Generic resumes don’t get callbacks. Every resume should be tailored to the:</p>
     <ul>
       <li>Job description keywords</li>
       <li>Company tech stack or tools</li>
@@ -1122,21 +1122,21 @@ image: "https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=
     </ul>
     <p><strong>Pro Tip:</strong> Tools like flashfire auto-generate custom resumes that beat ATS systems and increase your callback rate by 3x.</p>
 
-    <h2>Step 4: Track What's Working</h2>
-    <p>Most students don't know which jobs they applied to or which resumes performed well. That's a massive blind spot.</p>
+    <h2>Step 4: Track What’s Working</h2>
+    <p>Most students don’t know which jobs they applied to or which resumes performed well. That’s a massive blind spot.</p>
     <p>Track every job applied, the resume used, and interview outcomes. A system like <a href="https://www.flashfirejobs.com" target="_blank" rel="noopener noreferrer" style="color:#f97316;">flashfirejobs.com</a> does this automatically for you.</p>
 
     <h2>Step 5: Optimize LinkedIn</h2>
     <p>Your LinkedIn profile can either bring you recruiters or repel them. Here's what matters:</p>
     <ul>
-      <li>Clear title (e.g., "Data Analyst | OPT | Python | SQL | Tableau")</li>
+      <li>Clear title (e.g., “Data Analyst | OPT | Python | SQL | Tableau”)</li>
       <li>Headline that includes OPT/STEM availability</li>
       <li>Achievements + keywords in every section</li>
     </ul>
-    <p>Flashfire's LinkedIn optimization feature makes sure your profile shows up in recruiter searches.</p>
+    <p>Flashfire’s LinkedIn optimization feature makes sure your profile shows up in recruiter searches.</p>
 
     <h2>Final Takeaway</h2>
-    <p>You don't need luck. You need leverage. OPT job search success is about:</p>
+    <p>You don’t need luck. You need leverage. OPT job search success is about:</p>
     <ol>
       <li>Targeted job filters</li>
       <li>Resume personalization</li>
@@ -1157,23 +1157,23 @@ image: "https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=
   date: "Jul 21, 2025",
   readTime: "5 min",
   category: "Career Advice",
-image: "https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=800",  
+image: "/images/blog10.jpeg",  
   categoryColor: "bg-blue-100 text-blue-600",
   content: `
     <h1>How to Land a U.S. Internship After 2 Semesters</h1>
 
-    <p>Securing your first U.S. internship as an international student can feel like climbing a mountain with a blindfold on. You're new to the job market, still figuring out how to talk about your skills, and worse — every employer seems to want "U.S. experience" you don't yet have.</p>
+    <p>Securing your first U.S. internship as an international student can feel like climbing a mountain with a blindfold on. You’re new to the job market, still figuring out how to talk about your skills, and worse — every employer seems to want "U.S. experience" you don’t yet have.</p>
 
-    <p>But here's the truth:</p>
+    <p>But here’s the truth:</p>
 
-    <p><strong>You don't need referrals, luck, or perfect timing to land your internship after two semesters.</strong> What you need is a clear, optimized strategy — and a system that does the heavy lifting.</p>
+    <p><strong>You don’t need referrals, luck, or perfect timing to land your internship after two semesters.</strong> What you need is a clear, optimized strategy — and a system that does the heavy lifting.</p>
 
     <h2>Step 1: Get Your Resume U.S.-Ready</h2>
-    <p>Your resume isn't just a list of projects. It's your marketing pitch. Most international students undersell themselves. Here's how to fix that:</p>
+    <p>Your resume isn’t just a list of projects. It’s your marketing pitch. Most international students undersell themselves. Here’s how to fix that:</p>
     <ul>
-      <li>Start with a strong headline (e.g., "CS Grad Student | Python | Data Analysis | SQL")</li>
+      <li>Start with a strong headline (e.g., “CS Grad Student | Python | Data Analysis | SQL”)</li>
       <li>Show outcome-driven bullet points, not responsibilities</li>
-      <li>Tailor your resume to each internship's job description</li>
+      <li>Tailor your resume to each internship’s job description</li>
     </ul>
 
     <h2>Step 2: Apply Where You Have Leverage</h2>
@@ -1186,7 +1186,7 @@ image: "https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=
 
     <p>FlashfireJobs automatically filters such internships and even applies with custom resumes on your behalf.</p>
 
-    <h2>Step 3: Don't Wait for a Referral — Create One</h2>
+    <h2>Step 3: Don’t Wait for a Referral — Create One</h2>
     <p>Instead of cold messaging, try warm commenting:</p>
     <ul>
       <li>Follow hiring managers, recruiters, and team leads on LinkedIn</li>
@@ -1199,16 +1199,16 @@ image: "https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=
     <p>Even a single post on LinkedIn about your journey, projects, or learnings can attract hiring interest. Bonus if you include visuals or metrics.</p>
 
     <h2>Step 5: Track and Iterate</h2>
-    <p>Don't guess. Know what's working. Track:</p>
+    <p>Don’t guess. Know what’s working. Track:</p>
     <ul>
       <li>Which resumes got interviews</li>
       <li>Which companies responded</li>
       <li>Where to double down next</li>
     </ul>
-    <p>Flashfire's dashboard handles this automatically — giving you data-driven feedback each week.</p>
+    <p>Flashfire’s dashboard handles this automatically — giving you data-driven feedback each week.</p>
 
     <h2>Final Words</h2>
-    <p>You don't need to wait till your final semester to land something valuable. With the right targeting, branding, and automation — you can unlock real-world experience fast.</p>
+    <p>You don’t need to wait till your final semester to land something valuable. With the right targeting, branding, and automation — you can unlock real-world experience fast.</p>
 
     <p><a href="https://www.flashfirejobs.com" target="_blank" rel="noopener noreferrer" style="color:#3b82f6;"><strong>Start your internship journey smart — with flashfirejobs.com</strong></a></p>
   `}
@@ -1229,10 +1229,10 @@ image: "https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=
   const visiblePosts = blogPosts.slice(currentIndex, currentIndex + postsPerPage);
 
   const openBlogPost = (post) => {
-    // Open new window first
-    const newWindow = window.open('', '_blank');
+    // Get the current origin to properly reference local assets
+    const currentOrigin = window.location.origin;
     
-    // Create the HTML content
+    // Create the HTML content with proper favicon references
     const htmlContent = `
       <!DOCTYPE html>
       <html lang="en">
@@ -1241,12 +1241,12 @@ image: "https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>${post.title} - FlashFire Blog</title>
         
-        <!-- Favicon Links -->
-        <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-        <link rel="alternate icon" href="/favicon.ico">
-        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-        <link rel="shortcut icon" href="/favicon.ico">
-        <link rel="apple-touch-icon" href="/favicon-32x32.png">
+        <!-- Favicon Links - matching the main site -->
+        <link rel="icon" type="image/svg+xml" href="${currentOrigin}/favicon.svg">
+        <link rel="alternate icon" href="${currentOrigin}/favicon.ico">
+        <link rel="icon" type="image/png" sizes="32x32" href="${currentOrigin}/favicon-32x32.png">
+        <link rel="shortcut icon" href="${currentOrigin}/favicon.ico">
+        <link rel="apple-touch-icon" href="${currentOrigin}/favicon-32x32.png">
         
         <!-- Meta tags for SEO -->
         <meta name="description" content="${post.excerpt}">
@@ -1398,9 +1398,9 @@ image: "https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=
         <div class="max-w-4xl mx-auto px-4 py-8">
           <!-- Header -->
           <div class="bg-white rounded-lg shadow-lg overflow-hidden mb-8">
-            <img src="${post.image}" 
-                 alt="${post.title}" 
-                 class="w-full h-auto max-h-[600px] object-contain mx-auto rounded-t-lg" />
+<img src="${post.image.startsWith('/') ? currentOrigin + post.image : post.image}" 
+     alt="${post.title}" 
+     class="w-full h-auto max-h-[600px] object-contain mx-auto rounded-t-lg" />
             <div class="p-8">
               <div class="flex items-center mb-4">
                 <span class="px-3 py-1 rounded-full text-sm font-medium ${post.categoryColor}">
@@ -1449,31 +1449,15 @@ image: "https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=
       </html>
     `;
     
-    // Write HTML content to the new window
-    newWindow.document.write(htmlContent);
-    newWindow.document.close();
+    // Create a blob URL for the HTML content
+    const blob = new Blob([htmlContent], { type: 'text/html' });
+    const blobUrl = URL.createObjectURL(blob);
     
-    // Set the favicon programmatically after the document is loaded
-    newWindow.addEventListener('load', () => {
-      // Create and append favicon links
-      const faviconSvg = newWindow.document.createElement('link');
-      faviconSvg.rel = 'icon';
-      faviconSvg.type = 'image/svg+xml';
-      faviconSvg.href = window.location.origin + '/favicon.svg';
-      newWindow.document.head.appendChild(faviconSvg);
-      
-      const faviconIco = newWindow.document.createElement('link');
-      faviconIco.rel = 'shortcut icon';
-      faviconIco.href = window.location.origin + '/favicon.ico';
-      newWindow.document.head.appendChild(faviconIco);
-      
-      const faviconPng = newWindow.document.createElement('link');
-      faviconPng.rel = 'icon';
-      faviconPng.type = 'image/png';
-      faviconPng.sizes = '32x32';
-      faviconPng.href = window.location.origin + '/favicon-32x32.png';
-      newWindow.document.head.appendChild(faviconPng);
-    });
+    // Open the new window with the blob URL
+    const newWindow = window.open(blobUrl, '_blank');
+    
+    // Clean up the blob URL after a short delay
+    setTimeout(() => URL.revokeObjectURL(blobUrl), 1000);
   };
 
   return (
