@@ -1,9 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Calendar, Clock, User, ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react';
 
 const Blog = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const postsPerPage = 3;
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(true);
+  const [scrollProgress, setScrollProgress] = useState(0);
+  const [visibleDots, setVisibleDots] = useState([0, 1, 2]);
+  const scrollContainerRef = useRef(null);
+  const cardWidth = 384; // Approximate width of each card including gap
 
   const blogPosts = [
     {
@@ -1211,22 +1216,349 @@ image: "/images/blog10.jpeg",
     <p>You don’t need to wait till your final semester to land something valuable. With the right targeting, branding, and automation — you can unlock real-world experience fast.</p>
 
     <p><a href="https://www.flashfirejobs.com" target="_blank" rel="noopener noreferrer" style="color:#3b82f6;"><strong>Start your internship journey smart — with flashfirejobs.com</strong></a></p>
-  `}
+  `},
+   {
+    id: 11,
+    title: "Top Job Search Strategies for International Students in the U.S.: What Really Works",
+    excerpt: "Finding a job in the U.S. as an international student requires understanding the system, timing, visa rules, and tools that give you a competitive edge. Here's your complete guide.",
+    author: "Lavanya Bhatt",
+    date: "Jul 23, 2025",
+    readTime: "8 min",
+    category: "Career Advice",
+    image: "https://res.cloudinary.com/drit9nkha/image/upload/v1753269956/freepik__the-style-is-candid-image-photography-with-natural__60731_t7g37g.webp",
+    categoryColor: "bg-blue-100 text-blue-600",
+    content: `
+      <h1>Top Job Search Strategies for International Students in the U.S.: What Really Works</h1>
 
-  ];
+      <p>Finding a job in the U.S. as an international student is not just about sending resumes and waiting. It's about understanding the system, timing, visa rules, and the tools that give you a competitive edge. In this in-depth guide, we'll walk through the top strategies international students can use to secure meaningful employment—whether it's an internship, an OPT opportunity, or a full-time role.</p>
 
-  const totalPosts = blogPosts.length;
-  const maxIndex = Math.max(0, totalPosts - postsPerPage);
+      <p>Throughout this guide, we'll show you how <strong><a href="https://www.flashfirejobs.com" target="_blank" rel="noopener noreferrer" style="color: #f97316; text-decoration: underline;">www.flashfirejobs.com</a></strong> helps international students increase their chances exponentially. (Spoiler: most of our users get interview calls in under 6 weeks).</p>
 
-  const nextSlide = () => {
-    setCurrentIndex(prev => Math.min(prev + 1, maxIndex));
+      <h2>1. Understand Your Visa Timeline and Start Early</h2>
+      <p>Whether you're on an F-1 visa preparing for CPT or OPT, timing is everything. Most job offers take 2–3 months to land. That means you should be applying 3–4 months before your target start date.</p>
+      
+      <p><strong><a href="https://www.flashfirejobs.com" target="_blank" rel="noopener noreferrer" style="color: #f97316; text-decoration: underline;">www.flashfirejobs.com</a></strong> helps students stay ahead by:</p>
+      <ul>
+        <li>Starting job applications while you're still in class</li>
+        <li>Optimizing your resume and LinkedIn early</li>
+        <li>Targeting job boards that actually work for visa holders</li>
+      </ul>
+      
+      <p>Thousands of students have used <strong><a href="https://www.flashfirejobs.com" target="_blank" rel="noopener noreferrer" style="color: #f97316; text-decoration: underline;">www.flashfirejobs.com</a></strong> to build a predictable timeline that aligns with their immigration milestones.</p>
+
+      <h2>2. Target the Right Job Boards</h2>
+      <p>Not every job board is built for international students. Here's where most students go wrong:</p>
+      <ul>
+        <li>Wasting hours on Indeed or LinkedIn with outdated or closed roles</li>
+        <li>Applying to companies that don't hire international talent</li>
+      </ul>
+      
+      <p>Instead, <strong><a href="https://www.flashfirejobs.com" target="_blank" rel="noopener noreferrer" style="color: #f97316; text-decoration: underline;">www.flashfirejobs.com</a></strong> scrapes roles from:</p>
+      <ul>
+        <li>LinkedIn (curated, high-quality)</li>
+        <li>YC's startup job board (early-stage firms that move fast)</li>
+        <li>Jobright (fast-growing companies)</li>
+        <li>Indeed and Glassdoor (mainstream but essential platforms for job discovery)</li>
+      </ul>
+      
+      <p>Every job is reviewed for relevance, visa friendliness, and fit.</p>
+
+      <h2>3. Use a U.S.-Style Resume That Works With ATS</h2>
+      <p>Your resume should not look like your academic transcript. U.S. recruiters want impact-driven stories, not a list of responsibilities.</p>
+      
+      <p><strong>What to include:</strong></p>
+      <ul>
+        <li>Results: e.g., "Reduced customer churn by 20% in 3 months"</li>
+        <li>Tools and tech: SQL, Figma, Python, etc.</li>
+        <li>Action verbs and metrics that show value</li>
+      </ul>
+      
+      <p><strong><a href="https://www.flashfirejobs.com" target="_blank" rel="noopener noreferrer" style="color: #f97316; text-decoration: underline;">www.flashfirejobs.com</a></strong> auto-builds ATS-optimized resumes with:</p>
+      <ul>
+        <li>Job-specific keyword alignment</li>
+        <li>Role-specific bullet points</li>
+        <li>Clean formatting recruiters and bots can read easily</li>
+      </ul>
+      
+      <p>Your resume content should be built to convert. Make sure your formatting is clean and your resume is designed to make an impact in 6–8 seconds.</p>
+
+      <h2>4. Apply in Volume, With Precision</h2>
+      <p>Most international students apply to 20–30 jobs. That's not enough. The U.S. job market runs on volume—but not spam.</p>
+      
+      <p><strong><a href="https://www.flashfirejobs.com" target="_blank" rel="noopener noreferrer" style="color: #f97316; text-decoration: underline;">www.flashfirejobs.com</a></strong> applies to 1,000+ jobs on your behalf across 6–8 weeks. Here's how it works:</p>
+      <ul>
+        <li>You input preferences (location, industry, salary expectations)</li>
+        <li>We create custom resumes for each job</li>
+        <li>Our team applies daily using smart matching + ATS optimization</li>
+      </ul>
+      
+      <p>You save 150+ hours and apply to 30–40 jobs a day—without lifting a finger.</p>
+
+      <h2>5. Optimize Your LinkedIn to Attract Recruiters</h2>
+      <p>LinkedIn isn't just a profile; it's your inbound funnel. Recruiters use LinkedIn's search engine to discover candidates.</p>
+      
+      <p><strong><a href="https://www.flashfirejobs.com" target="_blank" rel="noopener noreferrer" style="color: #f97316; text-decoration: underline;">www.flashfirejobs.com</a></strong> boosts your LinkedIn profile by:</p>
+      <ul>
+        <li>Writing a keyword-rich headline and summary</li>
+        <li>Adding role-specific bullet points</li>
+        <li>Structuring your profile to increase visibility</li>
+      </ul>
+      
+      <p>We've helped users go from 0 to 50+ recruiter views per week.</p>
+
+      <h2>6. Reach Out to Recruiters Directly (Cold Outreach)</h2>
+      <p>Don't just wait for recruiters to find you—reach out.</p>
+      
+      <p>Use LinkedIn and email to:</p>
+      <ul>
+        <li>Introduce yourself with a short, professional note</li>
+        <li>Highlight relevant skills and visa status</li>
+        <li>Attach or link your optimized resume</li>
+      </ul>
+      
+      <p><strong>Pro tip:</strong> Use tools like Hunter.io to find recruiter emails. Always personalize your messages.</p>
+      
+      <p><strong><a href="https://www.flashfirejobs.com" target="_blank" rel="noopener noreferrer" style="color: #f97316; text-decoration: underline;">www.flashfirejobs.com</a></strong> provides templates and outreach strategies to help you get noticed through cold emails and DMs that actually work.</p>
+
+      <h2>7. Track Every Application (Don't Rely on Memory)</h2>
+      <p>Forget spreadsheets. You need a live dashboard that tells you:</p>
+      <ul>
+        <li>How many jobs you've applied to</li>
+        <li>Which ones led to interviews</li>
+        <li>Which industries and companies respond fastest</li>
+      </ul>
+      
+      <p><strong><a href="https://www.flashfirejobs.com" target="_blank" rel="noopener noreferrer" style="color: #f97316; text-decoration: underline;">www.flashfirejobs.com</a></strong> gives every user a personalized dashboard with application status, metrics, and improvement tips.</p>
+
+      <h2>8. Focus on Sponsor-Friendly Roles</h2>
+      <p>Even if you don't need H-1B right now, long-term planning matters. You don't want to waste months on dead-end companies.</p>
+      
+      <p><strong><a href="https://www.flashfirejobs.com" target="_blank" rel="noopener noreferrer" style="color: #f97316; text-decoration: underline;">www.flashfirejobs.com</a></strong> prioritizes companies that:</p>
+      <ul>
+        <li>Have a strong history of hiring international students</li>
+        <li>Are open to OPT, STEM OPT, and long-term sponsorship</li>
+        <li>Operate in visa-flexible industries (tech, finance, consulting)</li>
+      </ul>
+
+      <h2>9. Build Momentum with Interview Practice</h2>
+      <p>When you get the call, you must be ready. But most international students don't practice enough.</p>
+      
+      <p><strong><a href="https://www.flashfirejobs.com" target="_blank" rel="noopener noreferrer" style="color: #f97316; text-decoration: underline;">www.flashfirejobs.com</a></strong> provides:</p>
+      <ul>
+        <li>Mock interview kits</li>
+        <li>STAR framework templates</li>
+        <li>Personalized prep sessions</li>
+      </ul>
+      
+      <p>The result? More confidence and faster conversions from phone screen → offer.</p>
+
+      <h2>10. Use Feedback Loops to Improve</h2>
+      <p>The best job seekers treat applications like experiments. If something isn't working, change it.</p>
+      
+      <p>With <strong><a href="https://www.flashfirejobs.com" target="_blank" rel="noopener noreferrer" style="color: #f97316; text-decoration: underline;">www.flashfirejobs.com</a></strong>, you can:</p>
+      <ul>
+        <li>Identify low-performing resume sections</li>
+        <li>Track where you're getting ghosted</li>
+        <li>Adjust titles, industries, or keywords in real time</li>
+      </ul>
+
+      <h2>11. Don't Do It Alone</h2>
+      <p>Most international students go solo—Googling job tips, applying randomly, and feeling burned out.</p>
+      
+      <p><strong><a href="https://www.flashfirejobs.com" target="_blank" rel="noopener noreferrer" style="color: #f97316; text-decoration: underline;">www.flashfirejobs.com</a></strong> changes that.</p>
+      <ul>
+        <li>We give you a proven framework</li>
+        <li>24/7 support</li>
+        <li>A human-AI system built only for international students</li>
+      </ul>
+      
+      <p>Whether you're targeting internships, full-time roles, or trying to switch jobs on OPT, <strong><a href="https://www.flashfirejobs.com" target="_blank" rel="noopener noreferrer" style="color: #f97316; text-decoration: underline;">www.flashfirejobs.com</a></strong> gives you the speed and focus to win.</p>
+
+      <h2>Final Thoughts: Strategy Beats Luck</h2>
+      <p>Getting hired in the U.S. isn't about magic. It's about:</p>
+      <ul>
+        <li>Starting early</li>
+        <li>Using the right tools</li>
+        <li>Applying consistently</li>
+        <li>Learning and iterating</li>
+      </ul>
+      
+      <p>Thousands of students have landed interviews at top firms using <strong><a href="https://www.flashfirejobs.com" target="_blank" rel="noopener noreferrer" style="color: #f97316; text-decoration: underline;">www.flashfirejobs.com</a></strong>. You can too.</p>
+      
+      <p>If you're serious about landing a job in the U.S.—stop guessing.</p>
+      
+      <p><a href="https://www.flashfirejobs.com" target="_blank" rel="noopener noreferrer" style="color:#3b82f6;"><strong>Visit <strong><a href="https://www.flashfirejobs.com" target="_blank" rel="noopener noreferrer" style="color: #f97316; text-decoration: underline;">www.flashfirejobs.com</a></strong> and start your 7-day free trial today.</strong></a></p>
+      
+      <p>Let us do the work while you prep for interviews, build your skills, and plan your future.</p>
+      
+      <p>Need help writing your resume, fixing your LinkedIn, or getting 1,000 applications sent in 6 weeks? <strong><a href="https://www.flashfirejobs.com" target="_blank" rel="noopener noreferrer" style="color: #f97316; text-decoration: underline;">www.flashfirejobs.com</a></strong> was built for you.</p>
+      
+      <p><strong>Let's get you hired.</strong></p>
+    `
+  },
+  {
+  id: 12,
+  title: "I Applied to 1,000 U.S. Jobs in 45 Days — Here's What Actually Worked (And What Didn't)",
+  excerpt: "An international student's real experience using flashfirejobs.com to apply to 1,000 jobs in 45 days. The results: 17 recruiter replies, 7 interview rounds, and 2 offers.",
+  author: "Santosh Raj",
+  date: "Jul 23, 2025",
+  readTime: "6 min",
+  category: "Success Stories",
+  image: "https://res.cloudinary.com/drit9nkha/image/upload/v1753270580/freepik__the-style-is-candid-image-photography-with-natural__60732_wdgiw0.webp",
+  categoryColor: "bg-green-100 text-green-600",
+  content: `
+    <h1>I Applied to 1,000 U.S. Jobs in 45 Days — Here's What Actually Worked (And What Didn't)</h1>
+
+    <p>If you're an international student trying to break into the U.S. job market, let me start with this: I get it. The process is overwhelming, confusing, and borderline demoralizing. I was on an F-1 visa with limited time, zero referrals, and not much luck despite sending dozens of applications manually. Then I discovered <strong><a href="https://www.flashfirejobs.com" target="_blank" rel="noopener noreferrer" style="color: #f97316; text-decoration: underline;">www.flashfirejobs.com</a></strong>.</p>
+
+    <p>I didn't just land a job. I got <strong>multiple interview rounds</strong> from top companies in under 6 weeks—because I stopped guessing, and started using data, systems, and tools that actually work.</p>
+
+    <p>This is the full breakdown of what happened when I applied to <strong>1,000 jobs in 45 days</strong> using <strong><a href="https://www.flashfirejobs.com" target="_blank" rel="noopener noreferrer" style="color: #f97316; text-decoration: underline;">www.flashfirejobs.com</a></strong>—including what worked, what failed, and what I'd never do again.</p>
+
+    <h2>Phase 1: Manual Chaos (Week 0)</h2>
+    <p>Before <strong><a href="https://www.flashfirejobs.com" target="_blank" rel="noopener noreferrer" style="color: #f97316; text-decoration: underline;">www.flashfirejobs.com</a></strong>, my process looked like this:</p>
+    <ul>
+      <li>Apply to 10–15 jobs/day on LinkedIn and Indeed</li>
+      <li>Use one resume for all applications</li>
+      <li>Track everything in a messy spreadsheet</li>
+      <li>Get no responses for weeks</li>
+    </ul>
+    
+    <p>It was slow, exhausting, and mostly pointless.</p>
+
+    <h2>Phase 2: Signing Up for flashfirejobs.com</h2>
+    <p>A friend told me about <strong><a href="https://www.flashfirejobs.com" target="_blank" rel="noopener noreferrer" style="color: #f97316; text-decoration: underline;">www.flashfirejobs.com</a></strong>, a platform built for international students that:</p>
+    <ul>
+      <li>Applies to 1,000+ jobs for you (over 6–7 weeks)</li>
+      <li>Customizes resumes for each job</li>
+      <li>Optimizes LinkedIn</li>
+      <li>Gives you a dashboard to track everything</li>
+    </ul>
+    
+    <p>I chose the <strong>Executive Plan</strong> (1,000 applications) and got started. First, <strong><a href="https://www.flashfirejobs.com" target="_blank" rel="noopener noreferrer" style="color: #f97316; text-decoration: underline;">www.flashfirejobs.com</a></strong>'s team revamped my resume to make it outcome-focused, ATS-compatible, and loaded with role-specific keywords. They also optimized my LinkedIn profile from scratch—rewriting my headline, about section, and work history for maximum recruiter visibility. Only after this makeover did they begin the actual job applications based on my role, location, and visa preferences.</p>
+
+    <h2>Phase 3: Game On (Week 1–2)</h2>
+    <p>Immediately, I saw the difference:</p>
+    <ul>
+      <li>My LinkedIn was fully optimized with U.S. keywords</li>
+      <li>My resume was rewritten to focus on outcomes, tools, and ATS formatting</li>
+      <li>Applications started going out to companies that were relevant to my skills, visa status, and preferences</li>
+    </ul>
+    
+    <p>Within 10 days:</p>
+    <ul>
+      <li>200+ applications were sent</li>
+      <li>My dashboard showed live updates</li>
+      <li>I started getting replies—yes, actual replies</li>
+    </ul>
+
+    <h2>What Worked:</h2>
+    <p><strong>1. Custom Resumes</strong><br>
+    Every job got a tailored resume with matching keywords. I never did that manually.</p>
+    
+    <p><strong>2. Volume</strong><br>
+    I would've never been able to apply to 1,000 jobs myself. <strong><a href="https://www.flashfirejobs.com" target="_blank" rel="noopener noreferrer" style="color: #f97316; text-decoration: underline;">www.flashfirejobs.com</a></strong> did it for me.</p>
+    
+    <p><strong>3. Tracking</strong><br>
+    No more spreadsheets. I could see how many jobs were submitted, which industries were converting, and how to refine the next wave of applications.</p>
+    
+    <p><strong>4. LinkedIn Optimization</strong><br>
+    My profile went from invisible to getting 40–50 recruiter views per week.</p>
+    
+    <p><strong>5. Fast Turnaround</strong><br>
+    Applications were sent within 24 hours of jobs going live. That's a huge edge.</p>
+
+    <h2>Results by Week 6:</h2>
+    <ul>
+      <li><strong>1,000+ jobs applied</strong> via <strong><a href="https://www.flashfirejobs.com" target="_blank" rel="noopener noreferrer" style="color: #f97316; text-decoration: underline;">www.flashfirejobs.com</a></strong></li>
+      <li><strong>17 replies</strong> from recruiters or hiring managers</li>
+      <li><strong>7 interview rounds</strong> with high-quality companies</li>
+      <li><strong>2 offers</strong> (with more in process)</li>
+    </ul>
+
+    <h2>What <strong><a href="https://www.flashfirejobs.com" target="_blank" rel="noopener noreferrer" style="color: #f97316; text-decoration: underline;">www.flashfirejobs.com</a></strong> Actually Did:</h2>
+    <ul>
+      <li>Tailored my resume for each job</li>
+      <li>Optimized my LinkedIn for recruiter visibility</li>
+      <li>Filtered jobs by visa compatibility, industry, and location</li>
+      <li>Applied to 30–40 jobs per day</li>
+      <li>Tracked everything in one dashboard</li>
+      <li>Sent me alerts when responses came in</li>
+      <li>Provided templates for outreach and follow-ups</li>
+    </ul>
+    
+    <p>This wasn't just automation. It was intelligent, structured, and built for international students like me.</p>
+
+    <h2>Final Thoughts: Do I Recommend It?</h2>
+    <p>100%. Especially if you:</p>
+    <ul>
+      <li>Are an international student on OPT/CPT</li>
+      <li>Are overwhelmed with the process</li>
+      <li>Want to save 150+ hours of job hunting</li>
+      <li>Need better results, faster</li>
+    </ul>
+    
+    <p><strong><a href="https://www.flashfirejobs.com" target="_blank" rel="noopener noreferrer" style="color: #f97316; text-decoration: underline;">www.flashfirejobs.com</a></strong> gave me clarity, consistency, and conversions. It was the best decision I made in my job hunt.</p>
+    
+    <p>If you're serious about landing a U.S. job without burning out, do what I did:</p>
+    <p><a href="https://www.flashfirejobs.com" target="_blank" rel="noopener noreferrer" style="color:#3b82f6;"><strong>Start your 7-day free trial at <strong><a href="https://www.flashfirejobs.com" target="_blank" rel="noopener noreferrer" style="color: #f97316; text-decoration: underline;">www.flashfirejobs.com</a></strong> and let the system work for you.</strong></a></p>
+  `
+},
+];
+
+  const updateScrollButtons = () => {
+    if (scrollContainerRef.current) {
+      const { scrollLeft, scrollWidth, clientWidth } = scrollContainerRef.current;
+      setCanScrollLeft(scrollLeft > 0);
+      setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 10); // 10px buffer
+      
+      // Calculate progress based on actual scroll position
+      const maxScrollLeft = scrollWidth - clientWidth;
+      const progress = maxScrollLeft > 0 ? (scrollLeft / maxScrollLeft) * 100 : 0;
+      setScrollProgress(Math.min(100, Math.max(0, progress)));
+      
+      // Update current index for display
+      const currentPosition = Math.round(scrollLeft / cardWidth);
+      setCurrentIndex(currentPosition);
+      
+      // Update visible dots based on scroll position
+      const maxVisible = Math.min(3, Math.ceil(clientWidth / cardWidth));
+      const newVisibleDots = [];
+      
+      for (let i = currentPosition; i < Math.min(currentPosition + maxVisible, blogPosts.length); i++) {
+        newVisibleDots.push(i);
+      }
+      
+      setVisibleDots(newVisibleDots);
+    }
   };
 
-  const prevSlide = () => {
-    setCurrentIndex(prev => Math.max(prev - 1, 0));
+  useEffect(() => {
+    updateScrollButtons();
+    const container = scrollContainerRef.current;
+    if (container) {
+      container.addEventListener('scroll', updateScrollButtons);
+      return () => container.removeEventListener('scroll', updateScrollButtons);
+    }
+  }, []);
+
+  const scrollLeft = () => {
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollBy({
+        left: -cardWidth,
+        behavior: 'smooth'
+      });
+    }
   };
 
-  const visiblePosts = blogPosts.slice(currentIndex, currentIndex + postsPerPage);
+  const scrollRight = () => {
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollBy({
+        left: cardWidth,
+        behavior: 'smooth'
+      });
+    }
+  };
 
   const openBlogPost = (post) => {
     // Get the current origin to properly reference local assets
@@ -1481,115 +1813,115 @@ image: "/images/blog10.jpeg",
         {/* Carousel Container */}
         <div className="relative">
           {/* Left Arrow */}
-          {currentIndex > 0 && (
+          {canScrollLeft && (
             <button
-              onClick={prevSlide}
+              onClick={scrollLeft}
               className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 z-10 bg-white rounded-full p-3 shadow-lg hover:shadow-xl transition-all duration-300 hover:bg-orange-50 group"
-              aria-label="Previous articles"
+              aria-label="Scroll left"
             >
               <ChevronLeft className="w-6 h-6 text-gray-600 group-hover:text-orange-600 transition-colors duration-200" />
             </button>
           )}
 
           {/* Right Arrow */}
-          {currentIndex < maxIndex && (
+          {canScrollRight && (
             <button
-              onClick={nextSlide}
+              onClick={scrollRight}
               className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 z-10 bg-white rounded-full p-3 shadow-lg hover:shadow-xl transition-all duration-300 hover:bg-orange-50 group"
-              aria-label="Next articles"
+              aria-label="Scroll right"
             >
               <ChevronRight className="w-6 h-6 text-gray-600 group-hover:text-orange-600 transition-colors duration-200" />
             </button>
           )}
 
-          {/* Blog Grid with Smooth Transition */}
-          <div className="overflow-hidden">
-            <div 
-              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 transition-all duration-500 ease-in-out"
-              style={{ 
-                transform: `translateX(0)`,
-                opacity: 1
-              }}
-            >
-              {visiblePosts.map((post, index) => (
-                <article
-                  key={post.id}
-                  className="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden group cursor-pointer transform hover:-translate-y-1"
-                  onClick={() => openBlogPost(post)}
-                  style={{
-                    animationDelay: `${index * 100}ms`,
-                    animation: 'fadeInUp 0.6s ease-out forwards'
-                  }}
-                >
-                  {/* Image */}
-                  <div className="relative overflow-hidden">
-                    <img
-                      src={post.image}
-                      alt={post.title}
-                      className="w-full h-56 object-cover group-hover:scale-105 transition-transform duration-300"
-                    />
-                    <div className="absolute top-4 left-4">
-                      <span className={`px-3 py-1 rounded-full text-sm font-medium ${post.categoryColor}`}>
-                        {post.category}
-                      </span>
+          {/* Scrollable Container */}
+          <div 
+            ref={scrollContainerRef}
+            className="flex gap-8 overflow-x-auto scrollbar-hide pb-4"
+            style={{ 
+              scrollbarWidth: 'none',
+              msOverflowStyle: 'none',
+              WebkitScrollbar: { display: 'none' }
+            }}
+          >
+            {blogPosts.map((post, index) => (
+              <article
+                key={post.id}
+                className="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden group cursor-pointer transform hover:-translate-y-1 flex-shrink-0"
+                onClick={() => openBlogPost(post)}
+                style={{
+                  width: '368px', // Fixed width for consistent scrolling
+                  animationDelay: `${index * 100}ms`,
+                  animation: 'fadeInUp 0.6s ease-out forwards'
+                }}
+              >
+                {/* Image */}
+                <div className="relative overflow-hidden">
+                  <img
+                    src={post.image}
+                    alt={post.title}
+                    className="w-full h-56 object-cover group-hover:scale-105 transition-transform duration-300"
+                  />
+                  <div className="absolute top-4 left-4">
+                    <span className={`px-3 py-1 rounded-full text-sm font-medium ${post.categoryColor}`}>
+                      {post.category}
+                    </span>
+                  </div>
+                </div>
+
+                {/* Content */}
+                <div className="p-6">
+                  {/* Meta Info */}
+                  <div className="flex items-center text-sm text-gray-500 mb-3 space-x-4">
+                    <div className="flex items-center">
+                      <Calendar className="w-4 h-4 mr-1" />
+                      {post.date}
+                    </div>
+                    <div className="flex items-center">
+                      <Clock className="w-4 h-4 mr-1" />
+                      {post.readTime}
                     </div>
                   </div>
 
-                  {/* Content */}
-                  <div className="p-6">
-                    {/* Meta Info */}
-                    <div className="flex items-center text-sm text-gray-500 mb-3 space-x-4">
-                      <div className="flex items-center">
-                        <Calendar className="w-4 h-4 mr-1" />
-                        {post.date}
-                      </div>
-                      <div className="flex items-center">
-                        <Clock className="w-4 h-4 mr-1" />
-                        {post.readTime}
-                      </div>
+                  {/* Title */}
+                  <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-orange-600 transition-colors duration-200 line-clamp-2">
+                    {post.title}
+                  </h3>
+
+                  {/* Excerpt */}
+                  <p className="text-gray-600 mb-4 line-clamp-3 leading-relaxed">
+                    {post.excerpt}
+                  </p>
+
+                  {/* Author & Read More */}
+                  <div className="flex items-center justify-between pt-4 border-t border-gray-100">
+                    <div className="flex items-center">
+                      <User className="w-4 h-4 text-gray-400 mr-2" />
+                      <span className="text-sm text-gray-600 font-medium">{post.author}</span>
                     </div>
-
-                    {/* Title */}
-                    <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-orange-600 transition-colors duration-200 line-clamp-2">
-                      {post.title}
-                    </h3>
-
-                    {/* Excerpt */}
-                    <p className="text-gray-600 mb-4 line-clamp-3 leading-relaxed">
-                      {post.excerpt}
-                    </p>
-
-                    {/* Author & Read More */}
-                    <div className="flex items-center justify-between pt-4 border-t border-gray-100">
-                      <div className="flex items-center">
-                        <User className="w-4 h-4 text-gray-400 mr-2" />
-                        <span className="text-sm text-gray-600 font-medium">{post.author}</span>
-                      </div>
-                      <div className="flex items-center text-orange-600 font-medium text-sm group-hover:text-orange-700 transition-colors duration-200">
-                        Read More
-                        <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform duration-200" />
-                      </div>
+                    <div className="flex items-center text-orange-600 font-medium text-sm group-hover:text-orange-700 transition-colors duration-200">
+                      Read More
+                      <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform duration-200" />
                     </div>
                   </div>
-                </article>
-              ))}
-            </div>
-          </div>
-
-          {/* Pagination Dots */}
-          <div className="flex justify-center mt-12 space-x-2">
-            {Array.from({ length: maxIndex + 1 }, (_, index) => (
-              <button
-                key={index}
-                onClick={() => setCurrentIndex(index)}
-                className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                  currentIndex === index 
-                    ? 'bg-orange-600 w-8' 
-                    : 'bg-gray-300 hover:bg-gray-400'
-                }`}
-                aria-label={`Go to slide ${index + 1}`}
-              />
+                </div>
+              </article>
             ))}
+          </div>
+          {/* Progress Bar */}
+          <div className="mt-12 max-w-md mx-auto">
+            <div className="flex items-center justify-between text-sm text-gray-500 mb-2">
+              <span>{currentIndex + 1} of {blogPosts.length}</span>
+              <span>{Math.round(scrollProgress)}% viewed</span>
+            </div>
+            <div className="w-full bg-gray-200 rounded-full h-2">
+              <div 
+                className="bg-gradient-to-r from-orange-500 to-orange-600 h-2 rounded-full transition-all duration-500 ease-out"
+                style={{ 
+                  width: `${scrollProgress}%` 
+                }}
+              ></div>
+            </div>
           </div>
         </div>
       </div>
@@ -1604,6 +1936,15 @@ image: "/images/blog10.jpeg",
             opacity: 1;
             transform: translateY(0);
           }
+        }
+        
+        .scrollbar-hide {
+          -ms-overflow-style: none;
+          scrollbar-width: none;
+        }
+        
+        .scrollbar-hide::-webkit-scrollbar {
+          display: none;
         }
       `}</style>
     </section>

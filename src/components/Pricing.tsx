@@ -240,8 +240,8 @@ const Pricing = () => {
         "1000 tailored applications",
         "Executive-level job targeting",
         "Personal career consultant",
-        "Salary negotiation support",
-        "Custom cover letters",
+        "Portfolio development",
+        "Cover letters",
         "Network introduction requests",
       ],
       cta: "Start Now"
@@ -342,7 +342,7 @@ const Pricing = () => {
                 </button>
 
                 <p className="text-center text-sm text-gray-500 mt-4">
-                  Secure payment via PayPal • Cancel anytime
+                  Secure payment via PayPal
                 </p>
               </div>
             </div>
