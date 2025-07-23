@@ -334,7 +334,7 @@ const Contact = () => {
                   <div className="text-orange-100 text-xs sm:text-sm">Hours Saved</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-2xl sm:text-3xl font-bold">50+</div>
+                  <div className="text-2xl sm:text-3xl font-bold">100+</div>
                   <div className="text-orange-100 text-xs sm:text-sm">Jobs Landed</div>
                 </div>
                 <div className="text-center">
