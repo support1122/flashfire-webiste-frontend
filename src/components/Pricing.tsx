@@ -243,6 +243,7 @@ const Pricing = () => {
         "Portfolio development",
         "Cover letters",
         "Network introduction requests",
+        "Emailing Recruiters",
       ],
       cta: "Start Now"
     }
