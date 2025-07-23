@@ -55,9 +55,9 @@ const Hero = () => {
             </div>
 
             {/* Main Headline */}
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-gray-900 leading-tight lg:leading-[3.5rem] xl:leading-[4rem] mb-6 sm:mb-8 px-2 lg:mb-12">
-              <span className="block mb-2 sm:mb-3 lg:mb-8">We Apply To 1,000+</span>
-                <span className="block bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text text-transparent">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-gray-900 leading-tight mb-6 sm:mb-8 px-2">
+              <span className="block">We Apply To 1,000+</span>
+                <span className="bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text text-transparent">
                   U.S. Jobs For You
                 </span>
             </h1>
