@@ -37,7 +37,7 @@ const Hero = () => {
   return (
     <>
       {/* Main Hero Section - 100vh */}
-      <section id="home" className="relative h-screen bg-gradient-to-br from-orange-50 via-white to-red-50 overflow-hidden">
+      <section id="home" className="relative pb-4 top-12 h-screen bg-gradient-to-br from-orange-50 via-white to-red-50 overflow-hidden">
         {/* Background Effects */}
         <div className="absolute inset-0">
           <div className="absolute top-20 left-10 w-72 h-72 bg-orange-200/30 rounded-full blur-3xl"></div>
@@ -89,7 +89,7 @@ const Hero = () => {
         </div>
 
         {/* Scroll Indicator */}
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+        <div className="absolute bottom-8 left-1/2 h-fit transform -translate-x-1/2 animate-bounce">
           <div className="w-6 h-10 border-2 border-gray-400 rounded-full flex justify-center">
             <div className="w-1 h-3 bg-gray-400 rounded-full mt-2 animate-pulse"></div>
           </div>

@@ -15,6 +15,16 @@ const SignupModal = () => {
     workAuthorization: ''
   });
 
+
+  (window as any).openSignupModal = (customStep = 1) => {
+  const modal = document.getElementById('signup-modal');
+  if (modal) {
+    modal.classList.remove('hidden');
+    setStep(customStep);
+  }
+};
+
+
   const countryCodes = [
     { code: '+1', country: 'USA', pattern: /^1/ },
     { code: '+91', country: 'India', pattern: /^91/ }
@@ -99,117 +109,116 @@ const SignupModal = () => {
   };
 
   return (
-    <div id="signup-modal" className="hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center">
-      <div className="bg-white w-full h-full sm:rounded-2xl lg:rounded-3xl sm:w-[95vw] sm:h-[95vh] lg:max-w-7xl lg:max-h-[90vh] overflow-hidden shadow-2xl">
-        {step === 1 ? (
-          <div className="p-4 sm:p-6 lg:p-8 overflow-y-auto h-full">
-            <div className="flex justify-between items-start mb-6 sm:mb-8">
-              <div className="flex-1 pr-4">
-                <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900">Get Started for Free</h2>
-                <p className="text-gray-600 mt-1 sm:mt-2 text-sm sm:text-base">Tell us about yourself to schedule your consultation</p>
-              </div>
-              <button onClick={closeModal} className="text-gray-400 hover:text-gray-600 transition-colors flex-shrink-0 p-2">
-                <X className="w-5 h-5 sm:w-6 sm:h-6" />
-              </button>
-            </div>
-
-            <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6 max-w-2xl mx-auto">
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  <User className="w-4 h-4 inline mr-2" /> Full Name
-                </label>
-                <input 
-                  type="text" 
-                  name="fullName" 
-                  value={formData.fullName} 
-                  onChange={handleInputChange} 
-                  className="w-full px-4 py-4 bg-gray-50 border border-gray-200 rounded-xl text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent text-base" 
-                  placeholder="Enter your full name" 
-                  required 
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  <Phone className="w-4 h-4 inline mr-2" /> Phone Number (10 digits only)
-                </label>
-                <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2">
-                  <select 
-                    name="countryCode" 
-                    value={formData.countryCode} 
-                    onChange={handleInputChange} 
-                    className="w-full sm:w-auto px-4 py-4 bg-gray-50 border border-gray-200 rounded-xl text-gray-900 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent text-base"
-                  >
-                    {countryCodes.map((country) => (
-                      <option key={country.code} value={country.code}>
-                        {country.code} ({country.country})
-                      </option>
-                    ))}
-                  </select>
-                  <input 
-                    type="tel" 
-                    name="phone" 
-                    value={formData.phone} 
-                    onChange={handleInputChange} 
-                    className="flex-1 px-4 py-4 bg-gray-50 border border-gray-200 rounded-xl text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent text-base" 
-                    placeholder="Enter 10-digit phone number" 
-                    pattern="[0-9]{10}" 
-                    inputMode="numeric" 
-                    maxLength={10} 
-                    required 
-                  />
-                </div>
-                {formData.phone && formData.phone.length !== 10 && (
-                  <p className="text-red-500 text-sm mt-1">Phone number must be exactly 10 digits</p>
-                )}
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  <Mail className="w-4 h-4 inline mr-2" /> Email Address
-                </label>
-                <input 
-                  type="email" 
-                  name="email" 
-                  value={formData.email} 
-                  onChange={handleInputChange} 
-                  className="w-full px-4 py-4 bg-gray-50 border border-gray-200 rounded-xl text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent text-base" 
-                  placeholder="Enter your email address" 
-                  required 
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Are you authorized to work in USA?
-                </label>
-                <select 
-                  name="workAuthorization" 
-                  value={formData.workAuthorization} 
-                  onChange={handleInputChange} 
-                  className="w-full px-4 py-4 bg-gray-50 border border-gray-200 rounded-xl text-gray-900 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent text-base" 
-                  required
-                >
-                  <option value="">Select an option</option>
-                  <option value="yes">Yes</option>
-                  <option value="no">No</option>
-                </select>
-              </div>
-
-              <button 
-               
-                type="submit" 
-                disabled={formData.phone.length !== 10} 
-                className="w-full bg-gradient-to-r from-orange-500 to-orange-600 text-white py-4 px-6 rounded-xl font-bold hover:from-orange-600 hover:to-orange-700 transition-all duration-200 shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed text-base"
-              >
-                Submit
-              </button>
-            </form>
-
-            <p className="text-center text-sm text-gray-500 mt-6">No spam, ever. We respect your privacy.</p>
+    <div id="signup-modal" className="hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center w-full">
+  <div className={`bg-white w-full ${step === 1 ? 'max-w-md' : 'max-w-5xl'} mx-4 rounded-2xl overflow-hidden shadow-2xl transition-all duration-300`}>
+    {step === 1 ? (
+      <div className="p-6 w-full">
+        <div className="flex justify-between items-start mb-6 w-full">
+          <div className="flex-1">
+            <h2 className="text-2xl font-bold text-gray-900 mb-2">Get Started for Free</h2>
+            <p className="text-gray-600 text-sm">Tell us about yourself to schedule your consultation</p>
           </div>
+          <button onClick={closeModal} className="text-gray-400 hover:text-gray-600 transition-colors p-1">
+            <X className="w-5 h-5" />
+          </button>
+        </div>
+
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              <User className="w-4 h-4 inline mr-2" /> Full Name
+            </label>
+            <input 
+              type="text" 
+              name="fullName" 
+              value={formData.fullName} 
+              onChange={handleInputChange} 
+              className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent" 
+              placeholder="Enter your full name" 
+              required 
+            />
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              <Phone className="w-4 h-4 inline mr-2" /> Phone Number (10 digits only)
+            </label>
+            <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2">
+              <select 
+                name="countryCode" 
+                value={formData.countryCode} 
+                onChange={handleInputChange} 
+                className="w-full sm:w-auto px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+              >
+                {countryCodes.map((country) => (
+                  <option key={country.code} value={country.code}>
+                    {country.code} ({country.country})
+                  </option>
+                ))}
+              </select>
+              <input 
+                type="tel" 
+                name="phone" 
+                value={formData.phone} 
+                onChange={handleInputChange} 
+                className="flex-1 px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent" 
+                placeholder="Enter 10-digit phone number" 
+                pattern="[0-9]{10}" 
+                inputMode="numeric" 
+                maxLength={10} 
+                required 
+              />
+            </div>
+            {formData.phone && formData.phone.length !== 10 && (
+              <p className="text-red-500 text-sm mt-1">Phone number must be exactly 10 digits</p>
+            )}
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              <Mail className="w-4 h-4 inline mr-2" /> Email Address
+            </label>
+            <input 
+              type="email" 
+              name="email" 
+              value={formData.email} 
+              onChange={handleInputChange} 
+              className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent" 
+              placeholder="Enter your email address" 
+              required 
+            />
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              Are you authorized to work in USA?
+            </label>
+            <select 
+              name="workAuthorization" 
+              value={formData.workAuthorization} 
+              onChange={handleInputChange} 
+              className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent" 
+              required
+            >
+              <option value="">Select an option</option>
+              <option value="yes">Yes</option>
+              <option value="no">No</option>
+            </select>
+          </div>
+
+          <button 
+            type="submit" 
+            disabled={formData.phone.length !== 10} 
+            className="w-full bg-gradient-to-r from-orange-500 to-orange-600 text-white py-3 px-6 rounded-lg font-bold hover:from-orange-600 hover:to-orange-700 transition-all duration-200 shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            Submit
+          </button>
+        </form>
+
+        <p className="text-center text-sm text-gray-500 mt-6">No spam, ever. We respect your privacy.</p>
+      </div>
         ) : (
-          <div className="relative h-full">
+          <div className="relative h-full w-full">
             {/* Close button - fixed position */}
             <button onClick={closeModal} className="absolute top-4 right-4 sm:top-6 sm:right-6 text-gray-400 hover:text-gray-600 transition-colors z-20 bg-white/90 rounded-full p-2 shadow-lg">
               <X className="w-5 h-5 sm:w-6 sm:h-6" />
