@@ -15,6 +15,14 @@ const SignupModal = () => {
     workAuthorization: ''
   });
 
+  (window as any).openSignupModal = (customStep = 1) => {
+    const modal = document.getElementById('signup-modal');
+      if (modal) {
+      modal.classList.remove('hidden');
+      setStep(customStep);
+    }
+  };
+
   const countryCodes = [
     { code: '+1', country: 'USA', pattern: /^1/ },
     { code: '+91', country: 'India', pattern: /^91/ }
