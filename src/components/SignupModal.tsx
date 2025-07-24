@@ -106,7 +106,6 @@ const SignupModal = () => {
         <div className="flex justify-between items-start mb-6 w-full">
           <div className="flex-1">
             <h2 className="text-2xl font-bold text-gray-900 mb-2">Get Started for Free</h2>
-            <p className="text-gray-600 text-sm">Tell us about yourself to schedule your consultation</p>
           </div>
           <button onClick={closeModal} className="text-gray-400 hover:text-gray-600 transition-colors p-1">
             <X className="w-5 h-5" />
