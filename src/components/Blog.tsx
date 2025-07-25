@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { Calendar, Clock, User, ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react';
 import blogPosts from '../BLogsData.ts';
+import { Link } from 'react-router-dom';
 const Blog = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
@@ -287,14 +288,14 @@ const Blog = () => {
     `;
     
     // Create a blob URL for the HTML content
-    const blob = new Blob([htmlContent], { type: 'text/html' });
-    const blobUrl = URL.createObjectURL(blob);
+  //   const blob = new Blob([htmlContent], { type: 'text/html' });
+  //   const blobUrl = URL.createObjectURL(blob);
     
-    // Open the new window with the blob URL
-    const newWindow = window.open(blobUrl, '_blank');
+  //   // Open the new window with the blob URL
+  //   const newWindow = window.open(blobUrl, '_blank');
     
-    // Clean up the blob URL after a short delay
-    setTimeout(() => URL.revokeObjectURL(blobUrl), 1000);
+  //   // Clean up the blob URL after a short delay
+  //   setTimeout(() => URL.revokeObjectURL(blobUrl), 1000);
   };
 
   return (
@@ -350,6 +351,7 @@ const Blog = () => {
             }}
           >
             {blogPosts.map((post, index) => (
+              <Link to={`/blogs/${post.id}`} target='_blank' key={post.id}  >
               <article
                 key={post.id}
                 className="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden group cursor-pointer transform hover:-translate-y-1 flex-shrink-0"
@@ -411,6 +413,7 @@ const Blog = () => {
                   </div>
                 </div>
               </article>
+              </Link>
             ))}
           </div>
           {/* Progress Bar */}
