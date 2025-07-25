@@ -55,17 +55,18 @@ const Hero = () => {
             </div>
 
             {/* Main Headline */}
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-gray-900 leading-tight mb-6 sm:mb-8 px-2">
-              <span className="block">We Apply To 1,000+</span>
+<h1 className="relative -top-[18px] text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-6xl font-bold text-gray-900 leading-snug mb-6 sm:mb-8 px-2 text-center">
+              <span className="block">Land 15+ Interview Calls in 30 Days*</span>
                 <span className="bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text text-transparent">
-                  U.S. Jobs For You
+                  Powered by Flashfire AI.
                 </span>
             </h1>
 
             {/* Subtext */}
             <p className="text-lg sm:text-xl md:text-2xl lg:text-2xl text-[#333333] tracking-tight mb-12 sm:mb-12 max-w-[1100px] mx-auto leading-snug px-4 text-center lg:mb-14">
-              From Tailoring Resumes With Our <span className="text-orange-600 font-bold">AI Optimizer</span> To Tracking Every Application — We Handle It All,<br />
-              <span className="whitespace-nowrap">So You Can Focus On Interviews.</span>
+               <span className="text-orange-600 font-bold">1000+ Applications</span> Tailored & Tracked - We Handle Everything, So You Focus on Interviews. <br />
+              
+              {/* <span className="whitespace-nowrap">So You Can Focus On Interviews.</span> */}
             </p>
 
 
