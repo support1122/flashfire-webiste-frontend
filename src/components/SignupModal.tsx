@@ -39,7 +39,7 @@ const SignupModal = () => {
 
   async function SaveDetailsToDB() {
     try {
-        let reqToServer = await fetch('https://api.flashfirejobs.com/', { //
+        let reqToServer = await fetch(`${API_BASE_URL}`, { //https://api.flashfirejobs.com/
                               method: 'POST',
                               headers: { 'Content-Type': 'application/json' },
                               body: JSON.stringify({name : formData?.fullName,
