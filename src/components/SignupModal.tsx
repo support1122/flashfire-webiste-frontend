@@ -331,7 +331,7 @@ const SignupModal = () => {
                         <div className="text-orange-100 text-xs">Success Rate</div>
                       </div>
                       <div>
-                        <div className="text-2xl font-bold">10K+</div>
+                        <div className="text-2xl font-bold">100+</div>
                         <div className="text-orange-100 text-xs">Jobs Landed</div>
                       </div>
                       <div>
