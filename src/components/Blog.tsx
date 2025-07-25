@@ -1,24 +1,69 @@
-import React, { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { Calendar, Clock, User, ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react';
-import { Link } from 'react-router-dom';
 import blogPosts from '../BLogsData.ts';
-
 const Blog = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const postsPerPage = 3;
-
-  const totalPosts = blogPosts.length;
-  const maxIndex = Math.max(0, totalPosts - postsPerPage);
-
-  const nextSlide = () => {
-    setCurrentIndex(prev => Math.min(prev + 1, maxIndex));
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(true);
+  const [scrollProgress, setScrollProgress] = useState(0);
+  const [visibleDots, setVisibleDots] = useState([0, 1, 2]);
+  const scrollContainerRef = useRef(null);
+  const cardWidth = 384;
+  // Limit to first 10 posts for performance=
+    // Create the HTML content with proper favicon references
+   const updateScrollButtons = () => {
+    if (scrollContainerRef.current) {
+      const { scrollLeft, scrollWidth, clientWidth } = scrollContainerRef.current;
+      setCanScrollLeft(scrollLeft > 0);
+      setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 10); // 10px buffer
+      
+      // Calculate progress based on actual scroll position
+      const maxScrollLeft = scrollWidth - clientWidth;
+      const progress = maxScrollLeft > 0 ? (scrollLeft / maxScrollLeft) * 100 : 0;
+      setScrollProgress(Math.min(100, Math.max(0, progress)));
+      
+      // Update current index for display
+      const currentPosition = Math.round(scrollLeft / cardWidth);
+      setCurrentIndex(currentPosition);
+      
+      // Update visible dots based on scroll position
+      const maxVisible = Math.min(3, Math.ceil(clientWidth / cardWidth));
+      const newVisibleDots = [];
+      
+      for (let i = currentPosition; i < Math.min(currentPosition + maxVisible, blogPosts.length); i++) {
+        newVisibleDots.push(i);
+      }
+      
+      setVisibleDots(newVisibleDots);
+    }
   };
 
-  const prevSlide = () => {
-    setCurrentIndex(prev => Math.max(prev - 1, 0));
+  useEffect(() => {
+    updateScrollButtons();
+    const container = scrollContainerRef.current;
+    if (container) {
+      container.addEventListener('scroll', updateScrollButtons);
+      return () => container.removeEventListener('scroll', updateScrollButtons);
+    }
+  }, []);
+
+  const scrollLeft = () => {
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollBy({
+        left: -cardWidth,
+        behavior: 'smooth'
+      });
+    }
   };
 
-  const visiblePosts = blogPosts.slice(currentIndex, currentIndex + postsPerPage);
+  const scrollRight = () => {
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollBy({
+        left: cardWidth,
+        behavior: 'smooth'
+      });
+    }
+  };
 
   const openBlogPost = (post) => {
     // Get the current origin to properly reference local assets
@@ -242,14 +287,14 @@ const Blog = () => {
     `;
     
     // Create a blob URL for the HTML content
-    // const blob = new Blob([htmlContent], { type: 'text/html' });
-    // const blobUrl = URL.createObjectURL(blob);
+    const blob = new Blob([htmlContent], { type: 'text/html' });
+    const blobUrl = URL.createObjectURL(blob);
     
-    // // Open the new window with the blob URL
-    // const newWindow = window.open(blobUrl, '_blank');
+    // Open the new window with the blob URL
+    const newWindow = window.open(blobUrl, '_blank');
     
-    // // Clean up the blob URL after a short delay
-    // setTimeout(() => URL.revokeObjectURL(blobUrl), 1000);
+    // Clean up the blob URL after a short delay
+    setTimeout(() => URL.revokeObjectURL(blobUrl), 1000);
   };
 
   return (
@@ -273,117 +318,115 @@ const Blog = () => {
         {/* Carousel Container */}
         <div className="relative">
           {/* Left Arrow */}
-          {currentIndex > 0 && (
+          {canScrollLeft && (
             <button
-              onClick={prevSlide}
+              onClick={scrollLeft}
               className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 z-10 bg-white rounded-full p-3 shadow-lg hover:shadow-xl transition-all duration-300 hover:bg-orange-50 group"
-              aria-label="Previous articles"
+              aria-label="Scroll left"
             >
               <ChevronLeft className="w-6 h-6 text-gray-600 group-hover:text-orange-600 transition-colors duration-200" />
             </button>
           )}
 
           {/* Right Arrow */}
-          {currentIndex < maxIndex && (
+          {canScrollRight && (
             <button
-              onClick={nextSlide}
+              onClick={scrollRight}
               className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 z-10 bg-white rounded-full p-3 shadow-lg hover:shadow-xl transition-all duration-300 hover:bg-orange-50 group"
-              aria-label="Next articles"
+              aria-label="Scroll right"
             >
               <ChevronRight className="w-6 h-6 text-gray-600 group-hover:text-orange-600 transition-colors duration-200" />
             </button>
           )}
 
-          {/* Blog Grid with Smooth Transition */}
-          <div className="overflow-hidden">
-            <div 
-              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 transition-all duration-500 ease-in-out"
-              style={{ 
-                transform: `translateX(0)`,
-                opacity: 1
-              }}
-            >
-              {visiblePosts.map((post, index) => (
-                <Link to={`/blogs/${post.id}`} target='_blank' className="no-underline" key={post.id}>
-                <article
-                  key={post.id}
-                  className="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden group cursor-pointer transform hover:-translate-y-1"
-                  onClick={() => openBlogPost(post)}
-                  style={{
-                    animationDelay: `${index * 100}ms`,
-                    animation: 'fadeInUp 0.6s ease-out forwards'
-                  }}
-                >
-                  {/* Image */}
-                  <div className="relative overflow-hidden">
-                    <img
-                      src={post.image}
-                      alt={post.title}
-                      className="w-full h-56 object-cover group-hover:scale-105 transition-transform duration-300"
-                    />
-                    <div className="absolute top-4 left-4">
-                      <span className={`px-3 py-1 rounded-full text-sm font-medium ${post.categoryColor}`}>
-                        {post.category}
-                      </span>
+          {/* Scrollable Container */}
+          <div 
+            ref={scrollContainerRef}
+            className="flex gap-8 overflow-x-auto scrollbar-hide pb-4"
+            style={{ 
+              scrollbarWidth: 'none',
+              msOverflowStyle: 'none',
+              WebkitScrollbar: { display: 'none' }
+            }}
+          >
+            {blogPosts.map((post, index) => (
+              <article
+                key={post.id}
+                className="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden group cursor-pointer transform hover:-translate-y-1 flex-shrink-0"
+                onClick={() => openBlogPost(post)}
+                style={{
+                  width: '368px', // Fixed width for consistent scrolling
+                  animationDelay: `${index * 100}ms`,
+                  animation: 'fadeInUp 0.6s ease-out forwards'
+                }}
+              >
+                {/* Image */}
+                <div className="relative overflow-hidden">
+                  <img
+                    src={post.image}
+                    alt={post.title}
+                    className="w-full h-56 object-cover group-hover:scale-105 transition-transform duration-300"
+                  />
+                  <div className="absolute top-4 left-4">
+                    <span className={`px-3 py-1 rounded-full text-sm font-medium ${post.categoryColor}`}>
+                      {post.category}
+                    </span>
+                  </div>
+                </div>
+
+                {/* Content */}
+                <div className="p-6">
+                  {/* Meta Info */}
+                  <div className="flex items-center text-sm text-gray-500 mb-3 space-x-4">
+                    <div className="flex items-center">
+                      <Calendar className="w-4 h-4 mr-1" />
+                      {post.date}
+                    </div>
+                    <div className="flex items-center">
+                      <Clock className="w-4 h-4 mr-1" />
+                      {post.readTime}
                     </div>
                   </div>
 
-                  {/* Content */}
-                  <div className="p-6">
-                    {/* Meta Info */}
-                    <div className="flex items-center text-sm text-gray-500 mb-3 space-x-4">
-                      <div className="flex items-center">
-                        <Calendar className="w-4 h-4 mr-1" />
-                        {post.date}
-                      </div>
-                      <div className="flex items-center">
-                        <Clock className="w-4 h-4 mr-1" />
-                        {post.readTime}
-                      </div>
+                  {/* Title */}
+                  <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-orange-600 transition-colors duration-200 line-clamp-2">
+                    {post.title}
+                  </h3>
+
+                  {/* Excerpt */}
+                  <p className="text-gray-600 mb-4 line-clamp-3 leading-relaxed">
+                    {post.excerpt}
+                  </p>
+
+                  {/* Author & Read More */}
+                  <div className="flex items-center justify-between pt-4 border-t border-gray-100">
+                    <div className="flex items-center">
+                      <User className="w-4 h-4 text-gray-400 mr-2" />
+                      <span className="text-sm text-gray-600 font-medium">{post.author}</span>
                     </div>
-
-                    {/* Title */}
-                    <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-orange-600 transition-colors duration-200 line-clamp-2">
-                      {post.title}
-                    </h3>
-
-                    {/* Excerpt */}
-                    <p className="text-gray-600 mb-4 line-clamp-3 leading-relaxed">
-                      {post.excerpt}
-                    </p>
-
-                    {/* Author & Read More */}
-                    <div className="flex items-center justify-between pt-4 border-t border-gray-100">
-                      <div className="flex items-center">
-                        <User className="w-4 h-4 text-gray-400 mr-2" />
-                        <span className="text-sm text-gray-600 font-medium">{post.author}</span>
-                      </div>
-                      <div className="flex items-center text-orange-600 font-medium text-sm group-hover:text-orange-700 transition-colors duration-200">
-                        Read More
-                        <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform duration-200" />
-                      </div>
+                    <div className="flex items-center text-orange-600 font-medium text-sm group-hover:text-orange-700 transition-colors duration-200">
+                      Read More
+                      <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform duration-200" />
                     </div>
                   </div>
-                </article>
-                </Link>
-              ))}
-            </div>
-          </div>
-
-          {/* Pagination Dots */}
-          <div className="flex justify-center mt-12 space-x-2">
-            {Array.from({ length: maxIndex + 1 }, (_, index) => (
-              <button
-                key={index}
-                onClick={() => setCurrentIndex(index)}
-                className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                  currentIndex === index 
-                    ? 'bg-orange-600 w-8' 
-                    : 'bg-gray-300 hover:bg-gray-400'
-                }`}
-                aria-label={`Go to slide ${index + 1}`}
-              />
+                </div>
+              </article>
             ))}
+          </div>
+          {/* Progress Bar */}
+          <div className="mt-12 max-w-md mx-auto">
+            <div className="flex items-center justify-between text-sm text-gray-500 mb-2">
+              <span>{currentIndex + 1} of {blogPosts.length}</span>
+              <span>{Math.round(scrollProgress)}% viewed</span>
+            </div>
+            <div className="w-full bg-gray-200 rounded-full h-2">
+              <div 
+                className="bg-gradient-to-r from-orange-500 to-orange-600 h-2 rounded-full transition-all duration-500 ease-out"
+                style={{ 
+                  width: `${scrollProgress}%` 
+                }}
+              ></div>
+            </div>
           </div>
         </div>
       </div>
@@ -398,6 +441,15 @@ const Blog = () => {
             opacity: 1;
             transform: translateY(0);
           }
+        }
+        
+        .scrollbar-hide {
+          -ms-overflow-style: none;
+          scrollbar-width: none;
+        }
+        
+        .scrollbar-hide::-webkit-scrollbar {
+          display: none;
         }
       `}</style>
     </section>
