@@ -13,6 +13,7 @@ import MovingJobs from './MovingJobs';
 import WhatsAppButton from './WhatsAppButton';
 import Footer from './Footer';
 import Blog from './Blog';
+import AutoModalTrigger from './AutoModalTrigger';
 
 function Home() {
   return (
@@ -31,6 +32,7 @@ function Home() {
             <SignupModal />
             <WhatsAppButton />
                   <Footer />
+            <AutoModalTrigger />
 
     </div>
   )
