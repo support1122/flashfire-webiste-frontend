@@ -7,7 +7,7 @@ const AutoModalTrigger = () => {
       if (typeof window !== 'undefined' && window.openSignupModal) {
         window.openSignupModal(1);
       }
-    }, 15000); // 15 seconds
+    }, 10000); // 10 seconds
 
     return () => clearTimeout(timer);
   }, []);
