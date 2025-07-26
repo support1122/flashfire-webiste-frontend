@@ -157,7 +157,7 @@ const Navigation = () => {
              {/* CTA Button */}
              <button
                onClick={()=> openSignupModal(2)}
-               className='bg-red-600 hover:bg-red-700 text-white px-1 sm:px-4 lg:px-6 lg:py-3 py-0.5 sm:py-2 rounded sm:rounded-lg font-bold transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105 text-[10px] sm:text-sm tracking-wide whitespace-nowrap flex-shrink-0 animate-pulse hover:animate-none border-2 border-white/20'
+               className='bg-red-600 hover:bg-red-700 text-white px-1.5 sm:px-4 lg:px-6 py-0.5 sm:py-2 rounded sm:rounded-lg font-bold transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105 text-[10px] sm:text-sm tracking-wide whitespace-nowrap flex-shrink-0'
              >
                Book Now
              </button>
