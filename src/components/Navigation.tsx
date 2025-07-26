@@ -29,11 +29,6 @@ const Navigation = () => {
     setIsMenuOpen(false);
   };
 
-  const openSignupModal = (source) => {
-    // Your existing modal opening logic
-    openModal();
-  };
-
   return (
     <div className="font-inter">
       <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${
