@@ -24,8 +24,8 @@ function Home() {
     }
   };
   useEffect(() => {
-    
-    openSignupModal(1);
+    setTimeout(()=>
+    openSignupModal(1),10000)
   }, []);
   return (
     <div>
