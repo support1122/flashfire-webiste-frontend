@@ -60,7 +60,7 @@ const Navigation = () => {
 
             {/* CTA Button */}
             <div className="hidden md:block">
-              <a href='hhttps://flashfire-dashboard-frontend.vercel.app/register'  target='_blank'>
+              <a href='https://flashfire-dashboard-frontend.vercel.app/register'  target='_blank'>
                 <button
                 // onClick={()=> openSignupModal(2)}
                   className="bg-gradient-to-r from-orange-500 to-orange-600 text-white px-4 lg:px-6 py-2 lg:py-2.5 rounded-full font-semibold hover:from-orange-600 hover:to-orange-700 transition-all duration-200 shadow-lg hover:shadow-xl hover:scale-105 text-sm lg:text-base"
@@ -95,7 +95,7 @@ const Navigation = () => {
                     {item.name}
                   </a>
                 ))}
-                <a href='hhttps://flashfire-dashboard-frontend.vercel.app/register'  target='_blank'>
+                <a href='https://flashfire-dashboard-frontend.vercel.app/register'  target='_blank'>
                 <button
                 
                   className="bg-gradient-to-r from-orange-500 to-orange-600 text-white px-3 py-3 rounded-lg font-semibold hover:from-orange-600 hover:to-orange-700 transition-all duration-200 block text-center mt-4 w-full text-base"
