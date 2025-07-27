@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Navigation from './Navigation';
 import Hero from './Hero';
 import Features from './Features';
@@ -15,6 +15,18 @@ import Footer from './Footer';
 import Blog from './Blog';
 
 function Home() {
+
+  (window as any).openSignupModal = (customStep = 1) => {
+    const modal = document.getElementById('signup-modal');
+      if (modal) {
+      modal.classList.remove('hidden');
+      setStep(customStep);
+    }
+  };
+  useEffect(() => {
+    
+    openSignupModal(1);
+  }, []);
   return (
     <div>
               <Navigation />
