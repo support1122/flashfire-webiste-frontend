@@ -248,8 +248,20 @@ const Pricing = () => {
       cta: "Start Now"
     }
   ];
-
-  return (
+  const teamMembers = [
+    {
+      name: "Adit Jain",
+      role: "Partner",
+      image: "https://res.cloudinary.com/drit9nkha/image/upload/v1753688852/Adit_f2qfe8.webp"
+    },
+    {
+      name: "Pranjal Tripathi",
+      role: "CTO",
+      image: "https://res.cloudinary.com/drit9nkha/image/upload/v1753688852/pran_img_nbwdya.webp"
+    }
+  ]
+return (
+    <>
     <section id="pricing" className="py-16 sm:py-24 bg-gradient-to-b from-white to-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12 sm:mb-20">
@@ -351,7 +363,65 @@ const Pricing = () => {
         </div>
       </div>
     </section>
+    
+    <section className="py-16 bg-white">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Section Header */}
+        <div className="text-center mb-12">
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+            About the <span className="text-orange-500">Team</span>
+          </h2>
+          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+            Meet the dedicated professionals behind Flashfire AI who are committed to revolutionizing your job search experience.
+          </p>
+        </div>
+
+        {/* Team Members Grid */}
+        <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+          {teamMembers.map((member, index) => (
+            <div 
+              key={index}
+              className="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 p-8 text-center border border-gray-100 hover:border-orange-200"
+            >
+              {/* Profile Image */}
+              <div className="mb-6">
+                <div className={`w-32 h-32 rounded-full mx-auto border-4 border-orange-100 shadow-md overflow-hidden ${
+                  member.name === "Pranjal Tripathi" ? "bg-cover bg-center" : ""
+                }`}
+                style={member.name === "Pranjal Tripathi" ? {
+                  backgroundImage: `url(${member.image})`,
+                  backgroundSize: '120%',
+                  backgroundPosition: 'center'
+                } : {}}
+                >
+                  {member.name === "Adit Jain" && (
+                    <img
+                      src={member.image}
+                      alt={member.name}
+                      className="w-full h-full object-cover object-[center_20%]"
+                    />
+                  )}
+                </div>
+              </div>
+              
+              {/* Member Info */}
+              <div>
+                <h3 className="text-2xl font-bold text-gray-900 mb-2">
+                  {member.name}
+                </h3>
+                <p className="text-orange-500 font-semibold text-lg mb-4">
+                  {member.role}
+                </p>
+                <div className="w-16 h-1 bg-orange-500 mx-auto rounded-full"></div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+    </>
   );
+  
 };
 
 export default Pricing;

@@ -32,6 +32,7 @@ const SignupModal = () => {
     const modal = document.getElementById('signup-modal');
     if (modal) modal.classList.add('hidden');
     setStep(1);
+    setIsModalOpen(false);
     setFormData({ fullName: '', phone: '', countryCode: '+1', email: '', workAuthorization: '' });
   };
 
@@ -105,6 +106,19 @@ const SignupModal = () => {
   const goBack = () => {
     setStep(1);
   };
+
+  // Add this state to track if modal is open
+const [isModalOpen, setIsModalOpen] = useState(false);
+
+// Update the global function to set the state
+(window as any).openSignupModal = (customStep = 1) => {
+  const modal = document.getElementById('signup-modal');
+  if (modal) {
+    modal.classList.remove('hidden');
+    setStep(customStep);
+    setIsModalOpen(true); // Add this line
+  }
+};
 
   return (
     <div id="signup-modal" className="hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center w-full">
