@@ -40,7 +40,7 @@ function Home() {
     <div>
             <Hero setSignupFormVisibility={setSignupFormVisibility} setCalendlyModalVisibility = {setCalendlyModalVisibility} />
             <MovingJobs setSignupFormVisibility={setSignupFormVisibility} />
-            <RealTimeMetrics setSignupFormVisibility={setSignupFormVisibility} />          
+            <RealTimeMetrics />          
             <WhatsAppButton />
 
     </div>
