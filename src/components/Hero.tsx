@@ -1,14 +1,15 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { ArrowRight, Sparkles, Target, Clock, Users } from 'lucide-react';
+import { GTagUTM } from '../utils/GTagUTM';
 
-const Hero = () => {
+const Hero = ({setSignupFormVisibility, setCalendlyModalVisibility}) => {
   const [isSuccessMatrixVisible, setIsSuccessMatrixVisible] = useState(false);
   const successMatrixRef = useRef<HTMLDivElement>(null);
 
-  const openModal = () => {
-    const modal = document.getElementById('signup-modal');
-    if (modal) modal.classList.remove('hidden');
-  };
+  // const openModal = () => {
+  //   const modal = document.getElementById('signup-modal');
+  //   if (modal) modal.classList.remove('hidden');
+  // };
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -72,7 +73,16 @@ const Hero = () => {
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center px-4">
               <button
-                onClick={openModal}
+                onClick={() => {GTagUTM({eventName: 'sign_up_click',
+                                        label: 'Hero_Start_Free_Trial_Button',
+                                        utmParams: {
+                                          utm_source: 'WEBSITE',
+                                          utm_medium: 'Website_Front_Page',
+                                          utm_campaign: 'Website',
+                                        },
+                                      });
+                                      setSignupFormVisibility(true); // just opens modal/form
+                                    }}
                 className="group bg-gradient-to-r from-orange-500 to-orange-600 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold text-base sm:text-lg hover:from-orange-600 hover:to-orange-700 transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105 flex items-center space-x-2 w-full sm:w-auto justify-center"
               >
                 <span>Start My 7-Day Free Trial</span>
@@ -80,7 +90,7 @@ const Hero = () => {
               </button>
               <a
                 href="#how-it-works"
-                className="border-2 border-gray-300 text-gray-700 px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold text-base sm:text-lg hover:bg-gray-50 hover:border-gray-400 transition-all duration-300 w-full sm:w-auto text-center"
+                className="scroll-smooth border-2 border-gray-300 text-gray-700 px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold text-base sm:text-lg hover:bg-gray-50 hover:border-gray-400 transition-all duration-300 w-full sm:w-auto text-center"
               >
                 See How It Works
               </a>

@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X, Calendar, ArrowRight } from 'lucide-react';
-
-const Navigation = () => {
+import { Link } from 'react-router-dom';
+import { GTagUTM } from '../utils/GTagUTM.js';
+import CalendlyModal from './CalendlyModal';
+const Navigation = ({setSignupFormVisibility,setCalendlyModalVisibility}) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
@@ -14,13 +16,13 @@ const Navigation = () => {
   }, []);
 
   const navItems = [
-    { name: 'Home', href: '#' },
-    { name: 'Features', href: '#features' },
-    { name: 'Testimonials', href: '#testimonials' },
-    { name: 'Pricing', href: '#pricing' },
-    { name: 'FAQ', href: '#faq' },
-    { name: 'Contact', href: '#contact' },
-    { name: 'Blog', href: '#blog' },
+    { name: 'Home', href: '/' },
+    { name: 'Features', href: '/features' },
+    { name: 'Testimonials', href: '/testimonials' },
+    { name: 'Pricing', href: '/pricing' },
+    { name: 'FAQ', href: 'faq' },
+    { name: 'Contact', href: 'contact' },
+    { name: 'Blog', href: 'blog' },
   ];
 
   const openModal = () => {
@@ -39,35 +41,46 @@ const Navigation = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16 sm:h-18">
             {/* Logo */}
-            <a href="#home" className="flex items-center">
+            <Link to={'/'} className="flex items-center">
               <span className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-red-500 to-red-600 bg-clip-text text-transparent cursor-pointer hover:opacity-80 transition-opacity duration-200">
                 FLASHFIRE
               </span>
-            </a>
+            </Link>
 
             {/* Desktop Navigation */}
             <div className="hidden md:flex items-center space-x-6 lg:space-x-8">
               {navItems.map((item) => (
-                <a
+                <Link
                   key={item.name}
-                  href={item.href}
+                  to={item.href}
                   className="font-medium text-gray-700 transition-colors duration-200 hover:text-orange-600 text-sm lg:text-base"
                 >
                   {item.name}
-                </a>
+                </Link>
               ))}
             </div>
 
             {/* CTA Button */}
             <div className="hidden md:block">
-              <a href='https://flashfire-dashboard-frontend.vercel.app/register'  target='_blank'>
+              {/* <Link to={'https://flashfire-dashboard-frontend.vercel.app/register'} > */}
                 <button
-                // onClick={()=> openSignupModal(2)}
+                onClick={() => {GTagUTM({
+                                  eventName: 'sign_up_click',
+                                  label: 'Header Sign Up Button',
+                                  utmParams: {
+                                    utm_source: 'WEBSITE',
+                                    utm_medium: 'NAVBAR_SIGNUP_BUTTON',
+                                    utm_campaign: 'header_signup',
+                                  },
+                                });
+                                setSignupFormVisibility(true); // just opens modal/form
+                              }}
+                  
                   className="bg-gradient-to-r from-orange-500 to-orange-600 text-white px-4 lg:px-6 py-2 lg:py-2.5 rounded-full font-semibold hover:from-orange-600 hover:to-orange-700 transition-all duration-200 shadow-lg hover:shadow-xl hover:scale-105 text-sm lg:text-base"
                 >
                   Sign Up For Free 
                 </button>
-              </a>
+              {/* </Link> */}
             </div>
 
             {/* Mobile menu button */}
@@ -86,23 +99,33 @@ const Navigation = () => {
             <div className="md:hidden">
               <div className="px-2 pt-2 pb-3 space-y-1 bg-white/95 backdrop-blur-md border-t border-gray-100 rounded-b-lg shadow-lg">
                 {navItems.map((item) => (
-                  <a
+                  <Link
                     key={item.name}
-                    href={item.href}
+                    to={item.href}
                     className="text-gray-700 hover:text-orange-600 block px-3 py-3 font-medium transition-colors duration-200 text-base rounded-lg hover:bg-orange-50"
                     onClick={() => setIsMenuOpen(false)}
                   >
                     {item.name}
-                  </a>
+                  </Link>
                 ))}
-                <a href='https://flashfire-dashboard-frontend.vercel.app/register'  target='_blank'>
+                <Link href='https://flashfire-dashboard-frontend.vercel.app/register'  target='_blank'>
                 <button
-                
+                onClick={() => {GTagUTM({
+                                  eventName: 'sign_up_click',
+                                  label: 'Header Sign Up Button',
+                                  utmParams: {
+                                    utm_source: 'WEBSITE',
+                                    utm_medium: 'NAVBAR_SIGNUP_BUTTON',
+                                    utm_campaign: 'header_signup',
+                                  },
+                                });
+                                setSignupFormVisibility(true); // just opens modal/form
+                              }}
                   className="bg-gradient-to-r from-orange-500 to-orange-600 text-white px-3 py-3 rounded-lg font-semibold hover:from-orange-600 hover:to-orange-700 transition-all duration-200 block text-center mt-4 w-full text-base"
                 >
                   Start Free Trial
                 </button>
-                </a>
+                </Link>
               </div>
             </div>
           )}
@@ -146,7 +169,17 @@ const Navigation = () => {
               
               {/* CTA Button */}
               <button 
-                onClick={()=> openSignupModal(2)} 
+                onClick={()=>{setCalendlyModalVisibility(true);GTagUTM({
+                                                                    eventName: 'Calendly_Meet_click',
+                                                                    label: 'NAVBAR_LOWER_SECTION_Button',
+                                                                    utmParams: {
+                                                                      utm_source: 'WEBSITE',
+                                                                      utm_medium: 'Navbar_Meet_Button',
+                                                                      utm_campaign: 'WEBSITE_NAVBAR_LOWER_SECTION',
+                                                                    },
+                                                                      })
+                               // just opens modal/form
+                              }} 
                 className='bg-red-600 hover:bg-red-700 text-white px-4 sm:px-6 py-2 rounded-lg font-bold transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105 text-sm tracking-wide'
               >
                 Book Now

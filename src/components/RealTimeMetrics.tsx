@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { TrendingUp, Users, Clock, Briefcase } from 'lucide-react';
-
+import { GTagUTM } from '../utils/GTagUTM.js';
+import { useOutletContext } from 'react-router-dom';
 const RealTimeMetrics = () => {
   const [metrics, setMetrics] = useState({
     jobsApplying: 24,
@@ -8,6 +9,9 @@ const RealTimeMetrics = () => {
     activeUsers: 48,
     totalApplications: 210
   });
+  const { setSignupFormVisibility} = useOutletContext<{
+    setSignupFormVisibility: React.Dispatch<React.SetStateAction<boolean>>;
+  }>();
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -98,10 +102,17 @@ const RealTimeMetrics = () => {
               While you read this, our AI is applying to jobs for hundreds of professionals
             </p>
             <button
-              onClick={() => {
-                const modal = document.getElementById('signup-modal');
-                if (modal) modal.classList.remove('hidden');
-              }}
+             onClick={() => {GTagUTM({
+                                  eventName: 'sign_up_click',
+                                  label: 'RealTimeMetrics_Signup_Button',
+                                  utmParams: {
+                                    utm_source: 'WEBSITE',
+                                    utm_medium: 'REALTIME_METRICS_SECTION',
+                                    utm_campaign: 'WEBSIE',
+                                  },
+                                });
+                                setSignupFormVisibility(true); // just opens modal/form
+                              }}
               className="bg-gradient-to-r from-orange-500 to-orange-600 text-white px-6 sm:px-8 py-3 rounded-full font-bold hover:from-orange-600 hover:to-orange-700 transition-all duration-200 shadow-lg hover:scale-105 text-sm sm:text-base"
             >
               Start Your Free Trial

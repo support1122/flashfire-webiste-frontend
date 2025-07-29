@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Navigation from './components/Navigation';
 // import Hero from './components/Hero';
 // import Features from './components/Features';
@@ -14,11 +14,17 @@ import Navigation from './components/Navigation';
 import Footer from './components/Footer';
 import { Outlet } from 'react-router-dom';
 // import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
-
+import SignupForm from './components/SignupForm';
+import CalendlyModal from './components/CalendlyModal.tsx';
 
 function App() {
+  const [signupFormVisibility, setSignupFormVisibility] = useState(false);
+  const [calendlyModalVisibility, setCalendlyModalVisibility] = useState(false);
+
   return (
     <div className="min-h-screen bg-white">
+      <Navigation setSignupFormVisibility={setSignupFormVisibility} setCalendlyModalVisibility={setCalendlyModalVisibility} />
+
       {/* <Hero />
       <MovingJobs />
       <RealTimeMetrics />
@@ -28,7 +34,11 @@ function App() {
       <Pricing />
       <FAQ />
       <Contact /> */}
-      <Outlet />
+      <Outlet context={{ setSignupFormVisibility, setCalendlyModalVisibility }} />
+      {signupFormVisibility && <SignupForm setSignupFormVisibility={setSignupFormVisibility} />}
+      {calendlyModalVisibility && <CalendlyModal setCalendlyModalVisibility={setCalendlyModalVisibility} />}
+      <Footer />
+
       
     </div>
   );
