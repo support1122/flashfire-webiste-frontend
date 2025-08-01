@@ -1,6 +1,7 @@
 
 import React from 'react';
 import { Linkedin, FileText, Rocket, Phone } from 'lucide-react';
+import {GTagUTM} from '../utils/GTagUTM.ts';
 
 const HowItWorks = ({setSignupFormVisibility}) => {
   const steps = [
@@ -96,7 +97,7 @@ const HowItWorks = ({setSignupFormVisibility}) => {
         </div>
 
         {/* CTA Section */}
-        <div className="mt-12 sm:mt-20 text-center">
+        <div className="mt-5 sm:mt-20 text-center">
           <div className="bg-gradient-to-r from-orange-600 to-red-600 rounded-2xl sm:rounded-3xl p-8 sm:p-12 text-white">
             <h3 className="text-2xl sm:text-3xl font-bold mb-4">
               Ready to Start Your Success Journey?
@@ -105,7 +106,18 @@ const HowItWorks = ({setSignupFormVisibility}) => {
               Join thousands of professionals who've accelerated their careers with Flashfire's proven 4-step process.
             </p>
             <button
-              onClick={() => setSignupFormVisibility(true)}
+              onClick={() => {
+                                GTagUTM({
+                                  eventName: 'sign_up_click',
+                                  label: 'Hero_Start_Free_Trial_Button',
+                                  utmParams: {
+                                    utm_source: 'WEBSITE',
+                                    utm_medium: 'Website_HowItWorks_section',
+                                    utm_campaign: 'Website',
+                                  },
+                                });
+                                setSignupFormVisibility(true);
+                              }}
               className="bg-white text-orange-600 px-6 sm:px-8 py-3 sm:py-4 rounded-full font-bold hover:bg-gray-50 transition-all duration-200 shadow-lg hover:scale-105"
             >
               Start Free Trial

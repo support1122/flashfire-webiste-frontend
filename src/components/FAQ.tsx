@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 import { ChevronDown, ChevronUp, HelpCircle } from 'lucide-react';
 import { useOutletContext } from 'react-router-dom';
 import { GTagUTM } from '../utils/GTagUTM.js';
-const FAQ = () => {
+const FAQ = ({setSignupFormVisibility}) => {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
-  const { setSignupFormVisibility } = useOutletContext<{
-    setSignupFormVisibility: React.Dispatch<React.SetStateAction<boolean>>;
-  }>();
+  // const { setSignupFormVisibility } = useOutletContext<{
+  //   setSignupFormVisibility: React.Dispatch<React.SetStateAction<boolean>>;
+  // }>();
   const faqs = [
     {
       question: "Is there a refund policy if I'm not satisfied with the service?",
@@ -43,7 +43,7 @@ const FAQ = () => {
   };
 
   return (
-    <section id="faq" className="py-16 relative top-[8vh] sm:py-24 bg-gradient-to-b from-white to-orange-50">
+    <section id="faq" className="py-16 sm:py-24 bg-gradient-to-b from-white to-orange-50">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12 sm:mb-16">
           <div className="inline-flex items-center space-x-2 bg-orange-100 text-orange-800 px-4 py-2 rounded-full text-sm font-medium mb-4">

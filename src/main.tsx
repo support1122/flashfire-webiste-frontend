@@ -23,25 +23,16 @@ import HowItWorks from './components/HowItWorks.tsx';
 
 const routes=createBrowserRouter([
   {
-    path:"/",
-    element:<App/>,
-    children :[
-      { path: '/', element: <Home /> },
-      // {path: '/home', element: <Hero />},
-      {path: '/features', element: <Features />},
-      {path: '/testimonials', element: <Testimonials />},
-      {path: '/pricing', element: <Pricing />},
-      {path : '/FAQ', element: <FAQ />},
-      {path: '/contact', element: <Contact />},
-      {path: '/blog', element: <Blog />},
-      { path: '/paymentpolicy', element: <PaymentPolicy /> },
-      { path: '/refundpolicy', element: <RefundPolicy /> },
-      { path: '/privacypolicy', element: <PrivacyPolicy /> },
-      { path: '/termsofservice', element: <TermsOfService /> },
-      {path : '/blogs/:id' , element: <IndividualBlog />},
-      {path : '/howitworks', element : <HowItWorks />}
-     
-    ]
+    path: '/',
+    element: <App />,
+    children: [
+      { index: true, element: <Home /> },                 // <-- this
+      { path: 'paymentpolicy', element: <PaymentPolicy /> },
+      { path: 'refundpolicy', element: <RefundPolicy /> },
+      { path: 'privacypolicy', element: <PrivacyPolicy /> },
+      { path: 'termsofservice', element: <TermsOfService /> },
+      { path: 'blogs/:id', element: <IndividualBlog /> },
+    ],
   },
   
   

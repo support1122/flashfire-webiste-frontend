@@ -54,7 +54,6 @@ function SignupForm({ setSignupFormVisibility }) {
         formData.fullName &&
         formData.phone &&
         formData.email &&
-        formData.workAuthorization &&
         formData.phone.length === 10
       ) {
         await SaveDetailsToDB();
@@ -177,7 +176,7 @@ function SignupForm({ setSignupFormVisibility }) {
                 value={formData.workAuthorization}
                 onChange={handleInputChange}
                 className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent"
-                required
+                
               >
                 <option value="">Select an option</option>
                 <option value="yes">Yes</option>

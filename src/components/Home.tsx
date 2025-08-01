@@ -18,7 +18,7 @@ import CalendlyModal from './CalendlyModal.tsx';
 import { useOutletContext } from 'react-router-dom';
 
 function Home() {
-  const { setSignupFormVisibility, setCalendlyModalVisibility } = useOutletContext<{
+  const { signupFormVisibility,calendlyModalVisibility,setSignupFormVisibility, setCalendlyModalVisibility } = useOutletContext<{
     setSignupFormVisibility: React.Dispatch<React.SetStateAction<boolean>>,
     setCalendlyModalVisibility: React.Dispatch<React.SetStateAction<boolean>>,
   }>();
@@ -38,10 +38,22 @@ function Home() {
   }, []);
   return (
     <div>
-            <Hero setSignupFormVisibility={setSignupFormVisibility} setCalendlyModalVisibility = {setCalendlyModalVisibility} />
-            <MovingJobs setSignupFormVisibility={setSignupFormVisibility} />
-            <RealTimeMetrics />          
+            <Navigation setCalendlyModalVisibility={setCalendlyModalVisibility} setSignupFormVisibility={setSignupFormVisibility}/>
+            <Hero setCalendlyModalVisibility={setCalendlyModalVisibility} setSignupFormVisibility={setSignupFormVisibility}/>
+            <MovingJobs setSignupFormVisibility={setSignupFormVisibility}/>
+            <RealTimeMetrics setSignupFormVisibility={setSignupFormVisibility}/>
+            <Features setSignupFormVisibility={setSignupFormVisibility}/>
+            <Blog />
+            <HowItWorks setSignupFormVisibility={setSignupFormVisibility}/>
+            <Testimonials />
+            <Pricing />
+            <FAQ setSignupFormVisibility={setSignupFormVisibility}/>
+            <Contact setSignupFormVisibility={setSignupFormVisibility}/>
+            {signupFormVisibility && <SignupForm setSignupFormVisibility={setSignupFormVisibility} />}
+            {calendlyModalVisibility && <CalendlyModal setCalendlyModalVisibility={setCalendlyModalVisibility}/>}
             <WhatsAppButton />
+            <Footer />
+            {/* <AutoModalTrigger /> */}
 
     </div>
   )

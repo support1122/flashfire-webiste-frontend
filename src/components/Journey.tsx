@@ -1,7 +1,7 @@
 import React from 'react';
 import { Calendar, FileText, Send, RefreshCw } from 'lucide-react';
 
-const Journey = () => {
+const Journey = ({setSignupFormVisibility}) => {
   const weeks = [
     {
       week: "Week 1",

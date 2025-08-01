@@ -5,7 +5,7 @@ import { GTagUTM } from '../utils/GTagUTM.js';
 import { useOutletContext } from 'react-router-dom';
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
-const Contact = () => {
+const Contact = ({setSignupFormVisibility}) => {
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -15,9 +15,9 @@ const Contact = () => {
   });
   const [submitted, setSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const { setSignupFormVisibility } = useOutletContext<{
-    setSignupFormVisibility: React.Dispatch<React.SetStateAction<boolean>>;
-  }>();
+  // const { setSignupFormVisibility } = useOutletContext<{
+  //   setSignupFormVisibility: React.Dispatch<React.SetStateAction<boolean>>;
+  // }>();
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
@@ -52,7 +52,7 @@ const Contact = () => {
   };
 
   return (
-    <section id="contact" className="py-16 relative top-[8vh] sm:py-24 bg-gradient-to-b from-white to-gray-50">
+    <section id="contact" className="py-16 sm:py-24 bg-gradient-to-b from-white to-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12 sm:mb-16">
           <div className="inline-flex items-center space-x-2 bg-orange-100 text-orange-800 px-4 py-2 rounded-full text-sm font-medium mb-4">
