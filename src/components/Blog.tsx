@@ -286,16 +286,6 @@ const Blog = () => {
       </body>
       </html>
     `;
-    
-    // Create a blob URL for the HTML content
-  //   const blob = new Blob([htmlContent], { type: 'text/html' });
-  //   const blobUrl = URL.createObjectURL(blob);
-    
-  //   // Open the new window with the blob URL
-  //   const newWindow = window.open(blobUrl, '_blank');
-    
-  //   // Clean up the blob URL after a short delay
-  //   setTimeout(() => URL.revokeObjectURL(blobUrl), 1000);
   };
 
   return (

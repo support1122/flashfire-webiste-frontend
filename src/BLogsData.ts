@@ -1944,6 +1944,7 @@ image: "/images/blog10.jpeg",
     <p>Start your 7-day free trial at <strong><a href="https://www.flashfirejobs.com" target="_blank" rel="noopener noreferrer" style="color: #f97316; text-decoration: underline;">www.flashfirejobs.com</a></strong> and get back in control of your career.</p>
   `
 },
+
 {
   id: 16,
   title: "How I Got 15+ Interview Calls with FLASHFIRE — The AI-Powered Job Hunt That Applies to 1,000+ U.S. Jobs for You",
@@ -2889,7 +2890,5 @@ image: "/images/blog10.jpeg",
     <p><strong>Start your job search smarter today. Visit <a href="https://www.flashfirejobs.com" target="_blank" rel="noopener noreferrer" style="color: #f97316; text-decoration: underline;">www.flashfirejobs.com</a></strong></p>
   `
 },
-
-
 ];
 export default blogPosts;

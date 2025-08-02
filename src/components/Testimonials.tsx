@@ -43,7 +43,7 @@ avatar: "/images/rijul.jpg"  },
 
 const TestimonialsGrid = () => {
   return (
-    <section id='testimonials' className="bg-gradient-to-br from-orange-400 via-orange-500 to-red-500 min-h-screen py-16 px-6 relative overflow-hidden rounded-[3rem]">
+    <section id='testimonials' className="bg-gradient-to-br from-orange-400 via-orange-500 to-red-500 min-h-screen py-16 px-6  overflow-hidden rounded-[3rem]">
       {/* Background decoration */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(255,255,255,0.15),transparent_50%)] rounded-[3rem]"></div>
       

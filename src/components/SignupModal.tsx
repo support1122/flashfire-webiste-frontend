@@ -15,13 +15,15 @@ const SignupModal = () => {
     workAuthorization: ''
   });
 
+
   (window as any).openSignupModal = (customStep = 1) => {
-    const modal = document.getElementById('signup-modal');
-      if (modal) {
-      modal.classList.remove('hidden');
-      setStep(customStep);
-    }
-  };
+  const modal = document.getElementById('signup-modal');
+  if (modal) {
+    modal.classList.remove('hidden');
+    setStep(customStep);
+  }
+};
+
 
   const countryCodes = [
     { code: '+1', country: 'USA', pattern: /^1/ },
@@ -32,13 +34,12 @@ const SignupModal = () => {
     const modal = document.getElementById('signup-modal');
     if (modal) modal.classList.add('hidden');
     setStep(1);
-    setIsModalOpen(false);
     setFormData({ fullName: '', phone: '', countryCode: '+1', email: '', workAuthorization: '' });
   };
 
   async function SaveDetailsToDB() {
     try {
-        let reqToServer = await fetch('https://api.flashfirejobs.com/', { //
+        let reqToServer = await fetch(`${API_BASE_URL}`, { //https://api.flashfirejobs.com/
                               method: 'POST',
                               headers: { 'Content-Type': 'application/json' },
                               body: JSON.stringify({name : formData?.fullName,
@@ -107,19 +108,6 @@ const SignupModal = () => {
     setStep(1);
   };
 
-  // Add this state to track if modal is open
-const [isModalOpen, setIsModalOpen] = useState(false);
-
-// Update the global function to set the state
-(window as any).openSignupModal = (customStep = 1) => {
-  const modal = document.getElementById('signup-modal');
-  if (modal) {
-    modal.classList.remove('hidden');
-    setStep(customStep);
-    setIsModalOpen(true); // Add this line
-  }
-};
-
   return (
     <div id="signup-modal" className="hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center w-full">
   <div className={`bg-white w-full ${step === 1 ? 'max-w-md' : 'max-w-5xl'} mx-4 rounded-2xl overflow-hidden shadow-2xl transition-all duration-300`}>
@@ -128,6 +116,7 @@ const [isModalOpen, setIsModalOpen] = useState(false);
         <div className="flex justify-between items-start mb-6 w-full">
           <div className="flex-1">
             <h2 className="text-2xl font-bold text-gray-900 mb-2">Get Started for Free</h2>
+            <p className="text-gray-600 text-sm">Tell us about yourself to schedule your consultation</p>
           </div>
           <button onClick={closeModal} className="text-gray-400 hover:text-gray-600 transition-colors p-1">
             <X className="w-5 h-5" />
@@ -345,7 +334,7 @@ const [isModalOpen, setIsModalOpen] = useState(false);
                         <div className="text-orange-100 text-xs">Success Rate</div>
                       </div>
                       <div>
-                        <div className="text-2xl font-bold">100+</div>
+                        <div className="text-2xl font-bold">10K+</div>
                         <div className="text-orange-100 text-xs">Jobs Landed</div>
                       </div>
                       <div>

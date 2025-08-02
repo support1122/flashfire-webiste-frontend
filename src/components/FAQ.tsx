@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import { ChevronDown, ChevronUp, HelpCircle } from 'lucide-react';
-
-const FAQ = () => {
+import { useOutletContext } from 'react-router-dom';
+import { GTagUTM } from '../utils/GTagUTM.js';
+const FAQ = ({setSignupFormVisibility}) => {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
-
+  // const { setSignupFormVisibility } = useOutletContext<{
+  //   setSignupFormVisibility: React.Dispatch<React.SetStateAction<boolean>>;
+  // }>();
   const faqs = [
     {
       question: "Is there a refund policy if I'm not satisfied with the service?",
@@ -96,10 +99,17 @@ const FAQ = () => {
               Our team is here to help you understand how Flashfire can transform your job search and save you 150+ hours every month.
             </p>
             <button
-              onClick={() => {
-                const modal = document.getElementById('signup-modal');
-                if (modal) modal.classList.remove('hidden');
-              }}
+              onClick={() => {GTagUTM({
+                                  eventName: 'sign_up_click',
+                                  label: 'FAQ_SECTION_SIGNUP_Button',
+                                  utmParams: {
+                                    utm_source: 'WEBSITE',
+                                    utm_medium: 'FAQ_SECTION_SIGNUP_Button',
+                                    utm_campaign: 'WEBSITE',
+                                  },
+                                });
+                                setSignupFormVisibility(true); // just opens modal/form
+                              }}
               className="bg-white text-orange-600 px-6 sm:px-8 py-3 sm:py-4 rounded-full font-bold hover:bg-gray-50 transition-colors duration-200 shadow-lg hover:scale-105"
             >
               Schedule a Free Consultation
