@@ -34,8 +34,8 @@ const routes=createBrowserRouter([
       { path: 'blogs/:id', element: <IndividualBlog /> },
     ],
   },
-  
-  
+
+
 ]);
 
 createRoot(document.getElementById('root')!).render(
