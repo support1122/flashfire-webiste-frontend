@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { ArrowRight, Sparkles } from 'lucide-react';
-import { GTagUTM } from '../utils/GTagUTM';
+import { GTagUTM } from '../utils/GTagUTM.js';
 
-const Hero = ({ setSignupFormVisibility, setCalendlyModalVisibility }) => {
+const Hero = ({ setSignupFormVisibility }) => {
   const [isSuccessMatrixVisible, setIsSuccessMatrixVisible] = useState(false);
   const successMatrixRef = useRef<HTMLDivElement>(null);
 
@@ -13,7 +13,6 @@ const Hero = ({ setSignupFormVisibility, setCalendlyModalVisibility }) => {
       },
       { threshold: 0.05, rootMargin: '100px 0px' }
     );
-
     if (successMatrixRef.current) observer.observe(successMatrixRef.current);
     return () => {
       if (successMatrixRef.current) observer.unobserve(successMatrixRef.current);
@@ -23,51 +22,61 @@ const Hero = ({ setSignupFormVisibility, setCalendlyModalVisibility }) => {
   return (
     <>
       {/* Main Hero Section - 100vh */}
-      <section id="home" className="relative pb-4  h-screen bg-gradient-to-br from-orange-50 via-white to-red-50 overflow-hidden">
-        {/* Background Effects */}
-        <div className="absolute inset-0">
-          <div className="absolute top-20 left-10 w-72 h-72 bg-orange-200/30 rounded-full blur-3xl"></div>
-          <div className="absolute bottom-20 right-10 w-96 h-96 bg-red-200/30 rounded-full blur-3xl"></div>
-          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-to-r from-orange-100/40 to-red-100/40 rounded-full blur-3xl"></div>
+      <section
+        id="home"
+        className="relative pb-4 h-screen bg-gradient-to-br from-orange-50 via-white to-red-50 overflow-hidden"
+      >
+        {/* Background Effects (make click-through) */}
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute top-20 left-10 w-72 h-72 bg-orange-200/30 rounded-full blur-3xl pointer-events-none" />
+          <div className="absolute bottom-20 right-10 w-96 h-96 bg-red-200/30 rounded-full blur-3xl pointer-events-none" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-to-r from-orange-100/40 to-red-100/40 rounded-full blur-3xl pointer-events-none" />
         </div>
 
-        {/* Main Content - Centered */}
-        <div className="relative h-full flex items-center justify-center">
+        {/* Main Content - Centered (lift above background) */}
+        <div className="relative z-10 h-full flex items-center justify-center">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             {/* Badge */}
             <div className="inline-flex items-center space-x-2 bg-orange-100 border border-orange-200 rounded-full px-3 sm:px-4 py-2 mb-6 sm:mb-8 lg:mb-20">
               <Sparkles className="w-3 h-3 sm:w-4 sm:h-4 text-orange-600" />
-              <span className="text-orange-800 text-xs sm:text-sm font-medium">Save 150+ Hours Every Month</span>
+              <span className="text-orange-800 text-xs sm:text-sm font-medium">
+                Save 150+ Hours Every Month
+              </span>
             </div>
 
-            {/* Main Headline (text changed, classes kept) */}
+            {/* Main Headline */}
             <h1 className="relative -top-[18px] text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-6xl font-bold text-black leading-snug mb-6 sm:mb-8 px-2 text-center">
               <span className="block">Land 15+ Interview Calls in 30 Days*</span>
-                <span className="bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text text-transparent">
-                  Powered by Flashfire AI.
-                </span>
+              <span className="bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text text-transparent">
+                Powered by Flashfire AI.
+              </span>
             </h1>
 
-            {/* Subtext (text changed, classes kept) */}
+            {/* Subtext */}
             <p className="text-lg sm:text-xl md:text-2xl lg:text-2xl text-[#333333] tracking-tight mb-12 sm:mb-12 max-w-[1100px] mx-auto leading-snug px-4 text-center lg:mb-14">
               <span className="text-orange-600 font-bold">1000+ Applications</span> Tailored & Tracked — We handle everything,
               so you can focus on interviews.
             </p>
 
-            {/* CTA Buttons (unchanged functionality) */}
+            {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center px-4">
               <button
+                type="button"
                 onClick={() => {
-                  GTagUTM({
-                    eventName: 'sign_up_click',
-                    label: 'Hero_Start_Free_Trial_Button',
-                    utmParams: {
-                      utm_source: 'WEBSITE',
-                      utm_medium: 'Website_Front_Page',
-                      utm_campaign: 'Website',
-                    },
-                  });
+                  // Open the form first
                   setSignupFormVisibility(true);
+                  // Track safely
+                  try {
+                    GTagUTM({
+                      eventName: 'sign_up_click',
+                      label: 'Hero_Start_Free_Trial_Button',
+                      utmParams: {
+                        utm_source: 'WEBSITE',
+                        utm_medium: 'Website_Front_Page',
+                        utm_campaign: 'Website',
+                      },
+                    });
+                  } catch {}
                 }}
                 className="group bg-gradient-to-r from-orange-500 to-orange-600 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold text-base sm:text-lg hover:from-orange-600 hover:to-orange-700 transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105 flex items-center space-x-2 w-full sm:w-auto justify-center"
               >
@@ -88,7 +97,7 @@ const Hero = ({ setSignupFormVisibility, setCalendlyModalVisibility }) => {
         {/* Scroll Indicator */}
         <div className="absolute bottom-8 left-1/2 h-fit transform -translate-x-1/2 animate-bounce">
           <div className="w-6 h-10 border-2 border-gray-400 rounded-full flex justify-center">
-            <div className="w-1 h-3 bg-gray-400 rounded-full mt-2 animate-pulse"></div>
+            <div className="w-1 h-3 bg-gray-400 rounded-full mt-2 animate-pulse" />
           </div>
         </div>
       </section>
@@ -96,8 +105,8 @@ const Hero = ({ setSignupFormVisibility, setCalendlyModalVisibility }) => {
       {/* Success Matrix Section - unchanged */}
       <section className="relative bg-gradient-to-br from-orange-50 via-white to-red-50 py-16 sm:py-20 lg:py-24">
         <div className="absolute inset-0">
-          <div className="absolute top-20 left-10 w-72 h-72 bg-orange-200/20 rounded-full blur-3xl"></div>
-          <div className="absolute bottom-20 right-10 w-96 h-96 bg-red-200/20 rounded-full blur-3xl"></div>
+          <div className="absolute top-20 left-10 w-72 h-72 bg-orange-200/20 rounded-full blur-3xl" />
+          <div className="absolute bottom-20 right-10 w-96 h-96 bg-red-200/20 rounded-full blur-3xl" />
         </div>
 
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -136,22 +145,22 @@ const Hero = ({ setSignupFormVisibility, setCalendlyModalVisibility }) => {
                   }`}
                 >
                   <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="w-48 h-48 sm:w-56 sm:h-56 md:w-64 md:h-64 lg:w-72 lg:h-72 xl:w-80 xl:h-80 bg-gradient-to-br from-orange-100 via-orange-50 to-red-100 rounded-full scale-0 group-hover:scale-100 transition-all duration-500 ease-out opacity-0 group-hover:opacity-100"></div>
+                    <div className="w-48 h-48 sm:w-56 sm:h-56 md:w-64 md:h-64 lg:w-72 lg:h-72 xl:w-80 xl:h-80 bg-gradient-to-br from-orange-100 via-orange-50 to-red-100 rounded-full scale-0 group-hover:scale-100 transition-all duration-500 ease-out opacity-0 group-hover:opacity-100" />
                   </div>
 
                   <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="w-52 h-52 sm:w-60 sm:h-60 md:w-68 md:h-68 lg:w-76 lg:h-76 xl:w-84 xl:h-84 border-2 border-orange-200 rounded-full scale-0 group-hover:scale-100 transition-all duration-700 ease-out opacity-0 group-hover:opacity-60"></div>
+                    <div className="w-52 h-52 sm:w-60 sm:h-60 md:w-68 md:h-68 lg:w-76 lg:h-76 xl:w-84 xl:h-84 border-2 border-orange-200 rounded-full scale-0 group-hover:scale-100 transition-all duration-700 ease-out opacity-0 group-hover:opacity-60" />
                   </div>
 
                   <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="w-44 h-44 sm:w-52 sm:h-52 md:w-60 md:h-60 lg:w-68 lg:h-68 xl:w-76 xl:h-76 bg-gradient-to-r from-orange-200/30 to-red-200/30 rounded-full scale-0 group-hover:scale-100 transition-all duration-600 ease-out opacity-0 group-hover:opacity-70 blur-md"></div>
+                    <div className="w-44 h-44 sm:w-52 sm:h-52 md:w-60 md:h-60 lg:w-68 lg:h-68 xl:w-76 xl:h-76 bg-gradient-to-r from-orange-200/30 to-red-200/30 rounded-full scale-0 group-hover:scale-100 transition-all duration-600 ease-out opacity-0 group-hover:opacity-70 blur-md" />
                   </div>
 
                   <div className="relative z-10 flex flex-col items-center transition-all duration-300 group-hover:scale-105">
                     <div className="text-4xl sm:text-5xl md:text-6xl lg:text-6xl xl:text-7xl font-bold text-orange-600 mb-2 sm:mb-3 lg:mb-4 group-hover:text-orange-700 transition-colors duration-300">
                       {stat.percentage}
                     </div>
-                    <div className="h-1 w-16 sm:w-20 lg:w-24 bg-orange-600 mx-auto mb-4 sm:mb-5 lg:mb-6 transition-all duration-300 group-hover:bg-orange-700 group-hover:w-20 sm:group-hover:w-24 lg:group-hover:w-28"></div>
+                    <div className="h-1 w-16 sm:w-20 lg:w-24 bg-orange-600 mx-auto mb-4 sm:mb-5 lg:mb-6 transition-all duration-300 group-hover:bg-orange-700 group-hover:w-20 sm:group-hover:w-24 lg:group-hover:w-28" />
                     <div className="text-lg sm:text-xl md:text-2xl lg:text-2xl xl:text-3xl font-semibold text-gray-900 mb-2 sm:mb-3 text-center leading-tight group-hover:text-gray-800 transition-colors duration-300">
                       {stat.title}
                     </div>
