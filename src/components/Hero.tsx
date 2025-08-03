@@ -54,7 +54,7 @@ const Hero = ({ setSignupFormVisibility }) => {
 
             {/* Subtext */}
             <p className="text-lg sm:text-xl md:text-2xl lg:text-2xl text-[#333333] tracking-tight mb-12 sm:mb-12 max-w-[1100px] mx-auto leading-snug px-4 text-center lg:mb-14">
-               We apply to <span className="text-orange-600 font-bold">1,000+ USA Jobs</span> and track everything - so you focus on interviews.
+               We apply to <span className="text-orange-600 font-bold">1,000+ USA Jobs</span> and track everything - so you can focus on interviews.
              
             </p>
 
