@@ -188,7 +188,7 @@ const Navigation: React.FC<Props> = ({
               <div className="flex-1 mx-2">
                 <div className="text-white text-left">
                   <div className="font-bold text-sm leading-tight">Book A Live Demo Session</div>
-                  <div className="font-semibold text-xs mt-0.5 opacity-95">Just 2 Spots Left</div>
+                  <div className="font-semibold text-xs mt-0.5 opacity-95">Just 1 Spot Left</div>
                 </div>
               </div>
 
