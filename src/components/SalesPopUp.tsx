@@ -27,7 +27,7 @@ export default function SalesPopup() {
       setCurrent(generateNotification());
       setVisible(true);
       setTimeout(() => setVisible(false), 3000);
-    }, 20000);
+    }, 24000);
 
     return () => {
       clearTimeout(hideInitial);
