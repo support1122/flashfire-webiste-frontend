@@ -1,4 +1,5 @@
 import React from 'react';
+import { GTagUTM } from '../utils/GTagUTM';
 
 const WhatsAppButton = () => {
   const handleWhatsAppClick = () => {
@@ -10,7 +11,16 @@ const WhatsAppButton = () => {
 
   return (
    <button
-  onClick={handleWhatsAppClick}
+  onClick={()=>{handleWhatsAppClick();GTagUTM({
+                                    eventName: 'WhatsApp_Support_Click',
+                                    label: 'Whatsapp_Support_Button',
+                                    utmParams: {
+                                      utm_source: 'WEBSITE',
+                                      utm_medium: 'Website_WhatsApp_Button_section',
+                                      utm_campaign: 'Website',
+                                    },
+                                  });
+                                }}
   className="animate-glow animate-wave fixed z-[60] bottom-4 sm:bottom-6 right-4 sm:right-6 bg-green-600 hover:bg-green-700 text-white p-4 sm:p-5 rounded-full shadow-2xl hover:shadow-[0_0_20px_rgba(34,197,94,0.8)] transition-all duration-300 group"
   aria-label="Chat on WhatsApp"
 >
