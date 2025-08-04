@@ -336,7 +336,7 @@ body {
             box-shadow: 0 10px 25px rgba(249, 115, 22, 0.4);
           }
 
-       @keyframes wavePulse {
+    @keyframes wavePulse {
   0%, 100% { transform: scale(1); }
   25% { transform: scale(1.1); }
   50% { transform: scale(0.95); }
@@ -345,20 +345,20 @@ body {
 
 @keyframes glowPulse {
   0%, 100% {
-    box-shadow: 0 0 0px 0 rgba(72, 187, 120, 0.5);
-    background-color: rgba(72, 187, 120, 0.15);
+    box-shadow: 0 0 8px 4px rgba(72, 187, 120, 0.5);
+    background-color: #22c55e; /* Tailwind green-500 */
   }
   25% {
-    box-shadow: 0 0 12px 4px rgba(72, 187, 120, 0.6);
-    background-color: rgba(72, 187, 120, 0.25);
+    box-shadow: 0 0 12px 6px rgba(72, 187, 120, 0.6);
+    background-color: #16a34a; /* Tailwind green-600 */
   }
   50% {
-    box-shadow: 0 0 18px 8px rgba(16, 185, 129, 0.7);
-    background-color: rgba(72, 187, 120, 0.25);
+    box-shadow: 0 0 18px 10px rgba(34, 197, 94, 0.7);
+    background-color: #15803d; /* Tailwind green-700 */
   }
   75% {
-    box-shadow: 0 0 12px 6px rgba(34, 197, 94, 0.6);
-    background-color: rgba(72, 187, 120, 0.25);
+    box-shadow: 0 0 14px 6px rgba(21, 128, 61, 0.6);
+    background-color: #166534; /* Tailwind green-800 */
   }
 }
 
