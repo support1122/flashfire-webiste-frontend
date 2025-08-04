@@ -16,6 +16,7 @@ import Blog from './Blog';
 import SignupForm from './SignupForm.tsx';
 import CalendlyModal from './CalendlyModal.tsx';
 import { useOutletContext } from 'react-router-dom';
+import SalesPopup from './SalesPopUp.tsx';
 
 function Home() {
   const { signupFormVisibility,calendlyModalVisibility,setSignupFormVisibility, setCalendlyModalVisibility } = useOutletContext<{
@@ -52,6 +53,7 @@ function Home() {
             {signupFormVisibility && <SignupForm setSignupFormVisibility={setSignupFormVisibility} />}
             {calendlyModalVisibility && <CalendlyModal setCalendlyModalVisibility={setCalendlyModalVisibility}/>}
             <WhatsAppButton />
+            <SalesPopup />
             <Footer />
             {/* <AutoModalTrigger /> */}
 
