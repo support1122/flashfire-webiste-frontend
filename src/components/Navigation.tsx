@@ -238,7 +238,7 @@ const Navigation: React.FC<Props> = ({
                   </svg>
                 </div>
                 <span className="font-bold text-white text-[10px] sm:text-sm lg:text-base tracking-wide whitespace-nowrap">
-                  Just 2 Spots Left
+                  Just 1 Spot Left
                 </span>
               </div>
 
