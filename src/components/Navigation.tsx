@@ -22,7 +22,7 @@ const Navigation: React.FC<Props> = ({
   }, []);
 
   const navItems = [
-    { name: 'Home', href: '/' },           // keep Home routing
+    { name: 'Home', href: '#' },           // keep Home routing
     { name: 'Features', href: '#features' },
     { name: 'Testimonials', href: '#testimonials' },
     { name: 'Pricing', href: '#pricing' },
