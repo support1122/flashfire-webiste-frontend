@@ -13,7 +13,7 @@ const Footer = () => {
   };
 
   return (
-    <footer className="bg-gradient-to-r from-orange-500 to-red-500 text-white py-4 px-4 relative z-50">
+    <footer className="bg-gradient-to-r from-orange-500 to-red-500 text-white py-4 px-4 relative ">
       <div className="max-w-7xl mx-auto">
         <div className="flex flex-col sm:flex-row items-center justify-between space-y-2 sm:space-y-0">
           {/* Left side - Copyright and Links */}

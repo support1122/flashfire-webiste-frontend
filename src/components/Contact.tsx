@@ -3,6 +3,8 @@ import React, { useState } from 'react';
 import { Mail, Calendar, MessageCircle, Zap, CheckCircle } from 'lucide-react';
 import { GTagUTM } from '../utils/GTagUTM.js';
 import { useOutletContext } from 'react-router-dom';
+import WhatsAppButton from './WhatsAppButton.js';
+import WhatsAppSupport from './WhatsappSupport.js';
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 const Contact = ({setSignupFormVisibility}) => {
@@ -221,7 +223,7 @@ const Contact = ({setSignupFormVisibility}) => {
           </div>
         </div>
 
-        <div className="mt-12 sm:mt-20 text-center">
+        {/* <div className="mt-12 sm:mt-20 text-center">
           <div className="bg-white rounded-2xl sm:rounded-3xl p-8 sm:p-12 shadow-lg border border-gray-100">
             <div className="flex items-center justify-center space-x-3 mb-6">
               <Zap className="w-6 h-6 sm:w-8 sm:h-8 text-orange-500" />
@@ -247,7 +249,8 @@ const Contact = ({setSignupFormVisibility}) => {
               Start Your Free Trial Today
             </button>
           </div>
-        </div>
+        </div> */}
+        <WhatsAppSupport />
       </div>
     </section>
   );

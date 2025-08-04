@@ -2,6 +2,7 @@
 import React from 'react';
 import { Linkedin, FileText, Rocket, Phone } from 'lucide-react';
 import {GTagUTM} from '../utils/GTagUTM.ts';
+import WhatsAppSupport from './WhatsappSupport.tsx';
 
 const HowItWorks = ({setSignupFormVisibility}) => {
   const steps = [
@@ -97,7 +98,7 @@ const HowItWorks = ({setSignupFormVisibility}) => {
         </div>
 
         {/* CTA Section */}
-        <div className="mt-5 sm:mt-20 text-center">
+        {/* <div className="mt-5 sm:mt-20 text-center">
           <div className="bg-gradient-to-r from-orange-600 to-red-600 rounded-2xl sm:rounded-3xl p-8 sm:p-12 text-white">
             <h3 className="text-2xl sm:text-3xl font-bold mb-4">
               Ready to Start Your Success Journey?
@@ -123,7 +124,8 @@ const HowItWorks = ({setSignupFormVisibility}) => {
               Start Free Trial
             </button>
           </div>
-        </div>
+        </div> */}
+        <WhatsAppSupport />
       </div>
     </section>
   );
