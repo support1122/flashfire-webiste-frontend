@@ -21,7 +21,7 @@ const WhatsAppButton = () => {
                                     },
                                   });
                                 }}
-  className="animate-glow animate-wave fixed z-[60] bottom-4 sm:bottom-6 right-4 sm:right-6 bg-green-600 hover:bg-green-700 text-white p-4 sm:p-5 rounded-full shadow-2xl hover:shadow-[0_0_20px_rgba(34,197,94,0.8)] transition-all duration-300 group"
+  className=" fixed z-[60] bottom-4 sm:bottom-6 right-4 sm:right-6 bg-green-600 hover:bg-green-700 text-white p-4 sm:p-5 rounded-full shadow-2xl hover:shadow-[0_0_20px_rgba(34,197,94,0.8)] transition-all duration-300 group"
   aria-label="Chat on WhatsApp"
 >
   <svg 

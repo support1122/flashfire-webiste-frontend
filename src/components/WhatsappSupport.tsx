@@ -9,16 +9,23 @@ export default function WhatsAppSupport() {
     window.open(whatsappUrl, '_blank');
   };
   return (
-    <div className="flex m-10  items-center justify-between bg-white shadow-md rounded-lg p-10 border border-gray-200 max-w-4xl mx-auto">
+    <div className="flex m-10  items-center justify-between bg-white shadow-md rounded-lg p-10 border border-gray-200 max-w-4xl w-[80vw] mx-auto">
       {/* Left Side */}
-      <div className="flex items-center gap-4">
-        <div className="bg-green-500 rounded-full p-3 animate-wave">
-          <img
-            src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg"
-            alt="WhatsApp"
-            className="w-6 h-6"
-          />
-        </div>
+      <div className="flex items-center gap-4 w-full">
+        <div className="relative flex items-center gap-4 ">
+  {/* Ripple Animation */}
+  <span className="absolute w-12 h-12 rounded-full bg-green-400 opacity-75 animate-ripple"></span>
+  <span className="absolute w-12 h-12 rounded-full bg-green-400 opacity-20 animate-ripple delay-200 "></span>
+
+  {/* WhatsApp Icon */}
+  <div className="bg-green-500 rounded-full p-3 relative z-10 w-full">
+    <img
+      src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg"
+      alt="WhatsApp"
+      className="w-6 h-6"
+    />
+  </div>
+</div>
         <div>
           <h3 className="text-lg font-semibold text-gray-900">
             Still Confused?

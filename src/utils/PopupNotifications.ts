@@ -107,11 +107,11 @@ export const first_names = ["John", "Sarah", "Mike", "Emily", "David", "Olivia",
   "Logan", "Victoria", "Matthew", "Aria", "Henry", "Penelope", "Jackson", "Layla", "Sebastian", "Riley"
 ];
 
-export const actions = ["just bought", "signed up for", "upgraded to", "renewed"];
+export const actions = ["just bought", "signed up for", "renewed"];
 
 export const products = [
-  "FlashFireJobs Ignite Subscription",
-  "FlashFireJobs Professional Subscription",
-  "FlashFireJobs Executive Subscription",
-  "FlashFireJobs Starter Subscription"
+  "FlashfireJobs Ignite Plan",
+  "Flashfire's Professional Plan",
+  "Flashfire's Executive Plan",
+  
 ];

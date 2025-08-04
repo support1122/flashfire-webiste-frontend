@@ -84,12 +84,12 @@ const Hero = ({ setSignupFormVisibility }) => {
                 <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform" />
               </button>
 
-              <a
+              {/* <a
                 href="#how-it-works"
                 className="scroll-smooth border-2 border-gray-300 text-gray-700 px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold text-base sm:text-lg hover:bg-gray-50 hover:border-gray-400 transition-all duration-300 w-full sm:w-auto text-center"
               >
                 See How It Works
-              </a>
+              </a> */}
             </div>
           </div>
         </div>
