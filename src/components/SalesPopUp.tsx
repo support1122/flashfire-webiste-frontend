@@ -22,34 +22,38 @@ export default function SalesPopup() {
 
   useEffect(() => {
     const showSequence = () => {
-      // Show Sales Notification
-      setCurrent(generateNotification());
-      setVisibleSales(true);
-      setTimeout(() => {
-        setVisibleSales(false);
+  // Show Sales Notification
+  setCurrent(generateNotification());
+  setVisibleSales(true);
+  setTimeout(() => {
+    setVisibleSales(false);
+  }, 3000); // hide after 3s
 
-        // Show Optimizer Notification
-        setVisibleOptimizer(true);
-        setTimeout(() => {
-          setVisibleOptimizer(false);
+  // After 15s, show Optimizer Notification
+  setTimeout(() => {
+    setVisibleOptimizer(true);
+    setTimeout(() => {
+      setVisibleOptimizer(false);
+    }, 3000); // hide after 3s
+  }, 15000);
 
-          // Show Visitor Count
-          setVisitors(100 + Math.floor(Math.random() * 151));
+  // After 30s, show Visitor Count
+  setTimeout(() => {
+    setVisitors(100 + Math.floor(Math.random() * 151));
+    setVisibleVisitors(true);
+    setTimeout(() => {
+      setVisibleVisitors(false);
+    }, 3000); // hide after 3s
+  }, 30000);
+};
 
-          setVisibleVisitors(true);
-          setTimeout(() => {
-            setVisibleVisitors(false);
-          }, 3000);
-        }, 3000);
-      }, 3000);
-    };
+// Run first sequence immediately
+showSequence();
 
-    // Run first sequence immediately
-    showSequence();
+// Then every 45 seconds (15s gap between each type * 3)
+const interval = setInterval(showSequence, 45000);
 
-    // Then every 24 seconds
-    const interval = setInterval(showSequence, 24000);
-    return () => clearInterval(interval);
+return () => clearInterval(interval);
   }, []);
 
   return (
