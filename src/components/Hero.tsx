@@ -46,7 +46,7 @@ const Hero = ({ setSignupFormVisibility }) => {
 
             {/* Main Headline */}
             <h1 className="relative -top-[18px] text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-6xl font-bold text-black leading-snug mb-6 sm:mb-8 px-2 text-center">
-              <span className="block">Land 15+ Interview Calls in 30 Days*</span>
+              <span className="block">Land 15+ Interview Calls with Us</span>
               <span className="bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text text-transparent">
                 Powered by Flashfire AI.
               </span>
