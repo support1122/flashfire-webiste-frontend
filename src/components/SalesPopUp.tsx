@@ -20,37 +20,72 @@ export default function SalesPopup() {
   const [current, setCurrent] = useState(generateNotification());
   const [visitors, setVisitors] = useState(() => 300 + Math.floor(Math.random() * 300));
 
+  // useEffect(() => {
+  //   const showSequence = () => {
+  //     // Show Sales Notification
+  //     setCurrent(generateNotification());
+  //     setVisibleSales(true);
+  //     setTimeout(() => {
+  //       setVisibleSales(false);
+
+  //       // Show Optimizer Notification
+  //       setVisibleOptimizer(true);
+  //       setTimeout(() => {
+  //         setVisibleOptimizer(false);
+
+  //         // Show Visitor Count
+  //         setVisitors(100 + Math.floor(Math.random() * 151));
+
+  //         setVisibleVisitors(true);
+  //         setTimeout(() => {
+  //           setVisibleVisitors(false);
+  //         }, 3000);
+  //       }, 3000);
+  //     }, 3000);
+  //   };
+
+  //   // Run first sequence immediately
+  //   showSequence();
+
+  //   // Then every 24 seconds
+  //   const interval = setInterval(showSequence, 24000);
+  //   return () => clearInterval(interval);
+  // }, []);
+
   useEffect(() => {
-    const showSequence = () => {
-      // Show Sales Notification
-      setCurrent(generateNotification());
-      setVisibleSales(true);
+  const showSequence = () => {
+    // Step 1: Show Sales Notification
+    setCurrent(generateNotification());
+    setVisibleSales(true);
+    setTimeout(() => {
+      setVisibleSales(false);
+    }, 3000); // Hide after 3s
+
+    // Step 2: After 11s (3s shown + 8s delay), show Optimizer
+    setTimeout(() => {
+      setVisibleOptimizer(true);
       setTimeout(() => {
-        setVisibleSales(false);
+        setVisibleOptimizer(false);
+      }, 3000); // Hide after 3s
+    }, 11000);
 
-        // Show Optimizer Notification
-        setVisibleOptimizer(true);
-        setTimeout(() => {
-          setVisibleOptimizer(false);
+    // Step 3: After 22s (14s + 8s delay), show Visitors
+    setTimeout(() => {
+      setVisitors(100 + Math.floor(Math.random() * 151));
+      setVisibleVisitors(true);
+      setTimeout(() => {
+        setVisibleVisitors(false);
+      }, 3000); // Hide after 3s
+    }, 22000);
+  };
 
-          // Show Visitor Count
-          setVisitors(100 + Math.floor(Math.random() * 151));
+  // Run first sequence immediately
+  showSequence();
 
-          setVisibleVisitors(true);
-          setTimeout(() => {
-            setVisibleVisitors(false);
-          }, 3000);
-        }, 3000);
-      }, 3000);
-    };
-
-    // Run first sequence immediately
-    showSequence();
-
-    // Then every 24 seconds
-    const interval = setInterval(showSequence, 24000);
-    return () => clearInterval(interval);
-  }, []);
+  // Repeat every full cycle: 25s shown + 8s delay = 33s
+  const interval = setInterval(showSequence, 33000);
+  return () => clearInterval(interval);
+}, []);
 
   return (
     <>
@@ -98,9 +133,10 @@ export default function SalesPopup() {
   }`}
   style={{ zIndex: 9997 }}
 >
-  <div className="bg-green-100 text-green-600 rounded-full p-2 text-xl">
-    🟢
-  </div>
+<div className="rounded-full p-2 bg-green-100">
+  <img src="/path/to/profile.png" alt="visitor-icon" className="w-6 h-6" />
+</div>
+
   <div className="flex flex-col text-sm">
     <span className="font-medium text-gray-800">
       {visitors} users online
