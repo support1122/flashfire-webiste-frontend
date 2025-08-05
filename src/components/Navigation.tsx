@@ -105,7 +105,7 @@ const Navigation: React.FC<Props> = ({
 
 
 
-            <div className="hidden md:block">
+            {/* <div className="hidden md:block">
               <button
                 onClick={()=>setEmployerFormVisibility(true)}
                 className="bg-gradient-to-r from-orange-500 to-orange-600 text-white px-4 lg:px-6 py-2 lg:py-2.5 rounded-full font-semibold hover:from-orange-600 hover:to-orange-700 transition-all duration-200 shadow-lg hover:shadow-xl hover:scale-105 text-sm lg:text-base"
@@ -125,7 +125,7 @@ const Navigation: React.FC<Props> = ({
                           <EmployerForm setEmployerFormVisibility={setEmployerFormVisibility} />
                         </div>
                       </div>
-                    )}
+                    )} */}
 
             {/* CTA Button (desktop) */}
             <div className="hidden md:block">

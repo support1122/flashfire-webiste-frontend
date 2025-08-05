@@ -84,7 +84,7 @@ export default function EmployerForm({ employerFormVisibility, setEmployerFormVi
   }, [employerFormVisibility]);
 
   return (
-    <div className="fixed top-4 right-8 rounded-2xl z-[9999] h-[90vh] w-[90vw] bg-black/50 flex justify-center overflow-y-scroll">
+    <div className="fixed top-4 right-8 rounded-2xl z-[9999] h-[99vh] w-[90vw] bg-black/50 flex justify-center overflow-y-scroll border-2" >
       <div className="relative bg-gradient-to-br from-blue-50 via-white to-purple-50 py-12 px-6 rounded-3xl shadow-2xl overflow-y-auto w-full h-full" >
         <button
           className="absolute top-4 right-4 text-gray-500 hover:text-red-600 transition"

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { us_cities, first_names, actions, products } from "../utils/PopupNotifications.js";
-import { RadioTower } from "lucide-react";
+import { Dot, RadioTower } from "lucide-react";
 
 export default function SalesPopup() {
   const generateNotification = () => {
@@ -34,7 +34,8 @@ export default function SalesPopup() {
           setVisibleOptimizer(false);
 
           // Show Visitor Count
-          setVisitors(300 + Math.floor(Math.random() * 300));
+          setVisitors(100 + Math.floor(Math.random() * 151));
+
           setVisibleVisitors(true);
           setTimeout(() => {
             setVisibleVisitors(false);
@@ -75,23 +76,23 @@ export default function SalesPopup() {
 
       {/* Optimizer Popup */}
       <div
-        className={`fixed bottom-6 left-6 bg-orange-400 text-white px-5 py-3 rounded-lg shadow-lg transition-all duration-500 ${
+        className={`fixed bottom-6 left-6 bg-white text-neutral-600 px-5 py-3 rounded-lg shadow-lg transition-all duration-500 ${
           visibleOptimizer ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0 pointer-events-none"
         }`}
         style={{ zIndex: 9998 }}
       >
-        🚀 Try our <p>AI Resume Optimizer</p> —2x more interviews!
-        <button className="p-1 m-2 rounded-2xl border">Try For Free</button>
+        🚀 Try our <p>AI Resume Optimizer for Free</p>
+        
       </div>
 
       {/* Visitor Count Popup */}
       <div
-        className={`fixed bottom-6 left-6 bg-orange-600 text-white px-5 py-3 rounded-lg shadow-lg transition-all duration-500 ${
+        className={`fixed bottom-6 left-6 bg-white text-neutral-700 px-5 py-3 rounded-lg shadow-lg transition-all duration-500 ${
           visibleVisitors ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0 pointer-events-none"
         }`}
         style={{ zIndex: 9997 }}
       >
-        <p> {visitors}</p> users visiting FlashFireJobs right now!
+        <span className="flex"> <Dot className="text-green-600"/> {visitors} users are currently visiting FlashFireJobs right now!</span> 
       </div>
     </>
   );
