@@ -134,7 +134,7 @@ export default function SalesPopup() {
   style={{ zIndex: 9997 }}
 >
 <div className="rounded-full p-2 bg-green-100">
-  <img src="/path/to/profile.png" alt="visitor-icon" className="w-6 h-6" />
+  <img src="/images/profile.png" alt="visitor-icon" className="w-6 h-6 rounded-full object-cover" />
 </div>
 
   <div className="flex flex-col text-sm">
@@ -150,3 +150,4 @@ export default function SalesPopup() {
     </>
   );
 }
+
