@@ -68,7 +68,7 @@ export default function SalesPopup() {
           </span>
           <span>
             {current.action}{" "}
-            <span className="text-blue-600 font-semibold">{current.product}</span>
+            <span className="text-gray-500 font-semibold">{current.product}</span>
           </span>
           <span className="text-gray-500 text-xs">{current.time}</span>
         </div>
