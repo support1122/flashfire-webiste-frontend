@@ -75,23 +75,23 @@ export default function SalesPopup() {
 
       {/* Optimizer Popup */}
       <div
-        className={`fixed bottom-6 left-6 bg-indigo-600 text-white px-5 py-3 rounded-lg shadow-lg transition-all duration-500 ${
+        className={`fixed bottom-6 left-6 bg-orange-400 text-white px-5 py-3 rounded-lg shadow-lg transition-all duration-500 ${
           visibleOptimizer ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0 pointer-events-none"
         }`}
         style={{ zIndex: 9998 }}
       >
-        🚀 Try our <strong>AI Resume Optimizer</strong> — 2x more interviews!
+        🚀 Try our <p>AI Resume Optimizer</p> —2x more interviews!
         <button className="p-1 m-2 rounded-2xl border">Try For Free</button>
       </div>
 
       {/* Visitor Count Popup */}
       <div
-        className={`fixed bottom-6 left-6 bg-green-500 text-white px-5 py-3 rounded-lg shadow-lg transition-all duration-500 ${
+        className={`fixed bottom-6 left-6 bg-orange-600 text-white px-5 py-3 rounded-lg shadow-lg transition-all duration-500 ${
           visibleVisitors ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0 pointer-events-none"
         }`}
         style={{ zIndex: 9997 }}
       >
-        👀 <strong><RadioTower className="text-red-600" /> {visitors}</strong> users visiting FlashFireJobs right now!
+        <p> {visitors}</p> users visiting FlashFireJobs right now!
       </div>
     </>
   );

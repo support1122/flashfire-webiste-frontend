@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { GTagUTM } from '../utils/GTagUTM.js';
-
+import EmployerForm from '../components/EmployerForm.jsx';
 type Props = {
   setSignupFormVisibility: React.Dispatch<React.SetStateAction<boolean>>;
   setCalendlyModalVisibility: React.Dispatch<React.SetStateAction<boolean>>;
@@ -14,6 +14,8 @@ const Navigation: React.FC<Props> = ({
 }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+
+  const [employerFormVisibility, setEmployerFormVisibility] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 20);
@@ -100,6 +102,30 @@ const Navigation: React.FC<Props> = ({
                 )
               )}
             </div>
+
+
+
+            <div className="hidden md:block">
+              <button
+                onClick={()=>setEmployerFormVisibility(true)}
+                className="bg-gradient-to-r from-orange-500 to-orange-600 text-white px-4 lg:px-6 py-2 lg:py-2.5 rounded-full font-semibold hover:from-orange-600 hover:to-orange-700 transition-all duration-200 shadow-lg hover:shadow-xl hover:scale-105 text-sm lg:text-base"
+              >
+                Are you an Employer?
+              </button>
+            </div>
+            {employerFormVisibility && (
+                      <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/40 backdrop-blur-sm">
+                        <div className="relative w-full max-w-4xl mx-4 sm:mx-auto bg-white rounded-2xl shadow-2xl overflow-y-auto max-h-[90vh]">
+                          <button
+                            className="absolute top-3 right-3 text-gray-500 hover:text-red-600 transition"
+                            onClick={() => setEmployerFormVisibility(false)}
+                          >
+                            <X size={28} />
+                          </button>
+                          <EmployerForm setEmployerFormVisibility={setEmployerFormVisibility} />
+                        </div>
+                      </div>
+                    )}
 
             {/* CTA Button (desktop) */}
             <div className="hidden md:block">
