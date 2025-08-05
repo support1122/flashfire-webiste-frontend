@@ -76,24 +76,41 @@ export default function SalesPopup() {
 
       {/* Optimizer Popup */}
       <div
-        className={`fixed bottom-6 left-6 bg-white text-neutral-600 px-5 py-3 rounded-lg shadow-lg transition-all duration-500 ${
-          visibleOptimizer ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0 pointer-events-none"
-        }`}
-        style={{ zIndex: 9998 }}
-      >
-        🚀 Try our <p>AI Resume Optimizer for Free</p>
-        
-      </div>
+  className={`fixed bottom-6 left-6 bg-white shadow-lg border border-gray-200 rounded-lg p-4 w-80 flex items-center gap-3 transition-all duration-500 ${
+    visibleOptimizer ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0 pointer-events-none"
+  }`}
+  style={{ zIndex: 9998 }}
+>
+  <div className="bg-yellow-100 text-yellow-600 rounded-full p-2 text-xl">
+    💡
+  </div>
+  <div className="flex flex-col text-sm">
+    <span className="font-medium text-gray-800">Try our AI Optimizer</span>
+    <span className="text-gray-500">Boost your resume instantly — it's free!</span>
+  </div>
+</div>
+
 
       {/* Visitor Count Popup */}
       <div
-        className={`fixed bottom-6 left-6 bg-white text-neutral-700 px-5 py-3 rounded-lg shadow-lg transition-all duration-500 ${
-          visibleVisitors ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0 pointer-events-none"
-        }`}
-        style={{ zIndex: 9997 }}
-      >
-        <span className="flex"> <Dot className="text-green-600"/> {visitors} users are currently visiting FlashFireJobs right now!</span> 
-      </div>
+  className={`fixed bottom-6 left-6 bg-white shadow-lg border border-gray-200 rounded-lg p-4 w-80 flex items-center gap-3 transition-all duration-500 ${
+    visibleVisitors ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0 pointer-events-none"
+  }`}
+  style={{ zIndex: 9997 }}
+>
+  <div className="bg-green-100 text-green-600 rounded-full p-2 text-xl">
+    🟢
+  </div>
+  <div className="flex flex-col text-sm">
+    <span className="font-medium text-gray-800">
+      {visitors} users online
+    </span>
+    <span className="text-gray-500">
+      exploring FlashFireJobs right now
+    </span>
+  </div>
+</div>
+
     </>
   );
 }
