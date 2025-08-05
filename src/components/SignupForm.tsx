@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { X, User, Phone, Mail} from 'lucide-react';
 
-function SignupForm({ setSignupFormVisibility }) {
+function SignupForm({ setSignupFormVisibility, setCalendlyModalVisibility }) {
   const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
   const [formData, setFormData] = useState({
     fullName: '',
@@ -42,6 +42,12 @@ function SignupForm({ setSignupFormVisibility }) {
       console.log(formData.countryCode + formData.phone);
       let responseFromServer = await reqToServer.json();
       console.log("Response from server:", responseFromServer);
+      if(responseFromServer?.message.length > 0) {
+        
+        
+        setCalendlyModalVisibility(true);
+        setSignupFormVisibility(false);
+      }
     } catch (error) {
       console.log(error);
     }

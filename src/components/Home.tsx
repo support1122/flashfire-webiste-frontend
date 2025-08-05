@@ -50,7 +50,7 @@ function Home() {
             <Pricing />
             <FAQ setSignupFormVisibility={setSignupFormVisibility}/>
             <Contact setSignupFormVisibility={setSignupFormVisibility}/>
-            {signupFormVisibility && <SignupForm setSignupFormVisibility={setSignupFormVisibility} />}
+            {signupFormVisibility && <SignupForm setSignupFormVisibility={setSignupFormVisibility} setCalendlyModalVisibility={setCalendlyModalVisibility} />}
             {calendlyModalVisibility && <CalendlyModal setCalendlyModalVisibility={setCalendlyModalVisibility}/>}
             <WhatsAppButton />
             <SalesPopup />
