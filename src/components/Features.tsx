@@ -2,6 +2,7 @@ import React from 'react';
 import { Bot, FileText, Target, Zap, Shield, BarChart3, Linkedin } from 'lucide-react';
 import { useOutletContext } from 'react-router-dom';
 import { GTagUTM } from '../utils/GTagUTM.js';
+import WhatsAppSupport from './WhatsappSupport.js';
 const Features = ({setSignupFormVisibility}) => {
   // const { setSignupFormVisibility } = useOutletContext<{
   //   setSignupFormVisibility: React.Dispatch<React.SetStateAction<boolean>>;
@@ -90,7 +91,7 @@ const Features = ({setSignupFormVisibility}) => {
         </div>
 
         {/* Time Savings Highlight */}
-        <div className="mt-12 sm:mt-20 bg-gradient-to-r from-orange-500 to-red-600 rounded-2xl sm:rounded-3xl p-8 sm:p-12 text-center text-white">
+        {/* <div className="mt-12 sm:mt-20 bg-gradient-to-r from-orange-500 to-red-600 rounded-2xl sm:rounded-3xl p-8 sm:p-12 text-center text-white">
           <h3 className="text-2xl sm:text-3xl font-bold mb-4">
             Save 150+ Hours Every Month
           </h3>
@@ -113,7 +114,8 @@ const Features = ({setSignupFormVisibility}) => {
           >
             Start Saving Time Today
           </button>
-        </div>
+        </div> */}
+        <WhatsAppSupport />
       </div>
     </section>
   );

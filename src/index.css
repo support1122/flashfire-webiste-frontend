@@ -335,3 +335,53 @@ body {
             transform: translateY(-2px);
             box-shadow: 0 10px 25px rgba(249, 115, 22, 0.4);
           }
+
+    @keyframes wavePulse {
+  0%, 100% { transform: scale(1); }
+  25% { transform: scale(1.1); }
+  50% { transform: scale(0.95); }
+  75% { transform: scale(1.05); }
+}
+
+@keyframes glowPulse {
+  0%, 100% {
+    box-shadow: 0 0 8px 4px rgba(109, 189, 142, 0.5);
+    background-color: #57b87b; /* Tailwind green-500 */
+  }
+  25% {
+    box-shadow: 0 0 12px 6px rgba(128, 202, 159, 0.6);
+    background-color: #59d687; /* Tailwind green-600 */
+  }
+  50% {
+    box-shadow: 0 0 18px 10px rgba(68, 182, 110, 0.7);
+    background-color: #52a571; /* Tailwind green-700 */
+  }
+  75% {
+    box-shadow: 0 0 14px 6px rgba(89, 190, 126, 0.6);
+    background-color: #2f8e54; /* Tailwind green-800 */
+  }
+}
+
+@keyframes ripple {
+  0% {
+    transform: scale(1);
+    opacity: 0.6;
+  }
+  100% {
+    transform: scale(2.5);
+    opacity: 0;
+  }
+}
+
+.animate-ripple {
+  position: absolute;
+  animation: ripple 1s linear infinite;
+}
+
+.animate-wave {
+  animation: wavePulse 1.8s ease-in-out infinite;
+}
+
+.animate-glow {
+  animation: glowPulse 1.8s ease-in-out infinite;
+}

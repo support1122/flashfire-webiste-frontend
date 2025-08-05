@@ -46,7 +46,7 @@ const Hero = ({ setSignupFormVisibility }) => {
 
             {/* Main Headline */}
             <h1 className="relative -top-[18px] text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-6xl font-bold text-black leading-snug mb-6 sm:mb-8 px-2 text-center">
-              <span className="block">Land 15+ Interview Calls with Us</span>
+              <span className="block">Land 15+ Interview Calls in 30 Days*</span>
               <span className="bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text text-transparent">
                 Powered by Flashfire AI.
               </span>
@@ -54,8 +54,8 @@ const Hero = ({ setSignupFormVisibility }) => {
 
             {/* Subtext */}
             <p className="text-lg sm:text-xl md:text-2xl lg:text-2xl text-[#333333] tracking-tight mb-12 sm:mb-12 max-w-[1100px] mx-auto leading-snug px-4 text-center lg:mb-14">
-               We apply to <span className="text-orange-600 font-bold">1,000+ USA Jobs</span> and track everything - so you can focus on interviews.
-             
+              <span className="text-orange-600 font-bold">1000+ Applications</span> Tailored & Tracked — We handle everything,
+              so you can focus on interviews.
             </p>
 
             {/* CTA Buttons */}
@@ -84,7 +84,7 @@ const Hero = ({ setSignupFormVisibility }) => {
                 <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform" />
               </button>
 
-{/*               <a
+              {/* <a
                 href="#how-it-works"
                 className="scroll-smooth border-2 border-gray-300 text-gray-700 px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold text-base sm:text-lg hover:bg-gray-50 hover:border-gray-400 transition-all duration-300 w-full sm:w-auto text-center"
               >
