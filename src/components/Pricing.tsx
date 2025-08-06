@@ -188,7 +188,7 @@ const Pricing = () => {
 
   const plans = [
     {
-      name: "Ignite",
+      name: "Executive",
       icon: <Zap className="w-6 h-6" />,
       applications: "250",
       price: "$199",
@@ -226,7 +226,7 @@ const Pricing = () => {
       cta: "Start Now"
     },
     {
-      name: "Executive",
+      name: "Ignite",
       icon: <Rocket className="w-6 h-6" />,
       applications: "1000",
       price: "$599",
