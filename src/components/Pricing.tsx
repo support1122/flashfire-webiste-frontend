@@ -220,13 +220,13 @@ const Pricing = () => {
         "Priority job matching",
         "Advanced analytics & insights",
         "LinkedIn profile optimization",
-        "Priority support",
+        // "Priority support",
         "Interview preparation tips",
       ],
       cta: "Start Now"
     },
     {
-      name: "Executive",
+      name: "Ignite",
       icon: <Rocket className="w-6 h-6" />,
       applications: "1000",
       price: "$599",
