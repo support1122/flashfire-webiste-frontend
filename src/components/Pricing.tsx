@@ -188,7 +188,7 @@ const Pricing = () => {
 
   const plans = [
     {
-      name: "Ignite",
+      name: "Executive",
       icon: <Zap className="w-6 h-6" />,
       applications: "250",
       price: "$199",
@@ -215,18 +215,18 @@ const Pricing = () => {
       description: "Most popular for mid-level professionals",
       paymentLink: "https://www.paypal.com/ncp/payment/SMTK5UYQYM4A8",
       features: [
-        "Everything in Ignite",
+        "Everything in Executive",
         "500 tailored applications",
         "Priority job matching",
         "Advanced analytics & insights",
         "LinkedIn profile optimization",
-        "Priority support",
+        // "Priority support",
         "Interview preparation tips",
       ],
       cta: "Start Now"
     },
     {
-      name: "Executive",
+      name: "Ignite",
       icon: <Rocket className="w-6 h-6" />,
       applications: "1000",
       price: "$599",
