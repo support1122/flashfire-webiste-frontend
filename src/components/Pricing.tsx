@@ -194,7 +194,7 @@ const Pricing = () => {
       price: "$199",
       originalPrice: "$299",
       popular: false,
-      description: "Perfect for entry-level professionals",
+      description: "For senior professionals & executives",
       paymentLink: "https://www.paypal.com/ncp/payment/F6CESAWAYUYU2",
       features: [
         "AI-powered job matching",
@@ -220,7 +220,7 @@ const Pricing = () => {
         "Priority job matching",
         "Advanced analytics & insights",
         "LinkedIn profile optimization",
-        "Priority support",
+        // "Priority support",
         "Interview preparation tips",
       ],
       cta: "Start Now"
@@ -233,7 +233,7 @@ const Pricing = () => {
       originalPrice: "$699",
       popular: false,
       badge: "Best Value",
-      description: "For senior professionals & executives",
+      description: "Perfect for entry-level professionals",
       paymentLink: "https://www.paypal.com/ncp/payment/CDRFGB6M566X8",
       features: [
         "Everything in Professional",
