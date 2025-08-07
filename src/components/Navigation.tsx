@@ -15,7 +15,7 @@ const Navigation: React.FC<Props> = ({
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
-  const [employerFormVisibility, setEmployerFormVisibility] = useState(true);
+  const [employerFormVisibility, setEmployerFormVisibility] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 20);
