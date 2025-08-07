@@ -1,21 +1,21 @@
+"use client"
+
 import React, { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
-import { Link } from 'react-router-dom';
-import { GTagUTM } from '../utils/GTagUTM.js';
-import EmployerForm from '../components/EmployerForm.jsx';
-type Props = {
+import EmployerForm from './EmployerForm';
+
+interface NavigationProps {
   setSignupFormVisibility: React.Dispatch<React.SetStateAction<boolean>>;
   setCalendlyModalVisibility: React.Dispatch<React.SetStateAction<boolean>>;
-};
+}
 
-const Navigation: React.FC<Props> = ({
+const Navigation: React.FC<NavigationProps> = ({
   setSignupFormVisibility,
   setCalendlyModalVisibility,
 }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-
-  const [employerFormVisibility, setEmployerFormVisibility] = useState(false);
+  const [employerFormVisible, setEmployerFormVisible] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 20);
@@ -24,43 +24,35 @@ const Navigation: React.FC<Props> = ({
   }, []);
 
   const navItems = [
-    { name: 'Home', href: '#' },           // keep Home routing
+    { name: 'Home', href: '#' },
     { name: 'Features', href: '#features' },
     { name: 'Testimonials', href: '#testimonials' },
     { name: 'Pricing', href: '#pricing' },
     { name: 'FAQ', href: '#faq' },
     { name: 'Contact', href: '#contact' },
     { name: 'Blog', href: '#blog' },
-    { name: 'Employer', href: '#employer' }, 
+    { name: 'Employers', href: '#employers' }, 
   ];
 
   const openSignup = () => {
-    GTagUTM({
-      eventName: 'sign_up_click',
-      label: 'Header Sign Up Button',
-      utmParams: {
-        utm_source: 'WEBSITE',
-        utm_medium: 'NAVBAR_SIGNUP_BUTTON',
-        utm_campaign: 'header_signup',
-      },
-    });
+    // GTag tracking code would go here
     setSignupFormVisibility(true);
     setIsMenuOpen(false);
   };
 
   const openCalendly = () => {
-    // Preserve original functionality: banner "Book Now" opens Calendly
-    GTagUTM({
-      eventName: 'Calendly_Meet_click',
-      label: 'NAVBAR_LOWER_SECTION_Button',
-      utmParams: {
-        utm_source: 'WEBSITE',
-        utm_medium: 'Navbar_Meet_Button',
-        utm_campaign: 'WEBSITE_NAVBAR_LOWER_SECTION',
-      },
-    });
+    // GTag tracking code would go here
     setCalendlyModalVisibility(true);
     setIsMenuOpen(false);
+  };
+
+  const openEmployerForm = () => {
+    setEmployerFormVisible(true);
+    setIsMenuOpen(false);
+  };
+
+  const closeEmployerForm = () => {
+    setEmployerFormVisible(false);
   };
 
   return (
@@ -74,54 +66,35 @@ const Navigation: React.FC<Props> = ({
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16 sm:h-18">
-            {/* Logo (route to home) */}
-            <Link to="/" className="flex items-center">
+            {/* Logo */}
+            <div className="flex items-center">
               <span className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-red-500 to-red-600 bg-clip-text text-transparent cursor-pointer hover:opacity-80 transition-opacity duration-200">
                 FLASHFIRE
               </span>
-            </Link>
+            </div>
 
-          
-                {/* Desktop Navigation */}
-                <div className="hidden md:flex items-center space-x-6 lg:space-x-8">
-                  {navItems.map((item) =>
-                    item.name === 'Employer' ? (
-                      <a
-                        key={item.name}
-                        href="#"
-                        onClick={e => {
-                          e.preventDefault();
-                          setEmployerFormVisibility(true);
-                        }}
-                        className="font-medium text-gray-700 transition-colors duration-200 hover:text-orange-600 text-sm lg:text-base"
-                      >
-                        {item.name}
-                      </a>
-                    ) : item.href.startsWith('#') ? (
-                      <a
-                        key={item.name}
-                        href={item.href}
-                        className="font-medium text-gray-700 transition-colors duration-200 hover:text-orange-600 text-sm lg:text-base"
-                      >
-                        {item.name}
-                      </a>
-                    ) : (
-                      <Link
-                        key={item.name}
-                        to={item.href}
-                        className="font-medium text-gray-700 transition-colors duration-200 hover:text-orange-600 text-sm lg:text-base"
-                      >
-                        {item.name}
-                      </Link>
-                    )
-                  )}
-                </div>
-
-
-          {/* <div className="flex items-center space-x-4">
-            Employer Form Button */}
-
-             
+            {/* Desktop Navigation */}
+            <div className="hidden md:flex items-center space-x-6 lg:space-x-8">
+              {navItems.map((item) =>
+                item.name === 'Employers' ? (
+                  <button
+                    key={item.name}
+                    onClick={openEmployerForm}
+                    className="font-medium text-gray-700 transition-colors duration-200 hover:text-orange-600 text-sm lg:text-base"
+                  >
+                    {item.name}
+                  </button>
+                ) : (
+                  <a
+                    key={item.name}
+                    href={item.href}
+                    className="font-medium text-gray-700 transition-colors duration-200 hover:text-orange-600 text-sm lg:text-base"
+                  >
+                    {item.name}
+                  </a>
+                )
+              )}
+            </div>
 
             {/* CTA Button (desktop) */}
             <div className="hidden md:block">
@@ -149,7 +122,15 @@ const Navigation: React.FC<Props> = ({
             <div className="md:hidden">
               <div className="px-2 pt-2 pb-3 space-y-1 bg-white/95 backdrop-blur-md border-t border-gray-100 rounded-b-lg shadow-lg">
                 {navItems.map((item) =>
-                  item.href.startsWith('#') ? (
+                  item.name === 'Employers' ? (
+                    <button
+                      key={item.name}
+                      onClick={openEmployerForm}
+                      className="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-100 transition-colors duration-200"
+                    >
+                      {item.name}
+                    </button>
+                  ) : (
                     <a
                       key={item.name}
                       href={item.href}
@@ -157,14 +138,6 @@ const Navigation: React.FC<Props> = ({
                     >
                       {item.name}
                     </a>
-                  ) : (
-                    <Link
-                      key={item.name}
-                      to={item.href}
-                      className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-100 transition-colors duration-200"
-                    >
-                      {item.name}
-                    </Link>
                   )
                 )}
 
@@ -180,7 +153,7 @@ const Navigation: React.FC<Props> = ({
           )}
         </div>
 
-        {/* Enhanced Consultation Banner - Responsive Layout (unchanged styles) */}
+        {/* Enhanced Consultation Banner */}
         <div className="w-full bg-gradient-to-r from-orange-500 to-orange-600 shadow-lg">
           <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 lg:p-1">
             {/* Mobile Layout */}
@@ -228,7 +201,7 @@ const Navigation: React.FC<Props> = ({
             <div className="hidden sm:flex items-center justify-center py-1.5 sm:py-2.5 space-x-0.5 sm:space-x-3 lg:space-x-6 text-nowrap">
               <div className="flex items-center space-x-0.5 sm:space-x-2 lg:space-x-3">
                 <img
-                  src="https://res.cloudinary.com/drit9nkha/image/upload/v1753417509/right-arrow_j7m7o3.webp"
+                  src="/right-arrow-icon.png"
                   alt="Arrow"
                   className="w-2.5 h-2.5 sm:w-4 sm:h-4 lg:w-5 lg:h-5 filter brightness-0 invert flex-shrink-0"
                 />
@@ -274,12 +247,12 @@ const Navigation: React.FC<Props> = ({
           </div>
         </div>
       </nav>
-          {employerFormVisibility && (
-          <EmployerForm
-           employerFormVisibility={employerFormVisibility}
-           setEmployerFormVisibility={setEmployerFormVisibility}
-          />
-)}
+
+      {/* Employer Form Modal */}
+      <EmployerForm 
+        isVisible={employerFormVisible} 
+        onClose={closeEmployerForm} 
+      />
     </div>
   );
 };
