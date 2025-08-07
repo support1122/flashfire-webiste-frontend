@@ -58,7 +58,7 @@ const Navigation: React.FC<NavigationProps> = ({
   return (
     <div className="font-inter">
       <nav
-        className={`fixed top-0 w-full z-50 transition-all duration-300 ${
+        className={`fixed top-0 w-full z-40 transition-all duration-300 ${
           isScrolled
             ? 'bg-white/95 backdrop-blur-md shadow-lg border-b border-gray-100'
             : 'bg-white/80 backdrop-blur-sm'
@@ -249,10 +249,14 @@ const Navigation: React.FC<NavigationProps> = ({
       </nav>
 
       {/* Employer Form Modal */}
-      <EmployerForm 
-        isVisible={employerFormVisible} 
-        onClose={closeEmployerForm} 
-      />
+      {employerFormVisible && (
+        <div className="fixed inset-0 z-[60]">
+          <EmployerForm 
+            isVisible={employerFormVisible} 
+            onClose={closeEmployerForm} 
+          />
+        </div>
+      )}
     </div>
   );
 };
