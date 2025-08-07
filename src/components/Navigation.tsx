@@ -15,7 +15,7 @@ const Navigation: React.FC<Props> = ({
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
-  const [employerFormVisibility, setEmployerFormVisibility] = useState(false);
+  const [employerFormVisibility, setEmployerFormVisibility] = useState(true);
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 20);
@@ -31,6 +31,7 @@ const Navigation: React.FC<Props> = ({
     { name: 'FAQ', href: '#faq' },
     { name: 'Contact', href: '#contact' },
     { name: 'Blog', href: '#blog' },
+    { name: 'Employer', href: '#employer' }, 
   ];
 
   const openSignup = () => {
@@ -80,52 +81,47 @@ const Navigation: React.FC<Props> = ({
               </span>
             </Link>
 
-            {/* Desktop Navigation */}
-            <div className="hidden md:flex items-center space-x-6 lg:space-x-8">
-              {navItems.map((item) =>
-                item.href.startsWith('#') ? (
-                  <a
-                    key={item.name}
-                    href={item.href}
-                    className="font-medium text-gray-700 transition-colors duration-200 hover:text-orange-600 text-sm lg:text-base"
-                  >
-                    {item.name}
-                  </a>
-                ) : (
-                  <Link
-                    key={item.name}
-                    to={item.href}
-                    className="font-medium text-gray-700 transition-colors duration-200 hover:text-orange-600 text-sm lg:text-base"
-                  >
-                    {item.name}
-                  </Link>
-                )
-              )}
-            </div>
+          
+                {/* Desktop Navigation */}
+                <div className="hidden md:flex items-center space-x-6 lg:space-x-8">
+                  {navItems.map((item) =>
+                    item.name === 'Employer' ? (
+                      <a
+                        key={item.name}
+                        href="#"
+                        onClick={e => {
+                          e.preventDefault();
+                          setEmployerFormVisibility(true);
+                        }}
+                        className="font-medium text-gray-700 transition-colors duration-200 hover:text-orange-600 text-sm lg:text-base"
+                      >
+                        {item.name}
+                      </a>
+                    ) : item.href.startsWith('#') ? (
+                      <a
+                        key={item.name}
+                        href={item.href}
+                        className="font-medium text-gray-700 transition-colors duration-200 hover:text-orange-600 text-sm lg:text-base"
+                      >
+                        {item.name}
+                      </a>
+                    ) : (
+                      <Link
+                        key={item.name}
+                        to={item.href}
+                        className="font-medium text-gray-700 transition-colors duration-200 hover:text-orange-600 text-sm lg:text-base"
+                      >
+                        {item.name}
+                      </Link>
+                    )
+                  )}
+                </div>
 
 
+          {/* <div className="flex items-center space-x-4">
+            Employer Form Button */}
 
-            {/* <div className="hidden md:block">
-              <button
-                onClick={()=>setEmployerFormVisibility(true)}
-                className="bg-gradient-to-r from-orange-500 to-orange-600 text-white px-4 lg:px-6 py-2 lg:py-2.5 rounded-full font-semibold hover:from-orange-600 hover:to-orange-700 transition-all duration-200 shadow-lg hover:shadow-xl hover:scale-105 text-sm lg:text-base"
-              >
-                Are you an Employer?
-              </button>
-            </div>
-            {employerFormVisibility && (
-                      <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/40 backdrop-blur-sm">
-                        <div className="relative w-full max-w-4xl mx-4 sm:mx-auto bg-white rounded-2xl shadow-2xl overflow-y-auto max-h-[90vh]">
-                          <button
-                            className="absolute top-3 right-3 text-gray-500 hover:text-red-600 transition"
-                            onClick={() => setEmployerFormVisibility(false)}
-                          >
-                            <X size={28} />
-                          </button>
-                          <EmployerForm setEmployerFormVisibility={setEmployerFormVisibility} />
-                        </div>
-                      </div>
-                    )} */}
+             
 
             {/* CTA Button (desktop) */}
             <div className="hidden md:block">
@@ -157,8 +153,7 @@ const Navigation: React.FC<Props> = ({
                     <a
                       key={item.name}
                       href={item.href}
-                      className="text-gray-700 hover:text-orange-600 block px-3 py-3 font-medium transition-colors duration-200 text-base rounded-lg hover:bg-orange-50"
-                      onClick={() => setIsMenuOpen(false)}
+                      className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-100 transition-colors duration-200"
                     >
                       {item.name}
                     </a>
@@ -166,13 +161,14 @@ const Navigation: React.FC<Props> = ({
                     <Link
                       key={item.name}
                       to={item.href}
-                      className="text-gray-700 hover:text-orange-600 block px-3 py-3 font-medium transition-colors duration-200 text-base rounded-lg hover:bg-orange-50"
-                      onClick={() => setIsMenuOpen(false)}
+                      className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-100 transition-colors duration-200"
                     >
                       {item.name}
                     </Link>
                   )
                 )}
+
+                {/* CTA Button (mobile) */}
                 <button
                   onClick={openSignup}
                   className="bg-gradient-to-r from-orange-500 to-orange-600 text-white px-3 py-3 rounded-lg font-semibold hover:from-orange-600 hover:to-orange-700 transition-all duration-200 block text-center mt-4 w-full text-base"
@@ -278,6 +274,12 @@ const Navigation: React.FC<Props> = ({
           </div>
         </div>
       </nav>
+          {employerFormVisibility && (
+          <EmployerForm
+           employerFormVisibility={employerFormVisibility}
+           setEmployerFormVisibility={setEmployerFormVisibility}
+          />
+)}
     </div>
   );
 };
