@@ -109,7 +109,7 @@ const EmployerForm: React.FC<EmployerFormProps> = ({ isVisible, onClose }) => {
               Thank You for Your Interest!
             </h2>
             <p className="text-xl text-gray-600 mb-8">
-              We've received your hiring request. Our team will contact you within 24 hours to discuss how FlashFire can help you find the perfect candidates.
+              We've received your hiring request. Our team will contact you within 24 hours to discuss how Flashfire can help you find the perfect candidates.
             </p>
             <button
               onClick={handleClose}
