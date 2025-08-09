@@ -17,7 +17,9 @@
     {
       "source": "/:path*",
       "has": [{ "type": "host", "value": "flashfire-frontend.vercel.app" }],
-      "headers": [{ "key": "X-Robots-Tag", "value": "noindex, nofollow" }]
+      "headers": [
+        { "key": "X-Robots-Tag", "value": "noindex, nofollow" }
+      ]
     }
   ],
   "rewrites": [
