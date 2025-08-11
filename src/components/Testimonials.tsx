@@ -1,7 +1,7 @@
-"use client"
+"use client";
 
-import { useState, useEffect } from "react"
-import { Quote, Heart, Play } from "lucide-react"
+import { useState, useEffect } from "react";
+import { Quote, Heart, Play } from "lucide-react";
 
 const customStyles = `
 @keyframes bounce-gentle {
@@ -44,7 +44,7 @@ const customStyles = `
 .animation-delay-200 { animation-delay: 0.2s; }
 .animation-delay-500 { animation-delay: 0.5s; }
 .animation-delay-1000 { animation-delay: 1s; }
-`
+`;
 
 const testimonials = [
   {
@@ -54,25 +54,22 @@ const testimonials = [
     role: "Barclays",
     avatar: "/images/aman.jpg",
   },
-
   {
     type: "text",
     text: "What really impressed me was how personalized everything felt. The AI knew exactly which jobs suited me and why.",
-    name: "Anjali S.",
-    role: "Skyworks Solutions, Inc.",
-    avatar: "/images/anjali.jpeg",
+    name: "Sanju G.",
+    role: "Wood Mackenzie.",
+    avatar: "/images/sanju.jpg",
   },
-
   {
     type: "video",
-    videoUrl: "https://www.youtube.com/embed/p41OvikonKo",
-    thumbnail: "/images/amit.jpg",
+    videoUrl: "https://www.youtube.com/embed/nYEO8K0q38c",
+    thumbnail: "images/rijul.jpg",
     text: "I didn't think a tool could be this effective. My resume was instantly optimized and I saw results almost immediately.",
-    name: "Amit G.",
-    role: "ArmorCode",
-    avatar: "/images/amit.jpg",
+    name: "Rijul J.",
+    role: "Software Engineer",
+    avatar: "images/rijul.jpg",
   },
-
   {
     type: "text",
     text: "I wasn't sure what to expect at first, but Flashfire turned out to be a game-changer. Within a week, I got multiple interview calls from top companies.",
@@ -82,12 +79,12 @@ const testimonials = [
   },
   {
     type: "video",
-    videoUrl: "https://www.youtube.com/embed/p9kzhLHjJuI",
-    thumbnail: "/images/sanju.jpg",
+    videoUrl: "https://www.youtube.com/embed/p41OvikonKo",
+    thumbnail: "/images/anjali.jpeg",
     text: "I've tried other job platforms, but nothing compares to Flashfire's speed and accuracy. Plus, I finally stopped editing my resume manually.",
-    name: "Sanju G.",
-    role: "Wood Mackenzie",
-    avatar: "/images/sanju.jpg",
+    name: "Anjali S..",
+    role: "Skyworks Solutions, Inc",
+    avatar: "/images/anjali.jpeg",
   },
   {
     type: "text",
@@ -96,72 +93,56 @@ const testimonials = [
     role: "Microsoft",
     avatar: "/images/priya.jpg",
   },
-  {
+
+ {
     type: "text",
     text: "Honestly, I was skeptical. But Flashfire delivered—within a week, I had interviews booked. The insights and AI help made a huge difference.",
-    name: "Rijul J.",
-    role: "Software Engineer",
-    avatar: "/images/rijul.jpg",
+    name: "Amit G.",
+    role: "ArmorCode",
+    avatar: "/images/amit.jpg",
   },
-
   {
     type: "video",
-    videoUrl: "https://www.youtube.com/embed/nYEO8K0q38c",
+    videoUrl: "https://www.youtube.com/embed/p9kzhLHjJuI",
     thumbnail: "/images/aryan.jpg",
     text: "This saved me hours every week. The resume targeting feature alone is worth it—and I actually enjoy job hunting now!",
     name: "Aryan G.",
     role: "IBM",
     avatar: "/images/aryan.jpg",
   },
-]
+];
 
 const VideoTestimonial = ({ testimonial, index }) => {
-  const [showVideo, setShowVideo] = useState(false)
-  const [isLoading, setIsLoading] = useState(false)
-  const [hasError, setHasError] = useState(false)
+  const [showVideo, setShowVideo] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [hasError, setHasError] = useState(false);
 
   useEffect(() => {
     const handlePageClick = (e) => {
-      if (showVideo && !e.target.closest("iframe")) {
-        setShowVideo(false)
-        setIsLoading(false)
-        setHasError(false)
+      if (showVideo && !e.target.closest("iframe") && !e.target.closest("button")) {
+        setShowVideo(false);
+        setIsLoading(false);
+        setHasError(false);
       }
-    }
-
+    };
     if (showVideo) {
-      document.addEventListener("click", handlePageClick)
+      document.addEventListener("click", handlePageClick);
     }
-
     return () => {
-      document.removeEventListener("click", handlePageClick)
-    }
-  }, [showVideo])
+      document.removeEventListener("click", handlePageClick);
+    };
+  }, [showVideo]);
 
-  const handleShowVideo = () => {
-    setIsLoading(true)
-    setShowVideo(true)
-    setHasError(false)
-  }
+  const handleShowVideo = (e) => {
+    e.stopPropagation();
+    setIsLoading(true);
+    setShowVideo(true);
+    setHasError(false);
+  };
 
-  const handleVideoLoad = () => {
-    setIsLoading(false)
-  }
-
-  const handleVideoError = () => {
-    setIsLoading(false)
-    setHasError(true)
-  }
-
-  const handleStopVideo = (e) => {
-    e.stopPropagation()
-    setShowVideo(false)
-    setIsLoading(false)
-    setHasError(false)
-  }
 
   return (
-    <div className={`rounded-2xl overflow-hidden shadow-lg group animate-pulse-slow max-w-xs mx-auto`}>
+     <div className={`rounded-2xl overflow-hidden shadow-lg group animate-pulse-slow max-w-xs mx-auto`}>
       {!showVideo ? (
         <div className="relative overflow-hidden">
           <img
@@ -216,53 +197,48 @@ const VideoTestimonial = ({ testimonial, index }) => {
                 <div className="w-12 h-12 bg-red-500 rounded-full flex items-center justify-center">
                   <Play className="w-6 h-6 text-white" />
                 </div>
-                <p className="text-white text-sm">Video unavailable</p>
+                <p className="text-white text-sm">Video unavailable on localhost</p>
+                <p className="text-gray-300 text-xs">Deploy to see videos</p>
                 <button onClick={handleStopVideo} className="text-orange-400 text-xs underline">
                   Go back
                 </button>
               </div>
             </div>
           )}
-
-         <iframe
-          src={`${testimonial.videoUrl}?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0`}
-          className="w-full aspect-[3/4] rounded-2xl transition-opacity duration-500 hover:opacity-90"
-          style={{ opacity: isLoading || hasError ? 0 : 1 }}
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          allowFullScreen
-          onLoad={handleVideoLoad}
-          onError={handleVideoError}
-          title={`${testimonial.name} testimonial video`}
+          <iframe
+            src={`${testimonial.videoUrl}?autoplay=${window?.location.hostname === "localhost" ? 1 : 0}&controls=1&modestbranding=1&rel=0`}
+            className="w-full aspect-[3/4] rounded-2xl"
+            allow="autoplay; encrypted-media"
+            allowFullScreen
+            onLoad={() => setIsLoading(false)}
+            onError={() => { setIsLoading(false); setHasError(true); }}
+            title={`${testimonial.name} testimonial video`}
           />
         </div>
       )}
     </div>
-  )
-}
+  );
+};
 
-const TextTestimonial = ({ testimonial, rotation }) => {
-  return (
-    <div
-      className={`bg-white rounded-2xl p-6 shadow-lg transform ${rotation} hover:rotate-0 transition-transform duration-300`}
-    >
-      <div className="flex items-start gap-3 mb-4">
-        <Quote className="w-6 h-6 text-orange-300 flex-shrink-0 mt-1" />
-        <p className="text-gray-800 text-sm leading-relaxed">{testimonial.text}</p>
-      </div>
-      <div className="flex items-center gap-3">
-        <img
-          src={testimonial.avatar || "/placeholder.svg"}
-          alt={testimonial.name}
-          className="w-10 h-10 rounded-full object-cover border-2 border-orange-100"
-        />
-        <div>
-          <p className="font-semibold text-sm text-gray-900">{testimonial.name}</p>
-          <p className="text-xs text-gray-600">{testimonial.role}</p>
-        </div>
+const TextTestimonial = ({ testimonial, rotation }) => (
+  <div className={`bg-white rounded-2xl p-6 shadow-lg transform ${rotation} hover:rotate-0 transition-transform duration-300`}>
+    <div className="flex items-start gap-3 mb-4">
+      <Quote className="w-6 h-6 text-orange-300 flex-shrink-0 mt-1" />
+      <p className="text-gray-800 text-sm leading-relaxed">{testimonial.text}</p>
+    </div>
+    <div className="flex items-center gap-3">
+      <img
+        src={testimonial.avatar || "/placeholder.svg"}
+        alt={testimonial.name}
+        className="w-10 h-10 rounded-full object-cover border-2 border-orange-100"
+      />
+      <div>
+        <p className="font-semibold text-sm text-gray-900">{testimonial.name}</p>
+        <p className="text-xs text-gray-600">{testimonial.role}</p>
       </div>
     </div>
-  )
-}
+  </div>
+);
 
 const TestimonialsGrid = () => {
   const rotations = [
