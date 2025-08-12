@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 import EmployerForm from './EmployerForm';
+import { GTagUTM } from '../utils/GTagUTM.ts';
 
 interface NavigationProps {
   setSignupFormVisibility: React.Dispatch<React.SetStateAction<boolean>>;
@@ -33,14 +34,31 @@ const Navigation: React.FC<NavigationProps> = ({
     { name: 'Employers', href: '#employers' }, 
   ];
 
-  const openSignup = () => {
-    // GTag tracking code would go here
+const openSignup = () => {
+    GTagUTM({
+      eventName: 'sign_up_click',
+      label: 'Header Sign Up Button',
+      utmParams: {
+        utm_source: 'WEBSITE',
+        utm_medium: 'NAVBAR_SIGNUP_BUTTON',
+        utm_campaign: 'header_signup',
+      },
+    });
     setSignupFormVisibility(true);
     setIsMenuOpen(false);
   };
 
   const openCalendly = () => {
-    // GTag tracking code would go here
+    // Preserve original functionality: banner "Book Now" opens Calendly
+    GTagUTM({
+      eventName: 'Calendly_Meet_click',
+      label: 'NAVBAR_LOWER_SECTION_Button',
+      utmParams: {
+        utm_source: 'WEBSITE',
+        utm_medium: 'Navbar_Meet_Button',
+        utm_campaign: 'WEBSITE_NAVBAR_LOWER_SECTION',
+      },
+    });
     setCalendlyModalVisibility(true);
     setIsMenuOpen(false);
   };

@@ -71,28 +71,38 @@ const EmployerForm: React.FC<EmployerFormProps> = ({ isVisible, onClose }) => {
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setLoading(true);
-    setError('');
+  e.preventDefault();
+  setLoading(true);
+  setError('');
 
-    // Basic validation
-    if (!formData.companyName || !formData.contactName || !formData.email || !formData.phone) {
-      setError('Please fill in all required fields');
-      setLoading(false);
-      return;
-    }
+  // Check required fields
+  if (!formData.companyName || !formData.contactName || !formData.email || !formData.phone) {
+    setError('Please fill in all required fields');
+    setLoading(false);
+    return;
+  }
 
-    try {
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 2000));
+  try {
+    const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/employerform`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(formData),
+    });
+
+    if (response.ok) {
       setSuccess(true);
-      console.log('Employer form submitted:', formData);
-    } catch (error) {
-      setError('Something went wrong. Please try again.');
-    } finally {
-      setLoading(false);
+      console.log('Submitted:', formData);
+    } else {
+      const errorText = await response.text();
+      setError(errorText || 'Submission failed');
     }
-  };
+  } catch (err) {
+    console.error(err);
+    setError('Something went wrong. Please try again.');
+  } finally {
+    setLoading(false);
+  }
+};
 
   // Don't render if not visible
   if (!isVisible) return null;
