@@ -54,7 +54,7 @@ const testimonials = [
   },
   {
     type: "text",
-    text: "What really impressed me was how personalized everything felt. The AI knew exactly which jobs suited me and why.",
+    text: "I’ve tried other job platforms, but nothing compares to Flashfire’s speed and accuracy. Plus, I finally stopped editing my resume manually",
     name: "Sanju G.",
     role: "Wood Mackenzie.",
     avatar: "/images/sanju.jpg",
@@ -84,14 +84,14 @@ const testimonials = [
   },
   {
     type: "text",
-    text: "The AI-powered job matching is incredible. I went from sending hundreds of applications to getting quality interviews from just a few targeted applications.",
-    name: "Utkarsh",
-    role: "Microsoft",
-    avatar: "/images/utkarsh.jpg",
+    text: "This saved me hours every week. The resume targeting feature alone is worth it—and I actually enjoy job hunting now!",
+    name: "Aryan G.",
+    role: "IBM",
+    avatar: "/images/aryan.jpg",
   },
   {
     type: "text",
-    text: "Honestly, I was skeptical. But Flashfire delivered—within a week, I had interviews booked. The insights and AI help made a huge difference.",
+    text: "I didn’t think a tool could be this effective. My resume was instantly optimized and I saw results almost immediately.",
     name: "Amit G.",
     role: "ArmorCode",
     avatar: "/images/amit.jpg",
@@ -102,6 +102,7 @@ const testimonials = [
     thumbnail: "/images/aryan.jpg",
     text: "This saved me hours every week. The resume targeting feature alone is worth it—and I actually enjoy job hunting now!",
     name: "Aryan G.",
+    role : "IBM",
     avatar: "/images/aryan.jpg",
   },
 ]
