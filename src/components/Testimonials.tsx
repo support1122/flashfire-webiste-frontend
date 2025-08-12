@@ -1,4 +1,3 @@
-"use client"
 
 import { useState, useEffect } from "react"
 import { Quote, Heart, Play } from "lucide-react"
@@ -88,9 +87,9 @@ const testimonials = [
   {
     type: "text",
     text: "The AI-powered job matching is incredible. I went from sending hundreds of applications to getting quality interviews from just a few targeted applications.",
-    name: "Priya M.",
+    name: "Utkarsh",
     role: "Microsoft",
-    avatar: "/images/priya.jpg",
+    avatar: "/images/utkarsh.jpg",
   },
   {
     type: "text",
