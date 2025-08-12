@@ -1,10 +1,9 @@
-"use client";
+"use client"
 
-import { useState, useEffect } from "react";
-import { Quote, Heart, Play } from "lucide-react";
+import { useState, useEffect } from "react"
+import { Quote, Heart, Play } from "lucide-react"
 
-const customStyles = `
-@keyframes bounce-gentle {
+const customStyles = `@keyframes bounce-gentle {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-5px); }
 }
@@ -44,7 +43,7 @@ const customStyles = `
 .animation-delay-200 { animation-delay: 0.2s; }
 .animation-delay-500 { animation-delay: 0.5s; }
 .animation-delay-1000 { animation-delay: 1s; }
-`;
+`
 
 const testimonials = [
   {
@@ -93,8 +92,7 @@ const testimonials = [
     role: "Microsoft",
     avatar: "/images/priya.jpg",
   },
-
- {
+  {
     type: "text",
     text: "Honestly, I was skeptical. But Flashfire delivered—within a week, I had interviews booked. The insights and AI help made a huge difference.",
     name: "Amit G.",
@@ -110,39 +108,44 @@ const testimonials = [
     role: "IBM",
     avatar: "/images/aryan.jpg",
   },
-];
+]
 
 const VideoTestimonial = ({ testimonial, index }) => {
-  const [showVideo, setShowVideo] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-  const [hasError, setHasError] = useState(false);
+  const [showVideo, setShowVideo] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
+  const [hasError, setHasError] = useState(false)
 
   useEffect(() => {
     const handlePageClick = (e) => {
       if (showVideo && !e.target.closest("iframe") && !e.target.closest("button")) {
-        setShowVideo(false);
-        setIsLoading(false);
-        setHasError(false);
+        setShowVideo(false)
+        setIsLoading(false)
+        setHasError(false)
       }
-    };
+    }
     if (showVideo) {
-      document.addEventListener("click", handlePageClick);
+      document.addEventListener("click", handlePageClick)
     }
     return () => {
-      document.removeEventListener("click", handlePageClick);
-    };
-  }, [showVideo]);
+      document.removeEventListener("click", handlePageClick)
+    }
+  }, [showVideo])
 
   const handleShowVideo = (e) => {
-    e.stopPropagation();
-    setIsLoading(true);
-    setShowVideo(true);
-    setHasError(false);
-  };
+    e.stopPropagation()
+    setIsLoading(true)
+    setShowVideo(true)
+    setHasError(false)
+  }
 
+  const handleStopVideo = () => {
+    setShowVideo(false)
+    setIsLoading(false)
+    setHasError(false)
+  }
 
   return (
-     <div className={`rounded-2xl overflow-hidden shadow-lg group animate-pulse-slow max-w-xs mx-auto`}>
+    <div className={`rounded-2xl overflow-hidden shadow-lg group animate-pulse-slow max-w-xs mx-auto`}>
       {!showVideo ? (
         <div className="relative overflow-hidden">
           <img
@@ -206,22 +209,27 @@ const VideoTestimonial = ({ testimonial, index }) => {
             </div>
           )}
           <iframe
-            src={`${testimonial.videoUrl}?autoplay=${window?.location.hostname === "localhost" ? 1 : 0}&controls=1&modestbranding=1&rel=0`}
+            src={`${testimonial.videoUrl}?autoplay=1&controls=1&modestbranding=1&rel=0`}
             className="w-full aspect-[3/4] rounded-2xl"
             allow="autoplay; encrypted-media"
             allowFullScreen
             onLoad={() => setIsLoading(false)}
-            onError={() => { setIsLoading(false); setHasError(true); }}
+            onError={() => {
+              setIsLoading(false)
+              setHasError(true)
+            }}
             title={`${testimonial.name} testimonial video`}
           />
         </div>
       )}
     </div>
-  );
-};
+  )
+}
 
 const TextTestimonial = ({ testimonial, rotation }) => (
-  <div className={`bg-white rounded-2xl p-6 shadow-lg transform ${rotation} hover:rotate-0 transition-transform duration-300`}>
+  <div
+    className={`bg-white rounded-2xl p-6 shadow-lg transform ${rotation} hover:rotate-0 transition-transform duration-300`}
+  >
     <div className="flex items-start gap-3 mb-4">
       <Quote className="w-6 h-6 text-orange-300 flex-shrink-0 mt-1" />
       <p className="text-gray-800 text-sm leading-relaxed">{testimonial.text}</p>
@@ -238,7 +246,7 @@ const TextTestimonial = ({ testimonial, rotation }) => (
       </div>
     </div>
   </div>
-);
+)
 
 const TestimonialsGrid = () => {
   const rotations = [
@@ -300,7 +308,7 @@ const TestimonialsGrid = () => {
               ))}
             </div>
 
-            <div className="space-y-6 mt-12 lg:mt-0">
+            <div className="space-y-6 -mt-16 lg:-mt-32">
               {testimonials.slice(4, 8).map((testimonial, index) => (
                 <div
                   key={index + 4}

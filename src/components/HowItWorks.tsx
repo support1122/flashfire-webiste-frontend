@@ -2,7 +2,7 @@
 import React from 'react';
 import { Linkedin, FileText, Rocket, Phone } from 'lucide-react';
 import {GTagUTM} from '../utils/GTagUTM.ts';
-import WhatsAppSupport from './WhatsappSupport.tsx';
+
 
 const HowItWorks = ({setSignupFormVisibility}) => {
   const steps = [
@@ -125,7 +125,7 @@ const HowItWorks = ({setSignupFormVisibility}) => {
             </button>
           </div>
         </div>
-        {/* <WhatsAppSupport /> */}
+       
       </div>
     </section>
   );
