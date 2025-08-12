@@ -65,7 +65,6 @@ const testimonials = [
     thumbnail: "images/rijul.jpg",
     text: "I didn't think a tool could be this effective. My resume was instantly optimized and I saw results almost immediately.",
     name: "Rijul J.",
-    role: "Software Engineer",
     avatar: "images/rijul.jpg",
   },
   {
@@ -80,8 +79,7 @@ const testimonials = [
     videoUrl: "https://www.youtube.com/embed/p41OvikonKo",
     thumbnail: "/images/anjali.jpeg",
     text: "I've tried other job platforms, but nothing compares to Flashfire's speed and accuracy. Plus, I finally stopped editing my resume manually.",
-    name: "Anjali S..",
-    role: "Skyworks Solutions, Inc",
+    name: "Anjali S.",
     avatar: "/images/anjali.jpeg",
   },
   {
@@ -104,7 +102,6 @@ const testimonials = [
     thumbnail: "/images/aryan.jpg",
     text: "This saved me hours every week. The resume targeting feature alone is worth it—and I actually enjoy job hunting now!",
     name: "Aryan G.",
-    role: "IBM",
     avatar: "/images/aryan.jpg",
   },
 ]
