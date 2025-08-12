@@ -80,6 +80,7 @@ const testimonials = [
     thumbnail: "/images/anjali.jpeg",
     text: "I've tried other job platforms, but nothing compares to Flashfire's speed and accuracy. Plus, I finally stopped editing my resume manually.",
     name: "Anjali S.",
+    role: ""
     avatar: "/images/anjali.jpeg",
   },
   {
