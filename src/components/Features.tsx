@@ -2,6 +2,7 @@ import React from 'react';
 import { Bot, FileText, Target, Zap, Shield, BarChart3, Linkedin } from 'lucide-react';
 import { useOutletContext } from 'react-router-dom';
 import { GTagUTM } from '../utils/GTagUTM.js';
+import WhatsAppButton from './WhatsAppButton.js';
 import WhatsAppSupport from './WhatsappSupport.js';
 const Features = ({setSignupFormVisibility}) => {
   // const { setSignupFormVisibility } = useOutletContext<{
@@ -115,7 +116,7 @@ const Features = ({setSignupFormVisibility}) => {
             Start Saving Time Today
           </button>
         </div> */}
-        <WhatsAppSupport />
+      <WhatsAppSupport/>
       </div>
     </section>
   );
