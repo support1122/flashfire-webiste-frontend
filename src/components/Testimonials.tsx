@@ -60,21 +60,7 @@ const testimonials = [
     avatar: "/images/sanju.jpg",
   },
   {
-    type: "video",
-    videoUrl: "https://www.youtube.com/embed/nYEO8K0q38c",
-    thumbnail: "images/rijul.jpg",
-    text: "I didn't think a tool could be this effective. My resume was instantly optimized and I saw results almost immediately.",
-    name: "Rijul J.",
-    avatar: "images/rijul.jpg",
-  },
-  {
-    type: "text",
-    text: "I wasn't sure what to expect at first, but Flashfire turned out to be a game-changer. Within a week, I got multiple interview calls from top companies.",
-    name: "Rudraksh T.",
-    role: "State Street",
-    avatar: "/images/rudraksh.jpg",
-  },
-  {
+   
     type: "video",
     videoUrl: "https://www.youtube.com/embed/p41OvikonKo",
     thumbnail: "/images/anjali.jpeg",
@@ -85,10 +71,25 @@ const testimonials = [
   },
   {
     type: "text",
-    text: "This saved me hours every week. The resume targeting feature alone is worth it—and I actually enjoy job hunting now!",
-    name: "Aryan G.",
-    role: "IBM",
-    avatar: "/images/aryan.jpg",
+    text: "I wasn't sure what to expect at first, but Flashfire turned out to be a game-changer. Within a week, I got multiple interview calls from top companies.",
+    name: "Rudraksh T.",
+    role: "State Street",
+    avatar: "/images/rudraksh.jpg",
+  },
+  {
+     type: "video",
+    videoUrl: "https://www.youtube.com/embed/nYEO8K0q38c",
+    thumbnail: "images/rijul.jpg",
+    text: "I didn't think a tool could be this effective. My resume was instantly optimized and I saw results almost immediately.",
+    name: "Rijul J.",
+    avatar: "images/rijul.jpg",
+  },
+  {
+    type: "",
+    text: "",
+    name: "",
+    role: "",
+    avatar: "",
   },
   {
     type: "text",
@@ -306,7 +307,7 @@ const TestimonialsGrid = () => {
               ))}
             </div>
 
-            <div className="space-y-6 -mt-16 lg:-mt-32">
+            <div className="space-y-6 -mt-2 lg:-mt-4">
               {testimonials.slice(4, 8).map((testimonial, index) => (
                 <div
                   key={index + 4}
