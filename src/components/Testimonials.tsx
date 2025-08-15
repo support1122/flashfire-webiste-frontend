@@ -85,11 +85,11 @@ const testimonials = [
     avatar: "images/rijul.jpg",
   },
   {
-    type: "",
-    text: "",
-    name: "",
-    role: "",
-    avatar: "",
+    type: "text",
+    text: "This saved me hours every week. The resume targeting feature alone is worth it—and I actually enjoy job hunting now!",
+    name: "Anjali S.",
+    role: "Skyworks Solutions, Inc.",
+    avatar: "/images/anjali.jpeg",
   },
   {
     type: "text",
