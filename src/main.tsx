@@ -9,6 +9,7 @@ import PaymentPolicy from './components/PaymentPolicy';
 import RefundPolicy from './components/RefundPolicy';
 import PrivacyPolicy from './components/PrivacyPolicy';
 import TermsOfService from './components/TermsOfService';
+import BlogPage from './components/BlogPage.tsx';
 // import Home from './components/Home'
 import IndividualBlog from './components/IndividualBlog.tsx';
 import Hero from './components/Hero.tsx';
@@ -31,6 +32,7 @@ const routes=createBrowserRouter([
       { path: 'refundpolicy', element: <RefundPolicy /> },
       { path: 'privacypolicy', element: <PrivacyPolicy /> },
       { path: 'termsofservice', element: <TermsOfService /> },
+      { path: 'blogs', element: <BlogPage /> },
       { path: 'blogs/:id', element: <IndividualBlog /> },
     ],
   },

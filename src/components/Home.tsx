@@ -12,7 +12,7 @@ import RealTimeMetrics from './RealTimeMetrics';
 import MovingJobs from './MovingJobs';
 import WhatsAppButton from './WhatsAppButton';
 import Footer from './Footer';
-import Blog from './Blog';
+// import Blog from './Blog';
 import SignupForm from './SignupForm.tsx';
 import CalendlyModal from './CalendlyModal.tsx';
 import { useOutletContext } from 'react-router-dom';
@@ -44,7 +44,7 @@ function Home() {
             <MovingJobs setSignupFormVisibility={setSignupFormVisibility}/>
             <RealTimeMetrics setSignupFormVisibility={setSignupFormVisibility}/>
             <Features setSignupFormVisibility={setSignupFormVisibility}/>
-            <Blog />
+            {/* <Blog /> */}
             <HowItWorks setSignupFormVisibility={setSignupFormVisibility}/>
             <Testimonials />
             <Pricing />

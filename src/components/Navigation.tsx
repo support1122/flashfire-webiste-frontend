@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 import EmployerForm from './EmployerForm';
 import { GTagUTM } from '../utils/GTagUTM.ts';
+import { Link } from "react-router-dom";
 
 interface NavigationProps {
   setSignupFormVisibility: React.Dispatch<React.SetStateAction<boolean>>;
@@ -24,17 +25,17 @@ const Navigation: React.FC<NavigationProps> = ({
   }, []);
 
   const navItems = [
-    { name: 'Home', href: '#' },
-    { name: 'Features', href: '#features' },
-    { name: 'Testimonials', href: '#testimonials' },
-    { name: 'Pricing', href: '#pricing' },
-    { name: 'FAQ', href: '#faq' },
-    { name: 'Contact', href: '#contact' },
-    { name: 'Blog', href: '#blog' },
-    { name: 'Employers', href: '#employers' }, 
+    { name: 'Home', href: '/' },
+    { name: 'Features', href: '/#features' },
+    { name: 'Testimonials', href: '/#testimonials' },
+    { name: 'Pricing', href: '/#pricing' },
+    { name: 'FAQ', href: '/#faq' },
+    { name: 'Contact', href: '/#contact' },
+    { name: 'Blog', href: '/blogs' },
+    { name: 'Employers', href: '#employers' },
   ];
 
-const openSignup = () => {
+  const openSignup = () => {
     GTagUTM({
       eventName: 'sign_up_click',
       label: 'Header Sign Up Button',
@@ -75,32 +76,45 @@ const openSignup = () => {
   return (
     <div className="font-inter">
       <nav
-        className={`fixed top-0 w-full z-40 transition-all duration-300 ${
-          isScrolled
+        className={`fixed top-0 w-full z-40 transition-all duration-300 ${isScrolled
             ? 'bg-white/95 backdrop-blur-md shadow-lg border-b border-gray-100'
             : 'bg-white/80 backdrop-blur-sm'
-        }`}
+          }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16 sm:h-18">
             {/* Logo */}
             <div className="flex items-center">
-              <span className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-red-500 to-red-600 bg-clip-text text-transparent cursor-pointer hover:opacity-80 transition-opacity duration-200">
+              <Link to="/" className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-red-500 to-red-600 bg-clip-text text-transparent cursor-pointer hover:opacity-80 transition-opacity duration-200">
                 FLASHFIRE
-              </span>
+              </Link>
             </div>
 
             {/* Desktop Navigation */}
             <div className="hidden md:flex items-center space-x-6 lg:space-x-8">
-              {navItems.map((item) =>
-                item.name === 'Employers' ? (
-                  <button
+              {navItems.map((item) => {
+                if (item.name === 'Employers') {
+                  return (
+                    <button
+                      key={item.name}
+                      onClick={openEmployerForm}
+                      className="font-medium text-gray-700 transition-colors duration-200 hover:text-orange-600 text-sm lg:text-base"
+                    >
+                      {item.name}
+                    </button>
+                  );
+                }
+
+                const isInternalRoute = item.href.startsWith('/');
+
+                return isInternalRoute ? (
+                  <Link
                     key={item.name}
-                    onClick={openEmployerForm}
+                    to={item.href}
                     className="font-medium text-gray-700 transition-colors duration-200 hover:text-orange-600 text-sm lg:text-base"
                   >
                     {item.name}
-                  </button>
+                  </Link>
                 ) : (
                   <a
                     key={item.name}
@@ -109,8 +123,8 @@ const openSignup = () => {
                   >
                     {item.name}
                   </a>
-                )
-              )}
+                );
+              })}
             </div>
 
             {/* CTA Button (desktop) */}
@@ -138,25 +152,41 @@ const openSignup = () => {
           {isMenuOpen && (
             <div className="md:hidden">
               <div className="px-2 pt-2 pb-3 space-y-1 bg-white/95 backdrop-blur-md border-t border-gray-100 rounded-b-lg shadow-lg">
-                {navItems.map((item) =>
-                  item.name === 'Employers' ? (
-                    <button
+                {navItems.map((item) => {
+                  if (item.name === 'Employers') {
+                    return (
+                      <button
+                        key={item.name}
+                        onClick={openEmployerForm}
+                        className="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-100 transition-colors duration-200"
+                      >
+                        {item.name}
+                      </button>
+                    );
+                  }
+
+                  const isInternalRoute = item.href.startsWith('/')
+
+                  return isInternalRoute ? (
+                    <Link
                       key={item.name}
-                      onClick={openEmployerForm}
-                      className="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-100 transition-colors duration-200"
+                      to={item.href}
+                      onClick={() => setIsMenuOpen(false)}
+                      className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-100 transition-colors duration-200"
                     >
                       {item.name}
-                    </button>
+                    </Link>
                   ) : (
                     <a
                       key={item.name}
                       href={item.href}
                       className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-100 transition-colors duration-200"
+                      onClick={() => setIsMenuOpen(false)}
                     >
                       {item.name}
                     </a>
-                  )
-                )}
+                  );
+                })}
 
                 {/* CTA Button (mobile) */}
                 <button
@@ -268,9 +298,9 @@ const openSignup = () => {
       {/* Employer Form Modal */}
       {employerFormVisible && (
         <div className="fixed inset-0 z-[60]">
-          <EmployerForm 
-            isVisible={employerFormVisible} 
-            onClose={closeEmployerForm} 
+          <EmployerForm
+            isVisible={employerFormVisible}
+            onClose={closeEmployerForm}
           />
         </div>
       )}

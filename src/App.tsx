@@ -1,25 +1,35 @@
-import React, {useState} from 'react';
-import Navigation from './components/Navigation';
-import Hero from './components/Hero';
-import Features from './components/Features';
-import HowItWorks from './components/HowItWorks';
-import Testimonials from './components/Testimonials';
-import Pricing from './components/Pricing';
-import FAQ from './components/FAQ';
-import Contact from './components/Contact';
-import SignupModal from './components/SignupModal';
-import RealTimeMetrics from './components/RealTimeMetrics';
-import MovingJobs from './components/MovingJobs';
-import WhatsAppButton from './components/WhatsAppButton';
-import Footer from './components/Footer';
-import { Outlet } from 'react-router-dom';
+
+import {useEffect, useState} from 'react';
+import { Outlet, useLocation } from "react-router-dom";
 // import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
-import SignupForm from './components/SignupForm';
-import CalendlyModal from './components/CalendlyModal.tsx';
 
 function App() {
   const [signupFormVisibility, setSignupFormVisibility] = useState(false);
   const [calendlyModalVisibility, setCalendlyModalVisibility] = useState(false);
+  const location = useLocation();
+  
+  // Smooth-scroll to hash targets when path is '/#section'
+  useEffect(() => {
+    const tryScrollToHash = () => {
+      if (location.hash) {
+        const id = location.hash.slice(1);
+        const scrollWithRetry = (retries: number) => {
+          const el = document.getElementById(id);
+          if (el) {
+            const y = el.getBoundingClientRect().top + window.pageYOffset - 80;
+            window.scrollTo({ top: y, behavior: 'smooth' });
+          } else if (retries > 0) {
+            requestAnimationFrame(() => scrollWithRetry(retries - 1));
+          }
+        };
+        scrollWithRetry(20);
+      } else if (location.pathname === '/') {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    };
+
+    tryScrollToHash();
+  }, [location.pathname, location.hash]);
 
   return (
     <div className="min-h-screen bg-white">
