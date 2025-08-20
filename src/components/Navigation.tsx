@@ -248,7 +248,7 @@ const Navigation: React.FC<NavigationProps> = ({
             <div className="hidden sm:flex items-center justify-center py-1.5 sm:py-2.5 space-x-0.5 sm:space-x-3 lg:space-x-6 text-nowrap">
               <div className="flex items-center space-x-0.5 sm:space-x-2 lg:space-x-3">
                 <img
-                  src="/right-arrow-icon.png"
+                  src="https://res.cloudinary.com/drit9nkha/image/upload/v1753417509/right-arrow_j7m7o3.webp"
                   alt="Arrow"
                   className="w-2.5 h-2.5 sm:w-4 sm:h-4 lg:w-5 lg:h-5 filter brightness-0 invert flex-shrink-0"
                 />
