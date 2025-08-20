@@ -9,7 +9,7 @@ export default function WhatsAppSupport() {
     window.open(whatsappUrl, '_blank');
   };
   return (
-    <div className="min-h-screen flex justify-center items-center bg-gray-50 p-4">
+    <div className=" flex justify-center items-center bg-gray-50 p-4">
       <div className="flex flex-col sm:flex-row gap-4 sm:gap-0 items-center sm:items-center justify-between bg-white shadow-md rounded-lg p-5 sm:p-10 border border-gray-200 max-w-4xl w-[90vw] sm:w-[80vw]">
         {/* Left Side */}
         <div className="flex flex-col sm:flex-row items-center sm:items-center gap-4 w-full sm:w-auto text-center sm:text-left">
