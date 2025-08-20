@@ -43,16 +43,6 @@ const Footer = () => {
               </button>
               </Link>
               <span className="text-orange-200">|</span>
-              <Link to={'/refundpolicy'} target ='_blank' rel="noopener noreferrer">
-              <button
-                // href ='/refundpolicy'
-                // target="_blank" rel="noopener noreferrer"
-                // className="hover:text-orange-200 transition-colors duration-200 cursor-pointer"
-              >
-                REFUND POLICY
-              </button>
-              </Link>
-              <span className="text-orange-200">|</span>
               <Link to={'/paymentpolicy'} target ='_blank' rel="noopener noreferrer">
               <button
                 // onClick={() => handleLinkClick('/paymentpolicy')}
