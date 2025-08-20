@@ -11,30 +11,30 @@ const Blog = () => {
   const scrollContainerRef = useRef(null);
   const cardWidth = 384;
   // Limit to first 10 posts for performance=
-    // Create the HTML content with proper favicon references
-   const updateScrollButtons = () => {
+  // Create the HTML content with proper favicon references
+  const updateScrollButtons = () => {
     if (scrollContainerRef.current) {
       const { scrollLeft, scrollWidth, clientWidth } = scrollContainerRef.current;
       setCanScrollLeft(scrollLeft > 0);
       setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 10); // 10px buffer
-      
+
       // Calculate progress based on actual scroll position
       const maxScrollLeft = scrollWidth - clientWidth;
       const progress = maxScrollLeft > 0 ? (scrollLeft / maxScrollLeft) * 100 : 0;
       setScrollProgress(Math.min(100, Math.max(0, progress)));
-      
+
       // Update current index for display
       const currentPosition = Math.round(scrollLeft / cardWidth);
       setCurrentIndex(currentPosition);
-      
+
       // Update visible dots based on scroll position
       const maxVisible = Math.min(3, Math.ceil(clientWidth / cardWidth));
       const newVisibleDots = [];
-      
+
       for (let i = currentPosition; i < Math.min(currentPosition + maxVisible, blogPosts.length); i++) {
         newVisibleDots.push(i);
       }
-      
+
       setVisibleDots(newVisibleDots);
     }
   };
@@ -69,7 +69,7 @@ const Blog = () => {
   const openBlogPost = (post) => {
     // Get the current origin to properly reference local assets
     const currentOrigin = window.location.origin;
-    
+
     // Create the HTML content with proper favicon references
     const htmlContent = `
       <!DOCTYPE html>
@@ -289,11 +289,11 @@ const Blog = () => {
   };
 
   return (
-    <section id="blog" className="py-20 bg-gradient-to-br from-gray-50 to-gray-100">
+    <section id="blog" className="pt-6 pb-20 bg-gradient-to-br from-gray-50 to-gray-100">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="text-center mb-16">
-          <div className="inline-flex items-center justify-center px-4 py-2 bg-orange-100 text-orange-600 rounded-full font-medium text-sm mb-4">
+        <div className="text-center mb-20">
+          <div className="inline-flex items-center justify-center px-4 py-2 bg-orange-100 text-orange-600 rounded-full font-medium text-sm mb-4 relative z-20">
             <Calendar className="w-4 h-4 mr-2" />
             Career Insights
           </div>
@@ -307,12 +307,12 @@ const Blog = () => {
         </div>
 
         {/* Carousel Container */}
-        <div className="relative">
+        <div className="relative mt-20">
           {/* Left Arrow */}
           {canScrollLeft && (
             <button
               onClick={scrollLeft}
-              className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 z-10 bg-white rounded-full p-3 shadow-lg hover:shadow-xl transition-all duration-300 hover:bg-orange-50 group"
+              className="absolute left-0 top-1/2 -translate-y-1/2  z-10 bg-white rounded-full p-3 shadow-lg hover:shadow-xl transition-all duration-300 hover:bg-orange-50 group"
               aria-label="Scroll left"
             >
               <ChevronLeft className="w-6 h-6 text-gray-600 group-hover:text-orange-600 transition-colors duration-200" />
@@ -331,10 +331,10 @@ const Blog = () => {
           )}
 
           {/* Scrollable Container */}
-          <div 
+          <div
             ref={scrollContainerRef}
             className="flex gap-8 overflow-x-auto scrollbar-hide pb-4"
-            style={{ 
+            style={{
               scrollbarWidth: 'none',
               msOverflowStyle: 'none',
               WebkitScrollbar: { display: 'none' }
@@ -342,67 +342,67 @@ const Blog = () => {
           >
             {blogPosts.map((post, index) => (
               <Link to={`/blogs/${post.id}`} target='_blank' key={post.id}  >
-              <article
-                key={post.id}
-                className="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden group cursor-pointer transform hover:-translate-y-1 flex-shrink-0"
-                onClick={() => openBlogPost(post)}
-                style={{
-                  width: '368px', // Fixed width for consistent scrolling
-                  animationDelay: `${index * 100}ms`,
-                  animation: 'fadeInUp 0.6s ease-out forwards'
-                }}
-              >
-                {/* Image */}
-                <div className="relative overflow-hidden">
-                  <img
-                    src={post.image}
-                    alt={post.title}
-                    className="w-full h-56 object-cover group-hover:scale-105 transition-transform duration-300"
-                  />
-                  <div className="absolute top-4 left-4">
-                    <span className={`px-3 py-1 rounded-full text-sm font-medium ${post.categoryColor}`}>
-                      {post.category}
-                    </span>
-                  </div>
-                </div>
-
-                {/* Content */}
-                <div className="p-6">
-                  {/* Meta Info */}
-                  <div className="flex items-center text-sm text-gray-500 mb-3 space-x-4">
-                    <div className="flex items-center">
-                      <Calendar className="w-4 h-4 mr-1" />
-                      {post.date}
-                    </div>
-                    <div className="flex items-center">
-                      <Clock className="w-4 h-4 mr-1" />
-                      {post.readTime}
+                <article
+                  key={post.id}
+                  className="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden group cursor-pointer transform hover:-translate-y-1 flex-shrink-0"
+                  onClick={() => openBlogPost(post)}
+                  style={{
+                    width: '368px', // Fixed width for consistent scrolling
+                    animationDelay: `${index * 100}ms`,
+                    animation: 'fadeInUp 0.6s ease-out forwards'
+                  }}
+                >
+                  {/* Image */}
+                  <div className="relative overflow-hidden">
+                    <img
+                      src={post.image}
+                      alt={post.title}
+                      className="w-full h-56 object-cover group-hover:scale-105 transition-transform duration-300"
+                    />
+                    <div className="absolute top-4 left-4">
+                      <span className={`px-3 py-1 rounded-full text-sm font-medium ${post.categoryColor}`}>
+                        {post.category}
+                      </span>
                     </div>
                   </div>
 
-                  {/* Title */}
-                  <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-orange-600 transition-colors duration-200 line-clamp-2">
-                    {post.title}
-                  </h3>
-
-                  {/* Excerpt */}
-                  <p className="text-gray-600 mb-4 line-clamp-3 leading-relaxed">
-                    {post.excerpt}
-                  </p>
-
-                  {/* Author & Read More */}
-                  <div className="flex items-center justify-between pt-4 border-t border-gray-100">
-                    <div className="flex items-center">
-                      <User className="w-4 h-4 text-gray-400 mr-2" />
-                      <span className="text-sm text-gray-600 font-medium">{post.author}</span>
+                  {/* Content */}
+                  <div className="p-6">
+                    {/* Meta Info */}
+                    <div className="flex items-center text-sm text-gray-500 mb-3 space-x-4">
+                      <div className="flex items-center">
+                        <Calendar className="w-4 h-4 mr-1" />
+                        {post.date}
+                      </div>
+                      <div className="flex items-center">
+                        <Clock className="w-4 h-4 mr-1" />
+                        {post.readTime}
+                      </div>
                     </div>
-                    <div className="flex items-center text-orange-600 font-medium text-sm group-hover:text-orange-700 transition-colors duration-200">
-                      Read More
-                      <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform duration-200" />
+
+                    {/* Title */}
+                    <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-orange-600 transition-colors duration-200 line-clamp-2">
+                      {post.title}
+                    </h3>
+
+                    {/* Excerpt */}
+                    <p className="text-gray-600 mb-4 line-clamp-3 leading-relaxed">
+                      {post.excerpt}
+                    </p>
+
+                    {/* Author & Read More */}
+                    <div className="flex items-center justify-between pt-4 border-t border-gray-100">
+                      <div className="flex items-center">
+                        <User className="w-4 h-4 text-gray-400 mr-2" />
+                        <span className="text-sm text-gray-600 font-medium">{post.author}</span>
+                      </div>
+                      <div className="flex items-center text-orange-600 font-medium text-sm group-hover:text-orange-700 transition-colors duration-200">
+                        Read More
+                        <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform duration-200" />
+                      </div>
                     </div>
                   </div>
-                </div>
-              </article>
+                </article>
               </Link>
             ))}
           </div>
@@ -413,10 +413,10 @@ const Blog = () => {
               <span>{Math.round(scrollProgress)}% viewed</span>
             </div>
             <div className="w-full bg-gray-200 rounded-full h-2">
-              <div 
+              <div
                 className="bg-gradient-to-r from-orange-500 to-orange-600 h-2 rounded-full transition-all duration-500 ease-out"
-                style={{ 
-                  width: `${scrollProgress}%` 
+                style={{
+                  width: `${scrollProgress}%`
                 }}
               ></div>
             </div>

@@ -13,8 +13,10 @@ export default function BlogPage() {
   return (
     <div>
       <Navigation setCalendlyModalVisibility={setCalendlyModalVisibility} setSignupFormVisibility={setSignupFormVisibility} />
-      <Blog />
-      <Footer />
+      <main className="pt-28">
+        <Blog />
+        <Footer />
+      </main>
     </div>
   );
 }
