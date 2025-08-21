@@ -10,7 +10,7 @@ const FAQ = ({setSignupFormVisibility}) => {
   const faqs = [
     {
       question: "Is there a refund policy if I'm not satisfied with the service?",
-      answer: "We prioritize your satisfaction and offer prorated refunds if you're not happy with our service. A one-time fee of $150 covers resume building, dashboard setup, and admin costs. The remaining amount (up to $200 total) is refunded based on the number of job applications already processed. You only pay for what you receive, and we ensure it's worth it."
+      answer: "We prioritize your satisfaction. While we are unable to provide refunds, we ensure full value for your investment by applying to 150–200 additional job applications on your behalf. This way, you continue to get maximum benefit from the service you’ve chosen."
     },
     {
       question: "What if I don't receive any interview calls?",
