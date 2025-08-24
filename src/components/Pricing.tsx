@@ -227,7 +227,7 @@ const Pricing = () => {
     {
       name: "Executive",
       icon: <Rocket className="w-6 h-6" />,
-      applications: "1000",
+      applications: "1200+",
       price: "$599",
       originalPrice: "$699",
       popular: false,
@@ -236,7 +236,7 @@ const Pricing = () => {
       paymentLink: "https://www.paypal.com/ncp/payment/CDRFGB6M566X8",
       features: [
         "Everything in Professional",
-        "1200+ tailored applications",
+        "1000+ tailored applications",
         "Executive-level job targeting",
         "Personal career consultant",
         "Portfolio development",
