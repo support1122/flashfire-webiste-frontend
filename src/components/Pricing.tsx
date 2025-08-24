@@ -201,7 +201,6 @@ const Pricing = () => {
         "250 tailored applications",
         "Resume optimization",
         "Basic analytics dashboard",
-        "Email support",
       ],
       cta: "Start Now"
     },
@@ -237,7 +236,7 @@ const Pricing = () => {
       paymentLink: "https://www.paypal.com/ncp/payment/CDRFGB6M566X8",
       features: [
         "Everything in Professional",
-        "1000 tailored applications",
+        "1200+ tailored applications",
         "Executive-level job targeting",
         "Personal career consultant",
         "Portfolio development",
