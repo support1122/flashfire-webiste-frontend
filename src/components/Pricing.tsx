@@ -210,7 +210,7 @@ const Pricing = () => {
       applications: "500",
       price: "$349",
       originalPrice: "$449",
-      popular: true,
+      popular: false,
       description: "Most popular for mid-level professionals",
       paymentLink: "https://www.paypal.com/ncp/payment/SMTK5UYQYM4A8",
       features: [
@@ -230,8 +230,8 @@ const Pricing = () => {
       applications: "1200+",
       price: "$599",
       originalPrice: "$699",
-      popular: false,
-      badge: "Best Value",
+      popular: true,
+      // badge: "Best Value",
       description: "Perfect for entry-level professionals",
       paymentLink: "https://www.paypal.com/ncp/payment/CDRFGB6M566X8",
       features: [
