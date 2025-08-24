@@ -211,6 +211,7 @@ const Pricing = () => {
       price: "$349",
       originalPrice: "$449",
       popular: false,
+      badge: "Economical",
       description: "Most popular for mid-level professionals",
       paymentLink: "https://www.paypal.com/ncp/payment/SMTK5UYQYM4A8",
       features: [
