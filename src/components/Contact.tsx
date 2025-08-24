@@ -119,109 +119,59 @@ const Contact = ({setSignupFormVisibility}) => {
             </div>
           </div>
 
-          {/* Contact Form */}
-          <div className="bg-white p-6 sm:p-8 rounded-2xl shadow-lg border border-gray-100">
-            <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-6">Send Us a Message</h3>
-            
-            {submitted ? (
-              <div className="text-center py-12">
-                <div className="flex justify-center mb-4">
-                  <div className="w-12 h-12 sm:w-16 sm:h-16 bg-green-100 rounded-full flex items-center justify-center">
-                    <CheckCircle className="w-6 h-6 sm:w-8 sm:h-8 text-green-600" />
-                  </div>
-                </div>
-                <h4 className="text-lg sm:text-xl font-bold text-gray-900 mb-2">Message Sent Successfully!</h4>
-                <p className="text-gray-600 mb-6 text-sm sm:text-base">
-                  We have received your message. Our team will get back to you soon.
-                </p>
-                <button
-                  onClick={() => setSubmitted(false)}
-                  className="bg-gradient-to-r from-orange-500 to-red-500 text-white px-6 py-3 rounded-xl font-semibold hover:from-orange-600 hover:to-red-600 transition-all duration-200"
-                >
-                  Send Another Message
-                </button>
-              </div>
-            ) : (
-              <form onSubmit={async (e)=>{ e.preventDefault();await handleSubmit() ; GTagUTM({
-                                                eventName: 'CONTACT_FORM_SUBMIT',
-                                                label: 'CONTACT_SECTION_SUBMIT_Button',
-                                                utmParams: {
-                                                  utm_source: 'WEBSITE',
-                                                  utm_medium: 'CONTACT_SECTION_SUBMIT_Button',
-                                                  utm_campaign: 'WEBSITE',
-                                                },
-                                              });
+          {/* Contact Info */}
+<div className="space-y-6 sm:space-y-8">
+  <div className="bg-white p-6 sm:p-8 rounded-2xl shadow-lg border border-gray-100">
+    <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-6">Get Started Today</h3>
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      {/* Email Us */}
+      <div className="flex items-center space-x-4">
+        <div className="p-3 bg-orange-100 rounded-xl">
+          <Mail className="w-5 h-5 sm:w-6 sm:h-6 text-orange-600" />
+        </div>
+        <div>
+          <p className="text-gray-900 font-semibold">Email Us</p>
+          <p className="text-gray-600 text-sm sm:text-base">support@flashfirejobs.com</p>
+        </div>
+      </div>
 
-              }} className="space-y-4 sm:space-y-6">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">First Name</label>
-                    <input
-                      type="text"
-                      name="firstName"
-                      value={formData.firstName}
-                      onChange={handleChange}
-                      required
-                      className="w-full px-3 sm:px-4 py-2.5 sm:py-3 bg-gray-50 border border-gray-200 rounded-xl text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent text-sm sm:text-base"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">Last Name</label>
-                    <input
-                      type="text"
-                      name="lastName"
-                      value={formData.lastName}
-                      onChange={handleChange}
-                      required
-                      className="w-full px-3 sm:px-4 py-2.5 sm:py-3 bg-gray-50 border border-gray-200 rounded-xl text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent text-sm sm:text-base"
-                    />
-                  </div>
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Email Address</label>
-                  <input
-                    type="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    required
-                    className="w-full px-3 sm:px-4 py-2.5 sm:py-3 bg-gray-50 border border-gray-200 rounded-xl text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent text-sm sm:text-base"
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Current Role</label>
-                  <input
-                    type="text"
-                    name="currentRole"
-                    value={formData.currentRole}
-                    onChange={handleChange}
-                    required
-                    className="w-full px-3 sm:px-4 py-2.5 sm:py-3 bg-gray-50 border border-gray-200 rounded-xl text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent text-sm sm:text-base"
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Message</label>
-                  <textarea
-                    name="message"
-                    value={formData.message}
-                    onChange={handleChange}
-                    required
-                    rows={5}
-                    className="w-full px-3 sm:px-4 py-2.5 sm:py-3 bg-gray-50 border border-gray-200 rounded-xl text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent resize-none text-sm sm:text-base"
-                    placeholder="Tell us about your job search goals..."
-                  ></textarea>
-                </div>
-                <button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="w-full bg-gradient-to-r from-orange-500 to-red-500 text-white py-3 sm:py-4 px-6 rounded-xl font-bold hover:from-orange-600 hover:to-red-600 transition-all duration-200 shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed text-sm sm:text-base"
-                >
-                  {isSubmitting ? 'Sending...' : 'Send Message'}
-                </button>
-              </form>
-            )}
+      {/* Book a Demo */}
+      <div className="flex items-center space-x-4">
+        <div className="p-3 bg-orange-100 rounded-xl">
+          <Calendar className="w-5 h-5 sm:w-6 sm:h-6 text-orange-600" />
+        </div>
+        <div>
+          <p className="text-gray-900 font-semibold">Book a Demo</p>
+          <p className="text-gray-600 text-sm sm:text-base">Schedule a free consultation</p>
+        </div>
+      </div>
+
+      {/* Why Choose FLASHFIRE */}
+      <div className="bg-gradient-to-r from-orange-500 to-red-500 p-6 sm:p-8 rounded-2xl text-white shadow-lg md:col-span-2">
+        <h4 className="text-lg sm:text-xl font-bold mb-4">Why Choose FLASHFIRE?</h4>
+        <div className="grid grid-cols-2 gap-4">
+          <div className="text-center">
+            <div className="text-2xl sm:text-3xl font-bold">95%</div>
+            <div className="text-orange-100 text-xs sm:text-sm">Success Rate</div>
+          </div>
+          <div className="text-center">
+            <div className="text-2xl sm:text-3xl font-bold">150+</div>
+            <div className="text-orange-100 text-xs sm:text-sm">Hours Saved</div>
+          </div>
+          <div className="text-center">
+            <div className="text-2xl sm:text-3xl font-bold">50+</div>
+            <div className="text-orange-100 text-xs sm:text-sm">Jobs Landed</div>
+          </div>
+          <div className="text-center">
+            <div className="text-2xl sm:text-3xl font-bold">24/7</div>
+            <div className="text-orange-100 text-xs sm:text-sm">Help / Support</div>
           </div>
         </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 
         {/* <div className="mt-12 sm:mt-20 text-center">
           <div className="bg-white rounded-2xl sm:rounded-3xl p-8 sm:p-12 shadow-lg border border-gray-100">
