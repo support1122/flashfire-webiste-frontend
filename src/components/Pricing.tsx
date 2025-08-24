@@ -281,12 +281,6 @@ return (
             All plans include our AI-powered job matching and application automation. 
             <span className="text-orange-600 font-semibold"> Save 150+ hours monthly</span> while we work for you 24/7.
           </p>
-          
-          {/* Discount Banner */}
-          <div className="bg-gradient-to-r from-orange-500 to-red-500 text-white rounded-2xl p-4 sm:p-6 max-w-2xl mx-auto mb-8 sm:mb-12">
-            <h3 className="text-xl sm:text-2xl font-bold mb-2">🔥 Early Bird Special - 20% OFF</h3>
-            <p className="text-orange-100">Limited time offer. No code needed!</p>
-          </div>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8">
