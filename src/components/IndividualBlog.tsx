@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 // import React from 'react';
 // import { useParams, useNavigate } from 'react-router-dom';
 // import blogPosts from '../BLogsData.ts';
@@ -76,9 +75,6 @@
 // export default IndividualBlog;
 
 import React, { useEffect, useRef } from 'react';
-=======
-import React, { useEffect } from 'react';
->>>>>>> 0d713dc75898843afcb03d079ced38899d85276b
 import { useParams, useNavigate, useOutletContext } from 'react-router-dom';
 import blogPosts from '../BLogsData.ts';
 import Navigation from './Navigation';
@@ -89,7 +85,7 @@ import CalendlyModal from './CalendlyModal.tsx';
 function IndividualBlog() {
   const { id } = useParams();
   const navigate = useNavigate();
-<<<<<<< HEAD
+
   const contentRef = useRef<HTMLDivElement>(null);
   
   // Access modal state from parent App component
@@ -97,7 +93,7 @@ function IndividualBlog() {
     setSignupFormVisibility: React.Dispatch<React.SetStateAction<boolean>>,
     setCalendlyModalVisibility: React.Dispatch<React.SetStateAction<boolean>>,
   }>();
-=======
+
   const { signupFormVisibility, calendlyModalVisibility, setSignupFormVisibility, setCalendlyModalVisibility } = useOutletContext<{
     signupFormVisibility: boolean,
     calendlyModalVisibility: boolean,
@@ -108,7 +104,7 @@ function IndividualBlog() {
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }, []);
->>>>>>> 0d713dc75898843afcb03d079ced38899d85276b
+
 
   const selectedBlog = blogPosts.find((blog) => blog.id === parseInt(id || '0'));
 
