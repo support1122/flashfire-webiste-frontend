@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // import React from 'react';
 // import { useParams, useNavigate } from 'react-router-dom';
 // import blogPosts from '../BLogsData.ts';
@@ -75,12 +76,20 @@
 // export default IndividualBlog;
 
 import React, { useEffect, useRef } from 'react';
+=======
+import React, { useEffect } from 'react';
+>>>>>>> 0d713dc75898843afcb03d079ced38899d85276b
 import { useParams, useNavigate, useOutletContext } from 'react-router-dom';
 import blogPosts from '../BLogsData.ts';
+import Navigation from './Navigation';
+import Footer from './Footer';
+import SignupForm from './SignupForm.tsx';
+import CalendlyModal from './CalendlyModal.tsx';
 
 function IndividualBlog() {
   const { id } = useParams();
   const navigate = useNavigate();
+<<<<<<< HEAD
   const contentRef = useRef<HTMLDivElement>(null);
   
   // Access modal state from parent App component
@@ -88,6 +97,18 @@ function IndividualBlog() {
     setSignupFormVisibility: React.Dispatch<React.SetStateAction<boolean>>,
     setCalendlyModalVisibility: React.Dispatch<React.SetStateAction<boolean>>,
   }>();
+=======
+  const { signupFormVisibility, calendlyModalVisibility, setSignupFormVisibility, setCalendlyModalVisibility } = useOutletContext<{
+    signupFormVisibility: boolean,
+    calendlyModalVisibility: boolean,
+    setSignupFormVisibility: React.Dispatch<React.SetStateAction<boolean>>,
+    setCalendlyModalVisibility: React.Dispatch<React.SetStateAction<boolean>>,
+  }>();
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, []);
+>>>>>>> 0d713dc75898843afcb03d079ced38899d85276b
 
   const selectedBlog = blogPosts.find((blog) => blog.id === parseInt(id || '0'));
 
@@ -133,6 +154,7 @@ function IndividualBlog() {
 
   return (
     <div className="bg-gray-50 min-h-screen font-['Inter']">
+      <Navigation setCalendlyModalVisibility={setCalendlyModalVisibility} setSignupFormVisibility={setSignupFormVisibility} />
       <div className="max-w-4xl mx-auto px-4 py-8">
         {/* Blog Header */}
         <div className="bg-white rounded-lg shadow-lg overflow-hidden mb-8">
@@ -186,6 +208,16 @@ function IndividualBlog() {
           </button>
         </div>
       </div>
+      <Footer />
+      {signupFormVisibility && (
+        <SignupForm
+          setSignupFormVisibility={setSignupFormVisibility}
+          setCalendlyModalVisibility={setCalendlyModalVisibility}
+        />
+      )}
+      {calendlyModalVisibility && (
+        <CalendlyModal setCalendlyModalVisibility={setCalendlyModalVisibility} />
+      )}
     </div>
   );
 }
