@@ -1,51 +1,158 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { ArrowRight, Sparkles } from 'lucide-react';
-import { GTagUTM } from '../utils/GTagUTM.js';
+import { useState, useEffect, useRef } from "react"
+import { ArrowRight, Sparkles } from "lucide-react"
+import { GTagUTM } from "../utils/GTagUTM.js"
 
 const Hero = ({ setSignupFormVisibility }) => {
-  const [isSuccessMatrixVisible, setIsSuccessMatrixVisible] = useState(false);
-  const successMatrixRef = useRef<HTMLDivElement>(null);
+  const [isSuccessMatrixVisible, setIsSuccessMatrixVisible] = useState(false)
+  const [isLoaded, setIsLoaded] = useState(false)
+  const successMatrixRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
+    const timer = setTimeout(() => setIsLoaded(true), 100)
+
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) setIsSuccessMatrixVisible(true);
+        if (entry.isIntersecting) setIsSuccessMatrixVisible(true)
       },
-      { threshold: 0.05, rootMargin: '100px 0px' }
-    );
-    if (successMatrixRef.current) observer.observe(successMatrixRef.current);
+      { threshold: 0.05, rootMargin: "100px 0px" },
+    )
+    if (successMatrixRef.current) observer.observe(successMatrixRef.current)
     return () => {
-      if (successMatrixRef.current) observer.unobserve(successMatrixRef.current);
-    };
-  }, []);
+      clearTimeout(timer)
+      if (successMatrixRef.current) observer.unobserve(successMatrixRef.current)
+    }
+  }, [])
 
   return (
     <>
+      <style jsx>{`
+        @keyframes wave1 {
+          0%, 100% { transform: translateX(-100%) translateY(0px) rotate(0deg); }
+          50% { transform: translateX(100vw) translateY(-20px) rotate(180deg); }
+        }
+        
+        @keyframes wave2 {
+          0%, 100% { transform: translateX(100vw) translateY(0px) rotate(180deg); }
+          50% { transform: translateX(-100%) translateY(-30px) rotate(360deg); }
+        }
+        
+        @keyframes wave3 {
+          0%, 100% { transform: translateX(-50%) translateY(0px) rotate(0deg); }
+          33% { transform: translateX(50vw) translateY(-15px) rotate(120deg); }
+          66% { transform: translateX(150vw) translateY(-25px) rotate(240deg); }
+        }
+        
+        @keyframes float {
+          0%, 100% { transform: translateY(0px) rotate(0deg); }
+          50% { transform: translateY(-20px) rotate(5deg); }
+        }
+        
+        @keyframes pulse-glow {
+          0%, 100% { box-shadow: 0 0 20px rgba(249, 115, 22, 0.3); }
+          50% { box-shadow: 0 0 40px rgba(249, 115, 22, 0.6), 0 0 60px rgba(249, 115, 22, 0.3); }
+        }
+        
+        @keyframes slideInUp {
+          from { opacity: 0; transform: translateY(50px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes slideInDown {
+          from { opacity: 0; transform: translateY(-30px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes fadeInScale {
+          from { opacity: 0; transform: scale(0.8); }
+          to { opacity: 1; transform: scale(1); }
+        }
+        
+        @keyframes scrollBounce {
+          0%, 100% { transform: translateY(0px); }
+          50% { transform: translateY(-10px); }
+        }
+        
+        .wave-bg {
+          position: absolute;
+          width: 200%;
+          height: 200%;
+          background: linear-gradient(45deg, rgba(249, 115, 22, 0.4), rgba(239, 68, 68, 0.3));
+          border-radius: 50%;
+          animation: wave1 40s ease-in-out infinite;
+        }
+        
+        .wave-bg-2 {
+          position: absolute;
+          width: 150%;
+          height: 150%;
+          background: linear-gradient(-45deg, rgba(249, 115, 22, 0.35), rgba(239, 68, 68, 0.25));
+          border-radius: 50%;
+          animation: wave2 50s ease-in-out infinite;
+          animation-delay: -5s;
+        }
+        
+        .wave-bg-3 {
+          position: absolute;
+          width: 180%;
+          height: 180%;
+          background: linear-gradient(90deg, rgba(249, 115, 22, 0.3), rgba(239, 68, 68, 0.2));
+          border-radius: 50%;
+          animation: wave3 60s ease-in-out infinite;
+          animation-delay: -10s;
+        }
+        
+        .floating-element {
+          animation: float 12s ease-in-out infinite;
+        }
+        
+        .slide-in-up {
+          animation: slideInUp 0.8s ease-out forwards;
+        }
+        
+        .slide-in-down {
+          animation: slideInDown 0.6s ease-out forwards;
+        }
+        
+        .fade-in-scale {
+          animation: fadeInScale 0.7s ease-out forwards;
+        }
+        
+        .pulse-glow {
+          animation: pulse-glow 3s ease-in-out infinite;
+        }
+        
+        .scroll-bounce {
+          animation: scrollBounce 2s ease-in-out infinite;
+        }
+      `}</style>
+
       {/* Main Hero Section - 100vh */}
       <section
         id="home"
         className="relative pb-4 h-screen bg-gradient-to-br from-orange-50 via-white to-red-50 overflow-hidden"
       >
-        {/* Background Effects (make click-through) */}
         <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute top-20 left-10 w-72 h-72 bg-orange-200/30 rounded-full blur-3xl pointer-events-none" />
-          <div className="absolute bottom-20 right-10 w-96 h-96 bg-red-200/30 rounded-full blur-3xl pointer-events-none" />
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-to-r from-orange-100/40 to-red-100/40 rounded-full blur-3xl pointer-events-none" />
+          <div className="wave-bg opacity-60" />
+          <div className="wave-bg-2 opacity-50" />
+          <div className="wave-bg-3 opacity-40" />
         </div>
 
         {/* Main Content - Centered (lift above background) */}
         <div className="relative z-10 h-full flex items-center justify-center">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             {/* Badge */}
-            <div className="inline-flex items-center space-x-2 bg-orange-100 border border-orange-200 rounded-full px-3 sm:px-4 py-2 mb-6 sm:mb-8 lg:mb-20">
+            <div
+              className={`inline-flex items-center space-x-2 bg-orange-100 border border-orange-200 rounded-full px-3 sm:px-4 py-2 mb-6 sm:mb-8 lg:mb-20 transition-all duration-500 ${isLoaded ? "slide-in-down opacity-100" : "opacity-0"}`}
+            >
               <Sparkles className="w-3 h-3 sm:w-4 sm:h-4 text-orange-600" />
-              <span className="text-orange-800 text-xs sm:text-sm font-medium">
-                Save 150+ Hours Every Month
-              </span>
+              <span className="text-orange-800 text-xs sm:text-sm font-medium">Save 150+ Hours Every Month</span>
             </div>
 
             {/* Main Headline */}
-            <h1 className="relative -top-[18px] text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-6xl font-bold text-black leading-snug mb-6 sm:mb-8 px-2 text-center">
+            <h1
+              className={`relative -top-[18px] text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-6xl font-bold text-black leading-snug mb-6 sm:mb-8 px-2 text-center transition-all duration-700 ${isLoaded ? "fade-in-scale opacity-100" : "opacity-0"}`}
+              style={{ animationDelay: "0.2s" }}
+            >
               <span className="block">Land 15+ Interview Calls with Us</span>
               <span className="bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text text-transparent">
                 Powered by Flashfire AI.
@@ -53,50 +160,49 @@ const Hero = ({ setSignupFormVisibility }) => {
             </h1>
 
             {/* Subtext */}
-            <p className="text-lg sm:text-xl md:text-2xl lg:text-2xl text-[#333333] tracking-tight mb-12 sm:mb-12 max-w-[1100px] mx-auto leading-snug px-4 text-center lg:mb-14">
-              We apply to <span className="text-orange-600 font-bold">1,200+ USA jobs</span> and track everything - so you can focus on interviews.
+            <p
+              className={`text-lg sm:text-xl md:text-2xl lg:text-2xl text-[#333333] tracking-tight mb-12 sm:mb-12 max-w-[1100px] mx-auto leading-snug px-4 text-center lg:mb-14 transition-all duration-700 ${isLoaded ? "slide-in-up opacity-100" : "opacity-0"}`}
+              style={{ animationDelay: "0.4s" }}
+            >
+              We apply to <span className="text-orange-600 font-bold">1,200+ USA jobs</span> and track everything - so
+              you can focus on interviews.
             </p>
 
             {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center px-4">
+            <div
+              className={`flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center px-4 transition-all duration-700 ${isLoaded ? "slide-in-up opacity-100" : "opacity-0"}`}
+              style={{ animationDelay: "0.6s" }}
+            >
               <button
                 type="button"
                 onClick={() => {
                   // Open the form first
-                  setSignupFormVisibility(true);
+                  setSignupFormVisibility(true)
                   // Track safely
                   try {
                     GTagUTM({
-                      eventName: 'sign_up_click',
-                      label: 'Hero_Start_Free_Trial_Button',
+                      eventName: "sign_up_click",
+                      label: "Hero_Start_Free_Trial_Button",
                       utmParams: {
-                        utm_source: 'WEBSITE',
-                        utm_medium: 'Website_Front_Page',
-                        utm_campaign: 'Website',
+                        utm_source: "WEBSITE",
+                        utm_medium: "Website_Front_Page",
+                        utm_campaign: "Website",
                       },
-                    });
+                    })
                   } catch {}
                 }}
-                className="group bg-gradient-to-r from-orange-500 to-orange-600 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold text-base sm:text-lg hover:from-orange-600 hover:to-orange-700 transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105 flex items-center space-x-2 w-full sm:w-auto justify-center"
+                className="group bg-gradient-to-r from-orange-500 to-orange-600 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold text-base sm:text-lg hover:from-orange-600 hover:to-orange-700 transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105 flex items-center space-x-2 w-full sm:w-auto justify-center pulse-glow transform hover:rotate-1"
               >
                 <span>Start My 7-Day Free Trial</span>
                 <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform" />
               </button>
-
-              {/* <a
-                href="#how-it-works"
-                className="scroll-smooth border-2 border-gray-300 text-gray-700 px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold text-base sm:text-lg hover:bg-gray-50 hover:border-gray-400 transition-all duration-300 w-full sm:w-auto text-center"
-              >
-                See How It Works
-              </a> */}
             </div>
           </div>
         </div>
 
-        {/* Scroll Indicator */}
-        <div className="absolute bottom-8 left-1/2 h-fit transform -translate-x-1/2 animate-bounce">
-          <div className="w-6 h-10 border-2 border-gray-400 rounded-full flex justify-center">
-            <div className="w-1 h-3 bg-gray-400 rounded-full mt-2 animate-pulse" />
+        <div className="absolute bottom-8 left-1/2 h-fit transform -translate-x-1/2 scroll-bounce">
+          <div className="w-8 h-12 border-3 border-orange-500 rounded-full flex justify-center bg-white/80 backdrop-blur-sm shadow-lg">
+            <div className="w-2 h-4 bg-orange-500 rounded-full mt-2 animate-pulse" />
           </div>
         </div>
       </section>
@@ -112,12 +218,12 @@ const Hero = ({ setSignupFormVisibility }) => {
           <div
             ref={successMatrixRef}
             className={`max-w-7xl mx-auto text-center transition-all duration-800 ease-out opacity-100 transform translate-y-0 lg:opacity-0 lg:transform lg:translate-y-8 ${
-              isSuccessMatrixVisible ? 'lg:opacity-100 lg:transform lg:translate-y-0' : ''
+              isSuccessMatrixVisible ? "lg:opacity-100 lg:transform lg:translate-y-0" : ""
             }`}
           >
             <h2
               className={`text-2xl sm:text-3xl md:text-4xl lg:text-4xl font-bold text-gray-900 mb-4 sm:mb-6 lg:mb-8 leading-tight transition-all duration-800 delay-100 opacity-100 transform translate-y-0 lg:opacity-0 lg:transform lg:translate-y-4 ${
-                isSuccessMatrixVisible ? 'lg:opacity-100 lg:transform lg:translate-y-0' : ''
+                isSuccessMatrixVisible ? "lg:opacity-100 lg:transform lg:translate-y-0" : ""
               }`}
             >
               <span className="block">Our Platform Gets Users Interview Calls Within Weeks —</span>
@@ -126,7 +232,7 @@ const Hero = ({ setSignupFormVisibility }) => {
 
             <p
               className={`text-lg sm:text-xl md:text-xl lg:text-xl text-gray-600 mb-8 sm:mb-12 lg:mb-16 transition-all duration-800 delay-150 opacity-100 transform translate-y-0 lg:opacity-0 lg:transform lg:translate-y-4 ${
-                isSuccessMatrixVisible ? 'lg:opacity-100 lg:transform lg:translate-y-0' : ''
+                isSuccessMatrixVisible ? "lg:opacity-100 lg:transform lg:translate-y-0" : ""
               }`}
             >
               Powered by AI-driven job targeting and recruiter outreach automation.
@@ -134,13 +240,13 @@ const Hero = ({ setSignupFormVisibility }) => {
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 xl:gap-20 mb-8 sm:mb-12">
               {[
-                { percentage: '95%', title: 'Clients get calls', subtitle: 'within a month', delay: 'delay-200' },
-                { percentage: '90%', title: 'Clients land job', subtitle: 'within 3 months', delay: 'delay-300' },
+                { percentage: "95%", title: "Clients get calls", subtitle: "within a month", delay: "delay-200" },
+                { percentage: "90%", title: "Clients land job", subtitle: "within 3 months", delay: "delay-300" },
               ].map((stat, index) => (
                 <div
                   key={index}
                   className={`text-center group cursor-pointer relative p-4 sm:p-6 lg:p-8 transition-all duration-800 ${stat.delay} opacity-100 transform translate-y-0 lg:opacity-0 lg:transform lg:translate-y-6 flex flex-col items-center justify-center ${
-                    isSuccessMatrixVisible ? 'lg:opacity-100 lg:transform lg:translate-y-0' : ''
+                    isSuccessMatrixVisible ? "lg:opacity-100 lg:transform lg:translate-y-0" : ""
                   }`}
                 >
                   <div className="absolute inset-0 flex items-center justify-center">
@@ -173,7 +279,7 @@ const Hero = ({ setSignupFormVisibility }) => {
 
             <p
               className={`text-sm sm:text-base md:text-lg text-gray-500 italic transition-all duration-800 delay-400 opacity-100 transform translate-y-0 lg:opacity-0 lg:transform lg:translate-y-4 ${
-                isSuccessMatrixVisible ? 'lg:opacity-100 lg:transform lg:translate-y-0' : ''
+                isSuccessMatrixVisible ? "lg:opacity-100 lg:transform lg:translate-y-0" : ""
               }`}
             >
               *Based on verified user data from 2024-25 cohort
@@ -182,7 +288,7 @@ const Hero = ({ setSignupFormVisibility }) => {
         </div>
       </section>
     </>
-  );
-};
+  )
+}
 
-export default Hero;
+export default Hero
