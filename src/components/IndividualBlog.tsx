@@ -1,10 +1,9 @@
+// src/components/IndividualBlog.tsx
 import React, { useEffect, useRef } from 'react';
 import { useParams, useNavigate, useOutletContext } from 'react-router-dom';
 import blogPosts from '../BLogsData.ts';
 import Navigation from './Navigation';
 import Footer from './Footer';
-import SignupForm from './SignupForm.tsx';
-import CalendlyModal from './CalendlyModal.tsx';
 
 type AppOutletContext = {
   signupFormVisibility: boolean;
@@ -13,63 +12,78 @@ type AppOutletContext = {
   setCalendlyModalVisibility: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-function IndividualBlog() {
+export default function IndividualBlog() {
   const { id } = useParams();
   const navigate = useNavigate();
-
   const contentRef = useRef<HTMLDivElement>(null);
 
-  // ✅ Only one destructure, grab everything you need
+  // ✅ single source of truth from App.tsx
   const {
-    signupFormVisibility,
-    calendlyModalVisibility,
     setSignupFormVisibility,
     setCalendlyModalVisibility,
   } = useOutletContext<AppOutletContext>();
 
   useEffect(() => {
+    // scroll to top when opening an article
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }, []);
 
-  const selectedBlog = blogPosts.find((blog) => blog.id === parseInt(id || '0'));
-
-  if (!selectedBlog)
+  const selectedBlog = blogPosts.find((blog) => blog.id === parseInt(id || '0', 10));
+  if (!selectedBlog) {
     return <div className="text-center text-red-500 mt-10">Blog not found.</div>;
+  }
 
   const { title, image, category, categoryColor, date, readTime, author, content } =
     selectedBlog;
 
-  // Add event listeners to inline buttons after content is rendered
+  // Wire up inline CTAs inside rendered HTML (e.g., gradient buttons in content)
   useEffect(() => {
-    if (contentRef.current) {
-      const buttons = contentRef.current.querySelectorAll('a[style*="background"]');
-      buttons.forEach((button) => {
-        const buttonText = button.textContent?.toLowerCase() || '';
-        const newButton = button.cloneNode(true) as HTMLAnchorElement;
-        button.parentNode?.replaceChild(newButton, button);
+    if (!contentRef.current) return;
 
-        newButton.addEventListener('click', (e) => {
-          e.preventDefault();
-          if (
-            buttonText.includes('sign up') ||
-            buttonText.includes('free trial') ||
-            buttonText.includes('start')
-          ) {
-            setSignupFormVisibility(true);
-          } else if (
-            buttonText.includes('book') ||
-            buttonText.includes('schedule') ||
-            buttonText.includes('consultation') ||
-            buttonText.includes('demo')
-          ) {
-            setCalendlyModalVisibility(true);
-          } else {
-            setSignupFormVisibility(true);
-          }
-        });
+    const buttons = contentRef.current.querySelectorAll('a[style*="background"]');
+    buttons.forEach((button) => {
+      const text = (button.textContent || '').toLowerCase();
+
+      // replace node to remove previous listeners if any
+      const fresh = button.cloneNode(true) as HTMLAnchorElement;
+      button.parentNode?.replaceChild(fresh, button);
+
+      fresh.addEventListener('click', (e) => {
+        e.preventDefault();
+
+        if (
+          text.includes('sign up') ||
+          text.includes('free trial') ||
+          text.includes('start')
+        ) {
+          setSignupFormVisibility(true);
+        } else if (
+          text.includes('book') ||
+          text.includes('schedule') ||
+          text.includes('consultation') ||
+          text.includes('demo')
+        ) {
+          setCalendlyModalVisibility(true);
+        } else {
+          // default to signup if we can't classify
+          setSignupFormVisibility(true);
+        }
       });
-    }
+    });
   }, [content, setSignupFormVisibility, setCalendlyModalVisibility]);
+
+  // Smart close: window.close if pop-up, back if history, else go to list
+  const handleClose = () => {
+    if (window.opener && !window.opener.closed) {
+      window.close();
+      return;
+    }
+    if (window.history.length > 1) {
+      navigate(-1);
+      return;
+    }
+    navigate('/blogs'); // fallback to your blog list route
+  };
 
   return (
     <div className="bg-gray-50 min-h-screen font-['Inter']">
@@ -77,8 +91,9 @@ function IndividualBlog() {
         setCalendlyModalVisibility={setCalendlyModalVisibility}
         setSignupFormVisibility={setSignupFormVisibility}
       />
+
       <div className="max-w-4xl mx-auto px-4 py-8">
-        {/* Blog Header */}
+        {/* Header */}
         <div className="bg-white rounded-lg shadow-lg overflow-hidden mb-8">
           <img
             src={image.startsWith('/') ? window.location.origin + image : image}
@@ -111,29 +126,18 @@ function IndividualBlog() {
           />
         </div>
 
-        {/* Back Button */}
+        {/* Close */}
         <div className="mt-8 text-center">
           <button
-            onClick={() => navigate(-1)}
+            onClick={handleClose}
             className="back-btn text-white px-8 py-3 rounded-full font-semibold shadow-lg bg-gradient-to-r from-orange-400 to-orange-600 hover:translate-y-[-2px] hover:shadow-orange-200 transition-all"
           >
             Close Article
           </button>
         </div>
       </div>
-      <Footer />
 
-      {signupFormVisibility && (
-        <SignupForm
-          setSignupFormVisibility={setSignupFormVisibility}
-          setCalendlyModalVisibility={setCalendlyModalVisibility}
-        />
-      )}
-      {calendlyModalVisibility && (
-        <CalendlyModal setCalendlyModalVisibility={setCalendlyModalVisibility} />
-      )}
+      <Footer />
     </div>
   );
 }
-
-export default IndividualBlog;
