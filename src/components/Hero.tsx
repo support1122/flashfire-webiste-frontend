@@ -27,19 +27,36 @@ const Hero = ({ setSignupFormVisibility }) => {
     <>
       <style jsx>{`
         @keyframes wave1 {
-          0%, 100% { transform: translateX(-100%) translateY(0px) rotate(0deg); }
-          50% { transform: translateX(100vw) translateY(-20px) rotate(180deg); }
+          0% { transform: translateX(-80%) translateY(-60%) rotate(0deg); opacity: 0; }
+          10% { opacity: 0.4; }
+          50% { transform: translateX(-60%) translateY(-80%) rotate(180deg); opacity: 0.4; }
+          90% { opacity: 0.4; }
+          100% { transform: translateX(-80%) translateY(-60%) rotate(0deg); opacity: 0; }
         }
         
         @keyframes wave2 {
-          0%, 100% { transform: translateX(100vw) translateY(0px) rotate(180deg); }
-          50% { transform: translateX(-100%) translateY(-30px) rotate(360deg); }
+          0% { transform: translateX(60%) translateY(-60%) rotate(180deg); opacity: 0; }
+          15% { opacity: 0.35; }
+          50% { transform: translateX(80%) translateY(-40%) rotate(360deg); opacity: 0.35; }
+          85% { opacity: 0.35; }
+          100% { transform: translateX(60%) translateY(-60%) rotate(180deg); opacity: 0; }
         }
         
         @keyframes wave3 {
-          0%, 100% { transform: translateX(-50%) translateY(0px) rotate(0deg); }
-          33% { transform: translateX(50vw) translateY(-15px) rotate(120deg); }
-          66% { transform: translateX(150vw) translateY(-25px) rotate(240deg); }
+          0% { transform: translateX(-70%) translateY(40%) rotate(0deg); opacity: 0; }
+          20% { opacity: 0.3; }
+          33% { transform: translateX(-50%) translateY(60%) rotate(120deg); opacity: 0.3; }
+          66% { transform: translateX(-90%) translateY(50%) rotate(240deg); opacity: 0.3; }
+          80% { opacity: 0.3; }
+          100% { transform: translateX(-70%) translateY(40%) rotate(0deg); opacity: 0; }
+        }
+        
+        @keyframes wave4 {
+          0% { transform: translateX(70%) translateY(50%) rotate(0deg); opacity: 0; }
+          25% { opacity: 0.25; }
+          50% { transform: translateX(90%) translateY(70%) rotate(180deg); opacity: 0.25; }
+          75% { opacity: 0.25; }
+          100% { transform: translateX(70%) translateY(50%) rotate(0deg); opacity: 0; }
         }
         
         @keyframes float {
@@ -52,21 +69,6 @@ const Hero = ({ setSignupFormVisibility }) => {
           50% { box-shadow: 0 0 40px rgba(249, 115, 22, 0.6), 0 0 60px rgba(249, 115, 22, 0.3); }
         }
         
-        @keyframes slideInUp {
-          from { opacity: 0; transform: translateY(50px); }
-          to { opacity: 1; transform: translateY(0); }
-        }
-        
-        @keyframes slideInDown {
-          from { opacity: 0; transform: translateY(-30px); }
-          to { opacity: 1; transform: translateY(0); }
-        }
-        
-        @keyframes fadeInScale {
-          from { opacity: 0; transform: scale(0.8); }
-          to { opacity: 1; transform: scale(1); }
-        }
-        
         @keyframes scrollBounce {
           0%, 100% { transform: translateY(0px); }
           50% { transform: translateY(-10px); }
@@ -74,47 +76,57 @@ const Hero = ({ setSignupFormVisibility }) => {
         
         .wave-bg {
           position: absolute;
-          width: 200%;
-          height: 200%;
-          background: linear-gradient(45deg, rgba(249, 115, 22, 0.4), rgba(239, 68, 68, 0.3));
+          width: 120%;
+          height: 120%;
+          background: linear-gradient(45deg, rgba(249, 115, 22, 1), rgba(239, 68, 68, 1));
           border-radius: 50%;
           animation: wave1 40s ease-in-out infinite;
+          top: -10%;
+          left: -10%;
+          opacity: 0;
         }
         
         .wave-bg-2 {
           position: absolute;
-          width: 150%;
-          height: 150%;
-          background: linear-gradient(-45deg, rgba(249, 115, 22, 0.35), rgba(239, 68, 68, 0.25));
+          width: 100%;
+          height: 100%;
+          background: linear-gradient(-45deg, rgba(249, 115, 22, 1), rgba(239, 68, 68, 1));
           border-radius: 50%;
           animation: wave2 50s ease-in-out infinite;
           animation-delay: -5s;
+          top: -10%;
+          right: -10%;
+          opacity: 0;
         }
         
         .wave-bg-3 {
           position: absolute;
-          width: 180%;
-          height: 180%;
-          background: linear-gradient(90deg, rgba(249, 115, 22, 0.3), rgba(239, 68, 68, 0.2));
+          width: 110%;
+          height: 110%;
+          background: linear-gradient(90deg, rgba(249, 115, 22, 1), rgba(239, 68, 68, 1));
           border-radius: 50%;
           animation: wave3 60s ease-in-out infinite;
           animation-delay: -10s;
+          bottom: -10%;
+          left: -10%;
+          opacity: 0;
+        }
+        
+        .wave-bg-4 {
+          position: absolute;
+          width: 105%;
+          height: 105%;
+          background: linear-gradient(135deg, rgba(249, 115, 22, 1), rgba(239, 68, 68, 1));
+          border-radius: 50%;
+          animation: wave4 45s ease-in-out infinite;
+          animation-delay: -15s;
+          bottom: -10%;
+          right: -10%;
+          opacity: 0;
         }
         
         .floating-element {
           animation: float 12s ease-in-out infinite;
-        }
-        
-        .slide-in-up {
-          animation: slideInUp 0.8s ease-out forwards;
-        }
-        
-        .slide-in-down {
-          animation: slideInDown 0.6s ease-out forwards;
-        }
-        
-        .fade-in-scale {
-          animation: fadeInScale 0.7s ease-out forwards;
         }
         
         .pulse-glow {
@@ -132,9 +144,10 @@ const Hero = ({ setSignupFormVisibility }) => {
         className="relative pb-4 h-screen bg-gradient-to-br from-orange-50 via-white to-red-50 overflow-hidden"
       >
         <div className="absolute inset-0 pointer-events-none">
-          <div className="wave-bg opacity-60" />
-          <div className="wave-bg-2 opacity-50" />
-          <div className="wave-bg-3 opacity-40" />
+          <div className="wave-bg" />
+          <div className="wave-bg-2" />
+          <div className="wave-bg-3" />
+          <div className="wave-bg-4" />
         </div>
 
         {/* Main Content - Centered (lift above background) */}
@@ -142,7 +155,7 @@ const Hero = ({ setSignupFormVisibility }) => {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             {/* Badge */}
             <div
-              className={`inline-flex items-center space-x-2 bg-orange-100 border border-orange-200 rounded-full px-3 sm:px-4 py-2 mb-6 sm:mb-8 lg:mb-20 transition-all duration-500 ${isLoaded ? "slide-in-down opacity-100" : "opacity-0"}`}
+              className={`inline-flex items-center space-x-2 bg-orange-100 border border-orange-200 rounded-full px-3 sm:px-4 py-2 mb-6 sm:mb-8 lg:mb-20 transition-all duration-500 ${isLoaded ? "opacity-100" : "opacity-0"}`}
             >
               <Sparkles className="w-3 h-3 sm:w-4 sm:h-4 text-orange-600" />
               <span className="text-orange-800 text-xs sm:text-sm font-medium">Save 150+ Hours Every Month</span>
@@ -150,8 +163,7 @@ const Hero = ({ setSignupFormVisibility }) => {
 
             {/* Main Headline */}
             <h1
-              className={`relative -top-[18px] text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-6xl font-bold text-black leading-snug mb-6 sm:mb-8 px-2 text-center transition-all duration-700 ${isLoaded ? "fade-in-scale opacity-100" : "opacity-0"}`}
-              style={{ animationDelay: "0.2s" }}
+              className={`relative -top-[18px] text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-6xl font-bold text-black leading-snug mb-6 sm:mb-8 px-2 text-center transition-all duration-700 ${isLoaded ? "opacity-100" : "opacity-0"}`}
             >
               <span className="block">Land 15+ Interview Calls with Us</span>
               <span className="bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text text-transparent">
@@ -161,8 +173,7 @@ const Hero = ({ setSignupFormVisibility }) => {
 
             {/* Subtext */}
             <p
-              className={`text-lg sm:text-xl md:text-2xl lg:text-2xl text-[#333333] tracking-tight mb-12 sm:mb-12 max-w-[1100px] mx-auto leading-snug px-4 text-center lg:mb-14 transition-all duration-700 ${isLoaded ? "slide-in-up opacity-100" : "opacity-0"}`}
-              style={{ animationDelay: "0.4s" }}
+              className={`text-lg sm:text-xl md:text-2xl lg:text-2xl text-[#333333] tracking-tight mb-12 sm:mb-12 max-w-[1100px] mx-auto leading-snug px-4 text-center lg:mb-14 transition-all duration-700 ${isLoaded ? "opacity-100" : "opacity-0"}`}
             >
               We apply to <span className="text-orange-600 font-bold">1,200+ USA jobs</span> and track everything - so
               you can focus on interviews.
@@ -170,8 +181,7 @@ const Hero = ({ setSignupFormVisibility }) => {
 
             {/* CTA Buttons */}
             <div
-              className={`flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center px-4 transition-all duration-700 ${isLoaded ? "slide-in-up opacity-100" : "opacity-0"}`}
-              style={{ animationDelay: "0.6s" }}
+              className={`flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center px-4 transition-all duration-700 ${isLoaded ? "opacity-100" : "opacity-0"}`}
             >
               <button
                 type="button"
