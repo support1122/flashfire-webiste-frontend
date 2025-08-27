@@ -1,9 +1,8 @@
-
 import React, { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 import EmployerForm from './EmployerForm';
 import { GTagUTM } from '../utils/GTagUTM.ts';
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
 
 interface NavigationProps {
   setSignupFormVisibility: React.Dispatch<React.SetStateAction<boolean>>;
@@ -35,8 +34,22 @@ const Navigation: React.FC<NavigationProps> = ({
     { name: 'Employers', href: '#employers' },
   ];
 
+  // Never let analytics break the CTA flow
+  const safeTrack = (payload: any) => {
+    try {
+      GTagUTM?.(payload);
+    } catch {
+      /* swallow analytics errors */
+    }
+  };
+
   const openSignup = () => {
-    GTagUTM({
+    // 1) Real action first
+    setSignupFormVisibility(true);
+    setIsMenuOpen(false);
+
+    // 2) Non-blocking analytics
+    safeTrack({
       eventName: 'sign_up_click',
       label: 'Header Sign Up Button',
       utmParams: {
@@ -45,13 +58,13 @@ const Navigation: React.FC<NavigationProps> = ({
         utm_campaign: 'header_signup',
       },
     });
-    setSignupFormVisibility(true);
-    setIsMenuOpen(false);
   };
 
   const openCalendly = () => {
-    // Preserve original functionality: banner "Book Now" opens Calendly
-    GTagUTM({
+    setCalendlyModalVisibility(true);
+    setIsMenuOpen(false);
+
+    safeTrack({
       eventName: 'Calendly_Meet_click',
       label: 'NAVBAR_LOWER_SECTION_Button',
       utmParams: {
@@ -60,8 +73,6 @@ const Navigation: React.FC<NavigationProps> = ({
         utm_campaign: 'WEBSITE_NAVBAR_LOWER_SECTION',
       },
     });
-    setCalendlyModalVisibility(true);
-    setIsMenuOpen(false);
   };
 
   const openEmployerForm = () => {
@@ -76,16 +87,20 @@ const Navigation: React.FC<NavigationProps> = ({
   return (
     <div className="font-inter">
       <nav
-        className={`fixed top-0 w-full z-40 transition-all duration-300 ${isScrolled
+        className={`fixed top-0 w-full z-40 transition-all duration-300 ${
+          isScrolled
             ? 'bg-white/95 backdrop-blur-md shadow-lg border-b border-gray-100'
             : 'bg-white/80 backdrop-blur-sm'
-          }`}
+        }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16 sm:h-18">
             {/* Logo */}
             <div className="flex items-center">
-              <Link to="/" className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-red-500 to-red-600 bg-clip-text text-transparent cursor-pointer hover:opacity-80 transition-opacity duration-200">
+              <Link
+                to="/"
+                className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-red-500 to-red-600 bg-clip-text text-transparent cursor-pointer hover:opacity-80 transition-opacity duration-200"
+              >
                 FLASHFIRE
               </Link>
             </div>
@@ -165,7 +180,7 @@ const Navigation: React.FC<NavigationProps> = ({
                     );
                   }
 
-                  const isInternalRoute = item.href.startsWith('/')
+                  const isInternalRoute = item.href.startsWith('/');
 
                   return isInternalRoute ? (
                     <Link
@@ -298,10 +313,7 @@ const Navigation: React.FC<NavigationProps> = ({
       {/* Employer Form Modal */}
       {employerFormVisible && (
         <div className="fixed inset-0 z-[60]">
-          <EmployerForm
-            isVisible={employerFormVisible}
-            onClose={closeEmployerForm}
-          />
+          <EmployerForm isVisible={employerFormVisible} onClose={closeEmployerForm} />
         </div>
       )}
     </div>
