@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { X, Calendar, CheckCircle, Loader2 } from 'lucide-react';
+import { X, Calendar, CheckCircle, Loader2, Clock, Users, Target } from 'lucide-react';
 import { InlineWidget } from 'react-calendly';
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
@@ -45,10 +45,50 @@ function CalendlyModal({ setCalendlyModalVisibility }: { setCalendlyModalVisibil
           {/* Calendar - Full Height */}
           <div className="bg-white relative" style={{ height: 'calc(100vh - 100px)' }}>
             {isLoading && (
-              <div className="absolute inset-0 bg-white flex items-center justify-center z-10">
-                <div className="flex flex-col items-center gap-4">
-                  <Loader2 className="w-10 h-10 text-orange-500 animate-spin" />
-                  <p className="text-gray-700 text-lg font-medium">Finding best slots for you...</p>
+              <div className="absolute inset-0 bg-gradient-to-br from-gray-50 to-white flex items-center justify-center z-10">
+                <div className="text-center max-w-md mx-auto px-6">
+                  {/* Animated Logo */}
+                  <div className="relative mb-8">
+                    <div className="w-20 h-20 mx-auto bg-gradient-to-br from-orange-500 to-red-600 rounded-2xl flex items-center justify-center shadow-lg animate-pulse">
+                      <Calendar className="w-10 h-10 text-white" />
+                    </div>
+                    <div className="absolute -top-2 -right-2 w-6 h-6 bg-green-500 rounded-full flex items-center justify-center animate-bounce">
+                      <div className="w-3 h-3 bg-white rounded-full"></div>
+                    </div>
+                  </div>
+                  
+                  {/* Main Message */}
+                  <h3 className="text-2xl font-bold text-gray-800 mb-3">Finding Your Perfect Time</h3>
+                  <p className="text-gray-600 text-lg mb-8">We're analyzing our expert schedules to find the best consultation slots for you.</p>
+                  
+                  {/* Progress Indicators */}
+                  <div className="space-y-4 mb-8">
+                    <div className="flex items-center space-x-3 text-left">
+                      <div className="w-8 h-8 bg-orange-100 rounded-full flex items-center justify-center">
+                        <Clock className="w-4 h-4 text-orange-600" />
+                      </div>
+                      <span className="text-gray-700">Checking availability...</span>
+                    </div>
+                    <div className="flex items-center space-x-3 text-left">
+                      <div className="w-8 h-8 bg-orange-100 rounded-full flex items-center justify-center">
+                        <Users className="w-4 h-4 text-orange-600" />
+                      </div>
+                      <span className="text-gray-700">Matching with experts...</span>
+                    </div>
+                    <div className="flex items-center space-x-3 text-left">
+                      <div className="w-8 h-8 bg-orange-100 rounded-full flex items-center justify-center">
+                        <Target className="w-4 h-4 text-orange-600" />
+                      </div>
+                      <span className="text-gray-700">Optimizing for your goals...</span>
+                    </div>
+                  </div>
+                  
+                  {/* Loading Bar */}
+                  <div className="w-full bg-gray-200 rounded-full h-2 mb-4">
+                    <div className="bg-gradient-to-r from-orange-500 to-red-600 h-2 rounded-full animate-pulse" style={{ width: '60%' }}></div>
+                  </div>
+                  
+                  <p className="text-sm text-gray-500">This usually takes just a few seconds</p>
                 </div>
               </div>
             )}
@@ -146,10 +186,50 @@ function CalendlyModal({ setCalendlyModalVisibility }: { setCalendlyModalVisibil
           {/* Calendar Section */}
           <div className="w-3/5 bg-white overflow-hidden rounded-r-xl relative">
             {isLoading && (
-              <div className="absolute inset-0 bg-white flex items-center justify-center z-10">
-                <div className="flex flex-col items-center gap-4">
-                  <Loader2 className="w-10 h-10 text-orange-500 animate-spin" />
-                  <p className="text-gray-700 text-lg font-medium">Finding best slots for you...</p>
+              <div className="absolute inset-0 bg-gradient-to-br from-gray-50 to-white flex items-center justify-center z-10">
+                <div className="text-center max-w-lg mx-auto px-8">
+                  {/* Animated Logo */}
+                  <div className="relative mb-8">
+                    <div className="w-24 h-24 mx-auto bg-gradient-to-br from-orange-500 to-red-600 rounded-3xl flex items-center justify-center shadow-xl animate-pulse">
+                      <Calendar className="w-12 h-12 text-white" />
+                    </div>
+                    <div className="absolute -top-3 -right-3 w-8 h-8 bg-green-500 rounded-full flex items-center justify-center animate-bounce">
+                      <div className="w-4 h-4 bg-white rounded-full"></div>
+                    </div>
+                  </div>
+                  
+                  {/* Main Message */}
+                  <h3 className="text-3xl font-bold text-gray-800 mb-4">Finding Your Perfect Time</h3>
+                  <p className="text-gray-600 text-xl mb-10 leading-relaxed">We're analyzing our expert schedules to find the best consultation slots for you.</p>
+                  
+                  {/* Progress Indicators */}
+                  <div className="space-y-5 mb-10">
+                    <div className="flex items-center space-x-4 text-left">
+                      <div className="w-10 h-10 bg-orange-100 rounded-full flex items-center justify-center">
+                        <Clock className="w-5 h-5 text-orange-600" />
+                      </div>
+                      <span className="text-gray-700 text-lg">Checking availability...</span>
+                    </div>
+                    <div className="flex items-center space-x-4 text-left">
+                      <div className="w-10 h-10 bg-orange-100 rounded-full flex items-center justify-center">
+                        <Users className="w-5 h-5 text-orange-600" />
+                      </div>
+                      <span className="text-gray-700 text-lg">Matching with experts...</span>
+                    </div>
+                    <div className="flex items-center space-x-4 text-left">
+                      <div className="w-10 h-10 bg-orange-100 rounded-full flex items-center justify-center">
+                        <Target className="w-5 h-5 text-orange-600" />
+                      </div>
+                      <span className="text-gray-700 text-lg">Optimizing for your goals...</span>
+                    </div>
+                  </div>
+                  
+                  {/* Loading Bar */}
+                  <div className="w-full bg-gray-200 rounded-full h-3 mb-6">
+                    <div className="bg-gradient-to-r from-orange-500 to-red-600 h-3 rounded-full animate-pulse" style={{ width: '60%' }}></div>
+                  </div>
+                  
+                  <p className="text-gray-500 text-lg">This usually takes just a few seconds</p>
                 </div>
               </div>
             )}
