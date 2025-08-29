@@ -1,38 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import { X, Calendar, CheckCircle, Loader2 } from 'lucide-react';
-import OptimizedCalendlyWidget from './OptimizedCalendlyWidget';
+import { InlineWidget } from 'react-calendly';
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
-function CalendlyModal({ setCalendlyModalVisibility }) {
+function CalendlyModal({ setCalendlyModalVisibility }: { setCalendlyModalVisibility: (visible: boolean) => void }) {
   const [isLoading, setIsLoading] = useState(true);
-  const [isWidgetReady, setIsWidgetReady] = useState(false);
 
-  // Preload Calendly widget when component mounts
   useEffect(() => {
-    const preloadCalendly = () => {
-      // Create a hidden iframe to preload Calendly
-      const preloadIframe = document.createElement('iframe');
-      preloadIframe.src = 'https://calendly.com/feedback-flashfire/30min';
-      preloadIframe.style.display = 'none';
-      preloadIframe.onload = () => {
-        setIsWidgetReady(true);
-        setIsLoading(false);
-      };
-      document.body.appendChild(preloadIframe);
-      
-      // Fallback timeout
-      setTimeout(() => {
-        setIsLoading(false);
-      }, 3000);
-    };
+    // Hide loading after 3 seconds as fallback
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 3000);
 
-    preloadCalendly();
+    return () => clearTimeout(timer);
   }, []);
-
-  const handleWidgetLoad = () => {
-    setIsLoading(false);
-  };
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center w-full">
@@ -62,7 +44,15 @@ function CalendlyModal({ setCalendlyModalVisibility }) {
 
           {/* Calendar - Full Height */}
           <div className="bg-white relative" style={{ height: 'calc(100vh - 100px)' }}>
-            <OptimizedCalendlyWidget
+            {isLoading && (
+              <div className="absolute inset-0 bg-white flex items-center justify-center z-10">
+                <div className="flex flex-col items-center gap-3">
+                  <Loader2 className="w-8 h-8 text-orange-500 animate-spin" />
+                  <p className="text-gray-600 text-sm">Loading calendar...</p>
+                </div>
+              </div>
+            )}
+            <InlineWidget
               url="https://calendly.com/feedback-flashfire/30min"
               styles={{
                 height: '100%',
@@ -76,7 +66,6 @@ function CalendlyModal({ setCalendlyModalVisibility }) {
                 primaryColor: 'f97316',
                 textColor: '374151',
               }}
-              onLoad={handleWidgetLoad}
             />
           </div>
         </div>
@@ -156,7 +145,15 @@ function CalendlyModal({ setCalendlyModalVisibility }) {
 
           {/* Calendar Section */}
           <div className="w-3/5 bg-white overflow-hidden rounded-r-xl relative">
-            <OptimizedCalendlyWidget
+            {isLoading && (
+              <div className="absolute inset-0 bg-white flex items-center justify-center z-10">
+                <div className="flex flex-col items-center gap-3">
+                  <Loader2 className="w-8 h-8 text-orange-500 animate-spin" />
+                  <p className="text-gray-600 text-sm">Loading calendar...</p>
+                </div>
+              </div>
+            )}
+            <InlineWidget
               url="https://calendly.com/feedback-flashfire/30min"
               styles={{
                 height: '100%',
@@ -170,7 +167,6 @@ function CalendlyModal({ setCalendlyModalVisibility }) {
                 primaryColor: 'f97316',
                 textColor: '374151',
               }}
-              onLoad={handleWidgetLoad}
             />
           </div>
         </div>

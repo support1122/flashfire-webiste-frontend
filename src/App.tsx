@@ -60,13 +60,11 @@ import {useEffect, useState} from 'react';
 import { Outlet, useLocation } from "react-router-dom";
 import SignupForm from './components/SignupForm.tsx';
 import CalendlyModal from './components/CalendlyModal.tsx';
-import CalendlyPreloader from './components/CalendlyPreloader.tsx';
 // import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 
 function App() {
   const [signupFormVisibility, setSignupFormVisibility] = useState(false);
   const [calendlyModalVisibility, setCalendlyModalVisibility] = useState(false);
-  const [calendlyReady, setCalendlyReady] = useState(false);
   const location = useLocation();
   
   // Smooth-scroll to hash targets when path is '/#section'
@@ -94,9 +92,6 @@ function App() {
 
   return (
     <div className="min-h-screen bg-white">
-      {/* Global Calendly Preloader - loads in background */}
-      <CalendlyPreloader onReady={() => setCalendlyReady(true)} />
-      
       {/* <Navigation setSignupFormVisibility={setSignupFormVisibility} setCalendlyModalVisibility={setCalendlyModalVisibility} /> */}
       {/* <Hero setSignupFormVisibility={setSignupFormVisibility} setCalendlyModalVisibility={setCalendlyModalVisibility} /> */}
       {/* <MovingJobs setSignupFormVisibility={setSignupFormVisibility} /> */}
