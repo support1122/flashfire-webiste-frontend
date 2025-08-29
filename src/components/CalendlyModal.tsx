@@ -8,10 +8,10 @@ function CalendlyModal({ setCalendlyModalVisibility }: { setCalendlyModalVisibil
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // Hide loading after 3 seconds as fallback
+    // Hide loading after 5 seconds as fallback
     const timer = setTimeout(() => {
       setIsLoading(false);
-    }, 3000);
+    }, 5000);
 
     return () => clearTimeout(timer);
   }, []);
@@ -46,9 +46,9 @@ function CalendlyModal({ setCalendlyModalVisibility }: { setCalendlyModalVisibil
           <div className="bg-white relative" style={{ height: 'calc(100vh - 100px)' }}>
             {isLoading && (
               <div className="absolute inset-0 bg-white flex items-center justify-center z-10">
-                <div className="flex flex-col items-center gap-3">
-                  <Loader2 className="w-8 h-8 text-orange-500 animate-spin" />
-                  <p className="text-gray-600 text-sm">Loading calendar...</p>
+                <div className="flex flex-col items-center gap-4">
+                  <Loader2 className="w-10 h-10 text-orange-500 animate-spin" />
+                  <p className="text-gray-700 text-lg font-medium">Finding best slots for you...</p>
                 </div>
               </div>
             )}
@@ -147,9 +147,9 @@ function CalendlyModal({ setCalendlyModalVisibility }: { setCalendlyModalVisibil
           <div className="w-3/5 bg-white overflow-hidden rounded-r-xl relative">
             {isLoading && (
               <div className="absolute inset-0 bg-white flex items-center justify-center z-10">
-                <div className="flex flex-col items-center gap-3">
-                  <Loader2 className="w-8 h-8 text-orange-500 animate-spin" />
-                  <p className="text-gray-600 text-sm">Loading calendar...</p>
+                <div className="flex flex-col items-center gap-4">
+                  <Loader2 className="w-10 h-10 text-orange-500 animate-spin" />
+                  <p className="text-gray-700 text-lg font-medium">Finding best slots for you...</p>
                 </div>
               </div>
             )}
