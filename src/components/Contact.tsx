@@ -8,7 +8,7 @@ const Contact = ({ setSignupFormVisibility }) => {
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
-    email: '',
+    email: '',  
     currentRole: '',
     message: ''
   });
@@ -72,7 +72,7 @@ const Contact = ({ setSignupFormVisibility }) => {
   };
 
   return (
-    <section id="contact" className="py-16 sm:py-24 bg-gradient-to-b from-white to-gray-50">
+    <section id="contact" className="py-16 sm:py-24 bg-gradient-to-b from-white to-gray-50 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-12 sm:mb-16">
@@ -90,9 +90,9 @@ const Contact = ({ setSignupFormVisibility }) => {
         </div>
 
         {/* Two equal columns (White + Orange) */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
           {/* White Box */}
-          <div className="bg-white p-6 sm:p-8 rounded-2xl shadow-lg border border-gray-100">
+          <div className="bg-white p-4 sm:p-6 lg:p-8 rounded-2xl shadow-lg border border-gray-100">
             <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-6">Get Started Today</h3>
             <div className="space-y-6">
               <div className="flex items-center space-x-4">
@@ -128,21 +128,21 @@ const Contact = ({ setSignupFormVisibility }) => {
             `}
           >
             <h4 className="text-lg sm:text-xl font-bold mb-4">Why Choose FLASHFIRE?</h4>
-            <div className="grid grid-cols-2 gap-4">
-              <div className="text-center">
-                <div className="text-2xl sm:text-3xl font-bold">95%</div>
+            <div className="grid grid-cols-2 gap-2 sm:gap-3 lg:gap-4 overflow-hidden">
+              <div className="text-center p-2 break-words">
+                <div className="text-xl sm:text-2xl lg:text-3xl font-bold">95%</div>
                 <div className="text-orange-100 text-xs sm:text-sm">Success Rate</div>
               </div>
-              <div className="text-center">
-                <div className="text-2xl sm:text-3xl font-bold">150+</div>
+              <div className="text-center p-2 break-words">
+                <div className="text-xl sm:text-2xl lg:text-3xl font-bold">150+</div>
                 <div className="text-orange-100 text-xs sm:text-sm">Hours Saved</div>
               </div>
-              <div className="text-center">
-                <div className="text-2xl sm:text-3xl font-bold">50+</div>
+              <div className="text-center p-2 break-words">
+                <div className="text-xl sm:text-2xl lg:text-3xl font-bold">50+</div>
                 <div className="text-orange-100 text-xs sm:text-sm">Jobs Landed</div>
               </div>
-              <div className="text-center">
-                <div className="text-2xl sm:text-3xl font-bold">24/7</div>
+              <div className="text-center p-2 break-words">
+                <div className="text-xl sm:text-2xl lg:text-3xl font-bold">24/7</div>
                 <div className="text-orange-100 text-xs sm:text-sm">Help / Support</div>
               </div>
             </div>
