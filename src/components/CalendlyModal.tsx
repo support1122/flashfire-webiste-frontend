@@ -47,8 +47,8 @@ function CalendlyModal({ setCalendlyModalVisibility }: { setCalendlyModalVisibil
             {isLoading && (
               <div className="absolute inset-0 bg-white flex items-center justify-center z-10">
                 <div className="text-center">
-                  <div className="w-12 h-12 border-4 border-orange-500 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
-                  <h3 className="text-lg font-medium text-gray-700">Finding best slots for you...</h3>
+                  <h3 className="text-lg font-medium text-gray-700 mb-6">Find Your Perfect Timing</h3>
+                  <div className="w-12 h-12 border-4 border-orange-500 border-t-transparent rounded-full animate-spin mx-auto"></div>
                 </div>
               </div>
             )}
@@ -148,8 +148,8 @@ function CalendlyModal({ setCalendlyModalVisibility }: { setCalendlyModalVisibil
             {isLoading && (
               <div className="absolute inset-0 bg-white flex items-center justify-center z-10">
                 <div className="text-center">
-                  <h3 className="text-xl font-medium text-gray-700 mb-8">Finding best slots for you... </h3>
-                  <div className="w-20 h-20 border-4 border-orange-500 border-t-transparent rounded-full animate-spin mx-auto"></div>
+                  <div className="w-12 h-12 border-4 border-orange-500 border-t-transparent rounded-full animate-spin mx-auto mb-6"></div>
+                  <h3 className="text-xl font-medium text-gray-700">Finding best slots for you...</h3>
                 </div>
               </div>
             )}
