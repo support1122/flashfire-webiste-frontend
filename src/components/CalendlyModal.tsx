@@ -132,7 +132,7 @@ function CalendlyModal({ setCalendlyModalVisibility }: { setCalendlyModalVisibil
                   <div className="text-orange-100 text-xs">Success Rate</div>
                 </div>
                 <div>
-                  <div className="text-2xl font-bold">10K+</div>
+                  <div className="text-2xl font-bold">100+</div>
                   <div className="text-orange-100 text-xs">Jobs Landed</div>
                 </div>
                 <div>
@@ -148,7 +148,7 @@ function CalendlyModal({ setCalendlyModalVisibility }: { setCalendlyModalVisibil
             {isLoading && (
               <div className="absolute inset-0 bg-white flex items-center justify-center z-10">
                 <div className="text-center">
-                  <h3 className="text-3xl font-bold text-gray-800 mb-8">Find Your Perfect Timing</h3>
+                  <h3 className="text-3xl font-bold text-gray-800 mb-8 font-sans">Find Your Perfect Timing</h3>
                   <div className="w-20 h-20 border-4 border-orange-500 border-t-transparent rounded-full animate-spin mx-auto"></div>
                 </div>
               </div>
@@ -176,3 +176,4 @@ function CalendlyModal({ setCalendlyModalVisibility }: { setCalendlyModalVisibil
 }
 
 export default CalendlyModal;
+
