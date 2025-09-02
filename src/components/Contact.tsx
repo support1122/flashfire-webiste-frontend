@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Mail, Calendar, MessageCircle } from 'lucide-react';
 import WhatsAppSupport from './WhatsappSupport.js';
+import { createOrUpdateContact, trackContactFormSubmission, waitForCRMLoad } from '../utils/CRMTracking';
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
@@ -55,6 +56,22 @@ const Contact = ({ setSignupFormVisibility }) => {
       });
       const responseFromServer = await requestToServer.json();
       console.log(responseFromServer);
+
+      // Wait for CRM to load and then track the contact
+      await waitForCRMLoad();
+      
+      // Create/update contact in CRM
+      createOrUpdateContact({
+        firstName: formData.firstName,
+        lastName: formData.lastName,
+        email: formData.email,
+        currentRole: formData.currentRole,
+        message: formData.message,
+        source: 'Contact Form'
+      });
+      
+      // Track contact form submission event
+      trackContactFormSubmission(formData.email, 'Contact Form');
 
       setSubmitted(true);
       setFormData({
