@@ -1,0 +1,433 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-scroll {
+  animation: scroll 5s linear infinite;
+}
+
+/* Smooth scrolling for anchor links */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* Calendly Performance Optimizations */
+.calendly-inline-widget {
+  transition: opacity 0.3s ease-in-out;
+  will-change: opacity;
+}
+
+.calendly-inline-widget iframe {
+  border: none;
+  width: 100%;
+  height: 100%;
+  min-height: 400px;
+}
+
+/* Preload Calendly assets */
+.calendly-preload {
+  position: absolute;
+  left: -9999px;
+  top: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+/* Optimize modal animations */
+.modal-enter {
+  opacity: 0;
+  transform: scale(0.95);
+}
+
+.modal-enter-active {
+  opacity: 1;
+  transform: scale(1);
+  transition: opacity 200ms ease-out, transform 200ms ease-out;
+}
+
+.modal-exit {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.modal-exit-active {
+  opacity: 0;
+  transform: scale(0.95);
+  transition: opacity 200ms ease-in, transform 200ms ease-in;
+}
+
+/* Universal Mobile Optimizations for ALL Phone Sizes */
+@media (max-width: 640px) {
+  /* Ensure all interactive elements are touch-friendly */
+  button, input, select, textarea, a {
+    min-height: 44px;
+    font-size: 16px; /* Prevents zoom on iOS */
+  }
+  
+  /* Better spacing for small screens */
+  .space-y-4 > * + * {
+    margin-top: 1rem;
+  }
+  
+  /* Calendly mobile optimization */
+  .calendly-inline-widget {
+    min-height: 400px !important;
+  }
+  
+  /* Ensure text is readable on all devices */
+  body {
+    font-size: 16px;
+    line-height: 1.5;
+  }
+}
+
+/* Extra Small Phones (320px - 374px) */
+@media (max-width: 374px) {
+  /* Ultra compact layout for very small screens */
+  .modal-content {
+    padding: 8px;
+  }
+  
+  /* Smaller text for tiny screens */
+  .text-responsive {
+    font-size: 13px;
+  }
+  
+  /* Ensure Calendly widget works on smallest phones */
+  .calendly-inline-widget iframe {
+    min-height: 350px !important;
+  }
+  
+  /* Compact navigation */
+  nav {
+    padding: 0.5rem 1rem;
+  }
+  
+  /* Smaller buttons for tiny screens */
+  button {
+    padding: 0.75rem 1rem;
+    font-size: 14px;
+  }
+}
+
+/* Small Phones (375px - 413px) - iPhone SE, iPhone 12 mini */
+@media (min-width: 375px) and (max-width: 413px) {
+  .calendly-inline-widget iframe {
+    min-height: 400px !important;
+  }
+  
+  /* Better spacing for small phones */
+  .container {
+    padding: 1rem;
+  }
+}
+
+/* Medium Phones (414px - 479px) - iPhone 6/7/8 Plus, iPhone 11 Pro */
+@media (min-width: 414px) and (max-width: 479px) {
+  .calendly-inline-widget iframe {
+    min-height: 450px !important;
+  }
+}
+
+/* Large Phones (480px - 639px) - iPhone 11, iPhone 12/13/14 Pro Max */
+@media (min-width: 480px) and (max-width: 639px) {
+  .calendly-inline-widget iframe {
+    min-height: 500px !important;
+  }
+  
+  /* Better use of space on larger phones */
+  .grid-cols-1 {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+  }
+}
+
+/* Landscape mode optimizations for ALL mobile devices */
+@media (max-height: 500px) and (orientation: landscape) {
+  .modal-content {
+    padding: 4px 8px;
+  }
+  
+  .calendly-inline-widget {
+    min-height: 300px !important;
+  }
+  
+  /* Compact header in landscape */
+  .mobile-header {
+    padding: 0.5rem;
+  }
+  
+  /* Hide unnecessary elements in landscape */
+  .landscape-hide {
+    display: none;
+  }
+}
+
+/* Tablet Portrait (640px - 767px) */
+@media (min-width: 640px) and (max-width: 767px) {
+  .calendly-inline-widget iframe {
+    min-height: 550px !important;
+  }
+}
+
+/* Tablet Landscape (768px - 1023px) */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .calendly-inline-widget iframe {
+    min-height: 600px !important;
+  }
+}
+
+/* High DPI / Retina Display Optimizations */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  /* Sharper text rendering on high DPI displays */
+  body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+/* Dark Mode Support (if user prefers) */
+@media (prefers-color-scheme: dark) {
+  /* Respect user's dark mode preference for better accessibility */
+  .calendly-inline-widget {
+    filter: invert(0); /* Keep Calendly in light mode for consistency */
+  }
+}
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+  /* Disable animations for users who prefer reduced motion */
+  .animate-scroll {
+    animation: none;
+  }
+  
+  .transition-all {
+    transition: none;
+  }
+}
+
+/* Print Styles */
+@media print {
+  /* Hide interactive elements when printing */
+  .fixed, .sticky, .modal, .calendly-inline-widget {
+    display: none !important;
+  }
+}
+
+/* Focus Styles for Better Accessibility */
+button:focus,
+input:focus,
+select:focus,
+textarea:focus {
+  outline: 2px solid #f97316;
+  outline-offset: 2px;
+}
+
+/* Ensure proper contrast ratios */
+.text-gray-600 {
+  color: #4b5563; /* Ensures WCAG AA compliance */
+}
+
+.text-gray-500 {
+  color: #6b7280; /* Ensures WCAG AA compliance */
+}
+
+
+
+
+
+
+/* //blogs */
+body { 
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; 
+            line-height: 1.6;
+          }
+          .content h2 { 
+            font-size: 1.875rem; 
+            font-weight: bold; 
+            margin: 2rem 0 1rem 0; 
+            color: #1f2937;
+            border-bottom: 3px solid #f97316;
+            padding-bottom: 0.5rem;
+          }
+          .content h3 { 
+            font-size: 1.25rem; 
+            font-weight: 600; 
+            margin: 1.25rem 0 0.5rem 0; 
+            color: #374151; 
+          }
+          .content h3:has(+ p strong) { 
+            font-size: 1.125rem; 
+            font-weight: 600; 
+            margin: 1rem 0 0.25rem 0; 
+            color: #4b5563; 
+          }
+          .content p { 
+            margin: 0.5rem 0; 
+            line-height: 1.75; 
+            color: #4b5563; 
+            font-size: 0.95rem;
+          }
+          .content p strong:first-child { 
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #374151;
+          }
+          .content ul { 
+            margin: 1rem 0; 
+            padding-left: 1.5rem; 
+          }
+          .content li { 
+            margin: 0.5rem 0; 
+            color: #4b5563; 
+            font-size: 0.9rem;
+            line-height: 1.6;
+          }
+          .content blockquote { 
+            margin: 1rem 0; 
+            padding: 1rem; 
+            background: #f9fafb; 
+            border-left: 4px solid #f97316; 
+            font-style: italic;
+            border-radius: 0.375rem;
+            font-size: 0.9rem;
+          }
+          .content strong { 
+            color: #1f2937; 
+            font-weight: 600; 
+          }
+          .content a { 
+            color: #f97316; 
+            text-decoration: underline;
+            transition: color 0.2s ease;
+          }
+          .content a:hover { 
+            color: #ea580c; 
+          }
+          .content em { 
+            font-style: italic;
+            color: #6b7280;
+          }
+          .content table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+          }
+          .content th, .content td {
+            border: 1px solid #e5e7eb;
+            padding: 12px;
+            text-align: left;
+          }
+          .content th {
+            background-color: #f9fafb;
+            font-weight: 600;
+          }
+          .content tr:nth-child(even) {
+            background-color: #f9fafb;
+          }
+          /* Special styling for FAQ sections */
+          .content h2:contains("FAQ") + h3,
+          .content h3:contains("Q1:"),
+          .content h3:contains("Q2:"),
+          .content h3:contains("Q3:"),
+          .content h3:contains("Q4:"),
+          .content h3:contains("Q5:") { 
+            font-size: 1rem; 
+            font-weight: 600; 
+            margin: 1rem 0 0.25rem 0; 
+            color: #374151; 
+          }
+          /* Special styling for subsection headers like a), b), c) */
+          .content h3:contains("a)"),
+          .content h3:contains("b)"),
+          .content h3:contains("c)") { 
+            font-size: 1rem; 
+            font-weight: 600; 
+            margin: 1rem 0 0.25rem 0; 
+            color: #4b5563; 
+          }
+          .back-btn {
+            background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
+            transition: all 0.3s ease;
+          }
+          .back-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(249, 115, 22, 0.4);
+          }
+
+    @keyframes wavePulse {
+  0%, 100% { transform: scale(1); }
+  25% { transform: scale(1.1); }
+  50% { transform: scale(0.95); }
+  75% { transform: scale(1.05); }
+}
+
+@keyframes glowPulse {
+  0%, 100% {
+    box-shadow: 0 0 8px 4px rgba(109, 189, 142, 0.5);
+    background-color: #57b87b; /* Tailwind green-500 */
+  }
+  25% {
+    box-shadow: 0 0 12px 6px rgba(128, 202, 159, 0.6);
+    background-color: #59d687; /* Tailwind green-600 */
+  }
+  50% {
+    box-shadow: 0 0 18px 10px rgba(68, 182, 110, 0.7);
+    background-color: #52a571; /* Tailwind green-700 */
+  }
+  75% {
+    box-shadow: 0 0 14px 6px rgba(89, 190, 126, 0.6);
+    background-color: #2f8e54; /* Tailwind green-800 */
+  }
+}
+
+@keyframes ripple {
+  0% {
+    transform: scale(1);
+    opacity: 0.6;
+  }
+  100% {
+    transform: scale(2.5);
+    opacity: 0;
+  }
+}
+
+.animate-ripple {
+  position: absolute;
+  animation: ripple 1s linear infinite;
+}
+
+.animate-wave {
+  animation: wavePulse 1.8s ease-in-out infinite;
+}
+
+.animate-glow {
+  animation: glowPulse 1.8s ease-in-out infinite;
+}
