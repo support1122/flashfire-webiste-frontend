@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { X, User, Phone, Mail} from 'lucide-react';
+import { createOrUpdateContact, trackSignupEvent, waitForCRMLoad } from '../utils/CRMTracking';
 
 function SignupForm({ setSignupFormVisibility, setCalendlyModalVisibility }) {
   const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
@@ -43,8 +44,24 @@ function SignupForm({ setSignupFormVisibility, setCalendlyModalVisibility }) {
       let responseFromServer = await reqToServer.json();
       console.log("Response from server:", responseFromServer);
       if(responseFromServer?.message.length > 0) {
+        // Wait for CRM to load and then track the contact
+        await waitForCRMLoad();
         
+        // Create/update contact in CRM
+        const [firstName, ...lastNameParts] = formData.fullName.split(' ');
+        const lastName = lastNameParts.join(' ') || '';
         
+        createOrUpdateContact({
+          firstName,
+          lastName,
+          email: formData.email,
+          phone: formData.countryCode + formData.phone,
+          workAuthorization: formData.workAuthorization,
+          source: 'Signup Form'
+        });
+        
+        // Track signup event
+        trackSignupEvent(formData.email, 'Signup Form');
         
         setSignupFormVisibility(false);
       }
