@@ -19,127 +19,127 @@ const MovingJobs: React.FC<MovingJobsProps> = ({ setSignupFormVisibility }) => {
         company: "Redfin",
         position: "Senior Recruiter",
         time: "43 hours ago",
-        logo: "🏠"
+        logo: "https://logo.clearbit.com/redfin.com"
       },
       {
         company: "Motorola Solutions",
         position: "Software Engineer",
         time: "22 hours ago",
-        logo: "📱"
+        logo: "https://logo.clearbit.com/motorolasolutions.com"
       },
       {
         company: "Bank of America",
         position: "Senior Data Analyst",
         time: "5 hours ago",
-        logo: "🏦"
+        logo: "https://logo.clearbit.com/bankofamerica.com"
       },
       {
         company: "Barclays",
         position: "Software Engineer",
         time: "17 hours ago",
-        logo: "💳"
+        logo: "https://logo.clearbit.com/barclays.com"
       },
       {
         company: "Goldman Sachs",
         position: "Quantitative Analyst",
         time: "8 hours ago",
-        logo: "💰"
+        logo: "https://logo.clearbit.com/goldmansachs.com"
       },
       {
         company: "JPMorgan Chase",
         position: "Full Stack Developer",
         time: "12 hours ago",
-        logo: "🏛️"
+        logo: "https://logo.clearbit.com/jpmorganchase.com"
       },
       {  
         company: "Apple",
         position: "iOS Developer",
         time: "3 hours ago",
-        logo: "📱"
+        logo: "https://logo.clearbit.com/apple.com"
       },
       {
         company: "Amazon",
         position: "Cloud Solutions Architect",
         time: "9 hours ago",
-        logo: "📦"
+        logo: "https://logo.clearbit.com/amazon.com"
       },
       {
         company: "Microsoft",
         position: "AI Research Scientist",
         time: "6 hours ago",
-        logo: "💻"
+        logo: "https://logo.clearbit.com/microsoft.com"
       },
       {
         company: "Google",
         position: "Product Manager",
         time: "2 hours ago",
-        logo: "🌐"
+        logo: "https://logo.clearbit.com/google.com"
       },
       {
         company: "Meta",
         position: "Frontend Engineer",
         time: "15 hours ago",
-        logo: "📘"
+        logo: "https://logo.clearbit.com/meta.com"
       },
       {
         company: "Netflix",
         position: "Data Engineer",
         time: "11 hours ago",
-        logo: "🎬"
+        logo: "https://logo.clearbit.com/netflix.com"
       },
       {
         company: "Tesla",
         position: "Machine Learning Engineer",
         time: "4 hours ago",
-        logo: "🚗"
+        logo: "https://logo.clearbit.com/tesla.com"
       },
       {
         company: "IBM",
         position: "Cybersecurity Analyst",
         time: "19 hours ago",
-        logo: "🖥️"
+        logo: "https://logo.clearbit.com/ibm.com"
       },
       {
         company: "Intel",
         position: "Hardware Engineer",
         time: "7 hours ago",
-        logo: "🔌"
+        logo: "https://logo.clearbit.com/intel.com"
       },
       {
         company: "Oracle",
         position: "Database Administrator",
         time: "13 hours ago",
-        logo: "☁️"
+        logo: "https://logo.clearbit.com/oracle.com"
       },
       {
         company: "Adobe",
         position: "UX Designer",
         time: "10 hours ago",
-        logo: "🎨"
+        logo: "https://logo.clearbit.com/adobe.com"
       },
       {
         company: "Salesforce",
         position: "CRM Specialist",
         time: "21 hours ago",
-        logo: "☁️"
+        logo: "https://logo.clearbit.com/salesforce.com"
       },
       {
         company: "Uber",
         position: "Backend Developer",
         time: "16 hours ago",
-        logo: "🚖"
+        logo: "https://logo.clearbit.com/uber.com"
       },
       {
         company: "Airbnb",
         position: "Data Scientist",
         time: "14 hours ago",
-        logo: "🏡"
+        logo: "https://logo.clearbit.com/airbnb.com"
       },
       {
         company: "LinkedIn",
         position: "Software Engineer",
         time: "20 hours ago",
-        logo: "🔗"
+        logo: "https://logo.clearbit.com/linkedin.com"
       }
   ];
 
@@ -188,7 +188,7 @@ const MovingJobs: React.FC<MovingJobsProps> = ({ setSignupFormVisibility }) => {
         </div>
 
         {/* Moving Jobs Container - Fixed Animation */}
-        <div className="relative  w-full">
+        <div className="relative w-full">
           {/* Inline animation styles */}
           <style>
             {`
@@ -215,7 +215,21 @@ const MovingJobs: React.FC<MovingJobsProps> = ({ setSignupFormVisibility }) => {
                 className="flex-shrink-0 w-72 sm:w-80 bg-white p-4 sm:p-6 rounded-xl sm:rounded-2xl shadow-lg border border-gray-100 hover:shadow-xl transition-shadow duration-300"
               >
                 <div className="flex items-center space-x-3 sm:space-x-4">
-                  <div className="text-2xl sm:text-3xl flex-shrink-0">{job.logo}</div>
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 flex-shrink-0 bg-gray-100 rounded-lg flex items-center justify-center overflow-hidden">
+                    <img 
+                      src={job.logo} 
+                      alt={`${job.company} logo`}
+                      className="w-8 h-8 sm:w-10 sm:h-10 object-contain"
+                      onError={(e) => {
+                        // Fallback to a generic building icon if logo fails to load
+                        e.currentTarget.style.display = 'none';
+                        (e.currentTarget.nextElementSibling as HTMLElement)!.style.display = 'block';
+                      }}
+                    />
+                    <div className="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-br from-gray-400 to-gray-600 rounded flex items-center justify-center text-white text-xs font-bold hidden">
+                      {job.company.charAt(0)}
+                    </div>
+                  </div>
                   <div className="flex-1 min-w-0">
                     <h3 className="font-bold text-gray-900 text-sm sm:text-base truncate">{job.company}</h3>
                     <p className="text-gray-600 text-xs sm:text-sm truncate">{job.position}</p>
@@ -232,7 +246,21 @@ const MovingJobs: React.FC<MovingJobsProps> = ({ setSignupFormVisibility }) => {
                 className="flex-shrink-0 w-72 sm:w-80 bg-white p-4 sm:p-6 rounded-xl sm:rounded-2xl shadow-lg border border-gray-100 hover:shadow-xl transition-shadow duration-300"
               >
                 <div className="flex items-center space-x-3 sm:space-x-4">
-                  <div className="text-2xl sm:text-3xl flex-shrink-0">{job.logo}</div>
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 flex-shrink-0 bg-gray-100 rounded-lg flex items-center justify-center overflow-hidden">
+                    <img 
+                      src={job.logo} 
+                      alt={`${job.company} logo`}
+                      className="w-8 h-8 sm:w-10 sm:h-10 object-contain"
+                      onError={(e) => {
+                        // Fallback to a generic building icon if logo fails to load
+                        e.currentTarget.style.display = 'none';
+                        (e.currentTarget.nextElementSibling as HTMLElement)!.style.display = 'block';
+                      }}
+                    />
+                    <div className="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-br from-gray-400 to-gray-600 rounded flex items-center justify-center text-white text-xs font-bold hidden">
+                      {job.company.charAt(0)}
+                    </div>
+                  </div>
                   <div className="flex-1 min-w-0">
                     <h3 className="font-bold text-gray-900 text-sm sm:text-base truncate">{job.company}</h3>
                     <p className="text-gray-600 text-xs sm:text-sm truncate">{job.position}</p>
@@ -258,9 +286,9 @@ const MovingJobs: React.FC<MovingJobsProps> = ({ setSignupFormVisibility }) => {
               });
               setSignupFormVisibility(true);
             }}
-            //className="bg-gradient-to-r from-orange-500 to-orange-600 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-full font-bold hover:from-orange-600 hover:to-orange-700 transition-all duration-200 shadow-lg hover:scale-105 text-sm sm:text-base"
+            className="bg-gradient-to-r from-orange-500 to-orange-600 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-full font-bold hover:from-orange-600 hover:to-orange-700 transition-all duration-200 shadow-lg hover:scale-105 text-sm sm:text-base"
           >
-          
+            Get Started Now
           </button>
         </div>
       </div>
