@@ -143,7 +143,7 @@ const SignupModal = () => {
             <label className="block text-sm font-medium text-gray-700 mb-2">
               <Phone className="w-4 h-4 inline mr-2" /> Phone Number (10 digits only)
             </label>
-            <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2 min-w-0">
+            <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2">
               <select 
                 name="countryCode" 
                 value={formData.countryCode} 
@@ -156,18 +156,18 @@ const SignupModal = () => {
                   </option>
                 ))}
               </select>
-                  <input 
-                    type="tel" 
-                    name="phone" 
-                    value={formData.phone} 
-                    onChange={handleInputChange} 
-                    className="flex-1 w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg text-gray-900 placeholder-gray-500 placeholder:text-sm focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent" 
-                    placeholder="Enter 10-digit number" 
-                    pattern="[0-9]{10}" 
-                    inputMode="numeric" 
-                    maxLength={10} 
-                    required 
-                  />
+              <input 
+                type="tel" 
+                name="phone" 
+                value={formData.phone} 
+                onChange={handleInputChange} 
+                className="flex-1 px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent" 
+                placeholder="Enter 10-digit phone number" 
+                pattern="[0-9]{10}" 
+                inputMode="numeric" 
+                maxLength={10} 
+                required 
+              />
             </div>
             {formData.phone && formData.phone.length !== 10 && (
               <p className="text-red-500 text-sm mt-1">Phone number must be exactly 10 digits</p>

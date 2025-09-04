@@ -1,12 +1,8 @@
 import { useState } from 'react';
 import { X, User, Phone, Mail} from 'lucide-react';
+import { createOrUpdateContact, trackSignupEvent, waitForCRMLoad } from '../utils/CRMTracking';
 
-interface SignupFormProps {
-  setSignupFormVisibility: (visible: boolean) => void;
-  setCalendlyModalVisibility: (visible: boolean) => void;
-}
-
-function SignupForm({ setSignupFormVisibility, setCalendlyModalVisibility }: SignupFormProps) {
+function SignupForm({ setSignupFormVisibility, setCalendlyModalVisibility }) {
   const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
   const [formData, setFormData] = useState({
     fullName: '',
@@ -48,8 +44,24 @@ function SignupForm({ setSignupFormVisibility, setCalendlyModalVisibility }: Sig
       let responseFromServer = await reqToServer.json();
       console.log("Response from server:", responseFromServer);
       if(responseFromServer?.message.length > 0) {
+        // Wait for CRM to load and then track the contact
+        await waitForCRMLoad();
         
+        // Create/update contact in CRM
+        const [firstName, ...lastNameParts] = formData.fullName.split(' ');
+        const lastName = lastNameParts.join(' ') || '';
         
+        createOrUpdateContact({
+          firstName,
+          lastName,
+          email: formData.email,
+          phone: formData.countryCode + formData.phone,
+          workAuthorization: formData.workAuthorization,
+          source: 'Signup Form'
+        });
+        
+        // Track signup event
+        trackSignupEvent(formData.email, 'Signup Form');
         
         setSignupFormVisibility(false);
       }
@@ -58,7 +70,7 @@ function SignupForm({ setSignupFormVisibility, setCalendlyModalVisibility }: Sig
     }
   }
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setCalendlyModalVisibility(true);
     try {
@@ -75,8 +87,16 @@ function SignupForm({ setSignupFormVisibility, setCalendlyModalVisibility }: Sig
     }
   };
 
+  const detectCountryFromPhone = (phoneNumber) => {
+    for (const country of countryCodes) {
+      if (country.pattern && country.pattern.test(phoneNumber)) {
+        return country.code;
+      }
+    }
+    return '+1';
+  };
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+  const handleInputChange = (e) => {
     const { name, value } = e.target;
     if (name === 'phone') {
       const numericValue = value.replace(/\D/g, '');
@@ -115,7 +135,7 @@ function SignupForm({ setSignupFormVisibility, setCalendlyModalVisibility }: Sig
                 name="fullName"
                 value={formData.fullName}
                 onChange={handleInputChange}
-                className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg text-gray-900 placeholder-gray-500 placeholder:text-sm focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent"
                 placeholder="Enter your full name"
                 required
               />
@@ -130,7 +150,7 @@ function SignupForm({ setSignupFormVisibility, setCalendlyModalVisibility }: Sig
                   name="countryCode"
                   value={formData.countryCode}
                   onChange={handleInputChange}
-                  className="w-37 px-3 pr-2 py-3 bg-gray-50 border border-gray-200 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                  className="w-full sm:w-auto px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent"
                 >
                   {countryCodes.map((country) => (
                     <option key={country.code} value={country.code}>
@@ -143,8 +163,8 @@ function SignupForm({ setSignupFormVisibility, setCalendlyModalVisibility }: Sig
                   name="phone"
                   value={formData.phone}
                   onChange={handleInputChange}
-                  className="flex-1 px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg text-gray-900 placeholder-gray-500 placeholder:text-sm focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent"
-                  placeholder="Enter 10-digit Phone number"
+                  className="flex-1 px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                  placeholder="Enter 10-digit phone number"
                   pattern="[0-9]{10}"
                   inputMode="numeric"
                   maxLength={10}
@@ -165,7 +185,7 @@ function SignupForm({ setSignupFormVisibility, setCalendlyModalVisibility }: Sig
                 name="email"
                 value={formData.email}
                 onChange={handleInputChange}
-                className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg text-gray-900 placeholder-gray-500 placeholder:text-sm focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent"
                 placeholder="Enter your email address"
                 required
               />
