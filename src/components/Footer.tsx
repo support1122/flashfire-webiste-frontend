@@ -53,6 +53,12 @@ const Footer = () => {
                 PAYMENT POLICY
               </button>
               </Link>
+              <span className="text-orange-200">|</span>
+              <Link to={'/RefundPolicy'} target ='_blank' rel="noopener noreferrer">
+              <button>
+                REFUND POLICY
+              </button>
+              </Link>
             </div>
           </div>
 

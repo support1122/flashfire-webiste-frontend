@@ -38,7 +38,7 @@ const HowItWorks = ({setSignupFormVisibility}) => {
         <div className="text-center mb-12 sm:mb-20">
           <div className="inline-flex items-center space-x-2 bg-orange-100 text-orange-800 px-4 py-2 rounded-full text-sm font-medium mb-4">
             <Rocket className="w-4 h-4" />
-            <span>See How FlashFire Works</span>
+            <span>See How Flashfire Works</span>
           </div>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-4 sm:mb-6">
             Your Path to Success in 4 Simple Steps

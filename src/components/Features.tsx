@@ -4,7 +4,7 @@ import { useOutletContext } from 'react-router-dom';
 import { GTagUTM } from '../utils/GTagUTM.js';
 import WhatsAppButton from './WhatsAppButton.js';
 import WhatsAppSupport from './WhatsappSupport.js';
-const Features = ({setSignupFormVisibility}) => {
+const Features = ({ setSignupFormVisibility }) => {
   // const { setSignupFormVisibility } = useOutletContext<{
   //   setSignupFormVisibility: React.Dispatch<React.SetStateAction<boolean>>;
   // }>();
@@ -12,13 +12,13 @@ const Features = ({setSignupFormVisibility}) => {
     {
       icon: <Bot className="w-8 h-8 text-orange-500" />,
       title: "AI-Powered Matching",
-      description: "Custom resumes crafted for each job using real-time data, keywords, and AI insights.",
+      description: "For each and every application, your base resume is automatically optimized to the job description with ATS-friendly keywords and skills.",
       highlight: "Smart Algorithm"
     },
     {
       icon: <FileText className="w-8 h-8 text-green-500" />,
       title: "Dynamic Resume Optimization",
-      description: "Automatically tailors your resume for each application using industry-specific formatting and ATS-friendly keywords.",
+      description: "We build your base resume from scratch and tailor it for each job, making it ATS-friendly and recruiter-visible.",
       highlight: "ATS Optimized"
     },
     {
@@ -30,21 +30,21 @@ const Features = ({setSignupFormVisibility}) => {
     {
       icon: <Target className="w-8 h-8 text-purple-500" />,
       title: "Precision Targeting",
-      description: "Only apply to jobs that match your salary, location, company size, and career preferences.",
+      description: "We only apply to jobs that fit your pay, location, company size, and career goals — and only to jobs posted in the last 24–48 hours.",
       highlight: "Quality Over Quantity"
     },
     {
       icon: <Zap className="w-8 h-8 text-red-500" />,
       title: "Lightning Fast Applications",
-      description: "Applications submitted within hours of postings going live — giving you the first-mover advantage.",
+      description: "Our team applies to 1,200+ jobs within just 6–7 weeks, sending applications within hours of postings so you get the first-mover advantage.",
       highlight: "Speed Matters"
     },
     {
-  icon: <BarChart3 className="w-8 h-8 text-indigo-500" />,
-  title: "Dashboard & Analytics",
-  description: "Access a personalized dashboard to track applications, monitor success rates, and get real-time insights to improve your job search strategy.",
-  highlight: "Live Insights"
-}
+      icon: <BarChart3 className="w-8 h-8 text-indigo-500" />,
+      title: "Dashboard & Analytics",
+      description: "Access a personalized dashboard to track applications, monitor success rates, and get real-time insights to improve your job search strategy.",
+      highlight: "Live Insights"
+    }
   ];
 
   return (
@@ -116,7 +116,7 @@ const Features = ({setSignupFormVisibility}) => {
             Start Saving Time Today
           </button>
         </div> */}
-      <WhatsAppSupport/>
+        <WhatsAppSupport />
       </div>
     </section>
   );
