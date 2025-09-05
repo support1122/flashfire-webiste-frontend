@@ -1,4 +1,4 @@
-export const us_cities = [
+export const more_in_cities = [
   ["New York", "NY", 40.7128, -74.0060],
   ["Los Angeles", "CA", 34.0522, -118.2437],
   ["Chicago", "IL", 41.8781, -87.6298],
@@ -101,11 +101,17 @@ export const us_cities = [
   ["Spokane", "WA", 47.6588, -117.4260]
 ];
 
-export const first_names = ["John", "Sarah", "Mike", "Emily", "David", "Olivia", "Daniel", "Sophia", "James", "Ava",
-  "Ethan", "Isabella", "Mason", "Mia", "Liam", "Amelia", "Noah", "Harper", "Lucas", "Ella",
-  "Jacob", "Grace", "Michael", "Zoe", "Alexander", "Chloe", "Benjamin", "Lily", "Elijah", "Scarlett",
-  "Logan", "Victoria", "Matthew", "Aria", "Henry", "Penelope", "Jackson", "Layla", "Sebastian", "Riley"
-];
+export const first_names = [// Indian (20)
+  "Aarav", "Vivaan", "Aditya", "Arjun", "Kabir", 
+  "Rohan", "Krishna", "Aryan", "Rahul", "Shivansh",
+  "Ananya", "Diya", "Saanvi", "Aadhya", "Kavya", 
+  "Meera", "Riya", "Priya", "Tanvi", "Ishaan",
+
+  // English/Foreign (20)
+  "John", "Sarah", "Mike", "Emily", "David", 
+  "Olivia", "Daniel", "Sophia", "James", "Ava",
+  "Ethan", "Isabella", "Mason", "Mia", "Liam", 
+  "Amelia", "Noah", "Lucas", "Ella", "Grace"];
 
 export const actions = ["just bought"];
 

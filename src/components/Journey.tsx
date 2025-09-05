@@ -97,7 +97,7 @@ const Journey = ({setSignupFormVisibility}) => {
         </div>
 
         {/* CTA Section */}
-        <div className="mt-16 text-center">
+        {/* <div className="mt-16 text-center">
           <div className="bg-gradient-to-r from-blue-600 to-blue-700 rounded-2xl p-8 text-white">
             <h3 className="text-2xl font-bold mb-4">
               Ready to Start Your Success Journey?
@@ -112,7 +112,7 @@ const Journey = ({setSignupFormVisibility}) => {
               Get Started for Free
             </a>
           </div>
-        </div>
+        </div> */}
       </div>
     </section>
   );

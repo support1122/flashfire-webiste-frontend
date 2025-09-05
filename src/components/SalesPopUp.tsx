@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { us_cities, first_names, actions, products } from "../utils/PopupNotifications.js";
+import { more_in_cities, first_names, actions, products } from "../utils/PopupNotifications.js";
 import { Dot, RadioTower } from "lucide-react";
 
 export default function SalesPopup() {
   const generateNotification = () => {
-    const [city, state, lat, lng] = us_cities[Math.floor(Math.random() * us_cities.length)];
+  const [city, state, lat, lng] = more_in_cities[Math.floor(Math.random() * more_in_cities.length)];
     const name = first_names[Math.floor(Math.random() * first_names.length)];
     const action = actions[Math.floor(Math.random() * actions.length)];
     const product = products[Math.floor(Math.random() * products.length)];
