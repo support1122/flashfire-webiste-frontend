@@ -101,10 +101,10 @@ export const us_cities = [
   ["Spokane", "WA", 47.6588, -117.4260]
 ];
 
-export const first_names = ["John", "Sarah", "Mike", "Emily", "David", "Olivia", "Daniel", "Sophia", "James", "Ava",
-  "Ethan", "Isabella", "Mason", "Mia", "Liam", "Amelia", "Noah", "Harper", "Lucas", "Ella",
+export const first_names = ["Aarav", "Vivaan", "Aditya", "Saanvi", "Ishaan", "Diya", "Rohan", "Anaya", "James", "Ava",
+  "Ethan", "Isabella", "Mason", "Mia", "Liam", "Sarah", "Noah", "Harper", "Lucas", "Ella",
   "Jacob", "Grace", "Michael", "Zoe", "Alexander", "Chloe", "Benjamin", "Lily", "Elijah", "Scarlett",
-  "Logan", "Victoria", "Matthew", "Aria", "Henry", "Penelope", "Jackson", "Layla", "Sebastian", "Riley"
+ "Arjun", "Priya", "Amit", "Sneha", "Rahul", "Neha", "Karan", "Ananya", "Vikram", "Ritika"
 ];
 
 export const actions = ["just bought"];

@@ -29,7 +29,7 @@ const Navigation: React.FC<NavigationProps> = ({
     { name: 'Testimonials', href: '/#testimonials' },
     { name: 'Pricing', href: '/#pricing' },
     { name: 'FAQ', href: '/#faq' },
-    { name: 'Contact', href: '/#contact' },
+    // { name: 'Contact', href: '/#contact' },
     { name: 'Blog', href: '/blogs' },
     { name: 'Employers', href: '#employers' },
   ];
