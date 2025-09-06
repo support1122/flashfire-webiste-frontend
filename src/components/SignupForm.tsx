@@ -2,7 +2,12 @@ import { useState } from 'react';
 import { X, User, Phone, Mail} from 'lucide-react';
 import { createOrUpdateContact, trackSignupEvent, waitForCRMLoad } from '../utils/CRMTracking';
 
-function SignupForm({ setSignupFormVisibility, setCalendlyModalVisibility }) {
+interface SignupFormProps {
+  setSignupFormVisibility: (visible: boolean) => void;
+  setCalendlyModalVisibility: (visible: boolean) => void;
+}
+
+function SignupForm({ setSignupFormVisibility, setCalendlyModalVisibility }: SignupFormProps) {
   const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
   const [formData, setFormData] = useState({
     fullName: '',
@@ -70,7 +75,7 @@ function SignupForm({ setSignupFormVisibility, setCalendlyModalVisibility }) {
     }
   }
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setCalendlyModalVisibility(true);
     try {
@@ -87,7 +92,7 @@ function SignupForm({ setSignupFormVisibility, setCalendlyModalVisibility }) {
     }
   };
 
-  const detectCountryFromPhone = (phoneNumber) => {
+  const detectCountryFromPhone = (phoneNumber: string) => {
     for (const country of countryCodes) {
       if (country.pattern && country.pattern.test(phoneNumber)) {
         return country.code;
@@ -96,7 +101,7 @@ function SignupForm({ setSignupFormVisibility, setCalendlyModalVisibility }) {
     return '+1';
   };
 
-  const handleInputChange = (e) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     if (name === 'phone') {
       const numericValue = value.replace(/\D/g, '');
