@@ -124,6 +124,9 @@ function App() {
     else if(location.pathname === '/employers'){
       setEmployerFormVisibility(true);
     }
+    else if(location.pathname === '/book-free-demo'){
+      setCalendlyModalVisibility(true);
+    }
     else {
       setSignupFormVisibility(false);
     }

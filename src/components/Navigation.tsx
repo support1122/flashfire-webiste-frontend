@@ -660,13 +660,14 @@ const Navigation: React.FC<NavigationProps> = ({
                   Just 1 Spot Left
                 </span>
               </div>
-
+              <Link to={'/book-free-demo'}>
               <button
-                onClick={openCalendly}
+                // onClick={openCalendly}
                 className="bg-red-600 hover:bg-red-700 text-white px-1.5 sm:px-4 lg:px-6 py-0.5 sm:py-2 rounded sm:rounded-lg font-bold transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105 text-[10px] sm:text-sm tracking-wide whitespace-nowrap flex-shrink-0"
               >
                 Book Now
               </button>
+              </Link>
             </div>
           </div>
         </div>

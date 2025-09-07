@@ -24,6 +24,7 @@ import HowItWorks from './components/HowItWorks.tsx';
 import SignupForm from './components/SignupForm.tsx';
 import EmployerForm from './components/EmployerForm.tsx';
 import ScrollToHash from './components/ScrollToHash.tsx';
+import CalendlyModal from './components/CalendlyModal.tsx';
 
 const routes=createBrowserRouter([
   {
@@ -44,7 +45,7 @@ const routes=createBrowserRouter([
       { path : '/faq', element: <FAQ />},
       {path : '/pricing', element : <Pricing />},
       {path : '/features', element : <Features />},
-      // {path : '/book-free-demo', element : <Calend />}
+      {path : '/book-free-demo', element : <CalendlyModal />}
     ],
   },
 
