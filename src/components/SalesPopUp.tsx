@@ -20,38 +20,6 @@ export default function SalesPopup() {
   const [current, setCurrent] = useState(generateNotification());
   const [visitors, setVisitors] = useState(() => 300 + Math.floor(Math.random() * 300));
 
-  // useEffect(() => {
-  //   const showSequence = () => {
-  //     // Show Sales Notification
-  //     setCurrent(generateNotification());
-  //     setVisibleSales(true);
-  //     setTimeout(() => {
-  //       setVisibleSales(false);
-
-  //       // Show Optimizer Notification
-  //       setVisibleOptimizer(true);
-  //       setTimeout(() => {
-  //         setVisibleOptimizer(false);
-
-  //         // Show Visitor Count
-  //         setVisitors(100 + Math.floor(Math.random() * 151));
-
-  //         setVisibleVisitors(true);
-  //         setTimeout(() => {
-  //           setVisibleVisitors(false);
-  //         }, 3000);
-  //       }, 3000);
-  //     }, 3000);
-  //   };
-
-  //   // Run first sequence immediately
-  //   showSequence();
-
-  //   // Then every 24 seconds
-  //   const interval = setInterval(showSequence, 24000);
-  //   return () => clearInterval(interval);
-  // }, []);
-
   useEffect(() => {
   const showSequence = () => {
     // Step 1: Show Sales Notification
