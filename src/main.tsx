@@ -23,6 +23,7 @@ import Home from './components/Home.tsx';
 import HowItWorks from './components/HowItWorks.tsx';
 import SignupForm from './components/SignupForm.tsx';
 import EmployerForm from './components/EmployerForm.tsx';
+import ScrollToHash from './components/ScrollToHash.tsx';
 
 const routes=createBrowserRouter([
   {
@@ -30,6 +31,7 @@ const routes=createBrowserRouter([
     element: <App />,
     children: [
       { index: true, element: <Home /> },                 // <-- this
+      {path : 'home', element : <Home />},
       { path: 'paymentpolicy', element: <PaymentPolicy /> },
       { path: 'refundpolicy', element: <RefundPolicy /> },
       { path: 'privacypolicy', element: <PrivacyPolicy /> },
@@ -41,7 +43,8 @@ const routes=createBrowserRouter([
       { path : '/employers', element : <EmployerForm />},
       { path : '/faq', element: <FAQ />},
       {path : '/pricing', element : <Pricing />},
-      {path : '/features', element : <Features />}
+      {path : '/features', element : <Features />},
+      // {path : '/book-free-demo', element : <Calend />}
     ],
   },
 
@@ -51,6 +54,8 @@ const routes=createBrowserRouter([
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     {/* <Router /> */}
+    {/* <ScrollToHash> */}
     <RouterProvider router={routes} />
+    {/* </ScrollToHash> */}
   </StrictMode>
 );
