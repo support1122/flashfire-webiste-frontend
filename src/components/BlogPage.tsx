@@ -15,7 +15,7 @@ export default function BlogPage() {
       <Navigation setCalendlyModalVisibility={setCalendlyModalVisibility} setSignupFormVisibility={setSignupFormVisibility} />
       <main className="pt-28">
         <Blog />
-        <Footer />
+        {/* <Footer /> */}
       </main>
     </div>
   );

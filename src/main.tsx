@@ -21,6 +21,8 @@ import Pricing from './components/Pricing.tsx';
 import FAQ from './components/FAQ.tsx';
 import Home from './components/Home.tsx';
 import HowItWorks from './components/HowItWorks.tsx';
+import SignupForm from './components/SignupForm.tsx';
+import EmployerForm from './components/EmployerForm.tsx';
 
 const routes=createBrowserRouter([
   {
@@ -34,6 +36,12 @@ const routes=createBrowserRouter([
       { path: 'termsofservice', element: <TermsOfService /> },
       { path: 'blogs', element: <BlogPage /> },
       { path: 'blogs/:id', element: <IndividualBlog /> },
+      { path: '/signup', element : <Home /> },
+      { path: '/testimonials', element : <Testimonials /> },
+      { path : '/employers', element : <EmployerForm />},
+      { path : '/faq', element: <FAQ />},
+      {path : '/pricing', element : <Pricing />},
+      {path : '/features', element : <Features />}
     ],
   },
 

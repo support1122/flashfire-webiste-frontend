@@ -2,36 +2,40 @@ import React, { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 import EmployerForm from './EmployerForm';
 import { GTagUTM } from '../utils/GTagUTM.ts';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+
 
 interface NavigationProps {
   setSignupFormVisibility: React.Dispatch<React.SetStateAction<boolean>>;
   setCalendlyModalVisibility: React.Dispatch<React.SetStateAction<boolean>>;
+  setEmployerFormVisibility : React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const Navigation: React.FC<NavigationProps> = ({
   setSignupFormVisibility,
   setCalendlyModalVisibility,
+  setEmployerFormVisibility
 }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const [employerFormVisible, setEmployerFormVisible] = useState(false);
+  // const [employerFormVisible, setEmployerFormVisible] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 20);
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+  const navigate = useNavigate();
 
   const navItems = [
     { name: 'Home', href: '/' },
-    { name: 'Features', href: '/#features' },
-    { name: 'Testimonials', href: '/#testimonials' },
-    { name: 'Pricing', href: '/#pricing' },
-    { name: 'FAQ', href: '/#faq' },
+    { name: 'Features', href: '/features' },
+    { name: 'Testimonials', href: '/testimonials' },
+    { name: 'Pricing', href: '/pricing' },
+    { name: 'FAQ', href: '/faq' },
     // { name: 'Contact', href: '/#contact' },
     { name: 'Blog', href: '/blogs' },
-    { name: 'Employers', href: '#employers' },
+    { name: 'Employers', href: '/employers' },
   ];
 
   // Never let analytics break the CTA flow
@@ -45,7 +49,8 @@ const Navigation: React.FC<NavigationProps> = ({
 
   const openSignup = () => {
     // 1) Real action first
-    setSignupFormVisibility(true);
+    // setSignupFormVisibility(true);
+    navigate('/signup');
     setIsMenuOpen(false);
 
     // 2) Non-blocking analytics
@@ -76,12 +81,13 @@ const Navigation: React.FC<NavigationProps> = ({
   };
 
   const openEmployerForm = () => {
-    setEmployerFormVisible(true);
-    setIsMenuOpen(false);
+    setEmployerFormVisibility(true);
+    // setIsMenuOpen(false);
+    navigate('/employers');
   };
 
   const closeEmployerForm = () => {
-    setEmployerFormVisible(false);
+    setEmployerFormVisibility(false);
   };
 
   return (
@@ -110,13 +116,15 @@ const Navigation: React.FC<NavigationProps> = ({
               {navItems.map((item) => {
                 if (item.name === 'Employers') {
                   return (
+                    <Link to={'/employers'} key={item.name}>
                     <button
                       key={item.name}
-                      onClick={openEmployerForm}
+                      // onClick={openEmployerForm}
                       className="font-medium text-gray-700 transition-colors duration-200 hover:text-orange-600 text-sm lg:text-base"
                     >
                       {item.name}
                     </button>
+                    </Link>
                   );
                 }
 
@@ -144,12 +152,14 @@ const Navigation: React.FC<NavigationProps> = ({
 
             {/* CTA Button (desktop) */}
             <div className="hidden md:block">
+              <Link to={'/signup'}>
               <button
-                onClick={openSignup}
+                // onClick={openSignup}
                 className="bg-gradient-to-r from-orange-500 to-orange-600 text-white px-4 lg:px-6 py-2 lg:py-2.5 rounded-full font-semibold hover:from-orange-600 hover:to-orange-700 transition-all duration-200 shadow-lg hover:shadow-xl hover:scale-105 text-sm lg:text-base"
               >
                 Sign Up For Free
               </button>
+              </Link>
             </div>
 
             {/* Mobile menu button */}
@@ -204,12 +214,14 @@ const Navigation: React.FC<NavigationProps> = ({
                 })}
 
                 {/* CTA Button (mobile) */}
+                <Link to={'/signup'}>
                 <button
-                  onClick={openSignup}
+                  // onClick={openSignup}
                   className="bg-gradient-to-r from-orange-500 to-orange-600 text-white px-3 py-3 rounded-lg font-semibold hover:from-orange-600 hover:to-orange-700 transition-all duration-200 block text-center mt-4 w-full text-base"
                 >
                   Start Free Trial
                 </button>
+                </Link>
               </div>
             </div>
           )}
@@ -309,13 +321,6 @@ const Navigation: React.FC<NavigationProps> = ({
           </div>
         </div>
       </nav>
-
-      {/* Employer Form Modal */}
-      {employerFormVisible && (
-        <div className="fixed inset-0 z-[60]">
-          <EmployerForm isVisible={employerFormVisible} onClose={closeEmployerForm} />
-        </div>
-      )}
     </div>
   );
 };

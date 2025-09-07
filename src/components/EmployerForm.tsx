@@ -3,11 +3,14 @@ import React, { useState } from 'react';
 import { X, Building, Mail, Phone, Users, MapPin, Briefcase, DollarSign, Calendar, Loader } from 'lucide-react';
 
 interface EmployerFormProps {
+  // isVisible: boolean;
+  // onClose: () => void;
+  setEmployerFormVisibility: React.Dispatch<React.SetStateAction<boolean>>;
   isVisible: boolean;
-  onClose: () => void;
+  // onClose: () => void;
 }
 
-const EmployerForm: React.FC<EmployerFormProps> = ({ isVisible, onClose }) => {
+const EmployerForm: React.FC<EmployerFormProps> = ({ isVisible, setEmployerFormVisibility }) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState(false);
@@ -143,7 +146,7 @@ const EmployerForm: React.FC<EmployerFormProps> = ({ isVisible, onClose }) => {
               <p className="text-gray-600 mt-2">Find top talent faster with our AI-powered recruitment platform</p>
             </div>
             <button
-              onClick={handleClose}
+              onClick={()=>setEmployerFormVisibility(false)}
               className="text-gray-400 hover:text-gray-600 transition-colors"
             >
               <X className="w-6 h-6" />

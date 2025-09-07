@@ -57,15 +57,21 @@
 
 
 import {useEffect, useState} from 'react';
-import { Outlet, useLocation } from "react-router-dom";
+import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import SignupForm from './components/SignupForm.tsx';
 import CalendlyModal from './components/CalendlyModal.tsx';
+import Navigation from './components/Navigation.tsx';
+import Footer from './components/Footer.tsx';
+import SalesPopup from './components/SalesPopUp.tsx';
+import EmployerForm from './components/EmployerForm.tsx';
 // import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 
 function App() {
   const [signupFormVisibility, setSignupFormVisibility] = useState(false);
   const [calendlyModalVisibility, setCalendlyModalVisibility] = useState(false);
+  const [employerFormVisibility, setEmployerFormVisibility] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
   
   // Smooth-scroll to hash targets when path is '/#section'
   useEffect(() => {
@@ -90,9 +96,32 @@ function App() {
     tryScrollToHash();
   }, [location.pathname, location.hash]);
 
+
+    useEffect(() => {
+      setTimeout(()=>
+      // setSignupFormVisibility(true)
+      navigate('/signup')
+      ,10000);
+    }, []);
+    // const location = useLocation();
+  
+  useEffect(() => {
+    if (location.pathname === '/signup') {
+      setSignupFormVisibility(true);
+    // } else if(location.pathname === '/employers'){
+    //   return <EmployerForm />
+    }
+    else if(location.pathname === '/employers'){
+      setEmployerFormVisibility(true);
+    }
+    else {
+      setSignupFormVisibility(false);
+    }
+  }, [location.pathname]);
+
   return (
     <div className="min-h-screen bg-white">
-      {/* <Navigation setSignupFormVisibility={setSignupFormVisibility} setCalendlyModalVisibility={setCalendlyModalVisibility} /> */}
+      <Navigation setSignupFormVisibility={setSignupFormVisibility} setEmployerFormVisibility={setEmployerFormVisibility} setCalendlyModalVisibility={setCalendlyModalVisibility} />
       {/* <Hero setSignupFormVisibility={setSignupFormVisibility} setCalendlyModalVisibility={setCalendlyModalVisibility} /> */}
       {/* <MovingJobs setSignupFormVisibility={setSignupFormVisibility} /> */}
       {/* <RealTimeMetrics setSignupFormVisibility={setSignupFormVisibility} /> */}
@@ -109,6 +138,9 @@ function App() {
       <Outlet context={{signupFormVisibility,calendlyModalVisibility, setSignupFormVisibility, setCalendlyModalVisibility }} />
       {signupFormVisibility && <SignupForm setSignupFormVisibility={setSignupFormVisibility} setCalendlyModalVisibility={setCalendlyModalVisibility} />}
       {calendlyModalVisibility && <CalendlyModal setCalendlyModalVisibility={setCalendlyModalVisibility}/>}
+      {employerFormVisibility && <EmployerForm setEmployerFormVisibility={setEmployerFormVisibility} isVisible={employerFormVisibility} />}      
+      <SalesPopup />
+      <Footer />
     </div>
   );
 }

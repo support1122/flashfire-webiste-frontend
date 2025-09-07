@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { TrendingUp, Users, Clock, Briefcase } from 'lucide-react';
 import { GTagUTM } from '../utils/GTagUTM.js';
-import { useOutletContext } from 'react-router-dom';
+import { useOutletContext, useNavigate } from 'react-router-dom';
 const RealTimeMetrics = () => {
+  const navigate = useNavigate();
   const [metrics, setMetrics] = useState({
     jobsApplying: 24,
     interviewsToday: 6,
@@ -111,7 +112,8 @@ const RealTimeMetrics = () => {
                                     utm_campaign: 'WEBSIE',
                                   },
                                 });
-                                setSignupFormVisibility(true); // just opens modal/form
+                                navigate('/signup');
+                                // setSignupFormVisibility(true); // just opens modal/form
                               }}
               className="bg-gradient-to-r from-orange-500 to-orange-600 text-white px-6 sm:px-8 py-3 rounded-full font-bold hover:from-orange-600 hover:to-orange-700 transition-all duration-200 shadow-lg hover:scale-105 text-sm sm:text-base"
             >

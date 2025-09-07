@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { X, User, Phone, Mail} from 'lucide-react';
 import { createOrUpdateContact, trackSignupEvent, waitForCRMLoad } from '../utils/CRMTracking';
+import { useNavigate, Link } from 'react-router-dom';
 
 function SignupForm({ setSignupFormVisibility, setCalendlyModalVisibility }) {
   const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
@@ -11,6 +12,7 @@ function SignupForm({ setSignupFormVisibility, setCalendlyModalVisibility }) {
     email: '',
     workAuthorization: ''
   });
+  const navigate = useNavigate();
 
   const countryCodes = [
     { code: '+1', country: 'USA', pattern: /^1/ },
@@ -19,6 +21,8 @@ function SignupForm({ setSignupFormVisibility, setCalendlyModalVisibility }) {
 
   const closeModal = () => {
     setSignupFormVisibility(false);
+    console.log('Modal closed');
+    navigate('/');
     setFormData({
       fullName: '',
       phone: '',
@@ -26,6 +30,7 @@ function SignupForm({ setSignupFormVisibility, setCalendlyModalVisibility }) {
       email: '',
       workAuthorization: ''
     });
+    
   };
 
   async function SaveDetailsToDB() {

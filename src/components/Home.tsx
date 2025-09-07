@@ -15,14 +15,16 @@ import Footer from './Footer';
 // import Blog from './Blog';
 import SignupForm from './SignupForm.tsx';
 import CalendlyModal from './CalendlyModal.tsx';
-import { useOutletContext } from 'react-router-dom';
+import { useOutletContext, useNavigate, Link, Location, useLocation } from 'react-router-dom';
 import SalesPopup from './SalesPopUp.tsx';
+import EmployerForm from './EmployerForm.tsx';
 
 function Home() {
   const { signupFormVisibility,calendlyModalVisibility,setSignupFormVisibility, setCalendlyModalVisibility } = useOutletContext<{
     setSignupFormVisibility: React.Dispatch<React.SetStateAction<boolean>>,
     setCalendlyModalVisibility: React.Dispatch<React.SetStateAction<boolean>>,
   }>();
+  // const navigate = useNavigate();
   // const [signupFormVisibility, setSignupFormVisibility] = useState(false);
   //   const [calendlyModalVisibility, setCalendlyModalVisibility] = useState(false);
   
@@ -33,13 +35,27 @@ function Home() {
   //     setStep(customStep);
   //   }
   // };
-  useEffect(() => {
-    setTimeout(()=>
-    setSignupFormVisibility(true),10000);
-  }, []);
+//   useEffect(() => {
+//     setTimeout(()=>
+//     // setSignupFormVisibility(true)
+//     navigate('/signup')
+//     ,10000);
+//   }, []);
+//   const location = useLocation();
+
+// useEffect(() => {
+//   if (location.pathname === '/signup') {
+//     setSignupFormVisibility(true);
+//   // } else if(location.pathname === '/employers'){
+//   //   return <EmployerForm />
+//   }
+//   else {
+//     setSignupFormVisibility(false);
+//   }
+// }, [location.pathname]);
   return (
     <div>
-            <Navigation setCalendlyModalVisibility={setCalendlyModalVisibility} setSignupFormVisibility={setSignupFormVisibility}/>
+            {/* <Navigation setCalendlyModalVisibility={setCalendlyModalVisibility} setSignupFormVisibility={setSignupFormVisibility}/> */}
             <Hero setCalendlyModalVisibility={setCalendlyModalVisibility} setSignupFormVisibility={setSignupFormVisibility}/>
             <MovingJobs setSignupFormVisibility={setSignupFormVisibility}/>
             <RealTimeMetrics setSignupFormVisibility={setSignupFormVisibility}/>
@@ -50,11 +66,11 @@ function Home() {
             <Pricing />
             <FAQ setSignupFormVisibility={setSignupFormVisibility}/>
             <Contact setSignupFormVisibility={setSignupFormVisibility}/>
-            {signupFormVisibility && <SignupForm setSignupFormVisibility={setSignupFormVisibility} setCalendlyModalVisibility={setCalendlyModalVisibility} />}
-            {calendlyModalVisibility && <CalendlyModal setCalendlyModalVisibility={setCalendlyModalVisibility}/>}
+            {/* {signupFormVisibility && <SignupForm setSignupFormVisibility={setSignupFormVisibility} setCalendlyModalVisibility={setCalendlyModalVisibility} />}
+            {calendlyModalVisibility && <CalendlyModal setCalendlyModalVisibility={setCalendlyModalVisibility}/>} */}
             <WhatsAppButton />
-            <SalesPopup />
-            <Footer />
+            {/* <SalesPopup /> */}
+            {/* <Footer /> */}
             {/* <AutoModalTrigger /> */}
 
     </div>
