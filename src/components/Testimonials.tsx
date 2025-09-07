@@ -266,7 +266,7 @@ const TestimonialsGrid = () => {
       <style dangerouslySetInnerHTML={{ __html: customStyles }} />
       <section
         id="testimonials"
-        className="mb-40 relative top-36 bg-gradient-to-br from-orange-400 via-orange-500 to-red-500 min-h-screen py-16 px-6 overflow-hidden rounded-[3rem]"
+        className="mb-40 bg-gradient-to-br from-orange-400 via-orange-500 to-red-500 min-h-screen py-16 px-6 overflow-hidden rounded-[3rem]"
       >
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(255,255,255,0.15),transparent_50%)] rounded-[3rem]"></div>
 
