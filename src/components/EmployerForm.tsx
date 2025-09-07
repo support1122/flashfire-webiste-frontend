@@ -1,6 +1,7 @@
 
 import React, { useState } from 'react';
 import { X, Building, Mail, Phone, Users, MapPin, Briefcase, DollarSign, Calendar, Loader } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 interface EmployerFormProps {
   // isVisible: boolean;
@@ -28,6 +29,7 @@ const EmployerForm: React.FC<EmployerFormProps> = ({ isVisible, setEmployerFormV
     urgency: '',
     hiringNeeds: ''
   });
+  const navigate = useNavigate();
 
   const companySizes = [
     '1-10 employees',
@@ -46,6 +48,8 @@ const EmployerForm: React.FC<EmployerFormProps> = ({ isVisible, setEmployerFormV
   ];
 
   const handleClose = () => {
+    setEmployerFormVisibility(false);
+    navigate('/');
     setFormData({
       companyName: '',
       contactName: '',
@@ -63,7 +67,8 @@ const EmployerForm: React.FC<EmployerFormProps> = ({ isVisible, setEmployerFormV
     setError('');
     setSuccess(false);
     setLoading(false);
-    onClose();
+    
+    // onClose();
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
@@ -146,7 +151,7 @@ const EmployerForm: React.FC<EmployerFormProps> = ({ isVisible, setEmployerFormV
               <p className="text-gray-600 mt-2">Find top talent faster with our AI-powered recruitment platform</p>
             </div>
             <button
-              onClick={()=>setEmployerFormVisibility(false)}
+              onClick={handleClose}
               className="text-gray-400 hover:text-gray-600 transition-colors"
             >
               <X className="w-6 h-6" />
