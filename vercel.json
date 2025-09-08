@@ -1,5 +1,8 @@
 {
   "rewrites": [
     { "source": "/(.*)", "destination": "/" }
+  ],
+  "redirects":[
+    {"source":"https://flashfire-frontend.vercel.app","destination":"https://flashfire-frontend.vercel.app","permanent":true}
   ]
 }
