@@ -32,7 +32,7 @@ const routes=createBrowserRouter([
     element: <App />,
     children: [
       {path : '/', index: true, element: <Home /> },                 // <-- this
-      // {path : '/', element : <Home />},
+      {path : '/home', element : <Home />},
       { path: 'paymentpolicy', element: <PaymentPolicy /> },
       { path: 'refundpolicy', element: <RefundPolicy /> },
       { path: 'privacypolicy', element: <PrivacyPolicy /> },
