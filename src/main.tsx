@@ -31,8 +31,8 @@ const routes=createBrowserRouter([
     path: '/',
     element: <App />,
     children: [
-      { index: true, element: <Home /> },                 // <-- this
-      {path : 'home', element : <Home />},
+      {path : '/', index: true, element: <Home /> },                 // <-- this
+      // {path : '/', element : <Home />},
       { path: 'paymentpolicy', element: <PaymentPolicy /> },
       { path: 'refundpolicy', element: <RefundPolicy /> },
       { path: 'privacypolicy', element: <PrivacyPolicy /> },
@@ -40,12 +40,12 @@ const routes=createBrowserRouter([
       { path: 'blogs', element: <BlogPage /> },
       { path: 'blogs/:id', element: <IndividualBlog /> },
       { path: '/signup', element : <Home /> },
-      { path: '/testimonials', element : <Testimonials /> },
-      { path : '/employers', element : <EmployerForm />},
-      { path : '/faq', element: <FAQ />},
-      {path : '/pricing', element : <Pricing />},
-      {path : '/features', element : <Features />},
-      {path : '/book-free-demo', element : <CalendlyModal />}
+      { path: '/testimonials', element : <Home /> },
+      { path : '/employers', element : <Home />},
+      { path : '/faq', element: <Home />},
+      {path : '/pricing', element : <Home />},
+      {path : '/features', element : <Home />},
+      {path : '/book-free-demo', element : <Home />}
     ],
   },
 

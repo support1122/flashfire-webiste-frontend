@@ -9,7 +9,7 @@ interface NavigationProps {
 }
 
 type NavItem =
-  | { name: "Home" | "Features" | "Testimonials" | "Pricing" | "FAQ"; type: "section"; id: string }
+  | { name: "" | "Features" | "Testimonials" | "Pricing" | "FAQ"; type: "section"; id: string }
   | { name: "Blog" | "Employers"; type: "route"; to: string };
 
 const Navigation: React.FC<NavigationProps> = ({
@@ -30,7 +30,7 @@ const Navigation: React.FC<NavigationProps> = ({
 
   // --- CONFIG: one-pager sections + external routes ---
   const navItems: NavItem[] = [
-    { name: "Home", type: "section", id: "home" },
+    { name: "Home", type: "section", id: "/" },
     { name: "Features", type: "section", id: "features" },
     { name: "Testimonials", type: "section", id: "testimonials" },
     { name: "Pricing", type: "section", id: "pricing" },
@@ -52,16 +52,28 @@ const Navigation: React.FC<NavigationProps> = ({
   // If we're already on "/", just scroll.
   const goToSection = (id: string, closeMenu = true) => {
   const el = document.getElementById(id);
-  if (!el) return;
 
-  // Scroll
-  el.scrollIntoView({ behavior: "smooth", block: "start" });
+  if (el) {
+    // Scroll if element exists
+    el.scrollIntoView({ behavior: "smooth", block: "start" });
+    window.history.pushState({}, "", "/" + id);
+  } else {
+    // Navigate to home first
+    navigate("/");
 
-  // Clean URL update (no #)
-  window.history.pushState({}, "", "/" + id);
+    // Wait for Home to mount, then scroll
+    setTimeout(() => {
+      const newEl = document.getElementById(id);
+      if (newEl) {
+        newEl.scrollIntoView({ behavior: "smooth", block: "start" });
+        window.history.pushState({}, "", "/" + id);
+      }
+    }, 100); // Delay allows DOM to render
+  }
 
   if (closeMenu) setIsMenuOpen(false);
 };
+
 
   const openSignup = () => {
     navigate("/signup");
@@ -134,7 +146,7 @@ const Navigation: React.FC<NavigationProps> = ({
                     return (
                       <Link to="/employers" key={item.name}>
                         <button
-                          className="font-medium text-gray-700 transition-colors duration-200 hover:text-orange-600 text-sm lg:text-base"
+                          className="font-medium border-none text-gray-700 transition-colors duration-200 hover:text-orange-600 text-sm lg:text-base"
                           onClick={openEmployerForm}
                         >
                           {item.name}
@@ -146,7 +158,7 @@ const Navigation: React.FC<NavigationProps> = ({
                     <Link
                       key={item.name}
                       to={item.to}
-                      className="font-medium text-gray-700 transition-colors duration-200 hover:text-orange-600 text-sm lg:text-base"
+className="font-medium text-gray-700 transition-colors duration-200 hover:text-orange-600 text-sm lg:text-base focus:outline-none focus:ring-0 focus:text-orange-500"
                     >
                       {item.name}
                     </Link>
@@ -158,7 +170,7 @@ const Navigation: React.FC<NavigationProps> = ({
                   <button
                     key={item.name}
                     onClick={() => goToSection(item.id)}
-                    className="font-medium text-gray-700 transition-colors duration-200 hover:text-orange-600 text-sm lg:text-base"
+className="font-medium text-gray-700 transition-colors duration-200 hover:text-orange-600 text-sm lg:text-base focus:outline-none focus:text-orange-500 focus:ring-0"
                   >
                     {item.name}
                   </button>

@@ -73,15 +73,15 @@ function App() {
   const location = useLocation();
   const navigate = useNavigate();
 
-   useEffect(() => {
-    const id = window.location.hash.slice(1);
-    if (!id) return;
-    const el = document.getElementById(id);
-    if (el) {
-      // let layout settle
-      setTimeout(() => el.scrollIntoView({ behavior: "smooth", block: "start" }), 0);
-    }
-  }, []);
+  //  useEffect(() => {
+  //   const id = window.location.hash.slice(1);
+  //   if (!id) return;
+  //   const el = document.getElementById(id);
+  //   if (el) {
+  //     // let layout settle
+  //     setTimeout(() => el.scrollIntoView({ behavior: "smooth", block: "start" }), 0);
+  //   }
+  // }, []);
   
   // Smooth-scroll to hash targets when path is '/#section'
   useEffect(() => {

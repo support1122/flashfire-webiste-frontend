@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { TrendingUp, Users, Clock, Briefcase } from 'lucide-react';
 import { GTagUTM } from '../utils/GTagUTM.js';
-import { useOutletContext, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 const RealTimeMetrics = () => {
   const navigate = useNavigate();
   const [metrics, setMetrics] = useState({
@@ -10,9 +10,9 @@ const RealTimeMetrics = () => {
     activeUsers: 48,
     totalApplications: 210
   });
-  const { setSignupFormVisibility} = useOutletContext<{
-    setSignupFormVisibility: React.Dispatch<React.SetStateAction<boolean>>;
-  }>();
+  // const { setSignupFormVisibility} = useOutletContext<{
+  //   setSignupFormVisibility: React.Dispatch<React.SetStateAction<boolean>>;
+  // }>();
 
   useEffect(() => {
     const interval = setInterval(() => {

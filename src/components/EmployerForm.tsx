@@ -49,7 +49,11 @@ const EmployerForm: React.FC<EmployerFormProps> = ({ isVisible, setEmployerFormV
 
   const handleClose = () => {
     setEmployerFormVisibility(false);
-    navigate('/');
+   if (window.history.length > 1) {
+  window.history.back();
+} else {
+  navigate('/');
+}
     setFormData({
       companyName: '',
       contactName: '',
@@ -130,7 +134,7 @@ const EmployerForm: React.FC<EmployerFormProps> = ({ isVisible, setEmployerFormV
               We've received your hiring request. Our team will contact you within 24 hours to discuss how Flashfire can help you find the perfect candidates.
             </p>
             <button
-              onClick={handleClose}
+              onClick={()=>{handleClose();setEmployerFormVisibility(false);}}
               className="bg-gradient-to-r from-orange-500 to-orange-600 text-white px-8 py-4 rounded-full font-bold hover:from-orange-600 hover:to-orange-700 transition-all duration-200 shadow-lg"
             >
               Close

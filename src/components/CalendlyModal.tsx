@@ -23,7 +23,11 @@ function CalendlyModal({ setCalendlyModalVisibility }: { setCalendlyModalVisibil
       <div className="relative bg-white max-w-5xl w-full max-h-[90vh] overflow-hidden rounded-xl shadow-2xl flex flex-col lg:flex-row">
         {/* Close button */}
         <button
-          onClick={() =>{ setCalendlyModalVisibility(false); window.history.pushState({}, '', '/');navigate('/')}}
+          onClick={() =>{ setCalendlyModalVisibility(false);    if (window.history.length > 1) {
+  window.history.back();
+} else {
+  navigate('/');
+}}}
           className="absolute top-4 right-4 sm:top-6 sm:right-6 text-gray-400 hover:text-gray-600 transition-colors z-20 bg-white/90 rounded-full p-2 shadow-lg"
         >
           <X className="w-5 h-5 sm:w-6 sm:h-6" />

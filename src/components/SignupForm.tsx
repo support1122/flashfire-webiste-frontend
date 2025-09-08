@@ -20,9 +20,12 @@ function SignupForm({ setSignupFormVisibility, setCalendlyModalVisibility }) {
   ];
 
   const closeModal = () => {
-    setSignupFormVisibility(false);
     console.log('Modal closed');
-    navigate('/');
+    if (window.history.length > 1) {
+  window.history.back();
+} else {
+  navigate('/');
+}
     setFormData({
       fullName: '',
       phone: '',
@@ -125,7 +128,7 @@ function SignupForm({ setSignupFormVisibility, setCalendlyModalVisibility }) {
               <h2 className="text-2xl font-bold text-gray-900 mb-2">Get Started for Free</h2>
               <p className="text-gray-600 text-sm">Tell us about yourself to schedule your consultation</p>
             </div>
-            <button onClick={closeModal} className="text-gray-400 hover:text-gray-600 transition-colors p-1">
+            <button onClick={()=>{closeModal();setSignupFormVisibility(false);}} className="text-gray-400 hover:text-gray-600 transition-colors p-1">
               <X className="w-5 h-5" />
             </button>
           </div>
