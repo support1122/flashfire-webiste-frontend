@@ -30,7 +30,7 @@ const Navigation: React.FC<NavigationProps> = ({
 
   // --- CONFIG: one-pager sections + external routes ---
   const navItems: NavItem[] = [
-    { name: "Home", type: "section", id: "/" },
+    { name: "Home", type: "section", id: "home" },
     { name: "Features", type: "section", id: "features" },
     { name: "Testimonials", type: "section", id: "testimonials" },
     { name: "Pricing", type: "section", id: "pricing" },
