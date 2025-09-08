@@ -35,7 +35,12 @@ function Home() {
   else if(section.includes('faq')){
     const faq = document.getElementById('faq');
     faq?.scrollIntoView({behavior: "smooth", block: "start"} ); 
-  }else{
+  }
+  else if(section.includes('home')){
+    const top = document.getElementById('home');
+    top?.scrollIntoView({behavior: "smooth", block: "start"} );
+  }
+  else{
     const top = document.getElementById('home');
     top?.scrollIntoView({behavior: "smooth", block: "start"} );
   }
