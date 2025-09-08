@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { ChevronDown, ChevronUp, HelpCircle } from 'lucide-react';
 import { useOutletContext } from 'react-router-dom';
 import { GTagUTM } from '../utils/GTagUTM.js';
+import WhatsAppSupport from './WhatsappSupport.js';
 const FAQ = ({setSignupFormVisibility}) => {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
   // const { setSignupFormVisibility } = useOutletContext<{
@@ -90,7 +91,7 @@ const FAQ = ({setSignupFormVisibility}) => {
         </div>
 
         {/* CTA Section */}
-        <div className="mt-12 sm:mt-16 text-center">
+        {/* <div className="mt-12 sm:mt-16 text-center">
           <div className="bg-gradient-to-r from-orange-600 to-red-700 rounded-2xl sm:rounded-3xl p-8 sm:p-12 text-white">
             <h3 className="text-2xl sm:text-3xl font-bold mb-4">
               Still Have Questions?
@@ -115,7 +116,8 @@ const FAQ = ({setSignupFormVisibility}) => {
               Schedule a Free Consultation
             </button>
           </div>
-        </div>
+        </div> */}
+       <WhatsAppSupport />
       </div>
     </section>
   );

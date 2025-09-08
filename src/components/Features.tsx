@@ -4,6 +4,34 @@ import { useOutletContext } from 'react-router-dom';
 import { GTagUTM } from '../utils/GTagUTM.js';
 import WhatsAppButton from './WhatsAppButton.js';
 import WhatsAppSupport from './WhatsappSupport.js';
+const screenshots = [
+  "/images/image1.jpg",
+  "/images/image2.jpg",
+  "/images/image3.jpg",
+  "/images/image4.jpg",
+  "/images/image5.jpg",
+  "/images/image6.jpg",
+  "/images/image7.jpg",
+  "/images/image8.jpg",
+  "/images/image9.jpg",
+  "/images/image10.jpg",
+  "/images/image11.jpg",
+  "/images/image12.png",
+  // Add more image paths as needed
+]
+
+const rotations = [
+  "rotate-2",
+  "-rotate-2",
+  "rotate-1",
+  "-rotate-1",
+  "rotate-3",
+  "-rotate-3",
+  "rotate-1",
+  "-rotate-2",
+  "rotate-2",
+  "-rotate-1",
+]
 const Features = ({ setSignupFormVisibility }) => {
   // const { setSignupFormVisibility } = useOutletContext<{
   //   setSignupFormVisibility: React.Dispatch<React.SetStateAction<boolean>>;
@@ -116,6 +144,43 @@ const Features = ({ setSignupFormVisibility }) => {
             Start Saving Time Today
           </button>
         </div> */}
+       <section className="relative mt-20 py-24 px-6 overflow-hidden  rounded-3xl ">
+          <div className="absolute inset-0 bg-gradient-to-br from-slate-50 via-orange-50 to-red-50"></div>
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(251,146,60,0.05),transparent_50%)] bg-[radial-gradient(circle_at_70%_80%,rgba(239,68,68,0.05),transparent_50%)]"></div>
+
+          <div className="relative max-w-6xl mx-auto">
+            <div className="text-center mb-16">
+              <div className="inline-flex items-center space-x-2 bg-orange-100 backdrop-blur-sm border border-orange-100 text-orange-700 px-6 py-3 rounded-full text-sm font-semibold mb-6 shadow-sm">
+                <span className="text-red-500">❤️</span>
+                <span>Client Success Stories</span>
+              </div>
+
+              <h2 className="text-4xl md:text-5xl font-bold text-gray-900 leading-tight mb-6 text-balance">
+                What Our Clients Say
+              </h2>
+
+              <p className="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
+                Discover how we've helped 100+ professionals land their dream jobs at
+                <span className="font-semibold text-gray-800"> Amazon, Google, Microsoft</span>, and other top companies
+              </p>
+            </div>
+
+            <div className="columns-2 md:columns-3 lg:columns-4 gap-2 [column-fill:_balance]">
+              {screenshots.map((src, index) => (
+                <div
+                  key={index}
+                  className={`mb-2 inline-block w-full rounded-xl shadow-md transform ${rotations[index % rotations.length]} hover:rotate-0 transition-all duration-300 bg-orange-50 border border-gray-100 p-2`}
+                >
+                  <img
+                    src={src || "/placeholder.svg"}
+                    alt={`Testimonial ${index + 1}`}
+                    className="rounded-lg w-full h-auto object-contain"
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
         <WhatsAppSupport />
       </div>
     </section>
