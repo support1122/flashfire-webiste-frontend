@@ -19,7 +19,13 @@ const Navigation: React.FC<NavigationProps> = ({
 
   // ----------------- Countdown (Days / Hrs / Mins / Secs) -----------------
   // Set your target deadline here. Example: 24 hours from now.
-  const TARGET_DATE = useState(() => Date.now() + 24 * 60 * 60 * 1000)[0];
+  const TARGET_DATE = useState(() => {
+    const now = new Date();
+    const year = now.getFullYear();
+    const month = now.getMonth();
+    const lastDayOfMonth = new Date(year, month + 1, 0);
+    return lastDayOfMonth.getTime();
+  })[0];
 
   const [timeLeft, setTimeLeft] = useState({
     days: 0,
@@ -153,11 +159,10 @@ const Navigation: React.FC<NavigationProps> = ({
   return (
     <div className="font-inter">
       <nav
-        className={`fixed top-0 w-full z-40 transition-all duration-300 ${
-          isScrolled
+        className={`fixed top-0 w-full z-40 transition-all duration-300 ${isScrolled
             ? 'bg-white/95 backdrop-blur-md shadow-lg border-b border-gray-100'
             : 'bg-white/80 backdrop-blur-sm'
-        }`}
+          }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16 sm:h-18">
@@ -301,12 +306,12 @@ const Navigation: React.FC<NavigationProps> = ({
               </div>
 
               {/* Middle: Only 1 Spot Remaining (unchanged) */}
-              <div className="flex-1 min-w-0 flex items-center justify-center">
+              {/* <div className="flex-1 min-w-0 flex items-center justify-center">
                 <span className="inline-block w-2 h-2 bg-red-300 rounded-full mr-2 animate-[breathe_1.5s_ease-in-out_infinite]"></span>
                 <span className="text-white font-semibold text-sm opacity-95 truncate">
                   10 Slots Left 
                 </span>
-              </div>
+              </div> */}
 
               {/* Right: Book Now (unchanged) */}
               <div className="flex-shrink-0">
@@ -329,7 +334,7 @@ const Navigation: React.FC<NavigationProps> = ({
                   className="w-3 h-3 sm:w-5 sm:h-5 lg:w-6 lg:h-6 filter brightness-0 invert drop-shadow"
                 />
                 <span className="font-bold text-white text-xs sm:text-base lg:text-lg tracking-wide whitespace-nowrap">
-                  Book A Live Demo Session
+                  Hurry! 6 Slots Remaining
                 </span>
               </div>
 
@@ -339,10 +344,10 @@ const Navigation: React.FC<NavigationProps> = ({
               {/* Middle: Countdown + "Just 1 Spot Left" (clock replaced) */}
               <div className="flex items-end sm:items-center space-x-2">
                 <Countdown />
-                <span className="font-bold text-white text-xs sm:text-base lg:text-lg tracking-wide whitespace-nowrap flex items-center">
-                  {/* <span className="inline-block w-1.5 h-1.5 sm:w-2 sm:h-2 bg-red-300 rounded-full mr-1.5 sm:mr-2 animate-[breathe_1.5s_ease-in-out_infinite]"></span> */}
+                {/* <span className="font-bold text-white text-xs sm:text-base lg:text-lg tracking-wide whitespace-nowrap flex items-center">
+                  <span className="inline-block w-1.5 h-1.5 sm:w-2 sm:h-2 bg-red-300 rounded-full mr-1.5 sm:mr-2 animate-[breathe_1.5s_ease-in-out_infinite]"></span>
                   10 Slots Left This September
-                </span>
+                </span> */}
               </div>
 
               {/* Right: Book Now (unchanged) */}

@@ -197,7 +197,7 @@ const MovingJobs: React.FC<MovingJobsProps> = ({ setSignupFormVisibility }) => {
                 100% { transform: translateX(-50%); }
               }
               .animate-scroll {
-                animation: scroll 60s linear infinite;
+                animation: scroll 150s linear infinite;
                 display: flex;
                 width: fit-content;
               }
