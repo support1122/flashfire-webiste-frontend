@@ -125,7 +125,7 @@ function SignupForm({ setSignupFormVisibility, setCalendlyModalVisibility }) {
             </button>
           </div>
 
-          <form onSubmit={handleSubmit} className="space-y-4">
+          <form onSubmit={handleSubmit}  name="signupform" className="space-y-4">
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
                 <User className="w-4 h-4 inline mr-2" /> Full Name
@@ -225,3 +225,4 @@ function SignupForm({ setSignupFormVisibility, setCalendlyModalVisibility }) {
 }
 
 export default SignupForm;
+
