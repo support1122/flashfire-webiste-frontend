@@ -1,13 +1,17 @@
 
 import React, { useState } from 'react';
 import { X, Building, Mail, Phone, Users, MapPin, Briefcase, DollarSign, Calendar, Loader } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 interface EmployerFormProps {
+  // isVisible: boolean;
+  // onClose: () => void;
+  setEmployerFormVisibility: React.Dispatch<React.SetStateAction<boolean>>;
   isVisible: boolean;
-  onClose: () => void;
+  // onClose: () => void;
 }
 
-const EmployerForm: React.FC<EmployerFormProps> = ({ isVisible, onClose }) => {
+const EmployerForm: React.FC<EmployerFormProps> = ({ isVisible, setEmployerFormVisibility }) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState(false);
@@ -25,6 +29,7 @@ const EmployerForm: React.FC<EmployerFormProps> = ({ isVisible, onClose }) => {
     urgency: '',
     hiringNeeds: ''
   });
+  const navigate = useNavigate();
 
   const companySizes = [
     '1-10 employees',
@@ -43,6 +48,12 @@ const EmployerForm: React.FC<EmployerFormProps> = ({ isVisible, onClose }) => {
   ];
 
   const handleClose = () => {
+    setEmployerFormVisibility(false);
+   if (window.history.length > 1) {
+  window.history.back();
+} else {
+  navigate('/');
+}
     setFormData({
       companyName: '',
       contactName: '',
@@ -60,7 +71,8 @@ const EmployerForm: React.FC<EmployerFormProps> = ({ isVisible, onClose }) => {
     setError('');
     setSuccess(false);
     setLoading(false);
-    onClose();
+    
+    // onClose();
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
@@ -122,7 +134,7 @@ const EmployerForm: React.FC<EmployerFormProps> = ({ isVisible, onClose }) => {
               We've received your hiring request. Our team will contact you within 24 hours to discuss how Flashfire can help you find the perfect candidates.
             </p>
             <button
-              onClick={handleClose}
+              onClick={()=>{handleClose();setEmployerFormVisibility(false);}}
               className="bg-gradient-to-r from-orange-500 to-orange-600 text-white px-8 py-4 rounded-full font-bold hover:from-orange-600 hover:to-orange-700 transition-all duration-200 shadow-lg"
             >
               Close

@@ -1,40 +1,45 @@
-import React, { useState, useEffect } from 'react';
-import { Menu, X } from 'lucide-react';
-import EmployerForm from './EmployerForm';
-import { GTagUTM } from '../utils/GTagUTM.ts';
-import { Link } from 'react-router-dom';
-
+import React, { useState, useEffect } from "react";
+import { Menu, X } from "lucide-react";
+import { GTagUTM } from "../utils/GTagUTM.ts";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 interface NavigationProps {
   setSignupFormVisibility: React.Dispatch<React.SetStateAction<boolean>>;
   setCalendlyModalVisibility: React.Dispatch<React.SetStateAction<boolean>>;
+  setEmployerFormVisibility: React.Dispatch<React.SetStateAction<boolean>>;
 }
+
+type NavItem =
+  | { name: "" | "Features" | "Testimonials" | "Pricing" | "FAQ"; type: "section"; id: string }
+  | { name: "Blog" | "Employers"; type: "route"; to: string };
 
 const Navigation: React.FC<NavigationProps> = ({
   setSignupFormVisibility,
   setCalendlyModalVisibility,
+  setEmployerFormVisibility,
 }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const [employerFormVisible, setEmployerFormVisible] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 20);
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const navItems = [
-    { name: 'Home', href: '/' },
-    { name: 'Features', href: '/#features' },
-    { name: 'Testimonials', href: '/#testimonials' },
-    { name: 'Pricing', href: '/#pricing' },
-    { name: 'FAQ', href: '/#faq' },
-    // { name: 'Contact', href: '/#contact' },
-    { name: 'Blog', href: '/blogs' },
-    { name: 'Employers', href: '#employers' },
+  // --- CONFIG: one-pager sections + external routes ---
+  const navItems: NavItem[] = [
+    { name: "Home", type: "section", id: "home" },
+    { name: "Features", type: "section", id: "features" },
+    { name: "Testimonials", type: "section", id: "testimonials" },
+    { name: "Pricing", type: "section", id: "pricing" },
+    { name: "FAQ", type: "section", id: "faq" },
+    { name: "Blog", type: "route", to: "/blogs" },
+    { name: "Employers", type: "route", to: "/employers" },
   ];
 
-  // Never let analytics break the CTA flow
+  // --- helpers ---
   const safeTrack = (payload: any) => {
     try {
       GTagUTM?.(payload);
@@ -43,19 +48,43 @@ const Navigation: React.FC<NavigationProps> = ({
     }
   };
 
-  const openSignup = () => {
-    // 1) Real action first
-    setSignupFormVisibility(true);
-    setIsMenuOpen(false);
+  // Navigate to "/", then scroll to a section id.
+  // If we're already on "/", just scroll.
+  const goToSection = (id: string, closeMenu = true) => {
+  const el = document.getElementById(id);
 
-    // 2) Non-blocking analytics
+  if (el) {
+    // Scroll if element exists
+    el.scrollIntoView({ behavior: "smooth", block: "start" });
+    window.history.pushState({}, "", "/" + id);
+  } else {
+    // Navigate to home first
+    navigate("/");
+
+    // Wait for Home to mount, then scroll
+    setTimeout(() => {
+      const newEl = document.getElementById(id);
+      if (newEl) {
+        newEl.scrollIntoView({ behavior: "smooth", block: "start" });
+        window.history.pushState({}, "", "/" + id);
+      }
+    }, 100); // Delay allows DOM to render
+  }
+
+  if (closeMenu) setIsMenuOpen(false);
+};
+
+
+  const openSignup = () => {
+    navigate("/signup");
+    setIsMenuOpen(false);
     safeTrack({
-      eventName: 'sign_up_click',
-      label: 'Header Sign Up Button',
+      eventName: "sign_up_click",
+      label: "Header Sign Up Button",
       utmParams: {
-        utm_source: 'WEBSITE',
-        utm_medium: 'NAVBAR_SIGNUP_BUTTON',
-        utm_campaign: 'header_signup',
+        utm_source: "WEBSITE",
+        utm_medium: "NAVBAR_SIGNUP_BUTTON",
+        utm_campaign: "header_signup",
       },
     });
   };
@@ -63,34 +92,32 @@ const Navigation: React.FC<NavigationProps> = ({
   const openCalendly = () => {
     setCalendlyModalVisibility(true);
     setIsMenuOpen(false);
-
     safeTrack({
-      eventName: 'Calendly_Meet_click',
-      label: 'NAVBAR_LOWER_SECTION_Button',
+      eventName: "Calendly_Meet_click",
+      label: "NAVBAR_LOWER_SECTION_Button",
       utmParams: {
-        utm_source: 'WEBSITE',
-        utm_medium: 'Navbar_Meet_Button',
-        utm_campaign: 'WEBSITE_NAVBAR_LOWER_SECTION',
+        utm_source: "WEBSITE",
+        utm_medium: "Navbar_Meet_Button",
+        utm_campaign: "WEBSITE_NAVBAR_LOWER_SECTION",
       },
     });
   };
 
   const openEmployerForm = () => {
-    setEmployerFormVisible(true);
-    setIsMenuOpen(false);
+    setEmployerFormVisibility(true);
+    navigate("/employers");
+    // keep menu state as-is by design
   };
 
-  const closeEmployerForm = () => {
-    setEmployerFormVisible(false);
-  };
+  const closeEmployerForm = () => setEmployerFormVisibility(false);
 
   return (
     <div className="font-inter">
       <nav
         className={`fixed top-0 w-full z-40 transition-all duration-300 ${
           isScrolled
-            ? 'bg-white/95 backdrop-blur-md shadow-lg border-b border-gray-100'
-            : 'bg-white/80 backdrop-blur-sm'
+            ? "bg-white/95 backdrop-blur-md shadow-lg border-b border-gray-100"
+            : "bg-white/80 backdrop-blur-sm"
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -100,6 +127,11 @@ const Navigation: React.FC<NavigationProps> = ({
               <Link
                 to="/"
                 className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-red-500 to-red-600 bg-clip-text text-transparent cursor-pointer hover:opacity-80 transition-opacity duration-200"
+                onClick={(e) => {
+                  // If not on home, go home; if on home, scroll to top
+                  e.preventDefault();
+                  goToSection("home");
+                }}
               >
                 FLASHFIRE
               </Link>
@@ -108,36 +140,40 @@ const Navigation: React.FC<NavigationProps> = ({
             {/* Desktop Navigation */}
             <div className="hidden md:flex items-center space-x-6 lg:space-x-8">
               {navItems.map((item) => {
-                if (item.name === 'Employers') {
+                if (item.type === "route") {
+                  // Special handling for Employers (kept as in your code)
+                  if (item.name === "Employers") {
+                    return (
+                      <Link to="/employers" key={item.name}>
+                        <button
+                          className="font-medium border-none text-gray-700 transition-colors duration-200 hover:text-orange-600 text-sm lg:text-base"
+                          onClick={openEmployerForm}
+                        >
+                          {item.name}
+                        </button>
+                      </Link>
+                    );
+                  }
                   return (
-                    <button
+                    <Link
                       key={item.name}
-                      onClick={openEmployerForm}
-                      className="font-medium text-gray-700 transition-colors duration-200 hover:text-orange-600 text-sm lg:text-base"
+                      to={item.to}
+className="font-medium text-gray-700 transition-colors duration-200 hover:text-orange-600 text-sm lg:text-base focus:outline-none focus:ring-0 focus:text-orange-500"
                     >
                       {item.name}
-                    </button>
+                    </Link>
                   );
                 }
 
-                const isInternalRoute = item.href.startsWith('/');
-
-                return isInternalRoute ? (
-                  <Link
+                // section item (one-pager)
+                return (
+                  <button
                     key={item.name}
-                    to={item.href}
-                    className="font-medium text-gray-700 transition-colors duration-200 hover:text-orange-600 text-sm lg:text-base"
+                    onClick={() => goToSection(item.id)}
+className="font-medium text-gray-700 transition-colors duration-200 hover:text-orange-600 text-sm lg:text-base focus:outline-none focus:text-orange-500 focus:ring-0"
                   >
                     {item.name}
-                  </Link>
-                ) : (
-                  <a
-                    key={item.name}
-                    href={item.href}
-                    className="font-medium text-gray-700 transition-colors duration-200 hover:text-orange-600 text-sm lg:text-base"
-                  >
-                    {item.name}
-                  </a>
+                  </button>
                 );
               })}
             </div>
@@ -168,38 +204,42 @@ const Navigation: React.FC<NavigationProps> = ({
             <div className="md:hidden">
               <div className="px-2 pt-2 pb-3 space-y-1 bg-white/95 backdrop-blur-md border-t border-gray-100 rounded-b-lg shadow-lg">
                 {navItems.map((item) => {
-                  if (item.name === 'Employers') {
+                  if (item.type === "route") {
+                    if (item.name === "Employers") {
+                      return (
+                        <button
+                          key={item.name}
+                          onClick={() => {
+                            openEmployerForm();
+                            setIsMenuOpen(false);
+                          }}
+                          className="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-100 transition-colors duration-200"
+                        >
+                          {item.name}
+                        </button>
+                      );
+                    }
                     return (
-                      <button
+                      <Link
                         key={item.name}
-                        onClick={openEmployerForm}
-                        className="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-100 transition-colors duration-200"
+                        to={item.to}
+                        onClick={() => setIsMenuOpen(false)}
+                        className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-100 transition-colors duration-200"
                       >
                         {item.name}
-                      </button>
+                      </Link>
                     );
                   }
 
-                  const isInternalRoute = item.href.startsWith('/');
-
-                  return isInternalRoute ? (
-                    <Link
+                  // section (one-pager) on mobile
+                  return (
+                    <button
                       key={item.name}
-                      to={item.href}
-                      onClick={() => setIsMenuOpen(false)}
-                      className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-100 transition-colors duration-200"
+                      onClick={() => goToSection(item.id)}
+                      className="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-100 transition-colors duration-200"
                     >
                       {item.name}
-                    </Link>
-                  ) : (
-                    <a
-                      key={item.name}
-                      href={item.href}
-                      className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-100 transition-colors duration-200"
-                      onClick={() => setIsMenuOpen(false)}
-                    >
-                      {item.name}
-                    </a>
+                    </button>
                   );
                 })}
 
@@ -215,13 +255,14 @@ const Navigation: React.FC<NavigationProps> = ({
           )}
         </div>
 
-        {/* Enhanced Consultation Banner */}
+        {/* Enhanced Consultation Banner (unchanged) */}
         <div className="w-full bg-gradient-to-r from-orange-500 to-orange-600 shadow-lg">
           <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 lg:p-1">
             {/* Mobile Layout */}
             <div className="flex sm:hidden items-center justify-between py-1.5 px-3">
               <div className="flex-shrink-0">
                 <div className="w-10 h-10 flex items-center justify-center">
+                  {/* clock svg ... (kept as-is) */}
                   <svg className="w-9 h-9" viewBox="0 0 24 24">
                     <defs>
                       <linearGradient id="clockGradient" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -276,6 +317,7 @@ const Navigation: React.FC<NavigationProps> = ({
 
               <div className="flex items-center space-x-0.5 sm:space-x-2">
                 <div className="w-2.5 h-2.5 sm:w-4 sm:h-4 lg:w-5 lg:h-5 flex items-center justify-center flex-shrink-0">
+                  {/* clock svg 2 ... (kept as-is) */}
                   <svg className="w-2.5 h-2.5 sm:w-4 sm:h-4 lg:w-5 lg:h-5" viewBox="0 0 24 24">
                     <defs>
                       <linearGradient id="clockGradient2" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -298,24 +340,18 @@ const Navigation: React.FC<NavigationProps> = ({
                   Just 1 Spot Left
                 </span>
               </div>
-
+              <Link to={'/book-free-demo'}>
               <button
-                onClick={openCalendly}
+                // onClick={openCalendly}
                 className="bg-red-600 hover:bg-red-700 text-white px-1.5 sm:px-4 lg:px-6 py-0.5 sm:py-2 rounded sm:rounded-lg font-bold transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105 text-[10px] sm:text-sm tracking-wide whitespace-nowrap flex-shrink-0"
               >
                 Book Now
               </button>
+              </Link>
             </div>
           </div>
         </div>
       </nav>
-
-      {/* Employer Form Modal */}
-      {employerFormVisible && (
-        <div className="fixed inset-0 z-[60]">
-          <EmployerForm isVisible={employerFormVisible} onClose={closeEmployerForm} />
-        </div>
-      )}
     </div>
   );
 };

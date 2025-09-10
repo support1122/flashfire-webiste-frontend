@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { ChevronDown, ChevronUp, HelpCircle } from 'lucide-react';
-import { useOutletContext } from 'react-router-dom';
+import { useOutletContext, useNavigate } from 'react-router-dom';
 import { GTagUTM } from '../utils/GTagUTM.js';
 const FAQ = ({setSignupFormVisibility}) => {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const navigate = useNavigate();
   // const { setSignupFormVisibility } = useOutletContext<{
   //   setSignupFormVisibility: React.Dispatch<React.SetStateAction<boolean>>;
   // }>();
@@ -108,7 +109,8 @@ const FAQ = ({setSignupFormVisibility}) => {
                                     utm_campaign: 'WEBSITE',
                                   },
                                 });
-                                setSignupFormVisibility(true); // just opens modal/form
+                                // setSignupFormVisibility(true); // just opens modal/form
+                                navigate('/signup');
                               }}
               className="bg-white text-orange-600 px-6 sm:px-8 py-3 sm:py-4 rounded-full font-bold hover:bg-gray-50 transition-colors duration-200 shadow-lg hover:scale-105"
             >

@@ -2,9 +2,11 @@
 import React from 'react';
 import { Linkedin, FileText, Rocket, Phone } from 'lucide-react';
 import {GTagUTM} from '../utils/GTagUTM.ts';
+import { useNavigate } from 'react-router-dom';
 
 
 const HowItWorks = ({setSignupFormVisibility}) => {
+  const navigate = useNavigate();
   const steps = [
     {
       icon: <Linkedin className="w-8 h-8 text-orange-600" />,
@@ -117,7 +119,8 @@ const HowItWorks = ({setSignupFormVisibility}) => {
                                     utm_campaign: 'Website',
                                   },
                                 });
-                                setSignupFormVisibility(true);
+                                navigate('/signup');
+                                // setSignupFormVisibility(true);
                               }}
               className="bg-white text-orange-600 px-6 sm:px-8 py-3 sm:py-4 rounded-full font-bold hover:bg-gray-50 transition-all duration-200 shadow-lg hover:scale-105"
             >

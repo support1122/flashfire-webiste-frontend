@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { X, User, Phone, Mail} from 'lucide-react';
 import { createOrUpdateContact, trackSignupEvent, waitForCRMLoad } from '../utils/CRMTracking';
+import { useNavigate, Link } from 'react-router-dom';
 
 function SignupForm({ setSignupFormVisibility, setCalendlyModalVisibility }) {
   const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
@@ -11,6 +12,7 @@ function SignupForm({ setSignupFormVisibility, setCalendlyModalVisibility }) {
     email: '',
     workAuthorization: ''
   });
+  const navigate = useNavigate();
 
   const countryCodes = [
     { code: '+1', country: 'USA', pattern: /^1/ },
@@ -18,7 +20,12 @@ function SignupForm({ setSignupFormVisibility, setCalendlyModalVisibility }) {
   ];
 
   const closeModal = () => {
-    setSignupFormVisibility(false);
+    console.log('Modal closed');
+    if (window.history.length > 1) {
+  window.history.back();
+} else {
+  navigate('/');
+}
     setFormData({
       fullName: '',
       phone: '',
@@ -26,6 +33,7 @@ function SignupForm({ setSignupFormVisibility, setCalendlyModalVisibility }) {
       email: '',
       workAuthorization: ''
     });
+    
   };
 
   async function SaveDetailsToDB() {
@@ -120,7 +128,7 @@ function SignupForm({ setSignupFormVisibility, setCalendlyModalVisibility }) {
               <h2 className="text-2xl font-bold text-gray-900 mb-2">Get Started for Free</h2>
               <p className="text-gray-600 text-sm">Tell us about yourself to schedule your consultation</p>
             </div>
-            <button onClick={closeModal} className="text-gray-400 hover:text-gray-600 transition-colors p-1">
+            <button onClick={()=>{closeModal();setSignupFormVisibility(false);}} className="text-gray-400 hover:text-gray-600 transition-colors p-1">
               <X className="w-5 h-5" />
             </button>
           </div>

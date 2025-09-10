@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { X, Calendar, CheckCircle, Loader2 } from 'lucide-react';
 import { InlineWidget } from 'react-calendly';
+import { useNavigate } from 'react-router-dom';
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 function CalendlyModal({ setCalendlyModalVisibility }: { setCalendlyModalVisibility: (visible: boolean) => void }) {
   const [isLoading, setIsLoading] = useState(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
     // Hide loading after 5 seconds as fallback
@@ -21,7 +23,11 @@ function CalendlyModal({ setCalendlyModalVisibility }: { setCalendlyModalVisibil
       <div className="relative bg-white max-w-5xl w-full max-h-[90vh] overflow-hidden rounded-xl shadow-2xl flex flex-col lg:flex-row">
         {/* Close button */}
         <button
-          onClick={() => setCalendlyModalVisibility(false)}
+          onClick={() =>{ setCalendlyModalVisibility(false);    if (window.history.length > 1) {
+  window.history.back();
+} else {
+  navigate('/');
+}}}
           className="absolute top-4 right-4 sm:top-6 sm:right-6 text-gray-400 hover:text-gray-600 transition-colors z-20 bg-white/90 rounded-full p-2 shadow-lg"
         >
           <X className="w-5 h-5 sm:w-6 sm:h-6" />
@@ -53,7 +59,8 @@ function CalendlyModal({ setCalendlyModalVisibility }: { setCalendlyModalVisibil
               </div>
             )}
             <InlineWidget
-              url="https://calendly.com/feedback-flashfire/30min"
+              url = 'https://calendly.com/biswajitshrm66/30min'
+              // url=  "https://calendly.com/feedback-flashfire/30min"
               styles={{
                 height: '100%',
                 width: '100%',
@@ -154,7 +161,8 @@ function CalendlyModal({ setCalendlyModalVisibility }: { setCalendlyModalVisibil
               </div>
             )}
             <InlineWidget
-              url="https://calendly.com/feedback-flashfire/30min"
+              url="https://calendly.com/biswajitshrm66/30min"
+              // "https://calendly.com/feedback-flashfire/30min"
               styles={{
                 height: '100%',
                 width: '100%',

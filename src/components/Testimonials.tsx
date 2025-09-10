@@ -144,7 +144,7 @@ const VideoTestimonial = ({ testimonial, index }) => {
   }
 
   return (
-    <div className={`rounded-2xl overflow-hidden shadow-lg group animate-pulse-slow max-w-xs mx-auto`}>
+    <div className={`rounded-2xl overflow-hidden shadow-lg group animate-pulse-slow max-w-xs mx-auto `}>
       {!showVideo ? (
         <div className="relative overflow-hidden">
           <img
@@ -266,7 +266,7 @@ const TestimonialsGrid = () => {
       <style dangerouslySetInnerHTML={{ __html: customStyles }} />
       <section
         id="testimonials"
-        className="bg-gradient-to-br from-orange-400 via-orange-500 to-red-500 min-h-screen py-16 px-6 overflow-hidden rounded-[3rem]"
+        className="mb-40 bg-gradient-to-br from-orange-400 via-orange-500 to-red-500 min-h-screen py-16 px-6 overflow-hidden rounded-[3rem]"
       >
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(255,255,255,0.15),transparent_50%)] rounded-[3rem]"></div>
 

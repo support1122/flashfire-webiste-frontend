@@ -21,19 +21,31 @@ import Pricing from './components/Pricing.tsx';
 import FAQ from './components/FAQ.tsx';
 import Home from './components/Home.tsx';
 import HowItWorks from './components/HowItWorks.tsx';
+import SignupForm from './components/SignupForm.tsx';
+import EmployerForm from './components/EmployerForm.tsx';
+import ScrollToHash from './components/ScrollToHash.tsx';
+import CalendlyModal from './components/CalendlyModal.tsx';
 
 const routes=createBrowserRouter([
   {
     path: '/',
     element: <App />,
     children: [
-      { index: true, element: <Home /> },                 // <-- this
+      {path : '/', index: true, element: <Home /> },                 // <-- this
+      {path : '/home', element : <Home />},
       { path: 'paymentpolicy', element: <PaymentPolicy /> },
       { path: 'refundpolicy', element: <RefundPolicy /> },
       { path: 'privacypolicy', element: <PrivacyPolicy /> },
       { path: 'termsofservice', element: <TermsOfService /> },
       { path: 'blogs', element: <BlogPage /> },
       { path: 'blogs/:id', element: <IndividualBlog /> },
+      { path: '/signup', element : <Home /> },
+      { path: '/testimonials', element : <Home /> },
+      { path : '/employers', element : <Home />},
+      { path : '/faq', element: <Home />},
+      {path : '/pricing', element : <Home />},
+      {path : '/features', element : <Home />},
+      {path : '/book-free-demo', element : <Home />}
     ],
   },
 
@@ -43,6 +55,8 @@ const routes=createBrowserRouter([
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     {/* <Router /> */}
+    {/* <ScrollToHash> */}
     <RouterProvider router={routes} />
+    {/* </ScrollToHash> */}
   </StrictMode>
 );
