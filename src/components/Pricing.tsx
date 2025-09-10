@@ -267,7 +267,7 @@ const teamMembers = [
 
 return (
     <>
-    <section id="pricing" className="py-16 sm:py-24 bg-gradient-to-b from-white to-gray-50">
+    <section id="pricing" className="py-1 sm:py-10 bg-gradient-to-b from-white to-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12 sm:mb-20">
           <div className="inline-flex items-center space-x-2 bg-orange-100 text-orange-800 px-4 py-2 rounded-full text-sm font-medium mb-4">
@@ -362,6 +362,31 @@ return (
         </div>
       </div>
     </section>
+    <section className=" py-0 bg-gradient-to-b from-gray-50 to-white">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="bg-white rounded-2xl shadow-xl hover:shadow-2xl border-4 border-orange-300 p-6 sm:p-8 relative overflow-hidden">
+            {/* Background accent */}
+            <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-orange-100 to-transparent rounded-full -translate-y-16 translate-x-16"></div>
+
+            <div className="relative z-10">
+              <div className="flex items-start space-x-4">
+                <div className="flex-shrink-0">
+                  <div className="w-12 h-12 bg-gradient-to-r from-green-500 to-emerald-500 rounded-full flex items-center justify-center shadow-lg">
+                    <Check className="w-6 h-6 text-white" />
+                  </div>
+                </div>
+                <div className="flex-1">
+                  <h3 className="text-xl font-bold text-gray-900 mb-2">100% Risk-Free Guarantee</h3>
+                  <p className="text-gray-700 leading-relaxed">
+                    <span className="font-semibold text-gray-900">Only jobs you approve.</span> Get 150–200 extra
+                    applications completely free if you don't receive interview calls from your initial applications.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
     
     <section className="py-16 bg-white">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
