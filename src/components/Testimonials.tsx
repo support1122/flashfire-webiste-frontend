@@ -215,7 +215,7 @@ const TestimonialsGrid = () => {
         </div>
 
         {/* Image Testimonials */}
-        <div className="columns-2 md:columns-3 lg:columns-4 gap-2 [column-fill:_balance]">
+        <div className="columns-2 md:columns-3 lg:columns-3 gap-2 [column-fill:_balance]">
           {screenshots.map((src, index) => (
             <div
               key={index}
