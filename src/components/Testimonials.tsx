@@ -59,6 +59,9 @@ const screenshots = [
   "/images/image13.jpg",
   "/images/image14.jpg",
   "/images/image15.jpg",
+  "/images/image16.png",
+  "/images/image17.png",
+
 ]
 
 const rotations = [
