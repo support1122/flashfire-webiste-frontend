@@ -2,11 +2,13 @@
 import { useState, useEffect, useRef } from "react"
 import { ArrowRight, Sparkles } from "lucide-react"
 import { GTagUTM } from "../utils/GTagUTM.js"
+import { useNavigate } from "react-router-dom"
 
 const Hero = ({ setSignupFormVisibility }) => {
   const [isSuccessMatrixVisible, setIsSuccessMatrixVisible] = useState(false)
   const [isLoaded, setIsLoaded] = useState(false)
   const successMatrixRef = useRef<HTMLDivElement>(null)
+  const navigate = useNavigate();
 
   useEffect(() => {
     const timer = setTimeout(() => setIsLoaded(true), 100)
@@ -26,7 +28,7 @@ const Hero = ({ setSignupFormVisibility }) => {
 
   return (
     <>
-      <style jsx>{`
+      <style>{`
         @keyframes wave1 {
           0% { transform: translateX(-80%) translateY(-60%) rotate(0deg); opacity: 0; }
           10% { opacity: 0.4; }
@@ -234,8 +236,9 @@ const Hero = ({ setSignupFormVisibility }) => {
               <button
                 type="button"
                 onClick={() => {
+                  
                   // Open the form first
-                  setSignupFormVisibility(true)
+                  // setSignupFormVisibility(true)
                   // Track safely
                   try {
                     GTagUTM({
@@ -246,7 +249,8 @@ const Hero = ({ setSignupFormVisibility }) => {
                         utm_medium: "Website_Front_Page",
                         utm_campaign: "Website",
                       },
-                    })
+                    });
+                    navigate('/signup');
                   } catch {}
                 }}
                 className="group bg-gradient-to-r from-orange-500 to-orange-600 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold text-base sm:text-lg hover:from-orange-600 hover:to-orange-700 transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105 flex items-center space-x-2 w-full sm:w-auto justify-center pulse-glow transform"

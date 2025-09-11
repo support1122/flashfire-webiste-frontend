@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from 'react'
-import Navigation from './Navigation';
+import React, { useEffect } from 'react'
 import Hero from './Hero';
 import Features from './Features';
 import HowItWorks from './HowItWorks';
@@ -7,55 +6,63 @@ import Testimonials from './Testimonials';
 import Pricing from './Pricing';
 import FAQ from './FAQ';
 import Contact from './Contact';
-// import SignupModal from './SignupModal';
 import RealTimeMetrics from './RealTimeMetrics';
 import MovingJobs from './MovingJobs';
 import WhatsAppButton from './WhatsAppButton';
-import Footer from './Footer';
-// import Blog from './Blog';
-import SignupForm from './SignupForm.tsx';
-import CalendlyModal from './CalendlyModal.tsx';
-import { useOutletContext } from 'react-router-dom';
-import SalesPopup from './SalesPopUp.tsx';
+import { useOutletContext, useNavigate, Link, Location, useLocation } from 'react-router-dom';
+
 
 function Home() {
-  const { signupFormVisibility,calendlyModalVisibility,setSignupFormVisibility, setCalendlyModalVisibility } = useOutletContext<{
+  const {setSignupFormVisibility, setCalendlyModalVisibility } = useOutletContext<{
     setSignupFormVisibility: React.Dispatch<React.SetStateAction<boolean>>,
     setCalendlyModalVisibility: React.Dispatch<React.SetStateAction<boolean>>,
   }>();
-  // const [signupFormVisibility, setSignupFormVisibility] = useState(false);
-  //   const [calendlyModalVisibility, setCalendlyModalVisibility] = useState(false);
+  const section = useLocation().pathname;
+  useEffect(()=>{
+    console.log(section);
+  if(section.includes('testimonials')){
+    const testimonials = document.getElementById('testimonials');
+    testimonials?.scrollIntoView({behavior: "smooth", block: "start"} );
+  }
+  else if(section.includes('features')){
+    const features = document.getElementById('features');
+    features?.scrollIntoView({behavior: "smooth", block: "start"} );
+  }
+  else if(section.includes('pricing')){
+    const pricing = document.getElementById('pricing');
+    pricing?.scrollIntoView({behavior: "smooth", block: "start"} ); 
+  }
+  else if(section.includes('faq')){
+    const faq = document.getElementById('faq');
+    faq?.scrollIntoView({behavior: "smooth", block: "start"} ); 
+  }
+  else if(section.includes('home')){
+    const top = document.getElementById('home');
+    top?.scrollIntoView({behavior: "smooth", block: "start"} );
+  }
+  else{
+    const top = document.getElementById('home');
+    top?.scrollIntoView({behavior: "smooth", block: "start"} );
+  }
+    
+
+  },[location.pathname])
   
-  // (window as any).openSignupModal = (customStep = 1) => {
-  //   const modal = document.getElementById('signup-modal');
-  //     if (modal) {
-  //     modal.classList.remove('hidden');
-  //     setStep(customStep);
-  //   }
-  // };
-  useEffect(() => {
-    setTimeout(()=>
-    setSignupFormVisibility(true),10000);
-  }, []);
+  // if(section == )
+
   return (
     <div>
-            <Navigation setCalendlyModalVisibility={setCalendlyModalVisibility} setSignupFormVisibility={setSignupFormVisibility}/>
-            <Hero setCalendlyModalVisibility={setCalendlyModalVisibility} setSignupFormVisibility={setSignupFormVisibility}/>
+            <Hero setSignupFormVisibility={setSignupFormVisibility}/>
             <MovingJobs setSignupFormVisibility={setSignupFormVisibility}/>
-            <RealTimeMetrics setSignupFormVisibility={setSignupFormVisibility}/>
+            <RealTimeMetrics />
             <Features setSignupFormVisibility={setSignupFormVisibility}/>
-            {/* <Blog /> */}
             <HowItWorks setSignupFormVisibility={setSignupFormVisibility}/>
             <Testimonials />
             <Pricing />
             <FAQ setSignupFormVisibility={setSignupFormVisibility}/>
-            <Contact setSignupFormVisibility={setSignupFormVisibility}/>
-            {signupFormVisibility && <SignupForm setSignupFormVisibility={setSignupFormVisibility} setCalendlyModalVisibility={setCalendlyModalVisibility} />}
-            {calendlyModalVisibility && <CalendlyModal setCalendlyModalVisibility={setCalendlyModalVisibility}/>}
+            {/* <Contact setSignupFormVisibility={setSignupFormVisibility}/> */}
             <WhatsAppButton />
-            <SalesPopup />
-            <Footer />
-            {/* <AutoModalTrigger /> */}
+            
 
     </div>
   )
