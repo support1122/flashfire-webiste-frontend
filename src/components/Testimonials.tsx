@@ -44,21 +44,21 @@ const customStyles = `@keyframes bounce-gentle {
 `
 
 const screenshots = [
-  "/images/image1.png",
-  "/images/image2.png",
-  "/images/image3.png",
-  "/images/image4.png",
-  "/images/image5.png",
-  "/images/image6.png",
-  "/images/image7.png",
-  "/images/image8.png",
-  "/images/image9.png",
-  "/images/image10.png",
-  "/images/image11.png",
-  "/images/image12.png",
-  "/images/image13.png",
-  "/images/image14.png",
-  "/images/image15.png",
+  "/images/image1.jpg",
+  "/images/image2.jpg",
+  "/images/image3.jpg",
+  "/images/image4.jpg",
+  "/images/image5.jpg",
+  "/images/image6.jpg",
+  "/images/image7.jpg",
+  "/images/image8.jpg",
+  "/images/image9.jpg",
+  "/images/image10.jpg",
+  "/images/image11.jpg",
+  "/images/image12.jpg",
+  "/images/image13.jpg",
+  "/images/image14.jpg",
+  "/images/image15.jpg",
 ]
 
 const rotations = [
@@ -215,7 +215,7 @@ const TestimonialsGrid = () => {
         </div>
 
         {/* Image Testimonials */}
-        <div className="columns-2 md:columns-3 lg:columns-3 gap-2 [column-fill:_balance]">
+        <div className="columns-2 md:columns-3 lg:columns-4 gap-2 [column-fill:_balance]">
           {screenshots.map((src, index) => (
             <div
               key={index}
