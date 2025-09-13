@@ -60,7 +60,7 @@ function Home() {
             <Testimonials />
             <Pricing />
             <FAQ setSignupFormVisibility={setSignupFormVisibility}/>
-            {/* <Contact setSignupFormVisibility={setSignupFormVisibility}/> */}
+            <Contact setSignupFormVisibility={setSignupFormVisibility}/>
             <WhatsAppButton />
             
 
