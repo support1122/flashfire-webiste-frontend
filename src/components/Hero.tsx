@@ -67,14 +67,33 @@ const Hero = ({ setSignupFormVisibility }) => {
           50% { transform: translateY(-20px) rotate(5deg); }
         }
         
-        @keyframes pulse-glow {
-          0%, 100% { box-shadow: 0 0 20px rgba(249, 115, 22, 0.3); }
-          50% { box-shadow: 0 0 40px rgba(249, 115, 22, 0.6), 0 0 60px rgba(249, 115, 22, 0.3); }
+        @keyframes subtleGlow {
+          0%, 100% { 
+            box-shadow: 0 0 20px rgba(249, 115, 22, 0.2);
+          }
+          50% { 
+            box-shadow: 0 0 40px rgba(249, 115, 22, 0.4), 0 0 60px rgba(239, 68, 68, 0.2);
+          }
         }
-        
+
+        @keyframes floatGentle {
+          0%, 100% { transform: translateY(0px) scale(1); }
+          50% { transform: translateY(-8px) scale(1.02); }
+        }
+
+        @keyframes ripple {
+          0% { transform: scale(0.8); opacity: 1; }
+          100% { transform: scale(2.4); opacity: 0; }
+        }
+
         @keyframes scrollBounce {
           0%, 100% { transform: translateY(0px); }
           50% { transform: translateY(-10px); }
+        }
+
+        @keyframes shimmer {
+          0% { transform: translateX(-100%); }
+          100% { transform: translateX(100%); }
         }
         
         .wave-bg {
@@ -138,6 +157,34 @@ const Hero = ({ setSignupFormVisibility }) => {
         
         .scroll-bounce {
           animation: scrollBounce 2s ease-in-out infinite;
+        }
+
+        .subtle-glow {
+          animation: subtleGlow 4s ease-in-out infinite;
+        }
+
+        .float-gentle {
+          animation: floatGentle 6s ease-in-out infinite;
+        }
+
+        .ripple-effect {
+          animation: ripple 2s ease-out infinite;
+        }
+
+        .shimmer-effect {
+          position: relative;
+          overflow: hidden;
+        }
+
+        .shimmer-effect::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: linear-gradient(90deg, transparent, rgba(249, 115, 22, 0.3), transparent);
+          animation: shimmer 3s ease-in-out infinite;
         }
       `}</style>
 
@@ -223,10 +270,27 @@ const Hero = ({ setSignupFormVisibility }) => {
       </section>
 
       {/* Success Matrix Section - unchanged */}
-      <section className="relative bg-gradient-to-br from-orange-50 via-white to-red-50 py-16 sm:py-20 lg:py-24">
+       <section className="relative bg-gradient-to-br from-orange-50 via-white to-red-50 py-16 sm:py-20 lg:py-24 overflow-hidden">
         <div className="absolute inset-0">
-          <div className="absolute top-20 left-10 w-72 h-72 bg-orange-200/20 rounded-full blur-3xl" />
-          <div className="absolute bottom-20 right-10 w-96 h-96 bg-red-200/20 rounded-full blur-3xl" />
+          <div className="absolute top-20 left-10 w-72 h-72 bg-gradient-to-r from-orange-200/40 to-red-200/30 rounded-full blur-3xl float-gentle" />
+          <div
+            className="absolute bottom-20 right-10 w-96 h-96 bg-gradient-to-r from-red-200/30 to-orange-200/40 rounded-full blur-3xl float-gentle"
+            style={{ animationDelay: "2s" }}
+          />
+          <div
+            className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-gradient-to-r from-orange-100/50 to-red-100/40 rounded-full blur-3xl float-gentle"
+            style={{ animationDelay: "4s" }}
+          />
+
+          <div className="absolute top-1/4 left-1/4 w-3 h-3 bg-gradient-to-r from-orange-400 to-red-400 rounded-full float-gentle opacity-60" />
+          <div
+            className="absolute top-3/4 right-1/4 w-2 h-2 bg-gradient-to-r from-red-400 to-orange-400 rounded-full float-gentle opacity-50"
+            style={{ animationDelay: "3s" }}
+          />
+          <div
+            className="absolute top-1/2 right-1/3 w-4 h-4 bg-gradient-to-r from-orange-300 to-red-300 rounded-full float-gentle opacity-40"
+            style={{ animationDelay: "1.5s" }}
+          />
         </div>
 
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -237,12 +301,16 @@ const Hero = ({ setSignupFormVisibility }) => {
             }`}
           >
             <h2
-              className={`text-2xl sm:text-3xl md:text-4xl lg:text-4xl font-bold text-gray-900 mb-4 sm:mb-6 lg:mb-8 leading-tight transition-all duration-800 delay-100 opacity-100 transform translate-y-0 lg:opacity-0 lg:transform lg:translate-y-4 ${
+              className={`text-2xl sm:text-3xl md:text-4xl lg:text-4xl font-bold mb-4 sm:mb-6 lg:mb-8 leading-tight transition-all duration-800 delay-100 opacity-100 transform translate-y-0 lg:opacity-0 lg:transform lg:translate-y-4 shimmer-effect ${
                 isSuccessMatrixVisible ? "lg:opacity-100 lg:transform lg:translate-y-0" : ""
               }`}
             >
-              <span className="block">Our Platform Gets Users Interview Calls Within Weeks —</span>
-              <span className="block">And Offers In Months</span>
+              <span className="block bg-gradient-to-r from-slate-900 via-gray-800 to-slate-900 bg-clip-text text-transparent">
+                Our Platform Gets Users Interview Calls Within Weeks —
+              </span>
+              <span className="block bg-gradient-to-r from-orange-600 via-red-600 to-orange-700 bg-clip-text text-transparent">
+                And Offers In Months
+              </span>
             </h2>
 
             <p
@@ -255,36 +323,53 @@ const Hero = ({ setSignupFormVisibility }) => {
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 xl:gap-20 mb-8 sm:mb-12">
               {[
-                { percentage: "95%", title: "Clients get calls", subtitle: "within a month", delay: "delay-200" },
-                { percentage: "90%", title: "Clients land job", subtitle: "within 3 months", delay: "delay-300" },
+                {
+                  percentage: "95%",
+                  title: "Clients get calls",
+                  subtitle: "within a month",
+                  delay: "delay-200",
+                },
+                {
+                  percentage: "90%",
+                  title: "Clients land job",
+                  subtitle: "within 3 months",
+                  delay: "delay-300",
+                },
               ].map((stat, index) => (
                 <div
                   key={index}
-                  className={`text-center group cursor-pointer relative p-4 sm:p-6 lg:p-8 transition-all duration-800 ${stat.delay} opacity-100 transform translate-y-0 lg:opacity-0 lg:transform lg:translate-y-6 flex flex-col items-center justify-center ${
+                  className={`text-center group cursor-pointer relative p-6 sm:p-8 lg:p-10 transition-all duration-800 ${stat.delay} opacity-100 transform translate-y-0 lg:opacity-0 lg:transform lg:translate-y-6 flex flex-col items-center justify-center ${
                     isSuccessMatrixVisible ? "lg:opacity-100 lg:transform lg:translate-y-0" : ""
                   }`}
                 >
                   <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="w-48 h-48 sm:w-56 sm:h-56 md:w-64 md:h-64 lg:w-72 lg:h-72 xl:w-80 xl:h-80 bg-gradient-to-br from-orange-100 via-orange-50 to-red-100 rounded-full scale-0 group-hover:scale-100 transition-all duration-500 ease-out opacity-0 group-hover:opacity-100" />
+                    <div className="w-48 h-48 sm:w-56 sm:h-56 md:w-64 md:h-64 lg:w-72 lg:h-72 xl:w-80 xl:h-80 bg-gradient-to-br from-orange-500/10 via-red-500/15 to-orange-600/10 rounded-full scale-0 group-hover:scale-100 transition-all duration-700 ease-out group-hover:opacity-100 subtle-glow" />
                   </div>
 
                   <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="w-52 h-52 sm:w-60 sm:h-60 md:w-68 md:h-68 lg:w-76 lg:h-76 xl:w-84 xl:h-84 border-2 border-orange-200 rounded-full scale-0 group-hover:scale-100 transition-all duration-700 ease-out opacity-0 group-hover:opacity-60" />
+                    <div className="w-52 h-52 sm:w-60 sm:h-60 md:w-68 md:h-68 lg:w-76 lg:h-76 xl:w-84 xl:h-84 border-2 border-orange-300/40 rounded-full scale-0 group-hover:scale-100 transition-all duration-900 ease-out opacity-0 group-hover:opacity-60" />
                   </div>
 
                   <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="w-44 h-44 sm:w-52 sm:h-52 md:w-60 md:h-60 lg:w-68 lg:h-68 xl:w-76 xl:h-76 bg-gradient-to-r from-orange-200/30 to-red-200/30 rounded-full scale-0 group-hover:scale-100 transition-all duration-600 ease-out opacity-0 group-hover:opacity-70 blur-md" />
+                    <div className="w-44 h-44 sm:w-52 sm:h-52 md:w-60 md:h-60 lg:w-68 lg:h-68 xl:w-76 xl:h-76 bg-gradient-to-r from-orange-400/20 via-red-400/25 to-orange-500/20 rounded-full scale-0 group-hover:scale-100 transition-all duration-800 ease-out group-hover:opacity-100 blur-lg" />
                   </div>
 
-                  <div className="relative z-10 flex flex-col items-center transition-all duration-300 group-hover:scale-105">
-                    <div className="text-4xl sm:text-5xl md:text-6xl lg:text-6xl xl:text-7xl font-bold text-orange-600 mb-2 sm:mb-3 lg:mb-4 group-hover:text-orange-700 transition-colors duration-300">
+                  <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100">
+                    <div className="w-20 h-20 border-2 border-orange-400/60 rounded-full ripple-effect" />
+                  </div>
+
+                  <div className="relative z-10 flex flex-col items-center transition-all duration-500 group-hover:scale-110">
+                    <div className="text-4xl sm:text-5xl md:text-6xl lg:text-6xl xl:text-7xl font-bold mb-2 sm:mb-3 lg:mb-4 transition-all duration-500 bg-gradient-to-r from-orange-600 via-red-600 to-orange-700 bg-clip-text text-transparent group-hover:scale-115 group-hover:from-orange-500 group-hover:via-red-500 group-hover:to-orange-600 ">
                       {stat.percentage}
                     </div>
-                    <div className="h-1 w-16 sm:w-20 lg:w-24 bg-orange-600 mx-auto mb-4 sm:mb-5 lg:mb-6 transition-all duration-300 group-hover:bg-orange-700 group-hover:w-20 sm:group-hover:w-24 lg:group-hover:w-28" />
-                    <div className="text-lg sm:text-xl md:text-2xl lg:text-2xl xl:text-3xl font-semibold text-gray-900 mb-2 sm:mb-3 text-center leading-tight group-hover:text-gray-800 transition-colors duration-300">
+
+                    <div className="h-1.5 w-16 sm:w-20 lg:w-24 bg-gradient-to-r from-orange-500 via-red-500 to-orange-600 mx-auto mb-4 sm:mb-5 lg:mb-6 transition-all duration-500 group-hover:w-20 sm:group-hover:w-24 lg:group-hover:w-28 rounded-full group-hover:h-2" />
+
+                    <div className="text-lg sm:text-xl md:text-2xl lg:text-2xl xl:text-3xl font-semibold text-gray-900 mb-2 sm:mb-3 text-center leading-tight group-hover:bg-gradient-to-r group-hover:from-orange-600 group-hover:via-red-600 group-hover:to-orange-700 group-hover:bg-clip-text group-hover:text-transparent transition-all duration-500">
                       {stat.title}
                     </div>
-                    <div className="text-base sm:text-lg md:text-xl lg:text-xl xl:text-2xl text-orange-600 font-medium text-center group-hover:text-orange-700 transition-colors duration-300">
+
+                    <div className="text-base sm:text-lg md:text-xl lg:text-xl xl:text-2xl font-medium text-center transition-all duration-500 bg-gradient-to-r from-orange-600 via-red-600 to-orange-700 bg-clip-text text-transparent group-hover:from-orange-500 group-hover:via-red-500 group-hover:to-orange-600">
                       {stat.subtitle}
                     </div>
                   </div>

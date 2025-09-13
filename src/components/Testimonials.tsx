@@ -1,6 +1,5 @@
-
 import { useState, useEffect } from "react"
-import { Quote, Heart, Play } from "lucide-react"
+import { Play } from "lucide-react"
 
 const customStyles = `@keyframes bounce-gentle {
   0%, 100% { transform: translateY(0); }
@@ -44,69 +43,38 @@ const customStyles = `@keyframes bounce-gentle {
 .animation-delay-1000 { animation-delay: 1s; }
 `
 
-const testimonials = [
-  {
-    type: "text",
-    text: "It's crazy how much time I used to waste. Now I get tailored job matches, and the dashboard makes tracking everything so easy.",
-    name: "Aman G.",
-    role: "Barclays",
-    avatar: "/images/aman.jpg",
-  },
-  {
-    type: "text",
-    text: "I’ve tried other job platforms, but nothing compares to Flashfire’s speed and accuracy. Plus, I finally stopped editing my resume manually",
-    name: "Sanju G.",
-    role: "Wood Mackenzie.",
-    avatar: "/images/sanju.jpg",
-  },
-  {
-   
-    type: "video",
-    videoUrl: "https://www.youtube.com/embed/p41OvikonKo",
-    thumbnail: "/images/anjali.jpeg",
-    text: "I've tried other job platforms, but nothing compares to Flashfire's speed and accuracy. Plus, I finally stopped editing my resume manually.",
-    name: "Anjali S.",
-    role: "Skyworks Solutions, Inc.",
-    avatar: "/images/anjali.jpeg",
-  },
-  {
-    type: "text",
-    text: "I wasn't sure what to expect at first, but Flashfire turned out to be a game-changer. Within a week, I got multiple interview calls from top companies.",
-    name: "Rudraksh T.",
-    role: "State Street",
-    avatar: "/images/rudraksh.jpg",
-  },
-  {
-     type: "video",
-    videoUrl: "https://www.youtube.com/embed/nYEO8K0q38c",
-    thumbnail: "images/rijul.jpg",
-    text: "I didn't think a tool could be this effective. My resume was instantly optimized and I saw results almost immediately.",
-    name: "Rijul J.",
-    avatar: "images/rijul.jpg",
-  },
-  {
-    type: "text",
-    text: "This saved me hours every week. The resume targeting feature alone is worth it—and I actually enjoy job hunting now!",
-    name: "Anjali S.",
-    role: "Skyworks Solutions, Inc.",
-    avatar: "/images/anjali.jpeg",
-  },
-  {
-    type: "text",
-    text: "I didn’t think a tool could be this effective. My resume was instantly optimized and I saw results almost immediately.",
-    name: "Amit G.",
-    role: "ArmorCode",
-    avatar: "/images/amit.jpg",
-  },
-  {
-    type: "video",
-    videoUrl: "https://www.youtube.com/embed/p9kzhLHjJuI",
-    thumbnail: "/images/aryan.jpg",
-    text: "This saved me hours every week. The resume targeting feature alone is worth it—and I actually enjoy job hunting now!",
-    name: "Aryan G.",
-    role : "IBM",
-    avatar: "/images/aryan.jpg",
-  },
+const screenshots = [
+  "/images/image1.jpg",
+  "/images/image2.jpg",
+  "/images/image3.jpg",
+  "/images/image4.jpg",
+  "/images/image5.jpg",
+  "/images/image6.jpg",
+  "/images/image7.jpg",
+  "/images/image8.jpg",
+  "/images/image9.jpg",
+  "/images/image10.jpg",
+  "/images/image11.jpg",
+  "/images/image12.jpg",
+  "/images/image13.jpg",
+  "/images/image14.jpg",
+  "/images/image15.jpg",
+  "/images/image16.png",
+  "/images/image17.png",
+
+]
+
+const rotations = [
+  "rotate-2",
+  "-rotate-2",
+  "rotate-1",
+  "-rotate-1",
+  "rotate-3",
+  "-rotate-3",
+  "rotate-1",
+  "-rotate-2",
+  "rotate-2",
+  "-rotate-1",
 ]
 
 const VideoTestimonial = ({ testimonial, index }) => {
@@ -144,13 +112,13 @@ const VideoTestimonial = ({ testimonial, index }) => {
   }
 
   return (
-    <div className={`rounded-2xl overflow-hidden shadow-lg group animate-pulse-slow max-w-xs mx-auto `}>
+    <div className={`mb-2 inline-block w-full rounded-xl shadow-md transform ${rotations[index % rotations.length]} hover:rotate-0 transition-all duration-300  p-2`}>
       {!showVideo ? (
         <div className="relative overflow-hidden">
           <img
             src={testimonial.thumbnail || "/placeholder.svg"}
             alt={`${testimonial.name} video testimonial`}
-            className="w-full aspect-[3/4] object-cover transition-transform duration-700 group-hover:scale-110"
+            className="w-full aspect-[3/4] object-cover rounded-xl transition-transform duration-300 hover:scale-105"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-80 group-hover:opacity-90 transition-opacity duration-300"></div>
 
@@ -160,7 +128,6 @@ const VideoTestimonial = ({ testimonial, index }) => {
               className="relative w-16 h-16 bg-white bg-opacity-95 rounded-full flex items-center justify-center hover:bg-opacity-100 transition-all duration-300 hover:scale-110 animate-bounce-gentle group-hover:animate-pulse"
             >
               <Play className="w-8 h-8 text-orange-500 ml-1 transition-transform duration-200 group-hover:scale-110" />
-
               <div className="absolute inset-0 rounded-full border-2 border-white opacity-60 animate-ping"></div>
               <div className="absolute inset-0 rounded-full border border-white opacity-40 animate-ping animation-delay-200"></div>
             </button>
@@ -174,7 +141,7 @@ const VideoTestimonial = ({ testimonial, index }) => {
             <img
               src={testimonial.avatar || "/placeholder.svg"}
               alt={testimonial.name}
-              className="w-12 h-12 rounded-full object-cover border-3 border-orange-100 shadow-md transition-transform duration-300 hover:scale-110"
+              className="w-12 h-12 rounded-full object-cover border-4 border-orange-100 shadow-md transition-transform duration-300 hover:scale-110"
             />
             <div className="animate-slide-in-right">
               <p className="font-bold text-base">{testimonial.name}</p>
@@ -207,9 +174,11 @@ const VideoTestimonial = ({ testimonial, index }) => {
               </div>
             </div>
           )}
-          <iframe
+          <div className= "relative overflow-hidden rounded-xl ">
+            <iframe
+            id={`video-${index}`}
             src={`${testimonial.videoUrl}?autoplay=1&controls=1&modestbranding=1&rel=0`}
-            className="w-full aspect-[3/4] rounded-2xl"
+            className="w-full aspect-[3/4] rounded-lg"
             allow="autoplay; encrypted-media"
             allowFullScreen
             onLoad={() => setIsLoading(false)}
@@ -219,124 +188,81 @@ const VideoTestimonial = ({ testimonial, index }) => {
             }}
             title={`${testimonial.name} testimonial video`}
           />
+          </div>
+          
         </div>
       )}
     </div>
   )
 }
 
-const TextTestimonial = ({ testimonial, rotation }) => (
-  <div
-    className={`bg-white rounded-2xl p-6 shadow-lg transform ${rotation} hover:rotate-0 transition-transform duration-300`}
-  >
-    <div className="flex items-start gap-3 mb-4">
-      <Quote className="w-6 h-6 text-orange-300 flex-shrink-0 mt-1" />
-      <p className="text-gray-800 text-sm leading-relaxed">{testimonial.text}</p>
-    </div>
-    <div className="flex items-center gap-3">
-      <img
-        src={testimonial.avatar || "/placeholder.svg"}
-        alt={testimonial.name}
-        className="w-10 h-10 rounded-full object-cover border-2 border-orange-100"
-      />
-      <div>
-        <p className="font-semibold text-sm text-gray-900">{testimonial.name}</p>
-        <p className="text-xs text-gray-600">{testimonial.role}</p>
-      </div>
-    </div>
-  </div>
-)
-
 const TestimonialsGrid = () => {
-  const rotations = [
-    "rotate-1",
-    "-rotate-1",
-    "rotate-2",
-    "-rotate-2",
-    "rotate-3",
-    "-rotate-2",
-    "rotate-1",
-    "-rotate-3",
-    "rotate-2",
-  ]
-  const margins = ["", "ml-8", "", "mr-8", "", "ml-6", "mr-4", "", "mr-6"]
-
   return (
-    <>
-      <style dangerouslySetInnerHTML={{ __html: customStyles }} />
-      <section
-        id="testimonials"
-        className="mb-40 bg-gradient-to-br from-orange-400 via-orange-500 to-red-500 min-h-screen py-16 px-6 overflow-hidden rounded-[3rem]"
-      >
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(255,255,255,0.15),transparent_50%)] rounded-[3rem]"></div>
-
-        <div className="absolute top-8 right-8 z-10">
-          <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-lg">
-            <Heart className="w-6 h-6 text-orange-500" />
+    <section
+      id="testimonials"
+      className="bg-gradient-to-br from-orange-400 via-orange-500 to-red-500 min-h-screen py-16 px-6 overflow-hidden rounded-[3rem]"
+    >
+      <div className="max-w-6xl mx-auto relative z-10">
+        <div className="mb-12">
+          <h2 className="text-4xl sm:text-5xl  lg:text-6xl font-black text-white mb-6 leading-tight">
+            100+ HAPPY
+            <br />
+            USERS' LOVE
+          </h2>
+          <div className="max-w-2xl">
+            <p className="text-white/90 text-sm leading-relaxed">
+              Thank you for your praise and suggestions. With your support, we can go further. We hope to accompany
+              you throughout your job search journey.
+            </p>
           </div>
         </div>
 
-        <div className="max-w-6xl mx-auto relative z-10">
-          <div className="mb-12">
-            <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black text-white mb-6 leading-tight">
-              100+ HAPPY
-              <br />
-              USERS' LOVE
-            </h2>
-            <div className="max-w-md">
-              <p className="text-white/90 text-sm leading-relaxed">
-                Thank you for your praise and suggestions. With your support, we can go further. We hope to accompany
-                you throughout your job search journey.
-              </p>
+        {/* Image Testimonials */}
+        <div className="columns-2 md:columns-3 lg:columns-4 gap-2 [column-fill:_balance]">
+          {screenshots.map((src, index) => (
+            <div
+              key={index}
+              className={`mb-2 inline-block w-full rounded-xl shadow-md transform ${rotations[index % rotations.length]} hover:rotate-0 transition-all duration-300  p-2`}
+            >
+              <img
+                src={src || "/placeholder.svg"}
+                alt={`Testimonial ${index + 1}`}
+                className="rounded-lg w-full h-auto object-contain"
+              />
             </div>
-          </div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
-            <div className="space-y-6">
-              {testimonials.slice(0, 4).map((testimonial, index) => (
-                <div
-                  key={index}
-                  className={`${margins[index]} transform ${testimonial.type === "video" ? rotations[index] : ""} ${testimonial.type === "video" ? "hover:rotate-0 hover:scale-105 transition-all duration-500" : ""}`}
-                >
-                  {testimonial.type === "video" ? (
-                    <VideoTestimonial testimonial={testimonial} index={index} />
-                  ) : (
-                    <TextTestimonial testimonial={testimonial} rotation={rotations[index]} />
-                  )}
-                </div>
-              ))}
-            </div>
-
-            <div className="space-y-6 -mt-2 lg:-mt-4">
-              {testimonials.slice(4, 8).map((testimonial, index) => (
-                <div
-                  key={index + 4}
-                  className={`${margins[index + 4]} transform ${testimonial.type === "video" ? rotations[index + 4] : ""} ${testimonial.type === "video" ? "hover:rotate-0 hover:scale-105 transition-all duration-500" : ""}`}
-                >
-                  {testimonial.type === "video" ? (
-                    <VideoTestimonial testimonial={testimonial} index={index + 4} />
-                  ) : (
-                    <TextTestimonial testimonial={testimonial} rotation={rotations[index + 4]} />
-                  )}
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {testimonials[8] && (
-            <div className="mt-8 max-w-2xl mx-auto transform translate-x-8 -translate-y-4">
-              {testimonials[8].type === "video" ? (
-                <div className={`transform rotate-1 hover:rotate-0 hover:scale-105 transition-all duration-500`}>
-                  <VideoTestimonial testimonial={testimonials[8]} index={8} />
-                </div>
-              ) : (
-                <TextTestimonial testimonial={testimonials[8]} rotation="rotate-1" />
-              )}
-            </div>
-          )}
+          ))}
         </div>
-      </section>
-    </>
+
+        {/* Video Testimonials */}
+        <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {[
+            {
+              videoUrl: "https://www.youtube.com/embed/p41OvikonKo",
+              thumbnail: "/images/anjali.jpeg",
+              name: "Anjali S.",
+              avatar: "/images/anjali.jpeg",
+              role: "Skyworks Solutions, Inc.",
+            },
+            {
+              videoUrl: "https://www.youtube.com/embed/nYEO8K0q38c",
+              thumbnail: "images/rijul.jpg",
+              name: "Rijul J.",
+              avatar: "images/rijul.jpg",
+              role: "",
+            },
+            {
+              videoUrl: "https://www.youtube.com/embed/p9kzhLHjJuI",
+              thumbnail: "/images/aryan.jpg",
+              name: "Aryan G.",
+              avatar: "/images/aryan.jpg",
+              role: "IBM",
+            },
+          ].map((video, index) => (
+            <VideoTestimonial testimonial={video} index={index} key={index} />
+          ))}
+        </div>
+      </div>
+    </section>
   )
 }
 

@@ -63,7 +63,7 @@ const RealTimeMetrics = () => {
             <span>Live Activity</span>
           </div>
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-3 sm:mb-4">
-            FLASHFIRE is Working Right Now
+            FLASHFIRE in Action
           </h2>
           <p className="text-lg sm:text-xl text-gray-600">
             Real-time metrics showing our AI in action

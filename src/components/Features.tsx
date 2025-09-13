@@ -4,6 +4,7 @@ import { useOutletContext } from 'react-router-dom';
 import { GTagUTM } from '../utils/GTagUTM.js';
 import WhatsAppButton from './WhatsAppButton.js';
 import WhatsAppSupport from './WhatsappSupport.js';
+
 const Features = ({ setSignupFormVisibility }) => {
   // const { setSignupFormVisibility } = useOutletContext<{
   //   setSignupFormVisibility: React.Dispatch<React.SetStateAction<boolean>>;
@@ -91,31 +92,6 @@ const Features = ({ setSignupFormVisibility }) => {
           ))}
         </div>
 
-        {/* Time Savings Highlight */}
-        {/* <div className="mt-12 sm:mt-20 bg-gradient-to-r from-orange-500 to-red-600 rounded-2xl sm:rounded-3xl p-8 sm:p-12 text-center text-white">
-          <h3 className="text-2xl sm:text-3xl font-bold mb-4">
-            Save 150+ Hours Every Month
-          </h3>
-          <p className="text-lg sm:text-xl text-orange-100 mb-6 sm:mb-8 max-w-2xl mx-auto">
-            While our AI handles job applications, resume optimization, and tracking, you focus on interviews, skill-building, and networking.
-          </p>
-          <button
-            onClick={() => {GTagUTM({
-                                  eventName: 'sign_up_click',
-                                  label: 'Features_Section_Button',
-                                  utmParams: {
-                                    utm_source: 'WEBSITE',
-                                    utm_medium: 'FEATURES_SECTION_SIGNUP_BUTTON',
-                                    utm_campaign: 'WEBSITE',
-                                  }
-                                });
-                                setSignupFormVisibility(true); // just opens modal/form
-                              }}
-            className="bg-white text-orange-600 px-6 sm:px-8 py-3 sm:py-4 rounded-full font-bold hover:bg-gray-50 transition-colors duration-200 shadow-lg"
-          >
-            Start Saving Time Today
-          </button>
-        </div> */}
         <WhatsAppSupport />
       </div>
     </section>
