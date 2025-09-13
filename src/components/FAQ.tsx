@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { ChevronDown, ChevronUp, HelpCircle } from 'lucide-react';
 import { useOutletContext, useNavigate } from 'react-router-dom';
 import { GTagUTM } from '../utils/GTagUTM.js';
-import WhatsAppSupport from './WhatsappSupport.js';
+// import WhatsAppSupport from './WhatsappSupport.js';
 const FAQ = ({setSignupFormVisibility}) => {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
   const navigate = useNavigate();
@@ -119,7 +119,7 @@ const FAQ = ({setSignupFormVisibility}) => {
             </button>
           </div>
         </div> */}
-       <WhatsAppSupport />
+       {/* <WhatsAppSupport /> */}
       </div>
     </section>
   );
