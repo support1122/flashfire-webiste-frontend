@@ -5,7 +5,7 @@ import { InlineWidget } from 'react-calendly';
 
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
-const SignupModal = () => {
+const SignupModal = ({setCalendlyUser }) => {
   const [step, setStep] = useState(1);
   const [formData, setFormData] = useState({
     fullName: '',

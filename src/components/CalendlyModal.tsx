@@ -5,9 +5,41 @@ import { useNavigate } from 'react-router-dom';
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
-function CalendlyModal({ setCalendlyModalVisibility }: { setCalendlyModalVisibility: (visible: boolean) => void }) {
+function CalendlyModal({ setCalendlyModalVisibility, user }: { setCalendlyModalVisibility: (visible: boolean) => void , user: (any)}) {
   const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
+
+  const handleClose = async () => {
+
+    console.log("close clicked");
+
+  // ✅ First close modal
+  setCalendlyModalVisibility(false);
+
+  // ✅ Then navigate (slight delay ensures modal closes cleanly)
+  setTimeout(() => {
+    navigate("/");
+  }, 100);
+  try {
+    // Only send email if opened via SignupForm
+    if (user?.email) {
+      await fetch(`${API_BASE_URL}/sendReminderEmail`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email: user.email,
+          name: user.fullName,
+        }),
+      });
+      console.log("Reminder email sent!");
+    }
+  } catch (err) {
+    console.error("Failed to send email:", err);
+  }
+
+  
+};
+
 
   useEffect(() => {
     // Hide loading after 5 seconds as fallback
@@ -23,11 +55,7 @@ function CalendlyModal({ setCalendlyModalVisibility }: { setCalendlyModalVisibil
       <div className="relative bg-white max-w-5xl w-full max-h-[90vh] overflow-hidden rounded-xl shadow-2xl flex flex-col lg:flex-row">
         {/* Close button */}
         <button
-          onClick={() =>{ setCalendlyModalVisibility(false);    if (window.history.length > 1) {
-  window.history.back();
-} else {
-  navigate('/');
-}}}
+          onClick={handleClose}
           className="absolute top-4 right-4 sm:top-6 sm:right-6 text-gray-400 hover:text-gray-600 transition-colors z-20 bg-white/90 rounded-full p-2 shadow-lg"
         >
           <X className="w-5 h-5 sm:w-6 sm:h-6" />
