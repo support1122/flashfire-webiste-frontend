@@ -17,6 +17,7 @@ const Navigation: React.FC<NavigationProps> = ({
   setCalendlyModalVisibility,
   setEmployerFormVisibility,
 }) => {
+  const navigate = useNavigate();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [employerFormVisible, setEmployerFormVisible] = useState(false);
@@ -150,7 +151,7 @@ const Navigation: React.FC<NavigationProps> = ({
 
 
   const openSignup = () => {
-    navigate("/signup");
+    setSignupFormVisibility(true);
     setIsMenuOpen(false);
     safeTrack({
       eventName: "sign_up_click",
