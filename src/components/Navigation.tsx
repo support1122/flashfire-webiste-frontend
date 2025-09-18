@@ -360,7 +360,7 @@ className="font-medium text-gray-700 transition-colors duration-200 hover:text-o
               <div className="flex-shrink-0">
                 <button
                   onClick={openCalendly}
-                  className="bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white px-3 py-2 rounded-md font-semibold transition-all duration-300 shadow-md text-sm border border-red-500/30"
+                  className="bg-gradient-to-r from-rose-600 to-rose-700 hover:from-rose-700 hover:to-rose-800 text-white px-3 py-2 rounded-md font-semibold transition-all duration-300 shadow-md text-sm border border-red-500/30"
                 >
                   Book Now
                 </button>
@@ -395,7 +395,7 @@ className="font-medium text-gray-700 transition-colors duration-200 hover:text-o
               <Link to={'/book-free-demo'}>
               <button
                 // onClick={openCalendly}
-                className="bg-red-600 hover:bg-red-700 text-white px-1.5 sm:px-4 lg:px-6 py-0.5 sm:py-2 rounded sm:rounded-lg font-bold transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105 text-[10px] sm:text-sm tracking-wide whitespace-nowrap flex-shrink-0"
+                className="bg-gradient-to-r from-rose-600 to-rose-700 hover:from-rose-700 hover:to-rose-800 text-white px-1.5 sm:px-4 lg:px-6 py-0.5 sm:py-2 rounded sm:rounded-lg font-bold transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105 text-[10px] sm:text-sm tracking-wide whitespace-nowrap flex-shrink-0"
               >
                 Book Now
               </button>
