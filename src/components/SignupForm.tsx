@@ -3,7 +3,7 @@ import { X, User, Phone, Mail} from 'lucide-react';
 import { createOrUpdateContact, trackSignupEvent, waitForCRMLoad } from '../utils/CRMTracking';
 import { useNavigate, Link } from 'react-router-dom';
 
-function SignupForm({ setSignupFormVisibility, setCalendlyModalVisibility }) {
+function SignupForm({ setSignupFormVisibility, setCalendlyModalVisibility, setCalendlyUser  }) {
   const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
   const [formData, setFormData] = useState({
     fullName: '',
@@ -21,11 +21,12 @@ function SignupForm({ setSignupFormVisibility, setCalendlyModalVisibility }) {
 
   const closeModal = () => {
     console.log('Modal closed');
-    if (window.history.length > 1) {
-  window.history.back();
-} else {
+//     if (window.history.length > 1) {
+//   window.history.back();
+// } else {
+  setSignupFormVisibility(false);
   navigate('/');
-}
+// }
     setFormData({
       fullName: '',
       phone: '',
@@ -33,6 +34,10 @@ function SignupForm({ setSignupFormVisibility, setCalendlyModalVisibility }) {
       email: '',
       workAuthorization: ''
     });
+    // setSignupFormVisibility(false);
+    // setCalendlyModalVisibility(true);
+
+
     
   };
 
@@ -80,7 +85,10 @@ function SignupForm({ setSignupFormVisibility, setCalendlyModalVisibility }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setCalendlyModalVisibility(true);
+    setCalendlyUser(formData);
+    navigate('/book-free-demo');
+
+    // setCalendlyModalVisibility(true);
     try {
       if (
         formData.fullName &&
@@ -128,7 +136,7 @@ function SignupForm({ setSignupFormVisibility, setCalendlyModalVisibility }) {
               <h2 className="text-2xl font-bold text-gray-900 mb-2">Get Started for Free</h2>
               <p className="text-gray-600 text-sm">Tell us about yourself to schedule your consultation</p>
             </div>
-            <button onClick={()=>{closeModal();setSignupFormVisibility(false);}} className="text-gray-400 hover:text-gray-600 transition-colors p-1">
+            <button onClick={closeModal} className="text-gray-400 hover:text-gray-600 transition-colors p-1">
               <X className="w-5 h-5" />
             </button>
           </div>
