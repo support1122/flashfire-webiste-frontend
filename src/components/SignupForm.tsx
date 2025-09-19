@@ -24,6 +24,7 @@ function SignupForm({ setSignupFormVisibility, setCalendlyModalVisibility, setCa
 //     if (window.history.length > 1) {
 //   window.history.back();
 // } else {
+  setSignupFormVisibility(false);
   navigate('/');
 // }
     setFormData({
@@ -33,7 +34,7 @@ function SignupForm({ setSignupFormVisibility, setCalendlyModalVisibility, setCa
       email: '',
       workAuthorization: ''
     });
-    setSignupFormVisibility(false);
+    // setSignupFormVisibility(false);
     // setCalendlyModalVisibility(true);
 
 

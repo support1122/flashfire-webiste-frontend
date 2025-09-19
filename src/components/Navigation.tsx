@@ -18,9 +18,11 @@ const Navigation: React.FC<NavigationProps> = ({
   setEmployerFormVisibility,
 }) => {
   const navigate = useNavigate();
+  const location = useLocation();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const [employerFormVisible, setEmployerFormVisible] = useState(false);
+  // const [employerFormVisible, setEmployerFormVisible] = useState(false);
+
 
   // ----------------- Countdown (Days / Hrs / Mins / Secs) -----------------
   // Set your target deadline here. Example: 24 hours from now.
@@ -180,7 +182,7 @@ const Navigation: React.FC<NavigationProps> = ({
 
   const openEmployerForm = () => {
     setEmployerFormVisibility(true);
-    navigate("/employers");
+    // navigate("/employers");
     // keep menu state as-is by design
   };
 
@@ -221,7 +223,7 @@ const Navigation: React.FC<NavigationProps> = ({
                       <Link to="/employers" key={item.name}>
                         <button
                           className="font-medium border-none text-gray-700 transition-colors duration-200 hover:text-orange-600 text-sm lg:text-base"
-                          onClick={openEmployerForm}
+                          // onClick={openEmployerForm}
                         >
                           {item.name}
                         </button>
@@ -241,6 +243,7 @@ className="font-medium text-gray-700 transition-colors duration-200 hover:text-o
 
                 // section item (one-pager)
                 return (
+                  <Link to={item.name.toLowerCase()}>
                   <button
                     key={item.name}
                     onClick={() => goToSection(item.id)}
@@ -248,6 +251,7 @@ className="font-medium text-gray-700 transition-colors duration-200 hover:text-o
                   >
                     {item.name}
                   </button>
+                  </Link>
                 );
               })}
             </div>
@@ -255,7 +259,7 @@ className="font-medium text-gray-700 transition-colors duration-200 hover:text-o
             {/* CTA Button (desktop) */}
             <div className="hidden md:block">
               <button
-                onClick={openSignup}
+                onClick={()=>navigate('/signup')}
                 className="bg-gradient-to-r from-orange-500 to-orange-600 text-white px-4 lg:px-6 py-2 lg:py-2.5 rounded-full font-semibold hover:from-orange-600 hover:to-orange-700 transition-all duration-200 shadow-lg hover:shadow-xl hover:scale-105 text-sm lg:text-base"
               >
                 Sign Up For Free
@@ -281,21 +285,23 @@ className="font-medium text-gray-700 transition-colors duration-200 hover:text-o
                   if (item.type === "route") {
                     if (item.name === "Employers") {
                       return (
+                        <Link to={item.to}>
                         <button
                           key={item.name}
-                          onClick={() => {
-                            openEmployerForm();
-                            setIsMenuOpen(false);
-                          }}
+                          // onClick={() => {
+                          //   openEmployerForm();
+                          //   setIsMenuOpen(false);
+                          // }}
                           className="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-100 transition-colors duration-200"
                         >
                           {item.name}
                         </button>
+                        </Link>
                       );
                     }
                     return (
                       <Link
-                        key={item.name}
+                        key={item.to}
                         to={item.to}
                         onClick={() => setIsMenuOpen(false)}
                         className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-100 transition-colors duration-200"
