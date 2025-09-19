@@ -87,8 +87,15 @@ function CalendlyModal({ setCalendlyModalVisibility, user }: { setCalendlyModalV
               </div>
             )}
             <InlineWidget
-              url = 'https://calendly.com/biswajitshrm66/30min'
-              // url=  "https://calendly.com/feedback-flashfire/30min"
+              // url = 'https://calendly.com/biswajitshrm66/30min'
+              url=  "https://calendly.com/feedback-flashfire/30min"
+              prefill={{
+    name: user?.fullName || "",
+    email: user?.email || "",
+    customAnswers: {
+      a3: user?.countryCode + user?.phone || "", // phone is the 3rd question
+    },
+  }}
               styles={{
                 height: '100%',
                 width: '100%',
@@ -189,8 +196,15 @@ function CalendlyModal({ setCalendlyModalVisibility, user }: { setCalendlyModalV
               </div>
             )}
             <InlineWidget
-              url="https://calendly.com/biswajitshrm66/30min"
-              // url="https://calendly.com/feedback-flashfire/30min"
+              // url="https://calendly.com/biswajitshrm66/30min"
+              url="https://calendly.com/feedback-flashfire/30min"
+              prefill={{
+    name: user?.fullName || "",
+    email: user?.email || "",
+    customAnswers: {
+      a3: user?.phone || "", // phone is the 3rd question
+    },
+  }}
               styles={{
                 height: '100%',
                 width: '100%',
