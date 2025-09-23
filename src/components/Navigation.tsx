@@ -25,13 +25,11 @@ const Navigation: React.FC<NavigationProps> = ({
 
 
   // ----------------- Countdown (Days / Hrs / Mins / Secs) -----------------
-  // Set your target deadline here. Example: 24 hours from now.
+  // Set your target deadline here. Now + 2 days.
   const TARGET_DATE = useState(() => {
-    const now = new Date();
-    const year = now.getFullYear();
-    const month = now.getMonth();
-    const lastDayOfMonth = new Date(year, month + 1, 0);
-    return lastDayOfMonth.getTime();
+    const now = Date.now();
+    const twoDaysMs = 2 * 24 * 60 * 60 * 1000;
+    return now + twoDaysMs;
   })[0];
 
   const [timeLeft, setTimeLeft] = useState({
