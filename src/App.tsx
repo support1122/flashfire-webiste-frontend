@@ -51,12 +51,12 @@ function App() {
   }, [location.pathname, location.hash]);
 
 
-    useEffect(() => {
-      setTimeout(()=>
-      // setSignupFormVisibility(true)
-      navigate('/signup')
-      ,10000);
-    }, []);
+    // Disabled auto-redirect that opened the signup form after 10 seconds
+    // useEffect(() => {
+    //   setTimeout(() =>
+    //     navigate('/signup')
+    //   , 10000);
+    // }, []);
     // const location = useLocation();
   
   useEffect(() => {
