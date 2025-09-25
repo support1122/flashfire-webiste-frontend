@@ -383,7 +383,7 @@ className="font-medium text-gray-700 transition-colors duration-200 hover:text-o
                   className="w-3 h-3 sm:w-5 sm:h-5 lg:w-6 lg:h-6 filter brightness-0 invert drop-shadow"
                 />
                 <span className="font-bold text-white text-xs sm:text-base lg:text-lg tracking-wide whitespace-nowrap">
-                  Hurry! 3 Slots Remaining
+                  Hurry! 2 Slots Remaining
                 </span>
               </div>
 
