@@ -27,6 +27,42 @@ function App() {
   //   }
   // }, []);
   
+  //sending utm click data
+  useEffect(() => {
+  const params = new URLSearchParams(window.location.search);
+  const ref = params.get("ref");
+
+  if (ref) {
+    const payload = {
+      ref,
+      userAgent: navigator.userAgent,
+      screenWidth: window.screen.width,
+      screenHeight: window.screen.height,
+      language: navigator.language,
+      timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+    };
+
+    fetch("https://clients-tracking.onrender.com/api/track", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.ok) {
+          console.log("UTM Source:", data.utm_source); // ✅ campaigner 
+          localStorage.setItem("utm_source", data.utm_source);
+          localStorage.setItem("ref-code",ref);
+          //setCalendlyUser(data.utm_source);
+          // You can store it in state or context
+        } else {
+          console.warn("Tracking error:", data.message || data.error);
+        }
+      })
+      .catch((err) => console.error("Tracking failed:", err));
+  }
+}, []);
+  
   // Smooth-scroll to hash targets when path is '/#section'
   useEffect(() => {
     const tryScrollToHash = () => {
