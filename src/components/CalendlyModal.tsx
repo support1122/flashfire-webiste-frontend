@@ -88,7 +88,9 @@ function CalendlyModal({ setCalendlyModalVisibility, user }: { setCalendlyModalV
             )}
             <InlineWidget
               // url = 'https://calendly.com/biswajitshrm66/30min'
-              url=  "https://calendly.com/feedback-flashfire/30min"
+              url={`https://calendly.com/feedback-flashfire/30min?utm_source=${
+    localStorage.getItem("utm_source") || "webpage_visit"
+  }`}
               prefill={{
     name: user?.fullName || "",
     email: user?.email || "",
@@ -197,7 +199,9 @@ function CalendlyModal({ setCalendlyModalVisibility, user }: { setCalendlyModalV
             )}
             <InlineWidget
               // url="https://calendly.com/biswajitshrm66/30min"
-              url="https://calendly.com/feedback-flashfire/30min"
+              url={`https://calendly.com/feedback-flashfire/30min?utm_source=${
+    localStorage.getItem("utm_source") || "webpage_visit"
+  }`}
               prefill={{
     name: user?.fullName || "",
     email: user?.email || "",
