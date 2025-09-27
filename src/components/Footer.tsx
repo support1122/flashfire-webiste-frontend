@@ -1,76 +1,126 @@
-import React from 'react';
-import { Mail, MapPin, Zap } from 'lucide-react';
-import {RouterProvider, createBrowserRouter, BrowserRouter, Routes, Route, Link} from 'react-router-dom';
+import { Link } from "react-router-dom"
+import { Linkedin, Youtube, Zap, ChevronRight } from "lucide-react"
 
-
-const Footer = () => {
-  const handleLinkClick = (path: string) => {
-    // Update the URL without page reload
-    window.history.pushState({}, '', path);
-    
-    // Dispatch a custom event to notify about route change
-    window.dispatchEvent(new CustomEvent('routechange', { detail: { path } }));
-  };
-
+export default function Footer() {
   return (
-    <footer className="bg-gradient-to-r from-orange-500 to-red-500 text-white py-4 px-4 relative bottom-0">
-      <div className="max-w-7xl mx-auto">
-        <div className="flex flex-col sm:flex-row items-center justify-between space-y-2 sm:space-y-0">
-          {/* Left side - Copyright and Links */}
-          <div className="flex flex-col sm:flex-row items-center space-y-2 sm:space-y-0 sm:space-x-6 text-sm">
-            <div className="flex items-center space-x-1">
-              <span>© FLASHFIRE 2025</span>
-            </div>
-            
-            <div className="flex items-center space-x-4 text-xs sm:text-sm">
-              <Link to={'/termsofservice'} target ='_blank' rel="noopener noreferrer" >
-              <button
-                // href ='/termsofservice'
-                // target="_blank" rel="noopener noreferrer"
-                // className="hover:text-orange-200 transition-colors duration-200 cursor-pointer"
+    <footer className="relative overflow-hidden bg-gradient-to-r from-orange-500 to-red-500 text-white">
+      {/* Subtle radial highlights */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 opacity-30 mix-blend-overlay
+        [background:radial-gradient(600px_200px_at_20%_10%,rgba(255,255,255,0.08),transparent_60%),
+                     radial-gradient(500px_180px_at_80%_20%,rgba(255,255,255,0.06),transparent_60%)]"
+      />
+      <div className="relative max-w-7xl mx-auto px-6 py-8 md:py-10">
+        {/* Top Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {/* Left Column: Logo and Description */}
+          <div className="flex flex-col gap-5">
+            <h2 className="text-xl font-bold tracking-tight">FLASHFIRE</h2>
+            <p className="text-sm leading-relaxed">
+              The AI-powered platform to apply smarter. Optimized resumes, auto applications, and interview prep at
+              scale.
+            </p>
+            <div className="flex items-center gap-3">
+              <a
+                href="https://www.linkedin.com/company/flashfire-pvt-ltd/posts/?feedView=all"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="LinkedIn"
+                className="inline-flex h-9 w-9 items-center justify-center rounded-full border-2 border-white/70 hover:bg-black/50 transition-colors"
               >
-                TERMS OF SERVICE
-              </button>
-              </Link>
-              <span className="text-orange-200">|</span>
-              <Link to={'/privacypolicy'} target ='_blank' rel="noopener noreferrer">
-              <button
-                // href ='/privacypolicy'
-                // target="_blank" rel="noopener noreferrer"
-                // className="hover:text-orange-200 transition-colors duration-200 cursor-pointer"
+                <Linkedin className="h-5 w-5" />
+              </a>
+              <a
+                href="https://www.youtube.com/@flashfireindia"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="YouTube"
+                className="inline-flex h-9 w-9 items-center justify-center rounded-full border-2 border-white/70 hover:bg-black/50 transition-colors"
               >
-                PRIVACY POLICY
-              </button>
-              </Link>
-              <span className="text-orange-200">|</span>
-              <Link to={'/paymentpolicy'} target ='_blank' rel="noopener noreferrer">
-              <button
-                // onClick={() => handleLinkClick('/paymentpolicy')}
-                // href='/paymentpolicy'
-                // target="_blank" rel="noopener noreferrer"                
-                // className="hover:text-orange-200 transition-colors duration-200 cursor-pointer"
-              >
-                PAYMENT POLICY
-              </button>
-              </Link>
-              <span className="text-orange-200">|</span>
-              <Link to={'/RefundPolicy'} target ='_blank' rel="noopener noreferrer">
-              <button>
-                REFUND POLICY
-              </button>
-              </Link>
+                <Youtube className="h-5 w-5" />
+              </a>
             </div>
           </div>
 
-          {/* Right side - Brand */}
-          <div className="flex items-center space-x-2">
+          {/* Company Section */}
+          <div className="flex flex-col gap-3 md:border-l md:border-white/20 md:pl-6">
+            <h3 className="font-semibold text-base">Company</h3>
+            <nav className="flex flex-col gap-2">
+              <div className="flex items-center gap-2 text-sm">
+                <ChevronRight className="h-3.5 w-3.5 opacity-70" />
+                <a href="/RefundPolicy" target="_blank" rel="noopener noreferrer" className="hover:underline hover:text-white">
+                  Refund Policy
+                </a>
+              </div>
+              <div className="flex items-center gap-2 text-sm">
+                <ChevronRight className="h-3.5 w-3.5 opacity-70" />
+                <a href="/PrivacyPolicy" target="_blank" rel="noopener noreferrer" className="hover:underline hover:text-white">
+                  Privacy Policy
+                </a>
+              </div>
+              <div className="flex items-center gap-2 text-sm">
+                <ChevronRight className="h-3.5 w-3.5 opacity-70" />
+                <a href="/PaymentPolicy" target="_blank" rel="noopener noreferrer" className="hover:underline hover:text-white">
+                  Payment Policy
+                </a>
+              </div>
+              <div className="flex items-center gap-2 text-sm">
+                <ChevronRight className="h-3.5 w-3.5 opacity-70" />
+                <a href="/TermsOfService" target="_blank" rel="noopener noreferrer" className="hover:underline hover:text-white">
+                  Terms of Service
+                </a>
+              </div>
+            </nav>
+          </div>
+
+          {/* Quick Access Section */}
+          <div className="flex flex-col gap-3 md:border-l md:border-white/20 md:pl-6">
+            <h3 className="font-semibold text-base">Quick Access</h3>
+            <nav className="flex flex-col gap-2">
+              <div className="flex items-center gap-2 text-sm">
+                <ChevronRight className="h-3.5 w-3.5 opacity-70" />
+                <Link to="/features" className="hover:underline hover:text-white">
+                  Features
+                </Link>
+              </div>
+              <div className="flex items-center gap-2 text-sm">
+                <ChevronRight className="h-3.5 w-3.5 opacity-70" />
+                <Link to="/testimonials" className="hover:underline hover:text-white">
+                  Testimonials
+                </Link>
+              </div>
+              <div className="flex items-center gap-2 text-sm">
+                <ChevronRight className="h-3.5 w-3.5 opacity-70" />
+                <Link to="/pricing" className="hover:underline hover:text-white">
+                  Pricing
+                </Link>
+              </div>
+              <div className="flex items-center gap-2 text-sm">
+                <ChevronRight className="h-3.5 w-3.5 opacity-70" />
+                <Link to="/faq" className="hover:underline hover:text-white">
+                  FAQ
+                </Link>
+              </div>
+              <div className="flex items-center gap-2 text-sm">
+                <ChevronRight className="h-3.5 w-3.5 opacity-70" />
+                <Link to="/blogs" onClick={() => window.scrollTo(0, 0)}   className="hover:underline hover:text-white">
+                  Blog
+                </Link>
+              </div>
+            </nav>
+          </div>
+        </div>
+
+        {/* Bottom Bar */}
+        <div className="mt-6 border-t border-white/30 pt-4 flex flex-col sm:flex-row items-center justify-between text-xs sm:text-sm gap-2">
+          <p>© Flashfire 2025 | All Rights Reserved</p>
+          <div className="flex items-center gap-2">
             <Zap className="w-4 h-4" />
-            <span className="font-bold text-sm sm:text-base">FLASHFIRE Pvt. Ltd.</span>
+            <span>Flashfire Pvt. Ltd.</span>
           </div>
         </div>
       </div>
     </footer>
-  );
-};
-
-export default Footer;
+  )
+}

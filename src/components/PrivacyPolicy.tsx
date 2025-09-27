@@ -20,7 +20,12 @@ const PrivacyPolicy = () => {
             <span>Back to Home</span>
           </button> */}
           
-          <div className="flex items-center space-x-3 mb-4">
+          
+        </div>
+
+        {/* Content */}
+        <div className="bg-white rounded-lg shadow-sm p-8">
+           <div className="flex items-center space-x-3 mb-4">
             <div className="p-2 bg-blue-100 rounded-lg">
               <Shield className="w-6 h-6 text-blue-600" />
             </div>
@@ -29,10 +34,6 @@ const PrivacyPolicy = () => {
               <p className="text-gray-600">Last updated: July 2025</p>
             </div>
           </div>
-        </div>
-
-        {/* Content */}
-        <div className="bg-white rounded-lg shadow-sm p-8">
           <div className="prose prose-lg max-w-none">
             <p className="text-gray-700 mb-8">
               At Flashfire, we are committed to protecting your privacy and ensuring the security of your personal information. This Privacy Policy explains how we collect, use, store, and protect your data when you use our AI-powered job application automation platform.

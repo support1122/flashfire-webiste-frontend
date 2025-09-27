@@ -20,6 +20,11 @@ const TermsOfService = () => {
             <span>Back to Home</span>
           </button> */}
           
+          
+        </div>
+
+        {/* Content */}
+        <div className="bg-white rounded-lg shadow-sm p-8">
           <div className="flex items-center space-x-3 mb-4">
             <div className="p-2 bg-orange-100 rounded-lg">
               <FileText className="w-6 h-6 text-orange-600" />
@@ -29,10 +34,6 @@ const TermsOfService = () => {
               <p className="text-gray-600">Last updated: July 2025</p>
             </div>
           </div>
-        </div>
-
-        {/* Content */}
-        <div className="bg-white rounded-lg shadow-sm p-8">
           <div className="prose prose-lg max-w-none">
             <p className="text-gray-700 mb-6">
               Welcome to Flashfire. These Terms and Conditions ("Terms") govern your access to and use of the Flashfire website, services, and technology platform (collectively, the "Service"). Please read these Terms carefully before using our Service.
