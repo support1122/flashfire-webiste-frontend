@@ -20,6 +20,11 @@ const RefundPolicy = () => {
             <span>Back to Home</span>
           </button> */}
           
+          
+        </div>
+
+        {/* Content */}
+        <div className="bg-white rounded-lg shadow-sm p-8">
           <div className="flex items-center space-x-3 mb-4">
             <div className="p-2 bg-green-100 rounded-lg">
               <RefreshCw className="w-6 h-6 text-green-600" />
@@ -29,10 +34,6 @@ const RefundPolicy = () => {
               <p className="text-gray-600">Last updated: July 2025</p>
             </div>
           </div>
-        </div>
-
-        {/* Content */}
-        <div className="bg-white rounded-lg shadow-sm p-8">
           <div className="prose prose-lg max-w-none">
             <p className="text-gray-700 mb-8">
               At Flashfire, we are committed to your satisfaction and success in finding your dream job. This policy outlines our approach to ensuring you receive maximum value from our AI-powered job application automation services.
