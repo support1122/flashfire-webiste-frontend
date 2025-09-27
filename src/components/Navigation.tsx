@@ -69,34 +69,24 @@ const Navigation: React.FC<NavigationProps> = ({
 
   const Two = (n: number) => String(n).padStart(2, '0');
 
-  const Countdown = () => (
-    <div className="flex space-x-2 text-center items-end">
-      <div>
-        <div className="px-2 py-1 rounded bg-white/90 text-red-600 font-bold text-xs sm:text-sm shadow-md min-w-[2.5rem]">
-          {Two(timeLeft.days)}
+   const Countdown = () => (
+    <div className="flex items-end sm:items-center gap-2 text-center">
+      {[
+        { value: Two(timeLeft.days), label: "Days" },
+        { value: Two(timeLeft.hours), label: "Hrs" },
+        { value: Two(timeLeft.minutes), label: "Mins" },
+        { value: Two(timeLeft.seconds), label: "Secs" },
+      ].map((item, idx) => (
+        <div key={idx} className="flex flex-col items-center">
+          <div className="min-w-12 px-3 py-2 rounded-lg bg-white/30 text-white font-extrabold text-sm sm:text-base shadow-md">
+            {item.value}
+            <div className=" text-[10px] leading-tight text-white/80 font-normal">{item.label}</div>
+          </div>
+          {/* <div className="mt-1 text-[10px] leading-tight text-white/90">{item.label}</div> */}
         </div>
-        <div className="text-[10px] text-white/90 leading-tight mt-0.5">Days</div>
-      </div>
-      <div>
-        <div className="px-2 py-1 rounded bg-white/90 text-red-600 font-bold text-xs sm:text-sm shadow-md min-w-[2.5rem]">
-          {Two(timeLeft.hours)}
-        </div>
-        <div className="text-[10px] text-white/90 leading-tight mt-0.5">Hrs</div>
-      </div>
-      <div>
-        <div className="px-2 py-1 rounded bg-white/90 text-red-600 font-bold text-xs sm:text-sm shadow-md min-w-[2.5rem]">
-          {Two(timeLeft.minutes)}
-        </div>
-        <div className="text-[10px] text-white/90 leading-tight mt-0.5">Mins</div>
-      </div>
-      <div>
-        <div className="px-2 py-1 rounded bg-white/90 text-red-600 font-bold text-xs sm:text-sm shadow-md min-w-[2.5rem]">
-          {Two(timeLeft.seconds)}
-        </div>
-        <div className="text-[10px] text-white/90 leading-tight mt-0.5">Secs</div>
-      </div>
+      ))}
     </div>
-  );
+  )
   // ------------------------------------------------------------------------
 
   useEffect(() => {
@@ -128,28 +118,28 @@ const Navigation: React.FC<NavigationProps> = ({
   // Navigate to "/", then scroll to a section id.
   // If we're already on "/", just scroll.
   const goToSection = (id: string, closeMenu = true) => {
-  const el = document.getElementById(id);
+    const el = document.getElementById(id);
 
-  if (el) {
-    // Scroll if element exists
-    el.scrollIntoView({ behavior: "smooth", block: "start" });
-    window.history.pushState({}, "", "/" + id);
-  } else {
-    // Navigate to home first
-    navigate("/");
+    if (el) {
+      // Scroll if element exists
+      el.scrollIntoView({ behavior: "smooth", block: "start" });
+      window.history.pushState({}, "", "/" + id);
+    } else {
+      // Navigate to home first
+      navigate("/");
 
-    // Wait for Home to mount, then scroll
-    setTimeout(() => {
-      const newEl = document.getElementById(id);
-      if (newEl) {
-        newEl.scrollIntoView({ behavior: "smooth", block: "start" });
-        window.history.pushState({}, "", "/" + id);
-      }
-    }, 100); // Delay allows DOM to render
-  }
+      // Wait for Home to mount, then scroll
+      setTimeout(() => {
+        const newEl = document.getElementById(id);
+        if (newEl) {
+          newEl.scrollIntoView({ behavior: "smooth", block: "start" });
+          window.history.pushState({}, "", "/" + id);
+        }
+      }, 100); // Delay allows DOM to render
+    }
 
-  if (closeMenu) setIsMenuOpen(false);
-};
+    if (closeMenu) setIsMenuOpen(false);
+  };
 
 
   const openSignup = () => {
@@ -192,8 +182,8 @@ const Navigation: React.FC<NavigationProps> = ({
     <div className="font-inter">
       <nav
         className={`fixed top-0 w-full z-40 transition-all duration-300 ${isScrolled
-            ? 'bg-white/95 backdrop-blur-md shadow-lg border-b border-gray-100'
-            : 'bg-white/80 backdrop-blur-sm'
+          ? 'bg-white/95 backdrop-blur-md shadow-lg border-b border-gray-100'
+          : 'bg-white/80 backdrop-blur-sm'
           }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -223,7 +213,7 @@ const Navigation: React.FC<NavigationProps> = ({
                       <Link to="/employers" key={item.name}>
                         <button
                           className="font-medium border-none text-gray-700 transition-colors duration-200 hover:text-orange-600 text-sm lg:text-base"
-                          // onClick={openEmployerForm}
+                        // onClick={openEmployerForm}
                         >
                           {item.name}
                         </button>
@@ -234,7 +224,7 @@ const Navigation: React.FC<NavigationProps> = ({
                     <Link
                       key={item.name}
                       to={item.to}
-className="font-medium text-gray-700 transition-colors duration-200 hover:text-orange-600 text-sm lg:text-base focus:outline-none focus:ring-0 focus:text-orange-500"
+                      className="font-medium text-gray-700 transition-colors duration-200 hover:text-orange-600 text-sm lg:text-base focus:outline-none focus:ring-0 focus:text-orange-500"
                     >
                       {item.name}
                     </Link>
@@ -244,13 +234,13 @@ className="font-medium text-gray-700 transition-colors duration-200 hover:text-o
                 // section item (one-pager)
                 return (
                   <Link to={item.name.toLowerCase()}>
-                  <button
-                    key={item.name}
-                    onClick={() => goToSection(item.id)}
-className="font-medium text-gray-700 transition-colors duration-200 hover:text-orange-600 text-sm lg:text-base focus:outline-none focus:text-orange-500 focus:ring-0"
-                  >
-                    {item.name}
-                  </button>
+                    <button
+                      key={item.name}
+                      onClick={() => goToSection(item.id)}
+                      className="font-medium text-gray-700 transition-colors duration-200 hover:text-orange-600 text-sm lg:text-base focus:outline-none focus:text-orange-500 focus:ring-0"
+                    >
+                      {item.name}
+                    </button>
                   </Link>
                 );
               })}
@@ -259,7 +249,7 @@ className="font-medium text-gray-700 transition-colors duration-200 hover:text-o
             {/* CTA Button (desktop) */}
             <div className="hidden md:block">
               <button
-                onClick={()=>navigate('/signup')}
+                onClick={() => navigate('/signup')}
                 className="bg-gradient-to-r from-orange-500 to-orange-600 text-white px-4 lg:px-6 py-2 lg:py-2.5 rounded-full font-semibold hover:from-orange-600 hover:to-orange-700 transition-all duration-200 shadow-lg hover:shadow-xl hover:scale-105 text-sm lg:text-base"
               >
                 Sign Up For Free
@@ -286,16 +276,16 @@ className="font-medium text-gray-700 transition-colors duration-200 hover:text-o
                     if (item.name === "Employers") {
                       return (
                         <Link to={item.to}>
-                        <button
-                          key={item.name}
-                          // onClick={() => {
-                          //   openEmployerForm();
-                          //   setIsMenuOpen(false);
-                          // }}
-                          className="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-100 transition-colors duration-200"
-                        >
-                          {item.name}
-                        </button>
+                          <button
+                            key={item.name}
+                            // onClick={() => {
+                            //   openEmployerForm();
+                            //   setIsMenuOpen(false);
+                            // }}
+                            className="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-100 transition-colors duration-200"
+                          >
+                            {item.name}
+                          </button>
                         </Link>
                       );
                     }
@@ -336,7 +326,7 @@ className="font-medium text-gray-700 transition-colors duration-200 hover:text-o
         </div>
 
         {/* Enhanced Consultation Banner */}
-        <div className="w-full h-16 bg-gradient-to-r from-orange-500 via-red-500 to-orange-600 shadow-lg relative overflow-hidden">
+        <div className="w-full h-16 bg-gradient-to-r from-orange-500  to-orange-600 shadow-lg relative overflow-hidden">
           {/* Background effects (unchanged) */}
           <div className="absolute inset-0 opacity-10">
             <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent animate-pulse"></div>
@@ -377,21 +367,21 @@ className="font-medium text-gray-700 transition-colors duration-200 hover:text-o
             <div className="hidden sm:flex h-full items-center justify-center space-x-1 sm:space-x-4 lg:space-x-8 text-nowrap">
               {/* Left: Arrow + text (unchanged) */}
               <div className="flex items-center space-x-1 sm:space-x-3 lg:space-x-4">
-                <img
-                  src="https://res.cloudinary.com/drit9nkha/image/upload/v1753417509/right-arrow_j7m7o3.webp"
-                  alt="Arrow"
-                  className="w-3 h-3 sm:w-5 sm:h-5 lg:w-6 lg:h-6 filter brightness-0 invert drop-shadow"
-                />
+                <span className="relative flex h-3 w-3">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white/70 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-3 w-3 bg-white"></span>
+                </span>
                 <span className="font-bold text-white text-xs sm:text-base lg:text-lg tracking-wide whitespace-nowrap">
                   Hurry! 2 Slots Remaining
                 </span>
               </div>
 
               {/* Divider (unchanged) */}
-              <div className="w-px h-6 sm:h-6 lg:h-8 bg-white/50" />
+              {/* <div className="w-px h-6 sm:h-6 lg:h-8 bg-white/50" /> */}
 
               {/* Middle: Countdown + "Just 1 Spot Left" (clock replaced) */}
-              <div className="flex items-end sm:items-center space-x-2">
+              <div className="order-last sm:order-none">
+                
                 <Countdown />
                 {/* <span className="font-bold text-white text-xs sm:text-base lg:text-lg tracking-wide whitespace-nowrap flex items-center">
                   <span className="inline-block w-1.5 h-1.5 sm:w-2 sm:h-2 bg-red-300 rounded-full mr-1.5 sm:mr-2 animate-[breathe_1.5s_ease-in-out_infinite]"></span>
@@ -399,12 +389,12 @@ className="font-medium text-gray-700 transition-colors duration-200 hover:text-o
                 </span> */}
               </div>
               <Link to={'/book-free-demo'}>
-              <button
-                // onClick={openCalendly}
-                className="bg-gradient-to-r from-rose-600 to-rose-700 hover:from-rose-700 hover:to-rose-800 text-white px-1.5 sm:px-4 lg:px-6 py-0.5 sm:py-2 rounded sm:rounded-lg font-bold transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105 text-[10px] sm:text-sm tracking-wide whitespace-nowrap flex-shrink-0"
-              >
-                Book Now
-              </button>
+                <button
+                  // onClick={openCalendly}
+                  className="rounded-full bg-white text-red-600 font-bold px-5 sm:px-6 py-2 shadow-lg hover:shadow-xl transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-white/80"
+                >
+                  Book Now
+                </button>
               </Link>
             </div>
           </div>
