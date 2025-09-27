@@ -356,7 +356,7 @@ const Navigation: React.FC<NavigationProps> = ({
               <div className="flex-shrink-0">
                 <button
                   onClick={openCalendly}
-                  className="bg-gradient-to-r from-rose-600 to-rose-700 hover:from-rose-700 hover:to-rose-800 text-white px-3 py-2 rounded-md font-semibold transition-all duration-300 shadow-md text-sm border border-red-500/30"
+                  className="rounded-full bg-white text-red-600 font-bold px-5 sm:px-6 py-2 shadow-lg hover:shadow-xl transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-white/80"
                 >
                   Book Now
                 </button>
