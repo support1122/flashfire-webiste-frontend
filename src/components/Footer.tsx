@@ -24,6 +24,8 @@ export default function Footer() {
             <div className="flex items-center gap-3">
               <a
                 href="https://www.linkedin.com/company/flashfire-pvt-ltd/posts/?feedView=all"
+                target="_blank"
+                rel="noopener noreferrer"
                 aria-label="LinkedIn"
                 className="inline-flex h-9 w-9 items-center justify-center rounded-full border-2 border-white/70 hover:bg-black/50 transition-colors"
               >
@@ -31,6 +33,8 @@ export default function Footer() {
               </a>
               <a
                 href="https://www.youtube.com/@flashfireindia"
+                target="_blank"
+                rel="noopener noreferrer"
                 aria-label="YouTube"
                 className="inline-flex h-9 w-9 items-center justify-center rounded-full border-2 border-white/70 hover:bg-black/50 transition-colors"
               >
@@ -45,27 +49,27 @@ export default function Footer() {
             <nav className="flex flex-col gap-2">
               <div className="flex items-center gap-2 text-sm">
                 <ChevronRight className="h-3.5 w-3.5 opacity-70" />
-                <Link to="/RefundPolicy" onClick={() => window.scrollTo(0, 0)} className="hover:underline hover:text-white">
+                <a href="/RefundPolicy" target="_blank" rel="noopener noreferrer" className="hover:underline hover:text-white">
                   Refund Policy
-                </Link>
+                </a>
               </div>
               <div className="flex items-center gap-2 text-sm">
                 <ChevronRight className="h-3.5 w-3.5 opacity-70" />
-                <Link to="/PrivacyPolicy"onClick={() => window.scrollTo(0, 0)} className="hover:underline hover:text-white">
+                <a href="/PrivacyPolicy" target="_blank" rel="noopener noreferrer" className="hover:underline hover:text-white">
                   Privacy Policy
-                </Link>
+                </a>
               </div>
               <div className="flex items-center gap-2 text-sm">
                 <ChevronRight className="h-3.5 w-3.5 opacity-70" />
-                <Link to="/PaymentPolicy" onClick={() => window.scrollTo(0, 0)} className="hover:underline hover:text-white">
+                <a href="/PaymentPolicy" target="_blank" rel="noopener noreferrer" className="hover:underline hover:text-white">
                   Payment Policy
-                </Link>
+                </a>
               </div>
               <div className="flex items-center gap-2 text-sm">
                 <ChevronRight className="h-3.5 w-3.5 opacity-70" />
-                <Link to="/TermsOfService" onClick={() => window.scrollTo(0, 0)} className="hover:underline hover:text-white">
+                <a href="/TermsOfService" target="_blank" rel="noopener noreferrer" className="hover:underline hover:text-white">
                   Terms of Service
-                </Link>
+                </a>
               </div>
             </nav>
           </div>
@@ -94,13 +98,13 @@ export default function Footer() {
               </div>
               <div className="flex items-center gap-2 text-sm">
                 <ChevronRight className="h-3.5 w-3.5 opacity-70" />
-                <Link to ="/faq" className="hover:underline hover:text-white">
+                <Link to="/faq" className="hover:underline hover:text-white">
                   FAQ
                 </Link>
               </div>
               <div className="flex items-center gap-2 text-sm">
                 <ChevronRight className="h-3.5 w-3.5 opacity-70" />
-                <Link to="/blogs" className="hover:underline hover:text-white">
+                <Link to="/blogs" onClick={() => window.scrollTo(0, 0)}   className="hover:underline hover:text-white">
                   Blog
                 </Link>
               </div>
