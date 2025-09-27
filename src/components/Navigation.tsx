@@ -102,7 +102,7 @@ const Navigation: React.FC<NavigationProps> = ({
     { name: "Testimonials", type: "section", id: "testimonials" },
     { name: "Pricing", type: "section", id: "pricing" },
     { name: "FAQ", type: "section", id: "faq" },
-    { name: "Blog", type: "route", to: "/blogs" },
+    { name: "Blog", type: "route", to: "/blogs"  },
     { name: "Employers", type: "route", to: "/employers" },
   ];
 
