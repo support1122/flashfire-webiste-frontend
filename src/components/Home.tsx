@@ -54,7 +54,7 @@ function Home() {
     <div>
             <Hero setSignupFormVisibility={setSignupFormVisibility}/>
             <MovingJobs setSignupFormVisibility={setSignupFormVisibility}/>
-            <RealTimeMetrics />
+            {/* <RealTimeMetrics /> */}
             <Features setSignupFormVisibility={setSignupFormVisibility}/>
             <HowItWorks setSignupFormVisibility={setSignupFormVisibility}/>
             <Testimonials />
