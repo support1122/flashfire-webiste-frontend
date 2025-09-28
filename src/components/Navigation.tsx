@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
-import EmployerForm from './EmployerForm';
 import { GTagUTM } from '../utils/GTagUTM.ts';
 import { Link } from 'react-router-dom';
 
@@ -15,7 +14,6 @@ const Navigation: React.FC<NavigationProps> = ({
 }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const [employerFormVisible, setEmployerFormVisible] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 20);
@@ -76,13 +74,11 @@ const Navigation: React.FC<NavigationProps> = ({
   };
 
   const openEmployerForm = () => {
-    setEmployerFormVisible(true);
+    window.open('/employers', '_blank');
     setIsMenuOpen(false);
   };
 
-  const closeEmployerForm = () => {
-    setEmployerFormVisible(false);
-  };
+
 
   return (
     <div className="font-inter">
@@ -310,12 +306,7 @@ const Navigation: React.FC<NavigationProps> = ({
         </div>
       </nav>
 
-      {/* Employer Form Modal */}
-      {employerFormVisible && (
-        <div className="fixed inset-0 z-[60]">
-          <EmployerForm isVisible={employerFormVisible} onClose={closeEmployerForm} />
-        </div>
-      )}
+
     </div>
   );
 };

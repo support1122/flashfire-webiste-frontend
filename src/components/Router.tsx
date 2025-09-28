@@ -4,6 +4,7 @@ import TermsOfService from './TermsOfService';
 import PrivacyPolicy from './PrivacyPolicy';
 import RefundPolicy from './RefundPolicy';
 import PaymentPolicy from './PaymentPolicy';
+import EmployersPage from './EmployersPage';
 
 const Router = () => {
   const [currentPath, setCurrentPath] = useState(window.location.pathname);
@@ -36,6 +37,8 @@ const Router = () => {
         return <RefundPolicy />;
       case '/paymentpolicy':
         return <PaymentPolicy />;
+      case '/employers':
+        return <EmployersPage />;
       default:
         return <App />;
     }
