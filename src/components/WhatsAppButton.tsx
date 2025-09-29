@@ -1,5 +1,6 @@
 import React from 'react';
 import { GTagUTM } from '../utils/GTagUTM';
+import { trackButtonClick, trackExternalLink } from '../utils/PostHogTracking.ts';
 
 const WhatsAppButton = () => {
   const handleWhatsAppClick = () => {
@@ -11,16 +12,30 @@ const WhatsAppButton = () => {
 
   return (
  <button
-      onClick={()=>{handleWhatsAppClick();GTagUTM({
-                                    eventName: 'WhatsApp_Support_Click',
-                                    label: 'Whatsapp_Support_Button',
-                                    utmParams: {
-                                      utm_source: 'WEBSITE',
-                                      utm_medium: 'Website_WhatsApp_Button_section',
-                                      utm_campaign: 'Website',
-                                    },
-                                  });
-                                }}
+      onClick={()=>{
+        handleWhatsAppClick();
+        
+        // Track with both GTag and PostHog
+        GTagUTM({
+          eventName: 'WhatsApp_Support_Click',
+          label: 'Whatsapp_Support_Button',
+          utmParams: {
+            utm_source: 'WEBSITE',
+            utm_medium: 'Website_WhatsApp_Button_section',
+            utm_campaign: 'Website',
+          },
+        });
+        
+        // PostHog tracking
+        trackButtonClick("WhatsApp Support", "floating_button", "icon", {
+          button_location: "floating_whatsapp",
+          button_type: "support_contact"
+        });
+        trackExternalLink("https://wa.me/919817349846", "WhatsApp Support", "floating_button", {
+          link_type: "whatsapp_support",
+          contact_method: "whatsapp"
+        });
+      }}
       className="fixed z-[60] bottom-4 sm:bottom-6 right-4 sm:right-6 bg-green-500 hover:bg-green-600 text-white p-3 sm:p-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-300  group"
       aria-label="Chat on WhatsApp"
     >

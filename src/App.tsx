@@ -7,6 +7,7 @@ import Navigation from './components/Navigation.tsx';
 import Footer from './components/Footer.tsx';
 import SalesPopup from './components/SalesPopUp.tsx';
 import EmployerForm from './components/EmployerForm.tsx';
+import { trackPageView, trackUserJourney } from './utils/PostHogTracking.ts';
 // import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 
 function App() {
@@ -96,16 +97,38 @@ function App() {
     // const location = useLocation();
   
   useEffect(() => {
+    // Track page views
+    const pageName = location.pathname === '/' ? 'home' : location.pathname.slice(1);
+    trackPageView(pageName, location.pathname, {
+      page_url: location.pathname,
+      page_title: document.title
+    });
+    
+    // Track user journey
+    trackUserJourney('page_view', pageName, {
+      page_name: pageName,
+      page_url: location.pathname
+    });
+    
     if (location.pathname === '/signup') {
       setSignupFormVisibility(true);
+      trackUserJourney('signup_modal_opened', 'signup_flow', {
+        modal_trigger: 'direct_navigation'
+      });
     // } else if(location.pathname === '/employers'){
     //   return <EmployerForm />
     }
     else if(location.pathname === '/employers'){
       setEmployerFormVisibility(true);
+      trackUserJourney('employer_modal_opened', 'employer_flow', {
+        modal_trigger: 'direct_navigation'
+      });
     }
     else if(location.pathname === '/book-free-demo'){
       setCalendlyModalVisibility(true);
+      trackUserJourney('demo_modal_opened', 'demo_flow', {
+        modal_trigger: 'direct_navigation'
+      });
     }
     else {
       setSignupFormVisibility(false);

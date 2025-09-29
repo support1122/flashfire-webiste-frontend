@@ -1,9 +1,23 @@
 import { useState } from 'react';
 import { X, User, Phone, Mail} from 'lucide-react';
 import { createOrUpdateContact, trackSignupEvent, waitForCRMLoad } from '../utils/CRMTracking';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { 
+  trackFormStart, 
+  trackFormFieldFocus, 
+  trackFormSubmit, 
+  trackFormError,
+  trackModalClose,
+  trackConversion 
+} from '../utils/PostHogTracking.ts';
 
-function SignupForm({ setSignupFormVisibility, setCalendlyModalVisibility, setCalendlyUser  }) {
+interface SignupFormProps {
+  setSignupFormVisibility: (visible: boolean) => void;
+  setCalendlyModalVisibility: (visible: boolean) => void;
+  setCalendlyUser: (user: any) => void;
+}
+
+function SignupForm({ setSignupFormVisibility, setCalendlyModalVisibility, setCalendlyUser }: SignupFormProps) {
   const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
   const [formData, setFormData] = useState({
     fullName: '',
@@ -21,6 +35,13 @@ function SignupForm({ setSignupFormVisibility, setCalendlyModalVisibility, setCa
 
   const closeModal = () => {
     console.log('Modal closed');
+    
+    // Track modal close
+    trackModalClose("signup_form", "button", {
+      form_name: "signup_form",
+      close_method: "close_button"
+    });
+    
 //     if (window.history.length > 1) {
 //   window.history.back();
 // } else {
@@ -43,6 +64,14 @@ function SignupForm({ setSignupFormVisibility, setCalendlyModalVisibility, setCa
 
   async function SaveDetailsToDB() {
     try {
+      // Track form submission start
+      trackFormSubmit("signup_form", {
+        form_name: "signup_form",
+        form_step: "submission",
+        user_email: formData.email,
+        user_name: formData.fullName
+      });
+      
       let reqToServer = await fetch(`${API_BASE_URL}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -57,6 +86,14 @@ function SignupForm({ setSignupFormVisibility, setCalendlyModalVisibility, setCa
       let responseFromServer = await reqToServer.json();
       console.log("Response from server:", responseFromServer);
       if(responseFromServer?.message.length > 0) {
+        // Track successful conversion
+        trackConversion("signup_form_submission", 1, {
+          conversion_type: "signup_form",
+          user_email: formData.email,
+          user_name: formData.fullName,
+          work_authorization: formData.workAuthorization
+        });
+        
         // Wait for CRM to load and then track the contact
         await waitForCRMLoad();
         
@@ -80,11 +117,23 @@ function SignupForm({ setSignupFormVisibility, setCalendlyModalVisibility, setCa
       }
     } catch (error) {
       console.log(error);
+      // Track form error
+      trackFormError("signup_form", error instanceof Error ? error.message : 'Unknown error', "form_submission", {
+        error_type: "api_error",
+        form_name: "signup_form"
+      });
     }
   }
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    // Track form start when user begins interaction
+    trackFormStart("signup_form", "initial", {
+      form_name: "signup_form",
+      form_step: "form_interaction"
+    });
+    
     setCalendlyUser(formData);
     navigate('/book-free-demo');
 
@@ -103,7 +152,7 @@ function SignupForm({ setSignupFormVisibility, setCalendlyModalVisibility, setCa
     }
   };
 
-  const detectCountryFromPhone = (phoneNumber) => {
+  const detectCountryFromPhone = (phoneNumber: string) => {
     for (const country of countryCodes) {
       if (country.pattern && country.pattern.test(phoneNumber)) {
         return country.code;
@@ -112,7 +161,7 @@ function SignupForm({ setSignupFormVisibility, setCalendlyModalVisibility, setCa
     return '+1';
   };
 
-  const handleInputChange = (e) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     if (name === 'phone') {
       const numericValue = value.replace(/\D/g, '');
@@ -146,15 +195,19 @@ function SignupForm({ setSignupFormVisibility, setCalendlyModalVisibility, setCa
               <label className="block text-sm font-medium text-gray-700 mb-2">
                 <User className="w-4 h-4 inline mr-2" /> Full Name
               </label>
-              <input
-                type="text"
-                name="fullName"
-                value={formData.fullName}
-                onChange={handleInputChange}
-                className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent"
-                placeholder="Enter your full name"
-                required
-              />
+                <input
+                  type="text"
+                  name="fullName"
+                  value={formData.fullName}
+                  onChange={handleInputChange}
+                  onFocus={() => trackFormFieldFocus("signup_form", "fullName", {
+                    field_name: "fullName",
+                    form_name: "signup_form"
+                  })}
+                  className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                  placeholder="Enter your full name"
+                  required
+                />
             </div>
 
             <div>
@@ -179,6 +232,10 @@ function SignupForm({ setSignupFormVisibility, setCalendlyModalVisibility, setCa
                   name="phone"
                   value={formData.phone}
                   onChange={handleInputChange}
+                  onFocus={() => trackFormFieldFocus("signup_form", "phone", {
+                    field_name: "phone",
+                    form_name: "signup_form"
+                  })}
                   className="flex-1 px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent"
                   placeholder="Enter 10-digit phone number"
                   pattern="[0-9]{10}"
@@ -201,6 +258,10 @@ function SignupForm({ setSignupFormVisibility, setCalendlyModalVisibility, setCa
                 name="email"
                 value={formData.email}
                 onChange={handleInputChange}
+                onFocus={() => trackFormFieldFocus("signup_form", "email", {
+                  field_name: "email",
+                  form_name: "signup_form"
+                })}
                 className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent"
                 placeholder="Enter your email address"
                 required
@@ -215,6 +276,10 @@ function SignupForm({ setSignupFormVisibility, setCalendlyModalVisibility, setCa
                 name="workAuthorization"
                 value={formData.workAuthorization}
                 onChange={handleInputChange}
+                onFocus={() => trackFormFieldFocus("signup_form", "workAuthorization", {
+                  field_name: "workAuthorization",
+                  form_name: "signup_form"
+                })}
                 className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent"
                 
               >
