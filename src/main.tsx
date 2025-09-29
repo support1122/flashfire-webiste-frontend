@@ -12,6 +12,7 @@ import TermsOfService from './components/TermsOfService';
 import BlogPage from './components/BlogPage.tsx';
 // import Home from './components/Home'
 import IndividualBlog from './components/IndividualBlog.tsx';
+import { PostHogProvider } from 'posthog-js/react'
 import Hero from './components/Hero.tsx';
 import Blog from './components/Blog.tsx';
 import Contact from './components/Contact.tsx';
@@ -52,11 +53,37 @@ const routes=createBrowserRouter([
 
 ]);
 
+const options = {
+  api_host: import.meta.env.VITE_PUBLIC_POSTHOG_HOST,
+  autocapture: true,
+  capture_pageview: true,
+  capture_pageleave: true,
+  person_profiles: 'identified_only' as const,
+  // Enable heatmaps for click tracking and visual analytics
+  enable_heatmaps: true,
+  // Enable session recording for user behavior analysis
+  session_recording: {
+    maskAllInputs: false, // Set to true if you want to mask sensitive input fields
+    recordCrossOriginIframes: false,
+    recordCanvas: false, // Set to true if you have canvas elements
+  },
+  // Enhanced tracking options
+  capture_performance: true,
+  capture_console_logs: false, // Set to true for debugging
+  // Feature flags for A/B testing
+  bootstrap: {
+    featureFlags: {}
+  }
+}
+
+
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
+  <PostHogProvider apiKey={import.meta.env.VITE_PUBLIC_POSTHOG_KEY} options={options}>
     {/* <Router /> */}
     {/* <ScrollToHash> */}
     <RouterProvider router={routes} />
     {/* </ScrollToHash> */}
+    </PostHogProvider>
   </StrictMode>
 );

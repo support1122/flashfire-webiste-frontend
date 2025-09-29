@@ -3,6 +3,12 @@ import { useState, useEffect, useRef } from "react"
 import { ArrowRight, Sparkles } from "lucide-react"
 import { GTagUTM } from "../utils/GTagUTM.js"
 import { useNavigate } from "react-router-dom"
+import { 
+  trackButtonClick, 
+  trackSignupIntent, 
+  trackSectionView,
+  trackPageView 
+} from "../utils/PostHogTracking.ts"
 
 const Hero = ({ setSignupFormVisibility }) => {
   const [isSuccessMatrixVisible, setIsSuccessMatrixVisible] = useState(false)
@@ -15,11 +21,23 @@ const Hero = ({ setSignupFormVisibility }) => {
 
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) setIsSuccessMatrixVisible(true)
+        if (entry.isIntersecting) {
+          setIsSuccessMatrixVisible(true)
+          // Track section view
+          trackSectionView("success_matrix", {
+            section: "hero_success_metrics"
+          })
+        }
       },
       { threshold: 0.05, rootMargin: "100px 0px" },
     )
     if (successMatrixRef.current) observer.observe(successMatrixRef.current)
+    
+    // Track page view for hero section
+    trackPageView("hero", "home", {
+      section: "hero_landing"
+    })
+    
     return () => {
       clearTimeout(timer)
       if (successMatrixRef.current) observer.unobserve(successMatrixRef.current)
@@ -236,10 +254,7 @@ const Hero = ({ setSignupFormVisibility }) => {
               <button
                 type="button"
                 onClick={() => {
-                  
-                  // Open the form first
-                  // setSignupFormVisibility(true)
-                  // Track safely
+                  // Track with both GTag and PostHog
                   try {
                     GTagUTM({
                       eventName: "sign_up_click",
@@ -250,8 +265,19 @@ const Hero = ({ setSignupFormVisibility }) => {
                         utm_campaign: "Website",
                       },
                     });
-                    navigate('/signup');
                   } catch {}
+                  
+                  // PostHog tracking
+                  trackButtonClick("Start My 7-Day Free Trial", "hero_cta", "cta", {
+                    button_location: "hero_main_cta",
+                    section: "hero_landing"
+                  });
+                  trackSignupIntent("hero_cta", {
+                    signup_source: "hero_main_button",
+                    funnel_stage: "signup_intent"
+                  });
+                  
+                  navigate('/signup');
                 }}
                 className="group bg-gradient-to-r from-orange-500 to-orange-600 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold text-base sm:text-lg hover:from-orange-600 hover:to-orange-700 transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105 flex items-center space-x-2 w-full sm:w-auto justify-center pulse-glow transform"
               >

@@ -2,6 +2,12 @@ import React, { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 import { GTagUTM } from "../utils/GTagUTM.ts";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import { 
+  trackButtonClick, 
+  trackNavigation, 
+  trackModalOpen,
+  trackPageView 
+} from "../utils/PostHogTracking.ts";
 interface NavigationProps {
   setSignupFormVisibility: React.Dispatch<React.SetStateAction<boolean>>;
   setCalendlyModalVisibility: React.Dispatch<React.SetStateAction<boolean>>;
@@ -120,6 +126,12 @@ const Navigation: React.FC<NavigationProps> = ({
   const goToSection = (id: string, closeMenu = true) => {
     const el = document.getElementById(id);
 
+    // Track navigation
+    trackNavigation(location.pathname, `/#${id}`, 'click', {
+      section: id,
+      navigation_type: 'section_scroll'
+    });
+
     if (el) {
       // Scroll if element exists
       el.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -145,6 +157,8 @@ const Navigation: React.FC<NavigationProps> = ({
   const openSignup = () => {
     setSignupFormVisibility(true);
     setIsMenuOpen(false);
+    
+    // Track with both GTag and PostHog
     safeTrack({
       eventName: "sign_up_click",
       label: "Header Sign Up Button",
@@ -154,11 +168,22 @@ const Navigation: React.FC<NavigationProps> = ({
         utm_campaign: "header_signup",
       },
     });
+    
+    // PostHog tracking
+    trackButtonClick("Sign Up For Free", "navigation_header", "cta", {
+      button_location: "header",
+      navigation_type: "desktop"
+    });
+    trackModalOpen("signup_form", "navigation_button", {
+      trigger_source: "header_cta"
+    });
   };
 
   const openCalendly = () => {
     setCalendlyModalVisibility(true);
     setIsMenuOpen(false);
+    
+    // Track with both GTag and PostHog
     safeTrack({
       eventName: "Calendly_Meet_click",
       label: "NAVBAR_LOWER_SECTION_Button",
@@ -167,6 +192,15 @@ const Navigation: React.FC<NavigationProps> = ({
         utm_medium: "Navbar_Meet_Button",
         utm_campaign: "WEBSITE_NAVBAR_LOWER_SECTION",
       },
+    });
+    
+    // PostHog tracking
+    trackButtonClick("Book Now", "navigation_banner", "cta", {
+      button_location: "banner",
+      navigation_type: "banner_cta"
+    });
+    trackModalOpen("calendly_modal", "navigation_button", {
+      trigger_source: "banner_cta"
     });
   };
 
@@ -249,7 +283,13 @@ const Navigation: React.FC<NavigationProps> = ({
             {/* CTA Button (desktop) */}
             <div className="hidden md:block">
               <button
-                onClick={() => navigate('/signup')}
+                onClick={() => {
+                  trackButtonClick("Sign Up For Free", "navigation_header_desktop", "cta", {
+                    button_location: "header_desktop",
+                    navigation_type: "desktop"
+                  });
+                  navigate('/signup');
+                }}
                 className="bg-gradient-to-r from-orange-500 to-orange-600 text-white px-4 lg:px-6 py-2 lg:py-2.5 rounded-full font-semibold hover:from-orange-600 hover:to-orange-700 transition-all duration-200 shadow-lg hover:shadow-xl hover:scale-105 text-sm lg:text-base"
               >
                 Sign Up For Free
@@ -259,7 +299,18 @@ const Navigation: React.FC<NavigationProps> = ({
             {/* Mobile menu button */}
             <div className="md:hidden">
               <button
-                onClick={() => setIsMenuOpen((v) => !v)}
+                onClick={() => {
+                  trackButtonClick(
+                    isMenuOpen ? "Close Menu" : "Open Menu", 
+                    "navigation_mobile_menu", 
+                    "icon",
+                    {
+                      button_location: "mobile_header",
+                      menu_state: isMenuOpen ? "closing" : "opening"
+                    }
+                  );
+                  setIsMenuOpen((v) => !v);
+                }}
                 className="text-gray-700 transition-colors duration-200 p-2"
               >
                 {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -315,7 +366,13 @@ const Navigation: React.FC<NavigationProps> = ({
 
                 {/* CTA Button (mobile) */}
                 <button
-                  onClick={openSignup}
+                  onClick={() => {
+                    trackButtonClick("Start Free Trial", "navigation_mobile_menu", "cta", {
+                      button_location: "mobile_menu",
+                      navigation_type: "mobile"
+                    });
+                    openSignup();
+                  }}
                   className="bg-gradient-to-r from-orange-500 to-orange-600 text-white px-3 py-3 rounded-lg font-semibold hover:from-orange-600 hover:to-orange-700 transition-all duration-200 block text-center mt-4 w-full text-base"
                 >
                   Start Free Trial
@@ -355,7 +412,13 @@ const Navigation: React.FC<NavigationProps> = ({
               {/* Right: Book Now (unchanged) */}
               <div className="flex-shrink-0">
                 <button
-                  onClick={openCalendly}
+                  onClick={() => {
+                    trackButtonClick("Book Now", "navigation_banner_mobile", "cta", {
+                      button_location: "banner_mobile",
+                      navigation_type: "mobile_banner"
+                    });
+                    openCalendly();
+                  }}
                   className="rounded-full bg-white text-red-600 font-bold px-5 sm:px-6 py-2 shadow-lg hover:shadow-xl transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-white/80"
                 >
                   Book Now
@@ -390,7 +453,12 @@ const Navigation: React.FC<NavigationProps> = ({
               </div>
               <Link to={'/book-free-demo'}>
                 <button
-                  // onClick={openCalendly}
+                  onClick={() => {
+                    trackButtonClick("Book Now", "navigation_banner_desktop", "cta", {
+                      button_location: "banner_desktop",
+                      navigation_type: "desktop_banner"
+                    });
+                  }}
                   className="rounded-full bg-white text-red-600 font-bold px-5 sm:px-6 py-2 shadow-lg hover:shadow-xl transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-white/80"
                 >
                   Book Now
