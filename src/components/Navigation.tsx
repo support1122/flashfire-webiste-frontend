@@ -30,16 +30,7 @@ const Navigation: React.FC<NavigationProps> = ({
   // const [employerFormVisible, setEmployerFormVisible] = useState(false);
 
 
-  // ----------------- Countdown (Days / Hrs / Mins / Secs) -----------------
-  // Set your target deadline here. Example: end of current month.
-  const TARGET_DATE = useState(() => {
-    const now = new Date();
-    const year = now.getFullYear();
-    const month = now.getMonth();
-    const lastDayOfMonth = new Date(year, month + 1, 0);
-    return lastDayOfMonth.getTime();
-  })[0];
-
+  // ----------------- Monthly Countdown Timer -----------------
   const [timeLeft, setTimeLeft] = useState({
     days: 0,
     hours: 0,
@@ -47,31 +38,107 @@ const Navigation: React.FC<NavigationProps> = ({
     seconds: 0,
   });
 
+  // Function to get the end of current month at 11:59:59 PM
+  const getEndOfCurrentMonth = () => {
+    const now = new Date();
+    const year = now.getFullYear();
+    const month = now.getMonth();
+    
+    // Get the last day of current month and set time to 23:59:59
+    const lastDayOfMonth = new Date(year, month + 1, 0);
+    lastDayOfMonth.setHours(23, 59, 59, 999); // 11:59:59 PM
+    
+    return lastDayOfMonth.getTime();
+  };
+
+  // Function to get the end of next month at 11:59:59 PM
+  const getEndOfNextMonth = () => {
+    const now = new Date();
+    const year = now.getFullYear();
+    const month = now.getMonth();
+    
+    // Get the last day of next month and set time to 23:59:59
+    const lastDayOfNextMonth = new Date(year, month + 2, 0);
+    lastDayOfNextMonth.setHours(23, 59, 59, 999); // 11:59:59 PM
+    
+    return lastDayOfNextMonth.getTime();
+  };
+
   useEffect(() => {
     const tick = () => {
       const now = Date.now();
-      const distance = TARGET_DATE - now;
-
-      if (distance <= 0) {
-        setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0 });
-        return;
+      const currentMonthEnd = getEndOfCurrentMonth();
+      
+      // Check if current month has ended
+      if (now >= currentMonthEnd) {
+        // Month has ended, countdown to next month end
+        const nextMonthEnd = getEndOfNextMonth();
+        const distance = nextMonthEnd - now;
+        
+        if (distance <= 0) {
+          // This shouldn't happen, but just in case - recalculate
+          const newNextMonthEnd = getEndOfNextMonth();
+          const newDistance = newNextMonthEnd - now;
+          
+          if (newDistance <= 0) {
+            setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+            return;
+          }
+          
+          const days = Math.floor(newDistance / (1000 * 60 * 60 * 24));
+          const hours = Math.floor((newDistance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+          const minutes = Math.floor((newDistance % (1000 * 60 * 60)) / (1000 * 60));
+          const seconds = Math.floor((newDistance % (1000 * 60)) / 1000);
+          
+          setTimeLeft({ days, hours, minutes, seconds });
+          return;
+        }
+        
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+        
+        setTimeLeft({ days, hours, minutes, seconds });
+      } else {
+        // Still in current month, countdown to current month end
+        const distance = currentMonthEnd - now;
+        
+        if (distance <= 0) {
+          // Month just ended, switch to next month countdown
+          const nextMonthEnd = getEndOfNextMonth();
+          const nextDistance = nextMonthEnd - now;
+          
+          if (nextDistance <= 0) {
+            setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+            return;
+          }
+          
+          const days = Math.floor(nextDistance / (1000 * 60 * 60 * 24));
+          const hours = Math.floor((nextDistance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+          const minutes = Math.floor((nextDistance % (1000 * 60 * 60)) / (1000 * 60));
+          const seconds = Math.floor((nextDistance % (1000 * 60)) / 1000);
+          
+          setTimeLeft({ days, hours, minutes, seconds });
+          return;
+        }
+        
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+        
+        setTimeLeft({ days, hours, minutes, seconds });
       }
-
-      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-      const hours = Math.floor(
-        (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
-      );
-      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-      setTimeLeft({ days, hours, minutes, seconds });
     };
 
-    // initial paint
+    // Initial calculation
     tick();
+    
+    // Update every second
     const id = setInterval(tick, 1000);
     return () => clearInterval(id);
-  }, [TARGET_DATE]);
+  }, []); // Empty dependency array since we want this to run continuously
 
   const Two = (n: number) => String(n).padStart(2, '0');
 
