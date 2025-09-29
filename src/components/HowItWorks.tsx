@@ -2,9 +2,11 @@
 import React from 'react';
 import { Linkedin, FileText, Rocket, Phone } from 'lucide-react';
 import {GTagUTM} from '../utils/GTagUTM.ts';
+import { useNavigate } from 'react-router-dom';
 
 
 const HowItWorks = ({setSignupFormVisibility}) => {
+  const navigate = useNavigate();
   const steps = [
     {
       icon: <Linkedin className="w-8 h-8 text-orange-600" />,
@@ -38,7 +40,7 @@ const HowItWorks = ({setSignupFormVisibility}) => {
         <div className="text-center mb-12 sm:mb-20">
           <div className="inline-flex items-center space-x-2 bg-orange-100 text-orange-800 px-4 py-2 rounded-full text-sm font-medium mb-4">
             <Rocket className="w-4 h-4" />
-            <span>See How FlashFire Works</span>
+            <span>See How Flashfire Works</span>
           </div>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-4 sm:mb-6">
             Your Path to Success in 4 Simple Steps
@@ -117,7 +119,8 @@ const HowItWorks = ({setSignupFormVisibility}) => {
                                     utm_campaign: 'Website',
                                   },
                                 });
-                                setSignupFormVisibility(true);
+                                navigate('/signup');
+                                // setSignupFormVisibility(true);
                               }}
               className="bg-white text-orange-600 px-6 sm:px-8 py-3 sm:py-4 rounded-full font-bold hover:bg-gray-50 transition-all duration-200 shadow-lg hover:scale-105"
             >
