@@ -11,7 +11,6 @@ import { createLinkWithUTM, navigateWithUTM } from "../utils/UTMUtils";
 interface NavigationProps {
   setSignupFormVisibility: React.Dispatch<React.SetStateAction<boolean>>;
   setCalendlyModalVisibility: React.Dispatch<React.SetStateAction<boolean>>;
-  setEmployerFormVisibility: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 type NavItem =
@@ -21,7 +20,6 @@ type NavItem =
 const Navigation: React.FC<NavigationProps> = ({
   setSignupFormVisibility,
   setCalendlyModalVisibility,
-  setEmployerFormVisibility,
 }) => {
   const navigate = useNavigate();
   const location = useLocation();
@@ -283,17 +281,16 @@ const Navigation: React.FC<NavigationProps> = ({
             <div className="hidden md:flex items-center space-x-6 lg:space-x-8">
               {navItems.map((item) => {
                 if (item.type === "route") {
-                  // Special handling for Employers (kept as in your code)
+                  // Special handling for Employers (open in new tab)
                   if (item.name === "Employers") {
                     return (
-                      <Link to="/employers" key={item.name}>
+                      <a href="/employer-registration" target="_blank" rel="noopener noreferrer" key={item.name}>
                         <button
                           className="font-medium border-none text-gray-700 transition-colors duration-200 hover:text-orange-600 text-sm lg:text-base"
-                        // onClick={openEmployerForm}
                         >
                           {item.name}
                         </button>
-                      </Link>
+                      </a>
                     );
                   }
                   return (
@@ -368,18 +365,15 @@ const Navigation: React.FC<NavigationProps> = ({
                   if (item.type === "route") {
                     if (item.name === "Employers") {
                       return (
-                        <Link to={item.to}>
+                        <a href="/employer-registration" target="_blank" rel="noopener noreferrer">
                           <button
                             key={item.name}
-                            // onClick={() => {
-                            //   openEmployerForm();
-                            //   setIsMenuOpen(false);
-                            // }}
+                            onClick={() => setIsMenuOpen(false)}
                             className="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-100 transition-colors duration-200"
                           >
                             {item.name}
                           </button>
-                        </Link>
+                        </a>
                       );
                     }
                     return (
