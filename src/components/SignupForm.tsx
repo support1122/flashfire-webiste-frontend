@@ -10,6 +10,7 @@ import {
   trackModalClose,
   trackConversion 
 } from '../utils/PostHogTracking.ts';
+import { navigateWithUTM } from '../utils/UTMUtils';
 
 interface SignupFormProps {
   setSignupFormVisibility: (visible: boolean) => void;
@@ -135,7 +136,7 @@ function SignupForm({ setSignupFormVisibility, setCalendlyModalVisibility, setCa
     });
     
     setCalendlyUser(formData);
-    navigate('/book-free-demo');
+    navigateWithUTM('/book-free-demo', navigate);
 
     // setCalendlyModalVisibility(true);
     try {

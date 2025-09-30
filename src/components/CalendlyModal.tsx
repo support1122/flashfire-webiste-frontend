@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { X, Calendar, CheckCircle, Loader2 } from 'lucide-react';
-import { InlineWidget } from 'react-calendly';
+import { X, Calendar, CheckCircle } from 'lucide-react';
+import { InlineWidget, useCalendlyEventListener } from 'react-calendly';
 import { useNavigate } from 'react-router-dom';
+import posthog from 'posthog-js';
+import { trackCalendlyBooking } from '../utils/CRMTracking';
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 function CalendlyModal({ setCalendlyModalVisibility, user }: { setCalendlyModalVisibility: (visible: boolean) => void , user: (any)}) {
   const [isLoading, setIsLoading] = useState(true);
+  const [profileInvitee, setProfileInvitee] = useState<{ email?: string; name?: string } | null>(null);
   const navigate = useNavigate();
 
   const handleClose = async () => {
@@ -42,13 +45,101 @@ function CalendlyModal({ setCalendlyModalVisibility, user }: { setCalendlyModalV
 
 
   useEffect(() => {
+    console.log('📅 CalendlyModal mounted with user:', user);
+    console.log('📅 UTM params:', {
+      utm_source: localStorage.getItem('utm_source'),
+      utm_medium: localStorage.getItem('utm_medium'),
+      utm_campaign: localStorage.getItem('utm_campaign')
+    });
+    // Restore any previously captured invitee profile info (from another Calendly flow)
+    try {
+      const savedName = localStorage.getItem('cal_invitee_name') || undefined;
+      const savedEmail = localStorage.getItem('cal_invitee_email') || undefined;
+      if (savedName || savedEmail) {
+        setProfileInvitee({ name: savedName, email: savedEmail });
+      }
+    } catch {}
+    
     // Hide loading after 5 seconds as fallback
     const timer = setTimeout(() => {
       setIsLoading(false);
+      console.log('📅 Calendly loading timeout reached');
     }, 5000);
 
     return () => clearTimeout(timer);
   }, []);
+
+  // Listen for Calendly scheduled events and capture to analytics/CRM
+  useCalendlyEventListener({
+    // Fires when the user submits their details (name/email) before picking a time
+    onProfilePageSubmitted: (e: any) => {
+      try {
+        const payload = e?.data?.payload || e?.payload || {};
+        const name = payload?.name || payload?.invitee?.name || '';
+        const email = payload?.email || payload?.invitee?.email || '';
+        if (name || email) {
+          setProfileInvitee({ name, email });
+          try {
+            if (name) localStorage.setItem('cal_invitee_name', name);
+            if (email) localStorage.setItem('cal_invitee_email', email);
+          } catch {}
+          console.log('📝 Calendly profile captured:', { name, email });
+        }
+      } catch (err) {
+        console.error('❌ Failed to capture Calendly profile submission', err);
+      }
+    },
+    onEventScheduled: (e: any) => {
+      console.log('🎉 Calendly Event Triggered!', e);
+      try {
+        const payload = e?.data?.payload || e?.payload || {};
+        const inviteeEmail = payload?.invitee?.email || user?.email || profileInvitee?.email || localStorage.getItem('cal_invitee_email') || '';
+        const inviteeName = payload?.invitee?.name || user?.fullName || profileInvitee?.name || localStorage.getItem('cal_invitee_name') || '';
+        const meetingUrl = payload?.event?.uri || payload?.event?.location?.join_url || '';
+        const eventStartTime = payload?.event?.start_time || payload?.event?.start_time_pretty || '';
+
+        const utm_source = localStorage.getItem('utm_source') || 'direct';
+        const utm_medium = localStorage.getItem('utm_medium') || 'website';
+        const utm_campaign = localStorage.getItem('utm_campaign') || 'organic';
+
+        console.log('📊 PostHog Event Data:', {
+          email: inviteeEmail,
+          inviteeName,
+          meetingUrl,
+          eventStartTime,
+          page: window.location.pathname,
+          utm_source,
+          utm_medium,
+          utm_campaign
+        });
+
+        // PostHog capture so it appears in Insights immediately
+        if (typeof posthog !== 'undefined' && posthog.capture) {
+          posthog.capture('Calendly Meeting Booked', {
+            email: inviteeEmail,
+            inviteeName,
+            meetingUrl,
+            eventStartTime,
+            page: window.location.pathname,
+            utm_source,
+            utm_medium,
+            utm_campaign
+          });
+          console.log('✅ PostHog event captured: Calendly Meeting Booked');
+        } else {
+          console.error('❌ PostHog not available');
+        }
+
+        // Also send minimal CRM custom event (non-blocking)
+        if (inviteeEmail) {
+          trackCalendlyBooking(inviteeEmail);
+          console.log('✅ CRM event tracked');
+        }
+      } catch (err) {
+        console.error('❌ Calendly scheduled event capture failed', err);
+      }
+    }
+  } as any);
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center w-full">
@@ -88,9 +179,10 @@ function CalendlyModal({ setCalendlyModalVisibility, user }: { setCalendlyModalV
             )}
             <InlineWidget
               // url = 'https://calendly.com/biswajitshrm66/30min'
+              // mainUrl="https://calendly.com/feedback-flashfire/30min"
               url={`https://calendly.com/feedback-flashfire/30min?utm_source=${
     localStorage.getItem("utm_source") || "webpage_visit"
-  }`}
+  }&utm_medium=${localStorage.getItem("utm_medium") || "website"}`}
               prefill={{
     name: user?.fullName || "",
     email: user?.email || "",
@@ -201,7 +293,7 @@ function CalendlyModal({ setCalendlyModalVisibility, user }: { setCalendlyModalV
               // url="https://calendly.com/biswajitshrm66/30min"
               url={`https://calendly.com/feedback-flashfire/30min?utm_source=${
     localStorage.getItem("utm_source") || "webpage_visit"
-  }`}
+  }&utm_medium=${localStorage.getItem("utm_medium") || "website"}`}
               prefill={{
     name: user?.fullName || "",
     email: user?.email || "",

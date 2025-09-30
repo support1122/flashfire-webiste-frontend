@@ -5,9 +5,9 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { 
   trackButtonClick, 
   trackNavigation, 
-  trackModalOpen,
-  trackPageView 
+  trackModalOpen
 } from "../utils/PostHogTracking.ts";
+import { createLinkWithUTM, navigateWithUTM } from "../utils/UTMUtils";
 interface NavigationProps {
   setSignupFormVisibility: React.Dispatch<React.SetStateAction<boolean>>;
   setCalendlyModalVisibility: React.Dispatch<React.SetStateAction<boolean>>;
@@ -15,7 +15,7 @@ interface NavigationProps {
 }
 
 type NavItem =
-  | { name: "" | "Features" | "Testimonials" | "Pricing" | "FAQ"; type: "section"; id: string }
+  | { name: "" | "Home" | "Features" | "Testimonials" | "Pricing" | "FAQ"; type: "section"; id: string }
   | { name: "Blog" | "Employers"; type: "route"; to: string };
 
 const Navigation: React.FC<NavigationProps> = ({
@@ -31,15 +31,7 @@ const Navigation: React.FC<NavigationProps> = ({
 
 
   // ----------------- Countdown (Days / Hrs / Mins / Secs) -----------------
-  // Set your target deadline here. Example: end of current month.
-  const TARGET_DATE = useState(() => {
-    const now = new Date();
-    const year = now.getFullYear();
-    const month = now.getMonth();
-    const lastDayOfMonth = new Date(year, month + 1, 0);
-    return lastDayOfMonth.getTime();
-  })[0];
-
+  // Monthly countdown that rolls over to the end of next month after expiry.
   const [timeLeft, setTimeLeft] = useState({
     days: 0,
     hours: 0,
@@ -47,31 +39,84 @@ const Navigation: React.FC<NavigationProps> = ({
     seconds: 0,
   });
 
+  // End of current month at 23:59:59.999 local time
+  const getEndOfCurrentMonth = () => {
+    const now = new Date();
+    const year = now.getFullYear();
+    const month = now.getMonth();
+    const lastDayOfMonth = new Date(year, month + 1, 0);
+    lastDayOfMonth.setHours(23, 59, 59, 999);
+    return lastDayOfMonth.getTime();
+  };
+
+  // End of next month at 23:59:59.999 local time
+  const getEndOfNextMonth = () => {
+    const now = new Date();
+    const year = now.getFullYear();
+    const month = now.getMonth();
+    const lastDayOfNextMonth = new Date(year, month + 2, 0);
+    lastDayOfNextMonth.setHours(23, 59, 59, 999);
+    return lastDayOfNextMonth.getTime();
+  };
+
   useEffect(() => {
     const tick = () => {
       const now = Date.now();
-      const distance = TARGET_DATE - now;
+      const currentMonthEnd = getEndOfCurrentMonth();
 
-      if (distance <= 0) {
-        setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0 });
-        return;
+      if (now >= currentMonthEnd) {
+        // Month ended → countdown to end of next month
+        const nextMonthEnd = getEndOfNextMonth();
+        const distance = nextMonthEnd - now;
+        if (distance <= 0) {
+          // Defensive: recompute once
+          const retryDistance = getEndOfNextMonth() - now;
+          if (retryDistance <= 0) {
+            setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+            return;
+          }
+          const days = Math.floor(retryDistance / (1000 * 60 * 60 * 24));
+          const hours = Math.floor((retryDistance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+          const minutes = Math.floor((retryDistance % (1000 * 60 * 60)) / (1000 * 60));
+          const seconds = Math.floor((retryDistance % (1000 * 60)) / 1000);
+          setTimeLeft({ days, hours, minutes, seconds });
+          return;
+        }
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+        setTimeLeft({ days, hours, minutes, seconds });
+      } else {
+        // Still within current month → countdown to its end
+        const distance = currentMonthEnd - now;
+        if (distance <= 0) {
+          const nextMonthEnd = getEndOfNextMonth();
+          const nextDistance = nextMonthEnd - now;
+          if (nextDistance <= 0) {
+            setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+            return;
+          }
+          const days = Math.floor(nextDistance / (1000 * 60 * 60 * 24));
+          const hours = Math.floor((nextDistance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+          const minutes = Math.floor((nextDistance % (1000 * 60 * 60)) / (1000 * 60));
+          const seconds = Math.floor((nextDistance % (1000 * 60)) / 1000);
+          setTimeLeft({ days, hours, minutes, seconds });
+          return;
+        }
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+        setTimeLeft({ days, hours, minutes, seconds });
       }
-
-      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-      const hours = Math.floor(
-        (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
-      );
-      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-      setTimeLeft({ days, hours, minutes, seconds });
     };
 
-    // initial paint
+    // Initial calculation and interval update
     tick();
     const id = setInterval(tick, 1000);
     return () => clearInterval(id);
-  }, [TARGET_DATE]);
+  }, []);
 
   const Two = (n: number) => String(n).padStart(2, '0');
 
@@ -204,13 +249,10 @@ const Navigation: React.FC<NavigationProps> = ({
     });
   };
 
-  const openEmployerForm = () => {
-    setEmployerFormVisibility(true);
-    // navigate("/employers");
-    // keep menu state as-is by design
-  };
-
-  const closeEmployerForm = () => setEmployerFormVisibility(false);
+  // const openEmployerForm = () => {
+  //   setEmployerFormVisibility(true);
+  // };
+  // const closeEmployerForm = () => setEmployerFormVisibility(false);
 
   return (
     <div className="font-inter">
@@ -288,7 +330,7 @@ const Navigation: React.FC<NavigationProps> = ({
                     button_location: "header_desktop",
                     navigation_type: "desktop"
                   });
-                  navigate('/signup');
+                  navigateWithUTM('/signup', navigate);
                 }}
                 className="bg-gradient-to-r from-orange-500 to-orange-600 text-white px-4 lg:px-6 py-2 lg:py-2.5 rounded-full font-semibold hover:from-orange-600 hover:to-orange-700 transition-all duration-200 shadow-lg hover:shadow-xl hover:scale-105 text-sm lg:text-base"
               >
@@ -411,18 +453,33 @@ const Navigation: React.FC<NavigationProps> = ({
 
               {/* Right: Book Now (unchanged) */}
               <div className="flex-shrink-0">
-                <button
-                  onClick={() => {
-                    trackButtonClick("Book Now", "navigation_banner_mobile", "cta", {
-                      button_location: "banner_mobile",
-                      navigation_type: "mobile_banner"
-                    });
-                    openCalendly();
-                  }}
-                  className="rounded-full bg-white text-red-600 font-bold px-5 sm:px-6 py-2 shadow-lg hover:shadow-xl transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-white/80"
-                >
-                  Book Now
-                </button>
+                {location.pathname === '/book-free-demo' ? (
+                  <button
+                    onClick={() => {
+                      trackButtonClick("Book Now", "navigation_banner_mobile", "cta", {
+                        button_location: "banner_mobile",
+                        navigation_type: "mobile_banner"
+                      });
+                      openCalendly();
+                    }}
+                    className="rounded-full bg-white text-red-600 font-bold px-5 sm:px-6 py-2 shadow-lg hover:shadow-xl transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-white/80"
+                  >
+                    Book Now
+                  </button>
+                ) : (
+                  <button
+                    onClick={() => {
+                      trackButtonClick("Book Now", "navigation_banner_mobile", "cta", {
+                        button_location: "banner_mobile",
+                        navigation_type: "mobile_banner"
+                      });
+                      openCalendly();
+                    }}
+                    className="rounded-full bg-white text-red-600 font-bold px-5 sm:px-6 py-2 shadow-lg hover:shadow-xl transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-white/80"
+                  >
+                    Book Now
+                  </button>
+                )}
               </div>
             </div>
 
@@ -451,19 +508,34 @@ const Navigation: React.FC<NavigationProps> = ({
                   10 Slots Left This September
                 </span> */}
               </div>
-              <Link to={'/book-free-demo'}>
+              {location.pathname === '/book-free-demo' ? (
                 <button
                   onClick={() => {
                     trackButtonClick("Book Now", "navigation_banner_desktop", "cta", {
                       button_location: "banner_desktop",
                       navigation_type: "desktop_banner"
                     });
+                    openCalendly();
                   }}
                   className="rounded-full bg-white text-red-600 font-bold px-5 sm:px-6 py-2 shadow-lg hover:shadow-xl transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-white/80"
                 >
                   Book Now
                 </button>
-              </Link>
+              ) : (
+                <Link to={createLinkWithUTM('/book-free-demo')}>
+                  <button
+                    onClick={() => {
+                      trackButtonClick("Book Now", "navigation_banner_desktop", "cta", {
+                        button_location: "banner_desktop",
+                        navigation_type: "desktop_banner"
+                      });
+                    }}
+                    className="rounded-full bg-white text-red-600 font-bold px-5 sm:px-6 py-2 shadow-lg hover:shadow-xl transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-white/80"
+                  >
+                    Book Now
+                  </button>
+                </Link>
+              )}
             </div>
           </div>
         </div>
