@@ -28,41 +28,72 @@ function App() {
   //   }
   // }, []);
   
-  //sending utm click data
+  // Capture and store UTM parameters from URL
   useEffect(() => {
-  const params = new URLSearchParams(window.location.search);
-  const ref = params.get("ref");
+    const params = new URLSearchParams(window.location.search);
+    const ref = params.get("ref");
+    
+    // Store UTM parameters from URL in localStorage
+    const utmSource = params.get("utm_source");
+    const utmMedium = params.get("utm_medium");
+    const utmCampaign = params.get("utm_campaign");
+    const utmContent = params.get("utm_content");
+    const utmTerm = params.get("utm_term");
+    
+    // Store UTM parameters in localStorage if they exist in URL
+    if (utmSource) {
+      localStorage.setItem("utm_source", utmSource);
+      console.log("Stored utm_source:", utmSource);
+    }
+    if (utmMedium) {
+      localStorage.setItem("utm_medium", utmMedium);
+      console.log("Stored utm_medium:", utmMedium);
+    }
+    if (utmCampaign) {
+      localStorage.setItem("utm_campaign", utmCampaign);
+      console.log("Stored utm_campaign:", utmCampaign);
+    }
+    if (utmContent) {
+      localStorage.setItem("utm_content", utmContent);
+      console.log("Stored utm_content:", utmContent);
+    }
+    if (utmTerm) {
+      localStorage.setItem("utm_term", utmTerm);
+      console.log("Stored utm_term:", utmTerm);
+    }
 
-  if (ref) {
-    const payload = {
-      ref,
-      userAgent: navigator.userAgent,
-      screenWidth: window.screen.width,
-      screenHeight: window.screen.height,
-      language: navigator.language,
-      timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
-    };
+    // Handle ref parameter (existing logic)
+    if (ref) {
+      const payload = {
+        ref,
+        userAgent: navigator.userAgent,
+        screenWidth: window.screen.width,
+        screenHeight: window.screen.height,
+        language: navigator.language,
+        timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+      };
 
-    fetch("https://clients-tracking-backend.onrender.com/api/track", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.ok) {
-          console.log("UTM Source:", data.utm_source); // ✅ campaigner 
-          localStorage.setItem("utm_source", data.utm_source);
-          localStorage.setItem("ref-code",ref);
-          //setCalendlyUser(data.utm_source);
-          // You can store it in state or context
-        } else {
-          console.warn("Tracking error:", data.message || data.error);
-        }
+      fetch("https://clients-tracking-backend.onrender.com/api/track", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
       })
-      .catch((err) => console.error("Tracking failed:", err));
-  }
-}, []);
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.ok) {
+            console.log("UTM Source from ref:", data.utm_source); // ✅ campaigner 
+            // Only override if not already set from URL
+            if (!localStorage.getItem("utm_source")) {
+              localStorage.setItem("utm_source", data.utm_source);
+            }
+            localStorage.setItem("ref-code", ref);
+          } else {
+            console.warn("Tracking error:", data.message || data.error);
+          }
+        })
+        .catch((err) => console.error("Tracking failed:", err));
+    }
+  }, []);
   
   // Smooth-scroll to hash targets when path is '/#section'
   useEffect(() => {

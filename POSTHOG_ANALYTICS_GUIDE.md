@@ -1384,4 +1384,1229 @@ ORDER BY
 
 ---
 
-*These queries provide comprehensive insights into your FlashFire website performance and help make data-driven decisions for optimization and growth.* 🚀
+## 🎯 **UTM-Based Meeting Tracking Queries**
+
+### **12. Meeting Bookings by Intern (UTM Source)**
+**Purpose**: Track meeting bookings attributed to each intern
+**Business Impact**: Critical - intern performance measurement
+
+```sql
+-- Meeting bookings by UTM source (intern attribution)
+WITH meeting_attribution AS (
+  SELECT 
+    properties.utm_source as intern_name,
+    properties.utm_medium,
+    properties.utm_campaign,
+    COUNT(*) as total_meetings,
+    COUNT(DISTINCT properties.email) as unique_users,
+    MIN(timestamp) as first_meeting,
+    MAX(timestamp) as last_meeting,
+    AVG(CASE WHEN properties.eventStartTime IS NOT NULL THEN 1 ELSE 0 END) as completion_rate
+  FROM events 
+  WHERE event = 'Calendly Meeting Booked'
+    AND properties.utm_medium = 'website'
+    AND timestamp >= now() - toIntervalDay(30)
+  GROUP BY properties.utm_source, properties.utm_medium, properties.utm_campaign
+)
+SELECT 
+  intern_name,
+  utm_medium,
+  utm_campaign,
+  total_meetings,
+  unique_users,
+  ROUND(total_meetings * 100.0 / unique_users, 2) as meetings_per_user,
+  ROUND(completion_rate * 100, 2) as completion_rate_percent,
+  first_meeting,
+  last_meeting,
+  CASE 
+    WHEN total_meetings >= 20 THEN 'TOP_PERFORMER'
+    WHEN total_meetings >= 15 THEN 'HIGH_PERFORMER'
+    WHEN total_meetings >= 10 THEN 'MEDIUM_PERFORMER'
+    WHEN total_meetings >= 5 THEN 'LOW_PERFORMER'
+    ELSE 'NEEDS_ATTENTION'
+  END as performance_tier
+FROM meeting_attribution
+ORDER BY total_meetings DESC;
+```
+
+### **13. Intern Conversion Funnel Analysis**
+**Purpose**: Complete conversion journey from traffic to meeting booking
+**Business Impact**: High - intern ROI measurement
+
+```sql
+-- Complete conversion funnel by intern (UTM source)
+WITH intern_funnel AS (
+  SELECT 
+    properties.utm_source as intern_name,
+    COUNT(CASE WHEN event = 'page_view' THEN 1 END) as page_views,
+    COUNT(CASE WHEN event = 'button_click' THEN 1 END) as button_clicks,
+    COUNT(CASE WHEN event = 'form_start' THEN 1 END) as form_starts,
+    COUNT(CASE WHEN event = 'form_submit' THEN 1 END) as form_submissions,
+    COUNT(CASE WHEN event = 'Calendly Meeting Booked' THEN 1 END) as meetings_booked,
+    COUNT(DISTINCT person_id) as unique_users
+  FROM events 
+  WHERE timestamp >= now() - toIntervalDay(30)
+    AND properties.utm_medium = 'website'
+    AND properties.utm_source IS NOT NULL
+  GROUP BY properties.utm_source
+)
+SELECT 
+  intern_name,
+  unique_users,
+  page_views,
+  button_clicks,
+  form_starts,
+  form_submissions,
+  meetings_booked,
+  ROUND(button_clicks * 100.0 / page_views, 2) as view_to_click_rate,
+  ROUND(form_starts * 100.0 / button_clicks, 2) as click_to_form_rate,
+  ROUND(form_submissions * 100.0 / form_starts, 2) as form_completion_rate,
+  ROUND(meetings_booked * 100.0 / form_submissions, 2) as meeting_conversion_rate,
+  ROUND(meetings_booked * 100.0 / unique_users, 2) as overall_conversion_rate,
+  ROUND(meetings_booked * 100.0 / page_views, 2) as page_to_meeting_rate
+FROM intern_funnel
+ORDER BY meetings_booked DESC;
+```
+
+### **14. Daily Meeting Performance by Intern**
+**Purpose**: Daily tracking of meeting bookings by intern
+**Business Impact**: Medium - daily performance monitoring
+
+```sql
+-- Daily meeting performance by intern
+WITH daily_meetings AS (
+  SELECT 
+    DATE(timestamp) as meeting_date,
+    properties.utm_source as intern_name,
+    COUNT(*) as daily_meetings,
+    COUNT(DISTINCT properties.email) as daily_unique_users,
+    COUNT(DISTINCT properties.eventStartTime) as scheduled_meetings
+  FROM events 
+  WHERE event = 'Calendly Meeting Booked'
+    AND properties.utm_medium = 'website'
+    AND timestamp >= now() - toIntervalDay(7)
+  GROUP BY DATE(timestamp), properties.utm_source
+)
+SELECT 
+  meeting_date,
+  intern_name,
+  daily_meetings,
+  daily_unique_users,
+  scheduled_meetings,
+  ROUND(daily_meetings * 100.0 / daily_unique_users, 2) as meetings_per_user,
+  LAG(daily_meetings) OVER (PARTITION BY intern_name ORDER BY meeting_date) as previous_day_meetings,
+  ROUND(
+    (daily_meetings - LAG(daily_meetings) OVER (PARTITION BY intern_name ORDER BY meeting_date)) * 100.0 / 
+    LAG(daily_meetings) OVER (PARTITION BY intern_name ORDER BY meeting_date), 2
+  ) as day_over_day_change_percent
+FROM daily_meetings
+ORDER BY meeting_date DESC, daily_meetings DESC;
+```
+
+### **15. UTM Campaign Performance Analysis**
+**Purpose**: Analyze performance of different UTM campaigns
+**Business Impact**: High - marketing campaign optimization
+
+```sql
+-- UTM campaign performance analysis
+WITH campaign_performance AS (
+  SELECT 
+    properties.utm_source,
+    properties.utm_medium,
+    properties.utm_campaign,
+    COUNT(DISTINCT person_id) as total_users,
+    COUNT(CASE WHEN event = 'page_view' THEN 1 END) as page_views,
+    COUNT(CASE WHEN event = 'button_click' THEN 1 END) as button_clicks,
+    COUNT(CASE WHEN event = 'form_submit' THEN 1 END) as form_submissions,
+    COUNT(CASE WHEN event = 'Calendly Meeting Booked' THEN 1 END) as meetings_booked,
+    AVG(CASE WHEN event = 'Calendly Meeting Booked' THEN properties.conversion_value END) as avg_meeting_value
+  FROM events 
+  WHERE timestamp >= now() - toIntervalDay(30)
+    AND properties.utm_source IS NOT NULL
+  GROUP BY properties.utm_source, properties.utm_medium, properties.utm_campaign
+)
+SELECT 
+  utm_source as intern_name,
+  utm_medium,
+  utm_campaign,
+  total_users,
+  page_views,
+  button_clicks,
+  form_submissions,
+  meetings_booked,
+  ROUND(button_clicks * 100.0 / total_users, 2) as engagement_rate,
+  ROUND(form_submissions * 100.0 / button_clicks, 2) as form_conversion_rate,
+  ROUND(meetings_booked * 100.0 / form_submissions, 2) as meeting_conversion_rate,
+  ROUND(meetings_booked * 100.0 / total_users, 2) as overall_conversion_rate,
+  COALESCE(avg_meeting_value, 0) as avg_meeting_value,
+  ROUND(meetings_booked * COALESCE(avg_meeting_value, 0), 2) as estimated_revenue
+FROM campaign_performance
+ORDER BY meetings_booked DESC, overall_conversion_rate DESC;
+```
+
+### **16. Intern Performance Comparison**
+**Purpose**: Compare intern performance metrics side by side
+**Business Impact**: High - performance evaluation and training needs
+
+```sql
+-- Intern performance comparison dashboard
+WITH intern_metrics AS (
+  SELECT 
+    properties.utm_source as intern_name,
+    COUNT(DISTINCT person_id) as total_leads,
+    COUNT(CASE WHEN event = 'Calendly Meeting Booked' THEN 1 END) as meetings_booked,
+    COUNT(CASE WHEN event = 'conversion' THEN 1 END) as conversions,
+    AVG(CASE WHEN event = 'button_click' THEN EXTRACT(epoch FROM (timestamp - LAG(timestamp) OVER (ORDER BY timestamp))) END) as avg_response_time,
+    COUNT(DISTINCT DATE(timestamp)) as active_days
+  FROM events 
+  WHERE timestamp >= now() - toIntervalDay(30)
+    AND properties.utm_medium = 'website'
+    AND properties.utm_source IS NOT NULL
+  GROUP BY properties.utm_source
+)
+SELECT 
+  intern_name,
+  total_leads,
+  meetings_booked,
+  conversions,
+  active_days,
+  ROUND(meetings_booked * 100.0 / total_leads, 2) as lead_to_meeting_rate,
+  ROUND(conversions * 100.0 / meetings_booked, 2) as meeting_to_conversion_rate,
+  ROUND(conversions * 100.0 / total_leads, 2) as overall_conversion_rate,
+  ROUND(meetings_booked * 1.0 / active_days, 2) as avg_meetings_per_day,
+  ROUND(avg_response_time, 2) as avg_response_time_seconds,
+  CASE 
+    WHEN meetings_booked * 100.0 / total_leads >= 20 THEN 'EXCELLENT'
+    WHEN meetings_booked * 100.0 / total_leads >= 15 THEN 'GOOD'
+    WHEN meetings_booked * 100.0 / total_leads >= 10 THEN 'AVERAGE'
+    ELSE 'NEEDS_IMPROVEMENT'
+  END as performance_rating
+FROM intern_metrics
+ORDER BY meetings_booked DESC;
+```
+
+### **17. Real-time Meeting Alerts by Intern**
+**Purpose**: Real-time notifications for meeting bookings
+**Business Impact**: High - immediate response and follow-up
+
+```sql
+-- Real-time meeting alerts (last 24 hours)
+WITH recent_meetings AS (
+  SELECT 
+    properties.utm_source as intern_name,
+    properties.email as customer_email,
+    properties.inviteeName as customer_name,
+    properties.eventStartTime as meeting_time,
+    properties.meetingUrl as meeting_link,
+    timestamp as booking_time,
+    ROW_NUMBER() OVER (PARTITION BY properties.utm_source ORDER BY timestamp DESC) as rn
+  FROM events 
+  WHERE event = 'Calendly Meeting Booked'
+    AND timestamp >= now() - toIntervalDay(1)
+    AND properties.utm_medium = 'website'
+)
+SELECT 
+  intern_name,
+  customer_name,
+  customer_email,
+  meeting_time,
+  meeting_link,
+  booking_time,
+  EXTRACT(epoch FROM (now() - booking_time)) / 3600 as hours_since_booking
+FROM recent_meetings
+WHERE rn <= 5  -- Top 5 most recent per intern
+ORDER BY intern_name, booking_time DESC;
+```
+
+### **18. Weekly Intern Performance Trends**
+**Purpose**: Track week-over-week performance changes
+**Business Impact**: Medium - trend analysis and forecasting
+
+```sql
+-- Weekly intern performance trends
+WITH weekly_performance AS (
+  SELECT 
+    dateTrunc('week', timestamp) as week_start,
+    properties.utm_source as intern_name,
+    COUNT(CASE WHEN event = 'Calendly Meeting Booked' THEN 1 END) as weekly_meetings,
+    COUNT(DISTINCT properties.email) as weekly_unique_users,
+    COUNT(CASE WHEN event = 'conversion' THEN 1 END) as weekly_conversions
+  FROM events 
+  WHERE timestamp >= now() - toIntervalWeek(8)
+    AND properties.utm_medium = 'website'
+    AND properties.utm_source IS NOT NULL
+  GROUP BY dateTrunc('week', timestamp), properties.utm_source
+),
+weekly_trends AS (
+  SELECT 
+    *,
+    LAG(weekly_meetings) OVER (PARTITION BY intern_name ORDER BY week_start) as prev_week_meetings,
+    LAG(weekly_conversions) OVER (PARTITION BY intern_name ORDER BY week_start) as prev_week_conversions
+  FROM weekly_performance
+)
+SELECT 
+  week_start,
+  intern_name,
+  weekly_meetings,
+  weekly_unique_users,
+  weekly_conversions,
+  ROUND(weekly_meetings * 100.0 / weekly_unique_users, 2) as conversion_rate,
+  ROUND((weekly_meetings - prev_week_meetings) * 100.0 / prev_week_meetings, 2) as meeting_growth_rate,
+  ROUND((weekly_conversions - prev_week_conversions) * 100.0 / prev_week_conversions, 2) as conversion_growth_rate,
+  CASE 
+    WHEN (weekly_meetings - prev_week_meetings) > 0 THEN 'IMPROVING'
+    WHEN (weekly_meetings - prev_week_meetings) < 0 THEN 'DECLINING'
+    ELSE 'STABLE'
+  END as trend_direction
+FROM weekly_trends
+WHERE prev_week_meetings IS NOT NULL
+ORDER BY week_start DESC, weekly_meetings DESC;
+```
+
+### **19. Meeting Quality Analysis by Intern**
+**Purpose**: Analyze meeting quality and follow-through rates
+**Business Impact**: High - quality improvement and training
+
+```sql
+-- Meeting quality analysis by intern
+WITH meeting_quality AS (
+  SELECT 
+    properties.utm_source as intern_name,
+    COUNT(*) as total_meetings_booked,
+    COUNT(DISTINCT properties.email) as unique_meeting_users,
+    COUNT(CASE WHEN properties.eventStartTime IS NOT NULL THEN 1 END) as scheduled_meetings,
+    COUNT(CASE WHEN event = 'conversion' THEN 1 END) as post_meeting_conversions,
+    AVG(CASE WHEN properties.duration IS NOT NULL THEN properties.duration END) as avg_meeting_duration,
+    COUNT(DISTINCT DATE(timestamp)) as days_with_meetings
+  FROM events 
+  WHERE timestamp >= now() - toIntervalDay(30)
+    AND properties.utm_medium = 'website'
+    AND properties.utm_source IS NOT NULL
+  GROUP BY properties.utm_source
+)
+SELECT 
+  intern_name,
+  total_meetings_booked,
+  unique_meeting_users,
+  scheduled_meetings,
+  post_meeting_conversions,
+  ROUND(avg_meeting_duration, 2) as avg_meeting_duration_minutes,
+  days_with_meetings,
+  ROUND(scheduled_meetings * 100.0 / total_meetings_booked, 2) as scheduling_rate,
+  ROUND(post_meeting_conversions * 100.0 / scheduled_meetings, 2) as meeting_to_conversion_rate,
+  ROUND(post_meeting_conversions * 100.0 / total_meetings_booked, 2) as overall_success_rate,
+  ROUND(total_meetings_booked * 1.0 / days_with_meetings, 2) as avg_meetings_per_day,
+  CASE 
+    WHEN post_meeting_conversions * 100.0 / scheduled_meetings >= 25 THEN 'HIGH_QUALITY'
+    WHEN post_meeting_conversions * 100.0 / scheduled_meetings >= 15 THEN 'MEDIUM_QUALITY'
+    ELSE 'NEEDS_IMPROVEMENT'
+  END as quality_rating
+FROM meeting_quality
+ORDER BY post_meeting_conversions DESC;
+```
+
+### **20. UTM Source Attribution Summary**
+**Purpose**: Executive summary of all UTM sources and their performance
+**Business Impact**: Critical - executive reporting and resource allocation
+
+```sql
+-- Executive UTM source attribution summary
+WITH utm_summary AS (
+  SELECT 
+    properties.utm_source as source_name,
+    properties.utm_medium as medium_type,
+    COUNT(DISTINCT person_id) as total_users,
+    COUNT(CASE WHEN event = 'page_view' THEN 1 END) as page_views,
+    COUNT(CASE WHEN event = 'button_click' THEN 1 END) as interactions,
+    COUNT(CASE WHEN event = 'form_submit' THEN 1 END) as form_submissions,
+    COUNT(CASE WHEN event = 'Calendly Meeting Booked' THEN 1 END) as meetings_booked,
+    COUNT(CASE WHEN event = 'conversion' THEN 1 END) as conversions,
+    MIN(timestamp) as first_interaction,
+    MAX(timestamp) as last_interaction
+  FROM events 
+  WHERE timestamp >= now() - toIntervalDay(30)
+    AND properties.utm_source IS NOT NULL
+  GROUP BY properties.utm_source, properties.utm_medium
+)
+SELECT 
+  source_name,
+  medium_type,
+  total_users,
+  page_views,
+  interactions,
+  form_submissions,
+  meetings_booked,
+  conversions,
+  ROUND(interactions * 100.0 / total_users, 2) as engagement_rate,
+  ROUND(form_submissions * 100.0 / interactions, 2) as form_conversion_rate,
+  ROUND(meetings_booked * 100.0 / form_submissions, 2) as meeting_conversion_rate,
+  ROUND(conversions * 100.0 / meetings_booked, 2) as post_meeting_conversion_rate,
+  ROUND(conversions * 100.0 / total_users, 2) as overall_conversion_rate,
+  ROUND(meetings_booked * 1.0 / (EXTRACT(epoch FROM (last_interaction - first_interaction)) / 86400), 2) as meetings_per_day,
+  CASE 
+    WHEN meetings_booked >= 20 AND conversions * 100.0 / meetings_booked >= 20 THEN 'TOP_PERFORMER'
+    WHEN meetings_booked >= 15 AND conversions * 100.0 / meetings_booked >= 15 THEN 'HIGH_PERFORMER'
+    WHEN meetings_booked >= 10 THEN 'MEDIUM_PERFORMER'
+    WHEN meetings_booked >= 5 THEN 'LOW_PERFORMER'
+    ELSE 'UNDERPERFORMER'
+  END as performance_category,
+  first_interaction,
+  last_interaction
+FROM utm_summary
+ORDER BY meetings_booked DESC, overall_conversion_rate DESC;
+```
+
+---
+
+## 📊 **UTM Tracking Implementation Summary**
+
+### **URL Structure for Intern Tracking:**
+```
+https://yourwebsite.com?utm_source=Pranjal&utm_medium=website
+https://yourwebsite.com?utm_source=Amit&utm_medium=website  
+https://yourwebsite.com?utm_source=Anjali&utm_medium=website
+```
+
+### **PostHog Dashboard Setup:**
+1. **Create "Intern Performance" Dashboard**
+2. **Add Charts:**
+   - Meeting bookings by intern (Query 12)
+   - Conversion funnel by intern (Query 13)
+   - Daily performance trends (Query 14)
+   - Real-time meeting alerts (Query 17)
+
+### **Key Metrics to Track:**
+- **Meetings per intern per day**
+- **Conversion rates by intern**
+- **Quality of meetings (follow-through)**
+- **Response time to leads**
+- **Revenue attribution by intern**
+
+### **Recommended Schedule:**
+- **Daily**: Real-time alerts (Query 17), Daily performance (Query 14)
+- **Weekly**: Performance trends (Query 18), Quality analysis (Query 19)
+- **Monthly**: Complete attribution summary (Query 20), Performance comparison (Query 16)
+
+### **21. Traffic Volume by Specific Intern (Non-Converting Visitors)**
+**Purpose**: Track total visitors for a specific intern, including non-converting traffic
+**Business Impact**: High - understanding total reach and conversion gaps
+
+```sql
+-- Traffic volume analysis for specific intern (sohith)
+WITH sohith_traffic AS (
+  SELECT 
+    properties.utm_source as intern_name,
+    properties.utm_medium,
+    COUNT(DISTINCT person_id) as total_visitors,
+    countIf(event = 'page_view') as total_page_views,
+    countIf(event = 'button_click') as total_button_clicks,
+    countIf(event = 'form_start') as form_starts,
+    countIf(event = 'form_submit') as form_submissions,
+    countIf(event = 'Calendly Meeting Booked') as meetings_booked,
+    countIf(event = 'conversion') as conversions,
+    MIN(timestamp) as first_visit,
+    MAX(timestamp) as last_visit,
+    COUNT(DISTINCT toDate(timestamp)) as active_days
+  FROM events 
+  WHERE properties.utm_source = 'sohith'  --HARDCODED: Change intern name here
+    AND properties.utm_medium = 'website'
+    AND timestamp >= now() - toIntervalDay(30)
+  GROUP BY properties.utm_source, properties.utm_medium
+)
+SELECT 
+  intern_name,
+  utm_medium,
+  total_visitors,
+  total_page_views,
+  total_button_clicks,
+  form_starts,
+  form_submissions,
+  meetings_booked,
+  conversions,
+  (total_visitors - conversions) as non_converting_visitors,
+  (total_visitors - meetings_booked) as non_meeting_visitors,
+  (total_visitors - form_submissions) as non_form_visitors,
+  (total_visitors - total_button_clicks) as non_interacting_visitors,
+  ROUND(conversions * 100.0 / total_visitors, 2) as conversion_rate,
+  ROUND(meetings_booked * 100.0 / total_visitors, 2) as meeting_rate,
+  ROUND(form_submissions * 100.0 / total_visitors, 2) as form_submission_rate,
+  ROUND(total_button_clicks * 100.0 / total_visitors, 2) as interaction_rate,
+  ROUND((total_visitors - conversions) * 100.0 / total_visitors, 2) as non_conversion_rate,
+  ROUND(total_page_views * 1.0 / total_visitors, 2) as avg_pages_per_visitor,
+  ROUND(total_visitors * 1.0 / active_days, 2) as avg_visitors_per_day,
+  first_visit,
+  last_visit,
+  active_days,
+  CASE 
+    WHEN (conversions * 100.0 / total_visitors) >= 20 THEN 'HIGH_CONVERTER'
+    WHEN (conversions * 100.0 / total_visitors) >= 10 THEN 'MEDIUM_CONVERTER'
+    WHEN (conversions * 100.0 / total_visitors) >= 5 THEN 'LOW_CONVERTER'
+    ELSE 'NON_CONVERTER'
+  END as conversion_category,
+  CASE 
+    WHEN total_visitors >= 100 THEN 'HIGH_TRAFFIC'
+    WHEN total_visitors >= 50 THEN 'MEDIUM_TRAFFIC'
+    WHEN total_visitors >= 20 THEN 'LOW_TRAFFIC'
+    ELSE 'MINIMAL_TRAFFIC'
+  END as traffic_volume_category
+FROM sohith_traffic
+ORDER BY total_visitors DESC
+```
+
+### **22. Daily Traffic Breakdown for Specific Intern**
+**Purpose**: Daily visitor tracking for specific intern with conversion analysis
+**Business Impact**: Medium - daily performance monitoring
+
+```sql
+-- Daily traffic breakdown for sohith
+WITH daily_sohith_traffic AS (
+  SELECT 
+    DATE(timestamp) as visit_date,
+    properties.utm_source as intern_name,
+    COUNT(DISTINCT person_id) as daily_visitors,
+    COUNT(CASE WHEN event = 'page_view' THEN 1 END) as daily_page_views,
+    COUNT(CASE WHEN event = 'button_click' THEN 1 END) as daily_clicks,
+    COUNT(CASE WHEN event = 'form_submit' THEN 1 END) as daily_form_submissions,
+    COUNT(CASE WHEN event = 'Calendly Meeting Booked' THEN 1 END) as daily_meetings,
+    COUNT(CASE WHEN event = 'conversion' THEN 1 END) as daily_conversions,
+    MIN(timestamp) as first_visit_time,
+    MAX(timestamp) as last_visit_time
+  FROM events 
+  WHERE properties.utm_source = 'sohith'  -- 🔧 HARDCODED: Change intern name here
+    AND properties.utm_medium = 'website'
+    AND timestamp >= now() - toIntervalDay(7)
+  GROUP BY DATE(timestamp), properties.utm_source
+)
+SELECT 
+  visit_date,
+  intern_name,
+  daily_visitors,
+  daily_page_views,
+  daily_clicks,
+  daily_form_submissions,
+  daily_meetings,
+  daily_conversions,
+  (daily_visitors - daily_conversions) as daily_non_converting_visitors,
+  ROUND(daily_conversions * 100.0 / daily_visitors, 2) as daily_conversion_rate,
+  ROUND(daily_meetings * 100.0 / daily_visitors, 2) as daily_meeting_rate,
+  ROUND(daily_clicks * 100.0 / daily_visitors, 2) as daily_interaction_rate,
+  ROUND(daily_page_views * 1.0 / daily_visitors, 2) as avg_pages_per_visitor,
+  EXTRACT(hour FROM first_visit_time) as first_visit_hour,
+  EXTRACT(hour FROM last_visit_time) as last_visit_hour,
+  LAG(daily_visitors) OVER (ORDER BY visit_date) as prev_day_visitors,
+  ROUND(
+    (daily_visitors - LAG(daily_visitors) OVER (ORDER BY visit_date)) * 100.0 / 
+    LAG(daily_visitors) OVER (ORDER BY visit_date), 2
+  ) as day_over_day_visitor_change,
+  CASE 
+    WHEN daily_visitors > LAG(daily_visitors) OVER (ORDER BY visit_date) THEN 'INCREASING'
+    WHEN daily_visitors < LAG(daily_visitors) OVER (ORDER BY visit_date) THEN 'DECLINING'
+    ELSE 'STABLE'
+  END as traffic_trend
+FROM daily_sohith_traffic
+ORDER BY visit_date DESC;
+```
+
+### **23. Visitor Journey Analysis for Specific Intern**
+**Purpose**: Understand what non-converting visitors do on the site
+**Business Impact**: High - identify optimization opportunities
+
+```sql
+-- Visitor journey analysis for sohith's traffic
+WITH sohith_visitor_journey AS (
+  SELECT 
+    person_id,
+    properties.utm_source as intern_name,
+    COUNT(CASE WHEN event = 'page_view' THEN 1 END) as pages_viewed,
+    COUNT(CASE WHEN event = 'button_click' THEN 1 END) as buttons_clicked,
+    COUNT(CASE WHEN event = 'form_start' THEN 1 END) as forms_started,
+    COUNT(CASE WHEN event = 'form_submit' THEN 1 END) as forms_submitted,
+    COUNT(CASE WHEN event = 'Calendly Meeting Booked' THEN 1 END) as meetings_booked,
+    COUNT(CASE WHEN event = 'conversion' THEN 1 END) as conversions,
+    MIN(timestamp) as first_visit,
+    MAX(timestamp) as last_visit,
+    EXTRACT(epoch FROM (MAX(timestamp) - MIN(timestamp))) as session_duration_seconds,
+    array_agg(
+      CASE 
+        WHEN event = 'page_view' THEN concat('Page: ', properties.page_name)
+        WHEN event = 'button_click' THEN concat('Button: ', properties.button_text)
+        WHEN event = 'form_start' THEN concat('Form: ', properties.form_name)
+        ELSE event
+      END
+    ) as user_actions
+  FROM events 
+  WHERE properties.utm_source = 'sohith'  -- 🔧 HARDCODED: Change intern name here
+    AND properties.utm_medium = 'website'
+    AND timestamp >= now() - toIntervalDay(30)
+  GROUP BY person_id, properties.utm_source
+)
+SELECT 
+  intern_name,
+  COUNT(*) as total_visitors,
+  COUNT(CASE WHEN conversions > 0 THEN 1 END) as converting_visitors,
+  COUNT(CASE WHEN conversions = 0 THEN 1 END) as non_converting_visitors,
+  COUNT(CASE WHEN meetings_booked > 0 THEN 1 END) as meeting_visitors,
+  COUNT(CASE WHEN meetings_booked = 0 THEN 1 END) as non_meeting_visitors,
+  COUNT(CASE WHEN forms_submitted > 0 THEN 1 END) as form_submitting_visitors,
+  COUNT(CASE WHEN forms_submitted = 0 THEN 1 END) as non_form_submitting_visitors,
+  COUNT(CASE WHEN buttons_clicked > 0 THEN 1 END) as interacting_visitors,
+  COUNT(CASE WHEN buttons_clicked = 0 THEN 1 END) as non_interacting_visitors,
+  ROUND(AVG(pages_viewed), 2) as avg_pages_per_visitor,
+  ROUND(AVG(buttons_clicked), 2) as avg_clicks_per_visitor,
+  ROUND(AVG(session_duration_seconds) / 60, 2) as avg_session_duration_minutes,
+  ROUND(COUNT(CASE WHEN conversions > 0 THEN 1 END) * 100.0 / COUNT(*), 2) as conversion_rate,
+  ROUND(COUNT(CASE WHEN meetings_booked > 0 THEN 1 END) * 100.0 / COUNT(*), 2) as meeting_rate,
+  ROUND(COUNT(CASE WHEN forms_submitted > 0 THEN 1 END) * 100.0 / COUNT(*), 2) as form_submission_rate,
+  ROUND(COUNT(CASE WHEN buttons_clicked > 0 THEN 1 END) * 100.0 / COUNT(*), 2) as interaction_rate
+FROM sohith_visitor_journey
+GROUP BY intern_name
+ORDER BY total_visitors DESC;
+```
+
+```sql      
+SELECT 
+  toDate(timestamp) AS visit_date,
+  properties.utm_source AS intern_name,
+  COUNT(DISTINCT person_id) AS daily_visitors,
+  countIf(event = 'page_view') AS daily_page_views,
+  countIf(event = 'button_click') AS daily_clicks,
+  countIf(event = 'form_submit') AS daily_form_submissions,
+  countIf(event = 'Calendly Meeting Booked') AS daily_meetings,
+  countIf(event = 'conversion') AS daily_conversions,
+  MIN(timestamp) AS first_visit_time,
+  MAX(timestamp) AS last_visit_time,
+  (COUNT(DISTINCT person_id) - countIf(event = 'conversion')) AS daily_non_converting_visitors,
+  ROUND(countIf(event = 'conversion') * 100.0 / COUNT(DISTINCT person_id), 2) AS daily_conversion_rate,
+  ROUND(countIf(event = 'Calendly Meeting Booked') * 100.0 / COUNT(DISTINCT person_id), 2) AS daily_meeting_rate,
+  ROUND(countIf(event = 'button_click') * 100.0 / COUNT(DISTINCT person_id), 2) AS daily_interaction_rate,
+  ROUND(countIf(event = 'page_view') * 1.0 / COUNT(DISTINCT person_id), 2) AS avg_pages_per_visitor
+FROM events 
+WHERE properties.utm_medium = 'website'
+  AND timestamp >= now() - toIntervalDay(7)
+  AND properties.utm_source IN ('sohith','member1','member2','member3')  -- 🔧 add all operations team names here
+GROUP BY visit_date, intern_name
+ORDER BY visit_date DESC, intern_name;
+--- 
+specific name 
+---
+all
+---
+SELECT 
+  toDate(timestamp) AS visit_date,
+  properties.utm_source AS intern_name,
+  COUNT(DISTINCT person_id) AS daily_visitors,
+  countIf(event = 'page_view') AS daily_page_views,
+  countIf(event = 'button_click') AS daily_clicks,
+  countIf(event = 'form_submit') AS daily_form_submissions,
+  countIf(event = 'Calendly Meeting Booked') AS daily_meetings,
+  countIf(event = 'conversion') AS daily_conversions,
+  formatDateTime(MIN(timestamp), '%d %b %Y, %I:%M %p') AS first_visit_time,
+  formatDateTime(MAX(timestamp), '%d %b %Y, %I:%M %p') AS last_visit_time,
+  (COUNT(DISTINCT person_id) - countIf(event = 'conversion')) AS daily_non_converting_visitors,
+  ROUND(countIf(event = 'conversion') * 100.0 / COUNT(DISTINCT person_id), 2) AS daily_conversion_rate,
+  ROUND(countIf(event = 'Calendly Meeting Booked') * 100.0 / COUNT(DISTINCT person_id), 2) AS daily_meeting_rate,
+  ROUND(countIf(event = 'button_click') * 100.0 / COUNT(DISTINCT person_id), 2) AS daily_interaction_rate,
+  ROUND(countIf(event = 'page_view') * 1.0 / COUNT(DISTINCT person_id), 2) AS avg_pages_per_visitor
+FROM events 
+WHERE properties.utm_medium = 'website'
+  AND timestamp >= now() - toIntervalDay(7)
+  AND properties.utm_source IS NOT NULL  
+GROUP BY toDate(timestamp), properties.utm_source
+ORDER BY visit_date DESC, intern_name
+
+
+```
+
+### **24. Real-time Visitor Count for Specific Intern**
+**Purpose**: Live tracking of current visitors from specific intern
+**Business Impact**: Medium - real-time monitoring
+
+```sql
+-- Real-time visitor count for sohith (last 24 hours)
+WITH recent_sohith_visitors AS (
+  SELECT 
+    person_id,
+    properties.utm_source as intern_name,
+    properties.utm_medium,
+    MIN(timestamp) as first_visit,
+    MAX(timestamp) as last_visit,
+    COUNT(CASE WHEN event = 'page_view' THEN 1 END) as pages_viewed,
+    COUNT(CASE WHEN event = 'button_click' THEN 1 END) as interactions,
+    COUNT(CASE WHEN event = 'form_submit' THEN 1 END) as form_submissions,
+    COUNT(CASE WHEN event = 'Calendly Meeting Booked' THEN 1 END) as meetings_booked,
+    COUNT(CASE WHEN event = 'conversion' THEN 1 END) as conversions,
+    EXTRACT(epoch FROM (now() - MAX(timestamp))) as seconds_since_last_activity
+  FROM events 
+  WHERE properties.utm_source = 'sohith'  -- HARDCODED: Change intern name here
+    AND properties.utm_medium = 'website'
+    AND timestamp >= now() - toIntervalDay(1)
+  GROUP BY person_id, properties.utm_source, properties.utm_medium
+)
+SELECT 
+  intern_name,
+  utm_medium,
+  COUNT(*) as total_visitors_last_24h,
+  COUNT(CASE WHEN conversions > 0 THEN 1 END) as converting_visitors,
+  COUNT(CASE WHEN conversions = 0 THEN 1 END) as non_converting_visitors,
+  COUNT(CASE WHEN meetings_booked > 0 THEN 1 END) as meeting_visitors,
+  COUNT(CASE WHEN form_submissions > 0 THEN 1 END) as form_visitors,
+  COUNT(CASE WHEN interactions > 0 THEN 1 END) as interacting_visitors,
+  ROUND(AVG(pages_viewed), 2) as avg_pages_per_visitor,
+  ROUND(AVG(interactions), 2) as avg_interactions_per_visitor,
+  ROUND(AVG(seconds_since_last_activity) / 3600, 2) as avg_hours_since_last_activity,
+  MIN(first_visit) as earliest_visit,
+  MAX(last_visit) as latest_visit,
+  ROUND(COUNT(CASE WHEN conversions > 0 THEN 1 END) * 100.0 / COUNT(*), 2) as conversion_rate_24h,
+  ROUND(COUNT(CASE WHEN meetings_booked > 0 THEN 1 END) * 100.0 / COUNT(*), 2) as meeting_rate_24h
+FROM recent_sohith_visitors
+GROUP BY intern_name, utm_medium
+ORDER BY total_visitors_last_24h DESC;
+```
+
+---
+
+## **UTM Tracking Implementation Summary and how to use it**
+
+
+### **PostHog Dashboard Setup:**
+0. do this when we have paid version 
+1. **Create "Intern Performance" Dashboard**
+2. **Add Charts:**
+   - Meeting bookings by intern (Query 12)
+   - Conversion funnel by intern (Query 13)
+   - Daily performance trends (Query 14)
+   - Real-time meeting alerts (Query 17)
+   - **NEW**: Traffic volume by intern (Query 21)
+   - **NEW**: Daily traffic breakdown (Query 22)
+   - **NEW**: Visitor journey analysis (Query 23)
+   - **NEW**: Real-time visitor count (Query 24)
+
+### **Key Metrics to Track:**
+- **Meetings per intern per day**
+- **Conversion rates by intern**
+- **Quality of meetings (follow-through)**
+- **Response time to leads**
+- **Revenue attribution by intern**
+- **NEW**: Total traffic volume per intern
+- **NEW**: Non-converting visitor analysis
+- **NEW**: Visitor engagement patterns
+
+### **25. Simple Unique Visitors Count for Specific Intern**
+**Purpose**: Track only unique visitors (page views) for a specific intern
+**Business Impact**: High - understanding pure traffic volume
+
+```sql
+-- Simple unique visitors count for sohith (just page views)
+SELECT 
+  properties.utm_source as intern_name,
+  properties.utm_medium,
+  COUNT(DISTINCT person_id) as unique_visitors,
+  COUNT(CASE WHEN event = 'page_view' THEN 1 END) as total_page_views,
+  MIN(timestamp) as first_visit,
+  MAX(timestamp) as last_visit,
+  COUNT(DISTINCT DATE(timestamp)) as active_days,
+  ROUND(COUNT(CASE WHEN event = 'page_view' THEN 1 END) * 1.0 / COUNT(DISTINCT person_id), 2) as avg_pages_per_visitor
+FROM events 
+WHERE properties.utm_source = 'sohith'  -- 🔧 HARDCODED: Change intern name here
+  AND properties.utm_medium = 'website'
+  AND event = 'page_view'  -- Only page views, no clicks or conversions
+  AND timestamp >= now() - toIntervalDay(30)
+GROUP BY properties.utm_source, properties.utm_medium
+ORDER BY unique_visitors DESC;
+```
+
+### **26. Daily Unique Visitors for Specific Intern**
+**Purpose**: Daily breakdown of unique visitors (page views only)
+**Business Impact**: Medium - daily traffic monitoring
+
+```sql
+-- Daily unique visitors for sohith (page views only)
+SELECT 
+  DATE(timestamp) as visit_date,
+  properties.utm_source as intern_name,
+  COUNT(DISTINCT person_id) as daily_unique_visitors,
+  COUNT(CASE WHEN event = 'page_view' THEN 1 END) as daily_page_views,
+  MIN(timestamp) as first_visit_time,
+  MAX(timestamp) as last_visit_time,
+  ROUND(COUNT(CASE WHEN event = 'page_view' THEN 1 END) * 1.0 / COUNT(DISTINCT person_id), 2) as avg_pages_per_visitor,
+  LAG(COUNT(DISTINCT person_id)) OVER (ORDER BY DATE(timestamp)) as prev_day_visitors,
+  ROUND(
+    (COUNT(DISTINCT person_id) - LAG(COUNT(DISTINCT person_id)) OVER (ORDER BY DATE(timestamp))) * 100.0 / 
+    LAG(COUNT(DISTINCT person_id)) OVER (ORDER BY DATE(timestamp)), 2
+  ) as day_over_day_change_percent
+FROM events 
+WHERE properties.utm_source = 'sohith'  -- 🔧 HARDCODED: Change intern name here
+  AND properties.utm_medium = 'website'
+  AND event = 'page_view'  -- Only page views
+  AND timestamp >= now() - toIntervalDay(7)
+GROUP BY DATE(timestamp), properties.utm_source
+ORDER BY visit_date DESC;
+```
+
+### **27. Hourly Unique Visitors for Specific Intern**
+**Purpose**: Hourly breakdown of unique visitors (page views only)
+**Business Impact**: Low - peak time analysis
+
+```sql
+-- Hourly unique visitors for sohith (page views only)
+SELECT 
+  EXTRACT(hour FROM timestamp) as hour_of_day,
+  properties.utm_source as intern_name,
+  COUNT(DISTINCT person_id) as hourly_unique_visitors,
+  COUNT(CASE WHEN event = 'page_view' THEN 1 END) as hourly_page_views,
+  ROUND(COUNT(CASE WHEN event = 'page_view' THEN 1 END) * 1.0 / COUNT(DISTINCT person_id), 2) as avg_pages_per_visitor
+FROM events 
+WHERE properties.utm_source = 'sohith'  -- 🔧 HARDCODED: Change intern name here
+  AND properties.utm_medium = 'website'
+  AND event = 'page_view'  -- Only page views
+  AND timestamp >= now() - toIntervalDay(1)
+GROUP BY EXTRACT(hour FROM timestamp), properties.utm_source
+ORDER BY hour_of_day;
+```
+
+### **28. Simple Traffic Summary for All Interns**
+**Purpose**: Compare unique visitors across all interns
+**Business Impact**: High - intern comparison
+
+```sql
+-- Simple traffic summary for all interns (page views only)
+SELECT 
+  properties.utm_source as intern_name,
+  properties.utm_medium,
+  COUNT(DISTINCT person_id) as unique_visitors,
+  COUNT(CASE WHEN event = 'page_view' THEN 1 END) as total_page_views,
+  MIN(timestamp) as first_visit,
+  MAX(timestamp) as last_visit,
+  COUNT(DISTINCT DATE(timestamp)) as active_days,
+  ROUND(COUNT(CASE WHEN event = 'page_view' THEN 1 END) * 1.0 / COUNT(DISTINCT person_id), 2) as avg_pages_per_visitor,
+  ROUND(COUNT(DISTINCT person_id) * 1.0 / COUNT(DISTINCT DATE(timestamp)), 2) as avg_visitors_per_day
+FROM events 
+WHERE properties.utm_medium = 'website'
+  AND event = 'page_view'  -- Only page views
+  AND timestamp >= now() - toIntervalDay(30)
+GROUP BY properties.utm_source, properties.utm_medium
+ORDER BY unique_visitors DESC;
+```
+
+### **29. Total Daily Unique Visitors (All Sources)**
+**Purpose**: Get total unique visitors for your website in one day (all sources combined)
+**Business Impact**: High - overall website traffic measurement
+
+```sql
+-- Total unique visitors for today (all sources combined)
+SELECT 
+  COUNT(DISTINCT person_id) as total_unique_visitors_today,
+  countIf(event = 'page_view') as total_page_views_today,
+  ROUND(countIf(event = 'page_view') * 1.0 / COUNT(DISTINCT person_id), 2) as avg_pages_per_visitor
+FROM events 
+WHERE event = 'page_view'
+  AND toDate(timestamp) = toDate(now())  -- Today only
+```
+
+### **30. Total Weekly Unique Visitors (All Sources)**
+**Purpose**: Get total unique visitors for your website in one week (all sources combined)
+**Business Impact**: High - weekly traffic measurement
+
+```sql
+-- Total unique visitors for last 7 days (all sources combined)
+SELECT 
+  COUNT(DISTINCT person_id) as total_unique_visitors_week,
+  COUNT(*) as total_page_views_week,
+  ROUND(COUNT(*) * 1.0 / COUNT(DISTINCT person_id), 2) as avg_pages_per_visitor,
+  ROUND(COUNT(DISTINCT person_id) * 1.0 / 7, 2) as avg_visitors_per_day
+FROM events 
+WHERE event = 'page_view'
+  AND timestamp >= now() - toIntervalDay(7)  -- Last 7 days
+```
+
+### **31. Total Monthly Unique Visitors (All Sources)**
+**Purpose**: Get total unique visitors for your website in one month (all sources combined)
+**Business Impact**: High - monthly traffic measurement
+
+```sql
+-- Total unique visitors for last 30 days (all sources combined)
+SELECT 
+  COUNT(DISTINCT person_id) as total_unique_visitors_month,
+  COUNT() as total_page_views_month,
+  ROUND(COUNT() * 1.0 / COUNT(DISTINCT person_id), 2) as avg_pages_per_visitor,
+  ROUND(COUNT(DISTINCT person_id) * 1.0 / 30, 2) as avg_visitors_per_day
+FROM events 
+WHERE event = 'page_view'
+  AND timestamp >= now() - toIntervalDay(30)   -- last 30 days
+```
+
+### **32. Simple Daily Traffic Count**
+**Purpose**: Just the number - how many people visited today
+**Business Impact**: High - daily KPI
+
+```sql
+-- Just the number - total unique visitors today
+SELECT COUNT(DISTINCT person_id) as visitors_today
+FROM events 
+WHERE event = 'page_view'
+  AND toDate(timestamp) = today()
+```
+
+### **33. Fixed Daily Traffic Query (Corrected Logic)**
+**Purpose**: Fixed version of daily traffic query with correct conversion logic
+**Business Impact**: High - accurate conversion tracking
+
+```sql
+-- FIXED: Daily traffic breakdown with correct conversion logic
+SELECT 
+  toDate(timestamp) AS visit_date,
+  properties.utm_source AS intern_name,
+  COUNT(DISTINCT person_id) AS daily_visitors,
+  countIf(event = 'page_view') AS daily_page_views,
+  countIf(event = 'button_click') AS daily_clicks,
+  countIf(event = 'form_submit') AS daily_form_submissions,
+  countIf(event = 'Calendly Meeting Booked') AS daily_meetings,
+  countIf(event = 'conversion') AS daily_conversions,
+  formatDateTime(MIN(timestamp), '%d %b %Y, %I:%M %p') AS first_visit_time,
+  formatDateTime(MAX(timestamp), '%d %b %Y, %I:%M %p') AS last_visit_time,
+  -- FIXED: Count unique people who converted, not conversion events
+  (COUNT(DISTINCT person_id) - COUNT(DISTINCT CASE WHEN event = 'conversion' THEN person_id END)) AS daily_non_converting_visitors,
+  ROUND(COUNT(DISTINCT CASE WHEN event = 'conversion' THEN person_id END) * 100.0 / COUNT(DISTINCT person_id), 2) AS daily_conversion_rate,
+  ROUND(COUNT(DISTINCT CASE WHEN event = 'Calendly Meeting Booked' THEN person_id END) * 100.0 / COUNT(DISTINCT person_id), 2) AS daily_meeting_rate,
+  ROUND(countIf(event = 'button_click') * 100.0 / COUNT(DISTINCT person_id), 2) AS daily_interaction_rate,
+  ROUND(countIf(event = 'page_view') * 1.0 / COUNT(DISTINCT person_id), 2) AS avg_pages_per_visitor
+FROM events 
+WHERE properties.utm_medium = 'website'
+  AND timestamp >= now() - toIntervalDay(7)
+  AND properties.utm_source IS NOT NULL
+GROUP BY visit_date, intern_name
+ORDER BY visit_date DESC, intern_name;
+```
+
+### **34. Alternative Fixed Query (Using Subquery)**
+**Purpose**: Alternative approach using subquery for clearer logic
+**Business Impact**: High - easier to understand conversion tracking
+
+```sql
+-- ALTERNATIVE: Using subquery for clearer conversion logic
+WITH daily_stats AS (
+  SELECT 
+    toDate(timestamp) AS visit_date,
+    properties.utm_source AS intern_name,
+    person_id,
+    countIf(event = 'page_view') AS page_views,
+    countIf(event = 'button_click') AS clicks,
+    countIf(event = 'form_submit') AS form_submissions,
+    countIf(event = 'Calendly Meeting Booked') AS meetings,
+    countIf(event = 'conversion') AS conversions,
+    MIN(timestamp) AS first_visit,
+    MAX(timestamp) AS last_visit
+  FROM events 
+  WHERE properties.utm_medium = 'website'
+    AND timestamp >= now() - toIntervalDay(7)
+    AND properties.utm_source IS NOT NULL
+  GROUP BY visit_date, intern_name, person_id
+)
+SELECT 
+  visit_date,
+  intern_name,
+  COUNT(DISTINCT person_id) AS daily_visitors,
+  SUM(page_views) AS daily_page_views,
+  SUM(clicks) AS daily_clicks,
+  SUM(form_submissions) AS daily_form_submissions,
+  SUM(meetings) AS daily_meetings,
+  SUM(conversions) AS daily_conversions,
+  formatDateTime(MIN(first_visit), '%d %b %Y, %I:%M %p') AS first_visit_time,
+  formatDateTime(MAX(last_visit), '%d %b %Y, %I:%M %p') AS last_visit_time,
+  COUNT(DISTINCT CASE WHEN conversions = 0 THEN person_id END) AS daily_non_converting_visitors,
+  ROUND(COUNT(DISTINCT CASE WHEN conversions > 0 THEN person_id END) * 100.0 / COUNT(DISTINCT person_id), 2) AS daily_conversion_rate,
+  ROUND(COUNT(DISTINCT CASE WHEN meetings > 0 THEN person_id END) * 100.0 / COUNT(DISTINCT person_id), 2) AS daily_meeting_rate,
+  ROUND(SUM(clicks) * 100.0 / COUNT(DISTINCT person_id), 2) AS daily_interaction_rate,
+  ROUND(SUM(page_views) * 1.0 / COUNT(DISTINCT person_id), 2) AS avg_pages_per_visitor
+FROM daily_stats
+GROUP BY visit_date, intern_name
+ORDER BY visit_date DESC, intern_name;
+```
+
+### **35. Final Fixed Query (Corrected IF Logic)**
+**Purpose**: Final corrected version with proper IF logic for conversion tracking
+**Business Impact**: High - accurate conversion and meeting tracking
+
+```sql
+-- FINAL FIXED: Daily traffic breakdown with correct IF logic
+SELECT 
+  toDate(timestamp) AS visit_date,
+  properties.utm_source AS intern_name,
+  COUNT(DISTINCT person_id) AS daily_visitors,
+  countIf(event = 'page_view') AS daily_page_views,
+  countIf(event = 'button_click') AS daily_clicks,
+  countIf(event = 'form_submit') AS daily_form_submissions,
+  countIf(event = 'Calendly Meeting Booked') AS daily_meetings,
+  countIf(event = 'conversion') AS daily_conversions,
+  formatDateTime(MIN(timestamp), '%d %b %Y, %I:%M %p') AS first_visit_time,
+  formatDateTime(MAX(timestamp), '%d %b %Y, %I:%M %p') AS last_visit_time,
+  -- FIXED: Use uniqIf instead of COUNT(DISTINCT if(...))
+  (COUNT(DISTINCT person_id) - uniqIf(person_id, event = 'conversion')) AS daily_non_converting_visitors,
+  ROUND(uniqIf(person_id, event = 'conversion') * 100.0 / COUNT(DISTINCT person_id), 2) AS daily_conversion_rate,
+  ROUND(uniqIf(person_id, event = 'Calendly Meeting Booked') * 100.0 / COUNT(DISTINCT person_id), 2) AS daily_meeting_rate,
+  ROUND(countIf(event = 'button_click') * 100.0 / COUNT(DISTINCT person_id), 2) AS daily_interaction_rate,
+  ROUND(countIf(event = 'page_view') * 1.0 / COUNT(DISTINCT person_id), 2) AS avg_pages_per_visitor
+FROM events 
+WHERE properties.utm_medium = 'website'
+  AND timestamp >= now() - toIntervalDay(7)
+  AND properties.utm_source IS NOT NULL
+GROUP BY visit_date, intern_name
+ORDER BY visit_date DESC, intern_name;
+```
+
+### **36. Alternative Fixed Query (Using CASE WHEN)**
+**Purpose**: Alternative approach using CASE WHEN for better compatibility
+**Business Impact**: High - more compatible with different SQL dialects
+
+```sql
+-- ALTERNATIVE: Using CASE WHEN for better compatibility
+SELECT 
+  toDate(timestamp) AS visit_date,
+  properties.utm_source AS intern_name,
+  COUNT(DISTINCT person_id) AS daily_visitors,
+  countIf(event = 'page_view') AS daily_page_views,
+  countIf(event = 'button_click') AS daily_clicks,
+  countIf(event = 'form_submit') AS daily_form_submissions,
+  countIf(event = 'Calendly Meeting Booked') AS daily_meetings,
+  countIf(event = 'conversion') AS daily_conversions,
+  formatDateTime(MIN(timestamp), '%d %b %Y, %I:%M %p') AS first_visit_time,
+  formatDateTime(MAX(timestamp), '%d %b %Y, %I:%M %p') AS last_visit_time,
+  -- FIXED: Use CASE WHEN instead of if()
+  (COUNT(DISTINCT person_id) - COUNT(DISTINCT CASE WHEN event = 'conversion' THEN person_id END)) AS daily_non_converting_visitors,
+  ROUND(COUNT(DISTINCT CASE WHEN event = 'conversion' THEN person_id END) * 100.0 / COUNT(DISTINCT person_id), 2) AS daily_conversion_rate,
+  ROUND(COUNT(DISTINCT CASE WHEN event = 'Calendly Meeting Booked' THEN person_id END) * 100.0 / COUNT(DISTINCT person_id), 2) AS daily_meeting_rate,
+  ROUND(countIf(event = 'button_click') * 100.0 / COUNT(DISTINCT person_id), 2) AS daily_interaction_rate,
+  ROUND(countIf(event = 'page_view') * 1.0 / COUNT(DISTINCT person_id), 2) AS avg_pages_per_visitor
+FROM events 
+WHERE properties.utm_medium = 'website'
+  AND timestamp >= now() - toIntervalDay(7)
+  AND properties.utm_source IS NOT NULL
+GROUP BY visit_date, intern_name
+ORDER BY visit_date DESC, intern_name;
+```
+
+### **37. Debug Query (Check What Events Exist)**
+**Purpose**: Debug query to see what events are actually being tracked
+**Business Impact**: Medium - troubleshooting event tracking
+
+```sql
+-- DEBUG: Check what events exist for your intern
+SELECT 
+  event,
+  COUNT(*) as event_count,
+  COUNT(DISTINCT person_id) as unique_people
+FROM events 
+WHERE properties.utm_source = 'test'  -- Replace with your intern name
+  AND properties.utm_medium = 'website'
+  AND timestamp >= now() - toIntervalDay(7)
+GROUP BY event
+ORDER BY event_count DESC;
+```
+
+### **38. Working Query (No uniqIf Function)**
+**Purpose**: Working query without uniqIf function for PostHog compatibility
+**Business Impact**: High - accurate conversion tracking without errors
+
+```sql
+-- WORKING: Daily traffic breakdown without uniqIf function
+SELECT 
+  toDate(timestamp) AS visit_date,
+  properties.utm_source AS intern_name,
+  COUNT(DISTINCT person_id) AS daily_visitors,
+  countIf(event = 'page_view') AS daily_page_views,
+  countIf(event = 'button_click') AS daily_clicks,
+  countIf(event = 'form_submit') AS daily_form_submissions,
+  countIf(event = 'Calendly Meeting Booked') AS daily_meetings,
+  countIf(event = 'conversion') AS daily_conversions,
+  formatDateTime(MIN(timestamp), '%d %b %Y, %I:%M %p') AS first_visit_time,
+  formatDateTime(MAX(timestamp), '%d %b %Y, %I:%M %p') AS last_visit_time,
+  -- FIXED: Use COUNT(DISTINCT CASE WHEN) instead of uniqIf
+  (COUNT(DISTINCT person_id) - COUNT(DISTINCT CASE WHEN event = 'conversion' THEN person_id END)) AS daily_non_converting_visitors,
+  ROUND(COUNT(DISTINCT CASE WHEN event = 'conversion' THEN person_id END) * 100.0 / COUNT(DISTINCT person_id), 2) AS daily_conversion_rate,
+  ROUND(COUNT(DISTINCT CASE WHEN event = 'Calendly Meeting Booked' THEN person_id END) * 100.0 / COUNT(DISTINCT person_id), 2) AS daily_meeting_rate,
+  ROUND(countIf(event = 'button_click') * 100.0 / COUNT(DISTINCT person_id), 2) AS daily_interaction_rate,
+  ROUND(countIf(event = 'page_view') * 1.0 / COUNT(DISTINCT person_id), 2) AS avg_pages_per_visitor
+FROM events 
+WHERE properties.utm_medium = 'website'
+  AND timestamp >= now() - toIntervalDay(7)
+  AND properties.utm_source IS NOT NULL
+GROUP BY visit_date, intern_name
+ORDER BY visit_date DESC, intern_name;
+```
+
+### **39. Simple Working Query (Basic Version)**
+**Purpose**: Simple working query with basic metrics only
+**Business Impact**: High - reliable basic tracking
+
+```sql
+-- SIMPLE: Basic daily traffic breakdown
+SELECT 
+  toDate(timestamp) AS visit_date,
+  properties.utm_source AS intern_name,
+  COUNT(DISTINCT person_id) AS daily_visitors,
+  countIf(event = 'page_view') AS daily_page_views,
+  countIf(event = 'button_click') AS daily_clicks,
+  countIf(event = 'form_submit') AS daily_form_submissions,
+  countIf(event = 'Calendly Meeting Booked') AS daily_meetings,
+  countIf(event = 'conversion') AS daily_conversions,
+  formatDateTime(MIN(timestamp), '%d %b %Y, %I:%M %p') AS first_visit_time,
+  formatDateTime(MAX(timestamp), '%d %b %Y, %I:%M %p') AS last_visit_time
+FROM events 
+WHERE properties.utm_medium = 'website'
+  AND timestamp >= now() - toIntervalDay(7)
+  AND properties.utm_source IS NOT NULL
+GROUP BY visit_date, intern_name
+ORDER BY visit_date DESC, intern_name;
+```
+
+
+
+### **42. Calendly Integration Check**
+**Purpose**: Verify Calendly meeting events are being captured
+**Business Impact**: High - ensure meeting tracking works
+
+```sql
+-- Check Calendly Meeting Booked events specifically
+SELECT 
+  properties.utm_source as intern_name,
+  properties.email as customer_email,
+  properties.inviteeName as customer_name,
+  properties.meetingUrl as meeting_link,
+  properties.eventStartTime as meeting_time,
+  timestamp as booking_time,
+  formatDateTime(timestamp, '%d %b %Y, %I:%M %p') as formatted_booking_time
+FROM events 
+WHERE event = 'Calendly Meeting Booked'
+  AND properties.utm_medium = 'website'
+  AND timestamp >= now() - toIntervalDay(7)
+ORDER BY timestamp DESC;
+```
+
+### **43. Today's Meeting Bookings with Customer Details**
+**Purpose**: Get count and details of people who booked meetings today
+**Business Impact**: High - daily meeting booking tracking with customer data
+
+```sql
+-- Today's meeting bookings with customer details
+SELECT 
+  COUNT(*) as total_meetings_booked_today,
+  COUNT(DISTINCT properties.email) as unique_customers,
+  properties.utm_source as intern_name,
+  properties.email as customer_email,
+  properties.inviteeName as customer_name,
+  properties.meetingUrl as meeting_link,
+  properties.eventStartTime as meeting_time,
+  properties.eventType as meeting_type,
+  properties.duration as meeting_duration_minutes,
+  formatDateTime(timestamp, '%d %b %Y, %I:%M %p') as booking_time,
+  formatDateTime(timestamp, '%H:%M') as booking_hour
+FROM events 
+WHERE event = 'Calendly Meeting Booked'
+  AND properties.utm_medium = 'website'
+  AND toDate(timestamp) = today()
+GROUP BY 
+  properties.utm_source,
+  properties.email,
+  properties.inviteeName,
+  properties.meetingUrl,
+  properties.eventStartTime,
+  properties.eventType,
+  properties.duration,
+  timestamp
+ORDER BY timestamp DESC;
+```
+
+### **44. Today's Meeting Bookings Summary**
+**Purpose**: Summary count of today's meeting bookings by intern
+**Business Impact**: High - daily meeting booking summary
+
+```sql
+-- Today's meeting bookings summary by intern
+SELECT 
+  properties.utm_source as intern_name,
+  COUNT(*) as meetings_booked_today,
+  COUNT(DISTINCT properties.email) as unique_customers,
+  MIN(timestamp) as first_booking_time,
+  MAX(timestamp) as last_booking_time,
+  formatDateTime(MIN(timestamp), '%I:%M %p') as first_booking_hour,
+  formatDateTime(MAX(timestamp), '%I:%M %p') as last_booking_hour
+FROM events 
+WHERE event = 'Calendly Meeting Booked'
+  AND properties.utm_medium = 'website'
+  AND toDate(timestamp) = today()
+GROUP BY properties.utm_source
+ORDER BY meetings_booked_today DESC;
+```
+
+### **45. Today's Meeting Bookings with All Details**
+**Purpose**: Complete list of today's meeting bookings with all customer information
+**Business Impact**: High - complete meeting booking data for today
+
+```sql
+-- Complete list of today's meeting bookings
+SELECT 
+  properties.utm_source as intern_name,
+  properties.email as customer_email,
+  properties.inviteeName as customer_name,
+  properties.meetingUrl as meeting_link,
+  properties.eventStartTime as meeting_scheduled_time,
+  properties.eventType as meeting_type,
+  properties.duration as meeting_duration_minutes,
+  properties.location as meeting_location,
+  formatDateTime(timestamp, '%d %b %Y, %I:%M %p') as booking_time,
+  formatDateTime(timestamp, '%H:%M') as booking_hour,
+  formatDateTime(properties.eventStartTime, '%d %b %Y, %I:%M %p') as formatted_meeting_time
+FROM events 
+WHERE event = 'Calendly Meeting Booked'
+  AND properties.utm_medium = 'website'
+  AND toDate(timestamp) = today()
+ORDER BY timestamp DESC;
+```
+
+### **46. Weekly Meeting Bookings with Customer Details**
+**Purpose**: Get count and details of people who booked meetings this week
+**Business Impact**: High - weekly meeting booking tracking
+
+```sql
+-- This week's meeting bookings with customer details
+SELECT 
+  toDate(timestamp) as booking_date,
+  properties.utm_source as intern_name,
+  properties.email as customer_email,
+  properties.inviteeName as customer_name,
+  properties.meetingUrl as meeting_link,
+  properties.eventStartTime as meeting_time,
+  formatDateTime(timestamp, '%d %b %Y, %I:%M %p') as booking_time
+FROM events 
+WHERE event = 'Calendly Meeting Booked'
+  AND properties.utm_medium = 'website'
+  AND timestamp >= now() - toIntervalDay(7)
+ORDER BY timestamp DESC;
+```
+
+### **47. Meeting Bookings by Intern (Last 30 Days)**
+**Purpose**: Get meeting bookings by intern for the last 30 days
+**Business Impact**: High - monthly meeting booking analysis
+
+```sql
+-- Meeting bookings by intern (last 30 days)
+SELECT 
+  properties.utm_source as intern_name,
+  COUNT(*) as total_meetings_booked,
+  COUNT(DISTINCT properties.email) as unique_customers,
+  MIN(timestamp) as first_booking,
+  MAX(timestamp) as last_booking,
+  ROUND(COUNT(*) * 1.0 / 30, 2) as avg_meetings_per_day
+FROM events 
+WHERE event = 'Calendly Meeting Booked'
+  AND properties.utm_medium = 'website'
+  AND timestamp >= now() - toIntervalDay(30)
+GROUP BY properties.utm_source
+ORDER BY total_meetings_booked DESC;
+```
+
+### **Recommended Schedule:**
+- **Daily**: Real-time alerts (Query 17), Daily performance (Query 14), Real-time visitor count (Query 24), Daily unique visitors (Query 26), Simple daily traffic count (Query 32), Final working query (Query 40), Today's meeting bookings (Query 43)
+- **Weekly**: Performance trends (Query 18), Quality analysis (Query 19), Daily traffic breakdown (Query 22), Total weekly visitors (Query 30), Weekly meeting bookings (Query 46)
+- **Monthly**: Complete attribution summary (Query 20), Performance comparison (Query 16), Traffic volume analysis (Query 21), All interns comparison (Query 28), Total monthly visitors (Query 31), Monthly meeting bookings (Query 47)
+

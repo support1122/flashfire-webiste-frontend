@@ -209,20 +209,40 @@ export const trackContactFormSubmission = (email: string, formType: string) => {
 };
 
 export const trackCalendlyBooking = (email: string) => {
+  // Get UTM context for tracking
+  const utmContext = {
+    utm_source: localStorage.getItem('utm_source') || 'direct',
+    utm_medium: localStorage.getItem('utm_medium') || 'website',
+    utm_campaign: localStorage.getItem('utm_campaign') || 'organic',
+    utm_content: localStorage.getItem('utm_content'),
+    utm_term: localStorage.getItem('utm_term')
+  };
+
   trackCustomEvent("Calendly Meeting Booked", {
     email,
     timestamp: new Date().toISOString(),
-    page: window.location.pathname
+    page: window.location.pathname,
+    ...utmContext // Include UTM data for attribution
   });
 };
 
 // Track when someone books a meeting after form submission
 export const trackFormToMeeting = (email: string, formType: string, meetingData?: CalendlyMeetingData) => {
+  // Get UTM context for tracking
+  const utmContext = {
+    utm_source: localStorage.getItem('utm_source') || 'direct',
+    utm_medium: localStorage.getItem('utm_medium') || 'website',
+    utm_campaign: localStorage.getItem('utm_campaign') || 'organic',
+    utm_content: localStorage.getItem('utm_content'),
+    utm_term: localStorage.getItem('utm_term')
+  };
+
   const eventData: any = {
     email,
     formType,
     timestamp: new Date().toISOString(),
-    page: window.location.pathname
+    page: window.location.pathname,
+    ...utmContext // Include UTM data
   };
 
   if (meetingData) {
@@ -266,7 +286,17 @@ export const trackCalendlyMeeting = async (meetingData: CalendlyMeetingData) => 
     const identifier = meetingData.inviteeEmail;
     window.fwcrm.identify(identifier, newContact);
     
-    // Track the meeting booking event
+    // Get UTM context for tracking
+    const utmContext = {
+      utm_source: localStorage.getItem('utm_source') || 'direct',
+      utm_medium: localStorage.getItem('utm_medium') || 'website',
+      utm_campaign: localStorage.getItem('utm_campaign') || 'organic',
+      utm_content: localStorage.getItem('utm_content'),
+      utm_term: localStorage.getItem('utm_term'),
+      lead_source: localStorage.getItem('utm_source') || 'direct'
+    };
+
+    // Track the meeting booking event with UTM data
     trackCustomEvent("Calendly Meeting Booked", {
       email: meetingData.inviteeEmail,
       inviteeName: meetingData.inviteeName,
@@ -275,7 +305,8 @@ export const trackCalendlyMeeting = async (meetingData: CalendlyMeetingData) => 
       eventType: meetingData.eventType || "Consultation",
       duration: meetingData.duration || 30,
       timestamp: new Date().toISOString(),
-      page: window.location.pathname
+      page: window.location.pathname,
+      ...utmContext // Include UTM data for attribution
     });
     
     console.log('Calendly meeting tracked in CRM:', meetingData.inviteeEmail);
