@@ -12,7 +12,7 @@ const FAQ = ({setSignupFormVisibility}) => {
   const faqs = [
     {
       question: " How is Flashfire priced and are there any hidden charges?",
-      answer: " You pay once upfront for the plan you choose. There are no hidden fees. We complete all applications for you, with no fixed timeframe—the speed depends on the number of relevant job openings. Everything in your plan—resume optimization, job applications, LinkedIn help, and interview support—is included."
+      answer: " You pay once upfront for the plan you choose. There are no hidden fees. Everything in your plan (resume optimization, job applications, LinkedIn help, and interview support) is included."
     },
     {
       question: "Is there a refund policy if I'm not satisfied with the service?",
@@ -45,12 +45,9 @@ const FAQ = ({setSignupFormVisibility}) => {
     },
     {
       question: "How many applications do you send per day?",
-      answer: "Absolutely. Flashfire is designed for OPT/CPT/H1B holders and international students. We know every application matters, and our team ensures you maximize your chances in a competitive U.S. market."
+      answer: " It depends on the number of relevant job openings. Usually, our team applies to around 30 suitable jobs per day to ensure quality and precision."
     },
-    {
-      question: " How is Flashfire priced and are there any hidden charges?",
-      answer: " You pay once upfront for the plan you choose. There are no hidden fees. We complete all applications for you, with no fixed timeframe—the speed depends on the number of relevant job openings. Everything in your plan—resume optimization, job applications, LinkedIn help, and interview support—is included."
-    }
+    
   ];
 
   const toggleFAQ = (index: number) => {
