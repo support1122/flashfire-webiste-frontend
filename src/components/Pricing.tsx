@@ -1,4 +1,3 @@
-"use client"
 import { Check, Zap, Crown, Rocket } from "lucide-react"
 
 const Pricing = () => {
