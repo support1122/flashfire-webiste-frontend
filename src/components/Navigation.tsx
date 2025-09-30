@@ -2,6 +2,12 @@ import React, { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 import { GTagUTM } from "../utils/GTagUTM.ts";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import { 
+  trackButtonClick, 
+  trackNavigation, 
+  trackModalOpen,
+  trackPageView 
+} from "../utils/PostHogTracking.ts";
 interface NavigationProps {
   setSignupFormVisibility: React.Dispatch<React.SetStateAction<boolean>>;
   setCalendlyModalVisibility: React.Dispatch<React.SetStateAction<boolean>>;
@@ -24,16 +30,7 @@ const Navigation: React.FC<NavigationProps> = ({
   // const [employerFormVisible, setEmployerFormVisible] = useState(false);
 
 
-  // ----------------- Countdown (Days / Hrs / Mins / Secs) -----------------
-  // Set your target deadline here. Example: end of current month.
-  const TARGET_DATE = useState(() => {
-    const now = new Date();
-    const year = now.getFullYear();
-    const month = now.getMonth();
-    const lastDayOfMonth = new Date(year, month + 1, 0);
-    return lastDayOfMonth.getTime();
-  })[0];
-
+  // ----------------- Monthly Countdown Timer -----------------
   const [timeLeft, setTimeLeft] = useState({
     days: 0,
     hours: 0,
@@ -41,31 +38,107 @@ const Navigation: React.FC<NavigationProps> = ({
     seconds: 0,
   });
 
+  // Function to get the end of current month at 11:59:59 PM
+  const getEndOfCurrentMonth = () => {
+    const now = new Date();
+    const year = now.getFullYear();
+    const month = now.getMonth();
+    
+    // Get the last day of current month and set time to 23:59:59
+    const lastDayOfMonth = new Date(year, month + 1, 0);
+    lastDayOfMonth.setHours(23, 59, 59, 999); // 11:59:59 PM
+    
+    return lastDayOfMonth.getTime();
+  };
+
+  // Function to get the end of next month at 11:59:59 PM
+  const getEndOfNextMonth = () => {
+    const now = new Date();
+    const year = now.getFullYear();
+    const month = now.getMonth();
+    
+    // Get the last day of next month and set time to 23:59:59
+    const lastDayOfNextMonth = new Date(year, month + 2, 0);
+    lastDayOfNextMonth.setHours(23, 59, 59, 999); // 11:59:59 PM
+    
+    return lastDayOfNextMonth.getTime();
+  };
+
   useEffect(() => {
     const tick = () => {
       const now = Date.now();
-      const distance = TARGET_DATE - now;
-
-      if (distance <= 0) {
-        setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0 });
-        return;
+      const currentMonthEnd = getEndOfCurrentMonth();
+      
+      // Check if current month has ended
+      if (now >= currentMonthEnd) {
+        // Month has ended, countdown to next month end
+        const nextMonthEnd = getEndOfNextMonth();
+        const distance = nextMonthEnd - now;
+        
+        if (distance <= 0) {
+          // This shouldn't happen, but just in case - recalculate
+          const newNextMonthEnd = getEndOfNextMonth();
+          const newDistance = newNextMonthEnd - now;
+          
+          if (newDistance <= 0) {
+            setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+            return;
+          }
+          
+          const days = Math.floor(newDistance / (1000 * 60 * 60 * 24));
+          const hours = Math.floor((newDistance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+          const minutes = Math.floor((newDistance % (1000 * 60 * 60)) / (1000 * 60));
+          const seconds = Math.floor((newDistance % (1000 * 60)) / 1000);
+          
+          setTimeLeft({ days, hours, minutes, seconds });
+          return;
+        }
+        
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+        
+        setTimeLeft({ days, hours, minutes, seconds });
+      } else {
+        // Still in current month, countdown to current month end
+        const distance = currentMonthEnd - now;
+        
+        if (distance <= 0) {
+          // Month just ended, switch to next month countdown
+          const nextMonthEnd = getEndOfNextMonth();
+          const nextDistance = nextMonthEnd - now;
+          
+          if (nextDistance <= 0) {
+            setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+            return;
+          }
+          
+          const days = Math.floor(nextDistance / (1000 * 60 * 60 * 24));
+          const hours = Math.floor((nextDistance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+          const minutes = Math.floor((nextDistance % (1000 * 60 * 60)) / (1000 * 60));
+          const seconds = Math.floor((nextDistance % (1000 * 60)) / 1000);
+          
+          setTimeLeft({ days, hours, minutes, seconds });
+          return;
+        }
+        
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+        
+        setTimeLeft({ days, hours, minutes, seconds });
       }
-
-      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-      const hours = Math.floor(
-        (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
-      );
-      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-      setTimeLeft({ days, hours, minutes, seconds });
     };
 
-    // initial paint
+    // Initial calculation
     tick();
+    
+    // Update every second
     const id = setInterval(tick, 1000);
     return () => clearInterval(id);
-  }, [TARGET_DATE]);
+  }, []); // Empty dependency array since we want this to run continuously
 
   const Two = (n: number) => String(n).padStart(2, '0');
 
@@ -120,6 +193,12 @@ const Navigation: React.FC<NavigationProps> = ({
   const goToSection = (id: string, closeMenu = true) => {
     const el = document.getElementById(id);
 
+    // Track navigation
+    trackNavigation(location.pathname, `/#${id}`, 'click', {
+      section: id,
+      navigation_type: 'section_scroll'
+    });
+
     if (el) {
       // Scroll if element exists
       el.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -145,6 +224,8 @@ const Navigation: React.FC<NavigationProps> = ({
   const openSignup = () => {
     setSignupFormVisibility(true);
     setIsMenuOpen(false);
+    
+    // Track with both GTag and PostHog
     safeTrack({
       eventName: "sign_up_click",
       label: "Header Sign Up Button",
@@ -154,11 +235,22 @@ const Navigation: React.FC<NavigationProps> = ({
         utm_campaign: "header_signup",
       },
     });
+    
+    // PostHog tracking
+    trackButtonClick("Sign Up For Free", "navigation_header", "cta", {
+      button_location: "header",
+      navigation_type: "desktop"
+    });
+    trackModalOpen("signup_form", "navigation_button", {
+      trigger_source: "header_cta"
+    });
   };
 
   const openCalendly = () => {
     setCalendlyModalVisibility(true);
     setIsMenuOpen(false);
+    
+    // Track with both GTag and PostHog
     safeTrack({
       eventName: "Calendly_Meet_click",
       label: "NAVBAR_LOWER_SECTION_Button",
@@ -167,6 +259,15 @@ const Navigation: React.FC<NavigationProps> = ({
         utm_medium: "Navbar_Meet_Button",
         utm_campaign: "WEBSITE_NAVBAR_LOWER_SECTION",
       },
+    });
+    
+    // PostHog tracking
+    trackButtonClick("Book Now", "navigation_banner", "cta", {
+      button_location: "banner",
+      navigation_type: "banner_cta"
+    });
+    trackModalOpen("calendly_modal", "navigation_button", {
+      trigger_source: "banner_cta"
     });
   };
 
@@ -249,7 +350,13 @@ const Navigation: React.FC<NavigationProps> = ({
             {/* CTA Button (desktop) */}
             <div className="hidden md:block">
               <button
-                onClick={() => navigate('/signup')}
+                onClick={() => {
+                  trackButtonClick("Sign Up For Free", "navigation_header_desktop", "cta", {
+                    button_location: "header_desktop",
+                    navigation_type: "desktop"
+                  });
+                  navigate('/signup');
+                }}
                 className="bg-gradient-to-r from-orange-500 to-orange-600 text-white px-4 lg:px-6 py-2 lg:py-2.5 rounded-full font-semibold hover:from-orange-600 hover:to-orange-700 transition-all duration-200 shadow-lg hover:shadow-xl hover:scale-105 text-sm lg:text-base"
               >
                 Sign Up For Free
@@ -259,7 +366,18 @@ const Navigation: React.FC<NavigationProps> = ({
             {/* Mobile menu button */}
             <div className="md:hidden">
               <button
-                onClick={() => setIsMenuOpen((v) => !v)}
+                onClick={() => {
+                  trackButtonClick(
+                    isMenuOpen ? "Close Menu" : "Open Menu", 
+                    "navigation_mobile_menu", 
+                    "icon",
+                    {
+                      button_location: "mobile_header",
+                      menu_state: isMenuOpen ? "closing" : "opening"
+                    }
+                  );
+                  setIsMenuOpen((v) => !v);
+                }}
                 className="text-gray-700 transition-colors duration-200 p-2"
               >
                 {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -315,7 +433,13 @@ const Navigation: React.FC<NavigationProps> = ({
 
                 {/* CTA Button (mobile) */}
                 <button
-                  onClick={openSignup}
+                  onClick={() => {
+                    trackButtonClick("Start Free Trial", "navigation_mobile_menu", "cta", {
+                      button_location: "mobile_menu",
+                      navigation_type: "mobile"
+                    });
+                    openSignup();
+                  }}
                   className="bg-gradient-to-r from-orange-500 to-orange-600 text-white px-3 py-3 rounded-lg font-semibold hover:from-orange-600 hover:to-orange-700 transition-all duration-200 block text-center mt-4 w-full text-base"
                 >
                   Start Free Trial
@@ -355,7 +479,13 @@ const Navigation: React.FC<NavigationProps> = ({
               {/* Right: Book Now (unchanged) */}
               <div className="flex-shrink-0">
                 <button
-                  onClick={openCalendly}
+                  onClick={() => {
+                    trackButtonClick("Book Now", "navigation_banner_mobile", "cta", {
+                      button_location: "banner_mobile",
+                      navigation_type: "mobile_banner"
+                    });
+                    openCalendly();
+                  }}
                   className="rounded-full bg-white text-red-600 font-bold px-5 sm:px-6 py-2 shadow-lg hover:shadow-xl transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-white/80"
                 >
                   Book Now
@@ -390,7 +520,12 @@ const Navigation: React.FC<NavigationProps> = ({
               </div>
               <Link to={'/book-free-demo'}>
                 <button
-                  // onClick={openCalendly}
+                  onClick={() => {
+                    trackButtonClick("Book Now", "navigation_banner_desktop", "cta", {
+                      button_location: "banner_desktop",
+                      navigation_type: "desktop_banner"
+                    });
+                  }}
                   className="rounded-full bg-white text-red-600 font-bold px-5 sm:px-6 py-2 shadow-lg hover:shadow-xl transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-white/80"
                 >
                   Book Now
