@@ -24,8 +24,7 @@ import Home from './components/Home.tsx';
 import HowItWorks from './components/HowItWorks.tsx';
 import SignupForm from './components/SignupForm.tsx';
 import EmployerForm from './components/EmployerForm.tsx';
-import ScrollToHash from './components/ScrollToHash.tsx';
-import CalendlyModal from './components/CalendlyModal.tsx';
+import EmployerPage from './components/EmployerPage.tsx';
 
 const routes=createBrowserRouter([
   {
@@ -49,7 +48,10 @@ const routes=createBrowserRouter([
       {path : '/book-free-demo', element : <Home />}
     ],
   },
-
+  {
+    path: '/employer-registration',
+    element: <EmployerPage />
+  }
 
 ]);
 
