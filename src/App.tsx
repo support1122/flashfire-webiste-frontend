@@ -60,6 +60,37 @@ function App() {
       console.log("Stored utm_term:", utmTerm);
     }
 
+    // Generate or retrieve visitor ID
+    let visitorId = localStorage.getItem("visitor_id");
+    if (!visitorId) {
+      visitorId = `visitor_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+      localStorage.setItem("visitor_id", visitorId);
+    }
+
+    // Track page visit with UTM if utm_source exists
+    if (utmSource) {
+      const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'https://api.flashfirejobs.com';
+      fetch(`${API_BASE_URL}/api/campaigns/track/visit`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          utmSource,
+          visitorId,
+          userAgent: navigator.userAgent,
+          ipAddress: null, // Will be captured by server
+          referrer: document.referrer,
+          pageUrl: window.location.href
+        }),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.success) {
+            console.log("✅ Campaign page visit tracked:", data.data);
+          }
+        })
+        .catch((err) => console.error("Campaign tracking failed:", err));
+    }
+
     // Handle ref parameter (existing logic)
     if (ref) {
       const payload = {

@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { X, Calendar, CheckCircle } from 'lucide-react';
 import { InlineWidget, useCalendlyEventListener } from 'react-calendly';
 import { useNavigate } from 'react-router-dom';
 import posthog from 'posthog-js';
 import { trackCalendlyBooking } from '../utils/CRMTracking';
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'https://api.flashfirejobs.com';
 
 function CalendlyModal({ setCalendlyModalVisibility, user, isVisible }: { setCalendlyModalVisibility: (visible: boolean) => void , user: (any), isVisible: boolean }) {
   const [profileInvitee, setProfileInvitee] = useState<{ email?: string; name?: string } | null>(null);
@@ -140,7 +140,7 @@ function CalendlyModal({ setCalendlyModalVisibility, user, isVisible }: { setCal
         console.error('❌ Failed to capture Calendly profile submission', err);
       }
     },
-    onEventScheduled: (e: any) => {
+    onEventScheduled: async (e: any) => {
       console.log('🎉 Calendly Event Triggered!', e);
       try {
         const payload = e?.data?.payload || e?.payload || {};
@@ -152,6 +152,8 @@ function CalendlyModal({ setCalendlyModalVisibility, user, isVisible }: { setCal
         const utm_source = localStorage.getItem('utm_source') || 'direct';
         const utm_medium = localStorage.getItem('utm_medium') || 'website';
         const utm_campaign = localStorage.getItem('utm_campaign') || 'organic';
+        const utm_content = localStorage.getItem('utm_content') || null;
+        const utm_term = localStorage.getItem('utm_term') || null;
 
         console.log('📊 PostHog Event Data:', {
           email: inviteeEmail,
@@ -185,6 +187,48 @@ function CalendlyModal({ setCalendlyModalVisibility, user, isVisible }: { setCal
         if (inviteeEmail) {
           trackCalendlyBooking(inviteeEmail);
           console.log('✅ CRM event tracked');
+        }
+
+        // 🆕 DIRECT BACKUP: Send booking data to your backend API
+        // This is a backup to Calendly webhook - if webhook fails, we still capture the booking
+        try {
+          const bookingData = {
+            utmSource: utm_source,
+            utmMedium: utm_medium,
+            utmCampaign: utm_campaign,
+            utmContent: utm_content,
+            utmTerm: utm_term,
+            clientName: inviteeName,
+            clientEmail: inviteeEmail,
+            clientPhone: user?.phone ? `${user?.countryCode || ''}${user?.phone}` : null,
+            calendlyEventUri: payload?.event?.uri || null,
+            calendlyInviteeUri: payload?.invitee?.uri || null,
+            calendlyMeetLink: meetingUrl,
+            scheduledEventStartTime: eventStartTime,
+            scheduledEventEndTime: payload?.event?.end_time || null,
+            visitorId: localStorage.getItem('visitor_id') || null,
+            userAgent: navigator.userAgent,
+            source: 'frontend_direct' // Mark this as coming from frontend
+          };
+
+          console.log('📤 Sending booking to backend (backup to webhook)...', bookingData);
+          
+          const response = await fetch(`${API_BASE_URL}/api/campaign-bookings/frontend-capture`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(bookingData),
+          });
+
+          if (response.ok) {
+            const result = await response.json();
+            console.log('✅ Booking saved to backend (direct):', result);
+          } else {
+            console.warn('⚠️ Backend booking save failed, webhook will handle it:', await response.text());
+          }
+        } catch (backendError) {
+          console.warn('⚠️ Failed to send booking to backend directly (webhook will handle it):', backendError);
         }
       } catch (err) {
         console.error('❌ Calendly scheduled event capture failed', err);
@@ -234,7 +278,13 @@ function CalendlyModal({ setCalendlyModalVisibility, user, isVisible }: { setCal
             <InlineWidget
               url={`https://calendly.com/feedback-flashfire/30min?utm_source=${
                 localStorage.getItem("utm_source") || "webpage_visit"
-              }&utm_medium=${localStorage.getItem("utm_medium") || "website"}`}
+              }&utm_medium=${localStorage.getItem("utm_medium") || "website"}${
+                localStorage.getItem("utm_campaign") ? `&utm_campaign=${localStorage.getItem("utm_campaign")}` : ""
+              }${
+                localStorage.getItem("utm_content") ? `&utm_content=${localStorage.getItem("utm_content")}` : ""
+              }${
+                localStorage.getItem("utm_term") ? `&utm_term=${localStorage.getItem("utm_term")}` : ""
+              }`}
               prefill={{
                 name: user?.fullName || "",
                 email: user?.email || "",
@@ -345,7 +395,13 @@ function CalendlyModal({ setCalendlyModalVisibility, user, isVisible }: { setCal
             <InlineWidget
               url={`https://calendly.com/feedback-flashfire/30min?utm_source=${
                 localStorage.getItem("utm_source") || "webpage_visit"
-              }&utm_medium=${localStorage.getItem("utm_medium") || "website"}`}
+              }&utm_medium=${localStorage.getItem("utm_medium") || "website"}${
+                localStorage.getItem("utm_campaign") ? `&utm_campaign=${localStorage.getItem("utm_campaign")}` : ""
+              }${
+                localStorage.getItem("utm_content") ? `&utm_content=${localStorage.getItem("utm_content")}` : ""
+              }${
+                localStorage.getItem("utm_term") ? `&utm_term=${localStorage.getItem("utm_term")}` : ""
+              }`}
               prefill={{
                 name: user?.fullName || "",
                 email: user?.email || "",
