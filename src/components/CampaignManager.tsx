@@ -168,17 +168,18 @@ export default function CampaignManager() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
                 <label htmlFor="campaignName" className="block text-sm font-semibold text-gray-700 mb-2">
-                  Campaign Name *
+                  UTM Source *
                 </label>
                 <input
                   type="text"
                   id="campaignName"
                   value={campaignName}
                   onChange={(e) => setCampaignName(e.target.value)}
-                  placeholder="e.g., LinkedIn Q4 Campaign"
+                  placeholder="e.g., name"
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all"
                   required
                 />
+                <p className="text-xs text-gray-500 mt-1">This will be your campaign identifier</p>
               </div>
 
               <div>
@@ -191,20 +192,6 @@ export default function CampaignManager() {
                   value={utmMedium}
                   onChange={(e) => setUtmMedium(e.target.value)}
                   placeholder="e.g., social, email, cpc"
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all"
-                />
-              </div>
-
-              <div className="md:col-span-2">
-                <label htmlFor="utmCampaign" className="block text-sm font-semibold text-gray-700 mb-2">
-                  UTM Campaign (Optional)
-                </label>
-                <input
-                  type="text"
-                  id="utmCampaign"
-                  value={utmCampaign}
-                  onChange={(e) => setUtmCampaign(e.target.value)}
-                  placeholder="e.g., fall_promotion, product_launch"
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all"
                 />
               </div>
@@ -305,36 +292,64 @@ export default function CampaignManager() {
                   </div>
 
                   {/* URL Display */}
-                  <div className="p-4 bg-gray-50 border-b border-gray-100">
-                    <div className="text-xs text-gray-500 mb-1">Campaign URL:</div>
-                    <div className="text-xs text-gray-700 truncate font-mono bg-white px-2 py-1 rounded border border-gray-200">
-                      {campaign.generatedUrl}
+                  <div className="p-4 bg-gray-50 border-b border-gray-100 space-y-3">
+                    {/* Website URL */}
+                    <div>
+                      <div className="text-xs text-gray-500 mb-1 font-semibold">Website URL:</div>
+                      <div className="flex items-center gap-2">
+                        <div className="flex-1 text-xs text-gray-700 truncate font-mono bg-white px-2 py-1 rounded border border-gray-200">
+                          {campaign.generatedUrl}
+                        </div>
+                        <button
+                          onClick={() => handleCopyUrl(campaign.generatedUrl, `web-${campaign.campaignId}`)}
+                          className={`p-2 rounded transition-all ${
+                            copiedId === `web-${campaign.campaignId}`
+                              ? 'bg-green-500 text-white'
+                              : 'bg-white border border-gray-300 text-gray-600 hover:bg-gray-50'
+                          }`}
+                          title="Copy Website URL"
+                        >
+                          {copiedId === `web-${campaign.campaignId}` ? (
+                            <Check size={16} />
+                          ) : (
+                            <Copy size={16} />
+                          )}
+                        </button>
+                      </div>
+                    </div>
+
+                    {/* Calendly URL */}
+                    <div>
+                      <div className="text-xs text-gray-500 mb-1 font-semibold">Calendly URL:</div>
+                      <div className="flex items-center gap-2">
+                        <div className="flex-1 text-xs text-gray-700 truncate font-mono bg-white px-2 py-1 rounded border border-gray-200">
+                          {`https://calendly.com/feedback-flashfire/30min?utm_source=${campaign.utmSource}&utm_medium=${campaign.utmMedium || 'direct'}`}
+                        </div>
+                        <button
+                          onClick={() => handleCopyUrl(
+                            `https://calendly.com/feedback-flashfire/30min?utm_source=${campaign.utmSource}&utm_medium=${campaign.utmMedium || 'direct'}`,
+                            `cal-${campaign.campaignId}`
+                          )}
+                          className={`p-2 rounded transition-all ${
+                            copiedId === `cal-${campaign.campaignId}`
+                              ? 'bg-green-500 text-white'
+                              : 'bg-white border border-gray-300 text-gray-600 hover:bg-gray-50'
+                          }`}
+                          title="Copy Calendly URL"
+                        >
+                          {copiedId === `cal-${campaign.campaignId}` ? (
+                            <Check size={16} />
+                          ) : (
+                            <Copy size={16} />
+                          )}
+                        </button>
+                      </div>
                     </div>
                   </div>
 
                   {/* Actions */}
                   <div className="p-4 space-y-2">
                     <div className="flex gap-2">
-                      <button
-                        onClick={() => handleCopyUrl(campaign.generatedUrl, campaign.campaignId)}
-                        className={`flex-1 py-2 px-4 rounded-lg font-semibold transition-all flex items-center justify-center gap-2 ${
-                          copiedId === campaign.campaignId
-                            ? 'bg-green-500 text-white'
-                            : 'bg-orange-500 text-white hover:bg-orange-600'
-                        }`}
-                      >
-                        {copiedId === campaign.campaignId ? (
-                          <>
-                            <Check size={16} />
-                            Copied!
-                          </>
-                        ) : (
-                          <>
-                            <Copy size={16} />
-                            Copy URL
-                          </>
-                        )}
-                      </button>
                       <button
                         onClick={() => handleViewStats(campaign)}
                         className="flex-1 py-2 px-4 rounded-lg font-semibold bg-gray-800 text-white hover:bg-gray-900 transition-all"
