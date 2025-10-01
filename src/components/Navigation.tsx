@@ -284,12 +284,14 @@ const Navigation: React.FC<NavigationProps> = ({
                   // Special handling for Employers (open in new tab)
                   if (item.name === "Employers") {
                     return (
-                      <a href="/employer-registration" target="_blank" rel="noopener noreferrer" key={item.name}>
-                        <button
-                          className="font-medium border-none text-gray-700 transition-colors duration-200 hover:text-orange-600 text-sm lg:text-base"
-                        >
-                          {item.name}
-                        </button>
+                      <a 
+                        href="/employer-registration" 
+                        target="_blank" 
+                        rel="noopener noreferrer" 
+                        key={item.name}
+                        className="font-medium text-gray-700 transition-colors duration-200 hover:text-orange-600 text-sm lg:text-base focus:outline-none focus:ring-0 focus:text-orange-500"
+                      >
+                        {item.name}
                       </a>
                     );
                   }
@@ -365,14 +367,15 @@ const Navigation: React.FC<NavigationProps> = ({
                   if (item.type === "route") {
                     if (item.name === "Employers") {
                       return (
-                        <a href="/employer-registration" target="_blank" rel="noopener noreferrer">
-                          <button
-                            key={item.name}
-                            onClick={() => setIsMenuOpen(false)}
-                            className="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-100 transition-colors duration-200"
-                          >
-                            {item.name}
-                          </button>
+                        <a 
+                          href="/employer-registration" 
+                          target="_blank" 
+                          rel="noopener noreferrer"
+                          key={item.name}
+                          onClick={() => setIsMenuOpen(false)}
+                          className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-100 transition-colors duration-200"
+                        >
+                          {item.name}
                         </a>
                       );
                     }
