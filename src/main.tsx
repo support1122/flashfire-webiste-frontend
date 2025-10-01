@@ -25,6 +25,7 @@ import HowItWorks from './components/HowItWorks.tsx';
 import SignupForm from './components/SignupForm.tsx';
 import EmployerForm from './components/EmployerForm.tsx';
 import EmployerPage from './components/EmployerPage.tsx';
+import CampaignManager from './components/CampaignManager.tsx';
 
 const routes=createBrowserRouter([
   {
@@ -51,6 +52,10 @@ const routes=createBrowserRouter([
   {
     path: '/employer-registration',
     element: <EmployerPage />
+  },
+  {
+    path: '/campaign',
+    element: <CampaignManager />
   }
 
 ]);

@@ -4,6 +4,7 @@ import TermsOfService from './TermsOfService';
 import PrivacyPolicy from './PrivacyPolicy';
 import RefundPolicy from './RefundPolicy';
 import PaymentPolicy from './PaymentPolicy';
+import CampaignManager from './CampaignManager';
 
 const Router = () => {
   const [currentPath, setCurrentPath] = useState(window.location.pathname);
@@ -36,6 +37,8 @@ const Router = () => {
         return <RefundPolicy />;
       case '/paymentpolicy':
         return <PaymentPolicy />;
+      case '/campaign':
+        return <CampaignManager />;
       default:
         return <App />;
     }
