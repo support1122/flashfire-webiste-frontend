@@ -7,8 +7,9 @@ import { trackCalendlyBooking } from '../utils/CRMTracking';
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
-function CalendlyModal({ setCalendlyModalVisibility, user }: { setCalendlyModalVisibility: (visible: boolean) => void , user: (any)}) {
+function CalendlyModal({ setCalendlyModalVisibility, user, isVisible }: { setCalendlyModalVisibility: (visible: boolean) => void , user: (any), isVisible: boolean }) {
   const [isLoading, setIsLoading] = useState(true);
+  const [hasLoadedOnce, setHasLoadedOnce] = useState(false);
   const [profileInvitee, setProfileInvitee] = useState<{ email?: string; name?: string } | null>(null);
   const navigate = useNavigate();
 
@@ -45,12 +46,29 @@ function CalendlyModal({ setCalendlyModalVisibility, user }: { setCalendlyModalV
 
 
   useEffect(() => {
-    console.log('📅 CalendlyModal mounted with user:', user);
-    console.log('📅 UTM params:', {
-      utm_source: localStorage.getItem('utm_source'),
-      utm_medium: localStorage.getItem('utm_medium'),
-      utm_campaign: localStorage.getItem('utm_campaign')
-    });
+    if (isVisible && !hasLoadedOnce) {
+      console.log('📅 CalendlyModal opened with user:', user);
+      console.log('📅 UTM params:', {
+        utm_source: localStorage.getItem('utm_source'),
+        utm_medium: localStorage.getItem('utm_medium'),
+        utm_campaign: localStorage.getItem('utm_campaign')
+      });
+      
+      // Hide loading after 3 seconds as fallback (reduced from 5 since we're preloading)
+      const timer = setTimeout(() => {
+        setIsLoading(false);
+        setHasLoadedOnce(true);
+        console.log('📅 Calendly loaded');
+      }, 3000);
+
+      return () => clearTimeout(timer);
+    } else if (isVisible && hasLoadedOnce) {
+      // Already loaded once, show immediately
+      setIsLoading(false);
+    }
+  }, [isVisible, hasLoadedOnce, user]);
+
+  useEffect(() => {
     // Restore any previously captured invitee profile info (from another Calendly flow)
     try {
       const savedName = localStorage.getItem('cal_invitee_name') || undefined;
@@ -59,14 +77,6 @@ function CalendlyModal({ setCalendlyModalVisibility, user }: { setCalendlyModalV
         setProfileInvitee({ name: savedName, email: savedEmail });
       }
     } catch {}
-    
-    // Hide loading after 5 seconds as fallback
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-      console.log('📅 Calendly loading timeout reached');
-    }, 5000);
-
-    return () => clearTimeout(timer);
   }, []);
 
   // Listen for Calendly scheduled events and capture to analytics/CRM
@@ -140,6 +150,11 @@ function CalendlyModal({ setCalendlyModalVisibility, user }: { setCalendlyModalV
       }
     }
   } as any);
+
+  // Keep component mounted but hidden to preserve loaded state
+  if (!isVisible) {
+    return null;
+  }
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center w-full">

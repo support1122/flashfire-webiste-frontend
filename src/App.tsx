@@ -3,6 +3,7 @@ import {useEffect, useState} from 'react';
 import { Outlet, useLocation } from "react-router-dom";
 import SignupForm from './components/SignupForm.tsx';
 import CalendlyModal from './components/CalendlyModal.tsx';
+import CalendlyPreloader from './components/CalendlyPreloader.tsx';
 import Navigation from './components/Navigation.tsx';
 import Footer from './components/Footer.tsx';
 import SalesPopup from './components/SalesPopUp.tsx';
@@ -157,10 +158,11 @@ function App() {
 
   return (
     <div className="min-h-screen bg-white">
+      <CalendlyPreloader />
       <Navigation setSignupFormVisibility={setSignupFormVisibility} setCalendlyModalVisibility={setCalendlyModalVisibility} />
       <Outlet context={{signupFormVisibility,calendlyModalVisibility, setSignupFormVisibility, setCalendlyModalVisibility }} />
       {signupFormVisibility && <SignupForm setCalendlyUser= {setCalendlyUser} setSignupFormVisibility={setSignupFormVisibility} setCalendlyModalVisibility={setCalendlyModalVisibility} />}
-      {calendlyModalVisibility && <CalendlyModal user={calendlyUser} setCalendlyModalVisibility={setCalendlyModalVisibility}/>}      
+      <CalendlyModal user={calendlyUser} setCalendlyModalVisibility={setCalendlyModalVisibility} isVisible={calendlyModalVisibility}/>      
       <SalesPopup />
       <Footer />
     </div>
