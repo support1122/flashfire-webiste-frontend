@@ -8,68 +8,109 @@ import { trackCalendlyBooking } from '../utils/CRMTracking';
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 function CalendlyModal({ setCalendlyModalVisibility, user, isVisible }: { setCalendlyModalVisibility: (visible: boolean) => void , user: (any), isVisible: boolean }) {
+  const [profileInvitee, setProfileInvitee] = useState<{ email?: string; name?: string } | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [hasLoadedOnce, setHasLoadedOnce] = useState(false);
-  const [profileInvitee, setProfileInvitee] = useState<{ email?: string; name?: string } | null>(null);
   const navigate = useNavigate();
 
   const handleClose = async () => {
-
     console.log("close clicked");
 
-  // ✅ First close modal
-  setCalendlyModalVisibility(false);
+    // ✅ First close modal
+    setCalendlyModalVisibility(false);
 
-  // ✅ Then navigate (slight delay ensures modal closes cleanly)
-  setTimeout(() => {
-    navigate("/");
-  }, 100);
-  try {
-    // Only send email if opened via SignupForm
-    if (user?.email) {
-      await fetch(`${API_BASE_URL}/sendReminderEmail`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          email: user.email,
-          name: user.fullName,
-        }),
-      });
-      console.log("Reminder email sent!");
+    // ✅ Then navigate (slight delay ensures modal closes cleanly)
+    setTimeout(() => {
+      navigate("/");
+    }, 100);
+
+    try {
+      // Only send email if opened via SignupForm
+      if (user?.email) {
+        await fetch(`${API_BASE_URL}/sendReminderEmail`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            email: user.email,
+            name: user.fullName,
+          }),
+        });
+        console.log("Reminder email sent!");
+      }
+    } catch (err) {
+      console.error("Failed to send email:", err);
     }
-  } catch (err) {
-    console.error("Failed to send email:", err);
-  }
+  };
 
-  
-};
-
-
+  // Handle loading state when modal opens
   useEffect(() => {
-    if (isVisible && !hasLoadedOnce) {
+    if (isVisible) {
       console.log('📅 CalendlyModal opened with user:', user);
       console.log('📅 UTM params:', {
         utm_source: localStorage.getItem('utm_source'),
         utm_medium: localStorage.getItem('utm_medium'),
         utm_campaign: localStorage.getItem('utm_campaign')
       });
-      
-      // Hide loading after 3 seconds as fallback (reduced from 5 since we're preloading)
-      const timer = setTimeout(() => {
-        setIsLoading(false);
-        setHasLoadedOnce(true);
-        console.log('📅 Calendly loaded');
-      }, 3000);
 
-      return () => clearTimeout(timer);
-    } else if (isVisible && hasLoadedOnce) {
-      // Already loaded once, show immediately
-      setIsLoading(false);
+      // Always show loader briefly to cover Calendly's own loader
+      setIsLoading(true);
+      
+      // Determine loading duration based on whether it's been loaded before
+      const loadingDuration = hasLoadedOnce ? 800 : 3000; // 0.8s for subsequent opens, 3s for first
+      
+      let checkCount = 0;
+      const maxChecks = loadingDuration / 100; // Adjust checks based on duration
+      
+      const checkCalendlyLoaded = setInterval(() => {
+        checkCount++;
+        const calendlyIframe = document.querySelector('iframe[src*="calendly.com"]');
+        
+        // For subsequent loads, hide faster
+        if (hasLoadedOnce && calendlyIframe && checkCount >= 5) {
+          setIsLoading(false);
+          clearInterval(checkCalendlyLoaded);
+          console.log('✅ Calendly widget ready (cached)');
+        }
+        // For first load, wait for full load
+        else if (!hasLoadedOnce && calendlyIframe) {
+          try {
+            const iframeLoaded = calendlyIframe.getAttribute('data-loaded');
+            if (iframeLoaded || checkCount >= maxChecks) {
+              setIsLoading(false);
+              setHasLoadedOnce(true);
+              clearInterval(checkCalendlyLoaded);
+              console.log('✅ Calendly widget loaded');
+            }
+          } catch (e) {
+            // Cross-origin restriction, just wait for the timeout
+          }
+        }
+        
+        // Stop checking after max attempts
+        if (checkCount >= maxChecks) {
+          clearInterval(checkCalendlyLoaded);
+        }
+      }, 100);
+
+      // Fallback timer based on whether loaded before
+      const fallbackTimer = setTimeout(() => {
+        setIsLoading(false);
+        if (!hasLoadedOnce) {
+          setHasLoadedOnce(true);
+        }
+        clearInterval(checkCalendlyLoaded);
+        console.log('📅 Calendly loaded (fallback)');
+      }, loadingDuration);
+
+      return () => {
+        clearInterval(checkCalendlyLoaded);
+        clearTimeout(fallbackTimer);
+      };
     }
   }, [isVisible, hasLoadedOnce, user]);
 
+  // Restore invitee profile info on mount
   useEffect(() => {
-    // Restore any previously captured invitee profile info (from another Calendly flow)
     try {
       const savedName = localStorage.getItem('cal_invitee_name') || undefined;
       const savedEmail = localStorage.getItem('cal_invitee_email') || undefined;
@@ -151,13 +192,11 @@ function CalendlyModal({ setCalendlyModalVisibility, user, isVisible }: { setCal
     }
   } as any);
 
-  // Keep component mounted but hidden to preserve loaded state
-  if (!isVisible) {
-    return null;
-  }
-
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center w-full">
+    <div 
+      className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center w-full"
+      style={{ display: isVisible ? 'flex' : 'none' }}
+    >
       <div className="relative bg-white max-w-5xl w-full max-h-[90vh] overflow-hidden rounded-xl shadow-2xl flex flex-col lg:flex-row">
         {/* Close button */}
         <button
@@ -185,26 +224,24 @@ function CalendlyModal({ setCalendlyModalVisibility, user, isVisible }: { setCal
           {/* Calendar - Full Height */}
           <div className="bg-white relative" style={{ height: 'calc(100vh - 100px)' }}>
             {isLoading && (
-              <div className="absolute inset-0 bg-white flex items-center justify-center z-10">
-                <div className="text-center">
-                  <h3 className="text-lg font-medium text-gray-700 mb-6">Find Your Perfect Timing</h3>
-                  <div className="w-12 h-12 border-4 border-orange-500 border-t-transparent rounded-full animate-spin mx-auto"></div>
+              <div className="absolute inset-0 bg-white flex items-center justify-center z-50">
+                <div className="text-center px-6">
+                  <div className="w-16 h-16 border-4 border-orange-500 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+                  <p className="text-gray-600 text-sm">Loading calendar...</p>
                 </div>
               </div>
             )}
             <InlineWidget
-              // url = 'https://calendly.com/biswajitshrm66/30min'
-              // mainUrl="https://calendly.com/feedback-flashfire/30min"
               url={`https://calendly.com/feedback-flashfire/30min?utm_source=${
-    localStorage.getItem("utm_source") || "webpage_visit"
-  }&utm_medium=${localStorage.getItem("utm_medium") || "website"}`}
+                localStorage.getItem("utm_source") || "webpage_visit"
+              }&utm_medium=${localStorage.getItem("utm_medium") || "website"}`}
               prefill={{
-    name: user?.fullName || "",
-    email: user?.email || "",
-    customAnswers: {
-      a3: user?.countryCode + user?.phone || "", // phone is the 3rd question
-    },
-  }}
+                name: user?.fullName || "",
+                email: user?.email || "",
+                customAnswers: {
+                  a3: (user?.countryCode || "") + (user?.phone || ""), // phone is the 3rd question
+                },
+              }}
               styles={{
                 height: '100%',
                 width: '100%',
@@ -297,25 +334,25 @@ function CalendlyModal({ setCalendlyModalVisibility, user, isVisible }: { setCal
           {/* Calendar Section */}
           <div className="w-3/5 bg-white overflow-hidden rounded-r-xl relative">
             {isLoading && (
-              <div className="absolute inset-0 bg-white flex items-center justify-center z-10">
-                <div className="text-center">
-                  <div className="w-12 h-12 border-4 border-orange-500 border-t-transparent rounded-full animate-spin mx-auto mb-6"></div>
-                  <h3 className="text-xl font-medium text-gray-700">Finding best slots for you...</h3>
+              <div className="absolute inset-0 bg-white flex items-center justify-center z-50">
+                <div className="text-center px-8">
+                  <div className="w-20 h-20 border-4 border-orange-500 border-t-transparent rounded-full animate-spin mx-auto mb-6"></div>
+                  <p className="text-gray-700 text-lg font-medium">Finding best slots for you...</p>
+                  <p className="text-gray-500 text-sm mt-2">This will only take a moment</p>
                 </div>
               </div>
             )}
             <InlineWidget
-              // url="https://calendly.com/biswajitshrm66/30min"
               url={`https://calendly.com/feedback-flashfire/30min?utm_source=${
-    localStorage.getItem("utm_source") || "webpage_visit"
-  }&utm_medium=${localStorage.getItem("utm_medium") || "website"}`}
+                localStorage.getItem("utm_source") || "webpage_visit"
+              }&utm_medium=${localStorage.getItem("utm_medium") || "website"}`}
               prefill={{
-    name: user?.fullName || "",
-    email: user?.email || "",
-    customAnswers: {
-      a3: user?.phone || "", // phone is the 3rd question
-    },
-  }}
+                name: user?.fullName || "",
+                email: user?.email || "",
+                customAnswers: {
+                  a3: (user?.countryCode || "") + (user?.phone || ""), // phone is the 3rd question
+                },
+              }}
               styles={{
                 height: '100%',
                 width: '100%',
@@ -337,4 +374,3 @@ function CalendlyModal({ setCalendlyModalVisibility, user, isVisible }: { setCal
 }
 
 export default CalendlyModal;
-
