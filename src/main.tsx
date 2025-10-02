@@ -26,6 +26,7 @@ import SignupForm from './components/SignupForm.tsx';
 import EmployerForm from './components/EmployerForm.tsx';
 import EmployerPage from './components/EmployerPage.tsx';
 import CampaignManager from './components/CampaignManager.tsx';
+import ProtectedCampaignManager from './components/ProtectedCampaignManager.tsx';
 
 const routes=createBrowserRouter([
   {
@@ -55,7 +56,8 @@ const routes=createBrowserRouter([
   },
   {
     path: '/campaign',
-    element: <CampaignManager />
+    // Gate access behind password prompt inside ProtectedCampaignManager
+    element: <ProtectedCampaignManager />
   }
 
 ]);
