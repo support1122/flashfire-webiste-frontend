@@ -15,6 +15,7 @@ interface Campaign {
   totalBookings: number;
   isActive: boolean;
   createdAt: string;
+  pageVisits?: any[];
 }
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'https://api.flashfirejobs.com';
@@ -86,13 +87,34 @@ export default function CampaignManager() {
     });
   };
 
+  // Filter page visits by date range
+  const getFilteredPageVisits = (campaign: Campaign) => {
+    if (!fromDate || !toDate) {
+      return campaign.pageVisits || [];
+    }
+    
+    const startDate = new Date(fromDate);
+    startDate.setHours(0, 0, 0, 0);
+    const endDate = new Date(toDate);
+    endDate.setHours(23, 59, 59, 999);
+    
+    return (campaign.pageVisits || []).filter((visit: any) => {
+      const visitDate = new Date(visit.timestamp);
+      return visitDate >= startDate && visitDate <= endDate;
+    });
+  };
+
   // Get filtered metrics for a campaign
   const getFilteredMetrics = (campaign: Campaign) => {
     const filteredBookings = getFilteredBookings(campaign.utmSource);
+    const filteredVisits = getFilteredPageVisits(campaign);
+    
+    // Calculate unique visitors from filtered visits
+    const uniqueVisitorIds = new Set(filteredVisits.map((visit: any) => visit.visitorId));
     
     return {
-      totalClicks: campaign.totalClicks, // Keep original clicks (no date filtering for clicks)
-      uniqueVisitors: campaign.uniqueVisitorsCount, // Keep original unique visitors
+      totalClicks: filteredVisits.length, // Filter clicks by date range
+      uniqueVisitors: uniqueVisitorIds.size, // Filter unique visitors by date range
       totalBookings: filteredBookings.length,
       bookings: filteredBookings
     };
@@ -526,6 +548,7 @@ export default function CampaignManager() {
         <CampaignStatsModal
           campaign={selectedCampaign}
           filteredBookings={getFilteredBookings(selectedCampaign.utmSource)}
+          filteredMetrics={getFilteredMetrics(selectedCampaign)}
           dateRange={{ fromDate, toDate }}
           onClose={() => {
             setShowStatsModal(false);
