@@ -67,13 +67,17 @@ export default function CampaignManager() {
       url.searchParams.set('from', fromDate);
       url.searchParams.set('to', toDate);
       
+      console.log('API URL:', url.toString());
       const response = await fetch(url.toString());
       const data = await response.json();
+      
+      console.log('API Response:', data);
       
       if (data.success) {
         // Convert array to object keyed by campaignId for easy lookup
         const metricsObj: {[key: string]: any} = {};
         data.data.forEach((campaign: any) => {
+          console.log(`Campaign ${campaign.campaignId} filtered bookings:`, campaign.bookings);
           metricsObj[campaign.campaignId] = {
             totalClicks: campaign.totalClicks || 0,
             uniqueVisitors: campaign.uniqueVisitors || 0,
@@ -81,6 +85,7 @@ export default function CampaignManager() {
             bookings: campaign.bookings || []
           };
         });
+        console.log('Final filtered metrics object:', metricsObj);
         setFilteredMetrics(metricsObj);
       } else {
         console.error('Failed to fetch filtered metrics:', data.message);
@@ -97,6 +102,7 @@ export default function CampaignManager() {
   // Handle date range change
   const handleDateRangeChange = () => {
     if (fromDate && toDate) {
+      console.log('Fetching filtered metrics for date range:', fromDate, 'to', toDate);
       fetchFilteredMetrics();
     } else {
       setFilteredMetrics({});
