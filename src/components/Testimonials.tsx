@@ -62,6 +62,9 @@ const screenshots = [
   "/images/image16.png",
   "/images/image17.png",
   "/images/image18.png",
+  "/images/image19.png",
+  "/images/image20.png",
+  "/images/image21.png",
 
 ]
 
