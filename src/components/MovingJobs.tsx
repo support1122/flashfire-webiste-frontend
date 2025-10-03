@@ -166,7 +166,7 @@ const MovingJobs: React.FC<MovingJobsProps> = ({ setSignupFormVisibility }) => {
             </div>
             
             <div className="bg-white p-6 sm:p-8 rounded-xl sm:rounded-2xl shadow-lg border border-gray-100 transition-transform duration-200 hover:shadow-2xl hover:scale-105">
-              <div className="text-4xl sm:text-5xl lg:text-6xl font-bold text-orange-600 mb-3 sm:mb-4">50k+</div>
+              <div className="text-4xl sm:text-5xl lg:text-6xl font-bold text-orange-600 mb-3 sm:mb-4">100k+</div>
               <h3 className="text-lg sm:text-xl font-semibold text-gray-900 mb-2 sm:mb-3">
                Applications Sent Smartly
               </h3>
