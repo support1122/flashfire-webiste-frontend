@@ -40,6 +40,12 @@ interface CampaignDetails {
 interface Props {
   campaign: Campaign;
   filteredBookings?: any[];
+  filteredMetrics?: {
+    totalClicks: number;
+    uniqueVisitors: number;
+    totalBookings: number;
+    bookings: any[];
+  };
   dateRange?: { fromDate: string; toDate: string };
   onClose: () => void;
   onDelete?: () => void;
@@ -47,24 +53,24 @@ interface Props {
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'https://api.flashfirejobs.com';
 
-export default function CampaignStatsModal({ campaign, filteredBookings, dateRange, onClose, onDelete }: Props) {
+export default function CampaignStatsModal({ campaign, filteredBookings, filteredMetrics, dateRange, onClose, onDelete }: Props) {
   const [details, setDetails] = useState<CampaignDetails | null>(null);
   const [loading, setLoading] = useState(true);
   const [isDeleting, setIsDeleting] = useState(false);
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
 
   useEffect(() => {
-    if (filteredBookings && dateRange) {
-      // Use filtered bookings when available
+    if (filteredBookings && filteredMetrics && dateRange) {
+      // Use filtered data when available
       setDetails({
         campaign: campaign,
         bookings: filteredBookings,
         stats: {
-          totalClicks: campaign.totalClicks,
-          uniqueVisitors: campaign.uniqueVisitorsCount,
-          totalBookings: campaign.totalBookings,
-          conversionRate: campaign.uniqueVisitorsCount > 0 ? 
-            ((campaign.totalBookings / campaign.uniqueVisitorsCount) * 100).toFixed(2) : '0.00'
+          totalClicks: filteredMetrics.totalClicks,
+          uniqueVisitors: filteredMetrics.uniqueVisitors,
+          totalBookings: filteredMetrics.totalBookings,
+          conversionRate: filteredMetrics.uniqueVisitors > 0 ? 
+            ((filteredMetrics.totalBookings / filteredMetrics.uniqueVisitors) * 100).toFixed(2) : '0.00'
         }
       });
       setLoading(false);
@@ -72,7 +78,7 @@ export default function CampaignStatsModal({ campaign, filteredBookings, dateRan
       // Fetch all data when no filter is applied
       fetchCampaignDetails();
     }
-  }, [campaign.campaignId, filteredBookings, dateRange]);
+  }, [campaign.campaignId, filteredBookings, filteredMetrics, dateRange]);
 
   const fetchCampaignDetails = async () => {
     try {
