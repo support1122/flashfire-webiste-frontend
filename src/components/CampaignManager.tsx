@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react';
 import { Check, Copy, TrendingUp, Users, MousePointerClick, Calendar, Trash2 } from 'lucide-react';
 import CampaignStatsModal from './CampaignStatsModal';
@@ -29,6 +30,12 @@ export default function CampaignManager() {
   const [showStatsModal, setShowStatsModal] = useState(false);
   const [deletingId, setDeletingId] = useState<string | null>(null);
   const [confirmDeleteId, setConfirmDeleteId] = useState<string | null>(null);
+  
+  // Date range filter for campaign metrics
+  const [fromDate, setFromDate] = useState<string>('');
+  const [toDate, setToDate] = useState<string>('');
+  const [filteredMetrics, setFilteredMetrics] = useState<{[key: string]: any}>({});
+  const [loadingMetrics, setLoadingMetrics] = useState(false);
 
   // Fetch all campaigns
   const fetchCampaigns = async () => {
@@ -46,6 +53,62 @@ export default function CampaignManager() {
   useEffect(() => {
     fetchCampaigns();
   }, []);
+
+  // Fetch filtered metrics for all campaigns based on date range
+  const fetchFilteredMetrics = async () => {
+    if (!fromDate || !toDate) {
+      setFilteredMetrics({});
+      return;
+    }
+
+    setLoadingMetrics(true);
+    try {
+      const url = new URL(`${API_BASE_URL}/api/campaigns/report`);
+      url.searchParams.set('from', fromDate);
+      url.searchParams.set('to', toDate);
+      
+      const response = await fetch(url.toString());
+      const data = await response.json();
+      
+      if (data.success) {
+        // Convert array to object keyed by campaignId for easy lookup
+        const metricsObj: {[key: string]: any} = {};
+        data.data.forEach((campaign: any) => {
+          metricsObj[campaign.campaignId] = {
+            totalClicks: campaign.totalClicks || 0,
+            uniqueVisitors: campaign.uniqueVisitors || 0,
+            totalBookings: campaign.totalBookings || 0,
+            bookings: campaign.bookings || []
+          };
+        });
+        setFilteredMetrics(metricsObj);
+      } else {
+        console.error('Failed to fetch filtered metrics:', data.message);
+        setFilteredMetrics({});
+      }
+    } catch (error) {
+      console.error('Error fetching filtered metrics:', error);
+      setFilteredMetrics({});
+    } finally {
+      setLoadingMetrics(false);
+    }
+  };
+
+  // Handle date range change
+  const handleDateRangeChange = () => {
+    if (fromDate && toDate) {
+      fetchFilteredMetrics();
+    } else {
+      setFilteredMetrics({});
+    }
+  };
+
+  // Clear date filter
+  const clearDateFilter = () => {
+    setFromDate('');
+    setToDate('');
+    setFilteredMetrics({});
+  };
 
   // Create new campaign
   const handleCreateCampaign = async (e: React.FormEvent) => {
@@ -102,7 +165,13 @@ export default function CampaignManager() {
 
   // Open stats modal
   const handleViewStats = (campaign: Campaign) => {
-    setSelectedCampaign(campaign);
+    setSelectedCampaign({
+      ...campaign,
+      // Override with filtered metrics if available
+      totalClicks: filteredMetrics[campaign.campaignId]?.totalClicks ?? campaign.totalClicks,
+      uniqueVisitorsCount: filteredMetrics[campaign.campaignId]?.uniqueVisitors ?? campaign.uniqueVisitorsCount,
+      totalBookings: filteredMetrics[campaign.campaignId]?.totalBookings ?? campaign.totalBookings,
+    });
     setShowStatsModal(true);
   };
 
@@ -211,13 +280,92 @@ export default function CampaignManager() {
           </form>
         </div>
 
-        {/* Campaign Cards */}
-        <div className="mb-8">
+        {/* Date Range Filter */}
+        <div className="bg-white rounded-2xl shadow-xl p-6 mb-8 border border-orange-100">
           <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center">
             <span className="bg-orange-500 text-white rounded-full w-8 h-8 flex items-center justify-center mr-3 text-sm">
               2
             </span>
+            Filter Campaign Metrics by Date Range
+          </h2>
+          
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-4 items-end">
+            <div>
+              <label className="block text-sm font-semibold text-gray-700 mb-2">From Date</label>
+              <input 
+                type="date" 
+                value={fromDate} 
+                onChange={(e) => {
+                  setFromDate(e.target.value);
+                  if (e.target.value && toDate) {
+                    handleDateRangeChange();
+                  }
+                }} 
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all" 
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-semibold text-gray-700 mb-2">To Date</label>
+              <input 
+                type="date" 
+                value={toDate} 
+                onChange={(e) => {
+                  setToDate(e.target.value);
+                  if (fromDate && e.target.value) {
+                    handleDateRangeChange();
+                  }
+                }} 
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all" 
+              />
+            </div>
+            <div>
+              <button
+                onClick={handleDateRangeChange}
+                disabled={!fromDate || !toDate || loadingMetrics}
+                className={`w-full py-3 px-6 rounded-lg font-semibold transition-all ${
+                  (!fromDate || !toDate || loadingMetrics)
+                    ? 'bg-gray-400 text-white cursor-not-allowed'
+                    : 'bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white shadow-lg hover:shadow-xl'
+                }`}
+              >
+                {loadingMetrics ? 'Loading...' : 'Apply Filter'}
+              </button>
+            </div>
+            <div>
+              <button
+                onClick={clearDateFilter}
+                className="w-full py-3 px-6 bg-gray-500 hover:bg-gray-600 text-white rounded-lg font-semibold transition-all"
+              >
+                Clear Filter
+              </button>
+            </div>
+          </div>
+          
+          {(fromDate || toDate) && (
+            <div className="mt-4 p-3 bg-orange-50 rounded-lg border border-orange-200">
+              <p className="text-sm text-orange-800">
+                <strong>Filter Active:</strong> Showing metrics for{' '}
+                {fromDate && toDate 
+                  ? `${new Date(fromDate).toLocaleDateString()} - ${new Date(toDate).toLocaleDateString()}`
+                  : 'selected date range'
+                }
+              </p>
+            </div>
+          )}
+        </div>
+
+        {/* Campaign Cards */}
+        <div className="mb-8">
+          <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+            <span className="bg-orange-500 text-white rounded-full w-8 h-8 flex items-center justify-center mr-3 text-sm">
+              3
+            </span>
             Your Campaigns ({campaigns.length})
+            {(fromDate || toDate) && (
+              <span className="ml-2 text-sm font-normal text-orange-600">
+                (showing filtered metrics)
+              </span>
+            )}
           </h2>
 
           {campaigns.length === 0 ? (
@@ -267,27 +415,42 @@ export default function CampaignManager() {
                         <MousePointerClick size={16} />
                       </div>
                       <div className="text-2xl font-bold text-gray-900">
-                        {campaign.totalClicks}
+                        {filteredMetrics[campaign.campaignId]?.totalClicks ?? campaign.totalClicks}
                       </div>
-                      <div className="text-xs text-gray-500">Clicks</div>
+                      <div className="text-xs text-gray-500">
+                        Clicks
+                        {filteredMetrics[campaign.campaignId] && (
+                          <span className="block text-orange-600">(filtered)</span>
+                        )}
+                      </div>
                     </div>
                     <div>
                       <div className="flex items-center justify-center text-blue-500 mb-1">
                         <Users size={16} />
                       </div>
                       <div className="text-2xl font-bold text-gray-900">
-                        {campaign.uniqueVisitorsCount}
+                        {filteredMetrics[campaign.campaignId]?.uniqueVisitors ?? campaign.uniqueVisitorsCount}
                       </div>
-                      <div className="text-xs text-gray-500">Unique</div>
+                      <div className="text-xs text-gray-500">
+                        Unique
+                        {filteredMetrics[campaign.campaignId] && (
+                          <span className="block text-orange-600">(filtered)</span>
+                        )}
+                      </div>
                     </div>
                     <div>
                       <div className="flex items-center justify-center text-green-500 mb-1">
                         <Calendar size={16} />
                       </div>
                       <div className="text-2xl font-bold text-gray-900">
-                        {campaign.totalBookings}
+                        {filteredMetrics[campaign.campaignId]?.totalBookings ?? campaign.totalBookings}
                       </div>
-                      <div className="text-xs text-gray-500">Bookings</div>
+                      <div className="text-xs text-gray-500">
+                        Bookings
+                        {filteredMetrics[campaign.campaignId] && (
+                          <span className="block text-orange-600">(filtered)</span>
+                        )}
+                      </div>
                     </div>
                   </div>
 
@@ -385,6 +548,8 @@ export default function CampaignManager() {
       {showStatsModal && selectedCampaign && (
         <CampaignStatsModal
           campaign={selectedCampaign}
+          filteredBookings={filteredMetrics[selectedCampaign.campaignId]?.bookings}
+          dateRange={{ fromDate, toDate }}
           onClose={() => {
             setShowStatsModal(false);
             setSelectedCampaign(null);
@@ -398,4 +563,3 @@ export default function CampaignManager() {
     </div>
   );
 }
-
