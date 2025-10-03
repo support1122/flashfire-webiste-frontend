@@ -29,14 +29,6 @@ export default function CampaignManager() {
   const [showStatsModal, setShowStatsModal] = useState(false);
   const [deletingId, setDeletingId] = useState<string | null>(null);
   const [confirmDeleteId, setConfirmDeleteId] = useState<string | null>(null);
-  // Date filter and report data
-  const [fromDate, setFromDate] = useState<string>(() => new Date().toISOString().slice(0,10));
-  const [toDate, setToDate] = useState<string>(() => new Date().toISOString().slice(0,10));
-  const [reportLoading, setReportLoading] = useState(false);
-  const [report, setReport] = useState<any[]>([]);
-  // Campaign date filter
-  const [campaignFilterDate, setCampaignFilterDate] = useState<string>('');
-  const [showAllCampaigns, setShowAllCampaigns] = useState<boolean>(true);
 
   // Fetch all campaigns
   const fetchCampaigns = async () => {
@@ -54,28 +46,6 @@ export default function CampaignManager() {
   useEffect(() => {
     fetchCampaigns();
   }, []);
-
-  // Filter campaigns based on selected date
-  const filteredCampaigns = campaigns.filter(campaign => {
-    if (showAllCampaigns || !campaignFilterDate) {
-      return true;
-    }
-    
-    const campaignDate = new Date(campaign.createdAt).toISOString().slice(0, 10);
-    return campaignDate === campaignFilterDate;
-  });
-
-  // Handle campaign date filter change
-  const handleCampaignDateFilter = (date: string) => {
-    setCampaignFilterDate(date);
-    setShowAllCampaigns(!date);
-  };
-
-  // Clear campaign filter
-  const clearCampaignFilter = () => {
-    setCampaignFilterDate('');
-    setShowAllCampaigns(true);
-  };
 
   // Create new campaign
   const handleCreateCampaign = async (e: React.FormEvent) => {
@@ -241,134 +211,14 @@ export default function CampaignManager() {
           </form>
         </div>
 
-        {/* Date Filter + Report */}
-        <div className="bg-white rounded-2xl shadow-xl p-6 mb-12 border border-orange-100">
-          <h2 className="text-2xl font-bold text-gray-900 mb-4 flex items-center">
-            <span className="bg-orange-500 text-white rounded-full w-8 h-8 flex items-center justify-center mr-3 text-sm">2</span>
-            Filter by Date
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-4 items-end">
-            <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-2">From</label>
-              <input type="date" value={fromDate} onChange={(e)=>setFromDate(e.target.value)} className="w-full px-3 py-2 border border-gray-300 rounded-lg" />
-            </div>
-            <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-2">To</label>
-              <input type="date" value={toDate} onChange={(e)=>setToDate(e.target.value)} className="w-full px-3 py-2 border border-gray-300 rounded-lg" />
-            </div>
-            <div className="md:col-span-2">
-              <button
-                onClick={async ()=>{
-                  setReportLoading(true);
-                  try{
-                    const url = new URL(`${API_BASE_URL}/api/campaigns/report`);
-                    url.searchParams.set('from', fromDate);
-                    url.searchParams.set('to', toDate);
-                    const res = await fetch(url.toString());
-                    const data = await res.json();
-                    if(data.success){ setReport(data.data || []);} else { alert(data.message || 'Failed to load report'); }
-                  }catch(err){ console.error(err); alert('Failed to load report'); }
-                  finally{ setReportLoading(false);}                
-                }}
-                className="w-full md:w-auto py-3 px-6 bg-gradient-to-r from-orange-500 to-orange-600 text-white rounded-lg font-semibold"
-              >
-                {reportLoading ? 'Loading...' : 'Load Report'}
-              </button>
-            </div>
-          </div>
-
-          {/* Report list */}
-          {report.length > 0 && (
-            <div className="mt-6 space-y-6">
-              {report.map((r)=> (
-                <div key={r.campaignId} className="border rounded-lg p-4">
-                  <div className="flex items-center justify-between">
-                    <h3 className="text-lg font-semibold">{r.campaignName}</h3>
-                    <div className="grid grid-cols-4 gap-4 text-center">
-                      <div>
-                        <div className="text-2xl font-bold">{r.totalClicks}</div>
-                        <div className="text-xs text-gray-500">Total Clicks</div>
-                      </div>
-                      <div>
-                        <div className="text-2xl font-bold">{r.uniqueVisitors}</div>
-                        <div className="text-xs text-gray-500">Unique Visitors</div>
-                      </div>
-                      <div>
-                        <div className="text-2xl font-bold">{r.totalBookings}</div>
-                        <div className="text-xs text-gray-500">Bookings</div>
-                      </div>
-                      <div>
-                        <div className="text-2xl font-bold">{r.conversionRate}%</div>
-                        <div className="text-xs text-gray-500">Conversion Rate</div>
-                      </div>
-                    </div>
-                  </div>
-                  {/* Bookings table */}
-                  {r.bookings?.length > 0 && (
-                    <div className="mt-4 overflow-x-auto">
-                      <table className="min-w-full text-sm">
-                        <thead>
-                          <tr className="text-left text-gray-600">
-                            <th className="py-2 pr-4">Booking ID</th>
-                            <th className="py-2 pr-4">Name</th>
-                            <th className="py-2 pr-4">Email</th>
-                            <th className="py-2 pr-4">Phone</th>
-                            <th className="py-2 pr-4">Meeting Time</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          {r.bookings.map((b:any)=> (
-                            <tr key={b.bookingId} className="border-t">
-                              <td className="py-2 pr-4 font-mono">{b.bookingId}</td>
-                              <td className="py-2 pr-4">{b.clientName}</td>
-                              <td className="py-2 pr-4">{b.clientEmail}</td>
-                              <td className="py-2 pr-4">{b.clientPhone || '-'}</td>
-                              <td className="py-2 pr-4">{new Date(b.scheduledEventStartTime || b.bookingCreatedAt).toLocaleString()}</td>
-                            </tr>
-                          ))}
-                        </tbody>
-                      </table>
-                    </div>
-                  )}
-                </div>
-              ))}
-            </div>
-          )}
-        </div>
-
         {/* Campaign Cards */}
         <div className="mb-8">
-          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6 gap-4">
-            <h2 className="text-2xl font-bold text-gray-900 flex items-center">
-              <span className="bg-orange-500 text-white rounded-full w-8 h-8 flex items-center justify-center mr-3 text-sm">
-                2
-              </span>
-              Your Campaigns ({filteredCampaigns.length}{showAllCampaigns ? '' : ` of ${campaigns.length}`})
-            </h2>
-            
-            {/* Date Filter */}
-            <div className="flex items-center gap-3">
-              <label htmlFor="campaignDateFilter" className="text-sm font-semibold text-gray-700 whitespace-nowrap">
-                Filter by Date:
-              </label>
-              <input
-                type="date"
-                id="campaignDateFilter"
-                value={campaignFilterDate}
-                onChange={(e) => handleCampaignDateFilter(e.target.value)}
-                className="px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all"
-              />
-              {!showAllCampaigns && (
-                <button
-                  onClick={clearCampaignFilter}
-                  className="px-3 py-2 text-sm bg-gray-100 text-gray-600 rounded-lg hover:bg-gray-200 transition-all"
-                  title="Show all campaigns"
-                >
-                  Clear Filter
-                </button>
-              )}
-            </div>
-          </div>
+          <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+            <span className="bg-orange-500 text-white rounded-full w-8 h-8 flex items-center justify-center mr-3 text-sm">
+              2
+            </span>
+            Your Campaigns ({campaigns.length})
+          </h2>
 
           {campaigns.length === 0 ? (
             <div className="bg-white rounded-2xl shadow-md p-12 text-center border border-gray-200">
@@ -382,27 +232,9 @@ export default function CampaignManager() {
                 Create your first campaign to start tracking!
               </p>
             </div>
-          ) : filteredCampaigns.length === 0 ? (
-            <div className="bg-white rounded-2xl shadow-md p-12 text-center border border-gray-200">
-              <div className="text-gray-400 mb-4">
-                <Calendar size={64} className="mx-auto" />
-              </div>
-              <h3 className="text-xl font-semibold text-gray-700 mb-2">
-                No campaigns found for this date
-              </h3>
-              <p className="text-gray-500 mb-4">
-                No campaigns were created on {campaignFilterDate ? new Date(campaignFilterDate).toLocaleDateString() : 'the selected date'}.
-              </p>
-              <button
-                onClick={clearCampaignFilter}
-                className="px-4 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600 transition-all"
-              >
-                Show All Campaigns
-              </button>
-            </div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {filteredCampaigns.map((campaign) => (
+              {campaigns.map((campaign) => (
                 <div
                   key={campaign._id}
                   className="bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all border border-orange-100 overflow-hidden group"
@@ -425,9 +257,6 @@ export default function CampaignManager() {
                       >
                         {campaign.isActive ? 'Active' : 'Inactive'}
                       </span>
-                    </div>
-                    <div className="mt-2 text-orange-100 text-xs">
-                      Created: {new Date(campaign.createdAt).toLocaleDateString()}
                     </div>
                   </div>
 
