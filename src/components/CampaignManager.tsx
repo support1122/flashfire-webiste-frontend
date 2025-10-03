@@ -69,8 +69,9 @@ export default function CampaignManager() {
       
       console.log('API URL:', url.toString());
       const response = await fetch(url.toString());
-      const data = await response.json();
+      console.log('Response status:', response.status, response.statusText);
       
+      const data = await response.json();
       console.log('API Response:', data);
       
       if (data.success) {
@@ -89,10 +90,12 @@ export default function CampaignManager() {
         setFilteredMetrics(metricsObj);
       } else {
         console.error('Failed to fetch filtered metrics:', data.message);
+        alert(`Failed to fetch filtered metrics: ${data.message}. Please try again or contact support.`);
         setFilteredMetrics({});
       }
     } catch (error) {
       console.error('Error fetching filtered metrics:', error);
+      alert(`Network error while fetching filtered metrics: ${error instanceof Error ? error.message : 'Unknown error'}. Please check your connection and try again.`);
       setFilteredMetrics({});
     } finally {
       setLoadingMetrics(false);
