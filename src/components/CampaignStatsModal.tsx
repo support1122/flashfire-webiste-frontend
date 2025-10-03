@@ -54,8 +54,25 @@ export default function CampaignStatsModal({ campaign, filteredBookings, dateRan
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
 
   useEffect(() => {
-    fetchCampaignDetails();
-  }, [campaign.campaignId]);
+    if (filteredBookings && dateRange) {
+      // Use filtered bookings when available
+      setDetails({
+        campaign: campaign,
+        bookings: filteredBookings,
+        stats: {
+          totalClicks: campaign.totalClicks,
+          uniqueVisitors: campaign.uniqueVisitorsCount,
+          totalBookings: campaign.totalBookings,
+          conversionRate: campaign.uniqueVisitorsCount > 0 ? 
+            ((campaign.totalBookings / campaign.uniqueVisitorsCount) * 100).toFixed(2) : '0.00'
+        }
+      });
+      setLoading(false);
+    } else {
+      // Fetch all data when no filter is applied
+      fetchCampaignDetails();
+    }
+  }, [campaign.campaignId, filteredBookings, dateRange]);
 
   const fetchCampaignDetails = async () => {
     try {
