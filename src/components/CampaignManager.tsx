@@ -34,8 +34,7 @@ export default function CampaignManager() {
   // Date range filter for campaign metrics
   const [fromDate, setFromDate] = useState<string>('');
   const [toDate, setToDate] = useState<string>('');
-  const [filteredMetrics, setFilteredMetrics] = useState<{[key: string]: any}>({});
-  const [loadingMetrics, setLoadingMetrics] = useState(false);
+  const [allBookings, setAllBookings] = useState<any[]>([]);
 
   // Fetch all campaigns
   const fetchCampaigns = async () => {
@@ -52,71 +51,59 @@ export default function CampaignManager() {
 
   useEffect(() => {
     fetchCampaigns();
+    fetchAllBookings();
   }, []);
 
-  // Fetch filtered metrics for all campaigns based on date range
-  const fetchFilteredMetrics = async () => {
-    if (!fromDate || !toDate) {
-      setFilteredMetrics({});
-      return;
-    }
-
-    setLoadingMetrics(true);
+  // Fetch all bookings for filtering
+  const fetchAllBookings = async () => {
     try {
-      const url = new URL(`${API_BASE_URL}/api/campaigns/report`);
-      url.searchParams.set('from', fromDate);
-      url.searchParams.set('to', toDate);
-      
-      console.log('API URL:', url.toString());
-      const response = await fetch(url.toString());
-      console.log('Response status:', response.status, response.statusText);
-      
+      const response = await fetch(`${API_BASE_URL}/api/campaign-bookings`);
       const data = await response.json();
-      console.log('API Response:', data);
       
       if (data.success) {
-        // Convert array to object keyed by campaignId for easy lookup
-        const metricsObj: {[key: string]: any} = {};
-        data.data.forEach((campaign: any) => {
-          console.log(`Campaign ${campaign.campaignId} filtered bookings:`, campaign.bookings);
-          metricsObj[campaign.campaignId] = {
-            totalClicks: campaign.totalClicks || 0,
-            uniqueVisitors: campaign.uniqueVisitors || 0,
-            totalBookings: campaign.totalBookings || 0,
-            bookings: campaign.bookings || []
-          };
-        });
-        console.log('Final filtered metrics object:', metricsObj);
-        setFilteredMetrics(metricsObj);
-      } else {
-        console.error('Failed to fetch filtered metrics:', data.message);
-        alert(`Failed to fetch filtered metrics: ${data.message}. Please try again or contact support.`);
-        setFilteredMetrics({});
+        setAllBookings(data.data || []);
       }
     } catch (error) {
-      console.error('Error fetching filtered metrics:', error);
-      alert(`Network error while fetching filtered metrics: ${error instanceof Error ? error.message : 'Unknown error'}. Please check your connection and try again.`);
-      setFilteredMetrics({});
-    } finally {
-      setLoadingMetrics(false);
+      console.error('Error fetching bookings:', error);
     }
   };
 
-  // Handle date range change
-  const handleDateRangeChange = () => {
-    if (fromDate && toDate) {
-      console.log('Fetching filtered metrics for date range:', fromDate, 'to', toDate);
-      fetchFilteredMetrics();
-    } else {
-      setFilteredMetrics({});
+  // Filter bookings by date range
+  const getFilteredBookings = (utmSource: string) => {
+    if (!fromDate || !toDate) {
+      return allBookings.filter(booking => booking.utmSource === utmSource);
     }
+    
+    const startDate = new Date(fromDate);
+    startDate.setHours(0, 0, 0, 0);
+    const endDate = new Date(toDate);
+    endDate.setHours(23, 59, 59, 999);
+    
+    return allBookings.filter(booking => {
+      if (booking.utmSource !== utmSource) return false;
+      const bookingDate = new Date(booking.bookingCreatedAt);
+      return bookingDate >= startDate && bookingDate <= endDate;
+    });
   };
+
+  // Get filtered metrics for a campaign
+  const getFilteredMetrics = (campaign: Campaign) => {
+    const filteredBookings = getFilteredBookings(campaign.utmSource);
+    
+    return {
+      totalClicks: campaign.totalClicks, // Keep original clicks (no date filtering for clicks)
+      uniqueVisitors: campaign.uniqueVisitorsCount, // Keep original unique visitors
+      totalBookings: filteredBookings.length,
+      bookings: filteredBookings
+    };
+  };
+
+  // Date filtering is automatic - no separate handler needed
 
   // Clear date filter
   const clearDateFilter = () => {
     setFromDate('');
     setToDate('');
-    setFilteredMetrics({});
   };
 
   // Create new campaign
@@ -174,12 +161,13 @@ export default function CampaignManager() {
 
   // Open stats modal
   const handleViewStats = (campaign: Campaign) => {
+    const filteredMetrics = getFilteredMetrics(campaign);
     setSelectedCampaign({
       ...campaign,
-      // Override with filtered metrics if available
-      totalClicks: filteredMetrics[campaign.campaignId]?.totalClicks ?? campaign.totalClicks,
-      uniqueVisitorsCount: filteredMetrics[campaign.campaignId]?.uniqueVisitors ?? campaign.uniqueVisitorsCount,
-      totalBookings: filteredMetrics[campaign.campaignId]?.totalBookings ?? campaign.totalBookings,
+      // Override with filtered metrics
+      totalClicks: filteredMetrics.totalClicks,
+      uniqueVisitorsCount: filteredMetrics.uniqueVisitors,
+      totalBookings: filteredMetrics.totalBookings,
     });
     setShowStatsModal(true);
   };
@@ -298,18 +286,13 @@ export default function CampaignManager() {
             Filter Campaign Metrics by Date Range
           </h2>
           
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-4 items-end">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 items-end">
             <div>
               <label className="block text-sm font-semibold text-gray-700 mb-2">From Date</label>
               <input 
                 type="date" 
                 value={fromDate} 
-                onChange={(e) => {
-                  setFromDate(e.target.value);
-                  if (e.target.value && toDate) {
-                    handleDateRangeChange();
-                  }
-                }} 
+                onChange={(e) => setFromDate(e.target.value)} 
                 className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all" 
               />
             </div>
@@ -318,27 +301,9 @@ export default function CampaignManager() {
               <input 
                 type="date" 
                 value={toDate} 
-                onChange={(e) => {
-                  setToDate(e.target.value);
-                  if (fromDate && e.target.value) {
-                    handleDateRangeChange();
-                  }
-                }} 
+                onChange={(e) => setToDate(e.target.value)} 
                 className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all" 
               />
-            </div>
-            <div>
-              <button
-                onClick={handleDateRangeChange}
-                disabled={!fromDate || !toDate || loadingMetrics}
-                className={`w-full py-3 px-6 rounded-lg font-semibold transition-all ${
-                  (!fromDate || !toDate || loadingMetrics)
-                    ? 'bg-gray-400 text-white cursor-not-allowed'
-                    : 'bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white shadow-lg hover:shadow-xl'
-                }`}
-              >
-                {loadingMetrics ? 'Loading...' : 'Apply Filter'}
-              </button>
             </div>
             <div>
               <button
@@ -391,7 +356,9 @@ export default function CampaignManager() {
             </div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {campaigns.map((campaign) => (
+              {campaigns.map((campaign) => {
+                const filteredMetrics = getFilteredMetrics(campaign);
+                return (
                 <div
                   key={campaign._id}
                   className="bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all border border-orange-100 overflow-hidden group"
@@ -424,11 +391,11 @@ export default function CampaignManager() {
                         <MousePointerClick size={16} />
                       </div>
                       <div className="text-2xl font-bold text-gray-900">
-                        {filteredMetrics[campaign.campaignId]?.totalClicks ?? campaign.totalClicks}
+                        {filteredMetrics.totalClicks}
                       </div>
                       <div className="text-xs text-gray-500">
                         Clicks
-                        {filteredMetrics[campaign.campaignId] && (
+                        {(fromDate || toDate) && (
                           <span className="block text-orange-600">(filtered)</span>
                         )}
                       </div>
@@ -438,11 +405,11 @@ export default function CampaignManager() {
                         <Users size={16} />
                       </div>
                       <div className="text-2xl font-bold text-gray-900">
-                        {filteredMetrics[campaign.campaignId]?.uniqueVisitors ?? campaign.uniqueVisitorsCount}
+                        {filteredMetrics.uniqueVisitors}
                       </div>
                       <div className="text-xs text-gray-500">
                         Unique
-                        {filteredMetrics[campaign.campaignId] && (
+                        {(fromDate || toDate) && (
                           <span className="block text-orange-600">(filtered)</span>
                         )}
                       </div>
@@ -452,11 +419,11 @@ export default function CampaignManager() {
                         <Calendar size={16} />
                       </div>
                       <div className="text-2xl font-bold text-gray-900">
-                        {filteredMetrics[campaign.campaignId]?.totalBookings ?? campaign.totalBookings}
+                        {filteredMetrics.totalBookings}
                       </div>
                       <div className="text-xs text-gray-500">
                         Bookings
-                        {filteredMetrics[campaign.campaignId] && (
+                        {(fromDate || toDate) && (
                           <span className="block text-orange-600">(filtered)</span>
                         )}
                       </div>
@@ -547,7 +514,8 @@ export default function CampaignManager() {
                     </button>
                   </div>
                 </div>
-              ))}
+                );
+              })}
             </div>
           )}
         </div>
@@ -557,7 +525,7 @@ export default function CampaignManager() {
       {showStatsModal && selectedCampaign && (
         <CampaignStatsModal
           campaign={selectedCampaign}
-          filteredBookings={filteredMetrics[selectedCampaign.campaignId]?.bookings}
+          filteredBookings={getFilteredBookings(selectedCampaign.utmSource)}
           dateRange={{ fromDate, toDate }}
           onClose={() => {
             setShowStatsModal(false);
