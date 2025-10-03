@@ -39,13 +39,15 @@ interface CampaignDetails {
 
 interface Props {
   campaign: Campaign;
+  filteredBookings?: any[];
+  dateRange?: { fromDate: string; toDate: string };
   onClose: () => void;
   onDelete?: () => void;
 }
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'https://api.flashfirejobs.com';
 
-export default function CampaignStatsModal({ campaign, onClose, onDelete }: Props) {
+export default function CampaignStatsModal({ campaign, filteredBookings, dateRange, onClose, onDelete }: Props) {
   const [details, setDetails] = useState<CampaignDetails | null>(null);
   const [loading, setLoading] = useState(true);
   const [isDeleting, setIsDeleting] = useState(false);
@@ -210,10 +212,15 @@ export default function CampaignStatsModal({ campaign, onClose, onDelete }: Prop
               <div className="p-6">
                 <h3 className="text-xl font-bold text-gray-900 mb-4 flex items-center">
                   <Calendar className="mr-2 text-orange-500" size={24} />
-                  Bookings ({details.bookings.length})
+                  Bookings ({filteredBookings ? filteredBookings.length : details.bookings.length})
+                  {filteredBookings && dateRange && (
+                    <span className="ml-3 text-sm font-normal text-orange-600 bg-orange-100 px-2 py-1 rounded-full">
+                      Filtered: {new Date(dateRange.fromDate).toLocaleDateString()} - {new Date(dateRange.toDate).toLocaleDateString()}
+                    </span>
+                  )}
                 </h3>
 
-                {details.bookings.length === 0 ? (
+                {(filteredBookings ? filteredBookings.length : details.bookings.length) === 0 ? (
                   <div className="text-center py-12 bg-gray-50 rounded-lg border border-gray-200">
                     <Calendar className="mx-auto text-gray-300 mb-4" size={48} />
                     <p className="text-gray-500 font-medium">No bookings yet</p>
@@ -223,7 +230,7 @@ export default function CampaignStatsModal({ campaign, onClose, onDelete }: Prop
                   </div>
                 ) : (
                   <div className="space-y-4">
-                    {details.bookings.map((booking) => (
+                    {(filteredBookings || details.bookings).map((booking) => (
                       <div
                         key={booking.bookingId}
                         className="bg-white border border-gray-200 rounded-lg p-5 hover:shadow-md transition-shadow"
