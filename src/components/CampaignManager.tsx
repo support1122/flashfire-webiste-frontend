@@ -87,35 +87,14 @@ export default function CampaignManager() {
     });
   };
 
-  // Filter page visits by date range
-  const getFilteredPageVisits = (campaign: Campaign) => {
-    if (!fromDate || !toDate) {
-      return campaign.pageVisits || [];
-    }
-    
-    const startDate = new Date(fromDate);
-    startDate.setHours(0, 0, 0, 0);
-    const endDate = new Date(toDate);
-    endDate.setHours(23, 59, 59, 999);
-    
-    return (campaign.pageVisits || []).filter((visit: any) => {
-      const visitDate = new Date(visit.timestamp);
-      return visitDate >= startDate && visitDate <= endDate;
-    });
-  };
-
   // Get filtered metrics for a campaign
   const getFilteredMetrics = (campaign: Campaign) => {
     const filteredBookings = getFilteredBookings(campaign.utmSource);
-    const filteredVisits = getFilteredPageVisits(campaign);
-    
-    // Calculate unique visitors from filtered visits
-    const uniqueVisitorIds = new Set(filteredVisits.map((visit: any) => visit.visitorId));
     
     return {
-      totalClicks: filteredVisits.length, // Filter clicks by date range
-      uniqueVisitors: uniqueVisitorIds.size, // Filter unique visitors by date range
-      totalBookings: filteredBookings.length,
+      totalClicks: campaign.totalClicks, // Keep original clicks (can't filter without detailed visit data)
+      uniqueVisitors: campaign.uniqueVisitorsCount, // Keep original unique visitors (can't filter without detailed visit data)
+      totalBookings: filteredBookings.length, // This is filtered by date
       bookings: filteredBookings
     };
   };
@@ -346,6 +325,9 @@ export default function CampaignManager() {
                   : 'selected date range'
                 }
               </p>
+              <p className="text-xs text-orange-700 mt-1">
+                Note: Only bookings are filtered by date. Clicks and unique visitors show total counts.
+              </p>
             </div>
           )}
         </div>
@@ -418,7 +400,7 @@ export default function CampaignManager() {
                       <div className="text-xs text-gray-500">
                         Clicks
                         {(fromDate || toDate) && (
-                          <span className="block text-orange-600">(filtered)</span>
+                          <span className="block text-gray-500">(not filtered)</span>
                         )}
                       </div>
                     </div>
@@ -432,7 +414,7 @@ export default function CampaignManager() {
                       <div className="text-xs text-gray-500">
                         Unique
                         {(fromDate || toDate) && (
-                          <span className="block text-orange-600">(filtered)</span>
+                          <span className="block text-gray-500">(not filtered)</span>
                         )}
                       </div>
                     </div>
