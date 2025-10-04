@@ -302,9 +302,9 @@ const Hero = ({ setSignupFormVisibility }) => {
             <h1
               className={`text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-6xl font-bold leading-tight mb-4 sm:mb-6 px-2 text-center transition-all duration-700 ${isLoaded ? "opacity-100" : "opacity-0"}`}
             >
-              <span className="block text-black mb-2">No More Solo Job Hunting</span>
+              <span className="block text-black mb-2">Land 15+ Interview Calls with Us</span>
               <span className="block bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text text-transparent font-extrabold">
-                DO IT WITH AI COPILOT
+                Powered by Flashfire AI.
               </span>
             </h1>
 
