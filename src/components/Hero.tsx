@@ -1,21 +1,16 @@
+"use client"
 
 import { useState, useEffect, useRef } from "react"
-import { ArrowRight, Sparkles } from "lucide-react"
 import { GTagUTM } from "../utils/GTagUTM.js"
 import { useNavigate } from "react-router-dom"
-import { 
-  trackButtonClick, 
-  trackSignupIntent, 
-  trackSectionView,
-  trackPageView 
-} from "../utils/PostHogTracking.ts"
+import { trackButtonClick, trackSignupIntent, trackSectionView, trackPageView } from "../utils/PostHogTracking.ts"
 import { navigateWithUTM } from "../utils/UTMUtils"
 
 const Hero = ({ setSignupFormVisibility }) => {
   const [isSuccessMatrixVisible, setIsSuccessMatrixVisible] = useState(false)
   const [isLoaded, setIsLoaded] = useState(false)
   const successMatrixRef = useRef<HTMLDivElement>(null)
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
   useEffect(() => {
     const timer = setTimeout(() => setIsLoaded(true), 100)
@@ -26,19 +21,19 @@ const Hero = ({ setSignupFormVisibility }) => {
           setIsSuccessMatrixVisible(true)
           // Track section view
           trackSectionView("success_matrix", {
-            section: "hero_success_metrics"
+            section: "hero_success_metrics",
           })
         }
       },
       { threshold: 0.05, rootMargin: "100px 0px" },
     )
     if (successMatrixRef.current) observer.observe(successMatrixRef.current)
-    
+
     // Track page view for hero section
     trackPageView("hero", "home", {
-      section: "hero_landing"
+      section: "hero_landing",
     })
-    
+
     return () => {
       clearTimeout(timer)
       if (successMatrixRef.current) observer.unobserve(successMatrixRef.current)
@@ -222,35 +217,69 @@ const Hero = ({ setSignupFormVisibility }) => {
         {/* Main Content - Centered (lift above background) */}
         <div className="relative z-10 h-full flex items-center justify-center">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            {/* Badge */}
             <div
-              className={`inline-flex items-center space-x-2 bg-orange-100 border border-orange-200 rounded-full px-3 sm:px-4 py-2 mb-6 sm:mb-8 lg:mb-20 transition-all duration-500 ${isLoaded ? "opacity-100" : "opacity-0"}`}
+              className={`inline-flex items-center space-x-2 bg-white/90 backdrop-blur-sm border border-orange-200 rounded-full px-4 sm:px-5 py-1.5 sm:py-2 mb-6 sm:mb-8 transition-all duration-500 shadow-sm ${isLoaded ? "opacity-100" : "opacity-0"}`}
             >
-              <Sparkles className="w-3 h-3 sm:w-4 sm:h-4 text-orange-600" />
-              <span className="text-orange-800 text-xs sm:text-sm font-medium">Save 150+ Hours Every Month</span>
+              <span className="text-orange-600 text-xs sm:text-sm font-semibold">New</span>
+              <span className="text-gray-300">|</span>
+              <span className="text-gray-700 text-xs sm:text-sm font-medium">
+                Introducing Flashfire AI: the first AI that applies to jobs for you.
+              </span>
             </div>
 
-            {/* Main Headline */}
-            <h1
-              className={`relative -top-[18px] text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-6xl font-bold text-black leading-snug mb-6 sm:mb-8 px-2 text-center transition-all duration-700 ${isLoaded ? "opacity-100" : "opacity-0"}`}
+            {/* Award Badges Section */}
+            <div
+              className={`flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8 mb-8 sm:mb-10 transition-all duration-500 delay-100 ${isLoaded ? "opacity-100" : "opacity-0"}`}
             >
-              <span className="block">Land 15+ Interview Calls with Us</span>
-              <span className="bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text text-transparent">
-                Powered by Flashfire AI.
+              {/* Product Hunt Badge */}
+              <div className="flex items-center gap-2 sm:gap-3">
+                <svg className="w-6 h-6 sm:w-7 sm:h-7 text-gray-700" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 2L9.5 8.5L3 9.5L7.5 14L6.5 20.5L12 17.5L17.5 20.5L16.5 14L21 9.5L14.5 8.5L12 2Z" />
+                </svg>
+                <div className="text-center">
+                  <div className="text-xs sm:text-sm text-gray-600 font-medium leading-tight">Product of the month</div>
+                  <div className="text-xs sm:text-sm text-gray-500 font-normal leading-tight">PRODUCT HUNT</div>
+                  <div className="text-2xl sm:text-3xl font-bold text-gray-900 leading-tight">1st</div>
+                </div>
+                <svg className="w-6 h-6 sm:w-7 sm:h-7 text-gray-700" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 2L14.5 8.5L21 9.5L16.5 14L17.5 20.5L12 17.5L6.5 20.5L7.5 14L3 9.5L9.5 8.5L12 2Z" />
+                </svg>
+              </div>
+
+              {/* OpenAI Badge */}
+              <div className="flex items-center gap-2 sm:gap-3">
+                <svg className="w-6 h-6 sm:w-7 sm:h-7 text-gray-700" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 2L9.5 8.5L3 9.5L7.5 14L6.5 20.5L12 17.5L17.5 20.5L16.5 14L21 9.5L14.5 8.5L12 2Z" />
+                </svg>
+                <div className="text-center">
+                  <div className="text-xs sm:text-sm text-gray-600 font-medium leading-tight">Featured by</div>
+                  <div className="text-xs sm:text-sm text-gray-500 font-normal leading-tight">OpenAI</div>
+                  <div className="text-xl sm:text-2xl font-bold text-gray-900 leading-tight">TOP PICK</div>
+                </div>
+                <svg className="w-6 h-6 sm:w-7 sm:h-7 text-gray-700" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 2L14.5 8.5L21 9.5L16.5 14L17.5 20.5L12 17.5L6.5 20.5L7.5 14L3 9.5L9.5 8.5L12 2Z" />
+                </svg>
+              </div>
+            </div>
+
+            <h1
+              className={`text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-7xl font-bold leading-tight mb-6 sm:mb-8 px-2 text-center transition-all duration-700 ${isLoaded ? "opacity-100" : "opacity-0"}`}
+            >
+              <span className="block text-black mb-2">No More Solo Job Hunting</span>
+              <span className="block bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text text-transparent font-extrabold">
+                DO IT WITH AI COPILOT
               </span>
             </h1>
 
-            {/* Subtext */}
             <p
-              className={`text-lg sm:text-xl md:text-2xl lg:text-2xl text-[#333333] tracking-tight mb-12 sm:mb-12 max-w-[1100px] mx-auto leading-snug px-4 text-center lg:mb-14 transition-all duration-700 ${isLoaded ? "opacity-100" : "opacity-0"}`}
+              className={`text-lg sm:text-xl md:text-2xl text-gray-700 mb-10 sm:mb-12 max-w-4xl mx-auto leading-relaxed px-4 text-center transition-all duration-700 ${isLoaded ? "opacity-100" : "opacity-0"}`}
             >
-              We apply to <span className="text-orange-600 font-bold">1,200+ USA jobs</span> and track everything - so
-              you can focus on interviews.
+              Our AI makes landing job interviews dramatically easier and faster! Get matched jobs, tailored
+              applications, and insider connections in less than 1 min!
             </p>
 
-            {/* CTA Buttons */}
             <div
-              className={`flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center px-4 transition-all duration-700 ${isLoaded ? "opacity-100" : "opacity-0"}`}
+              className={`flex justify-center items-center px-4 transition-all duration-700 ${isLoaded ? "opacity-100" : "opacity-0"}`}
             >
               <button
                 type="button"
@@ -265,25 +294,24 @@ const Hero = ({ setSignupFormVisibility }) => {
                         utm_medium: "Website_Front_Page",
                         utm_campaign: "Website",
                       },
-                    });
+                    })
                   } catch {}
-                  
+
                   // PostHog tracking
-                  trackButtonClick("Start My 7-Day Free Trial", "hero_cta", "cta", {
+                  trackButtonClick("Try Flashfire for Free", "hero_cta", "cta", {
                     button_location: "hero_main_cta",
-                    section: "hero_landing"
-                  });
+                    section: "hero_landing",
+                  })
                   trackSignupIntent("hero_cta", {
                     signup_source: "hero_main_button",
-                    funnel_stage: "signup_intent"
-                  });
-                  
-                  navigateWithUTM('/signup', navigate);
+                    funnel_stage: "signup_intent",
+                  })
+
+                  navigateWithUTM("/signup", navigate)
                 }}
-                className="group bg-gradient-to-r from-orange-500 to-orange-600 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold text-base sm:text-lg hover:from-orange-600 hover:to-orange-700 transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105 flex items-center space-x-2 w-full sm:w-auto justify-center pulse-glow transform"
+                className="group bg-gradient-to-r from-orange-500 to-red-500 text-white px-10 sm:px-12 py-4 sm:py-5 rounded-full font-bold text-lg sm:text-xl hover:from-orange-600 hover:to-red-600 transition-all duration-300 shadow-2xl hover:shadow-orange-500/50 hover:scale-105 subtle-glow"
               >
-                <span>Start My 7-Day Free Trial</span>
-                <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform" />
+                <span>Try Flashfire for Free</span>
               </button>
             </div>
           </div>
@@ -297,7 +325,7 @@ const Hero = ({ setSignupFormVisibility }) => {
       </section>
 
       {/* Success Matrix Section - unchanged */}
-       <section className="relative bg-gradient-to-br from-orange-50 via-white to-red-50 py-16 sm:py-20 lg:py-24 overflow-hidden">
+      <section className="relative bg-gradient-to-br from-orange-50 via-white to-red-50 py-16 sm:py-20 lg:py-24 overflow-hidden">
         <div className="absolute inset-0">
           <div className="absolute top-20 left-10 w-72 h-72 bg-gradient-to-r from-orange-200/40 to-red-200/30 rounded-full blur-3xl float-gentle" />
           <div
