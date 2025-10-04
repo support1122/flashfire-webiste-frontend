@@ -59,7 +59,6 @@ const Pricing = () => {
         "Everything in Professional",
         "1000+ tailored applications",
         "Executive-level job targeting",
-        "Personal career consultant",
         "Portfolio development",
         "Cover letters",
         "Network introduction requests",
