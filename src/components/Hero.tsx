@@ -205,8 +205,8 @@ const Hero = ({ setSignupFormVisibility }) => {
       {/* Main Hero Section - 100vh */}
       <section
         id="home"
-        className="relative pb-4 h-screen bg-gradient-to-br from-orange-50 via-white to-red-50 overflow-hidden"
-      >
+        className="relative pb-4 h-[110vh] bg-gradient-to-br from-orange-50 via-white to-red-50 overflow-hidden"
+>
         <div className="absolute inset-0 pointer-events-none">
           <div className="wave-bg" />
           <div className="wave-bg-2" />
