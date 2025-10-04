@@ -218,7 +218,7 @@ const Hero = ({ setSignupFormVisibility }) => {
         <div className="relative z-10 h-full flex items-center justify-center">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <div
-              className={`inline-flex items-center space-x-2 bg-white/90 backdrop-blur-sm border border-orange-200 rounded-full px-4 sm:px-5 py-1.5 sm:py-2 mb-6 sm:mb-8 transition-all duration-500 shadow-sm ${isLoaded ? "opacity-100" : "opacity-0"}`}
+              className={`inline-flex items-center space-x-2 bg-white/90 backdrop-blur-sm border border-orange-200 rounded-full px-4 sm:px-5 py-1.5 sm:py-2 mb-4 sm:mb-6 transition-all duration-500 shadow-sm ${isLoaded ? "opacity-100" : "opacity-0"}`}
             >
               <span className="text-orange-600 text-xs sm:text-sm font-semibold">New</span>
               <span className="text-gray-300">|</span>
@@ -227,43 +227,112 @@ const Hero = ({ setSignupFormVisibility }) => {
               </span>
             </div>
 
-            {/* Award Badges Section */}
             <div
-              className={`flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8 mb-8 sm:mb-10 transition-all duration-500 delay-100 ${isLoaded ? "opacity-100" : "opacity-0"}`}
+              className={`flex flex-col sm:flex-row items-center justify-center gap-6 sm:gap-12 mb-6 sm:mb-8 transition-all duration-500 delay-100 ${isLoaded ? "opacity-100" : "opacity-0"}`}
             >
               {/* Product Hunt Badge */}
-              <div className="flex items-center gap-2 sm:gap-3">
-                <svg className="w-6 h-6 sm:w-7 sm:h-7 text-gray-700" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M12 2L9.5 8.5L3 9.5L7.5 14L6.5 20.5L12 17.5L17.5 20.5L16.5 14L21 9.5L14.5 8.5L12 2Z" />
+              <div className="flex items-center gap-2 sm:gap-3 group hover:scale-105 transition-transform duration-300">
+                {/* Left Laurel */}
+                <svg
+                  className="w-8 h-8 sm:w-10 sm:h-10 text-gray-800/80"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                >
+                  <path
+                    d="M3 21C3 21 5 19 7 17C8 16 9 14 9 12C9 10 8 8 7 7C5 5 3 3 3 3"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                  <path
+                    d="M5 19C5 19 6 18 7 16C7.5 15 8 13.5 8 12C8 10.5 7.5 9 7 8C6 6 5 5 5 5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
                 </svg>
+
                 <div className="text-center">
-                  <div className="text-xs sm:text-sm text-gray-600 font-medium leading-tight">Product of the month</div>
-                  <div className="text-xs sm:text-sm text-gray-500 font-normal leading-tight">PRODUCT HUNT</div>
+                  <div className="text-[10px] sm:text-xs text-gray-600 font-medium leading-tight">
+                    Product of the month
+                  </div>
+                  <div className="text-[10px] sm:text-xs text-gray-500 font-normal leading-tight">PRODUCT HUNT</div>
                   <div className="text-2xl sm:text-3xl font-bold text-gray-900 leading-tight">1st</div>
                 </div>
-                <svg className="w-6 h-6 sm:w-7 sm:h-7 text-gray-700" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M12 2L14.5 8.5L21 9.5L16.5 14L17.5 20.5L12 17.5L6.5 20.5L7.5 14L3 9.5L9.5 8.5L12 2Z" />
+
+                {/* Right Laurel */}
+                <svg
+                  className="w-8 h-8 sm:w-10 sm:h-10 text-gray-800/80"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                >
+                  <path
+                    d="M21 21C21 21 19 19 17 17C16 16 15 14 15 12C15 10 16 8 17 7C19 5 21 3 21 3"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                  <path
+                    d="M19 19C19 19 18 18 17 16C16.5 15 16 13.5 16 12C16 10.5 16.5 9 17 8C18 6 19 5 19 5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
                 </svg>
               </div>
 
               {/* OpenAI Badge */}
-              <div className="flex items-center gap-2 sm:gap-3">
-                <svg className="w-6 h-6 sm:w-7 sm:h-7 text-gray-700" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M12 2L9.5 8.5L3 9.5L7.5 14L6.5 20.5L12 17.5L17.5 20.5L16.5 14L21 9.5L14.5 8.5L12 2Z" />
+              <div className="flex items-center gap-2 sm:gap-3 group hover:scale-105 transition-transform duration-300">
+                {/* Left Laurel */}
+                <svg
+                  className="w-8 h-8 sm:w-10 sm:h-10 text-gray-800/80"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                >
+                  <path
+                    d="M3 21C3 21 5 19 7 17C8 16 9 14 9 12C9 10 8 8 7 7C5 5 3 3 3 3"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                  <path
+                    d="M5 19C5 19 6 18 7 16C7.5 15 8 13.5 8 12C8 10.5 7.5 9 7 8C6 6 5 5 5 5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
                 </svg>
+
                 <div className="text-center">
-                  <div className="text-xs sm:text-sm text-gray-600 font-medium leading-tight">Featured by</div>
-                  <div className="text-xs sm:text-sm text-gray-500 font-normal leading-tight">OpenAI</div>
+                  <div className="text-[10px] sm:text-xs text-gray-600 font-medium leading-tight">Featured by</div>
+                  <div className="text-[10px] sm:text-xs text-gray-500 font-normal leading-tight">OpenAI</div>
                   <div className="text-xl sm:text-2xl font-bold text-gray-900 leading-tight">TOP PICK</div>
                 </div>
-                <svg className="w-6 h-6 sm:w-7 sm:h-7 text-gray-700" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M12 2L14.5 8.5L21 9.5L16.5 14L17.5 20.5L12 17.5L6.5 20.5L7.5 14L3 9.5L9.5 8.5L12 2Z" />
+
+                {/* Right Laurel */}
+                <svg
+                  className="w-8 h-8 sm:w-10 sm:h-10 text-gray-800/80"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                >
+                  <path
+                    d="M21 21C21 21 19 19 17 17C16 16 15 14 15 12C15 10 16 8 17 7C19 5 21 3 21 3"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                  <path
+                    d="M19 19C19 19 18 18 17 16C16.5 15 16 13.5 16 12C16 10.5 16.5 9 17 8C18 6 19 5 19 5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
                 </svg>
               </div>
             </div>
 
             <h1
-              className={`text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-7xl font-bold leading-tight mb-6 sm:mb-8 px-2 text-center transition-all duration-700 ${isLoaded ? "opacity-100" : "opacity-0"}`}
+              className={`text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-6xl font-bold leading-tight mb-4 sm:mb-6 px-2 text-center transition-all duration-700 ${isLoaded ? "opacity-100" : "opacity-0"}`}
             >
               <span className="block text-black mb-2">No More Solo Job Hunting</span>
               <span className="block bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text text-transparent font-extrabold">
@@ -272,7 +341,7 @@ const Hero = ({ setSignupFormVisibility }) => {
             </h1>
 
             <p
-              className={`text-lg sm:text-xl md:text-2xl text-gray-700 mb-10 sm:mb-12 max-w-4xl mx-auto leading-relaxed px-4 text-center transition-all duration-700 ${isLoaded ? "opacity-100" : "opacity-0"}`}
+              className={`text-base sm:text-lg md:text-xl text-gray-700 mb-6 sm:mb-8 max-w-4xl mx-auto leading-relaxed px-4 text-center transition-all duration-700 ${isLoaded ? "opacity-100" : "opacity-0"}`}
             >
               Our AI makes landing job interviews dramatically easier and faster! Get matched jobs, tailored
               applications, and insider connections in less than 1 min!
