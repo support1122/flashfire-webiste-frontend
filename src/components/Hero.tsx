@@ -227,6 +227,7 @@ const Hero = ({ setSignupFormVisibility }) => {
               </span>
             </div>
 
+            {/* Awards Row */}
             <div
               className={`flex flex-col sm:flex-row items-center justify-center gap-6 sm:gap-12 mb-6 sm:mb-8 transition-all duration-500 delay-100 ${isLoaded ? "opacity-100" : "opacity-0"}`}
             >
@@ -240,22 +241,12 @@ const Hero = ({ setSignupFormVisibility }) => {
                   stroke="currentColor"
                   strokeWidth="1.5"
                 >
-                  <path
-                    d="M3 21C3 21 5 19 7 17C8 16 9 14 9 12C9 10 8 8 7 7C5 5 3 3 3 3"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                  <path
-                    d="M5 19C5 19 6 18 7 16C7.5 15 8 13.5 8 12C8 10.5 7.5 9 7 8C6 6 5 5 5 5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
+                  <path d="M3 21C3 21 5 19 7 17C8 16 9 14 9 12C9 10 8 8 7 7C5 5 3 3 3 3" strokeLinecap="round" strokeLinejoin="round" />
+                  <path d="M5 19C5 19 6 18 7 16C7.5 15 8 13.5 8 12C8 10.5 7.5 9 7 8C6 6 5 5 5 5" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
 
                 <div className="text-center">
-                  <div className="text-[10px] sm:text-xs text-gray-600 font-medium leading-tight">
-                    Product of the month
-                  </div>
+                  <div className="text-[10px] sm:text-xs text-gray-600 font-medium leading-tight">Product of the month</div>
                   <div className="text-[10px] sm:text-xs text-gray-500 font-normal leading-tight">PRODUCT HUNT</div>
                   <div className="text-2xl sm:text-3xl font-bold text-gray-900 leading-tight">1st</div>
                 </div>
@@ -268,16 +259,8 @@ const Hero = ({ setSignupFormVisibility }) => {
                   stroke="currentColor"
                   strokeWidth="1.5"
                 >
-                  <path
-                    d="M21 21C21 21 19 19 17 17C16 16 15 14 15 12C15 10 16 8 17 7C19 5 21 3 21 3"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                  <path
-                    d="M19 19C19 19 18 18 17 16C16.5 15 16 13.5 16 12C16 10.5 16.5 9 17 8C18 6 19 5 19 5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
+                  <path d="M21 21C21 21 19 19 17 17C16 16 15 14 15 12C15 10 16 8 17 7C19 5 21 3 21 3" strokeLinecap="round" strokeLinejoin="round" />
+                  <path d="M19 19C19 19 18 18 17 16C16.5 15 16 13.5 16 12C16 10.5 16.5 9 17 8C18 6 19 5 19 5" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
               </div>
 
@@ -291,16 +274,8 @@ const Hero = ({ setSignupFormVisibility }) => {
                   stroke="currentColor"
                   strokeWidth="1.5"
                 >
-                  <path
-                    d="M3 21C3 21 5 19 7 17C8 16 9 14 9 12C9 10 8 8 7 7C5 5 3 3 3 3"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                  <path
-                    d="M5 19C5 19 6 18 7 16C7.5 15 8 13.5 8 12C8 10.5 7.5 9 7 8C6 6 5 5 5 5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
+                  <path d="M3 21C3 21 5 19 7 17C8 16 9 14 9 12C9 10 8 8 7 7C5 5 3 3 3 3" strokeLinecap="round" strokeLinejoin="round" />
+                  <path d="M5 19C5 19 6 18 7 16C7.5 15 8 13.5 8 12C8 10.5 7.5 9 7 8C6 6 5 5 5 5" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
 
                 <div className="text-center">
@@ -317,19 +292,12 @@ const Hero = ({ setSignupFormVisibility }) => {
                   stroke="currentColor"
                   strokeWidth="1.5"
                 >
-                  <path
-                    d="M21 21C21 21 19 19 17 17C16 16 15 14 15 12C15 10 16 8 17 7C19 5 21 3 21 3"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                  <path
-                    d="M19 19C19 19 18 18 17 16C16.5 15 16 13.5 16 12C16 10.5 16.5 9 17 8C18 6 19 5 19 5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
+                  <path d="M21 21C21 21 19 19 17 17C16 16 15 14 15 12C15 10 16 8 17 7C19 5 21 3 21 3" strokeLinecap="round" strokeLinejoin="round" />
+                  <path d="M19 19C19 19 18 18 17 16C16.5 15 16 13.5 16 12C16 10.5 16.5 9 17 8C18 6 19 5 19 5" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
               </div>
             </div>
+
 
             <h1
               className={`text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-6xl font-bold leading-tight mb-4 sm:mb-6 px-2 text-center transition-all duration-700 ${isLoaded ? "opacity-100" : "opacity-0"}`}
@@ -364,7 +332,7 @@ const Hero = ({ setSignupFormVisibility }) => {
                         utm_campaign: "Website",
                       },
                     })
-                  } catch {}
+                  } catch { }
 
                   // PostHog tracking
                   trackButtonClick("Try Flashfire for Free", "hero_cta", "cta", {
@@ -420,14 +388,12 @@ const Hero = ({ setSignupFormVisibility }) => {
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div
             ref={successMatrixRef}
-            className={`max-w-7xl mx-auto text-center transition-all duration-800 ease-out opacity-100 transform translate-y-0 lg:opacity-0 lg:transform lg:translate-y-8 ${
-              isSuccessMatrixVisible ? "lg:opacity-100 lg:transform lg:translate-y-0" : ""
-            }`}
+            className={`max-w-7xl mx-auto text-center transition-all duration-800 ease-out opacity-100 transform translate-y-0 lg:opacity-0 lg:transform lg:translate-y-8 ${isSuccessMatrixVisible ? "lg:opacity-100 lg:transform lg:translate-y-0" : ""
+              }`}
           >
             <h2
-              className={`text-2xl sm:text-3xl md:text-4xl lg:text-4xl font-bold mb-4 sm:mb-6 lg:mb-8 leading-tight transition-all duration-800 delay-100 opacity-100 transform translate-y-0 lg:opacity-0 lg:transform lg:translate-y-4 shimmer-effect ${
-                isSuccessMatrixVisible ? "lg:opacity-100 lg:transform lg:translate-y-0" : ""
-              }`}
+              className={`text-2xl sm:text-3xl md:text-4xl lg:text-4xl font-bold mb-4 sm:mb-6 lg:mb-8 leading-tight transition-all duration-800 delay-100 opacity-100 transform translate-y-0 lg:opacity-0 lg:transform lg:translate-y-4 shimmer-effect ${isSuccessMatrixVisible ? "lg:opacity-100 lg:transform lg:translate-y-0" : ""
+                }`}
             >
               <span className="block bg-gradient-to-r from-slate-900 via-gray-800 to-slate-900 bg-clip-text text-transparent">
                 Our Platform Gets Users Interview Calls Within Weeks —
@@ -438,9 +404,8 @@ const Hero = ({ setSignupFormVisibility }) => {
             </h2>
 
             <p
-              className={`text-lg sm:text-xl md:text-xl lg:text-xl text-gray-600 mb-8 sm:mb-12 lg:mb-16 transition-all duration-800 delay-150 opacity-100 transform translate-y-0 lg:opacity-0 lg:transform lg:translate-y-4 ${
-                isSuccessMatrixVisible ? "lg:opacity-100 lg:transform lg:translate-y-0" : ""
-              }`}
+              className={`text-lg sm:text-xl md:text-xl lg:text-xl text-gray-600 mb-8 sm:mb-12 lg:mb-16 transition-all duration-800 delay-150 opacity-100 transform translate-y-0 lg:opacity-0 lg:transform lg:translate-y-4 ${isSuccessMatrixVisible ? "lg:opacity-100 lg:transform lg:translate-y-0" : ""
+                }`}
             >
               Powered by AI-driven job targeting and recruiter outreach automation.
             </p>
@@ -462,9 +427,8 @@ const Hero = ({ setSignupFormVisibility }) => {
               ].map((stat, index) => (
                 <div
                   key={index}
-                  className={`text-center group cursor-pointer relative p-6 sm:p-8 lg:p-10 transition-all duration-800 ${stat.delay} opacity-100 transform translate-y-0 lg:opacity-0 lg:transform lg:translate-y-6 flex flex-col items-center justify-center ${
-                    isSuccessMatrixVisible ? "lg:opacity-100 lg:transform lg:translate-y-0" : ""
-                  }`}
+                  className={`text-center group cursor-pointer relative p-6 sm:p-8 lg:p-10 transition-all duration-800 ${stat.delay} opacity-100 transform translate-y-0 lg:opacity-0 lg:transform lg:translate-y-6 flex flex-col items-center justify-center ${isSuccessMatrixVisible ? "lg:opacity-100 lg:transform lg:translate-y-0" : ""
+                    }`}
                 >
                   <div className="absolute inset-0 flex items-center justify-center">
                     <div className="w-48 h-48 sm:w-56 sm:h-56 md:w-64 md:h-64 lg:w-72 lg:h-72 xl:w-80 xl:h-80 bg-gradient-to-br from-orange-500/10 via-red-500/15 to-orange-600/10 rounded-full scale-0 group-hover:scale-100 transition-all duration-700 ease-out group-hover:opacity-100 subtle-glow" />
@@ -502,9 +466,8 @@ const Hero = ({ setSignupFormVisibility }) => {
             </div>
 
             <p
-              className={`text-sm sm:text-base md:text-lg text-gray-500 italic transition-all duration-800 delay-400 opacity-100 transform translate-y-0 lg:opacity-0 lg:transform lg:translate-y-4 ${
-                isSuccessMatrixVisible ? "lg:opacity-100 lg:transform lg:translate-y-0" : ""
-              }`}
+              className={`text-sm sm:text-base md:text-lg text-gray-500 italic transition-all duration-800 delay-400 opacity-100 transform translate-y-0 lg:opacity-0 lg:transform lg:translate-y-4 ${isSuccessMatrixVisible ? "lg:opacity-100 lg:transform lg:translate-y-0" : ""
+                }`}
             >
               *Based on verified user data from 2024-25 cohort
             </p>
