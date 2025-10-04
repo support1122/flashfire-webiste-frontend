@@ -3278,7 +3278,7 @@ image: "/images/blog10.jpeg",
   `
 },
 {
-  id: 22,
+  id: 23,
   title: "When Is the Right Time to Come to the U.S.? A Strategic Guide for Students and Professionals Dreaming of America",
   excerpt: "The right time to move to the U.S. can define your career and education journey. Learn when students, professionals, and families should plan their arrival for maximum success.",
   author: "Flashfire Team",
