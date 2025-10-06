@@ -258,7 +258,7 @@ const TestimonialsGrid = () => {
               name: "Anjali S.",
               avatar: "/images/anjali.jpeg",
               role: "Skyworks Solutions, Inc.",
-              linkedinUrl: "https://www.linkedin.com/in/anjali-s",
+              linkedinUrl: " https://www.linkedin.com/in/anjalishah6198/",
             },
             {
               videoUrl: "https://www.youtube.com/embed/nYEO8K0q38c",
@@ -274,7 +274,7 @@ const TestimonialsGrid = () => {
               name: "Aryan G.",
               avatar: "/images/aryan.jpg",
               role: "IBM",
-              linkedinUrl: "https://www.linkedin.com/in/aryan-g",
+              linkedinUrl: "#",
             },
           ].map((video, index) => (
             <VideoTestimonial testimonial={video} index={index} key={index} />
