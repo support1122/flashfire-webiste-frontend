@@ -142,17 +142,20 @@ const VideoTestimonial = ({ testimonial, index }) => {
           <div className="absolute top-8 right-8 w-1 h-1 bg-white rounded-full opacity-40 animate-float animation-delay-500"></div>
           <div className="absolute top-6 right-12 w-1.5 h-1.5 bg-white rounded-full opacity-50 animate-float animation-delay-1000"></div>
 
-          {testimonial.linkedinUrl && (
-            <a
-              href={testimonial.linkedinUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={(e) => e.stopPropagation()}
-              className="absolute bottom-4 right-4 w-10 h-10 bg-white rounded-full flex items-center justify-center hover:bg-blue-50 transition-all duration-300 hover:scale-110 shadow-lg z-10"
+          {testimonial.linkedinUrl !== undefined && (
+            <div
+              onClick={(e) => {
+                e.stopPropagation();
+                if (testimonial.linkedinUrl) {
+                  window.open(testimonial.linkedinUrl, "_blank");
+                }
+              }}
+              className="absolute bottom-4 right-4 w-10 h-10 bg-white rounded-full flex items-center justify-center hover:bg-blue-50 transition-all duration-300 hover:scale-110 shadow-lg z-10 cursor-pointer"
             >
               <Linkedin className="w-5 h-5 text-blue-600" />
-            </a>
+            </div>
           )}
+
 
           <div className="absolute bottom-4 left-4 flex items-center gap-3 text-white">
             <img
