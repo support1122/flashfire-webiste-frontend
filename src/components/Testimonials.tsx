@@ -274,7 +274,7 @@ const TestimonialsGrid = () => {
               name: "Aryan G.",
               avatar: "/images/aryan.jpg",
               role: "IBM",
-              linkedinUrl: "null",
+              linkedinUrl: "",
             },
           ].map((video, index) => (
             <VideoTestimonial testimonial={video} index={index} key={index} />
