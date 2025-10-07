@@ -203,7 +203,7 @@ const TestimonialsGrid = () => {
   return (
     <section
       id="testimonials"
-      className="bg-gradient-to-br from-orange-400 via-orange-500 to-red-500 min-h-screen py-16 px-6 overflow-hidden rounded-[3rem]"
+      className="bg-gradient-to-br from-orange-400 via-orange-500 to-red-500 min-h-screen py-16 px-6 overflow-hidden rounded-[3rem] pt-20"
     >
       <div className="max-w-6xl mx-auto relative z-10">
         <div className="mb-12">
