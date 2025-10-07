@@ -125,24 +125,24 @@ const Blog = () => {
       </div>
 
       <style>{`
-        @keyframes fadeInUp {
-          from { opacity: 0; transform: translateY(30px); }
-          to { opacity: 1; transform: translateY(0); }
+       @keyframes fadeInUp {
+       from { opacity: 0; transform: translateY(30px); }
+       to { opacity: 1; transform: translateY(0); }
         }
-        .animate-fadeInUp {
-          animation: fadeInUp 0.6s ease-out forwards;
-        }
-        /* Scrollbar Styling */
-        ::-webkit-scrollbar {
-          width: 8px;
-        }
-        ::-webkit-scrollbar-thumb {
-          background: #fb923c;
-          border-radius: 4px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-          background: #f97316;
-        }
+     .animate-fadeInUp {
+      animation: fadeInUp 0.6s ease-out forwards;
+     }
+
+     /* Hide scrollbar but keep scroll functionality */
+     html, body, section {
+     scrollbar-width: none;        /* Firefox */
+     -ms-overflow-style: none;     /* IE and Edge */
+    }
+    html::-webkit-scrollbar,
+    body::-webkit-scrollbar,
+    section::-webkit-scrollbar {
+    display: none;                /* Chrome, Safari */
+  }
       `}</style>
     </section>
   );
