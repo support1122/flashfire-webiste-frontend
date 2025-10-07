@@ -1,21 +1,16 @@
+"use client"
 
 import { useState, useEffect, useRef } from "react"
-import { ArrowRight, Sparkles } from "lucide-react"
 import { GTagUTM } from "../utils/GTagUTM.js"
 import { useNavigate } from "react-router-dom"
-import { 
-  trackButtonClick, 
-  trackSignupIntent, 
-  trackSectionView,
-  trackPageView 
-} from "../utils/PostHogTracking.ts"
+import { trackButtonClick, trackSignupIntent, trackSectionView, trackPageView } from "../utils/PostHogTracking.ts"
 import { navigateWithUTM } from "../utils/UTMUtils"
 
 const Hero = ({ setSignupFormVisibility }) => {
   const [isSuccessMatrixVisible, setIsSuccessMatrixVisible] = useState(false)
   const [isLoaded, setIsLoaded] = useState(false)
   const successMatrixRef = useRef<HTMLDivElement>(null)
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
   useEffect(() => {
     const timer = setTimeout(() => setIsLoaded(true), 100)
@@ -26,19 +21,19 @@ const Hero = ({ setSignupFormVisibility }) => {
           setIsSuccessMatrixVisible(true)
           // Track section view
           trackSectionView("success_matrix", {
-            section: "hero_success_metrics"
+            section: "hero_success_metrics",
           })
         }
       },
       { threshold: 0.05, rootMargin: "100px 0px" },
     )
     if (successMatrixRef.current) observer.observe(successMatrixRef.current)
-    
+
     // Track page view for hero section
     trackPageView("hero", "home", {
-      section: "hero_landing"
+      section: "hero_landing",
     })
-    
+
     return () => {
       clearTimeout(timer)
       if (successMatrixRef.current) observer.unobserve(successMatrixRef.current)
@@ -210,8 +205,8 @@ const Hero = ({ setSignupFormVisibility }) => {
       {/* Main Hero Section - 100vh */}
       <section
         id="home"
-        className="relative pb-4 h-screen bg-gradient-to-br from-orange-50 via-white to-red-50 overflow-hidden"
-      >
+        className="relative pb-4 h-[125vh] bg-gradient-to-br from-orange-50 via-white to-red-50 overflow-hidden"
+>
         <div className="absolute inset-0 pointer-events-none">
           <div className="wave-bg" />
           <div className="wave-bg-2" />
@@ -222,35 +217,106 @@ const Hero = ({ setSignupFormVisibility }) => {
         {/* Main Content - Centered (lift above background) */}
         <div className="relative z-10 h-full flex items-center justify-center">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            {/* Badge */}
             <div
-              className={`inline-flex items-center space-x-2 bg-orange-100 border border-orange-200 rounded-full px-3 sm:px-4 py-2 mb-6 sm:mb-8 lg:mb-20 transition-all duration-500 ${isLoaded ? "opacity-100" : "opacity-0"}`}
+              className={`inline-flex items-center space-x-2 bg-white/90 backdrop-blur-sm border border-orange-200 rounded-full px-4 sm:px-5 py-1.5 sm:py-2 mb-4 sm:mb-6 transition-all duration-500 shadow-sm ${isLoaded ? "opacity-100" : "opacity-0"}`}
             >
-              <Sparkles className="w-3 h-3 sm:w-4 sm:h-4 text-orange-600" />
-              <span className="text-orange-800 text-xs sm:text-sm font-medium">Save 150+ Hours Every Month</span>
+              <span className="text-orange-600 text-xs sm:text-sm font-semibold">New</span>
+              <span className="text-gray-300">|</span>
+              <span className="text-gray-700 text-xs sm:text-sm font-medium">
+                Introducing Flashfire AI: the first AI that applies to jobs for you.
+              </span>
             </div>
 
-            {/* Main Headline */}
-            <h1
-              className={`relative -top-[18px] text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-6xl font-bold text-black leading-snug mb-6 sm:mb-8 px-2 text-center transition-all duration-700 ${isLoaded ? "opacity-100" : "opacity-0"}`}
+            {/* Awards Row */}
+            <div
+              className={`flex flex-col sm:flex-row items-center justify-center gap-6 sm:gap-12 mb-6 sm:mb-8 transition-all duration-500 delay-100 ${isLoaded ? "opacity-100" : "opacity-0"}`}
             >
-              <span className="block">Land 15+ Interview Calls with Us</span>
-              <span className="bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text text-transparent">
+              {/* Product Hunt Badge */}
+              <div className="flex items-center gap-2 sm:gap-3 group hover:scale-105 transition-transform duration-300">
+                {/* Left Laurel */}
+                <svg
+                  className="w-8 h-8 sm:w-10 sm:h-10 text-gray-800/80"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                >
+                  <path d="M3 21C3 21 5 19 7 17C8 16 9 14 9 12C9 10 8 8 7 7C5 5 3 3 3 3" strokeLinecap="round" strokeLinejoin="round" />
+                  <path d="M5 19C5 19 6 18 7 16C7.5 15 8 13.5 8 12C8 10.5 7.5 9 7 8C6 6 5 5 5 5" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+
+                <div className="text-center">
+                  <div className="text-[10px] sm:text-xs text-gray-600 font-medium leading-tight">Product of the month</div>
+                  <div className="text-[10px] sm:text-xs text-gray-500 font-normal leading-tight">PRODUCT HUNT</div>
+                  <div className="text-2xl sm:text-3xl font-bold text-gray-900 leading-tight">1st</div>
+                </div>
+
+                {/* Right Laurel */}
+                <svg
+                  className="w-8 h-8 sm:w-10 sm:h-10 text-gray-800/80"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                >
+                  <path d="M21 21C21 21 19 19 17 17C16 16 15 14 15 12C15 10 16 8 17 7C19 5 21 3 21 3" strokeLinecap="round" strokeLinejoin="round" />
+                  <path d="M19 19C19 19 18 18 17 16C16.5 15 16 13.5 16 12C16 10.5 16.5 9 17 8C18 6 19 5 19 5" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </div>
+
+              {/* OpenAI Badge */}
+              <div className="flex items-center gap-2 sm:gap-3 group hover:scale-105 transition-transform duration-300">
+                {/* Left Laurel */}
+                <svg
+                  className="w-8 h-8 sm:w-10 sm:h-10 text-gray-800/80"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                >
+                  <path d="M3 21C3 21 5 19 7 17C8 16 9 14 9 12C9 10 8 8 7 7C5 5 3 3 3 3" strokeLinecap="round" strokeLinejoin="round" />
+                  <path d="M5 19C5 19 6 18 7 16C7.5 15 8 13.5 8 12C8 10.5 7.5 9 7 8C6 6 5 5 5 5" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+
+                <div className="text-center">
+                  <div className="text-[10px] sm:text-xs text-gray-600 font-medium leading-tight">Featured by</div>
+                  <div className="text-[10px] sm:text-xs text-gray-500 font-normal leading-tight">OpenAI</div>
+                  <div className="text-xl sm:text-2xl font-bold text-gray-900 leading-tight">TOP PICK</div>
+                </div>
+
+                {/* Right Laurel */}
+                <svg
+                  className="w-8 h-8 sm:w-10 sm:h-10 text-gray-800/80"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                >
+                  <path d="M21 21C21 21 19 19 17 17C16 16 15 14 15 12C15 10 16 8 17 7C19 5 21 3 21 3" strokeLinecap="round" strokeLinejoin="round" />
+                  <path d="M19 19C19 19 18 18 17 16C16.5 15 16 13.5 16 12C16 10.5 16.5 9 17 8C18 6 19 5 19 5" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </div>
+            </div>
+
+
+            <h1
+              className={`text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-6xl font-bold leading-tight mb-4 sm:mb-6 px-2 text-center transition-all duration-700 ${isLoaded ? "opacity-100" : "opacity-0"}`}
+            >
+              <span className="block text-black mb-2">Land 15+ Interview Calls with Us</span>
+              <span className="block bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text text-transparent font-extrabold">
                 Powered by Flashfire AI.
               </span>
             </h1>
 
-            {/* Subtext */}
             <p
-              className={`text-lg sm:text-xl md:text-2xl lg:text-2xl text-[#333333] tracking-tight mb-12 sm:mb-12 max-w-[1100px] mx-auto leading-snug px-4 text-center lg:mb-14 transition-all duration-700 ${isLoaded ? "opacity-100" : "opacity-0"}`}
+              className={`text-base sm:text-lg md:text-xl text-gray-700 mb-6 sm:mb-8 max-w-4xl mx-auto leading-relaxed px-4 text-center transition-all duration-700 ${isLoaded ? "opacity-100" : "opacity-0"}`}
             >
-              We apply to <span className="text-orange-600 font-bold">1,200+ USA jobs</span> and track everything - so
-              you can focus on interviews.
+              Our AI makes landing job interviews dramatically easier and faster! Get matched jobs, tailored
+              applications, and insider connections in less than 1 min!
             </p>
 
-            {/* CTA Buttons */}
             <div
-              className={`flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center px-4 transition-all duration-700 ${isLoaded ? "opacity-100" : "opacity-0"}`}
+              className={`flex justify-center items-center px-4 transition-all duration-700 ${isLoaded ? "opacity-100" : "opacity-0"}`}
             >
               <button
                 type="button"
@@ -265,25 +331,24 @@ const Hero = ({ setSignupFormVisibility }) => {
                         utm_medium: "Website_Front_Page",
                         utm_campaign: "Website",
                       },
-                    });
-                  } catch {}
-                  
+                    })
+                  } catch { }
+
                   // PostHog tracking
-                  trackButtonClick("Start My 7-Day Free Trial", "hero_cta", "cta", {
+                  trackButtonClick("Try Flashfire for Free", "hero_cta", "cta", {
                     button_location: "hero_main_cta",
-                    section: "hero_landing"
-                  });
+                    section: "hero_landing",
+                  })
                   trackSignupIntent("hero_cta", {
                     signup_source: "hero_main_button",
-                    funnel_stage: "signup_intent"
-                  });
-                  
-                  navigateWithUTM('/signup', navigate);
+                    funnel_stage: "signup_intent",
+                  })
+
+                  navigateWithUTM("/signup", navigate)
                 }}
-                className="group bg-gradient-to-r from-orange-500 to-orange-600 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold text-base sm:text-lg hover:from-orange-600 hover:to-orange-700 transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105 flex items-center space-x-2 w-full sm:w-auto justify-center pulse-glow transform"
+                className="group bg-gradient-to-r from-orange-500 to-red-500 text-white px-10 sm:px-12 py-4 sm:py-5 rounded-full font-bold text-lg sm:text-xl hover:from-orange-600 hover:to-red-600 transition-all duration-300 shadow-2xl hover:shadow-orange-500/50 hover:scale-105 subtle-glow"
               >
-                <span>Start My 7-Day Free Trial</span>
-                <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform" />
+                <span>Try Flashfire for Free</span>
               </button>
             </div>
           </div>
@@ -297,7 +362,7 @@ const Hero = ({ setSignupFormVisibility }) => {
       </section>
 
       {/* Success Matrix Section - unchanged */}
-       <section className="relative bg-gradient-to-br from-orange-50 via-white to-red-50 py-16 sm:py-20 lg:py-24 overflow-hidden">
+      <section className="relative bg-gradient-to-br from-orange-50 via-white to-red-50 py-16 sm:py-20 lg:py-24 overflow-hidden">
         <div className="absolute inset-0">
           <div className="absolute top-20 left-10 w-72 h-72 bg-gradient-to-r from-orange-200/40 to-red-200/30 rounded-full blur-3xl float-gentle" />
           <div
@@ -323,14 +388,12 @@ const Hero = ({ setSignupFormVisibility }) => {
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div
             ref={successMatrixRef}
-            className={`max-w-7xl mx-auto text-center transition-all duration-800 ease-out opacity-100 transform translate-y-0 lg:opacity-0 lg:transform lg:translate-y-8 ${
-              isSuccessMatrixVisible ? "lg:opacity-100 lg:transform lg:translate-y-0" : ""
-            }`}
+            className={`max-w-7xl mx-auto text-center transition-all duration-800 ease-out opacity-100 transform translate-y-0 lg:opacity-0 lg:transform lg:translate-y-8 ${isSuccessMatrixVisible ? "lg:opacity-100 lg:transform lg:translate-y-0" : ""
+              }`}
           >
             <h2
-              className={`text-2xl sm:text-3xl md:text-4xl lg:text-4xl font-bold mb-4 sm:mb-6 lg:mb-8 leading-tight transition-all duration-800 delay-100 opacity-100 transform translate-y-0 lg:opacity-0 lg:transform lg:translate-y-4 shimmer-effect ${
-                isSuccessMatrixVisible ? "lg:opacity-100 lg:transform lg:translate-y-0" : ""
-              }`}
+              className={`text-2xl sm:text-3xl md:text-4xl lg:text-4xl font-bold mb-4 sm:mb-6 lg:mb-8 leading-tight transition-all duration-800 delay-100 opacity-100 transform translate-y-0 lg:opacity-0 lg:transform lg:translate-y-4 shimmer-effect ${isSuccessMatrixVisible ? "lg:opacity-100 lg:transform lg:translate-y-0" : ""
+                }`}
             >
               <span className="block bg-gradient-to-r from-slate-900 via-gray-800 to-slate-900 bg-clip-text text-transparent">
                 Our Platform Gets Users Interview Calls Within Weeks —
@@ -341,9 +404,8 @@ const Hero = ({ setSignupFormVisibility }) => {
             </h2>
 
             <p
-              className={`text-lg sm:text-xl md:text-xl lg:text-xl text-gray-600 mb-8 sm:mb-12 lg:mb-16 transition-all duration-800 delay-150 opacity-100 transform translate-y-0 lg:opacity-0 lg:transform lg:translate-y-4 ${
-                isSuccessMatrixVisible ? "lg:opacity-100 lg:transform lg:translate-y-0" : ""
-              }`}
+              className={`text-lg sm:text-xl md:text-xl lg:text-xl text-gray-600 mb-8 sm:mb-12 lg:mb-16 transition-all duration-800 delay-150 opacity-100 transform translate-y-0 lg:opacity-0 lg:transform lg:translate-y-4 ${isSuccessMatrixVisible ? "lg:opacity-100 lg:transform lg:translate-y-0" : ""
+                }`}
             >
               Powered by AI-driven job targeting and recruiter outreach automation.
             </p>
@@ -365,9 +427,8 @@ const Hero = ({ setSignupFormVisibility }) => {
               ].map((stat, index) => (
                 <div
                   key={index}
-                  className={`text-center group cursor-pointer relative p-6 sm:p-8 lg:p-10 transition-all duration-800 ${stat.delay} opacity-100 transform translate-y-0 lg:opacity-0 lg:transform lg:translate-y-6 flex flex-col items-center justify-center ${
-                    isSuccessMatrixVisible ? "lg:opacity-100 lg:transform lg:translate-y-0" : ""
-                  }`}
+                  className={`text-center group cursor-pointer relative p-6 sm:p-8 lg:p-10 transition-all duration-800 ${stat.delay} opacity-100 transform translate-y-0 lg:opacity-0 lg:transform lg:translate-y-6 flex flex-col items-center justify-center ${isSuccessMatrixVisible ? "lg:opacity-100 lg:transform lg:translate-y-0" : ""
+                    }`}
                 >
                   <div className="absolute inset-0 flex items-center justify-center">
                     <div className="w-48 h-48 sm:w-56 sm:h-56 md:w-64 md:h-64 lg:w-72 lg:h-72 xl:w-80 xl:h-80 bg-gradient-to-br from-orange-500/10 via-red-500/15 to-orange-600/10 rounded-full scale-0 group-hover:scale-100 transition-all duration-700 ease-out group-hover:opacity-100 subtle-glow" />
@@ -405,9 +466,8 @@ const Hero = ({ setSignupFormVisibility }) => {
             </div>
 
             <p
-              className={`text-sm sm:text-base md:text-lg text-gray-500 italic transition-all duration-800 delay-400 opacity-100 transform translate-y-0 lg:opacity-0 lg:transform lg:translate-y-4 ${
-                isSuccessMatrixVisible ? "lg:opacity-100 lg:transform lg:translate-y-0" : ""
-              }`}
+              className={`text-sm sm:text-base md:text-lg text-gray-500 italic transition-all duration-800 delay-400 opacity-100 transform translate-y-0 lg:opacity-0 lg:transform lg:translate-y-4 ${isSuccessMatrixVisible ? "lg:opacity-100 lg:transform lg:translate-y-0" : ""
+                }`}
             >
               *Based on verified user data from 2024-25 cohort
             </p>
