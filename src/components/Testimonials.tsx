@@ -217,10 +217,8 @@ const VideoTestimonial = ({ testimonial, index }) => {
 
 const TestimonialsGrid = () => {
   return (
-    <section
-      id="testimonials"
-      className="bg-gradient-to-br from-orange-400 via-orange-500 to-red-500 min-h-screen py-16 px-6 overflow-hidden rounded-[3rem]"
-    >
+   <section id="testimonials" className="scroll-mt-28 bg-gradient-to-br from-orange-400 via-orange-500 to-red-500 min-h-screen py-16 px-6 overflow-hidden rounded-[3rem]">
+
       <div className="max-w-6xl mx-auto relative z-10">
         <div className="mb-12">
           <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black text-white mb-6 leading-tight">
