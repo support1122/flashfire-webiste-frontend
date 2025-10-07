@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react"
-import { Play } from "lucide-react"
+import { Play, Linkedin } from "lucide-react"
 
 const customStyles = `@keyframes bounce-gentle {
   0%, 100% { transform: translateY(0); }
@@ -51,10 +51,10 @@ const screenshots = [
   "/images/image5.jpg",
   "/images/image6.jpg",
   "/images/image7.jpg",
+  "/images/image9.png",
   "/images/image8.jpg",
   "/images/image10.jpg",
   "/images/image11.jpg",
-  "/images/image12.jpg",
   "/images/image13.png",
   "/images/image14.jpg",
   "/images/image15.jpg",
@@ -64,7 +64,7 @@ const screenshots = [
   "/images/image19.png",
   "/images/image20.png",
   "/images/image21.png",
-
+  "/images/image22.jpg",
 ]
 
 const rotations = [
@@ -115,7 +115,9 @@ const VideoTestimonial = ({ testimonial, index }) => {
   }
 
   return (
-    <div className={`mb-2 inline-block w-full rounded-xl shadow-md transform ${rotations[index % rotations.length]} hover:rotate-0 transition-all duration-300  p-2`}>
+    <div
+      className={`mb-2 inline-block w-full rounded-xl shadow-md transform ${rotations[index % rotations.length]} hover:rotate-0 transition-all duration-300  p-2`}
+    >
       {!showVideo ? (
         <div className="relative overflow-hidden">
           <img
@@ -139,6 +141,21 @@ const VideoTestimonial = ({ testimonial, index }) => {
           <div className="absolute top-4 right-4 w-2 h-2 bg-white rounded-full opacity-60 animate-float"></div>
           <div className="absolute top-8 right-8 w-1 h-1 bg-white rounded-full opacity-40 animate-float animation-delay-500"></div>
           <div className="absolute top-6 right-12 w-1.5 h-1.5 bg-white rounded-full opacity-50 animate-float animation-delay-1000"></div>
+
+          {testimonial.linkedinUrl !== undefined && (
+            <div
+              onClick={(e) => {
+                e.stopPropagation();
+                if (testimonial.linkedinUrl) {
+                  window.open(testimonial.linkedinUrl, "_blank");
+                }
+              }}
+              className="absolute bottom-4 right-4 w-10 h-10 bg-white rounded-full flex items-center justify-center hover:bg-blue-50 transition-all duration-300 hover:scale-110 shadow-lg z-10 cursor-pointer"
+            >
+              <Linkedin className="w-5 h-5 text-blue-600" />
+            </div>
+          )}
+
 
           <div className="absolute bottom-4 left-4 flex items-center gap-3 text-white">
             <img
@@ -177,22 +194,21 @@ const VideoTestimonial = ({ testimonial, index }) => {
               </div>
             </div>
           )}
-          <div className= "relative overflow-hidden rounded-xl ">
+          <div className="relative overflow-hidden rounded-xl ">
             <iframe
-            id={`video-${index}`}
-            src={`${testimonial.videoUrl}?autoplay=1&controls=1&modestbranding=1&rel=0`}
-            className="w-full aspect-[3/4] rounded-lg"
-            allow="autoplay; encrypted-media"
-            allowFullScreen
-            onLoad={() => setIsLoading(false)}
-            onError={() => {
-              setIsLoading(false)
-              setHasError(true)
-            }}
-            title={`${testimonial.name} testimonial video`}
-          />
+              id={`video-${index}`}
+              src={`${testimonial.videoUrl}?autoplay=1&controls=1&modestbranding=1&rel=0`}
+              className="w-full aspect-[3/4] rounded-lg"
+              allow="autoplay; encrypted-media"
+              allowFullScreen
+              onLoad={() => setIsLoading(false)}
+              onError={() => {
+                setIsLoading(false)
+                setHasError(true)
+              }}
+              title={`${testimonial.name} testimonial video`}
+            />
           </div>
-          
         </div>
       )}
     </div>
@@ -203,19 +219,19 @@ const TestimonialsGrid = () => {
   return (
     <section
       id="testimonials"
-      className="bg-gradient-to-br from-orange-400 via-orange-500 to-red-500 min-h-screen py-16 px-6 overflow-hidden rounded-[3rem] pt-20"
+      className="bg-gradient-to-br from-orange-400 via-orange-500 to-red-500 min-h-screen py-16 px-6 overflow-hidden rounded-[3rem]"
     >
       <div className="max-w-6xl mx-auto relative z-10">
         <div className="mb-12">
-          <h2 className="text-4xl sm:text-5xl  lg:text-6xl font-black text-white mb-6 leading-tight">
+          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black text-white mb-6 leading-tight">
             100+ HAPPY
             <br />
             USERS' LOVE
           </h2>
           <div className="max-w-2xl">
             <p className="text-white/90 text-sm leading-relaxed">
-              Thank you for your praise and suggestions. With your support, we can go further. We hope to accompany
-              you throughout your job search journey.
+              Thank you for your praise and suggestions. With your support, we can go further. We hope to accompany you
+              throughout your job search journey.
             </p>
           </div>
         </div>
@@ -225,7 +241,7 @@ const TestimonialsGrid = () => {
           {screenshots.map((src, index) => (
             <div
               key={index}
-              className={`mb-2 inline-block w-full rounded-xl shadow-md transform ${rotations[index % rotations.length]} hover:rotate-0 transition-all duration-300  p-2`}
+              className={`mb-2 inline-block w-full rounded-xl shadow-md transform ${rotations[index % rotations.length]} hover:rotate-0 transition-all duration-300 p-2`}
             >
               <img
                 src={src || "/placeholder.svg"}
@@ -245,6 +261,7 @@ const TestimonialsGrid = () => {
               name: "Anjali S.",
               avatar: "/images/anjali.jpeg",
               role: "Skyworks Solutions, Inc.",
+              linkedinUrl: " https://www.linkedin.com/in/anjalishah6198/",
             },
             {
               videoUrl: "https://www.youtube.com/embed/nYEO8K0q38c",
@@ -252,6 +269,7 @@ const TestimonialsGrid = () => {
               name: "Rijul J.",
               avatar: "images/rijul.jpg",
               role: "",
+              linkedinUrl: " https://www.linkedin.com/in/-rijuljain-/",
             },
             {
               videoUrl: "https://www.youtube.com/embed/p9kzhLHjJuI",
@@ -259,6 +277,7 @@ const TestimonialsGrid = () => {
               name: "Aryan G.",
               avatar: "/images/aryan.jpg",
               role: "IBM",
+              linkedinUrl: "",
             },
           ].map((video, index) => (
             <VideoTestimonial testimonial={video} index={index} key={index} />
