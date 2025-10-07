@@ -3379,7 +3379,7 @@ image: "/images/blog10.jpeg",
   title: "The Most In-Demand Skills for International Students in 2025",
   excerpt:
     "Flashfire analyzed 10,000+ U.S. job listings to reveal the most sought-after skills for international students in 2025. Learn how to align your resume with what top employers actually want.",
-  author: "Flashfire Research Team",
+  author: "Flashfire Team",
   date: "Feb 5, 2025",
   readTime: "14 min",
   category: "Career Skills",
