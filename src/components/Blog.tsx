@@ -50,7 +50,7 @@ const Blog = () => {
   }, []);
 
   return (
-    <section id="blog" className="pt-6 pb-20 bg-gradient-to-br from-gray-50 to-gray-100">
+    <section id="blog" className="pt-6 pb-20 bg-gradient-to-br from-gray-50 to-gray-100 min-h-screen">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-20">
@@ -66,63 +66,61 @@ const Blog = () => {
           </p>
         </div>
 
-        {/* Blog Grid */}
-        <div className="max-h-[80vh] overflow-y-auto scrollbar-thin scrollbar-thumb-orange-400 scrollbar-track-gray-100 pr-2">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            {blogPosts.map((post, index) => (
-              <Link to={`/blogs/${post.id}`} target="_blank" key={post.id}>
-                <article
-                  onClick={() => openBlogPost(post)}
-                  className="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden group cursor-pointer transform hover:-translate-y-1 animate-fadeInUp"
-                  style={{ animationDelay: `${index * 100}ms` }}
-                >
-                  {/* Image */}
-                  <div className="relative overflow-hidden">
-                    <img
-                      src={post.image}
-                      alt={post.title}
-                      className="w-full h-56 object-cover group-hover:scale-105 transition-transform duration-300"
-                    />
-                    <div className="absolute top-4 left-4">
-                      <span className={`px-3 py-1 rounded-full text-sm font-medium ${post.categoryColor}`}>
-                        {post.category}
-                      </span>
+        {/* Blog Grid (Full Page Scroll) */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          {blogPosts.map((post, index) => (
+            <Link to={`/blogs/${post.id}`} target="_blank" key={post.id}>
+              <article
+                onClick={() => openBlogPost(post)}
+                className="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden group cursor-pointer transform hover:-translate-y-1 animate-fadeInUp"
+                style={{ animationDelay: `${index * 100}ms` }}
+              >
+                {/* Image */}
+                <div className="relative overflow-hidden">
+                  <img
+                    src={post.image}
+                    alt={post.title}
+                    className="w-full h-56 object-cover group-hover:scale-105 transition-transform duration-300"
+                  />
+                  <div className="absolute top-4 left-4">
+                    <span className={`px-3 py-1 rounded-full text-sm font-medium ${post.categoryColor}`}>
+                      {post.category}
+                    </span>
+                  </div>
+                </div>
+
+                {/* Content */}
+                <div className="p-6">
+                  <div className="flex items-center text-sm text-gray-500 mb-3 space-x-4">
+                    <div className="flex items-center">
+                      <Calendar className="w-4 h-4 mr-1" /> {post.date}
+                    </div>
+                    <div className="flex items-center">
+                      <Clock className="w-4 h-4 mr-1" /> {post.readTime}
                     </div>
                   </div>
 
-                  {/* Content */}
-                  <div className="p-6">
-                    <div className="flex items-center text-sm text-gray-500 mb-3 space-x-4">
-                      <div className="flex items-center">
-                        <Calendar className="w-4 h-4 mr-1" /> {post.date}
-                      </div>
-                      <div className="flex items-center">
-                        <Clock className="w-4 h-4 mr-1" /> {post.readTime}
-                      </div>
+                  <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-orange-600 transition-colors duration-200 line-clamp-2">
+                    {post.title}
+                  </h3>
+                  <p className="text-gray-600 mb-4 line-clamp-3 leading-relaxed">
+                    {post.excerpt}
+                  </p>
+
+                  <div className="flex items-center justify-between pt-4 border-t border-gray-100">
+                    <div className="flex items-center">
+                      <User className="w-4 h-4 text-gray-400 mr-2" />
+                      <span className="text-sm text-gray-600 font-medium">{post.author}</span>
                     </div>
-
-                    <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-orange-600 transition-colors duration-200 line-clamp-2">
-                      {post.title}
-                    </h3>
-                    <p className="text-gray-600 mb-4 line-clamp-3 leading-relaxed">
-                      {post.excerpt}
-                    </p>
-
-                    <div className="flex items-center justify-between pt-4 border-t border-gray-100">
-                      <div className="flex items-center">
-                        <User className="w-4 h-4 text-gray-400 mr-2" />
-                        <span className="text-sm text-gray-600 font-medium">{post.author}</span>
-                      </div>
-                      <div className="flex items-center text-orange-600 font-medium text-sm group-hover:text-orange-700 transition-colors duration-200">
-                        Read More
-                        <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform duration-200" />
-                      </div>
+                    <div className="flex items-center text-orange-600 font-medium text-sm group-hover:text-orange-700 transition-colors duration-200">
+                      Read More
+                      <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform duration-200" />
                     </div>
                   </div>
-                </article>
-              </Link>
-            ))}
-          </div>
+                </div>
+              </article>
+            </Link>
+          ))}
         </div>
       </div>
 
@@ -134,7 +132,7 @@ const Blog = () => {
         .animate-fadeInUp {
           animation: fadeInUp 0.6s ease-out forwards;
         }
-        /* Scrollbar styling */
+        /* Scrollbar Styling */
         ::-webkit-scrollbar {
           width: 8px;
         }
