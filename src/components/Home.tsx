@@ -13,9 +13,10 @@ import { useOutletContext, useNavigate, Link, Location, useLocation } from 'reac
 
 
 function Home() {
-  const {setSignupFormVisibility, setCalendlyModalVisibility } = useOutletContext<{
+  const {setSignupFormVisibility, setCalendlyModalVisibility, handleBookingAttempt } = useOutletContext<{
     setSignupFormVisibility: React.Dispatch<React.SetStateAction<boolean>>,
     setCalendlyModalVisibility: React.Dispatch<React.SetStateAction<boolean>>,
+    handleBookingAttempt?: () => boolean,
   }>();
   const section = useLocation().pathname;
   useEffect(()=>{
