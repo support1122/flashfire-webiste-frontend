@@ -55,7 +55,8 @@ const FAQ = ({setSignupFormVisibility}) => {
   };
 
   return (
-    <section id="faq" className="py-16 sm:py-24 bg-gradient-to-b from-white to-orange-50">
+   <section id="faq" className="scroll-mt-28 py-16 sm:py-24 bg-gradient-to-b from-white to-orange-50">
+
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12 sm:mb-16">
           <div className="inline-flex items-center space-x-2 bg-orange-100 text-orange-800 px-4 py-2 rounded-full text-sm font-medium mb-4">
