@@ -1,3 +1,4 @@
+import React from 'react';
 import { useEffect } from 'react';
 import { Calendar, Clock, User, ArrowRight } from 'lucide-react';
 import blogPosts from '../BLogsData.ts';
