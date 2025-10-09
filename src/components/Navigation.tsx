@@ -11,6 +11,7 @@ import { createLinkWithUTM, navigateWithUTM } from "../utils/UTMUtils";
 interface NavigationProps {
   setSignupFormVisibility: React.Dispatch<React.SetStateAction<boolean>>;
   setCalendlyModalVisibility: React.Dispatch<React.SetStateAction<boolean>>;
+  handleBookingAttempt?: () => boolean;
 }
 
 type NavItem =
@@ -20,6 +21,7 @@ type NavItem =
 const Navigation: React.FC<NavigationProps> = ({
   setSignupFormVisibility,
   setCalendlyModalVisibility,
+  handleBookingAttempt,
 }) => {
   const navigate = useNavigate();
   const location = useLocation();
@@ -223,6 +225,12 @@ const Navigation: React.FC<NavigationProps> = ({
   };
 
   const openCalendly = () => {
+    // Check geolocation before opening booking modal
+    if (handleBookingAttempt && !handleBookingAttempt()) {
+      // If geolocation check fails (user is from India), the modal will be shown by App.tsx
+      return;
+    }
+    
     setCalendlyModalVisibility(true);
     setIsMenuOpen(false);
     
@@ -448,7 +456,7 @@ const Navigation: React.FC<NavigationProps> = ({
                 </span>
               </div> */}
 
-              {/* Right: Book Now (unchanged) */}
+              {/* Right: Book Now */}
               <div className="flex-shrink-0">
                 {location.pathname === '/book-free-demo' ? (
                   <button

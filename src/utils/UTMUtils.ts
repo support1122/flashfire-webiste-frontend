@@ -29,9 +29,9 @@ export const navigateWithUTM = (path: string, navigate: (path: string) => void):
   const separator = path.includes('?') ? '&' : '?';
   const finalPath = utmParams ? `${path}${separator}${utmParams}` : path;
   
-  console.log(`UTM Navigation - Original path: ${path}`);
-  console.log(`UTM Navigation - UTM params: ${utmParams}`);
-  console.log(`UTM Navigation - Final path: ${finalPath}`);
+  // console.log(`UTM Navigation - Original path: ${path}`);
+  // console.log(`UTM Navigation - UTM params: ${utmParams}`);
+  // console.log(`UTM Navigation - Final path: ${finalPath}`);
   navigate(finalPath);
 };
 
@@ -41,9 +41,9 @@ export const createLinkWithUTM = (path: string): string => {
   const separator = path.includes('?') ? '&' : '?';
   const finalPath = utmParams ? `${path}${separator}${utmParams}` : path;
   
-  console.log(`UTM Link - Original path: ${path}`);
-  console.log(`UTM Link - UTM params: ${utmParams}`);
-  console.log(`UTM Link - Final path: ${finalPath}`);
+  // console.log(`UTM Link - Original path: ${path}`);
+  // console.log(`UTM Link - UTM params: ${utmParams}`);
+  // console.log(`UTM Link - Final path: ${finalPath}`);
   return finalPath;
 };
 

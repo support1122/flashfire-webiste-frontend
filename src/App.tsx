@@ -7,6 +7,7 @@ import CalendlyPreloader from './components/CalendlyPreloader.tsx';
 import Navigation from './components/Navigation.tsx';
 import Footer from './components/Footer.tsx';
 import SalesPopup from './components/SalesPopUp.tsx';
+import GeoBlockModal from './components/GeoBlockModal.tsx';
 import { trackPageView, trackUserJourney } from './utils/PostHogTracking.ts';
 // import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 
@@ -14,7 +15,142 @@ function App() {
   const [signupFormVisibility, setSignupFormVisibility] = useState(false);
   const [calendlyModalVisibility, setCalendlyModalVisibility] = useState(false);
   const [calendlyUser, setCalendlyUser] = useState(null);
+  const [showGeoBlockModal, setShowGeoBlockModal] = useState(false);
+  const [isFromIndia, setIsFromIndia] = useState(false);
+  const [countryInfo, setCountryInfo] = useState<{code: string, name: string} | null>(null);
+  const [geoLoading, setGeoLoading] = useState(true);
   const location = useLocation();
+
+  // Simple geolocation function using browser APIs only
+  const detectUserCountry = async () => {
+    try {
+      setGeoLoading(true);
+      console.log("🌍 Detecting user location using browser APIs...");
+      
+      // Use fallback method immediately since external APIs have CORS issues
+      detectCountryFallback();
+      
+    } catch (error) {
+      console.log("❌ Geolocation failed:", error);
+      // Ultimate fallback: assume not from India
+      setIsFromIndia(false);
+      setCountryInfo({ code: 'US', name: 'United States' });
+    } finally {
+      setGeoLoading(false);
+    }
+  };
+
+  // Fallback method using browser timezone and language
+  const detectCountryFallback = () => {
+    try {
+      console.log("🔄 Using fallback country detection...");
+      
+      // Get timezone
+      const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+      console.log("🕐 Timezone detected:", timezone);
+      
+      // Get language
+      const language = navigator.language || navigator.languages?.[0];
+      console.log("🗣️ Language detected:", language);
+      
+      // Simple heuristics for India detection
+      let isIndia = false;
+      
+      // Check timezone
+      if (timezone.includes('Asia/Kolkata') || timezone.includes('Asia/Calcutta')) {
+        isIndia = true;
+        console.log("🇮🇳 India detected via timezone");
+      }
+      
+      // Check language
+      if (language.startsWith('hi') || language.startsWith('bn') || language.startsWith('te') || 
+          language.startsWith('ta') || language.startsWith('gu') || language.startsWith('kn') || 
+          language.startsWith('ml') || language.startsWith('pa') || language.startsWith('or')) {
+        isIndia = true;
+        console.log("🇮🇳 India detected via language");
+      }
+      
+      // Set fallback country info
+      setCountryInfo({
+        code: isIndia ? 'IN' : 'US', // Default to US if not India
+        name: isIndia ? 'India' : 'United States'
+      });
+      
+      setIsFromIndia(isIndia);
+      
+      if (isIndia) {
+        console.log("🇮🇳 Fallback: User likely from India");
+      } else {
+        console.log("🌎 Fallback: User likely from US (default)");
+      }
+      
+    } catch (error) {
+      console.log("❌ Fallback detection failed:", error);
+      // Ultimate fallback: assume not from India
+      setIsFromIndia(false);
+      setCountryInfo({ code: 'US', name: 'United States' });
+    }
+  };
+
+  // Detect user country on component mount
+  useEffect(() => {
+    detectUserCountry();
+  }, []);
+
+  // Add a simple way to test India detection (for development)
+  useEffect(() => {
+    // Check for URL parameter to simulate India (for testing)
+    const urlParams = new URLSearchParams(window.location.search);
+    const testIndia = urlParams.get('test_india');
+    
+    if (testIndia === 'true') {
+      console.log("🧪 Testing: Simulating India location via URL parameter");
+      setIsFromIndia(true);
+      setCountryInfo({ code: 'IN', name: 'India' });
+      setGeoLoading(false);
+    }
+  }, []);
+
+  // Handle booking attempts for Indian users
+  const handleBookingAttempt = () => {
+    // If geolocation is still loading, allow booking (fallback behavior)
+    if (geoLoading) {
+      console.log("⏳ Geolocation still loading, allowing booking");
+      return true;
+    }
+    
+    if (isFromIndia) {
+      console.log("🚫 Geo-blocking Indian user from booking");
+      setShowGeoBlockModal(true);
+      trackUserJourney('geo_block_modal_opened', 'geo_blocking', {
+        country: countryInfo?.code || 'unknown',
+        blocked_reason: 'india_not_supported'
+      });
+      return false; // Block the booking
+    }
+    return true; // Allow booking
+  };
+
+  // Handle "provide anyway" action
+  const handleProvideAnyway = () => {
+    setShowGeoBlockModal(false);
+    // Allow the booking to proceed
+    setCalendlyModalVisibility(true);
+    trackUserJourney('geo_block_bypassed', 'geo_blocking', {
+      country: countryInfo?.code || 'unknown',
+      bypass_reason: 'user_insisted'
+    });
+  };
+
+  // Close geo block modal
+  const closeGeoBlockModal = () => {
+    setShowGeoBlockModal(false);
+    trackUserJourney('geo_block_modal_closed', 'geo_blocking', {
+      country: countryInfo?.code || 'unknown',
+      action: 'modal_closed'
+    });
+  };
+
 
   //  useEffect(() => {
   //   const id = window.location.hash.slice(1);
@@ -177,10 +313,13 @@ function App() {
       });
     }
     else if(location.pathname === '/book-free-demo'){
-      setCalendlyModalVisibility(true);
-      trackUserJourney('demo_modal_opened', 'demo_flow', {
-        modal_trigger: 'direct_navigation'
-      });
+      // Check geolocation before opening booking modal
+      if (handleBookingAttempt()) {
+        setCalendlyModalVisibility(true);
+        trackUserJourney('demo_modal_opened', 'demo_flow', {
+          modal_trigger: 'direct_navigation'
+        });
+      }
     }
     else {
       setSignupFormVisibility(false);
@@ -190,10 +329,25 @@ function App() {
   return (
     <div className="min-h-screen bg-white">
       <CalendlyPreloader />
-      <Navigation setSignupFormVisibility={setSignupFormVisibility} setCalendlyModalVisibility={setCalendlyModalVisibility} />
-      <Outlet context={{signupFormVisibility,calendlyModalVisibility, setSignupFormVisibility, setCalendlyModalVisibility }} />
+      <Navigation 
+        setSignupFormVisibility={setSignupFormVisibility} 
+        setCalendlyModalVisibility={setCalendlyModalVisibility}
+        handleBookingAttempt={handleBookingAttempt}
+      />
+      <Outlet context={{
+        signupFormVisibility,
+        calendlyModalVisibility, 
+        setSignupFormVisibility, 
+        setCalendlyModalVisibility,
+        handleBookingAttempt
+      }} />
       {signupFormVisibility && <SignupForm setCalendlyUser= {setCalendlyUser} setSignupFormVisibility={setSignupFormVisibility} setCalendlyModalVisibility={setCalendlyModalVisibility} />}
       <CalendlyModal user={calendlyUser} setCalendlyModalVisibility={setCalendlyModalVisibility} isVisible={calendlyModalVisibility}/>      
+      <GeoBlockModal 
+        isVisible={showGeoBlockModal}
+        onClose={closeGeoBlockModal}
+        onProvideAnyway={handleProvideAnyway}
+      />
       <SalesPopup />
       <Footer />
     </div>
