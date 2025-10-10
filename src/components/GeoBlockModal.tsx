@@ -65,22 +65,28 @@ const GeoBlockModal: React.FC<GeoBlockModalProps> = ({
             We’re working hard to expand access worldwide. Stay tuned for updates
             on our global availability!
           </p>
+            
+          <div className="bg-orange-50 border border-orange-200 rounded-lg p-3 mb-6">
+              <p className="text-orange-800 text-sm font-medium">
+                🚀 Coming soon to India!
+              </p>
+            </div>
 
           {/* Buttons */}
           <div className="space-y-3">
-            <button
+            {/* <button
               onClick={onClose}
               className="w-full bg-gradient-to-r from-orange-500 to-red-600 text-white py-3 px-4 rounded-lg font-medium hover:from-orange-600 hover:to-red-700 transition focus:ring-2 focus:ring-orange-500 focus:ring-offset-2"
             >
               <Calendar className="w-4 h-4 inline mr-2" />
               I’ll Wait for Launch
-            </button>
+            </button> */}
 
             <button
               onClick={onProvideAnyway}
               className="w-full bg-gray-100 text-gray-700 py-3 px-4 rounded-lg font-medium hover:bg-gray-200 transition focus:ring-2 focus:ring-gray-500 focus:ring-offset-2"
             >
-              Provide Anyway (Limited Support)
+              Try Anyway
             </button>
           </div>
 
