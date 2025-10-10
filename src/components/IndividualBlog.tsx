@@ -9,9 +9,10 @@ function IndividualBlog() {
   const contentRef = useRef<HTMLDivElement>(null);
   
   // Access modal state from parent App component
-  const { setSignupFormVisibility, setCalendlyModalVisibility } = useOutletContext<{
+  const { setSignupFormVisibility, setCalendlyModalVisibility, handleBookingAttempt } = useOutletContext<{
     setSignupFormVisibility: React.Dispatch<React.SetStateAction<boolean>>,
     setCalendlyModalVisibility: React.Dispatch<React.SetStateAction<boolean>>,
+    handleBookingAttempt?: () => boolean,
   }>();
 
   const selectedBlog = blogPosts.find((blog) => blog.id === parseInt(id || '0'));
@@ -46,6 +47,11 @@ function IndividualBlog() {
             setSignupFormVisibility(true);
           } else if (buttonText.includes('book') || buttonText.includes('schedule') || buttonText.includes('consultation') || buttonText.includes('demo')) {
             console.log('Opening Calendly modal');
+            // Check geolocation before opening booking modal
+            if (handleBookingAttempt && !handleBookingAttempt()) {
+              // If geolocation check fails (user is from India), the modal will be shown by App.tsx
+              return;
+            }
             setCalendlyModalVisibility(true);
           } else {
             console.log('Unknown button type, defaulting to signup modal');
@@ -54,7 +60,7 @@ function IndividualBlog() {
         });
       });
     }
-  }, [content, setSignupFormVisibility, setCalendlyModalVisibility]);
+  }, [content, setSignupFormVisibility, setCalendlyModalVisibility, handleBookingAttempt]);
 
   return (
     <div className="bg-gray-50 min-h-screen font-['Inter']">
