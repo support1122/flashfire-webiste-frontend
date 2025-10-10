@@ -40,7 +40,7 @@ const GeoBlockModal: React.FC<GeoBlockModalProps> = ({
         {/* Close button */}
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition-colors p-1 z-10"
+          className="absolute top-4 right-4 text-white hover:text-gray-600 transition-colors p-1 z-10"
         >
           <X className="w-5 h-5" />
         </button>
