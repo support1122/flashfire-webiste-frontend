@@ -497,7 +497,7 @@ const Navigation: React.FC<NavigationProps> = ({
                   <span className="relative inline-flex rounded-full h-3 w-3 bg-white"></span>
                 </span>
                 <span className="font-bold text-white text-xs sm:text-base lg:text-lg tracking-wide whitespace-nowrap">
-                  Hurry! 5 Slots Remaining
+                  Hurry! 4 Slots Remaining
                 </span>
               </div>
 
