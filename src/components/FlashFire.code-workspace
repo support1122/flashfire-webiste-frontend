@@ -1,0 +1,16 @@
+{
+	"folders": [
+		{
+			"path": "../../.."
+		},
+		{
+			"path": "../../../../practice of MERN stack"
+		},
+		{
+			"path": "../../../../flashfirePortfolio"
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "practice of MERN stack"
+	}
+}

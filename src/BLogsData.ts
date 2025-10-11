@@ -1,15 +1,16 @@
-      const blogPosts = [
-        {
-      id: 1,
-      title: "How to Write a Resume That Gets Interviews in the U.S. (2025 Job Market Edition)",
-      excerpt: "The no-nonsense guide to writing a resume that doesn't just sit in a database — it lands interviews. Learn precision-crafted strategies that make your 6-8 seconds count.",
-      author: "Sneha Patel",
-      date: "Jan 15, 2025",
-      readTime: "12 min",
-      category: "Resume Tips",
-      image: "https://res.cloudinary.com/drit9nkha/image/upload/v1752811844/image_1_exsbfq.webp",
-      categoryColor: "bg-blue-100 text-blue-600",
-      content: `
+const blogPosts = [
+  {
+    id: 1,
+    title: "How to Write a Resume That Gets Interviews in the U.S. (2025 Job Market Edition)",
+    excerpt:
+      "The no-nonsense guide to writing a resume that doesn't just sit in a database — it lands interviews. Learn precision-crafted strategies that make your 6-8 seconds count.",
+    author: "Sneha Patel",
+    date: "Jan 15, 2025",
+    readTime: "12 min",
+    category: "Resume Tips",
+    image: "https://res.cloudinary.com/drit9nkha/image/upload/v1752811844/image_1_exsbfq.webp",
+    categoryColor: "bg-blue-100 text-blue-600",
+    content: `
         <p>Welcome to the no-nonsense guide to writing a resume that doesn't just sit in a database — it lands interviews. At <strong><a href="https://www.flashfirejobs.com" target="_blank" rel="noopener noreferrer" style="color: #f97316; text-decoration: underline;">www.flashfirejobs.com</a></strong>, we've helped thousands of job seekers get in front of hiring managers by optimizing every word, metric, and keyword on their resume. In today's high-speed, high-noise U.S. job market, you have 6-8 seconds to make your resume count. Let's make those seconds explosive.</p>
 
         <h2>1. Start With a Precision-Crafted Summary</h2>
@@ -123,19 +124,21 @@
           <li>Bypass ATS filters with built-in keyword scanning</li>
         </ul>
         <p><strong>The future doesn't wait. Neither should your next job.</strong></p>
-      `
-    },
-    {
-      id: 2,
-      title: "Why Finding a Job in the U.S. as a New Graduate Feels Impossible",
-      excerpt: "If you're a recent graduate trying to land your first job in the United States, you're probably overwhelmed and frustrated. Learn why the system isn't built for new grads and how to overcome it.",
-      author: "Devansh Pandey",
-      date: "Jan 12, 2025",
-      readTime: "10 min",
-      category: "Job Strategy",
-      image: "https://res.cloudinary.com/drit9nkha/image/upload/v1752832446/46d07f8b-261d-49cf-b140-5eaf609b874e_kkjjml.webp",
-      categoryColor: "bg-green-100 text-green-600",
-      content: `
+      `,
+  },
+  {
+    id: 2,
+    title: "Why Finding a Job in the U.S. as a New Graduate Feels Impossible",
+    excerpt:
+      "If you're a recent graduate trying to land your first job in the United States, you're probably overwhelmed and frustrated. Learn why the system isn't built for new grads and how to overcome it.",
+    author: "Devansh Pandey",
+    date: "Jan 12, 2025",
+    readTime: "10 min",
+    category: "Job Strategy",
+    image:
+      "https://res.cloudinary.com/drit9nkha/image/upload/v1752832446/46d07f8b-261d-49cf-b140-5eaf609b874e_kkjjml.webp",
+    categoryColor: "bg-green-100 text-green-600",
+    content: `
         <p>If you're a recent graduate trying to land your first job in the United States, you're probably overwhelmed, frustrated, and exhausted. You've sent out hundreds of resumes, rewritten your cover letter a dozen times, and refreshed job boards more times than you can count. And yet — silence.</p>
 
         <p>You're not alone. For international students and recent graduates, finding a job in the U.S. feels nearly impossible. And it's not just a feeling — the data backs it up. Every year, thousands of new grads enter the U.S. job market with high hopes, only to find that the system isn't built for them.</p>
@@ -310,19 +313,21 @@
 
         <p>You're not alone. You just need a better system.</p>
         <p><strong>Let's get you hired.</strong></p>
-      `
-    },
-    {
-      id: 3,
-      title: "From 0 to Offer: A Step-by-Step Guide to Landing Your First U.S. Job with Flashfire",
-      excerpt: "Graduating in the U.S. as an international student should feel like winning the lottery. But instead of celebration, most students find themselves spiraling into a black hole of ghosted applications and visa anxiety. Here's your complete roadmap from 0 to offer.",
-      author: "Radhika Shukla",
-      date: "Jan 10, 2025",
-      readTime: "15 min",
-      category: "Job Strategy",
-      image: "https://res.cloudinary.com/drit9nkha/image/upload/v1752832996/freepik__the-style-is-candid-image-photography-with-natural__35759_dnwqka.webp",
-      categoryColor: "bg-purple-100 text-purple-600",
-      content: `
+      `,
+  },
+  {
+    id: 3,
+    title: "From 0 to Offer: A Step-by-Step Guide to Landing Your First U.S. Job with Flashfire",
+    excerpt:
+      "Graduating in the U.S. as an international student should feel like winning the lottery. But instead of celebration, most students find themselves spiraling into a black hole of ghosted applications and visa anxiety. Here's your complete roadmap from 0 to offer.",
+    author: "Radhika Shukla",
+    date: "Jan 10, 2025",
+    readTime: "15 min",
+    category: "Job Strategy",
+    image:
+      "https://res.cloudinary.com/drit9nkha/image/upload/v1752832996/freepik__the-style-is-candid-image-photography-with-natural__35759_dnwqka.webp",
+    categoryColor: "bg-purple-100 text-purple-600",
+    content: `
         <p>Graduating in the U.S. as an international student should feel like winning the lottery. But instead of celebration, most students find themselves spiraling into a black hole of ghosted applications, visa anxiety, and the same dreaded question: "How do I get anyone to notice me?"</p>
         
         <p>This isn't just a guide — it's a reality check and a roadmap. We're not going to tell you to "network more" or "customize your resume" and leave it at that. At <strong><a href="https://www.flashfirejobs.com" target="_blank" rel="noopener noreferrer" style="color: #f97316; text-decoration: underline;">flashfirejobs.com</a></strong>, we've helped hundreds of international students land jobs in record time — not by doing more, but by doing things smarter.</p>
@@ -565,19 +570,20 @@
         <p>👉 Don't just job hunt. Dominate the process.</p>
 
         <p><strong>From 0 to Offer — Flashfire gets it done.</strong></p>
-      `
-    },
-    {
-      id: 4,
-      title: "From CPT to H-1B: A Simple Game Plan for Navigating Job Search as an International Student",
-      excerpt: "The no-nonsense guide to writing a resume that doesn't just sit in a database — it lands interviews. Learn precision-crafted strategies that make your 6-8 seconds count.",
-      author: "Shubham Shukla",
-      date: "Jan 5, 2025",
-      readTime: "10 min",
-      category: "Career Advice",
-      image: "https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=800",
-      categoryColor: "bg-blue-100 text-blue-600",
-      content: `
+      `,
+  },
+  {
+    id: 4,
+    title: "From CPT to H-1B: A Simple Game Plan for Navigating Job Search as an International Student",
+    excerpt:
+      "The no-nonsense guide to writing a resume that doesn't just sit in a database — it lands interviews. Learn precision-crafted strategies that make your 6-8 seconds count.",
+    author: "Shubham Shukla",
+    date: "Jan 5, 2025",
+    readTime: "10 min",
+    category: "Career Advice",
+    image: "https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=800",
+    categoryColor: "bg-blue-100 text-blue-600",
+    content: `
         <p>If you're an international student in the U.S., the journey doesn't end at graduation — that's when the real challenge begins. Between CPT, OPT, and the elusive H-1B sponsorship lies a path filled with deadlines, job boards, and uncertainty. <strong><a href="https://www.flashfirejobs.com" target="_blank" rel="noopener noreferrer" style="color: #f97316; text-decoration: underline;">flashfirejobs.com</a></strong> simplifies that path.</p>
 
         <p>This is your no-fluff guide to turning CPT into a full-time job and maximizing your shot at H-1B — with speed, purpose, and strategy.</p>
@@ -670,19 +676,20 @@
         </ul>
         <p><strong><a href="https://www.flashfirejobs.com" target="_blank" rel="noopener noreferrer" style="color: #f97316; text-decoration: underline;">Start your free trial today</a></strong> and watch the job search flip in your favor.</p>
         <p>Your degree opened the door. Now let flashfirejobs.com help you walk through it — fast, smart, and sponsor-ready.</p>
-      `
-    },
-    {
-      id: 5,
-      title:"How I Got 10 Offers in 6 Weeks Using Only flashfirejobs.com (Product Manager Edition)",
-      excerpt: "Struggling to get interviews as a product manager? I was too — until I found flashfirejobs.com. This blog breaks down exactly how I used it to go from confusion and rejection to multiple offers in just 6 weeks, without referrals or recruiters.",
-      author: "Sneha Dingra",
-      date: "Jan 1, 2025",
-      readTime: "14 min",
-      category: "Career Advice",
-      image: "/images/blog5.jpeg",
-      categoryColor: "bg-blue-100 text-blue-600",
-      content: `
+      `,
+  },
+  {
+    id: 5,
+    title: "How I Got 10 Offers in 6 Weeks Using Only flashfirejobs.com (Product Manager Edition)",
+    excerpt:
+      "Struggling to get interviews as a product manager? I was too — until I found flashfirejobs.com. This blog breaks down exactly how I used it to go from confusion and rejection to multiple offers in just 6 weeks, without referrals or recruiters.",
+    author: "Sneha Dingra",
+    date: "Jan 1, 2025",
+    readTime: "14 min",
+    category: "Career Advice",
+    image: "/images/blog5.jpeg",
+    categoryColor: "bg-blue-100 text-blue-600",
+    content: `
         <p>The U.S. job market isn’t easy. Especially if you're an international student.</p>
 
 <p>It took me months of frustration, rejections, and ghosting before I discovered a way to flip the script. In just 6 weeks, I went from being unsure and overwhelmed — to choosing between <strong>10 product management offers</strong>, all thanks to one tool: <strong>flashfirejobs.com</strong>.</p>
@@ -832,19 +839,20 @@
 <p><a href="https://www.flashfirejobs.com" target="_blank" class="underline text-primary">Start your own success story. Visit flashfirejobs.com and activate your trial today.</a></p>
 
 <p><strong>I signed up for the 1000-application plan on flashfirejobs.com — and that’s how I got 10 offers in just 6 weeks. What will you do in your next 6?</strong></p>
-`
-    },
-    {
-      id: 6,
-      title: "How to Land Your First Job in the U.S. with Zero Referrals — A Proven Strategy for International Students",
-      excerpt: "Landing your first U.S. job as an international student can feel impossible — unless you use the right system. Here's the exact playbook that worked for me.",
-      author: "Ira Verma",
-      date: "Dec 25, 2024",
-      readTime: "16 min",
-      category: "Job Search Tips",
-      image: "/images/blog6.jpeg",
-      categoryColor: "bg-blue-100 text-blue-600",
-      content: `
+`,
+  },
+  {
+    id: 6,
+    title: "How to Land Your First Job in the U.S. with Zero Referrals — A Proven Strategy for International Students",
+    excerpt:
+      "Landing your first U.S. job as an international student can feel impossible — unless you use the right system. Here's the exact playbook that worked for me.",
+    author: "Ira Verma",
+    date: "Dec 25, 2024",
+    readTime: "16 min",
+    category: "Job Search Tips",
+    image: "/images/blog6.jpeg",
+    categoryColor: "bg-blue-100 text-blue-600",
+    content: `
         <p>The U.S. job market can feel like a locked door for international students. You’ve got the degree, the OPT window ticking, and the pressure to prove yourself fast. But unless you have an insider referral, Ivy League connections, or a visa-friendly employer lined up, landing your first job in the U.S. can feel almost impossible.</p>
 
     <h2>Referrals help. But systems win.</h2>
@@ -926,18 +934,20 @@
     </ul>
     <p><a href="https://www.flashfirejobs.com">flashfirejobs.com</a> delivers it all. You stay interview-ready while the machine works for you.</p>
     <p><strong>No luck needed. Just the right system.</strong></p>
-`
-    },
-    {id: 7,
-  title: "10 Reasons International Students Fail to Land Jobs in the U.S. — And How to Fix Them",
-  excerpt: "You've studied hard, built projects, and dreamed big — yet the U.S. job market still feels impossible. Here's why most international students struggle, and how flashfirejobs.com turns it around.",
-  author: "Shubham Shukla",
-  date: "Jul 21, 2025",
-  readTime: "9 min",
-  category: "Career Advice",
-image: "/images/blog7.jpeg",  
-     categoryColor: "bg-orange-100 text-orange-600",
-  content: `
+`,
+  },
+  {
+    id: 7,
+    title: "10 Reasons International Students Fail to Land Jobs in the U.S. — And How to Fix Them",
+    excerpt:
+      "You've studied hard, built projects, and dreamed big — yet the U.S. job market still feels impossible. Here's why most international students struggle, and how flashfirejobs.com turns it around.",
+    author: "Shubham Shukla",
+    date: "Jul 21, 2025",
+    readTime: "9 min",
+    category: "Career Advice",
+    image: "/images/blog7.jpeg",
+    categoryColor: "bg-orange-100 text-orange-600",
+    content: `
     <p>For many international students, landing a job in the U.S. is more than just a career move—it's a life goal. You've invested in your degree, worked on real-world projects, and learned to navigate a new culture. Yet, the job market feels like a locked maze, especially when you're competing without referrals, sponsorship certainty, or unlimited time on OPT.</p>
 
     <p>So why do so many international students fail to land jobs in the U.S.?</p>
@@ -1003,19 +1013,20 @@ image: "/images/blog7.jpeg",
     <p>The job market isn’t broken — the traditional approach is.</p>
     <p>If you’re tired of ghosting, rejections, and dead ends, let <a href="https://www.flashfirejobs.com" target="_blank" rel="noopener noreferrer" style="color:#f97316;">flashfirejobs.com</a> handle your search with precision and automation.</p>
     <p><strong>Start your 7-day free trial today.</strong> Save time. Get interviews. Land your dream role.</p>
-  `
+  `,
   },
   {
     id: 8,
-  title: "The 7 Best Job Portals for International Students Applying in the U.S. (And Which One Actually Works)",
-  excerpt: "Not all job boards are created equal—especially for international students. This guide ranks the most popular platforms and reveals which one actually gets you results, fast.",
-  author: "Shubham Shukla",
-  date: "Jul 21, 2025",
-  readTime: "8 min",
-  category: "Career Advice",
-image: "/images/blog8.jpeg",  
+    title: "The 7 Best Job Portals for International Students Applying in the U.S. (And Which One Actually Works)",
+    excerpt:
+      "Not all job boards are created equal—especially for international students. This guide ranks the most popular platforms and reveals which one actually gets you results, fast.",
+    author: "Shubham Shukla",
+    date: "Jul 21, 2025",
+    readTime: "8 min",
+    category: "Career Advice",
+    image: "/images/blog8.jpeg",
     categoryColor: "bg-green-100 text-green-600",
-  content: `
+    content: `
     <p>If you're an international student on F-1 or STEM OPT trying to land a job in the U.S., you've probably spent hours scrolling through job boards. But here’s the hard truth:</p>
 
     <p><strong>Most job platforms aren't built for your situation.</strong> They don’t tell you if the company hires international talent. They don't filter for roles that align with your visa timeline. And they definitely don’t personalize each resume.</p>
@@ -1074,19 +1085,20 @@ image: "/images/blog8.jpeg",
     </ol>
     <p>Thousands of users are already getting results. Now it’s your turn.</p>
     <p><strong><a href="https://www.flashfirejobs.com" target="_blank" rel="noopener noreferrer" style="color:#f97316;">Start your job search today</a></strong> — the right way.</p>
-  `
-},
-{
-  id: 9,
-  title: "The Ultimate Job Search Strategy for OPT Students in the U.S. — What No One Tells You",
-  excerpt: "OPT job seekers aren’t just looking for roles—they’re racing against time. Here’s a step-by-step strategy to land a job in the U.S. as an international student, without wasting months.",
-  author: "Gaurav Sharma",
-  date: "Jul 21, 2025",
-  readTime: "6 min",
-  category: "Career Advice",
-image: "/images/blog9.jpeg",  
-  categoryColor: "bg-orange-100 text-orange-600",
-  content: `
+  `,
+  },
+  {
+    id: 9,
+    title: "The Ultimate Job Search Strategy for OPT Students in the U.S. — What No One Tells You",
+    excerpt:
+      "OPT job seekers aren’t just looking for roles—they’re racing against time. Here’s a step-by-step strategy to land a job in the U.S. as an international student, without wasting months.",
+    author: "Gaurav Sharma",
+    date: "Jul 21, 2025",
+    readTime: "6 min",
+    category: "Career Advice",
+    image: "/images/blog9.jpeg",
+    categoryColor: "bg-orange-100 text-orange-600",
+    content: `
     <h1>The Ultimate Job Search Strategy for OPT Students in the U.S. — What No One Tells You</h1>
 
     <p>Finding a job in the U.S. as an international student on OPT is nothing like a regular job search. It’s not just about finding a role that excites you. It’s about finding a company that understands visa timelines, moves fast, and actually replies. In a system built for domestic applicants, OPT job seekers face a game that feels rigged from the start.</p>
@@ -1140,19 +1152,20 @@ image: "/images/blog9.jpeg",
     <p><strong>Thousands of OPT/STEM students</strong> have used this strategy and landed jobs within 4–8 weeks—even without referrals.</p>
 
     <p><a href="https://www.flashfirejobs.com" target="_blank" rel="noopener noreferrer" style="color:#f97316;"><strong>Start your job search smart — with flashfirejobs.com</strong></a></p>
-  `
-},
-{
-  id: 10,
-  title: "How to Land a U.S. Internship After 2 Semesters",
-  excerpt: "No U.S. experience? No referrals? No problem. Here's a step-by-step game plan for international students to land their first internship after just two semesters.",
-  author: "Amit Jain",
-  date: "Jul 21, 2025",
-  readTime: "5 min",
-  category: "Career Advice",
-image: "/images/blog10.jpeg",  
-  categoryColor: "bg-blue-100 text-blue-600",
-  content: `
+  `,
+  },
+  {
+    id: 10,
+    title: "How to Land a U.S. Internship After 2 Semesters",
+    excerpt:
+      "No U.S. experience? No referrals? No problem. Here's a step-by-step game plan for international students to land their first internship after just two semesters.",
+    author: "Amit Jain",
+    date: "Jul 21, 2025",
+    readTime: "5 min",
+    category: "Career Advice",
+    image: "/images/blog10.jpeg",
+    categoryColor: "bg-blue-100 text-blue-600",
+    content: `
     <h1>How to Land a U.S. Internship After 2 Semesters</h1>
 
     <p>Securing your first U.S. internship as an international student can feel like climbing a mountain with a blindfold on. You’re new to the job market, still figuring out how to talk about your skills, and worse — every employer seems to want "U.S. experience" you don’t yet have.</p>
@@ -1204,16 +1217,19 @@ image: "/images/blog10.jpeg",
     <p>You don’t need to wait till your final semester to land something valuable. With the right targeting, branding, and automation — you can unlock real-world experience fast.</p>
 
     <p><a href="https://www.flashfirejobs.com" target="_blank" rel="noopener noreferrer" style="color:#3b82f6;"><strong>Start your internship journey smart — with flashfirejobs.com</strong></a></p>
-  `},
-   {
+  `,
+  },
+  {
     id: 11,
     title: "Top Job Search Strategies for International Students in the U.S.: What Really Works",
-    excerpt: "Finding a job in the U.S. as an international student requires understanding the system, timing, visa rules, and tools that give you a competitive edge. Here's your complete guide.",
+    excerpt:
+      "Finding a job in the U.S. as an international student requires understanding the system, timing, visa rules, and tools that give you a competitive edge. Here's your complete guide.",
     author: "Lavanya Bhatt",
     date: "Jul 23, 2025",
     readTime: "8 min",
     category: "Career Advice",
-    image: "https://res.cloudinary.com/drit9nkha/image/upload/v1753269956/freepik__the-style-is-candid-image-photography-with-natural__60731_t7g37g.webp",
+    image:
+      "https://res.cloudinary.com/drit9nkha/image/upload/v1753269956/freepik__the-style-is-candid-image-photography-with-natural__60731_t7g37g.webp",
     categoryColor: "bg-blue-100 text-blue-600",
     content: `
       <h1>Top Job Search Strategies for International Students in the U.S.: What Really Works</h1>
@@ -1382,19 +1398,21 @@ image: "/images/blog10.jpeg",
       <p>Need help writing your resume, fixing your LinkedIn, or getting 1,000 applications sent in 6 weeks? <strong><a href="https://www.flashfirejobs.com" target="_blank" rel="noopener noreferrer" style="color: #f97316; text-decoration: underline;">www.flashfirejobs.com</a></strong> was built for you.</p>
       
       <p><strong>Let's get you hired.</strong></p>
-    `
+    `,
   },
   {
-  id: 12,
-  title: "I Applied to 1,000 U.S. Jobs in 45 Days — Here's What Actually Worked (And What Didn't)",
-  excerpt: "An international student's real experience using flashfirejobs.com to apply to 1,000 jobs in 45 days. The results: 17 recruiter replies, 7 interview rounds, and 2 offers.",
-  author: "Santosh Raj",
-  date: "Jul 23, 2025",
-  readTime: "6 min",
-  category: "Success Stories",
-  image: "https://res.cloudinary.com/drit9nkha/image/upload/v1753270580/freepik__the-style-is-candid-image-photography-with-natural__60732_wdgiw0.webp",
-  categoryColor: "bg-green-100 text-green-600",
-  content: `
+    id: 12,
+    title: "I Applied to 1,000 U.S. Jobs in 45 Days — Here's What Actually Worked (And What Didn't)",
+    excerpt:
+      "An international student's real experience using flashfirejobs.com to apply to 1,000 jobs in 45 days. The results: 17 recruiter replies, 7 interview rounds, and 2 offers.",
+    author: "Santosh Raj",
+    date: "Jul 23, 2025",
+    readTime: "6 min",
+    category: "Success Stories",
+    image:
+      "https://res.cloudinary.com/drit9nkha/image/upload/v1753270580/freepik__the-style-is-candid-image-photography-with-natural__60732_wdgiw0.webp",
+    categoryColor: "bg-green-100 text-green-600",
+    content: `
     <h1>I Applied to 1,000 U.S. Jobs in 45 Days — Here's What Actually Worked (And What Didn't)</h1>
 
     <p>If you're an international student trying to break into the U.S. job market, let me start with this: I get it. The process is overwhelming, confusing, and borderline demoralizing. I was on an F-1 visa with limited time, zero referrals, and not much luck despite sending dozens of applications manually. Then I discovered <strong><a href="https://www.flashfirejobs.com" target="_blank" rel="noopener noreferrer" style="color: #f97316; text-decoration: underline;">www.flashfirejobs.com</a></strong>.</p>
@@ -1490,19 +1508,21 @@ image: "/images/blog10.jpeg",
     
     <p>If you're serious about landing a U.S. job without burning out, do what I did:</p>
     <p><a href="https://www.flashfirejobs.com" target="_blank" rel="noopener noreferrer" style="color:#3b82f6;"><strong>Start your 7-day free trial at <strong><a href="https://www.flashfirejobs.com" target="_blank" rel="noopener noreferrer" style="color: #f97316; text-decoration: underline;">www.flashfirejobs.com</a></strong> and let the system work for you.</strong></a></p>
-  `
-},
-{
-  id: 13,
-  title: "Why Your Job Applications in the U.S. Are Getting Ghosted — And How to Finally Break the Silence",
-  excerpt: "Getting ghosted by employers? You're not alone. Learn why international students face unique challenges in the U.S. job market and how to stop being ignored.",
-  author: "Amit Jain",
-  date: "Jul 22, 2025",
-  readTime: "7 min",
-  category: "Job Search Tips",
-  image: "https://res.cloudinary.com/drit9nkha/image/upload/v1753335343/freepik__the-style-is-candid-image-photography-with-natural__48989_ysww2v.webp",
-  categoryColor: "bg-purple-100 text-purple-600",
-  content: `
+  `,
+  },
+  {
+    id: 13,
+    title: "Why Your Job Applications in the U.S. Are Getting Ghosted — And How to Finally Break the Silence",
+    excerpt:
+      "Getting ghosted by employers? You're not alone. Learn why international students face unique challenges in the U.S. job market and how to stop being ignored.",
+    author: "Amit Jain",
+    date: "Jul 22, 2025",
+    readTime: "7 min",
+    category: "Job Search Tips",
+    image:
+      "https://res.cloudinary.com/drit9nkha/image/upload/v1753335343/freepik__the-style-is-candid-image-photography-with-natural__48989_ysww2v.webp",
+    categoryColor: "bg-purple-100 text-purple-600",
+    content: `
     <h1>Why Your Job Applications in the U.S. Are Getting Ghosted — And How to Finally Break the Silence</h1>
 
     <p>If you're an international student in the U.S., chances are you've experienced this: You find a job you qualify for, submit your application, maybe even tailor your resume a bit, hit "Apply" — and then... nothing. No email. No rejection. Just silence. It's like your application fell into a black hole.</p>
@@ -1643,19 +1663,22 @@ image: "/images/blog10.jpeg",
     
     <p>Ready to stop guessing and start converting?<br>
     👉 Start your 7-day trial at <strong><a href="https://www.flashfirejobs.com" target="_blank" rel="noopener noreferrer" style="color: #f97316; text-decoration: underline;">www.flashfirejobs.com</a></strong>.</p>
-  `
-},
-{
-  id: 14,
-  title: "I Had No Referrals, No Experience, and No U.S. Connections — But I Still Got Interviews at Top Companies. Here's How.",
-  excerpt: "Starting from scratch as an international student? No referrals, no experience, no problem. Here's the exact system that landed me interviews at top companies.",
-  author: "Amit Jain",
-  date: "Jul 21, 2025",
-  readTime: "6 min",
-  category: "Success Stories",
-  image: "https://res.cloudinary.com/drit9nkha/image/upload/v1753335616/freepik__the-style-is-candid-image-photography-with-natural__48990_nm5lwr.webp",
-  categoryColor: "bg-green-100 text-green-600",
-  content: `
+  `,
+  },
+  {
+    id: 14,
+    title:
+      "I Had No Referrals, No Experience, and No U.S. Connections — But I Still Got Interviews at Top Companies. Here's How.",
+    excerpt:
+      "Starting from scratch as an international student? No referrals, no experience, no problem. Here's the exact system that landed me interviews at top companies.",
+    author: "Amit Jain",
+    date: "Jul 21, 2025",
+    readTime: "6 min",
+    category: "Success Stories",
+    image:
+      "https://res.cloudinary.com/drit9nkha/image/upload/v1753335616/freepik__the-style-is-candid-image-photography-with-natural__48990_nm5lwr.webp",
+    categoryColor: "bg-green-100 text-green-600",
+    content: `
     <h1>I Had No Referrals, No Experience, and No U.S. Connections — But I Still Got Interviews at Top Companies. Here's How.</h1>
 
     <p>If you're an international student in the U.S., you know the feeling: staring at a job posting thinking, <em>"I'd be a great fit... if only someone gave me a shot."</em> No referrals, no prior internships, no one in your network. Just you, your resume, and a mountain of self-doubt.</p>
@@ -1785,19 +1808,21 @@ image: "/images/blog10.jpeg",
     <p>Within weeks, I was interviewing at companies I thought wouldn't even glance at my profile. If you're in the same boat I was — no U.S. connections, no work history, no clue where to start — go to <strong><a href="https://www.flashfirejobs.com" target="_blank" rel="noopener noreferrer" style="color: #f97316; text-decoration: underline;">www.flashfirejobs.com</a></strong> and activate your 7-day trial.</p>
     
     <p>Your future self (and inbox) will thank you.</p>
-  `
-},
-{
-  id: 15,
-  title: "The Job Hunt Nearly Broke Me — Until I Discovered This One Strategy That Changed Everything",
-  excerpt: "Searching for a job in the U.S. as an international student isn't just hard—it's emotionally exhausting. Here's the one strategy that changed my entire job search.",
-  author: "Lavanya Bhatt",
-  date: "Jul 22, 2025",
-  readTime: "7 min",
-  category: "Success Stories",
-  image: "https://res.cloudinary.com/drit9nkha/image/upload/v1753336206/freepik__the-style-is-candid-image-photography-with-natural__20853_qj9mkz.webp",
-  categoryColor: "bg-green-100 text-green-600",
-  content: `
+  `,
+  },
+  {
+    id: 15,
+    title: "The Job Hunt Nearly Broke Me — Until I Discovered This One Strategy That Changed Everything",
+    excerpt:
+      "Searching for a job in the U.S. as an international student isn't just hard—it's emotionally exhausting. Here's the one strategy that changed my entire job search.",
+    author: "Lavanya Bhatt",
+    date: "Jul 22, 2025",
+    readTime: "7 min",
+    category: "Success Stories",
+    image:
+      "https://res.cloudinary.com/drit9nkha/image/upload/v1753336206/freepik__the-style-is-candid-image-photography-with-natural__20853_qj9mkz.webp",
+    categoryColor: "bg-green-100 text-green-600",
+    content: `
     <h1>The Job Hunt Nearly Broke Me — Until I Discovered This One Strategy That Changed Everything</h1>
 
     <p>Searching for a job in the U.S. as an international student isn't just hard—it's emotionally exhausting. Rejections pile up. Ghosting becomes the norm. You start questioning your skills, your education, and even your decision to move abroad. I know, because I've been there.</p>
@@ -1942,20 +1967,22 @@ image: "/images/blog10.jpeg",
     <p>And it might just save yours too.</p>
     
     <p>Start your 7-day free trial at <strong><a href="https://www.flashfirejobs.com" target="_blank" rel="noopener noreferrer" style="color: #f97316; text-decoration: underline;">www.flashfirejobs.com</a></strong> and get back in control of your career.</p>
-  `
-},
+  `,
+  },
 
-{
-  id: 16,
-  title: "How I Got 15+ Interview Calls with FLASHFIRE — The AI-Powered Job Hunt That Applies to 1,000+ U.S. Jobs for You",
-  excerpt: "When I first began searching for jobs in the U.S., I didn't realize how broken the system was for international students like me. Here's how I got 15+ interview calls in 6 weeks.",
-  author: "Priya Sharma",
-  date: "Jul 24, 2025",
-  readTime: "8 min",
-  category: "Success Stories",
-  image: "https://res.cloudinary.com/drit9nkha/image/upload/v1753515623/1_v8dktb.jpg",
-  categoryColor: "bg-green-100 text-green-600",
-  content: `
+  {
+    id: 16,
+    title:
+      "How I Got 15+ Interview Calls with FLASHFIRE — The AI-Powered Job Hunt That Applies to 1,000+ U.S. Jobs for You",
+    excerpt:
+      "When I first began searching for jobs in the U.S., I didn't realize how broken the system was for international students like me. Here's how I got 15+ interview calls in 6 weeks.",
+    author: "Priya Sharma",
+    date: "Jul 24, 2025",
+    readTime: "8 min",
+    category: "Success Stories",
+    image: "https://res.cloudinary.com/drit9nkha/image/upload/v1753515623/1_v8dktb.jpg",
+    categoryColor: "bg-green-100 text-green-600",
+    content: `
     <h1>How I Got 15+ Interview Calls with FLASHFIRE — The AI-Powered Job Hunt That Applies to 1,000+ U.S. Jobs for You</h1>
 
     <p>When I first began searching for jobs in the U.S., I didn't realize how broken the system was for international students like me. With no referrals, no U.S. experience, and thousands of applications going out for every job posting, it felt like I was sending resumes into a black hole. Every morning, I'd scroll LinkedIn and Indeed, tweak my resume, apply manually, and then… wait. And wait. And wait.</p>
@@ -2143,19 +2170,20 @@ image: "/images/blog10.jpeg",
     <p>Use the system that works.</p>
     
     <p><strong>Use <a href="https://www.flashfirejobs.com" target="_blank" rel="noopener noreferrer" style="color: #f97316; text-decoration: underline;">www.flashfirejobs.com</a>.</strong></p>
-  `
-},
-{
-  id: 17,
-  title: "The Work Authorization Question: How to Navigate It Like a Pro When Applying for U.S. Jobs",
-  excerpt: "For every international student or professional job seeker in the U.S., one question can make or break a job application: 'Are you authorized to work in the U.S.?' Here's how to answer it correctly.",
-  author: "Sunil Varma",
-  date: "Jul 25, 2025",
-  readTime: "6 min",
-  category: "Success Stories",
-  image: "https://res.cloudinary.com/drit9nkha/image/upload/v1753515620/2_ufbx8d.webp",
-  categoryColor: "bg-green-100 text-green-600",
-  content: `
+  `,
+  },
+  {
+    id: 17,
+    title: "The Work Authorization Question: How to Navigate It Like a Pro When Applying for U.S. Jobs",
+    excerpt:
+      "For every international student or professional job seeker in the U.S., one question can make or break a job application: 'Are you authorized to work in the U.S.?' Here's how to answer it correctly.",
+    author: "Sunil Varma",
+    date: "Jul 25, 2025",
+    readTime: "6 min",
+    category: "Success Stories",
+    image: "https://res.cloudinary.com/drit9nkha/image/upload/v1753515620/2_ufbx8d.webp",
+    categoryColor: "bg-green-100 text-green-600",
+    content: `
     <h1>The Work Authorization Question: How to Navigate It Like a Pro When Applying for U.S. Jobs</h1>
 
     <p>For every international student or professional job seeker in the U.S., one question can make or break a job application:</p>
@@ -2291,19 +2319,20 @@ image: "/images/blog10.jpeg",
     <p>I did it. You can too.</p>
 
     <p><strong>Start your 7-day free trial at <a href="https://www.flashfirejobs.com" target="_blank" rel="noopener noreferrer" style="color: #f97316; text-decoration: underline;">www.flashfirejobs.com</a> now.</strong></p>
-  `
-},
-{
-  id: 18,
-  title: "Yes, the Job Market in 2025 is Brutal. But Here's Why You Can't Give Up",
-  excerpt: "The 2025 U.S. job market is relentless—layoffs, ghosting, and endless rejections. But if you're still fighting, you're stronger than this market. Here's how to break through.",
-  author: "Meera Patel",
-  date: "Jul 26, 2025",
-  readTime: "8 min",
-  category: "Success Stories",
-  image: "https://res.cloudinary.com/drit9nkha/image/upload/v1753699963/01_n3iilu.webp",
-  categoryColor: "bg-green-100 text-green-600",
-  content: `
+  `,
+  },
+  {
+    id: 18,
+    title: "Yes, the Job Market in 2025 is Brutal. But Here's Why You Can't Give Up",
+    excerpt:
+      "The 2025 U.S. job market is relentless—layoffs, ghosting, and endless rejections. But if you're still fighting, you're stronger than this market. Here's how to break through.",
+    author: "Meera Patel",
+    date: "Jul 26, 2025",
+    readTime: "8 min",
+    category: "Success Stories",
+    image: "https://res.cloudinary.com/drit9nkha/image/upload/v1753699963/01_n3iilu.webp",
+    categoryColor: "bg-green-100 text-green-600",
+    content: `
     <h1>Yes, the Job Market in 2025 is Brutal. But Here's Why You Can't Give Up</h1>
 
     <p>Let's not sugarcoat it:</p>
@@ -2493,19 +2522,21 @@ image: "/images/blog10.jpeg",
 
     <p>Start your journey now.<br>
     <strong>Visit <a href="https://www.flashfirejobs.com" target="_blank" rel="noopener noreferrer" style="color: #f97316; text-decoration: underline;">www.flashfirejobs.com</a>.</strong></p>
-  `
-},
-{
-  id: 19,
-  title: "How I Got 15+ Interview Calls with FLASHFIRE — The AI-Powered Job Hunt That Applies to 1,000+ U.S. Jobs for You",
-  excerpt: "The U.S. job market is overwhelming, but what if you could automate the painful parts and still land interviews at top companies? I got 15+ interview calls in 6 weeks without sending a single application manually.",
-  author: "Priya Sharma",
-  date: "Jul 27, 2025",
-  readTime: "7 min",
-  category: "Success Stories",
-  image: "https://res.cloudinary.com/drit9nkha/image/upload/v1753699963/02_rkdgv0.webp",
-  categoryColor: "bg-green-100 text-green-600",
-  content: `
+  `,
+  },
+  {
+    id: 19,
+    title:
+      "How I Got 15+ Interview Calls with FLASHFIRE — The AI-Powered Job Hunt That Applies to 1,000+ U.S. Jobs for You",
+    excerpt:
+      "The U.S. job market is overwhelming, but what if you could automate the painful parts and still land interviews at top companies? I got 15+ interview calls in 6 weeks without sending a single application manually.",
+    author: "Priya Sharma",
+    date: "Jul 27, 2025",
+    readTime: "7 min",
+    category: "Success Stories",
+    image: "https://res.cloudinary.com/drit9nkha/image/upload/v1753699963/02_rkdgv0.webp",
+    categoryColor: "bg-green-100 text-green-600",
+    content: `
     <h1>How I Got 15+ Interview Calls with FLASHFIRE — The AI-Powered Job Hunt That Applies to 1,000+ U.S. Jobs for You</h1>
 
     <p>Let's talk facts:<br>
@@ -2675,19 +2706,20 @@ image: "/images/blog10.jpeg",
     You need to <strong>hunt smarter.</strong></p>
 
     <p>Start your 7-day free trial now at <strong><a href="https://www.flashfirejobs.com" target="_blank" rel="noopener noreferrer" style="color: #f97316; text-decoration: underline;">www.flashfirejobs.com</a></strong> — and let your breakthrough begin.</p>
-  `
-},
-{
-  id: 20,
-  title: "3000 Applications, 3 Weeks, 12 Offers: How I Finally Cracked the U.S. Job Market with Flashfire",
-  excerpt: "I watched my peers hustle daily with 3,000+ manual applications and get nothing. Then I tried Flashfire's Executive Plan, got 1,000+ applications sent for me, and walked away with 12 job offers in 3 weeks.",
-  author: "Ananya Gupta",
-  date: "Jul 28, 2025",
-  readTime: "6 min",
-  category: "Success Stories",
-  image: "https://res.cloudinary.com/drit9nkha/image/upload/v1753699963/03_gjgsmu.webp",
-  categoryColor: "bg-green-100 text-green-600",
-  content: `
+  `,
+  },
+  {
+    id: 20,
+    title: "3000 Applications, 3 Weeks, 12 Offers: How I Finally Cracked the U.S. Job Market with Flashfire",
+    excerpt:
+      "I watched my peers hustle daily with 3,000+ manual applications and get nothing. Then I tried Flashfire's Executive Plan, got 1,000+ applications sent for me, and walked away with 12 job offers in 3 weeks.",
+    author: "Ananya Gupta",
+    date: "Jul 28, 2025",
+    readTime: "6 min",
+    category: "Success Stories",
+    image: "https://res.cloudinary.com/drit9nkha/image/upload/v1753699963/03_gjgsmu.webp",
+    categoryColor: "bg-green-100 text-green-600",
+    content: `
     <h1>3000 Applications, 3 Weeks, 12 Offers: How I Finally Cracked the U.S. Job Market with Flashfire</h1>
 
     <p>Let's get real for a second.</p>
@@ -2888,19 +2920,21 @@ image: "/images/blog10.jpeg",
     You'll finally start getting results.</p>
 
     <p><strong>Start your job search smarter today. Visit <a href="https://www.flashfirejobs.com" target="_blank" rel="noopener noreferrer" style="color: #f97316; text-decoration: underline;">www.flashfirejobs.com</a></strong></p>
-  `
-},
-{
-  id: 22,
-  title: "Top 20 Companies Sponsoring H-1B in 2025 (And How to Apply as an International Student)",
-  excerpt: "Discover the top 20 companies actively sponsoring H-1B visas in 2025, plus strategic application tips for international students. Stop wasting time on companies that don't sponsor - target the right employers from day one.",
-  author: "Flashfire Team",
-  date: "Jan 25, 2025",
-  readTime: "18 min",
-  category: "H-1B Visa",
-  image: "https://res.cloudinary.com/dbjop20tw/image/upload/v1759450088/ChatGPT_Image_Oct_2_2025_08_35_24_PM_rgnlqm.png",
-  categoryColor: "bg-purple-100 text-purple-600",
-  content: `
+  `,
+  },
+  {
+    id: 22,
+    title: "Top 20 Companies Sponsoring H-1B in 2025 (And How to Apply as an International Student)",
+    excerpt:
+      "Discover the top 20 companies actively sponsoring H-1B visas in 2025, plus strategic application tips for international students. Stop wasting time on companies that don't sponsor - target the right employers from day one.",
+    author: "Flashfire Team",
+    date: "Jan 25, 2025",
+    readTime: "18 min",
+    category: "H-1B Visa",
+    image:
+      "https://res.cloudinary.com/dbjop20tw/image/upload/v1759450088/ChatGPT_Image_Oct_2_2025_08_35_24_PM_rgnlqm.png",
+    categoryColor: "bg-purple-100 text-purple-600",
+    content: `
     <p>Every year, 200,000+ international students graduate in the U.S. Yet, most discover a frustrating truth: not all companies hire foreign nationals. Job postings often say: "Candidates must be U.S. citizens or permanent residents."</p>
 
     <p>For students on OPT or STEM OPT, this is devastating. You may get an offer—but if the company won't file an H-1B, you'll be forced to leave when your work permit ends.</p>
@@ -3065,19 +3099,21 @@ image: "/images/blog10.jpeg",
     <div style="background-color: #fff3cd; padding: 15px; border-radius: 5px; margin: 20px 0;">
       <p><strong>Stop applying blindly.</strong> Make every application count with <strong><a href="https://www.flashfirejobs.com" target="_blank" rel="noopener noreferrer" style="color: #f97316; text-decoration: underline;">flashfirejobs.com</a></strong>.</p>
     </div>
-  `
-},
-{
-  id: 21,
-  title: "How to Find a Job in the U.S. on OPT Without Referrals",
-  excerpt: "Landing a job in the U.S. on OPT can feel overwhelming—especially if you don't have personal referrals. Learn step-by-step strategies, real-life examples, and actionable tips to secure interviews and land offers without connections.",
-  author: "Flashfire Team",
-  date: "Jan 20, 2025",
-  readTime: "15 min",
-  category: "Career Strategy",
-  image: "https://res.cloudinary.com/dbjop20tw/image/upload/v1759403990/e7a3e92f-58a4-427d-86b2-f4a47cf40a96-wm_uxgz8b.png",
-  categoryColor: "bg-green-100 text-green-600",
-  content: `
+  `,
+  },
+  {
+    id: 21,
+    title: "How to Find a Job in the U.S. on OPT Without Referrals",
+    excerpt:
+      "Landing a job in the U.S. on OPT can feel overwhelming—especially if you don't have personal referrals. Learn step-by-step strategies, real-life examples, and actionable tips to secure interviews and land offers without connections.",
+    author: "Flashfire Team",
+    date: "Jan 20, 2025",
+    readTime: "15 min",
+    category: "Career Strategy",
+    image:
+      "https://res.cloudinary.com/dbjop20tw/image/upload/v1759403990/e7a3e92f-58a4-427d-86b2-f4a47cf40a96-wm_uxgz8b.png",
+    categoryColor: "bg-green-100 text-green-600",
+    content: `
     <p>Landing a job in the U.S. on OPT can feel overwhelming—especially if you don't have personal referrals. As an international student, you may wonder: "Is it even possible to compete with candidates who already have connections?"</p>
 
     <p>The answer: absolutely. With a strategic approach, focused efforts, and the right tools, you can secure interviews and land offers—even without referrals. In this guide, we'll walk through step-by-step strategies, real-life examples, actionable tips, and tools like <strong><a href="https://www.flashfirejobs.com" target="_blank" rel="noopener noreferrer" style="color: #f97316; text-decoration: underline;">Flashfire</a></strong> that help international students succeed.</p>
@@ -3275,19 +3311,20 @@ image: "/images/blog10.jpeg",
 
     <p><strong>Ready to land your first U.S. job without referrals?</strong></p>
     <p>Visit <a href="https://www.flashfirejobs.com" target="_blank" rel="noopener noreferrer" style="color: #f97316; text-decoration: underline;">flashfirejobs.com</a> and start applying smartly today!</p>
-  `
-},
-{
-  id: 23,
-  title: "The Most In-Demand Skills for International Students in 2025",
-  excerpt: "Landing a job in the U.S. can feel like an uphill battle. We analyzed over 10,000 U.S. job listings to pinpoint exactly what employers want in 2025.",
-  author: "Flashfire Team",
-  date: "Oct 8, 2025",
-  readTime: "15 min",
-  category: "Career Skills",
-  image: "https://res.cloudinary.com/dbjop20tw/image/upload/v1759953226/skills_article_banner_3_wi2cw3.png",
-  categoryColor: "bg-purple-100 text-purple-600",
-  content: `
+  `,
+  },
+  {
+    id: 23,
+    title: "The Most In-Demand Skills for International Students in 2025",
+    excerpt:
+      "Landing a job in the U.S. can feel like an uphill battle. We analyzed over 10,000 U.S. job listings to pinpoint exactly what employers want in 2025.",
+    author: "Flashfire Team",
+    date: "Oct 8, 2025",
+    readTime: "15 min",
+    category: "Career Skills",
+    image: "https://res.cloudinary.com/dbjop20tw/image/upload/v1759953226/skills_article_banner_3_wi2cw3.png",
+    categoryColor: "bg-purple-100 text-purple-600",
+    content: `
     <h2>Introduction: Why 2025 Is a Pivotal Year for International Students</h2>
     <p>Landing a job in the U.S. can feel like an uphill battle. Between navigating OPT, CPT, and H-1B constraints and competing with local graduates, the process often seems overwhelming.</p>
     
@@ -3395,19 +3432,21 @@ image: "/images/blog10.jpeg",
     <p>By combining technical expertise, soft skills, and strategic resume presentation, students can break barriers — no referrals, no U.S. experience, no problem.</p>
     
     <p>Your global background is a strength. With Flashfire, it becomes your superpower. <strong><a href="https://www.flashfirejobs.com" target="_blank" rel="noopener noreferrer" style="color: #f97316; text-decoration: underline;">flashfirejobs.com</a></strong></p>
-  `
-},
-{
-  id: 24,
-  title: "When Is the Right Time to Come to the U.S.?",
-  excerpt: "A strategic guide for students and professionals dreaming of America. Learn the perfect window of opportunity to transform uncertainty into strategy.",
-  author: "Flashfire Team",
-  date: "Oct 8, 2025",
-  readTime: "12 min",
-  category: "Strategy",
-  image: "https://res.cloudinary.com/dbjop20tw/image/upload/v1759953595/ChatGPT_Image_Oct_4_2025_06_12_17_PM_e1bjl6.png",
-  categoryColor: "bg-indigo-100 text-indigo-600",
-  content: `
+  `,
+  },
+  {
+    id: 24,
+    title: "When Is the Right Time to Come to the U.S.?",
+    excerpt:
+      "A strategic guide for students and professionals dreaming of America. Learn the perfect window of opportunity to transform uncertainty into strategy.",
+    author: "Flashfire Team",
+    date: "Oct 8, 2025",
+    readTime: "12 min",
+    category: "Strategy",
+    image:
+      "https://res.cloudinary.com/dbjop20tw/image/upload/v1759953595/ChatGPT_Image_Oct_4_2025_06_12_17_PM_e1bjl6.png",
+    categoryColor: "bg-indigo-100 text-indigo-600",
+    content: `
     <h2>A Strategic Guide for Students and Professionals Dreaming of America</h2>
     <p>Every year, thousands of ambitious students and professionals around the world ask the same question:</p>
     <p><em>"When is the right time to go to the U.S.?"</em></p>
@@ -3569,19 +3608,21 @@ image: "/images/blog10.jpeg",
     <p>With the right guidance, every moment becomes the right time.</p>
     
     <p><strong>And with FLASHFIRE by your side — your timing will always be perfect.</strong> <a href="https://www.flashfirejobs.com" target="_blank" rel="noopener noreferrer" style="color: #f97316; text-decoration: underline;">flashfirejobs.com</a></p>
-  `
-},
-{
-  id: 25,
-  title: "The H-1B Lottery System Explained — What to Expect in 2026",
-  excerpt: "A complete guide for international students navigating their U.S. career ambitions. Understand the lottery system, new policies, and strategic pathways beyond chance.",
-  author: "Flashfire Team",
-  date: "Oct 8, 2025",
-  readTime: "18 min",
-  category: "Visa & Immigration",
-  image: "https://res.cloudinary.com/dbjop20tw/image/upload/v1759953814/WhatsApp_Image_2025-10-08_at_18.28.03_zy9l1t.jpg",
-  categoryColor: "bg-red-100 text-red-600",
-  content: `
+  `,
+  },
+  {
+    id: 25,
+    title: "The H-1B Lottery System Explained — What to Expect in 2026",
+    excerpt:
+      "A complete guide for international students navigating their U.S. career ambitions. Understand the lottery system, new policies, and strategic pathways beyond chance.",
+    author: "Flashfire Team",
+    date: "Oct 8, 2025",
+    readTime: "18 min",
+    category: "Visa & Immigration",
+    image:
+      "https://res.cloudinary.com/dbjop20tw/image/upload/v1759953814/WhatsApp_Image_2025-10-08_at_18.28.03_zy9l1t.jpg",
+    categoryColor: "bg-red-100 text-red-600",
+    content: `
     <h2>Introduction: The Visa That Shapes International Careers</h2>
     <p>For thousands of international students in the U.S., the H-1B visa is more than just a work permit — it's the bridge between academic achievement and long-term professional growth. Every spring, as the H-1B lottery approaches, hope and anxiety surge together.</p>
     
@@ -3751,7 +3792,7 @@ image: "/images/blog10.jpeg",
     <p><strong>The system may rely on luck, but your preparation can rely on strategy.</strong></p>
     
     <p>Visit <strong><a href="https://www.flashfirejobs.com" target="_blank" rel="noopener noreferrer" style="color: #f97316; text-decoration: underline;">flashfirejobs.com</a></strong> to start your strategic journey today.</p>
-  `
-},
-];
-export default blogPosts;
+  `,
+  },
+]
+export default blogPosts
