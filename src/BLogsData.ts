@@ -1,131 +1,133 @@
 const blogPosts = [
   {
     id: 1,
-    title: "How to Write a Resume That Gets Interviews in the U.S. (2025 Job Market Edition)",
+    title:
+      "How to Write a Resume That Gets Interviews in the U.S. (2025 Job Market Edition)",
     excerpt:
       "The no-nonsense guide to writing a resume that doesn't just sit in a database — it lands interviews. Learn precision-crafted strategies that make your 6-8 seconds count.",
     author: "Sneha Patel",
     date: "Jan 15, 2025",
     readTime: "12 min",
     category: "Resume Tips",
-    image: "https://res.cloudinary.com/drit9nkha/image/upload/v1752811844/image_1_exsbfq.webp",
+    image:
+      "https://res.cloudinary.com/drit9nkha/image/upload/v1752811844/image_1_exsbfq.webp",
     categoryColor: "bg-blue-100 text-blue-600",
     content: `
-        <p>Welcome to the no-nonsense guide to writing a resume that doesn't just sit in a database — it lands interviews. At <strong><a href="https://www.flashfirejobs.com" target="_blank" rel="noopener noreferrer" style="color: #f97316; text-decoration: underline;">www.flashfirejobs.com</a></strong>, we've helped thousands of job seekers get in front of hiring managers by optimizing every word, metric, and keyword on their resume. In today's high-speed, high-noise U.S. job market, you have 6-8 seconds to make your resume count. Let's make those seconds explosive.</p>
+  <section class="max-w-4xl mx-auto font-inter text-gray-800 leading-relaxed">
+    <p class="text-base mb-6">Welcome to the no-nonsense guide to writing a resume that <strong>gets interviews</strong> — not rejection emails. At 
+      <a href="https://www.flashfirejobs.com" target="_blank" rel="noopener noreferrer" class="text-orange-600 underline hover:text-red-600 font-semibold">FlashFire Jobs</a>,
+      we’ve helped thousands of professionals stand out with data-driven resume optimization. In today’s U.S. job market, you have <strong>6–8 seconds</strong> to impress. Let’s make them count.</p>
 
-        <h2>1. Start With a Precision-Crafted Summary</h2>
-        <p>Skip the generic "hardworking, detail-oriented team player" fluff. Your professional summary should be:</p>
-        <ul>
-          <li>2-3 lines</li>
-          <li>Position-specific</li>
-          <li>Impact-driven</li>
-        </ul>
-        <p><strong>Bad:</strong> Product Manager with 3 years of experience.</p>
-        <p><strong>Better:</strong> Product Manager specializing in B2B SaaS, with a track record of driving 25% feature adoption through user-first innovation.</p>
-        <p><strong><a href="https://www.flashfirejobs.com" target="_blank" rel="noopener noreferrer" style="color: #f97316; text-decoration: underline;">www.flashfirejobs.com</a></strong> helps you generate high-converting resume summaries aligned to each job post using our proprietary IDRRSA (In-Demand Role Recruitment System Algorithm).</p>
+    <h2 class="text-2xl font-bold text-gray-900 mt-10 mb-3">1️⃣ Start With a Precision-Crafted Summary</h2>
+    <p>Skip the clichés — your summary should be sharp, specific, and measurable.</p>
+    <ul class="list-disc ml-6 my-3">
+      <li>2–3 focused lines</li>
+      <li>Position-specific keywords</li>
+      <li>Impact-driven statement</li>
+    </ul>
+    <p><strong>Bad:</strong> Product Manager with 3 years of experience.</p>
+    <p><strong>Better:</strong> Product Manager specializing in B2B SaaS, driving 25% feature adoption through user-first innovation.</p>
+    <blockquote class="border-l-4 border-orange-500 bg-orange-50 p-4 rounded-md italic my-4">
+      FlashFire’s <strong>IDRRSA</strong> algorithm instantly rewrites your summary for relevance and conversion.
+    </blockquote>
 
-        <h2>2. Write Like a Strategist, Not a Historian</h2>
-        <p>Your resume isn't a logbook. It's a pitch.</p>
-        <p>Each bullet should:</p>
-        <ul>
-          <li>Start with a high-voltage verb: "Spearheaded," "Engineered," "Drove"</li>
-          <li>Be followed by an outcome, ideally with a number</li>
-        </ul>
-        <p><strong>Say this:</strong></p>
-        <blockquote>Drove 35% increase in sprint velocity by restructuring backlog prioritization, improving Agile cycle time.</blockquote>
-        <p><strong>Not this:</strong></p>
-        <blockquote>Responsible for sprint planning and task delegation.</blockquote>
-        <p><strong><a href="https://www.flashfirejobs.com" target="_blank" rel="noopener noreferrer" style="color: #f97316; text-decoration: underline;">www.flashfirejobs.com</a></strong> gives real-time feedback on weak verbs and missing results.</p>
+    <h2 class="text-2xl font-bold text-gray-900 mt-10 mb-3">2️⃣ Write Like a Strategist, Not a Historian</h2>
+    <p>Your resume isn’t a timeline — it’s a <em>pitch deck</em>. Every line should tell a result story.</p>
+    <ul class="list-disc ml-6 my-3">
+      <li>Start with a strong action verb</li>
+      <li>Quantify the outcome</li>
+    </ul>
+    <p><strong>Say this:</strong></p>
+    <blockquote class="border-l-4 border-orange-500 bg-orange-50 p-4 rounded-md italic my-2">
+      Drove 35% increase in sprint velocity by restructuring backlog prioritization.
+    </blockquote>
+    <p><strong>Not this:</strong></p>
+    <blockquote class="border-l-4 border-gray-300 bg-gray-50 p-4 rounded-md italic my-2">
+      Responsible for sprint planning and task delegation.
+    </blockquote>
 
-        <h2>3. Quantify or It Didn't Happen</h2>
-        <p>Metrics create credibility. If you're applying for jobs in Product, Data, Marketing, Ops, or Engineering — numbers speak louder than titles.</p>
-        <p><strong>Examples that work:</strong></p>
-        <ul>
-          <li>Increased CTR by 42% through SEO-focused content redesign</li>
-          <li>Saved $56K annually by automating reporting workflows</li>
-          <li>Led a team of 4 to deliver 5 MVPs in 12 weeks</li>
-        </ul>
-        <p><strong><a href="https://www.flashfirejobs.com" target="_blank" rel="noopener noreferrer" style="color: #f97316; text-decoration: underline;">www.flashfirejobs.com</a></strong> prompts you to add numbers that recruiters are actively scanning for.</p>
+    <h2 class="text-2xl font-bold text-gray-900 mt-10 mb-3">3️⃣ Quantify or It Didn’t Happen</h2>
+    <p>Numbers = credibility. Showcase tangible results wherever possible.</p>
+    <ul class="list-disc ml-6 my-3">
+      <li>Increased CTR by 42% through SEO optimization</li>
+      <li>Saved $56K yearly via automated reporting</li>
+      <li>Led a team of 4 to deliver 5 MVPs in 12 weeks</li>
+    </ul>
 
-        <h2>4. Tailor for ATS and Humans</h2>
-        <p>Over 95% of Fortune 500 companies use Applicant Tracking Systems. If you don't optimize, your resume won't even be seen.</p>
-        <p><strong><a href="https://www.flashfirejobs.com" target="_blank" rel="noopener noreferrer" style="color: #f97316; text-decoration: underline;">www.flashfirejobs.com</a></strong> automatically extracts relevant keywords from each job post and integrates them into your resume without keyword stuffing.</p>
-        <p><strong>Example:</strong> Instead of writing "Marketing Analyst," our AI may suggest "Performance Marketing Analyst - DTC, Paid Media, Google Analytics" depending on the job.</p>
+    <h2 class="text-2xl font-bold text-gray-900 mt-10 mb-3">4️⃣ Tailor for ATS and Humans</h2>
+    <p>Over 95% of Fortune 500 firms use ATS filters. FlashFire’s AI extracts keywords and rewrites content without stuffing.</p>
+    <blockquote class="border-l-4 border-orange-500 bg-orange-50 p-4 rounded-md my-3 italic">
+      Example: "Performance Marketing Analyst – DTC, Paid Media, Google Analytics"
+    </blockquote>
 
-        <h2>5. Structure and Layout = Readability + Retention</h2>
-        <p>According to a 2023 LinkedIn study, resumes that are visually clean and sectioned clearly get 37% more recruiter responses.</p>
-        <p><strong><a href="https://www.flashfirejobs.com" target="_blank" rel="noopener noreferrer" style="color: #f97316; text-decoration: underline;">www.flashfirejobs.com</a></strong> templates are ATS-proof and built with recruiter psychology in mind:</p>
-        <ul>
-          <li>Bold headers</li>
-          <li>Adequate white space</li>
-          <li>Strategic placement of callout metrics</li>
-        </ul>
-        <p>Avoid columns, text boxes, or decorative icons. Bots can't read them.</p>
+    <h2 class="text-2xl font-bold text-gray-900 mt-10 mb-3">5️⃣ Design for Readability and Retention</h2>
+    <p>According to LinkedIn’s 2023 data, <strong>clean layouts</strong> boost recruiter response by 37%.</p>
+    <ul class="list-disc ml-6 my-3">
+      <li>Bold section headers</li>
+      <li>Consistent spacing</li>
+      <li>No decorative elements (ATS-safe)</li>
+    </ul>
 
-        <h2>6. Emphasize Soft Skills via Outcomes</h2>
-        <p>Hiring managers want influence and ownership — not fluff.</p>
-        <p><strong>Instead of:</strong> Excellent communication skills</p>
-        <p><strong>Say:</strong> Negotiated cross-functional priorities with Engineering, Design, and Sales to align roadmap on $1.2M ARR opportunity.</p>
-        <p><strong><a href="https://www.flashfirejobs.com" target="_blank" rel="noopener noreferrer" style="color: #f97316; text-decoration: underline;">www.flashfirejobs.com</a></strong> scans your resume to identify vague phrases and replaces them with real-world business language.</p>
+    <h2 class="text-2xl font-bold text-gray-900 mt-10 mb-3">6️⃣ Showcase Soft Skills Through Outcomes</h2>
+    <p>Transform vague claims into measurable leadership results.</p>
+    <p><strong>Instead of:</strong> Excellent communication skills</p>
+    <p><strong>Say:</strong> Negotiated cross-functional priorities with Engineering, Design & Sales to align on a $1.2M ARR roadmap.</p>
 
-        <h2>7. Leverage Automation Without Losing Personalization</h2>
-        <p>You don't need to rewrite your resume 50 times. You need:</p>
-        <ul>
-          <li>Smart templating</li>
-          <li>AI-assisted tailoring</li>
-          <li>Instant keyword feedback</li>
-        </ul>
-        <p><strong><a href="https://www.flashfirejobs.com" target="_blank" rel="noopener noreferrer" style="color: #f97316; text-decoration: underline;">www.flashfirejobs.com</a></strong> does all this. Upload your resume once. Let us personalize it to every job, instantly.</p>
+    <h2 class="text-2xl font-bold text-gray-900 mt-10 mb-3">7️⃣ Leverage Automation Without Losing Personality</h2>
+    <p>Don’t rewrite your resume 50 times — automate personalization with AI feedback loops.</p>
+    <ul class="list-disc ml-6 my-3">
+      <li>Smart templating</li>
+      <li>Instant keyword scoring</li>
+      <li>AI-assisted rewriting</li>
+    </ul>
 
-        <h2>8. Brandon's Insider Strategy: What Recruiters Really Want</h2>
-        <p>As shared in a private hiring feedback loop (not typically available to candidates), here's what elite U.S. recruiters are actually scanning for:</p>
-        
-        <h3>a) Clear Value Proposition</h3>
-        <ul>
-          <li>A focused headline: "Growth Product Manager | B2B SaaS | PLG, AI Integrations"</li>
-          <li>Role-specific skills within first scroll: e.g. "User research, Internal tooling, Experimentation, Roadmapping"</li>
-        </ul>
+    <h2 class="text-2xl font-bold text-gray-900 mt-10 mb-3">8️⃣ What Recruiters Really Want (Insider Tips)</h2>
+    <h3 class="text-xl font-semibold text-gray-800 mt-4 mb-2">a) Clear Value Proposition</h3>
+    <ul class="list-disc ml-6">
+      <li>Headline like “Growth PM | SaaS | AI Integrations”</li>
+      <li>Top-visible skills: research, experimentation, roadmap</li>
+    </ul>
 
-        <h3>b) Outcome-Centric Language</h3>
-        <ul>
-          <li>Say what <em>changed</em> because of your work</li>
-          <li>Recruiters are allergic to: "worked on," "involved in," "assisted with"</li>
-        </ul>
+    <h3 class="text-xl font-semibold text-gray-800 mt-4 mb-2">b) Outcome-Centric Language</h3>
+    <ul class="list-disc ml-6">
+      <li>Focus on what <em>changed</em> because of your work</li>
+      <li>Avoid “worked on,” “helped with,” “involved in”</li>
+    </ul>
 
-        <h3>c) Cultural Alignment Signals</h3>
-        <ul>
-          <li>Show how you influenced decisions, overcame ambiguity, advocated for users, or pushed a roadmap</li>
-          <li>Mention Agile, OKRs, user feedback loops, or cross-functional rituals</li>
-        </ul>
+    <h3 class="text-xl font-semibold text-gray-800 mt-4 mb-2">c) Cultural Alignment Signals</h3>
+    <ul class="list-disc ml-6">
+      <li>Show influence, ambiguity management, advocacy</li>
+      <li>Mention OKRs, Agile, retrospectives</li>
+    </ul>
 
-        <h2>9. FAQs About U.S. Resumes (2025 Edition)</h2>
-        
-        <h3>Q1: Should I include a photo on my resume?</h3>
-        <p class="text-base"><strong>A:</strong> No. U.S. recruiters prefer resumes without photos to minimize bias and meet ATS standards.</p>
+    <h2 class="text-2xl font-bold text-gray-900 mt-10 mb-3">9️⃣ FAQs: 2025 Resume Essentials</h2>
+    <ul class="list-disc ml-6 space-y-3">
+      <li><strong>Q:</strong> Include a photo?<br/><strong>A:</strong> No — U.S. recruiters prefer ATS-friendly text only.</li>
+      <li><strong>Q:</strong> Objective or Summary?<br/><strong>A:</strong> Always a summary — concise & role-specific.</li>
+      <li><strong>Q:</strong> Canva templates?<br/><strong>A:</strong> Avoid — most break ATS parsing. Use FlashFire’s templates.</li>
+      <li><strong>Q:</strong> Ideal length?<br/><strong>A:</strong> One page (&lt;7 years), two for senior roles.</li>
+      <li><strong>Q:</strong> Remote or freelance work?<br/><strong>A:</strong> Absolutely. Quantify outcomes & client impact.</li>
+    </ul>
 
-        <h3>Q2: Should I write an objective or a summary?</h3>
-        <p class="text-base"><strong>A:</strong> Always choose a summary. Objectives are outdated and usually too vague.</p>
+    <h2 class="text-2xl font-bold text-gray-900 mt-10 mb-3">🚀 Final Word: Stop Blending In</h2>
+    <p>Your resume is your personal <strong>pitch deck</strong>. It deserves clarity, intensity, and precision.</p>
+    <div class="border-l-4 border-orange-500 bg-orange-50 p-5 rounded-lg my-5">
+      <p class="font-semibold mb-2">Get started at 
+        <a href="https://www.flashfirejobs.com" target="_blank" rel="noopener noreferrer" class="text-orange-600 underline hover:text-red-600 font-semibold">
+          flashfirejobs.com
+        </a> to:</p>
+      <ul class="list-disc ml-6">
+        <li>Get your resume reviewed by AI and experts</li>
+        <li>Tailor to every job in 30 seconds</li>
+        <li>Bypass ATS filters automatically</li>
+      </ul>
+    </div>
 
-        <h3>Q3: Is it okay to use Canva templates?</h3>
-        <p class="text-base"><strong>A:</strong> Most Canva designs break in ATS parsing. <strong><a href="https://www.flashfirejobs.com" target="_blank" rel="noopener noreferrer" style="color: #f97316; text-decoration: underline;">www.flashfirejobs.com</a></strong> uses fully optimized layouts tested across 12 major ATS platforms.</p>
-
-        <h3>Q4: How long should my resume be?</h3>
-        <p class="text-base"><strong>A:</strong> One page if &lt;7 years experience. Two pages max if you're applying to director-level roles or above.</p>
-
-        <h3>Q5: Should I mention remote work or freelance gigs?</h3>
-        <p class="text-base"><strong>A:</strong> Absolutely. Clearly list them with outcomes and client results. <strong><a href="https://www.flashfirejobs.com" target="_blank" rel="noopener noreferrer" style="color: #f97316; text-decoration: underline;">www.flashfirejobs.com</a></strong> has dedicated templates for gig, freelance, and remote resumes.</p>
-
-        <h2>Final Word: Stop Blending In</h2>
-        <p>Your resume is your pitch deck. It deserves clarity, intensity, and precision.</p>
-        <p>Sign up at <strong><a href="https://www.flashfirejobs.com" target="_blank" rel="noopener noreferrer" style="color: #f97316; text-decoration: underline;">www.flashfirejobs.com</a></strong> to:</p>
-        <ul>
-          <li>Get your resume reviewed and rewritten by pros</li>
-          <li>Tailor your resume to every job in 30 seconds</li>
-          <li>Bypass ATS filters with built-in keyword scanning</li>
-        </ul>
-        <p><strong>The future doesn't wait. Neither should your next job.</strong></p>
-      `,
+    <p class="text-lg font-semibold text-gray-900">🔥 The future doesn’t wait — and neither should your next job.</p>
+  </section>
+  `,
   },
+
   {
     id: 2,
     title: "Why Finding a Job in the U.S. as a New Graduate Feels Impossible",
@@ -317,7 +319,8 @@ const blogPosts = [
   },
   {
     id: 3,
-    title: "From 0 to Offer: A Step-by-Step Guide to Landing Your First U.S. Job with Flashfire",
+    title:
+      "From 0 to Offer: A Step-by-Step Guide to Landing Your First U.S. Job with Flashfire",
     excerpt:
       "Graduating in the U.S. as an international student should feel like winning the lottery. But instead of celebration, most students find themselves spiraling into a black hole of ghosted applications and visa anxiety. Here's your complete roadmap from 0 to offer.",
     author: "Radhika Shukla",
@@ -574,14 +577,16 @@ const blogPosts = [
   },
   {
     id: 4,
-    title: "From CPT to H-1B: A Simple Game Plan for Navigating Job Search as an International Student",
+    title:
+      "From CPT to H-1B: A Simple Game Plan for Navigating Job Search as an International Student",
     excerpt:
       "The no-nonsense guide to writing a resume that doesn't just sit in a database — it lands interviews. Learn precision-crafted strategies that make your 6-8 seconds count.",
     author: "Shubham Shukla",
     date: "Jan 5, 2025",
     readTime: "10 min",
     category: "Career Advice",
-    image: "https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=800",
+    image:
+      "https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=800",
     categoryColor: "bg-blue-100 text-blue-600",
     content: `
         <p>If you're an international student in the U.S., the journey doesn't end at graduation — that's when the real challenge begins. Between CPT, OPT, and the elusive H-1B sponsorship lies a path filled with deadlines, job boards, and uncertainty. <strong><a href="https://www.flashfirejobs.com" target="_blank" rel="noopener noreferrer" style="color: #f97316; text-decoration: underline;">flashfirejobs.com</a></strong> simplifies that path.</p>
@@ -680,7 +685,8 @@ const blogPosts = [
   },
   {
     id: 5,
-    title: "How I Got 10 Offers in 6 Weeks Using Only flashfirejobs.com (Product Manager Edition)",
+    title:
+      "How I Got 10 Offers in 6 Weeks Using Only flashfirejobs.com (Product Manager Edition)",
     excerpt:
       "Struggling to get interviews as a product manager? I was too — until I found flashfirejobs.com. This blog breaks down exactly how I used it to go from confusion and rejection to multiple offers in just 6 weeks, without referrals or recruiters.",
     author: "Sneha Dingra",
@@ -843,7 +849,8 @@ const blogPosts = [
   },
   {
     id: 6,
-    title: "How to Land Your First Job in the U.S. with Zero Referrals — A Proven Strategy for International Students",
+    title:
+      "How to Land Your First Job in the U.S. with Zero Referrals — A Proven Strategy for International Students",
     excerpt:
       "Landing your first U.S. job as an international student can feel impossible — unless you use the right system. Here's the exact playbook that worked for me.",
     author: "Ira Verma",
@@ -938,7 +945,8 @@ const blogPosts = [
   },
   {
     id: 7,
-    title: "10 Reasons International Students Fail to Land Jobs in the U.S. — And How to Fix Them",
+    title:
+      "10 Reasons International Students Fail to Land Jobs in the U.S. — And How to Fix Them",
     excerpt:
       "You've studied hard, built projects, and dreamed big — yet the U.S. job market still feels impossible. Here's why most international students struggle, and how flashfirejobs.com turns it around.",
     author: "Shubham Shukla",
@@ -1017,7 +1025,8 @@ const blogPosts = [
   },
   {
     id: 8,
-    title: "The 7 Best Job Portals for International Students Applying in the U.S. (And Which One Actually Works)",
+    title:
+      "The 7 Best Job Portals for International Students Applying in the U.S. (And Which One Actually Works)",
     excerpt:
       "Not all job boards are created equal—especially for international students. This guide ranks the most popular platforms and reveals which one actually gets you results, fast.",
     author: "Shubham Shukla",
@@ -1089,7 +1098,8 @@ const blogPosts = [
   },
   {
     id: 9,
-    title: "The Ultimate Job Search Strategy for OPT Students in the U.S. — What No One Tells You",
+    title:
+      "The Ultimate Job Search Strategy for OPT Students in the U.S. — What No One Tells You",
     excerpt:
       "OPT job seekers aren’t just looking for roles—they’re racing against time. Here’s a step-by-step strategy to land a job in the U.S. as an international student, without wasting months.",
     author: "Gaurav Sharma",
@@ -1221,7 +1231,8 @@ const blogPosts = [
   },
   {
     id: 11,
-    title: "Top Job Search Strategies for International Students in the U.S.: What Really Works",
+    title:
+      "Top Job Search Strategies for International Students in the U.S.: What Really Works",
     excerpt:
       "Finding a job in the U.S. as an international student requires understanding the system, timing, visa rules, and tools that give you a competitive edge. Here's your complete guide.",
     author: "Lavanya Bhatt",
@@ -1402,7 +1413,8 @@ const blogPosts = [
   },
   {
     id: 12,
-    title: "I Applied to 1,000 U.S. Jobs in 45 Days — Here's What Actually Worked (And What Didn't)",
+    title:
+      "I Applied to 1,000 U.S. Jobs in 45 Days — Here's What Actually Worked (And What Didn't)",
     excerpt:
       "An international student's real experience using flashfirejobs.com to apply to 1,000 jobs in 45 days. The results: 17 recruiter replies, 7 interview rounds, and 2 offers.",
     author: "Santosh Raj",
@@ -1512,7 +1524,8 @@ const blogPosts = [
   },
   {
     id: 13,
-    title: "Why Your Job Applications in the U.S. Are Getting Ghosted — And How to Finally Break the Silence",
+    title:
+      "Why Your Job Applications in the U.S. Are Getting Ghosted — And How to Finally Break the Silence",
     excerpt:
       "Getting ghosted by employers? You're not alone. Learn why international students face unique challenges in the U.S. job market and how to stop being ignored.",
     author: "Amit Jain",
@@ -1812,7 +1825,8 @@ const blogPosts = [
   },
   {
     id: 15,
-    title: "The Job Hunt Nearly Broke Me — Until I Discovered This One Strategy That Changed Everything",
+    title:
+      "The Job Hunt Nearly Broke Me — Until I Discovered This One Strategy That Changed Everything",
     excerpt:
       "Searching for a job in the U.S. as an international student isn't just hard—it's emotionally exhausting. Here's the one strategy that changed my entire job search.",
     author: "Lavanya Bhatt",
@@ -1980,7 +1994,8 @@ const blogPosts = [
     date: "Jul 24, 2025",
     readTime: "8 min",
     category: "Success Stories",
-    image: "https://res.cloudinary.com/drit9nkha/image/upload/v1753515623/1_v8dktb.jpg",
+    image:
+      "https://res.cloudinary.com/drit9nkha/image/upload/v1753515623/1_v8dktb.jpg",
     categoryColor: "bg-green-100 text-green-600",
     content: `
     <h1>How I Got 15+ Interview Calls with FLASHFIRE — The AI-Powered Job Hunt That Applies to 1,000+ U.S. Jobs for You</h1>
@@ -2174,14 +2189,16 @@ const blogPosts = [
   },
   {
     id: 17,
-    title: "The Work Authorization Question: How to Navigate It Like a Pro When Applying for U.S. Jobs",
+    title:
+      "The Work Authorization Question: How to Navigate It Like a Pro When Applying for U.S. Jobs",
     excerpt:
       "For every international student or professional job seeker in the U.S., one question can make or break a job application: 'Are you authorized to work in the U.S.?' Here's how to answer it correctly.",
     author: "Sunil Varma",
     date: "Jul 25, 2025",
     readTime: "6 min",
     category: "Success Stories",
-    image: "https://res.cloudinary.com/drit9nkha/image/upload/v1753515620/2_ufbx8d.webp",
+    image:
+      "https://res.cloudinary.com/drit9nkha/image/upload/v1753515620/2_ufbx8d.webp",
     categoryColor: "bg-green-100 text-green-600",
     content: `
     <h1>The Work Authorization Question: How to Navigate It Like a Pro When Applying for U.S. Jobs</h1>
@@ -2323,14 +2340,16 @@ const blogPosts = [
   },
   {
     id: 18,
-    title: "Yes, the Job Market in 2025 is Brutal. But Here's Why You Can't Give Up",
+    title:
+      "Yes, the Job Market in 2025 is Brutal. But Here's Why You Can't Give Up",
     excerpt:
       "The 2025 U.S. job market is relentless—layoffs, ghosting, and endless rejections. But if you're still fighting, you're stronger than this market. Here's how to break through.",
     author: "Meera Patel",
     date: "Jul 26, 2025",
     readTime: "8 min",
     category: "Success Stories",
-    image: "https://res.cloudinary.com/drit9nkha/image/upload/v1753699963/01_n3iilu.webp",
+    image:
+      "https://res.cloudinary.com/drit9nkha/image/upload/v1753699963/01_n3iilu.webp",
     categoryColor: "bg-green-100 text-green-600",
     content: `
     <h1>Yes, the Job Market in 2025 is Brutal. But Here's Why You Can't Give Up</h1>
@@ -2534,7 +2553,8 @@ const blogPosts = [
     date: "Jul 27, 2025",
     readTime: "7 min",
     category: "Success Stories",
-    image: "https://res.cloudinary.com/drit9nkha/image/upload/v1753699963/02_rkdgv0.webp",
+    image:
+      "https://res.cloudinary.com/drit9nkha/image/upload/v1753699963/02_rkdgv0.webp",
     categoryColor: "bg-green-100 text-green-600",
     content: `
     <h1>How I Got 15+ Interview Calls with FLASHFIRE — The AI-Powered Job Hunt That Applies to 1,000+ U.S. Jobs for You</h1>
@@ -2710,14 +2730,16 @@ const blogPosts = [
   },
   {
     id: 20,
-    title: "3000 Applications, 3 Weeks, 12 Offers: How I Finally Cracked the U.S. Job Market with Flashfire",
+    title:
+      "3000 Applications, 3 Weeks, 12 Offers: How I Finally Cracked the U.S. Job Market with Flashfire",
     excerpt:
       "I watched my peers hustle daily with 3,000+ manual applications and get nothing. Then I tried Flashfire's Executive Plan, got 1,000+ applications sent for me, and walked away with 12 job offers in 3 weeks.",
     author: "Ananya Gupta",
     date: "Jul 28, 2025",
     readTime: "6 min",
     category: "Success Stories",
-    image: "https://res.cloudinary.com/drit9nkha/image/upload/v1753699963/03_gjgsmu.webp",
+    image:
+      "https://res.cloudinary.com/drit9nkha/image/upload/v1753699963/03_gjgsmu.webp",
     categoryColor: "bg-green-100 text-green-600",
     content: `
     <h1>3000 Applications, 3 Weeks, 12 Offers: How I Finally Cracked the U.S. Job Market with Flashfire</h1>
@@ -2924,7 +2946,8 @@ const blogPosts = [
   },
   {
     id: 22,
-    title: "Top 20 Companies Sponsoring H-1B in 2025 (And How to Apply as an International Student)",
+    title:
+      "Top 20 Companies Sponsoring H-1B in 2025 (And How to Apply as an International Student)",
     excerpt:
       "Discover the top 20 companies actively sponsoring H-1B visas in 2025, plus strategic application tips for international students. Stop wasting time on companies that don't sponsor - target the right employers from day one.",
     author: "Flashfire Team",
@@ -3322,7 +3345,8 @@ const blogPosts = [
     date: "Oct 8, 2025",
     readTime: "15 min",
     category: "Career Skills",
-    image: "https://res.cloudinary.com/dbjop20tw/image/upload/v1759953226/skills_article_banner_3_wi2cw3.png",
+    image:
+      "https://res.cloudinary.com/dbjop20tw/image/upload/v1759953226/skills_article_banner_3_wi2cw3.png",
     categoryColor: "bg-purple-100 text-purple-600",
     content: `
     <h2>Introduction: Why 2025 Is a Pivotal Year for International Students</h2>
@@ -3794,5 +3818,5 @@ const blogPosts = [
     <p>Visit <strong><a href="https://www.flashfirejobs.com" target="_blank" rel="noopener noreferrer" style="color: #f97316; text-decoration: underline;">flashfirejobs.com</a></strong> to start your strategic journey today.</p>
   `,
   },
-]
-export default blogPosts
+];
+export default blogPosts;
