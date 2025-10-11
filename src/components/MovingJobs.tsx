@@ -171,7 +171,7 @@ const MovingJobs: React.FC<MovingJobsProps> = ({ setSignupFormVisibility }) => {
                Applications Sent Smartly
               </h3>
               <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
-                50k+ applications optimized with ATS resumes for maximum visibility and callbacks.
+                100k+ applications optimized with ATS resumes for maximum visibility and callbacks.
               </p>
             </div>
             
