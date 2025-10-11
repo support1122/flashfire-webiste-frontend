@@ -27,7 +27,7 @@ const blogPosts = [
     </ul>
     <p style='margin-bottom:12px; line-height:1.7;'><strong>Bad:</strong> Product Manager with 3 years of experience.</p>
     <p style='margin-bottom:12px; line-height:1.7;'><strong>Better:</strong> Product Manager specializing in B2B SaaS, driving 25% feature adoption through user-first innovation.</p>
-    <blockquote class="border-l-4 border-orange-500 bg-orange-50 p-4 rounded-md italic my-4">
+    <blockquote style="margin:14px 0; padding:12px 14px; border-left:4px solid #f97316; background:#FFF7ED; border-radius:8px; color:#1f2937;">
       FlashFire’s <strong>IDRRSA</strong> algorithm instantly rewrites your summary for relevance and conversion.
     </blockquote>
 
@@ -38,11 +38,11 @@ const blogPosts = [
       <li>Quantify the outcome</li>
     </ul>
     <p style='margin-bottom:12px; line-height:1.7;'><strong>Say this:</strong></p>
-    <blockquote class="border-l-4 border-orange-500 bg-orange-50 p-4 rounded-md italic my-2">
+    <blockquote style="margin:14px 0; padding:12px 14px; border-left:4px solid #f97316; background:#FFF7ED; border-radius:8px; color:#1f2937;">
       Drove 35% increase in sprint velocity by restructuring backlog prioritization.
     </blockquote>
     <p style='margin-bottom:12px; line-height:1.7;'><strong>Not this:</strong></p>
-    <blockquote class="border-l-4 border-gray-300 bg-gray-50 p-4 rounded-md italic my-2">
+    <blockquote style="margin:14px 0; padding:12px 14px; border-left:4px solid #f97316; background:#FFF7ED; border-radius:8px; color:#1f2937;">
       Responsible for sprint planning and task delegation.
     </blockquote>
 
@@ -56,7 +56,7 @@ const blogPosts = [
 
     <h2 class="text-2xl font-bold text-gray-900 mt-10 mb-3">4️⃣ Tailor for ATS and Humans</h2>
     <p style='margin-bottom:12px; line-height:1.7;'>Over 95% of Fortune 500 firms use ATS filters. FlashFire’s AI extracts keywords and rewrites content without stuffing.</p>
-    <blockquote class="border-l-4 border-orange-500 bg-orange-50 p-4 rounded-md my-3 italic">
+    <blockquote style="margin:14px 0; padding:12px 14px; border-left:4px solid #f97316; background:#FFF7ED; border-radius:8px; color:#1f2937;">
       Example: "Performance Marketing Analyst – DTC, Paid Media, Google Analytics"
     </blockquote>
 
@@ -150,7 +150,7 @@ const blogPosts = [
 
     <h3 class="text-xl font-semibold text-gray-800 mt-6 mb-2">1️⃣ Job Boards Are Overwhelming</h3>
     <p style='margin-bottom:12px; line-height:1.7;'>Indeed, LinkedIn, and Glassdoor are flooded with listings — but most are duplicated, outdated, or irrelevant to visa needs.</p>
-    <blockquote class="border-l-4 border-green-500 bg-green-50 p-4 rounded-md italic my-4">
+    <blockquote style="margin:14px 0; padding:12px 14px; border-left:4px solid #f97316; background:#FFF7ED; border-radius:8px; color:#1f2937;">
       FlashFire’s AI filters 1000+ roles per week — removing expired or non-visa-friendly ones.
     </blockquote>
 
@@ -160,7 +160,7 @@ const blogPosts = [
 
     <h3 class="text-xl font-semibold text-gray-800 mt-6 mb-2">3️⃣ The ATS Wall</h3>
     <p style='margin-bottom:12px; line-height:1.7;'>Over 90% of resumes never reach a human because of poor formatting or keyword mismatch.</p>
-    <blockquote class="border-l-4 border-green-500 bg-green-50 p-4 rounded-md italic my-4">
+    <blockquote style="margin:14px 0; padding:12px 14px; border-left:4px solid #f97316; background:#FFF7ED; border-radius:8px; color:#1f2937;">
       FlashFire auto-tailors every resume per job — with dynamic keywords and layout checks.
     </blockquote>
 
@@ -170,7 +170,7 @@ const blogPosts = [
 
     <h3 class="text-xl font-semibold text-gray-800 mt-6 mb-2">5️⃣ Time Isn’t on Your Side</h3>
     <p style='margin-bottom:12px; line-height:1.7;'>Deadlines, coursework, and visa clocks tick fast — and you can’t afford inefficiency.</p>
-    <blockquote class="border-l-4 border-green-500 bg-green-50 p-4 rounded-md italic my-4">
+    <blockquote style="margin:14px 0; padding:12px 14px; border-left:4px solid #f97316; background:#FFF7ED; border-radius:8px; color:#1f2937;">
       FlashFire saves 150+ hours monthly by auto-applying while you sleep.
     </blockquote>
 
@@ -190,7 +190,7 @@ const blogPosts = [
       <li>Dashboard tracking and analytics</li>
     </ul>
 
-    <blockquote class="border-l-4 border-green-500 bg-green-50 p-4 rounded-md italic my-4">
+    <blockquote style="margin:14px 0; padding:12px 14px; border-left:4px solid #f97316; background:#FFF7ED; border-radius:8px; color:#1f2937;">
       “Within a week, I had interviews lined up — FlashFire made it feel effortless.” — Aman G., Barclays
     </blockquote>
 
@@ -236,7 +236,7 @@ const blogPosts = [
       <li>Keywords extracted from live job data</li>
       <li>Action verbs and quantifiable impact lines</li>
     </ul>
-    <blockquote class="border-l-4 border-purple-500 bg-purple-50 p-4 rounded-md italic my-4">
+    <blockquote style="margin:14px 0; padding:12px 14px; border-left:4px solid #f97316; background:#FFF7ED; border-radius:8px; color:#1f2937;">
       FlashFire’s A/B-tested resumes learn from recruiter behavior to keep improving.
     </blockquote>
 
@@ -274,10 +274,10 @@ const blogPosts = [
     <p style='margin-bottom:12px; line-height:1.7;'>Create 2–3 viral-ready posts showing your story and expertise — FlashFire helps you write them.</p>
 
     <h2 class="text-2xl font-bold text-gray-900 mt-10 mb-3">🧠 User Success Stories</h2>
-    <blockquote class="border-l-4 border-purple-500 bg-purple-50 p-4 rounded-md italic my-4">
+    <blockquote style="margin:14px 0; padding:12px 14px; border-left:4px solid #f97316; background:#FFF7ED; border-radius:8px; color:#1f2937;">
       “I didn’t touch LinkedIn or job boards for 2 weeks — still got 3 calls.” — Rijul J.
     </blockquote>
-    <blockquote class="border-l-4 border-purple-500 bg-purple-50 p-4 rounded-md italic my-4">
+    <blockquote style="margin:14px 0; padding:12px 14px; border-left:4px solid #f97316; background:#FFF7ED; border-radius:8px; color:#1f2937;">
       “From 0 to JPMorgan in 28 days. FlashFire isn’t a tool — it’s a team.” — Tanya D.
     </blockquote>
 
@@ -398,10 +398,10 @@ const blogPosts = [
         <p style='margin-bottom:12px; line-height:1.7;'><a href="https://www.flashfirejobs.com" target="_blank" rel="noopener noreferrer" style="color: #f97316; font-weight: 600; text-decoration: underline;">flashfirejobs.com</a> evolves your search strategy every 30 days — automatically.</p>
 
         <h2 style='margin-top:20px; margin-bottom:10px; font-size:20px; font-weight:700;'>What Flashfire Users Are Saying</h2>
-        <blockquote style='margin:12px 0; padding-left:12px; border-left:3px solid #f97316; color:#444;'>"I didn't think it was possible to get this many interviews without cold emailing. flashfirejobs.com made the job hunt 10x easier." — <strong>Rijul J.</strong></blockquote>
-        <blockquote style='margin:12px 0; padding-left:12px; border-left:3px solid #f97316; color:#444;'>"I finally stopped second-guessing my resume. I knew flashfirejobs.com was optimizing every single one of my applications." — <strong>Anjali S.</strong></blockquote>
-        <blockquote style='margin:12px 0; padding-left:12px; border-left:3px solid #f97316; color:#444;'>"I had no referrals and still got calls from IBM and Goldman Sachs. I didn't believe it until it happened." — <strong>Aman G.</strong></blockquote>
-        <blockquote style='margin:12px 0; padding-left:12px; border-left:3px solid #f97316; color:#444;'>"Without flashfirejobs.com, I'd have spent six months scrolling job boards. I got my first offer in 3 weeks." — <strong>Amit G.</strong></blockquote>
+        <blockquote style="margin:14px 0; padding:12px 14px; border-left:4px solid #f97316; background:#FFF7ED; border-radius:8px; color:#1f2937;">"I didn't think it was possible to get this many interviews without cold emailing. flashfirejobs.com made the job hunt 10x easier." — <strong>Rijul J.</strong></blockquote>
+        <blockquote style="margin:14px 0; padding:12px 14px; border-left:4px solid #f97316; background:#FFF7ED; border-radius:8px; color:#1f2937;">"I finally stopped second-guessing my resume. I knew flashfirejobs.com was optimizing every single one of my applications." — <strong>Anjali S.</strong></blockquote>
+        <blockquote style="margin:14px 0; padding:12px 14px; border-left:4px solid #f97316; background:#FFF7ED; border-radius:8px; color:#1f2937;">"I had no referrals and still got calls from IBM and Goldman Sachs. I didn't believe it until it happened." — <strong>Aman G.</strong></blockquote>
+        <blockquote style="margin:14px 0; padding:12px 14px; border-left:4px solid #f97316; background:#FFF7ED; border-radius:8px; color:#1f2937;">"Without flashfirejobs.com, I'd have spent six months scrolling job boards. I got my first offer in 3 weeks." — <strong>Amit G.</strong></blockquote>
 
         <h2 style='margin-top:20px; margin-bottom:10px; font-size:20px; font-weight:700;'>Final Thoughts: Build Your Own Momentum</h2>
         <p style='margin-bottom:12px; line-height:1.7;'><strong>flashfirejobs.com</strong> is built for international students — from CPT to H-1B.</p>
@@ -537,7 +537,7 @@ const blogPosts = [
 
 <h2 style='margin-top:20px; margin-bottom:10px; font-size:20px; font-weight:700;'>Why flashfirejobs.com Actually Works</h2>
 
-<ol>
+<ol style="margin-left:20px;margin-bottom:12px;line-height:1.6;">
   <li><strong>Tailored Applications, Every Time</strong> — AI + human-crafted resumes for every job</li>
   <li><strong>Smart Matching</strong> — Based on your skills, location, and goals</li>
   <li><strong>ATS-Optimized Everything</strong> — Resumes and profiles built to pass filters</li>
@@ -550,17 +550,17 @@ const blogPosts = [
 
 <h2 style='margin-top:20px; margin-bottom:10px; font-size:20px; font-weight:700;'>Testimonials Like Mine</h2>
 
-<blockquote style='margin:12px 0; padding-left:12px; border-left:3px solid #f97316; color:#444;'>
+<blockquote style="margin:14px 0; padding:12px 14px; border-left:4px solid #f97316; background:#FFF7ED; border-radius:8px; color:#1f2937;">
   “flashfirejobs.com made the job hunt 10x easier. I got calls from Amazon, Meta, and 2 SaaS startups — all within 3 weeks.”<br />
   <em>— Rijul J.</em>
 </blockquote>
 
-<blockquote style='margin:12px 0; padding-left:12px; border-left:3px solid #f97316; color:#444;'>
+<blockquote style="margin:14px 0; padding:12px 14px; border-left:4px solid #f97316; background:#FFF7ED; border-radius:8px; color:#1f2937;">
   “I finally stopped second-guessing my resume. I knew flashfirejobs.com was optimizing every single one of my applications.”<br />
   <em>— Anjali S.</em>
 </blockquote>
 
-<blockquote style='margin:12px 0; padding-left:12px; border-left:3px solid #f97316; color:#444;'>
+<blockquote style="margin:14px 0; padding:12px 14px; border-left:4px solid #f97316; background:#FFF7ED; border-radius:8px; color:#1f2937;">
   “Without flashfirejobs.com, I’d have spent six months scrolling job boards. I got my first offer in 3 weeks.”<br />
   <em>— Aman G.</em>
 </blockquote>
@@ -819,7 +819,7 @@ const blogPosts = [
       <li>Don’t track what’s working</li>
     </ul>
     <p style='margin-bottom:12px; line-height:1.7;'>Don’t make the same mistakes. Instead:</p>
-    <ol>
+    <ol style="margin-left:20px;margin-bottom:12px;line-height:1.6;">
       <li>Use LinkedIn, YC, and Jobright for research</li>
       <li>Let <a href="https://www.flashfirejobs.com" target="_blank" rel="noopener noreferrer" style="color:#f97316;">flashfirejobs.com</a> handle the heavy lifting</li>
     </ol>
@@ -883,7 +883,7 @@ const blogPosts = [
 
     <h2 style='margin-top:20px; margin-bottom:10px; font-size:20px; font-weight:700;'>Final Takeaway</h2>
     <p style='margin-bottom:12px; line-height:1.7;'>You don’t need luck. You need leverage. OPT job search success is about:</p>
-    <ol>
+    <ol style="margin-left:20px;margin-bottom:12px;line-height:1.6;">
       <li>Targeted job filters</li>
       <li>Resume personalization</li>
       <li>Automated, strategic applications</li>
@@ -1309,19 +1309,19 @@ const blogPosts = [
     <p style='margin-bottom:12px; line-height:1.7;'>Let's break down the five things that lead to ghosting — and how to fix them using <strong><a href="https://www.flashfirejobs.com" target="_blank" rel="noopener noreferrer" style="color: #f97316; font-weight: 600; text-decoration: underline;">www.flashfirejobs.com</a></strong>.</p>
     
     <p style='margin-bottom:12px; line-height:1.7;'><strong>1. One-Size-Fits-All Resumes</strong></p>
-    <blockquote style='margin:12px 0; padding-left:12px; border-left:3px solid #f97316; color:#444;'><p style='margin-bottom:12px; line-height:1.7;'>Fix: <strong><a href="https://www.flashfirejobs.com" target="_blank" rel="noopener noreferrer" style="color: #f97316; font-weight: 600; text-decoration: underline;">www.flashfirejobs.com</a></strong> customizes your resume for each job using AI and job-specific keywords. No two resumes are the same.</p></blockquote>
+    <blockquote style="margin:14px 0; padding:12px 14px; border-left:4px solid #f97316; background:#FFF7ED; border-radius:8px; color:#1f2937;"><p style='margin-bottom:12px; line-height:1.7;'>Fix: <strong><a href="https://www.flashfirejobs.com" target="_blank" rel="noopener noreferrer" style="color: #f97316; font-weight: 600; text-decoration: underline;">www.flashfirejobs.com</a></strong> customizes your resume for each job using AI and job-specific keywords. No two resumes are the same.</p></blockquote>
     
     <p style='margin-bottom:12px; line-height:1.7;'><strong>2. Wrong Companies</strong></p>
-    <blockquote style='margin:12px 0; padding-left:12px; border-left:3px solid #f97316; color:#444;'><p style='margin-bottom:12px; line-height:1.7;'>Fix: <strong><a href="https://www.flashfirejobs.com" target="_blank" rel="noopener noreferrer" style="color: #f97316; font-weight: 600; text-decoration: underline;">www.flashfirejobs.com</a></strong> filters out companies that historically ignore OPT/STEM students. Your applications go only to sponsor-aware, high-conversion employers.</p></blockquote>
+    <blockquote style="margin:14px 0; padding:12px 14px; border-left:4px solid #f97316; background:#FFF7ED; border-radius:8px; color:#1f2937;"><p style='margin-bottom:12px; line-height:1.7;'>Fix: <strong><a href="https://www.flashfirejobs.com" target="_blank" rel="noopener noreferrer" style="color: #f97316; font-weight: 600; text-decoration: underline;">www.flashfirejobs.com</a></strong> filters out companies that historically ignore OPT/STEM students. Your applications go only to sponsor-aware, high-conversion employers.</p></blockquote>
     
     <p style='margin-bottom:12px; line-height:1.7;'><strong>3. Poor Resume Formatting</strong></p>
-    <blockquote style='margin:12px 0; padding-left:12px; border-left:3px solid #f97316; color:#444;'><p style='margin-bottom:12px; line-height:1.7;'>Fix: Your resume is rewritten in clean, ATS-optimized formatting that recruiters and bots both love.</p></blockquote>
+    <blockquote style="margin:14px 0; padding:12px 14px; border-left:4px solid #f97316; background:#FFF7ED; border-radius:8px; color:#1f2937;"><p style='margin-bottom:12px; line-height:1.7;'>Fix: Your resume is rewritten in clean, ATS-optimized formatting that recruiters and bots both love.</p></blockquote>
     
     <p style='margin-bottom:12px; line-height:1.7;'><strong>4. Weak LinkedIn Profiles</strong></p>
-    <blockquote style='margin:12px 0; padding-left:12px; border-left:3px solid #f97316; color:#444;'><p style='margin-bottom:12px; line-height:1.7;'>Fix: <strong><a href="https://www.flashfirejobs.com" target="_blank" rel="noopener noreferrer" style="color: #f97316; font-weight: 600; text-decoration: underline;">www.flashfirejobs.com</a></strong> completely overhauls your profile to match U.S. standards and improve visibility in searches.</p></blockquote>
+    <blockquote style="margin:14px 0; padding:12px 14px; border-left:4px solid #f97316; background:#FFF7ED; border-radius:8px; color:#1f2937;"><p style='margin-bottom:12px; line-height:1.7;'>Fix: <strong><a href="https://www.flashfirejobs.com" target="_blank" rel="noopener noreferrer" style="color: #f97316; font-weight: 600; text-decoration: underline;">www.flashfirejobs.com</a></strong> completely overhauls your profile to match U.S. standards and improve visibility in searches.</p></blockquote>
     
     <p style='margin-bottom:12px; line-height:1.7;'><strong>5. No Application Tracking</strong></p>
-    <blockquote style='margin:12px 0; padding-left:12px; border-left:3px solid #f97316; color:#444;'><p style='margin-bottom:12px; line-height:1.7;'>Fix: <strong><a href="https://www.flashfirejobs.com" target="_blank" rel="noopener noreferrer" style="color: #f97316; font-weight: 600; text-decoration: underline;">www.flashfirejobs.com</a></strong> gives you a dashboard with real-time tracking. You know exactly where your resume is going and what's working.</p></blockquote>
+    <blockquote style="margin:14px 0; padding:12px 14px; border-left:4px solid #f97316; background:#FFF7ED; border-radius:8px; color:#1f2937;"><p style='margin-bottom:12px; line-height:1.7;'>Fix: <strong><a href="https://www.flashfirejobs.com" target="_blank" rel="noopener noreferrer" style="color: #f97316; font-weight: 600; text-decoration: underline;">www.flashfirejobs.com</a></strong> gives you a dashboard with real-time tracking. You know exactly where your resume is going and what's working.</p></blockquote>
 
     <h2 style='margin-top:20px; margin-bottom:10px; font-size:20px; font-weight:700;'>Part 4: The <strong><a href="https://www.flashfirejobs.com" target="_blank" rel="noopener noreferrer" style="color: #f97316; font-weight: 600; text-decoration: underline;">www.flashfirejobs.com</a></strong> Fix</h2>
     <p style='margin-bottom:12px; line-height:1.7;'>When I signed up for <strong><a href="https://www.flashfirejobs.com" target="_blank" rel="noopener noreferrer" style="color: #f97316; font-weight: 600; text-decoration: underline;">www.flashfirejobs.com</a></strong>, I was ghosted by over 70 companies. I chose the 1,000-application Executive Plan, and this is how the process flipped everything:</p>
@@ -1436,7 +1436,7 @@ const blogPosts = [
     <h2 style='margin-top:20px; margin-bottom:10px; font-size:20px; font-weight:700;'>Part 1: Why Experience Isn't Always the Dealbreaker You Think It Is</h2>
     <p style='margin-bottom:12px; line-height:1.7;'>Most international students assume that without work experience, their resume is useless. But here's what no one tells you:</p>
     
-    <blockquote style='margin:12px 0; padding-left:12px; border-left:3px solid #f97316; color:#444;'><p style='margin-bottom:12px; line-height:1.7;'>Recruiters don't expect work experience from interns. They expect <strong>proof of skills</strong>.</p></blockquote>
+    <blockquote style="margin:14px 0; padding:12px 14px; border-left:4px solid #f97316; background:#FFF7ED; border-radius:8px; color:#1f2937;"><p style='margin-bottom:12px; line-height:1.7;'>Recruiters don't expect work experience from interns. They expect <strong>proof of skills</strong>.</p></blockquote>
     
     <p style='margin-bottom:12px; line-height:1.7;'>And proof can come in the form of:</p>
     <ul style='margin-left:20px; margin-bottom:12px; line-height:1.6;'>
@@ -1507,7 +1507,7 @@ const blogPosts = [
     
     <p style='margin-bottom:12px; line-height:1.7;'>One of my projects was a data dashboard I built for a class. Flashfire reframed it like this:</p>
     
-    <blockquote style='margin:12px 0; padding-left:12px; border-left:3px solid #f97316; color:#444;'><p style='margin-bottom:12px; line-height:1.7;'>"Designed a real-time analytics dashboard in Python and Plotly that reduced weekly report generation time by 70% for a simulated university department."</p></blockquote>
+    <blockquote style="margin:14px 0; padding:12px 14px; border-left:4px solid #f97316; background:#FFF7ED; border-radius:8px; color:#1f2937;"><p style='margin-bottom:12px; line-height:1.7;'>"Designed a real-time analytics dashboard in Python and Plotly that reduced weekly report generation time by 70% for a simulated university department."</p></blockquote>
 
     <h2 style='margin-top:20px; margin-bottom:10px; font-size:20px; font-weight:700;'>Part 6: Cold Outreach Works (If You Do It Right)</h2>
     <p style='margin-bottom:12px; line-height:1.7;'>Flashfire did it all — from revamping my resume and optimizing my LinkedIn profile to applying for hundreds of jobs on my behalf. Once those applications were submitted, they also provided me with <strong>cold outreach templates</strong> to use on LinkedIn and email.</p>
@@ -1639,11 +1639,11 @@ const blogPosts = [
     <h2 style='margin-top:20px; margin-bottom:10px; font-size:20px; font-weight:700;'>Part 4: The Projects That Got Me Interviews</h2>
     <p style='margin-bottom:12px; line-height:1.7;'>I didn't have work experience, but I had class projects. Flashfire helped me turn these into interview-worthy bullets:</p>
     
-    <blockquote style='margin:12px 0; padding-left:12px; border-left:3px solid #f97316; color:#444;'>
+    <blockquote style="margin:14px 0; padding:12px 14px; border-left:4px solid #f97316; background:#FFF7ED; border-radius:8px; color:#1f2937;">
       <p style='margin-bottom:12px; line-height:1.7;'>"Built a React web app to automate meal delivery for campus students, reducing manual entry by 70%"</p>
     </blockquote>
     
-    <blockquote style='margin:12px 0; padding-left:12px; border-left:3px solid #f97316; color:#444;'>
+    <blockquote style="margin:14px 0; padding:12px 14px; border-left:4px solid #f97316; background:#FFF7ED; border-radius:8px; color:#1f2937;">
       <p style='margin-bottom:12px; line-height:1.7;'>"Analyzed financial models in Python to optimize inventory cost for a simulated retail chain"</p>
     </blockquote>
     
@@ -1945,7 +1945,7 @@ const blogPosts = [
     <h2 style='margin-top:20px; margin-bottom:10px; font-size:20px; font-weight:700;'>Part 1: What Does "Work Authorization" Really Mean?</h2>
     <p style='margin-bottom:12px; line-height:1.7;'>When employers ask this, they typically want to know two things:</p>
 
-    <ol>
+    <ol style="margin-left:20px;margin-bottom:12px;line-height:1.6;">
       <li><strong>Are you currently authorized to work in the U.S.?</strong>
         <ul style='margin-left:20px; margin-bottom:12px; line-height:1.6;'>
           <li>If you're on OPT or STEM OPT, the answer is YES.</li>
@@ -1993,7 +1993,7 @@ const blogPosts = [
       <li>Use cold email and outreach messaging like:</li>
     </ul>
 
-    <blockquote style='margin:12px 0; padding-left:12px; border-left:3px solid #f97316; color:#444;'>
+    <blockquote style="margin:14px 0; padding:12px 14px; border-left:4px solid #f97316; background:#FFF7ED; border-radius:8px; color:#1f2937;">
       <p style='margin-bottom:12px; line-height:1.7;'>"I'm currently authorized to work in the U.S. on my F-1 OPT and don't require sponsorship at this stage."</p>
     </blockquote>
 
@@ -2244,7 +2244,7 @@ const blogPosts = [
 
     <h2 style='margin-top:20px; margin-bottom:10px; font-size:20px; font-weight:700;'>How to Stay in the Game</h2>
 
-    <ol>
+    <ol style="margin-left:20px;margin-bottom:12px;line-height:1.6;">
       <li><strong>Use smart tools like <a href="https://www.flashfirejobs.com" target="_blank" rel="noopener noreferrer" style="color: #f97316; font-weight: 600; text-decoration: underline;">www.flashfirejobs.com</a></strong> to eliminate grunt work and save time.</li>
       <li><strong>Stop applying manually</strong>—let automation handle it at scale.</li>
       <li><strong>Focus on learning + outreach</strong>—build your visibility and skills.</li>
@@ -2407,7 +2407,7 @@ const blogPosts = [
 
     <h2 style='margin-top:20px; margin-bottom:10px; font-size:20px; font-weight:700;'>How You Can Get Started</h2>
 
-    <ol>
+    <ol style="margin-left:20px;margin-bottom:12px;line-height:1.6;">
       <li>Go to <strong><a href="https://www.flashfirejobs.com" target="_blank" rel="noopener noreferrer" style="color: #f97316; font-weight: 600; text-decoration: underline;">www.flashfirejobs.com</a></strong></li>
       <li>Pick a plan (I chose Executive: 1,000 applications)</li>
       <li>Share your resume, LinkedIn, and job preferences</li>
@@ -2641,7 +2641,7 @@ const blogPosts = [
 
     <p style='margin-bottom:12px; line-height:1.7;'>Then here's what I'd do again in a heartbeat:</p>
 
-    <ol>
+    <ol style="margin-left:20px;margin-bottom:12px;line-height:1.6;">
       <li>Go to <strong><a href="https://www.flashfirejobs.com" target="_blank" rel="noopener noreferrer" style="color: #f97316; font-weight: 600; text-decoration: underline;">www.flashfirejobs.com</a></strong></li>
       <li>Book a free consult or start a free 7-day trial</li>
       <li>Pick the <strong>Executive Plan</strong> (1000 job applications)</li>
@@ -2735,7 +2735,7 @@ const blogPosts = [
 
     <p style='margin-bottom:12px; line-height:1.7;'>Here's the breakdown of the top H-1B visa sponsors in 2025:</p>
 
-    <ol>
+    <ol style="margin-left:20px;margin-bottom:12px;line-height:1.6;">
       <li><strong>Amazon</strong> – 6,000+ petitions</li>
       <li><strong>Infosys</strong> – 5,500+</li>
       <li><strong>TCS</strong> – 4,800+</li>
@@ -2874,7 +2874,7 @@ const blogPosts = [
 
     <h2 style='margin-top:20px; margin-bottom:10px; font-size:20px; font-weight:700;'>The Reality of Job Hunting on OPT Without Referrals</h2>
     <p style='margin-bottom:12px; line-height:1.7;'>Many international students face three major hurdles:</p>
-    <ol>
+    <ol style="margin-left:20px;margin-bottom:12px;line-height:1.6;">
       <li><strong>Limited Network:</strong> Arriving in the U.S. without professional contacts limits access to the hidden job market.</li>
       <li><strong>High Competition:</strong> According to Glassdoor, competitive roles in tech, finance, or analytics can attract 500+ applicants per position.</li>
       <li><strong>Visa & OPT Concerns:</strong> Some employers hesitate to hire OPT candidates due to visa timelines or sponsorship concerns.</li>
@@ -3013,7 +3013,7 @@ const blogPosts = [
     <p style='margin-bottom:12px; line-height:1.7;'><strong>Pro Tip:</strong> Consistency beats luck. <a href="https://www.flashfirejobs.com" target="_blank" rel="noopener noreferrer" style="color: #f97316; font-weight: 600; text-decoration: underline;">flashfirejobs.com</a> keeps your OPT job search structured and actionable.</p>
 
     <h2 style='margin-top:20px; margin-bottom:10px; font-size:20px; font-weight:700;'>Bonus Tips to Accelerate Your OPT Job Search</h2>
-    <ol>
+    <ol style="margin-left:20px;margin-bottom:12px;line-height:1.6;">
       <li><strong>Mock Interviews:</strong> Record and review to improve answers.</li>
       <li><strong>Mini Projects:</strong> Showcase initiative and skills.</li>
       <li><strong>Alumni Success Stories:</strong> Learn from students who succeeded.</li>
@@ -3395,7 +3395,7 @@ const blogPosts = [
     <p style='margin-bottom:12px; line-height:1.7;'>For FY2026, USCIS opened registration from March 7–24, 2025. Employers registered approximately 336,000 unique beneficiaries, of which 118,660 were selected — a 35% selection rate, the highest since 2021.</p>
     
     <h3 style='margin-top:15px; font-weight:600;'>H-1B Process Overview:</h3>
-    <ol>
+    <ol style="margin-left:20px;margin-bottom:12px;line-height:1.6;">
       <li><strong>Employer Registration (March)</strong> – Only employers or their attorneys can register candidates through the USCIS online system. Students cannot self-register.</li>
       <li><strong>Random Selection (Lottery)</strong> – USCIS conducts a lottery to fill both the regular and master's caps.</li>
       <li><strong>Petition Filing (April–June)</strong> – Only selected candidates' employers file the full petition (Form I-129 + Labor Condition Application).</li>
