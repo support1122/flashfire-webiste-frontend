@@ -2865,7 +2865,8 @@ const blogPosts = [
     readTime: "15 min",
     category: "Career Strategy",
     image:
-    "https://res.cloudinary.com/dcrj8p79e/image/upload/v1760366994/e7a3e92f-58a4-427d-86b2-f4a47cf40a96-wm_uxgz8b_gfpv63.png"    categoryColor: "bg-green-100 text-green-600",
+      "https://res.cloudinary.com/dcrj8p79e/image/upload/v1760366994/e7a3e92f-58a4-427d-86b2-f4a47cf40a96-wm_uxgz8b_gfpv63.png",
+    categoryColor: "bg-green-100 text-green-600",
     content: `
     <p style='margin-bottom:12px; line-height:1.7;'>Landing a job in the U.S. on OPT can feel overwhelming—especially if you don't have personal referrals. As an international student, you may wonder: "Is it even possible to compete with candidates who already have connections?"</p>
 
