@@ -306,7 +306,7 @@ function App() {
       page_url: location.pathname
     });
     
-    if (location.pathname === '/signup') {
+    if (location.pathname === '/signup' || location.pathname === '/get-a-demo') {
       setSignupFormVisibility(true);
       trackUserJourney('signup_modal_opened', 'signup_flow', {
         modal_trigger: 'direct_navigation'
