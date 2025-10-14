@@ -40,7 +40,6 @@ const routes=createBrowserRouter([
       { path: 'privacypolicy', element: <PrivacyPolicy /> },
       { path: 'termsofservice', element: <TermsOfService /> },
       { path: 'blogs', element: <BlogPage /> },
-      { path: 'blogs/:id', element: <IndividualBlog /> },
       { path: '/signup', element : <Home /> },
       { path: '/get-a-demo', element : <Home /> },
       { path: '/testimonials', element : <Home /> },
@@ -50,6 +49,15 @@ const routes=createBrowserRouter([
       {path : '/features', element : <Home />},
       {path : '/book-free-demo', element : <Home />}
     ],
+  },
+  // Standalone blog reader pages (no navigation, no footer - clean reading experience)
+  {
+    path: '/blog/:slug',
+    element: <IndividualBlog />
+  },
+  {
+    path: '/blogs/:id',
+    element: <IndividualBlog /> 
   },
   {
     path: '/employer-registration',
