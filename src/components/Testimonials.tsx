@@ -45,16 +45,14 @@ const customStyles = `@keyframes bounce-gentle {
 
 const screenshots = [
   "/images/image1.jpg",
-  "/images/image2.jpg",
   "/images/image3.jpg",
   "/images/image4.jpg",
   "/images/image5.jpg",
   "/images/image6.jpg",
   "/images/image7.jpg",
-  // "/images/image9.png",
   "/images/image8.jpg",
+  "/images/image9.png",
   "/images/image10.jpg",
-  "/images/image11.jpg",
   "/images/image13.png",
   "/images/image14.jpg",
   "/images/image15.jpg",
@@ -65,6 +63,10 @@ const screenshots = [
   "/images/image20.png",
   "/images/image21.png",
   "/images/image22.png",
+  "/images/image23.png",
+  "/images/image24.png",
+  "/images/image25.png",
+
 ]
 
 const rotations = [
