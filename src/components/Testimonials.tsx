@@ -45,7 +45,6 @@ const customStyles = `@keyframes bounce-gentle {
 
 const screenshots = [
   "/images/image1.jpg",
-  "/images/image2.jpg",
   "/images/image3.jpg",
   "/images/image4.jpg",
   "/images/image5.jpg",
@@ -54,7 +53,6 @@ const screenshots = [
   "/images/image8.jpg",
   "/images/image9.png",
   "/images/image10.jpg",
-  "/images/image11.jpg",
   "/images/image13.png",
   "/images/image14.jpg",
   "/images/image15.jpg",
