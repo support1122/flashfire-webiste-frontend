@@ -1,21 +1,85 @@
 
+import type React from "react"
+
 import { useState, useEffect, useRef } from "react"
 import { ArrowRight, Sparkles } from "lucide-react"
 import { GTagUTM } from "../utils/GTagUTM.js"
 import { useNavigate } from "react-router-dom"
-import { 
-  trackButtonClick, 
-  trackSignupIntent, 
-  trackSectionView,
-  trackPageView 
-} from "../utils/PostHogTracking.ts"
+import { trackButtonClick, trackSignupIntent, trackSectionView, trackPageView } from "../utils/PostHogTracking.ts"
 import { navigateWithUTM } from "../utils/UTMUtils"
 
 const Hero = ({ setSignupFormVisibility }) => {
   const [isSuccessMatrixVisible, setIsSuccessMatrixVisible] = useState(false)
   const [isLoaded, setIsLoaded] = useState(false)
   const successMatrixRef = useRef<HTMLDivElement>(null)
-  const navigate = useNavigate();
+  const navigate = useNavigate()
+
+  // Define company box configs (positions, timing, sizes, stack levels)
+  const companies = [
+    "Google",
+    "Amazon",
+    "Meta",
+    "Microsoft",
+    "Tesla",
+    "Netflix",
+    "Adobe",
+    "Salesforce",
+    "Apple",
+    "NVIDIA",
+    "Uber",
+    "Airbnb",
+    "Stripe",
+    "Shopify",
+    "Oracle",
+    "Intel",
+    "IBM",
+    "Cisco",
+    "Zoom",
+    "Spotify",
+  ]
+
+  const boxConfigs = [
+    { x: 6, w: 90, h: 50, dur: 9.5, delay: 0.3, stack: 0, variant: "fall-soft-white", mobile: true },
+    { x: 13, w: 76, h: 44, dur: 8.2, delay: 1.1, stack: 10, variant: "fall-soft-peach", mobile: true },
+    { x: 21, w: 84, h: 48, dur: 10, delay: 0.0, stack: 6, variant: "fall-soft-rose", mobile: true },
+    { x: 29, w: 86, h: 52, dur: 7.8, delay: 2.0, stack: 14, variant: "fall-soft-white", mobile: true },
+    { x: 36, w: 72, h: 42, dur: 9.2, delay: 1.6, stack: 4, variant: "fall-soft-peach", mobile: true },
+    { x: 44, w: 88, h: 50, dur: 11, delay: 0.8, stack: 18, variant: "fall-soft-rose", mobile: true },
+    { x: 52, w: 78, h: 46, dur: 8.7, delay: 1.9, stack: 8, variant: "fall-soft-white", mobile: true },
+    { x: 60, w: 92, h: 54, dur: 10.8, delay: 0.5, stack: 12, variant: "fall-soft-peach", mobile: true },
+    { x: 68, w: 80, h: 48, dur: 7.4, delay: 2.4, stack: 2, variant: "fall-soft-rose", mobile: true },
+    { x: 76, w: 74, h: 44, dur: 9.8, delay: 1.2, stack: 16, variant: "fall-soft-white", mobile: true },
+
+    // Optional extras (hidden on very small screens)
+    { x: 15, w: 84, h: 50, dur: 8.9, delay: 2.8, stack: 6, variant: "fall-soft-peach", mobile: false },
+    { x: 25, w: 70, h: 42, dur: 10.4, delay: 1.4, stack: 0, variant: "fall-soft-rose", mobile: false },
+    { x: 41, w: 86, h: 52, dur: 9.1, delay: 2.2, stack: 10, variant: "fall-soft-white", mobile: false },
+    { x: 55, w: 78, h: 46, dur: 7.9, delay: 3.0, stack: 12, variant: "fall-soft-peach", mobile: false },
+    { x: 69, w: 92, h: 54, dur: 11.2, delay: 0.6, stack: 18, variant: "fall-soft-rose", mobile: false },
+    { x: 83, w: 76, h: 44, dur: 8.1, delay: 1.7, stack: 8, variant: "fall-soft-white", mobile: false },
+    { x: 89, w: 84, h: 48, dur: 9.7, delay: 2.6, stack: 4, variant: "fall-soft-peach", mobile: false },
+    { x: 33, w: 74, h: 44, dur: 10.6, delay: 0.9, stack: 14, variant: "fall-soft-rose", mobile: false },
+  ]
+
+  const companyBoxes = boxConfigs.slice(0, Math.min(20, companies.length)).map((cfg, i) => {
+    const label = companies[i % companies.length]
+    const settleDur = 0.8
+    const settleDelay = (cfg.delay ?? 0) + (cfg.dur ?? 8)
+    return {
+      label,
+      className: `fall-box ${cfg.variant} ${cfg.mobile ? "" : "hide-on-mobile"}`,
+      style: {
+        ["--x" as any]: `${cfg.x}%`,
+        ["--w" as any]: `${cfg.w}px`,
+        ["--h" as any]: `${cfg.h}px`,
+        ["--dur" as any]: `${cfg.dur}s`,
+        ["--delay" as any]: `${cfg.delay}s`,
+        ["--stack-level" as any]: `${cfg.stack}px`,
+        ["--settleDur" as any]: `${settleDur}s`,
+        ["--settleDelay" as any]: `${settleDelay}s`,
+      } as React.CSSProperties,
+    }
+  })
 
   useEffect(() => {
     const timer = setTimeout(() => setIsLoaded(true), 100)
@@ -26,19 +90,19 @@ const Hero = ({ setSignupFormVisibility }) => {
           setIsSuccessMatrixVisible(true)
           // Track section view
           trackSectionView("success_matrix", {
-            section: "hero_success_metrics"
+            section: "hero_success_metrics",
           })
         }
       },
       { threshold: 0.05, rootMargin: "100px 0px" },
     )
     if (successMatrixRef.current) observer.observe(successMatrixRef.current)
-    
+
     // Track page view for hero section
     trackPageView("hero", "home", {
-      section: "hero_landing"
+      section: "hero_landing",
     })
-    
+
     return () => {
       clearTimeout(timer)
       if (successMatrixRef.current) observer.unobserve(successMatrixRef.current)
@@ -205,6 +269,88 @@ const Hero = ({ setSignupFormVisibility }) => {
           background: linear-gradient(90deg, transparent, rgba(249, 115, 22, 0.3), transparent);
           animation: shimmer 3s ease-in-out infinite;
         }
+
+        /* Falling company boxes layer */
+        .companies-layer {
+          position: absolute;
+          inset: 0;
+          z-index: 0;
+          overflow: hidden;
+          pointer-events: none;
+        }
+
+        /* Fade-in for each box */
+        @keyframes companyFadeIn {
+          0% { opacity: 0; }
+          30% { opacity: 1; }
+          100% { opacity: 1; }
+        }
+
+        /* Vertical fall from above viewport to bottom with stacking offset */
+        @keyframes companyFall {
+          0%   { transform: translateY(-20vh); }
+          90%  { transform: translateY(calc(100vh - var(--stack-level, 0px))); }
+          100% { transform: translateY(calc(100vh - var(--stack-level, 0px))); }
+        }
+
+        /* Subtle settle bounce on landing */
+        @keyframes companySettle {
+          0%   { transform: translateY(0px); }
+          50%  { transform: translateY(-6px); }
+          100% { transform: translateY(0px); }
+        }
+
+        .fall-box {
+          position: absolute;
+          top: -100px; /* ensure off-screen start */
+          left: var(--x, 0%);
+          width: var(--w, 80px);
+          height: var(--h, 48px);
+          border-radius: 10px;
+          border: 1px solid rgba(255,255,255,0.55);
+          background: var(--bg, linear-gradient(135deg, rgba(255,255,255,0.45), rgba(254,215,170,0.5)));
+          box-shadow: 0 4px 14px rgba(0,0,0,0.06);
+          color: rgba(0,0,0,0.65);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-weight: 600;
+          font-size: 12px;
+          letter-spacing: 0.2px;
+          opacity: 0;
+          transform: translateY(0);
+          will-change: transform, opacity;
+          /* fall + fade-in */
+          animation:
+            companyFall var(--dur, 8s) linear var(--delay, 0s) forwards,
+            companyFadeIn 0.8s ease-out var(--delay, 0s) forwards;
+        }
+
+        .fall-box .inner {
+          width: 100%;
+          height: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          /* bounce starts after fall completes */
+          animation: companySettle var(--settleDur, 0.8s) ease-out var(--settleDelay, 8s) 1 both;
+        }
+
+        /* Slight variety options */
+        .fall-soft-white {
+          --bg: linear-gradient(135deg, rgba(255,255,255,0.45), rgba(255,255,255,0.35));
+        }
+        .fall-soft-peach {
+          --bg: linear-gradient(135deg, rgba(255,245,235,0.5), rgba(254,215,170,0.45));
+        }
+        .fall-soft-rose {
+          --bg: linear-gradient(135deg, rgba(255,240,240,0.48), rgba(254,205,211,0.4));
+        }
+
+        /* Responsive: reduce count on very small screens by hiding some */
+        @media (max-width: 640px) {
+          .hide-on-mobile { display: none !important; }
+        }
       `}</style>
 
       {/* Main Hero Section - 100vh */}
@@ -213,10 +359,21 @@ const Hero = ({ setSignupFormVisibility }) => {
         className="relative pb-4 h-screen bg-gradient-to-br from-orange-50 via-white to-red-50 overflow-hidden"
       >
         <div className="absolute inset-0 pointer-events-none">
-          <div className="wave-bg" />
-          <div className="wave-bg-2" />
-          <div className="wave-bg-3" />
-          <div className="wave-bg-4" />
+          {/* Removed old wave layers */}
+          {/* <div className="wave-bg" /> */}
+          {/* <div className="wave-bg-2" /> */}
+          {/* <div className="wave-bg-3" /> */}
+          {/* <div className="wave-bg-4" /> */}
+
+          <div className="companies-layer" aria-hidden="true">
+            {companyBoxes.map((b, idx) => (
+              <div key={idx} className={b.className} style={b.style}>
+                <div className="inner">
+                  <span style={{ fontSize: "12px" }}>{b.label}</span>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
 
         {/* Main Content - Centered (lift above background) */}
@@ -265,20 +422,20 @@ const Hero = ({ setSignupFormVisibility }) => {
                         utm_medium: "Website_Front_Page",
                         utm_campaign: "Website",
                       },
-                    });
+                    })
                   } catch {}
-                  
+
                   // PostHog tracking
                   trackButtonClick("Start My 7-Day Free Trial", "hero_cta", "cta", {
                     button_location: "hero_main_cta",
-                    section: "hero_landing"
-                  });
+                    section: "hero_landing",
+                  })
                   trackSignupIntent("hero_cta", {
                     signup_source: "hero_main_button",
-                    funnel_stage: "signup_intent"
-                  });
-                  
-                  navigateWithUTM('/signup', navigate);
+                    funnel_stage: "signup_intent",
+                  })
+
+                  navigateWithUTM("/signup", navigate)
                 }}
                 className="group bg-gradient-to-r from-orange-500 to-orange-600 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold text-base sm:text-lg hover:from-orange-600 hover:to-orange-700 transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105 flex items-center space-x-2 w-full sm:w-auto justify-center pulse-glow transform"
               >
@@ -297,7 +454,7 @@ const Hero = ({ setSignupFormVisibility }) => {
       </section>
 
       {/* Success Matrix Section - unchanged */}
-       <section className="relative bg-gradient-to-br from-orange-50 via-white to-red-50 py-16 sm:py-20 lg:py-24 overflow-hidden">
+      <section className="relative bg-gradient-to-br from-orange-50 via-white to-red-50 py-16 sm:py-20 lg:py-24 overflow-hidden">
         <div className="absolute inset-0">
           <div className="absolute top-20 left-10 w-72 h-72 bg-gradient-to-r from-orange-200/40 to-red-200/30 rounded-full blur-3xl float-gentle" />
           <div
