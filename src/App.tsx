@@ -19,6 +19,7 @@ function App() {
   const [isFromIndia, setIsFromIndia] = useState(false);
   const [countryInfo, setCountryInfo] = useState<{code: string, name: string} | null>(null);
   const [geoLoading, setGeoLoading] = useState(true);
+  const [pendingAction, setPendingAction] = useState<null | 'signup' | 'calendly'>(null);
   const location = useLocation();
 
   // Simple geolocation function using browser APIs only
@@ -121,6 +122,7 @@ function App() {
     
     if (isFromIndia) {
       console.log("🚫 Geo-blocking Indian user from booking");
+      setPendingAction('calendly');
       setShowGeoBlockModal(true);
       trackUserJourney('geo_block_modal_opened', 'geo_blocking', {
         country: countryInfo?.code || 'unknown',
@@ -134,8 +136,13 @@ function App() {
   // Handle "provide anyway" action
   const handleProvideAnyway = () => {
     setShowGeoBlockModal(false);
-    // Allow the booking to proceed
-    setCalendlyModalVisibility(true);
+    
+    if (pendingAction === 'calendly') {
+      setCalendlyModalVisibility(true);
+    } else if (pendingAction === 'signup') {
+      setSignupFormVisibility(true);
+    }
+    setPendingAction(null);
     trackUserJourney('geo_block_bypassed', 'geo_blocking', {
       country: countryInfo?.code || 'unknown',
       bypass_reason: 'user_insisted'
@@ -307,12 +314,26 @@ function App() {
     });
     
     if (location.pathname === '/signup' || location.pathname === '/get-a-demo') {
-      setSignupFormVisibility(true);
-      trackUserJourney('signup_modal_opened', 'signup_flow', {
-        modal_trigger: 'direct_navigation'
-      });
-    }
-    else if(location.pathname === '/book-free-demo'){
+      
+      if (geoLoading) {
+        setSignupFormVisibility(true);
+        trackUserJourney('signup_modal_opened', 'signup_flow', {
+          modal_trigger: 'direct_navigation'
+        });
+      } else if (isFromIndia) {
+        setPendingAction('signup');
+        setShowGeoBlockModal(true);
+        trackUserJourney('geo_block_modal_opened', 'geo_blocking', {
+          country: countryInfo?.code || 'unknown',
+          blocked_reason: 'india_not_supported_signup'
+        });
+      } else {
+        setSignupFormVisibility(true);
+        trackUserJourney('signup_modal_opened', 'signup_flow', {
+          modal_trigger: 'direct_navigation'
+        });
+      }
+    } else if(location.pathname === '/book-free-demo'){
       // Check geolocation before opening booking modal
       if (handleBookingAttempt()) {
         setCalendlyModalVisibility(true);
@@ -320,8 +341,7 @@ function App() {
           modal_trigger: 'direct_navigation'
         });
       }
-    }
-    else {
+    } else {
       setSignupFormVisibility(false);
     }
   }, [location.pathname]);
