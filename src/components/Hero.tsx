@@ -1,101 +1,46 @@
-import type React from "react"
 
 import { useState, useEffect, useRef } from "react"
 import { ArrowRight, Sparkles } from "lucide-react"
 import { GTagUTM } from "../utils/GTagUTM.js"
 import { useNavigate } from "react-router-dom"
-import { trackButtonClick, trackSignupIntent, trackSectionView, trackPageView } from "../utils/PostHogTracking.ts"
+import { 
+  trackButtonClick, 
+  trackSignupIntent, 
+  trackSectionView,
+  trackPageView 
+} from "../utils/PostHogTracking.ts"
 import { navigateWithUTM } from "../utils/UTMUtils"
 
 const Hero = ({ setSignupFormVisibility }) => {
   const [isSuccessMatrixVisible, setIsSuccessMatrixVisible] = useState(false)
+  const [isLoaded, setIsLoaded] = useState(false)
   const successMatrixRef = useRef<HTMLDivElement>(null)
-  const navigate = useNavigate()
-
-  // Define company box configs (positions, timing, sizes, stack levels)
-  const companies = [
-    "Google",
-    "Amazon",
-    "Meta",
-    "Microsoft",
-    "Tesla",
-    "Netflix",
-    "Adobe",
-    "Salesforce",
-    "Apple",
-    "NVIDIA",
-    "Uber",
-    "Airbnb",
-    "Stripe",
-    "Shopify",
-    "Oracle",
-    "Intel",
-    "IBM",
-    "Cisco",
-    "Zoom",
-    "Spotify",
-  ]
-
-  const boxConfigs = [
-    { x: 6, w: 90, h: 50, dur: 9.5, delay: 0.3, stack: 0, variant: "fall-soft-white", mobile: true },
-    { x: 13, w: 76, h: 44, dur: 8.2, delay: 1.1, stack: 10, variant: "fall-soft-peach", mobile: true },
-    { x: 21, w: 84, h: 48, dur: 10, delay: 0.0, stack: 6, variant: "fall-soft-rose", mobile: true },
-    { x: 29, w: 86, h: 52, dur: 7.8, delay: 2.0, stack: 14, variant: "fall-soft-white", mobile: true },
-    { x: 36, w: 72, h: 42, dur: 9.2, delay: 1.6, stack: 4, variant: "fall-soft-peach", mobile: true },
-    { x: 44, w: 88, h: 50, dur: 11, delay: 0.8, stack: 18, variant: "fall-soft-rose", mobile: true },
-    { x: 52, w: 78, h: 46, dur: 8.7, delay: 1.9, stack: 8, variant: "fall-soft-white", mobile: true },
-    { x: 60, w: 92, h: 54, dur: 10.8, delay: 0.5, stack: 12, variant: "fall-soft-peach", mobile: true },
-    { x: 68, w: 80, h: 48, dur: 7.4, delay: 2.4, stack: 2, variant: "fall-soft-rose", mobile: true },
-    { x: 76, w: 74, h: 44, dur: 9.8, delay: 1.2, stack: 16, variant: "fall-soft-white", mobile: true },
-
-    // Optional extras (hidden on very small screens)
-    { x: 15, w: 84, h: 50, dur: 8.9, delay: 2.8, stack: 6, variant: "fall-soft-peach", mobile: false },
-    { x: 25, w: 70, h: 42, dur: 10.4, delay: 1.4, stack: 0, variant: "fall-soft-rose", mobile: false },
-    { x: 41, w: 86, h: 52, dur: 9.1, delay: 2.2, stack: 10, variant: "fall-soft-white", mobile: false },
-    { x: 55, w: 78, h: 46, dur: 7.9, delay: 3.0, stack: 12, variant: "fall-soft-peach", mobile: false },
-    { x: 69, w: 92, h: 54, dur: 11.2, delay: 0.6, stack: 18, variant: "fall-soft-rose", mobile: false },
-    { x: 83, w: 76, h: 44, dur: 8.1, delay: 1.7, stack: 8, variant: "fall-soft-white", mobile: false },
-    { x: 89, w: 84, h: 48, dur: 9.7, delay: 2.6, stack: 4, variant: "fall-soft-peach", mobile: false },
-    { x: 33, w: 74, h: 44, dur: 10.6, delay: 0.9, stack: 14, variant: "fall-soft-rose", mobile: false },
-  ]
-
-  const companyBoxes = boxConfigs.slice(0, Math.min(20, companies.length)).map((cfg, i) => {
-    const label = companies[i % companies.length]
-    return {
-      label,
-      className: `fall-box ${cfg.variant} ${cfg.mobile ? "" : "hide-on-mobile"}`,
-      style: {
-        ["--x" as any]: `${cfg.x}%`,
-        ["--w" as any]: `${cfg.w}px`,
-        ["--h" as any]: `${cfg.h}px`,
-        ["--dur" as any]: `${cfg.dur}s`,
-        ["--delay" as any]: `${cfg.delay}s`,
-        ["--stack-level" as any]: `${cfg.stack}px`,
-      } as React.CSSProperties,
-    }
-  })
+  const navigate = useNavigate();
 
   useEffect(() => {
+    const timer = setTimeout(() => setIsLoaded(true), 100)
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
           setIsSuccessMatrixVisible(true)
           // Track section view
           trackSectionView("success_matrix", {
-            section: "hero_success_metrics",
+            section: "hero_success_metrics"
           })
         }
       },
       { threshold: 0.05, rootMargin: "100px 0px" },
     )
     if (successMatrixRef.current) observer.observe(successMatrixRef.current)
-
+    
     // Track page view for hero section
     trackPageView("hero", "home", {
-      section: "hero_landing",
+      section: "hero_landing"
     })
-
+    
     return () => {
+      clearTimeout(timer)
       if (successMatrixRef.current) observer.unobserve(successMatrixRef.current)
     }
   }, [])
@@ -260,83 +205,6 @@ const Hero = ({ setSignupFormVisibility }) => {
           background: linear-gradient(90deg, transparent, rgba(249, 115, 22, 0.3), transparent);
           animation: shimmer 3s ease-in-out infinite;
         }
-
-        /* Falling company boxes layer */
-        .companies-layer {
-          position: absolute;
-          inset: 0;
-          z-index: 0;
-          overflow: hidden;
-          pointer-events: none;
-        }
-
-        /* Single looping keyframe for falling company boxes */
-       @keyframes companyFallLoop {
-          0% {
-            transform: translateY(-20vh);
-            opacity: 0;
-          }
-          10% {
-            opacity: 1;
-          }
-          90% {
-            transform: translateY(100vh); /* reach bottom */
-            opacity: 1;
-          }
-          100% {
-            transform: translateY(110vh); /* go slightly below to disappear */
-            opacity: 0;
-          }
-        }
-
-        /* Updated .fall-box to use the looping animation */
-        .fall-box {
-          position: absolute;
-          top: -100px;
-          left: var(--x, 0%);
-          width: var(--w, 80px);
-          height: var(--h, 48px);
-          border-radius: 10px;
-          border: 1px solid rgba(255,255,255,0.55);
-          background: var(--bg, linear-gradient(135deg, rgba(255,255,255,0.45), rgba(254,215,170,0.5)));
-          box-shadow: 0 4px 14px rgba(0,0,0,0.06);
-          color: rgba(0,0,0,0.65);
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          font-weight: 600;
-          font-size: 12px;
-          letter-spacing: 0.2px;
-          opacity: 0;
-          transform: translateY(0);
-          will-change: transform, opacity;
-          animation: companyFallLoop var(--dur, 8s) linear var(--delay, 0s) infinite;
-        }
-
-        /* Removed per-loop inner settle animation */
-        .fall-box .inner {
-          width: 100%;
-          height: 100%;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-        }
-
-        /* Slight variety options */
-        .fall-soft-white {
-          --bg: linear-gradient(135deg, rgba(255,255,255,0.45), rgba(255,255,255,0.35));
-        }
-        .fall-soft-peach {
-          --bg: linear-gradient(135deg, rgba(255,245,235,0.5), rgba(254,215,170,0.45));
-        }
-        .fall-soft-rose {
-          --bg: linear-gradient(135deg, rgba(255,240,240,0.48), rgba(254,205,211,0.4));
-        }
-
-        /* Responsive: reduce count on very small screens by hiding some */
-        @media (max-width: 640px) {
-          .hide-on-mobile { display: none !important; }
-        }
       `}</style>
 
       {/* Main Hero Section - 100vh */}
@@ -345,34 +213,27 @@ const Hero = ({ setSignupFormVisibility }) => {
         className="relative pb-4 h-screen bg-gradient-to-br from-orange-50 via-white to-red-50 overflow-hidden"
       >
         <div className="absolute inset-0 pointer-events-none">
-          {/* Removed old wave layers */}
-          {/* <div className="wave-bg" /> */}
-          {/* <div className="wave-bg-2" /> */}
-          {/* <div className="wave-bg-3" /> */}
-          {/* <div className="wave-bg-4" /> */}
-
-          <div className="companies-layer" aria-hidden="true">
-            {companyBoxes.map((b, idx) => (
-              <div key={idx} className={b.className} style={b.style}>
-                <div className="inner">
-                  <span style={{ fontSize: "12px" }}>{b.label}</span>
-                </div>
-              </div>
-            ))}
-          </div>
+          <div className="wave-bg" />
+          <div className="wave-bg-2" />
+          <div className="wave-bg-3" />
+          <div className="wave-bg-4" />
         </div>
 
         {/* Main Content - Centered (lift above background) */}
         <div className="relative z-10 h-full flex items-center justify-center">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             {/* Badge */}
-            <div className="inline-flex items-center space-x-2 bg-orange-100 border border-orange-200 rounded-full px-3 sm:px-4 py-2 mb-6 sm:mb-8 lg:mb-20 transition-all duration-500">
+            <div
+              className={`inline-flex items-center space-x-2 bg-orange-100 border border-orange-200 rounded-full px-3 sm:px-4 py-2 mb-6 sm:mb-8 lg:mb-20 transition-all duration-500 ${isLoaded ? "opacity-100" : "opacity-0"}`}
+            >
               <Sparkles className="w-3 h-3 sm:w-4 sm:h-4 text-orange-600" />
               <span className="text-orange-800 text-xs sm:text-sm font-medium">Save 150+ Hours Every Month</span>
             </div>
 
             {/* Main Headline */}
-            <h1 className="relative -top-[18px] text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-6xl font-bold text-black leading-snug mb-6 sm:mb-8 px-2 text-center transition-all duration-700">
+            <h1
+              className={`relative -top-[18px] text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-6xl font-bold text-black leading-snug mb-6 sm:mb-8 px-2 text-center transition-all duration-700 ${isLoaded ? "opacity-100" : "opacity-0"}`}
+            >
               <span className="block">Land 15+ Interview Calls with Us</span>
               <span className="bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text text-transparent">
                 Powered by Flashfire AI.
@@ -380,13 +241,17 @@ const Hero = ({ setSignupFormVisibility }) => {
             </h1>
 
             {/* Subtext */}
-            <p className="text-lg sm:text-xl md:text-2xl lg:text-2xl text-[#333333] tracking-tight mb-12 sm:mb-12 max-w-[1100px] mx-auto leading-snug px-4 text-center lg:mb-14 transition-all duration-700">
+            <p
+              className={`text-lg sm:text-xl md:text-2xl lg:text-2xl text-[#333333] tracking-tight mb-12 sm:mb-12 max-w-[1100px] mx-auto leading-snug px-4 text-center lg:mb-14 transition-all duration-700 ${isLoaded ? "opacity-100" : "opacity-0"}`}
+            >
               We apply to <span className="text-orange-600 font-bold">1,200+ USA jobs</span> and track everything - so
               you can focus on interviews.
             </p>
 
             {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center px-4 transition-all duration-700">
+            <div
+              className={`flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center px-4 transition-all duration-700 ${isLoaded ? "opacity-100" : "opacity-0"}`}
+            >
               <button
                 type="button"
                 onClick={() => {
@@ -400,20 +265,20 @@ const Hero = ({ setSignupFormVisibility }) => {
                         utm_medium: "Website_Front_Page",
                         utm_campaign: "Website",
                       },
-                    })
-                  } catch { }
-
+                    });
+                  } catch {}
+                  
                   // PostHog tracking
                   trackButtonClick("Start My 7-Day Free Trial", "hero_cta", "cta", {
                     button_location: "hero_main_cta",
-                    section: "hero_landing",
-                  })
+                    section: "hero_landing"
+                  });
                   trackSignupIntent("hero_cta", {
                     signup_source: "hero_main_button",
-                    funnel_stage: "signup_intent",
-                  })
-
-                  navigateWithUTM("/signup", navigate)
+                    funnel_stage: "signup_intent"
+                  });
+                  
+                  navigateWithUTM('/signup', navigate);
                 }}
                 className="group bg-gradient-to-r from-orange-500 to-orange-600 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold text-base sm:text-lg hover:from-orange-600 hover:to-orange-700 transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105 flex items-center space-x-2 w-full sm:w-auto justify-center pulse-glow transform"
               >
@@ -432,7 +297,7 @@ const Hero = ({ setSignupFormVisibility }) => {
       </section>
 
       {/* Success Matrix Section - unchanged */}
-      <section className="relative bg-gradient-to-br from-orange-50 via-white to-red-50 py-16 sm:py-20 lg:py-24 overflow-hidden">
+       <section className="relative bg-gradient-to-br from-orange-50 via-white to-red-50 py-16 sm:py-20 lg:py-24 overflow-hidden">
         <div className="absolute inset-0">
           <div className="absolute top-20 left-10 w-72 h-72 bg-gradient-to-r from-orange-200/40 to-red-200/30 rounded-full blur-3xl float-gentle" />
           <div
@@ -458,12 +323,14 @@ const Hero = ({ setSignupFormVisibility }) => {
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div
             ref={successMatrixRef}
-            className={`max-w-7xl mx-auto text-center transition-all duration-800 ease-out opacity-100 transform translate-y-0 lg:opacity-0 lg:transform lg:translate-y-8 ${isSuccessMatrixVisible ? "lg:opacity-100 lg:transform lg:translate-y-0" : ""
-              }`}
+            className={`max-w-7xl mx-auto text-center transition-all duration-800 ease-out opacity-100 transform translate-y-0 lg:opacity-0 lg:transform lg:translate-y-8 ${
+              isSuccessMatrixVisible ? "lg:opacity-100 lg:transform lg:translate-y-0" : ""
+            }`}
           >
             <h2
-              className={`text-2xl sm:text-3xl md:text-4xl lg:text-4xl font-bold mb-4 sm:mb-6 lg:mb-8 leading-tight transition-all duration-800 delay-100 opacity-100 transform translate-y-0 lg:opacity-0 lg:transform lg:translate-y-4 shimmer-effect ${isSuccessMatrixVisible ? "lg:opacity-100 lg:transform lg:translate-y-0" : ""
-                }`}
+              className={`text-2xl sm:text-3xl md:text-4xl lg:text-4xl font-bold mb-4 sm:mb-6 lg:mb-8 leading-tight transition-all duration-800 delay-100 opacity-100 transform translate-y-0 lg:opacity-0 lg:transform lg:translate-y-4 shimmer-effect ${
+                isSuccessMatrixVisible ? "lg:opacity-100 lg:transform lg:translate-y-0" : ""
+              }`}
             >
               <span className="block bg-gradient-to-r from-slate-900 via-gray-800 to-slate-900 bg-clip-text text-transparent">
                 Our Platform Gets Users Interview Calls Within Weeks —
@@ -474,8 +341,9 @@ const Hero = ({ setSignupFormVisibility }) => {
             </h2>
 
             <p
-              className={`text-lg sm:text-xl md:text-xl lg:text-xl text-gray-600 mb-8 sm:mb-12 lg:mb-16 transition-all duration-800 delay-150 opacity-100 transform translate-y-0 lg:opacity-0 lg:transform lg:translate-y-4 ${isSuccessMatrixVisible ? "lg:opacity-100 lg:transform lg:translate-y-0" : ""
-                }`}
+              className={`text-lg sm:text-xl md:text-xl lg:text-xl text-gray-600 mb-8 sm:mb-12 lg:mb-16 transition-all duration-800 delay-150 opacity-100 transform translate-y-0 lg:opacity-0 lg:transform lg:translate-y-4 ${
+                isSuccessMatrixVisible ? "lg:opacity-100 lg:transform lg:translate-y-0" : ""
+              }`}
             >
               Powered by AI-driven job targeting and recruiter outreach automation.
             </p>
@@ -497,8 +365,9 @@ const Hero = ({ setSignupFormVisibility }) => {
               ].map((stat, index) => (
                 <div
                   key={index}
-                  className={`text-center group cursor-pointer relative p-6 sm:p-8 lg:p-10 transition-all duration-800 ${stat.delay} opacity-100 transform translate-y-0 lg:opacity-0 lg:transform lg:translate-y-6 flex flex-col items-center justify-center ${isSuccessMatrixVisible ? "lg:opacity-100 lg:transform lg:translate-y-0" : ""
-                    }`}
+                  className={`text-center group cursor-pointer relative p-6 sm:p-8 lg:p-10 transition-all duration-800 ${stat.delay} opacity-100 transform translate-y-0 lg:opacity-0 lg:transform lg:translate-y-6 flex flex-col items-center justify-center ${
+                    isSuccessMatrixVisible ? "lg:opacity-100 lg:transform lg:translate-y-0" : ""
+                  }`}
                 >
                   <div className="absolute inset-0 flex items-center justify-center">
                     <div className="w-48 h-48 sm:w-56 sm:h-56 md:w-64 md:h-64 lg:w-72 lg:h-72 xl:w-80 xl:h-80 bg-gradient-to-br from-orange-500/10 via-red-500/15 to-orange-600/10 rounded-full scale-0 group-hover:scale-100 transition-all duration-700 ease-out group-hover:opacity-100 subtle-glow" />
@@ -536,8 +405,9 @@ const Hero = ({ setSignupFormVisibility }) => {
             </div>
 
             <p
-              className={`text-sm sm:text-base md:text-lg text-gray-500 italic transition-all duration-800 delay-400 opacity-100 transform translate-y-0 lg:opacity-0 lg:transform lg:translate-y-4 ${isSuccessMatrixVisible ? "lg:opacity-100 lg:transform lg:translate-y-0" : ""
-                }`}
+              className={`text-sm sm:text-base md:text-lg text-gray-500 italic transition-all duration-800 delay-400 opacity-100 transform translate-y-0 lg:opacity-0 lg:transform lg:translate-y-4 ${
+                isSuccessMatrixVisible ? "lg:opacity-100 lg:transform lg:translate-y-0" : ""
+              }`}
             >
               *Based on verified user data from 2024-25 cohort
             </p>
