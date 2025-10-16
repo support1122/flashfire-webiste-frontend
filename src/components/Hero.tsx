@@ -3,14 +3,19 @@ import { useState, useEffect, useRef } from "react"
 import { ArrowRight, Sparkles } from "lucide-react"
 import { GTagUTM } from "../utils/GTagUTM.js"
 import { useNavigate } from "react-router-dom"
-import { trackButtonClick, trackSignupIntent, trackSectionView, trackPageView } from "../utils/PostHogTracking.ts"
+import { 
+  trackButtonClick, 
+  trackSignupIntent, 
+  trackSectionView,
+  trackPageView 
+} from "../utils/PostHogTracking.ts"
 import { navigateWithUTM } from "../utils/UTMUtils"
 
 const Hero = ({ setSignupFormVisibility }) => {
   const [isSuccessMatrixVisible, setIsSuccessMatrixVisible] = useState(false)
   const [isLoaded, setIsLoaded] = useState(false)
   const successMatrixRef = useRef<HTMLDivElement>(null)
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   useEffect(() => {
     const timer = setTimeout(() => setIsLoaded(true), 100)
@@ -21,19 +26,19 @@ const Hero = ({ setSignupFormVisibility }) => {
           setIsSuccessMatrixVisible(true)
           // Track section view
           trackSectionView("success_matrix", {
-            section: "hero_success_metrics",
+            section: "hero_success_metrics"
           })
         }
       },
       { threshold: 0.05, rootMargin: "100px 0px" },
     )
     if (successMatrixRef.current) observer.observe(successMatrixRef.current)
-
+    
     // Track page view for hero section
     trackPageView("hero", "home", {
-      section: "hero_landing",
+      section: "hero_landing"
     })
-
+    
     return () => {
       clearTimeout(timer)
       if (successMatrixRef.current) observer.unobserve(successMatrixRef.current)
@@ -108,27 +113,6 @@ const Hero = ({ setSignupFormVisibility }) => {
         @keyframes shimmer {
           0% { transform: translateX(-100%); }
           100% { transform: translateX(100%); }
-        }
-
-        /* Gradient bar animation: smooth left-to-right loop */
-        @keyframes heroBarSlide {
-          0% { background-position: 0% 0; }
-          100% { background-position: 200% 0; }
-        }
-
-        /* Thin, full-width bar with subtle premium glow */
-        .hero-gradient-bar {
-          position: absolute;
-          left: 0;
-          right: 0;
-          bottom: 0;
-          height: 5px; /* within 4–6px requirement */
-          background: linear-gradient(90deg, rgba(249,115,22,1), rgba(239,68,68,1), rgba(249,115,22,1));
-          background-size: 200% 100%;
-          animation: heroBarSlide 6s linear infinite;
-          box-shadow: 0 0 10px rgba(249,115,22,0.45), 0 0 18px rgba(239,68,68,0.35);
-          border-radius: 9999px;
-          pointer-events: none; /* purely decorative */
         }
         
         .wave-bg {
@@ -218,7 +202,7 @@ const Hero = ({ setSignupFormVisibility }) => {
           left: 0;
           width: 100%;
           height: 100%;
-          background: linear-gradient(90deg, transparent, rgba(249,115,22,0.3), transparent);
+          background: linear-gradient(90deg, transparent, rgba(249, 115, 22, 0.3), transparent);
           animation: shimmer 3s ease-in-out infinite;
         }
       `}</style>
@@ -281,20 +265,20 @@ const Hero = ({ setSignupFormVisibility }) => {
                         utm_medium: "Website_Front_Page",
                         utm_campaign: "Website",
                       },
-                    })
+                    });
                   } catch {}
-
+                  
                   // PostHog tracking
                   trackButtonClick("Start My 7-Day Free Trial", "hero_cta", "cta", {
                     button_location: "hero_main_cta",
-                    section: "hero_landing",
-                  })
+                    section: "hero_landing"
+                  });
                   trackSignupIntent("hero_cta", {
                     signup_source: "hero_main_button",
-                    funnel_stage: "signup_intent",
-                  })
-
-                  navigateWithUTM("/signup", navigate)
+                    funnel_stage: "signup_intent"
+                  });
+                  
+                  navigateWithUTM('/signup', navigate);
                 }}
                 className="group bg-gradient-to-r from-orange-500 to-orange-600 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold text-base sm:text-lg hover:from-orange-600 hover:to-orange-700 transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105 flex items-center space-x-2 w-full sm:w-auto justify-center pulse-glow transform"
               >
@@ -305,8 +289,6 @@ const Hero = ({ setSignupFormVisibility }) => {
           </div>
         </div>
 
-        <div className="hero-gradient-bar" aria-hidden="true" />
-
         <div className="absolute bottom-8 left-1/2 h-fit transform -translate-x-1/2 scroll-bounce">
           <div className="w-8 h-12 border-3 border-orange-500 rounded-full flex justify-center bg-white/80 backdrop-blur-sm shadow-lg">
             <div className="w-2 h-4 bg-orange-500 rounded-full mt-2 animate-pulse" />
@@ -315,7 +297,7 @@ const Hero = ({ setSignupFormVisibility }) => {
       </section>
 
       {/* Success Matrix Section - unchanged */}
-      <section className="relative bg-gradient-to-br from-orange-50 via-white to-red-50 py-16 sm:py-20 lg:py-24 overflow-hidden">
+       <section className="relative bg-gradient-to-br from-orange-50 via-white to-red-50 py-16 sm:py-20 lg:py-24 overflow-hidden">
         <div className="absolute inset-0">
           <div className="absolute top-20 left-10 w-72 h-72 bg-gradient-to-r from-orange-200/40 to-red-200/30 rounded-full blur-3xl float-gentle" />
           <div
