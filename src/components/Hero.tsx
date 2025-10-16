@@ -11,7 +11,7 @@ import {
 } from "../utils/PostHogTracking.ts"
 import { navigateWithUTM } from "../utils/UTMUtils"
 
-const Hero = ({ setSignupFormVisibility, handleSignupAttempt }) => {
+const Hero = ({ setSignupFormVisibility }) => {
   const [isSuccessMatrixVisible, setIsSuccessMatrixVisible] = useState(false)
   const [isLoaded, setIsLoaded] = useState(false)
   const successMatrixRef = useRef<HTMLDivElement>(null)
@@ -278,10 +278,7 @@ const Hero = ({ setSignupFormVisibility, handleSignupAttempt }) => {
                     funnel_stage: "signup_intent"
                   });
                   
-                  // Check geo-blocking before navigating
-                  if (handleSignupAttempt && handleSignupAttempt()) {
-                    navigateWithUTM('/signup', navigate);
-                  }
+                  navigateWithUTM('/signup', navigate);
                 }}
                 className="group bg-gradient-to-r from-orange-500 to-orange-600 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold text-base sm:text-lg hover:from-orange-600 hover:to-orange-700 transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105 flex items-center space-x-2 w-full sm:w-auto justify-center pulse-glow transform"
               >

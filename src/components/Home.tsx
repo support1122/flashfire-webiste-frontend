@@ -13,11 +13,10 @@ import { useOutletContext, useNavigate, Link, Location, useLocation } from 'reac
 
 
 function Home() {
-  const {setSignupFormVisibility, setCalendlyModalVisibility, handleBookingAttempt, handleSignupAttempt } = useOutletContext<{
+  const {setSignupFormVisibility, setCalendlyModalVisibility, handleBookingAttempt } = useOutletContext<{
     setSignupFormVisibility: React.Dispatch<React.SetStateAction<boolean>>,
     setCalendlyModalVisibility: React.Dispatch<React.SetStateAction<boolean>>,
     handleBookingAttempt?: () => boolean,
-    handleSignupAttempt?: () => boolean,
   }>();
   const section = useLocation().pathname;
   useEffect(()=>{
@@ -54,14 +53,14 @@ function Home() {
 
   return (
     <div>
-            <Hero setSignupFormVisibility={setSignupFormVisibility} handleSignupAttempt={handleSignupAttempt}/>
-            <MovingJobs setSignupFormVisibility={setSignupFormVisibility} handleSignupAttempt={handleSignupAttempt}/>
+            <Hero setSignupFormVisibility={setSignupFormVisibility}/>
+            <MovingJobs setSignupFormVisibility={setSignupFormVisibility}/>
             {/* <RealTimeMetrics /> */}
             <Features setSignupFormVisibility={setSignupFormVisibility}/>
-            <HowItWorks setSignupFormVisibility={setSignupFormVisibility} handleSignupAttempt={handleSignupAttempt}/>
+            <HowItWorks setSignupFormVisibility={setSignupFormVisibility}/>
             <Testimonials />
             <Pricing />
-            <FAQ setSignupFormVisibility={setSignupFormVisibility} handleSignupAttempt={handleSignupAttempt}/>
+            <FAQ setSignupFormVisibility={setSignupFormVisibility}/>
             <Contact setSignupFormVisibility={setSignupFormVisibility}/>
             <WhatsAppButton />
             
