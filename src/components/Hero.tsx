@@ -1,48 +1,29 @@
+import { useState, useEffect, useRef } from "react";
+import { ArrowRight, Sparkles } from "lucide-react";
+import { GTagUTM } from "../utils/GTagUTM.js";
+import { useNavigate } from "react-router-dom";
+import {
+  trackButtonClick,
+  trackSignupIntent,
+  trackSectionView,
+  trackPageView,
+} from "../utils/PostHogTracking.ts";
+import { navigateWithUTM } from "../utils/UTMUtils";
 
-import { useState, useEffect, useRef } from "react"
-import { ArrowRight, Sparkles } from "lucide-react"
-import { GTagUTM } from "../utils/GTagUTM.js"
-import { useNavigate } from "react-router-dom"
-import { trackButtonClick, trackSignupIntent, trackSectionView, trackPageView } from "../utils/PostHogTracking.ts"
-import { navigateWithUTM } from "../utils/UTMUtils"
-
-const Hero = ({ setSignupFormVisibility }) => {
-  const [isSuccessMatrixVisible, setIsSuccessMatrixVisible] = useState(false)
-  const [isLoaded, setIsLoaded] = useState(false)
-  const successMatrixRef = useRef<HTMLDivElement>(null)
-  const navigate = useNavigate()
+const Hero = () => {
+  const [isLoaded, setIsLoaded] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    const timer = setTimeout(() => setIsLoaded(true), 100)
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsSuccessMatrixVisible(true)
-          // Track section view
-          trackSectionView("success_matrix", {
-            section: "hero_success_metrics",
-          })
-        }
-      },
-      { threshold: 0.05, rootMargin: "100px 0px" },
-    )
-    if (successMatrixRef.current) observer.observe(successMatrixRef.current)
-
-    // Track page view for hero section
-    trackPageView("hero", "home", {
-      section: "hero_landing",
-    })
-
-    return () => {
-      clearTimeout(timer)
-      if (successMatrixRef.current) observer.unobserve(successMatrixRef.current)
-    }
-  }, [])
+    const timer = setTimeout(() => setIsLoaded(true), 100);
+    trackPageView("hero", "home", { section: "hero_landing" });
+    return () => clearTimeout(timer);
+  }, []);
 
   return (
     <>
       <style>{`
+        /* ---------- BACKGROUND WAVE ANIMATIONS ---------- */
         @keyframes wave1 {
           0% { transform: translateX(-80%) translateY(-60%) rotate(0deg); opacity: 0; }
           10% { opacity: 0.4; }
@@ -50,7 +31,7 @@ const Hero = ({ setSignupFormVisibility }) => {
           90% { opacity: 0.4; }
           100% { transform: translateX(-80%) translateY(-60%) rotate(0deg); opacity: 0; }
         }
-        
+
         @keyframes wave2 {
           0% { transform: translateX(60%) translateY(-60%) rotate(180deg); opacity: 0; }
           15% { opacity: 0.35; }
@@ -58,7 +39,7 @@ const Hero = ({ setSignupFormVisibility }) => {
           85% { opacity: 0.35; }
           100% { transform: translateX(60%) translateY(-60%) rotate(180deg); opacity: 0; }
         }
-        
+
         @keyframes wave3 {
           0% { transform: translateX(-70%) translateY(40%) rotate(0deg); opacity: 0; }
           20% { opacity: 0.3; }
@@ -67,7 +48,7 @@ const Hero = ({ setSignupFormVisibility }) => {
           80% { opacity: 0.3; }
           100% { transform: translateX(-70%) translateY(40%) rotate(0deg); opacity: 0; }
         }
-        
+
         @keyframes wave4 {
           0% { transform: translateX(70%) translateY(50%) rotate(0deg); opacity: 0; }
           25% { opacity: 0.25; }
@@ -75,218 +56,75 @@ const Hero = ({ setSignupFormVisibility }) => {
           75% { opacity: 0.25; }
           100% { transform: translateX(70%) translateY(50%) rotate(0deg); opacity: 0; }
         }
-        
-        @keyframes float {
-          0%, 100% { transform: translateY(0px) rotate(0deg); }
-          50% { transform: translateY(-20px) rotate(5deg); }
-        }
-        
-        @keyframes subtleGlow {
-          0%, 100% { 
-            box-shadow: 0 0 20px rgba(249, 115, 22, 0.2);
-          }
-          50% { 
-            box-shadow: 0 0 40px rgba(249, 115, 22, 0.4), 0 0 60px rgba(239, 68, 68, 0.2);
-          }
+
+        .wave-bg, .wave-bg-2, .wave-bg-3, .wave-bg-4 {
+          position: absolute;
+          border-radius: 50%;
+          opacity: 0;
         }
 
-        @keyframes floatGentle {
-          0%, 100% { transform: translateY(0px) scale(1); }
-          50% { transform: translateY(-8px) scale(1.02); }
+        .wave-bg { width: 120%; height: 120%; background: linear-gradient(45deg, rgba(249,115,22,1), rgba(239,68,68,1)); animation: wave1 40s ease-in-out infinite; top: -10%; left: -10%; }
+        .wave-bg-2 { width: 100%; height: 100%; background: linear-gradient(-45deg, rgba(249,115,22,1), rgba(239,68,68,1)); animation: wave2 50s ease-in-out infinite; animation-delay: -5s; top: -10%; right: -10%; }
+        .wave-bg-3 { width: 110%; height: 110%; background: linear-gradient(90deg, rgba(249,115,22,1), rgba(239,68,68,1)); animation: wave3 60s ease-in-out infinite; animation-delay: -10s; bottom: -10%; left: -10%; }
+        .wave-bg-4 { width: 105%; height: 105%; background: linear-gradient(135deg, rgba(249,115,22,1), rgba(239,68,68,1)); animation: wave4 45s ease-in-out infinite; animation-delay: -15s; bottom: -10%; right: -10%; }
+
+        /* ---------- COMPANY NAME SCROLL ---------- */
+        @keyframes companyScroll {
+          0% { transform: translateX(100%); }
+          100% { transform: translateX(-100%); }
         }
 
-        @keyframes ripple {
-          0% { transform: scale(0.8); opacity: 1; }
-          100% { transform: scale(2.4); opacity: 0; }
+        .company-ticker {
+          position: absolute;
+          bottom: 70px;
+          left: 0;
+          width: 100%;
+          overflow: hidden;
+          background: transparent;
+          z-index: 5;
         }
 
+        .company-track {
+          display: flex;
+          gap: 1.5rem;
+          white-space: nowrap;
+          animation: companyScroll 28s linear infinite;
+        }
+
+        .company-item {
+          display: inline-block;
+          background: rgba(255, 255, 255, 0.6);
+          backdrop-filter: blur(6px);
+          border: 1px solid rgba(249, 115, 22, 0.2);
+          color: #333;
+          font-weight: 600;
+          padding: 0.5rem 1rem;
+          border-radius: 8px;
+          box-shadow: 0 2px 6px rgba(249, 115, 22, 0.15);
+          transition: transform 0.3s ease;
+        }
+
+        .company-item:hover {
+          transform: scale(1.05);
+        }
+
+        /* ---------- SCROLL ICON ANIMATION ---------- */
         @keyframes scrollBounce {
           0%, 100% { transform: translateY(0px); }
           50% { transform: translateY(-10px); }
         }
 
-        @keyframes shimmer {
-          0% { transform: translateX(-100%); }
-          100% { transform: translateX(100%); }
-        }
-
-        /* Gradient bar animation: smooth left-to-right loop */
-        @keyframes heroBarSlide {
-          0% { background-position: 0% 0; }
-          100% { background-position: 200% 0; }
-        }
-
-        /* Company name scrolling animation */
-        @keyframes scrollCompanies {
-          0% { transform: translateX(0); }
-          100% { transform: translateX(-50%); }
-        }
-
-        .company-scroll-container {
-          position: absolute;
-          left: 0;
-          right: 0;
-          bottom: 60px;
-          overflow: hidden;
-          pointer-events: none;
-          z-index: 20;
-        }
-
-        .company-scroll-track {
-          display: flex;
-          gap: 1.5rem;
-          animation: scrollCompanies 30s linear infinite;
-          will-change: transform;
-        }
-
-        .company-scroll-track:hover {
-          animation-play-state: paused;
-        }
-
-        .company-name-box {
-          flex-shrink: 0;
-          padding: 0.5rem 1.25rem;
-          border-radius: 9999px;
-          background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(255, 237, 213, 0.8), rgba(254, 215, 215, 0.8));
-          border: 1px solid rgba(249, 115, 22, 0.25);
-          box-shadow: 0 2px 10px rgba(249, 115, 22, 0.2), 0 0 25px rgba(249, 115, 22, 0.15);
-          font-size: 0.875rem;
-          font-weight: 600;
-          color: #333;
-          white-space: nowrap;
-          pointer-events: auto;
-          cursor: default;
-          backdrop-filter: blur(10px);
-          transition: all 0.3s ease;
-        }
-
-        .company-name-box:hover {
-          transform: scale(1.05);
-          box-shadow: 0 4px 15px rgba(249, 115, 22, 0.3), 0 0 30px rgba(249, 115, 22, 0.2);
-        }
-
-        @media (max-width: 640px) {
-          .company-name-box {
-            font-size: 0.75rem;
-            padding: 0.4rem 1rem;
-          }
-          .company-scroll-container {
-            bottom: 50px;
-          }
-        }
-
-        /* Thin, full-width bar with subtle premium glow */
-        .hero-gradient-bar {
-          position: absolute;
-          left: 0;
-          right: 0;
-          bottom: 0;
-          height: 5px; /* within 4–6px requirement */
-          background: linear-gradient(90deg, rgba(249,115,22,1), rgba(239,68,68,1), rgba(249,115,22,1));
-          background-size: 200% 100%;
-          animation: heroBarSlide 6s linear infinite;
-          box-shadow: 0 0 10px rgba(249,115,22,0.45), 0 0 18px rgba(239,68,68,0.35);
-          border-radius: 9999px;
-          pointer-events: none; /* purely decorative */
-        }
-        
-        .wave-bg {
-          position: absolute;
-          width: 120%;
-          height: 120%;
-          background: linear-gradient(45deg, rgba(249, 115, 22, 1), rgba(239, 68, 68, 1));
-          border-radius: 50%;
-          animation: wave1 40s ease-in-out infinite;
-          top: -10%;
-          left: -10%;
-          opacity: 0;
-        }
-        
-        .wave-bg-2 {
-          position: absolute;
-          width: 100%;
-          height: 100%;
-          background: linear-gradient(-45deg, rgba(249, 115, 22, 1), rgba(239, 68, 68, 1));
-          border-radius: 50%;
-          animation: wave2 50s ease-in-out infinite;
-          animation-delay: -5s;
-          top: -10%;
-          right: -10%;
-          opacity: 0;
-        }
-        
-        .wave-bg-3 {
-          position: absolute;
-          width: 110%;
-          height: 110%;
-          background: linear-gradient(90deg, rgba(249, 115, 22, 1), rgba(239, 68, 68, 1));
-          border-radius: 50%;
-          animation: wave3 60s ease-in-out infinite;
-          animation-delay: -10s;
-          bottom: -10%;
-          left: -10%;
-          opacity: 0;
-        }
-        
-        .wave-bg-4 {
-          position: absolute;
-          width: 105%;
-          height: 105%;
-          background: linear-gradient(135deg, rgba(249, 115, 22, 1), rgba(239, 68, 68, 1));
-          border-radius: 50%;
-          animation: wave4 45s ease-in-out infinite;
-          animation-delay: -15s;
-          bottom: -10%;
-          right: -10%;
-          opacity: 0;
-        }
-        
-        .floating-element {
-          animation: float 12s ease-in-out infinite;
-        }
-        
-        .pulse-glow {
-          animation: pulse-glow 3s ease-in-out infinite;
-        }
-        
         .scroll-bounce {
           animation: scrollBounce 2s ease-in-out infinite;
         }
-
-        .subtle-glow {
-          animation: subtleGlow 4s ease-in-out infinite;
-        }
-
-        .float-gentle {
-          animation: floatGentle 6s ease-in-out infinite;
-        }
-
-        .ripple-effect {
-          animation: ripple 2s ease-out infinite;
-        }
-
-        .shimmer-effect {
-          position: relative;
-          overflow: hidden;
-        }
-
-        .shimmer-effect::before {
-          content: '';
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          background: linear-gradient(90deg, transparent, rgba(249,115,22,0.3), transparent);
-          animation: shimmer 3s ease-in-out infinite;
-        }
       `}</style>
 
-      {/* Main Hero Section - 100vh */}
+      {/* ---------- HERO SECTION ---------- */}
       <section
         id="home"
         className="relative pb-4 h-screen bg-gradient-to-br from-orange-50 via-white to-red-50 overflow-hidden"
       >
+        {/* Background Waves */}
         <div className="absolute inset-0 pointer-events-none">
           <div className="wave-bg" />
           <div className="wave-bg-2" />
@@ -294,20 +132,26 @@ const Hero = ({ setSignupFormVisibility }) => {
           <div className="wave-bg-4" />
         </div>
 
-        {/* Main Content - Centered (lift above background) */}
+        {/* Main Content */}
         <div className="relative z-10 h-full flex items-center justify-center">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             {/* Badge */}
             <div
-              className={`inline-flex items-center space-x-2 bg-orange-100 border border-orange-200 rounded-full px-3 sm:px-4 py-2 mb-6 sm:mb-8 lg:mb-20 transition-all duration-500 ${isLoaded ? "opacity-100" : "opacity-0"}`}
+              className={`inline-flex items-center space-x-2 bg-orange-100 border border-orange-200 rounded-full px-3 sm:px-4 py-2 mb-6 sm:mb-8 lg:mb-20 transition-all duration-500 ${
+                isLoaded ? "opacity-100" : "opacity-0"
+              }`}
             >
               <Sparkles className="w-3 h-3 sm:w-4 sm:h-4 text-orange-600" />
-              <span className="text-orange-800 text-xs sm:text-sm font-medium">Save 150+ Hours Every Month</span>
+              <span className="text-orange-800 text-xs sm:text-sm font-medium">
+                Save 150+ Hours Every Month
+              </span>
             </div>
 
-            {/* Main Headline */}
+            {/* Headline */}
             <h1
-              className={`relative -top-[18px] text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-6xl font-bold text-black leading-snug mb-6 sm:mb-8 px-2 text-center transition-all duration-700 ${isLoaded ? "opacity-100" : "opacity-0"}`}
+              className={`relative -top-[18px] text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-6xl font-bold text-black leading-snug mb-6 sm:mb-8 px-2 text-center transition-all duration-700 ${
+                isLoaded ? "opacity-100" : "opacity-0"
+              }`}
             >
               <span className="block">Land 15+ Interview Calls with Us</span>
               <span className="bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text text-transparent">
@@ -317,20 +161,26 @@ const Hero = ({ setSignupFormVisibility }) => {
 
             {/* Subtext */}
             <p
-              className={`text-lg sm:text-xl md:text-2xl lg:text-2xl text-[#333333] tracking-tight mb-12 sm:mb-12 max-w-[1100px] mx-auto leading-snug px-4 text-center lg:mb-14 transition-all duration-700 ${isLoaded ? "opacity-100" : "opacity-0"}`}
+              className={`text-lg sm:text-xl md:text-2xl lg:text-2xl text-[#333333] tracking-tight mb-12 sm:mb-12 max-w-[1100px] mx-auto leading-snug px-4 text-center lg:mb-14 transition-all duration-700 ${
+                isLoaded ? "opacity-100" : "opacity-0"
+              }`}
             >
-              We apply to <span className="text-orange-600 font-bold">1,200+ USA jobs</span> and track everything - so
-              you can focus on interviews.
+              We apply to{" "}
+              <span className="text-orange-600 font-bold">
+                1,200+ USA jobs
+              </span>{" "}
+              and track everything — so you can focus on interviews.
             </p>
 
-            {/* CTA Buttons */}
+            {/* CTA */}
             <div
-              className={`flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center px-4 transition-all duration-700 ${isLoaded ? "opacity-100" : "opacity-0"}`}
+              className={`flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center px-4 transition-all duration-700 ${
+                isLoaded ? "opacity-100" : "opacity-0"
+              }`}
             >
               <button
                 type="button"
                 onClick={() => {
-                  // Track with both GTag and PostHog
                   try {
                     GTagUTM({
                       eventName: "sign_up_click",
@@ -340,22 +190,21 @@ const Hero = ({ setSignupFormVisibility }) => {
                         utm_medium: "Website_Front_Page",
                         utm_campaign: "Website",
                       },
-                    })
+                    });
                   } catch {}
-
-                  // PostHog tracking
-                  trackButtonClick("Start My 7-Day Free Trial", "hero_cta", "cta", {
-                    button_location: "hero_main_cta",
-                    section: "hero_landing",
-                  })
+                  trackButtonClick(
+                    "Start My 7-Day Free Trial",
+                    "hero_cta",
+                    "cta",
+                    { button_location: "hero_main_cta", section: "hero_landing" }
+                  );
                   trackSignupIntent("hero_cta", {
                     signup_source: "hero_main_button",
                     funnel_stage: "signup_intent",
-                  })
-
-                  navigateWithUTM("/signup", navigate)
+                  });
+                  navigateWithUTM("/signup", navigate);
                 }}
-                className="group bg-gradient-to-r from-orange-500 to-orange-600 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold text-base sm:text-lg hover:from-orange-600 hover:to-orange-700 transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105 flex items-center space-x-2 w-full sm:w-auto justify-center pulse-glow transform"
+                className="group bg-gradient-to-r from-orange-500 to-orange-600 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold text-base sm:text-lg hover:from-orange-600 hover:to-orange-700 transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105 flex items-center space-x-2 w-full sm:w-auto justify-center"
               >
                 <span>Start My 7-Day Free Trial</span>
                 <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform" />
@@ -364,49 +213,49 @@ const Hero = ({ setSignupFormVisibility }) => {
           </div>
         </div>
 
-        {/* Company Name Scrolling Strip */}
-        <div className="company-scroll-container" aria-hidden="true">
-          <div className="company-scroll-track">
-            {/* First set of companies */}
-            <div className="company-name-box">Google</div>
-            <div className="company-name-box">Microsoft</div>
-            <div className="company-name-box">Amazon</div>
-            <div className="company-name-box">Meta</div>
-            <div className="company-name-box">Apple</div>
-            <div className="company-name-box">Netflix</div>
-            <div className="company-name-box">Tesla</div>
-            <div className="company-name-box">Uber</div>
-            <div className="company-name-box">Airbnb</div>
-            <div className="company-name-box">Spotify</div>
-            <div className="company-name-box">LinkedIn</div>
-            <div className="company-name-box">Adobe</div>
-            {/* Duplicate set for seamless loop */}
-            <div className="company-name-box">Google</div>
-            <div className="company-name-box">Microsoft</div>
-            <div className="company-name-box">Amazon</div>
-            <div className="company-name-box">Meta</div>
-            <div className="company-name-box">Apple</div>
-            <div className="company-name-box">Netflix</div>
-            <div className="company-name-box">Tesla</div>
-            <div className="company-name-box">Uber</div>
-            <div className="company-name-box">Airbnb</div>
-            <div className="company-name-box">Spotify</div>
-            <div className="company-name-box">LinkedIn</div>
-            <div className="company-name-box">Adobe</div>
+        {/* ---------- MOVING COMPANY NAMES ---------- */}
+        <div className="company-ticker">
+          <div className="company-track">
+            {[
+              "Google",
+              "Amazon",
+              "Meta",
+              "Microsoft",
+              "Tesla",
+              "Netflix",
+              "Adobe",
+              "Salesforce",
+              "Apple",
+              "NVIDIA",
+              "Uber",
+              "Airbnb",
+              "Stripe",
+              "Shopify",
+              "Oracle",
+              "Intel",
+              "IBM",
+              "Cisco",
+              "Zoom",
+              "Spotify",
+            ].map((name, idx) => (
+              <span key={idx} className="company-item">
+                {name}
+              </span>
+            ))}
           </div>
         </div>
 
-        <div className="hero-gradient-bar" aria-hidden="true" />
-
-        <div className="absolute bottom-8 left-1/2 h-fit transform -translate-x-1/2 scroll-bounce">
+        {/* ---------- SCROLL ICON ---------- */}
+        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 scroll-bounce">
           <div className="w-8 h-12 border-3 border-orange-500 rounded-full flex justify-center bg-white/80 backdrop-blur-sm shadow-lg">
             <div className="w-2 h-4 bg-orange-500 rounded-full mt-2 animate-pulse" />
           </div>
         </div>
       </section>
+    
 
       {/* Success Matrix Section - unchanged */}
-      <section className="relative bg-gradient-to-br from-orange-50 via-white to-red-50 py-16 sm:py-20 lg:py-24 overflow-hidden">
+       <section className="relative bg-gradient-to-br from-orange-50 via-white to-red-50 py-16 sm:py-20 lg:py-24 overflow-hidden">
         <div className="absolute inset-0">
           <div className="absolute top-20 left-10 w-72 h-72 bg-gradient-to-r from-orange-200/40 to-red-200/30 rounded-full blur-3xl float-gentle" />
           <div
