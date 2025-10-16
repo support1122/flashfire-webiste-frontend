@@ -3,7 +3,7 @@ import { ChevronDown, ChevronUp, HelpCircle } from 'lucide-react';
 import { useOutletContext, useNavigate } from 'react-router-dom';
 import { GTagUTM } from '../utils/GTagUTM.js';
 // import WhatsAppSupport from './WhatsappSupport.js';
-const FAQ = ({setSignupFormVisibility, handleSignupAttempt}) => {
+const FAQ = ({setSignupFormVisibility}) => {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
   const navigate = useNavigate();
   // const { setSignupFormVisibility } = useOutletContext<{
@@ -121,11 +121,8 @@ const FAQ = ({setSignupFormVisibility, handleSignupAttempt}) => {
                                     utm_campaign: 'WEBSITE',
                                   },
                                 });
-                                // Check geo-blocking before navigating
-                                if (handleSignupAttempt && handleSignupAttempt()) {
-                                  navigate('/signup');
-                                }
                                 // setSignupFormVisibility(true); // just opens modal/form
+                                navigate('/signup');
                               }}
               className="bg-white text-orange-600 px-6 sm:px-8 py-3 sm:py-4 rounded-full font-bold hover:bg-gray-50 transition-colors duration-200 shadow-lg hover:scale-105"
             >
