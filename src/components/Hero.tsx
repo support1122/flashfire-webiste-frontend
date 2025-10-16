@@ -271,12 +271,22 @@ const Hero = ({ setSignupFormVisibility }) => {
         }
 
         /* Single looping keyframe for falling company boxes */
-        @keyframes companyFallLoop {
-          0%   { transform: translateY(-25vh); opacity: 0; }
-          10%  { opacity: 1; }
-          85%  { transform: translateY(calc(55vh - var(--stack-level, 0px))); opacity: 1; }
-          92%  { transform: translateY(calc(55vh - var(--stack-level, 0px) - 6px)); opacity: 1; } /* small bounce up */
-          100% { transform: translateY(calc(55vh - var(--stack-level, 0px))); opacity: 1; }
+       @keyframes companyFallLoop {
+          0% {
+            transform: translateY(-20vh);
+            opacity: 0;
+          }
+          10% {
+            opacity: 1;
+          }
+          90% {
+            transform: translateY(100vh); /* reach bottom */
+            opacity: 1;
+          }
+          100% {
+            transform: translateY(110vh); /* go slightly below to disappear */
+            opacity: 0;
+          }
         }
 
         /* Updated .fall-box to use the looping animation */
@@ -391,7 +401,7 @@ const Hero = ({ setSignupFormVisibility }) => {
                         utm_campaign: "Website",
                       },
                     })
-                  } catch {}
+                  } catch { }
 
                   // PostHog tracking
                   trackButtonClick("Start My 7-Day Free Trial", "hero_cta", "cta", {
@@ -448,14 +458,12 @@ const Hero = ({ setSignupFormVisibility }) => {
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div
             ref={successMatrixRef}
-            className={`max-w-7xl mx-auto text-center transition-all duration-800 ease-out opacity-100 transform translate-y-0 lg:opacity-0 lg:transform lg:translate-y-8 ${
-              isSuccessMatrixVisible ? "lg:opacity-100 lg:transform lg:translate-y-0" : ""
-            }`}
+            className={`max-w-7xl mx-auto text-center transition-all duration-800 ease-out opacity-100 transform translate-y-0 lg:opacity-0 lg:transform lg:translate-y-8 ${isSuccessMatrixVisible ? "lg:opacity-100 lg:transform lg:translate-y-0" : ""
+              }`}
           >
             <h2
-              className={`text-2xl sm:text-3xl md:text-4xl lg:text-4xl font-bold mb-4 sm:mb-6 lg:mb-8 leading-tight transition-all duration-800 delay-100 opacity-100 transform translate-y-0 lg:opacity-0 lg:transform lg:translate-y-4 shimmer-effect ${
-                isSuccessMatrixVisible ? "lg:opacity-100 lg:transform lg:translate-y-0" : ""
-              }`}
+              className={`text-2xl sm:text-3xl md:text-4xl lg:text-4xl font-bold mb-4 sm:mb-6 lg:mb-8 leading-tight transition-all duration-800 delay-100 opacity-100 transform translate-y-0 lg:opacity-0 lg:transform lg:translate-y-4 shimmer-effect ${isSuccessMatrixVisible ? "lg:opacity-100 lg:transform lg:translate-y-0" : ""
+                }`}
             >
               <span className="block bg-gradient-to-r from-slate-900 via-gray-800 to-slate-900 bg-clip-text text-transparent">
                 Our Platform Gets Users Interview Calls Within Weeks —
@@ -466,9 +474,8 @@ const Hero = ({ setSignupFormVisibility }) => {
             </h2>
 
             <p
-              className={`text-lg sm:text-xl md:text-xl lg:text-xl text-gray-600 mb-8 sm:mb-12 lg:mb-16 transition-all duration-800 delay-150 opacity-100 transform translate-y-0 lg:opacity-0 lg:transform lg:translate-y-4 ${
-                isSuccessMatrixVisible ? "lg:opacity-100 lg:transform lg:translate-y-0" : ""
-              }`}
+              className={`text-lg sm:text-xl md:text-xl lg:text-xl text-gray-600 mb-8 sm:mb-12 lg:mb-16 transition-all duration-800 delay-150 opacity-100 transform translate-y-0 lg:opacity-0 lg:transform lg:translate-y-4 ${isSuccessMatrixVisible ? "lg:opacity-100 lg:transform lg:translate-y-0" : ""
+                }`}
             >
               Powered by AI-driven job targeting and recruiter outreach automation.
             </p>
@@ -490,9 +497,8 @@ const Hero = ({ setSignupFormVisibility }) => {
               ].map((stat, index) => (
                 <div
                   key={index}
-                  className={`text-center group cursor-pointer relative p-6 sm:p-8 lg:p-10 transition-all duration-800 ${stat.delay} opacity-100 transform translate-y-0 lg:opacity-0 lg:transform lg:translate-y-6 flex flex-col items-center justify-center ${
-                    isSuccessMatrixVisible ? "lg:opacity-100 lg:transform lg:translate-y-0" : ""
-                  }`}
+                  className={`text-center group cursor-pointer relative p-6 sm:p-8 lg:p-10 transition-all duration-800 ${stat.delay} opacity-100 transform translate-y-0 lg:opacity-0 lg:transform lg:translate-y-6 flex flex-col items-center justify-center ${isSuccessMatrixVisible ? "lg:opacity-100 lg:transform lg:translate-y-0" : ""
+                    }`}
                 >
                   <div className="absolute inset-0 flex items-center justify-center">
                     <div className="w-48 h-48 sm:w-56 sm:h-56 md:w-64 md:h-64 lg:w-72 lg:h-72 xl:w-80 xl:h-80 bg-gradient-to-br from-orange-500/10 via-red-500/15 to-orange-600/10 rounded-full scale-0 group-hover:scale-100 transition-all duration-700 ease-out group-hover:opacity-100 subtle-glow" />
@@ -530,9 +536,8 @@ const Hero = ({ setSignupFormVisibility }) => {
             </div>
 
             <p
-              className={`text-sm sm:text-base md:text-lg text-gray-500 italic transition-all duration-800 delay-400 opacity-100 transform translate-y-0 lg:opacity-0 lg:transform lg:translate-y-4 ${
-                isSuccessMatrixVisible ? "lg:opacity-100 lg:transform lg:translate-y-0" : ""
-              }`}
+              className={`text-sm sm:text-base md:text-lg text-gray-500 italic transition-all duration-800 delay-400 opacity-100 transform translate-y-0 lg:opacity-0 lg:transform lg:translate-y-4 ${isSuccessMatrixVisible ? "lg:opacity-100 lg:transform lg:translate-y-0" : ""
+                }`}
             >
               *Based on verified user data from 2024-25 cohort
             </p>
