@@ -3,6 +3,7 @@ import { GTagUTM } from '../utils/GTagUTM.js';
 
 interface MovingJobsProps {
   setSignupFormVisibility: (visible: boolean) => void;
+  handleSignupAttempt?: () => boolean;
 }
 
 interface Job {
@@ -12,7 +13,7 @@ interface Job {
   logo: string;
 }
 
-const MovingJobs: React.FC<MovingJobsProps> = ({ setSignupFormVisibility }) => {
+const MovingJobs: React.FC<MovingJobsProps> = ({ setSignupFormVisibility, handleSignupAttempt }) => {
  
     const jobs: Job[] = [
       {
@@ -284,7 +285,10 @@ const MovingJobs: React.FC<MovingJobsProps> = ({ setSignupFormVisibility }) => {
                   utm_campaign: 'Moving_Jobs_Signup',
                 },
               });
-              setSignupFormVisibility(true);
+              // Check geo-blocking before opening signup form
+              if (handleSignupAttempt && handleSignupAttempt()) {
+                setSignupFormVisibility(true);
+              }
             }}
            // className="bg-gradient-to-r from-orange-500 to-orange-600 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-full font-bold hover:from-orange-600 hover:to-orange-700 transition-all duration-200 shadow-lg hover:scale-105 text-sm sm:text-base"
           >

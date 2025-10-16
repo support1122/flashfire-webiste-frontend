@@ -128,7 +128,26 @@ function App() {
       });
       return false; // Block the booking
     }
-    return true; // Allow booking
+    return true; 
+  };
+
+
+  const handleSignupAttempt = () => {
+    if (geoLoading) {
+      console.log("⏳ Geolocation still loading, allowing signup");
+      return true;
+    }
+    
+    if (isFromIndia) {
+      console.log("🚫 Geo-blocking Indian user from signup");
+      setShowGeoBlockModal(true);
+      trackUserJourney('geo_block_modal_opened', 'geo_blocking', {
+        country: countryInfo?.code || 'unknown',
+        blocked_reason: 'india_not_supported'
+      });
+      return false;
+    }
+    return true; 
   };
 
   // Handle "provide anyway" action
@@ -330,16 +349,17 @@ function App() {
     <div className="min-h-screen bg-white">
       <CalendlyPreloader />
       <Navigation 
-        setSignupFormVisibility={setSignupFormVisibility} 
         setCalendlyModalVisibility={setCalendlyModalVisibility}
         handleBookingAttempt={handleBookingAttempt}
+        handleSignupAttempt={handleSignupAttempt}
       />
       <Outlet context={{
         signupFormVisibility,
         calendlyModalVisibility, 
         setSignupFormVisibility, 
         setCalendlyModalVisibility,
-        handleBookingAttempt
+        handleBookingAttempt,
+        handleSignupAttempt
       }} />
       {signupFormVisibility && <SignupForm setCalendlyUser= {setCalendlyUser} setSignupFormVisibility={setSignupFormVisibility} setCalendlyModalVisibility={setCalendlyModalVisibility} />}
       <CalendlyModal user={calendlyUser} setCalendlyModalVisibility={setCalendlyModalVisibility} isVisible={calendlyModalVisibility}/>      

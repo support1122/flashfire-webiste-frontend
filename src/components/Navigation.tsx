@@ -9,9 +9,9 @@ import {
 } from "../utils/PostHogTracking.ts";
 import { createLinkWithUTM, navigateWithUTM } from "../utils/UTMUtils";
 interface NavigationProps {
-  setSignupFormVisibility: React.Dispatch<React.SetStateAction<boolean>>;
   setCalendlyModalVisibility: React.Dispatch<React.SetStateAction<boolean>>;
   handleBookingAttempt?: () => boolean;
+  handleSignupAttempt?: () => boolean;
 }
 
 type NavItem =
@@ -19,9 +19,9 @@ type NavItem =
   | { name: "Blog" | "Employers"; type: "route"; to: string };
 
 const Navigation: React.FC<NavigationProps> = ({
-  setSignupFormVisibility,
   setCalendlyModalVisibility,
   handleBookingAttempt,
+  handleSignupAttempt,
 }) => {
   const navigate = useNavigate();
   const location = useLocation();
@@ -199,30 +199,6 @@ const Navigation: React.FC<NavigationProps> = ({
   };
 
 
-  const openSignup = () => {
-    setSignupFormVisibility(true);
-    setIsMenuOpen(false);
-    
-    // Track with both GTag and PostHog
-    safeTrack({
-      eventName: "sign_up_click",
-      label: "Header Sign Up Button",
-      utmParams: {
-        utm_source: "WEBSITE",
-        utm_medium: "NAVBAR_SIGNUP_BUTTON",
-        utm_campaign: "header_signup",
-      },
-    });
-    
-    // PostHog tracking
-    trackButtonClick("Get a Demo", "navigation_header", "cta", {
-      button_location: "header",
-      navigation_type: "desktop"
-    });
-    trackModalOpen("signup_form", "navigation_button", {
-      trigger_source: "header_cta"
-    });
-  };
 
   const openCalendly = () => {
     // Check geolocation before opening booking modal
@@ -337,7 +313,10 @@ const Navigation: React.FC<NavigationProps> = ({
                     button_location: "header_desktop",
                     navigation_type: "desktop"
                   });
-                  navigateWithUTM('/get-a-demo', navigate);
+                  // Check geo-blocking before navigating
+                  if (handleSignupAttempt && handleSignupAttempt()) {
+                    navigateWithUTM('/get-a-demo', navigate);
+                  }
                 }}
                 className="bg-gradient-to-r from-orange-500 to-orange-600 text-white px-4 lg:px-6 py-2 lg:py-2.5 rounded-full font-semibold hover:from-orange-600 hover:to-orange-700 transition-all duration-200 shadow-lg hover:shadow-xl hover:scale-105 text-sm lg:text-base"
               >
@@ -418,8 +397,11 @@ const Navigation: React.FC<NavigationProps> = ({
                       button_location: "mobile_menu",
                       navigation_type: "mobile"
                     });
-                    navigateWithUTM('/get-a-demo', navigate);
-                    setIsMenuOpen(false);
+                    // Check geo-blocking before navigating
+                    if (handleSignupAttempt && handleSignupAttempt()) {
+                      navigateWithUTM('/get-a-demo', navigate);
+                      setIsMenuOpen(false);
+                    }
                   }}
                   className="bg-gradient-to-r from-orange-500 to-orange-600 text-white px-3 py-3 rounded-lg font-semibold hover:from-orange-600 hover:to-orange-700 transition-all duration-200 block text-center mt-4 w-full text-base"
                 >
