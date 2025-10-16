@@ -1,4 +1,3 @@
-
 import type React from "react"
 
 import { useState, useEffect, useRef } from "react"
@@ -10,7 +9,6 @@ import { navigateWithUTM } from "../utils/UTMUtils"
 
 const Hero = ({ setSignupFormVisibility }) => {
   const [isSuccessMatrixVisible, setIsSuccessMatrixVisible] = useState(false)
-  const [isLoaded, setIsLoaded] = useState(false)
   const successMatrixRef = useRef<HTMLDivElement>(null)
   const navigate = useNavigate()
 
@@ -63,8 +61,6 @@ const Hero = ({ setSignupFormVisibility }) => {
 
   const companyBoxes = boxConfigs.slice(0, Math.min(20, companies.length)).map((cfg, i) => {
     const label = companies[i % companies.length]
-    const settleDur = 0.8
-    const settleDelay = (cfg.delay ?? 0) + (cfg.dur ?? 8)
     return {
       label,
       className: `fall-box ${cfg.variant} ${cfg.mobile ? "" : "hide-on-mobile"}`,
@@ -75,15 +71,11 @@ const Hero = ({ setSignupFormVisibility }) => {
         ["--dur" as any]: `${cfg.dur}s`,
         ["--delay" as any]: `${cfg.delay}s`,
         ["--stack-level" as any]: `${cfg.stack}px`,
-        ["--settleDur" as any]: `${settleDur}s`,
-        ["--settleDelay" as any]: `${settleDelay}s`,
       } as React.CSSProperties,
     }
   })
 
   useEffect(() => {
-    const timer = setTimeout(() => setIsLoaded(true), 100)
-
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -104,7 +96,6 @@ const Hero = ({ setSignupFormVisibility }) => {
     })
 
     return () => {
-      clearTimeout(timer)
       if (successMatrixRef.current) observer.unobserve(successMatrixRef.current)
     }
   }, [])
@@ -279,30 +270,19 @@ const Hero = ({ setSignupFormVisibility }) => {
           pointer-events: none;
         }
 
-        /* Fade-in for each box */
-        @keyframes companyFadeIn {
-          0% { opacity: 0; }
-          30% { opacity: 1; }
-          100% { opacity: 1; }
+        /* Single looping keyframe for falling company boxes */
+        @keyframes companyFallLoop {
+          0%   { transform: translateY(-25vh); opacity: 0; }
+          10%  { opacity: 1; }
+          85%  { transform: translateY(calc(55vh - var(--stack-level, 0px))); opacity: 1; }
+          92%  { transform: translateY(calc(55vh - var(--stack-level, 0px) - 6px)); opacity: 1; } /* small bounce up */
+          100% { transform: translateY(calc(55vh - var(--stack-level, 0px))); opacity: 1; }
         }
 
-        /* Vertical fall from above viewport to bottom with stacking offset */
-        @keyframes companyFall {
-          0%   { transform: translateY(-20vh); }
-          90%  { transform: translateY(calc(100vh - var(--stack-level, 0px))); }
-          100% { transform: translateY(calc(100vh - var(--stack-level, 0px))); }
-        }
-
-        /* Subtle settle bounce on landing */
-        @keyframes companySettle {
-          0%   { transform: translateY(0px); }
-          50%  { transform: translateY(-6px); }
-          100% { transform: translateY(0px); }
-        }
-
+        /* Updated .fall-box to use the looping animation */
         .fall-box {
           position: absolute;
-          top: -100px; /* ensure off-screen start */
+          top: -100px;
           left: var(--x, 0%);
           width: var(--w, 80px);
           height: var(--h, 48px);
@@ -320,20 +300,16 @@ const Hero = ({ setSignupFormVisibility }) => {
           opacity: 0;
           transform: translateY(0);
           will-change: transform, opacity;
-          /* fall + fade-in */
-          animation:
-            companyFall var(--dur, 8s) linear var(--delay, 0s) forwards,
-            companyFadeIn 0.8s ease-out var(--delay, 0s) forwards;
+          animation: companyFallLoop var(--dur, 8s) linear var(--delay, 0s) infinite;
         }
 
+        /* Removed per-loop inner settle animation */
         .fall-box .inner {
           width: 100%;
           height: 100%;
           display: flex;
           align-items: center;
           justify-content: center;
-          /* bounce starts after fall completes */
-          animation: companySettle var(--settleDur, 0.8s) ease-out var(--settleDelay, 8s) 1 both;
         }
 
         /* Slight variety options */
@@ -380,17 +356,13 @@ const Hero = ({ setSignupFormVisibility }) => {
         <div className="relative z-10 h-full flex items-center justify-center">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             {/* Badge */}
-            <div
-              className={`inline-flex items-center space-x-2 bg-orange-100 border border-orange-200 rounded-full px-3 sm:px-4 py-2 mb-6 sm:mb-8 lg:mb-20 transition-all duration-500 ${isLoaded ? "opacity-100" : "opacity-0"}`}
-            >
+            <div className="inline-flex items-center space-x-2 bg-orange-100 border border-orange-200 rounded-full px-3 sm:px-4 py-2 mb-6 sm:mb-8 lg:mb-20 transition-all duration-500">
               <Sparkles className="w-3 h-3 sm:w-4 sm:h-4 text-orange-600" />
               <span className="text-orange-800 text-xs sm:text-sm font-medium">Save 150+ Hours Every Month</span>
             </div>
 
             {/* Main Headline */}
-            <h1
-              className={`relative -top-[18px] text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-6xl font-bold text-black leading-snug mb-6 sm:mb-8 px-2 text-center transition-all duration-700 ${isLoaded ? "opacity-100" : "opacity-0"}`}
-            >
+            <h1 className="relative -top-[18px] text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-6xl font-bold text-black leading-snug mb-6 sm:mb-8 px-2 text-center transition-all duration-700">
               <span className="block">Land 15+ Interview Calls with Us</span>
               <span className="bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text text-transparent">
                 Powered by Flashfire AI.
@@ -398,17 +370,13 @@ const Hero = ({ setSignupFormVisibility }) => {
             </h1>
 
             {/* Subtext */}
-            <p
-              className={`text-lg sm:text-xl md:text-2xl lg:text-2xl text-[#333333] tracking-tight mb-12 sm:mb-12 max-w-[1100px] mx-auto leading-snug px-4 text-center lg:mb-14 transition-all duration-700 ${isLoaded ? "opacity-100" : "opacity-0"}`}
-            >
+            <p className="text-lg sm:text-xl md:text-2xl lg:text-2xl text-[#333333] tracking-tight mb-12 sm:mb-12 max-w-[1100px] mx-auto leading-snug px-4 text-center lg:mb-14 transition-all duration-700">
               We apply to <span className="text-orange-600 font-bold">1,200+ USA jobs</span> and track everything - so
               you can focus on interviews.
             </p>
 
             {/* CTA Buttons */}
-            <div
-              className={`flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center px-4 transition-all duration-700 ${isLoaded ? "opacity-100" : "opacity-0"}`}
-            >
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center px-4 transition-all duration-700">
               <button
                 type="button"
                 onClick={() => {
