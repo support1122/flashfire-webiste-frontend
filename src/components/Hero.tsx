@@ -116,6 +116,65 @@ const Hero = ({ setSignupFormVisibility }) => {
           100% { background-position: 200% 0; }
         }
 
+        /* Company name scrolling animation */
+        @keyframes scrollCompanies {
+          0% { transform: translateX(0); }
+          100% { transform: translateX(-50%); }
+        }
+
+        .company-scroll-container {
+          position: absolute;
+          left: 0;
+          right: 0;
+          bottom: 60px;
+          overflow: hidden;
+          pointer-events: none;
+          z-index: 20;
+        }
+
+        .company-scroll-track {
+          display: flex;
+          gap: 1.5rem;
+          animation: scrollCompanies 30s linear infinite;
+          will-change: transform;
+        }
+
+        .company-scroll-track:hover {
+          animation-play-state: paused;
+        }
+
+        .company-name-box {
+          flex-shrink: 0;
+          padding: 0.5rem 1.25rem;
+          border-radius: 9999px;
+          background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(255, 237, 213, 0.8), rgba(254, 215, 215, 0.8));
+          border: 1px solid rgba(249, 115, 22, 0.25);
+          box-shadow: 0 2px 10px rgba(249, 115, 22, 0.2), 0 0 25px rgba(249, 115, 22, 0.15);
+          font-size: 0.875rem;
+          font-weight: 600;
+          color: #333;
+          white-space: nowrap;
+          pointer-events: auto;
+          cursor: default;
+          backdrop-filter: blur(10px);
+          transition: all 0.3s ease;
+        }
+
+        .company-name-box:hover {
+          transform: scale(1.05);
+          box-shadow: 0 4px 15px rgba(249, 115, 22, 0.3), 0 0 30px rgba(249, 115, 22, 0.2);
+        }
+
+        @media (max-width: 640px) {
+          .company-name-box {
+            font-size: 0.75rem;
+            padding: 0.4rem 1rem;
+          }
+          .company-scroll-container {
+            bottom: 50px;
+          }
+        }
+
         /* Thin, full-width bar with subtle premium glow */
         .hero-gradient-bar {
           position: absolute;
@@ -302,6 +361,38 @@ const Hero = ({ setSignupFormVisibility }) => {
                 <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform" />
               </button>
             </div>
+          </div>
+        </div>
+
+        {/* Company Name Scrolling Strip */}
+        <div className="company-scroll-container" aria-hidden="true">
+          <div className="company-scroll-track">
+            {/* First set of companies */}
+            <div className="company-name-box">Google</div>
+            <div className="company-name-box">Microsoft</div>
+            <div className="company-name-box">Amazon</div>
+            <div className="company-name-box">Meta</div>
+            <div className="company-name-box">Apple</div>
+            <div className="company-name-box">Netflix</div>
+            <div className="company-name-box">Tesla</div>
+            <div className="company-name-box">Uber</div>
+            <div className="company-name-box">Airbnb</div>
+            <div className="company-name-box">Spotify</div>
+            <div className="company-name-box">LinkedIn</div>
+            <div className="company-name-box">Adobe</div>
+            {/* Duplicate set for seamless loop */}
+            <div className="company-name-box">Google</div>
+            <div className="company-name-box">Microsoft</div>
+            <div className="company-name-box">Amazon</div>
+            <div className="company-name-box">Meta</div>
+            <div className="company-name-box">Apple</div>
+            <div className="company-name-box">Netflix</div>
+            <div className="company-name-box">Tesla</div>
+            <div className="company-name-box">Uber</div>
+            <div className="company-name-box">Airbnb</div>
+            <div className="company-name-box">Spotify</div>
+            <div className="company-name-box">LinkedIn</div>
+            <div className="company-name-box">Adobe</div>
           </div>
         </div>
 
