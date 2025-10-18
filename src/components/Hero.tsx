@@ -16,18 +16,22 @@ const Hero = ({ setSignupFormVisibility }) => {
   const successMatrixRef = useRef<HTMLDivElement>(null)
   const navigate = useNavigate();
   const companies = [
-    "Course",
-    "Mytos",
-    "Sensat",
-    "Komi",
-    "Incident.io",
-    "Fyxer.ai",
-    "Deliveroo",
+    "spacex",
+    "Google",
+    "Amazon",
+    "Meta",
+    "Microsoft",
+    "Tesla",
+    "Netflix",
+    "Adobe",
+    "Salesforce",
+    "Apple",
+    "NVIDIA",
+    "Uber",
+    "Airbnb",
     "Stripe",
-    "Figma",
-    "Notion",
-    "Vercel",
-    "GitHub",
+    "Shopify",
+    "Oracle",
   ]
 
 
@@ -210,13 +214,14 @@ const Hero = ({ setSignupFormVisibility }) => {
           </div>
         </div>
 
-       
+
         {/* ✅ Moving Company Names Bar */}
         <section className="absolute bottom-0 left-0 w-full bg-orange-500 py-6 z-20">
           {/* Tagline */}
           <div className="text-center mb-4">
             <p className="text-white text-sm md:text-base font-medium">
-              Matching you with engineering roles at the world's leading tech companies
+
+              People got Interview calls from companies like:
             </p>
           </div>
 
