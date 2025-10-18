@@ -216,31 +216,6 @@ const Hero = ({ setSignupFormVisibility }) => {
           </div>
         </div>
 
-        {/* ✅ Moving Company Names Bar */}
-        <div className="relative flex items-center h-16 overflow-hidden">
-            {/* Left Fade */}
-            <div className="absolute left-0 top-0 bottom-0 w-12 bg-gradient-to-r from-orange-500 to-transparent z-10 pointer-events-none" />
-
-            {/* Right Fade */}
-            <div className="absolute right-0 top-0 bottom-0 w-12 bg-gradient-to-l from-orange-500 to-transparent z-10 pointer-events-none" />
-
-            {/* Moving Content */}
-            <div className="flex gap-8 animate-scroll">
-              {companies.concat(companies).map((company, index) => (
-                <div
-                  key={index}
-                  className="flex-shrink-0 text-white font-medium text-lg whitespace-nowrap hover:scale-105 transition-transform duration-200"
-                >
-                  {company}
-                </div>
-              ))}
-
-              {/* "and many more!" */}
-              <div className="flex-shrink-0 ml-8 px-4 py-2 border-2 border-white rounded-full text-white font-medium text-sm whitespace-nowrap hover:bg-white hover:text-orange-500 transition-colors duration-200">
-                and many more!
-              </div>
-            </div>
-         </div>
        
 
         {/* Scroll Indicator */}
