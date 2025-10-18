@@ -15,6 +15,21 @@ const Hero = ({ setSignupFormVisibility }) => {
   const [isLoaded, setIsLoaded] = useState(false)
   const successMatrixRef = useRef<HTMLDivElement>(null)
   const navigate = useNavigate();
+   const companies = [
+    "Course",
+    "Mytos",
+    "Sensat",
+    "Komi",
+    "Incident.io",
+    "Fyxer.ai",
+    "Deliveroo",
+    "Stripe",
+    "Figma",
+    "Notion",
+    "Vercel",
+    "GitHub",
+  ]
+
 
   useEffect(() => {
     const timer = setTimeout(() => setIsLoaded(true), 100)
@@ -45,6 +60,15 @@ const Hero = ({ setSignupFormVisibility }) => {
   return (
     <>
       <style>{`
+
+        @keyframes scroll {
+          0% { transform: translateX(0); }
+          100% { transform: translateX(-50%); }
+        }
+        .animate-scroll {
+          animation: scroll 25s linear infinite;
+        } 
+
         /* Existing animations */
         @keyframes wave1 {
           0% { transform: translateX(-80%) translateY(-60%) rotate(0deg); opacity: 0; }
@@ -193,36 +217,31 @@ const Hero = ({ setSignupFormVisibility }) => {
         </div>
 
         {/* ✅ Moving Company Names Bar */}
-        <div className="company-ticker">
-          <div className="company-track">
-            {[
-              "Google",
-              "Amazon",
-              "Meta",
-              "Microsoft",
-              "Tesla",
-              "Netflix",
-              "Adobe",
-              "Salesforce",
-              "Apple",
-              "NVIDIA",
-              "Uber",
-              "Airbnb",
-              "Stripe",
-              "Shopify",
-              "Oracle",
-              "Intel",
-              "IBM",
-              "Cisco",
-              "Zoom",
-              "Spotify",
-            ].map((name, idx) => (
-              <span key={idx} className="company-item">
-                {name}
-              </span>
-            ))}
-          </div>
-        </div>
+        <div className="relative flex items-center h-16 overflow-hidden">
+            {/* Left Fade */}
+            <div className="absolute left-0 top-0 bottom-0 w-12 bg-gradient-to-r from-orange-500 to-transparent z-10 pointer-events-none" />
+
+            {/* Right Fade */}
+            <div className="absolute right-0 top-0 bottom-0 w-12 bg-gradient-to-l from-orange-500 to-transparent z-10 pointer-events-none" />
+
+            {/* Moving Content */}
+            <div className="flex gap-8 animate-scroll">
+              {companies.concat(companies).map((company, index) => (
+                <div
+                  key={index}
+                  className="flex-shrink-0 text-white font-medium text-lg whitespace-nowrap hover:scale-105 transition-transform duration-200"
+                >
+                  {company}
+                </div>
+              ))}
+
+              {/* "and many more!" */}
+              <div className="flex-shrink-0 ml-8 px-4 py-2 border-2 border-white rounded-full text-white font-medium text-sm whitespace-nowrap hover:bg-white hover:text-orange-500 transition-colors duration-200">
+                and many more!
+              </div>
+            </div>
+         </div>
+       
 
         {/* Scroll Indicator */}
         <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 scroll-bounce">
@@ -233,8 +252,122 @@ const Hero = ({ setSignupFormVisibility }) => {
       </section>
 
       {/* Success Matrix Section (unchanged) */}
-      <section className="relative bg-gradient-to-br from-orange-50 via-white to-red-50 py-16 sm:py-20 lg:py-24 overflow-hidden">
-        {/* ... existing success matrix code ... */}
+     <section className="relative bg-gradient-to-br from-orange-50 via-white to-red-50 py-16 sm:py-20 lg:py-24 overflow-hidden">
+        <div className="absolute inset-0">
+          <div className="absolute top-20 left-10 w-72 h-72 bg-gradient-to-r from-orange-200/40 to-red-200/30 rounded-full blur-3xl float-gentle" />
+          <div
+            className="absolute bottom-20 right-10 w-96 h-96 bg-gradient-to-r from-red-200/30 to-orange-200/40 rounded-full blur-3xl float-gentle"
+            style={{ animationDelay: "2s" }}
+          />
+          <div
+            className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-gradient-to-r from-orange-100/50 to-red-100/40 rounded-full blur-3xl float-gentle"
+            style={{ animationDelay: "4s" }}
+          />
+
+          <div className="absolute top-1/4 left-1/4 w-3 h-3 bg-gradient-to-r from-orange-400 to-red-400 rounded-full float-gentle opacity-60" />
+          <div
+            className="absolute top-3/4 right-1/4 w-2 h-2 bg-gradient-to-r from-red-400 to-orange-400 rounded-full float-gentle opacity-50"
+            style={{ animationDelay: "3s" }}
+          />
+          <div
+            className="absolute top-1/2 right-1/3 w-4 h-4 bg-gradient-to-r from-orange-300 to-red-300 rounded-full float-gentle opacity-40"
+            style={{ animationDelay: "1.5s" }}
+          />
+        </div>
+
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div
+            ref={successMatrixRef}
+            className={`max-w-7xl mx-auto text-center transition-all duration-800 ease-out opacity-100 transform translate-y-0 lg:opacity-0 lg:transform lg:translate-y-8 ${
+              isSuccessMatrixVisible ? "lg:opacity-100 lg:transform lg:translate-y-0" : ""
+            }`}
+          >
+            <h2
+              className={`text-2xl sm:text-3xl md:text-4xl lg:text-4xl font-bold mb-4 sm:mb-6 lg:mb-8 leading-tight transition-all duration-800 delay-100 opacity-100 transform translate-y-0 lg:opacity-0 lg:transform lg:translate-y-4 shimmer-effect ${
+                isSuccessMatrixVisible ? "lg:opacity-100 lg:transform lg:translate-y-0" : ""
+              }`}
+            >
+              <span className="block bg-gradient-to-r from-slate-900 via-gray-800 to-slate-900 bg-clip-text text-transparent">
+                Our Platform Gets Users Interview Calls Within Weeks —
+              </span>
+              <span className="block bg-gradient-to-r from-orange-600 via-red-600 to-orange-700 bg-clip-text text-transparent">
+                And Offers In Months
+              </span>
+            </h2>
+
+            <p
+              className={`text-lg sm:text-xl md:text-xl lg:text-xl text-gray-600 mb-8 sm:mb-12 lg:mb-16 transition-all duration-800 delay-150 opacity-100 transform translate-y-0 lg:opacity-0 lg:transform lg:translate-y-4 ${
+                isSuccessMatrixVisible ? "lg:opacity-100 lg:transform lg:translate-y-0" : ""
+              }`}
+            >
+              Powered by AI-driven job targeting and recruiter outreach automation.
+            </p>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 xl:gap-20 mb-8 sm:mb-12">
+              {[
+                {
+                  percentage: "95%",
+                  title: "Clients get calls",
+                  subtitle: "within a month",
+                  delay: "delay-200",
+                },
+                {
+                  percentage: "90%",
+                  title: "Clients land job",
+                  subtitle: "within 3 months",
+                  delay: "delay-300",
+                },
+              ].map((stat, index) => (
+                <div
+                  key={index}
+                  className={`text-center group cursor-pointer relative p-6 sm:p-8 lg:p-10 transition-all duration-800 ${stat.delay} opacity-100 transform translate-y-0 lg:opacity-0 lg:transform lg:translate-y-6 flex flex-col items-center justify-center ${
+                    isSuccessMatrixVisible ? "lg:opacity-100 lg:transform lg:translate-y-0" : ""
+                  }`}
+                >
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="w-48 h-48 sm:w-56 sm:h-56 md:w-64 md:h-64 lg:w-72 lg:h-72 xl:w-80 xl:h-80 bg-gradient-to-br from-orange-500/10 via-red-500/15 to-orange-600/10 rounded-full scale-0 group-hover:scale-100 transition-all duration-700 ease-out group-hover:opacity-100 subtle-glow" />
+                  </div>
+
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="w-52 h-52 sm:w-60 sm:h-60 md:w-68 md:h-68 lg:w-76 lg:h-76 xl:w-84 xl:h-84 border-2 border-orange-300/40 rounded-full scale-0 group-hover:scale-100 transition-all duration-900 ease-out opacity-0 group-hover:opacity-60" />
+                  </div>
+
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="w-44 h-44 sm:w-52 sm:h-52 md:w-60 md:h-60 lg:w-68 lg:h-68 xl:w-76 xl:h-76 bg-gradient-to-r from-orange-400/20 via-red-400/25 to-orange-500/20 rounded-full scale-0 group-hover:scale-100 transition-all duration-800 ease-out group-hover:opacity-100 blur-lg" />
+                  </div>
+
+                  <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100">
+                    <div className="w-20 h-20 border-2 border-orange-400/60 rounded-full ripple-effect" />
+                  </div>
+
+                  <div className="relative z-10 flex flex-col items-center transition-all duration-500 group-hover:scale-110">
+                    <div className="text-4xl sm:text-5xl md:text-6xl lg:text-6xl xl:text-7xl font-bold mb-2 sm:mb-3 lg:mb-4 transition-all duration-500 bg-gradient-to-r from-orange-600 via-red-600 to-orange-700 bg-clip-text text-transparent group-hover:scale-115 group-hover:from-orange-500 group-hover:via-red-500 group-hover:to-orange-600 ">
+                      {stat.percentage}
+                    </div>
+
+                    <div className="h-1.5 w-16 sm:w-20 lg:w-24 bg-gradient-to-r from-orange-500 via-red-500 to-orange-600 mx-auto mb-4 sm:mb-5 lg:mb-6 transition-all duration-500 group-hover:w-20 sm:group-hover:w-24 lg:group-hover:w-28 rounded-full group-hover:h-2" />
+
+                    <div className="text-lg sm:text-xl md:text-2xl lg:text-2xl xl:text-3xl font-semibold text-gray-900 mb-2 sm:mb-3 text-center leading-tight group-hover:bg-gradient-to-r group-hover:from-orange-600 group-hover:via-red-600 group-hover:to-orange-700 group-hover:bg-clip-text group-hover:text-transparent transition-all duration-500">
+                      {stat.title}
+                    </div>
+
+                    <div className="text-base sm:text-lg md:text-xl lg:text-xl xl:text-2xl font-medium text-center transition-all duration-500 bg-gradient-to-r from-orange-600 via-red-600 to-orange-700 bg-clip-text text-transparent group-hover:from-orange-500 group-hover:via-red-500 group-hover:to-orange-600">
+                      {stat.subtitle}
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <p
+              className={`text-sm sm:text-base md:text-lg text-gray-500 italic transition-all duration-800 delay-400 opacity-100 transform translate-y-0 lg:opacity-0 lg:transform lg:translate-y-4 ${
+                isSuccessMatrixVisible ? "lg:opacity-100 lg:transform lg:translate-y-0" : ""
+              }`}
+            >
+              *Based on verified user data from 2024-25 cohort
+            </p>
+          </div>
+        </div>
       </section>
     </>
   )
