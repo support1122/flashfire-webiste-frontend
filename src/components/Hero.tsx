@@ -2,11 +2,11 @@ import { useState, useEffect, useRef } from "react"
 import { ArrowRight, Sparkles } from "lucide-react"
 import { GTagUTM } from "../utils/GTagUTM.js"
 import { useNavigate } from "react-router-dom"
-import { 
-  trackButtonClick, 
-  trackSignupIntent, 
+import {
+  trackButtonClick,
+  trackSignupIntent,
   trackSectionView,
-  trackPageView 
+  trackPageView
 } from "../utils/PostHogTracking.ts"
 import { navigateWithUTM } from "../utils/UTMUtils"
 
@@ -15,7 +15,7 @@ const Hero = ({ setSignupFormVisibility }) => {
   const [isLoaded, setIsLoaded] = useState(false)
   const successMatrixRef = useRef<HTMLDivElement>(null)
   const navigate = useNavigate();
-   const companies = [
+  const companies = [
     "Course",
     "Mytos",
     "Sensat",
@@ -46,11 +46,11 @@ const Hero = ({ setSignupFormVisibility }) => {
       { threshold: 0.05, rootMargin: "100px 0px" },
     )
     if (successMatrixRef.current) observer.observe(successMatrixRef.current)
-    
+
     trackPageView("hero", "home", {
       section: "hero_landing"
     })
-    
+
     return () => {
       clearTimeout(timer)
       if (successMatrixRef.current) observer.unobserve(successMatrixRef.current)
@@ -61,13 +61,7 @@ const Hero = ({ setSignupFormVisibility }) => {
     <>
       <style>{`
 
-        @keyframes scroll {
-          0% { transform: translateX(0); }
-          100% { transform: translateX(-50%); }
-        }
-        .animate-scroll {
-          animation: scroll 25s linear infinite;
-        } 
+        
 
         /* Existing animations */
         @keyframes wave1 {
@@ -196,7 +190,7 @@ const Hero = ({ setSignupFormVisibility }) => {
                         utm_campaign: "Website",
                       },
                     });
-                  } catch {}
+                  } catch { }
                   trackButtonClick("Start My 7-Day Free Trial", "hero_cta", "cta", {
                     button_location: "hero_main_cta",
                     section: "hero_landing",
@@ -217,6 +211,46 @@ const Hero = ({ setSignupFormVisibility }) => {
         </div>
 
        
+        {/* ✅ Moving Company Names Bar */}
+        <section className="absolute bottom-0 left-0 w-full bg-orange-500 py-6 z-20">
+          {/* Tagline */}
+          <div className="text-center mb-4">
+            <p className="text-white text-sm md:text-base font-medium">
+              Matching you with engineering roles at the world's leading tech companies
+            </p>
+          </div>
+
+          {/* ✅ Animated Scrolling Companies */}
+          <div className="relative w-full overflow-hidden h-10 flex items-center">
+            <div className="absolute left-0 top-0 bottom-0 w-12 bg-gradient-to-r from-orange-500 to-transparent z-10" />
+            <div className="absolute right-0 top-0 bottom-0 w-12 bg-gradient-to-l from-orange-500 to-transparent z-10" />
+
+            <div className="animate-scroll flex gap-8 whitespace-nowrap text-white font-semibold text-lg">
+              {[...companies, ...companies].map((company, index) => (
+                <span key={index} className="mx-4">
+                  {company}
+                </span>
+              ))}
+              <span className="mx-4 px-3 py-1 border-2 border-white rounded-full text-sm">
+                and many more!
+              </span>
+            </div>
+          </div>
+
+          {/* Inline animation style */}
+          <style>{`
+    @keyframes scroll {
+      0% { transform: translateX(100%); }
+      100% { transform: translateX(-100%); }
+    }
+    .animate-scroll {
+      animation: scroll 25s linear infinite;
+      display: flex;
+      width: max-content;
+    }
+  `}</style>
+        </section>
+
 
         {/* Scroll Indicator */}
         <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 scroll-bounce">
@@ -227,7 +261,7 @@ const Hero = ({ setSignupFormVisibility }) => {
       </section>
 
       {/* Success Matrix Section (unchanged) */}
-     <section className="relative bg-gradient-to-br from-orange-50 via-white to-red-50 py-16 sm:py-20 lg:py-24 overflow-hidden">
+      <section className="relative bg-gradient-to-br from-orange-50 via-white to-red-50 py-16 sm:py-20 lg:py-24 overflow-hidden">
         <div className="absolute inset-0">
           <div className="absolute top-20 left-10 w-72 h-72 bg-gradient-to-r from-orange-200/40 to-red-200/30 rounded-full blur-3xl float-gentle" />
           <div
@@ -253,14 +287,12 @@ const Hero = ({ setSignupFormVisibility }) => {
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div
             ref={successMatrixRef}
-            className={`max-w-7xl mx-auto text-center transition-all duration-800 ease-out opacity-100 transform translate-y-0 lg:opacity-0 lg:transform lg:translate-y-8 ${
-              isSuccessMatrixVisible ? "lg:opacity-100 lg:transform lg:translate-y-0" : ""
-            }`}
+            className={`max-w-7xl mx-auto text-center transition-all duration-800 ease-out opacity-100 transform translate-y-0 lg:opacity-0 lg:transform lg:translate-y-8 ${isSuccessMatrixVisible ? "lg:opacity-100 lg:transform lg:translate-y-0" : ""
+              }`}
           >
             <h2
-              className={`text-2xl sm:text-3xl md:text-4xl lg:text-4xl font-bold mb-4 sm:mb-6 lg:mb-8 leading-tight transition-all duration-800 delay-100 opacity-100 transform translate-y-0 lg:opacity-0 lg:transform lg:translate-y-4 shimmer-effect ${
-                isSuccessMatrixVisible ? "lg:opacity-100 lg:transform lg:translate-y-0" : ""
-              }`}
+              className={`text-2xl sm:text-3xl md:text-4xl lg:text-4xl font-bold mb-4 sm:mb-6 lg:mb-8 leading-tight transition-all duration-800 delay-100 opacity-100 transform translate-y-0 lg:opacity-0 lg:transform lg:translate-y-4 shimmer-effect ${isSuccessMatrixVisible ? "lg:opacity-100 lg:transform lg:translate-y-0" : ""
+                }`}
             >
               <span className="block bg-gradient-to-r from-slate-900 via-gray-800 to-slate-900 bg-clip-text text-transparent">
                 Our Platform Gets Users Interview Calls Within Weeks —
@@ -271,9 +303,8 @@ const Hero = ({ setSignupFormVisibility }) => {
             </h2>
 
             <p
-              className={`text-lg sm:text-xl md:text-xl lg:text-xl text-gray-600 mb-8 sm:mb-12 lg:mb-16 transition-all duration-800 delay-150 opacity-100 transform translate-y-0 lg:opacity-0 lg:transform lg:translate-y-4 ${
-                isSuccessMatrixVisible ? "lg:opacity-100 lg:transform lg:translate-y-0" : ""
-              }`}
+              className={`text-lg sm:text-xl md:text-xl lg:text-xl text-gray-600 mb-8 sm:mb-12 lg:mb-16 transition-all duration-800 delay-150 opacity-100 transform translate-y-0 lg:opacity-0 lg:transform lg:translate-y-4 ${isSuccessMatrixVisible ? "lg:opacity-100 lg:transform lg:translate-y-0" : ""
+                }`}
             >
               Powered by AI-driven job targeting and recruiter outreach automation.
             </p>
@@ -295,9 +326,8 @@ const Hero = ({ setSignupFormVisibility }) => {
               ].map((stat, index) => (
                 <div
                   key={index}
-                  className={`text-center group cursor-pointer relative p-6 sm:p-8 lg:p-10 transition-all duration-800 ${stat.delay} opacity-100 transform translate-y-0 lg:opacity-0 lg:transform lg:translate-y-6 flex flex-col items-center justify-center ${
-                    isSuccessMatrixVisible ? "lg:opacity-100 lg:transform lg:translate-y-0" : ""
-                  }`}
+                  className={`text-center group cursor-pointer relative p-6 sm:p-8 lg:p-10 transition-all duration-800 ${stat.delay} opacity-100 transform translate-y-0 lg:opacity-0 lg:transform lg:translate-y-6 flex flex-col items-center justify-center ${isSuccessMatrixVisible ? "lg:opacity-100 lg:transform lg:translate-y-0" : ""
+                    }`}
                 >
                   <div className="absolute inset-0 flex items-center justify-center">
                     <div className="w-48 h-48 sm:w-56 sm:h-56 md:w-64 md:h-64 lg:w-72 lg:h-72 xl:w-80 xl:h-80 bg-gradient-to-br from-orange-500/10 via-red-500/15 to-orange-600/10 rounded-full scale-0 group-hover:scale-100 transition-all duration-700 ease-out group-hover:opacity-100 subtle-glow" />
@@ -335,9 +365,8 @@ const Hero = ({ setSignupFormVisibility }) => {
             </div>
 
             <p
-              className={`text-sm sm:text-base md:text-lg text-gray-500 italic transition-all duration-800 delay-400 opacity-100 transform translate-y-0 lg:opacity-0 lg:transform lg:translate-y-4 ${
-                isSuccessMatrixVisible ? "lg:opacity-100 lg:transform lg:translate-y-0" : ""
-              }`}
+              className={`text-sm sm:text-base md:text-lg text-gray-500 italic transition-all duration-800 delay-400 opacity-100 transform translate-y-0 lg:opacity-0 lg:transform lg:translate-y-4 ${isSuccessMatrixVisible ? "lg:opacity-100 lg:transform lg:translate-y-0" : ""
+                }`}
             >
               *Based on verified user data from 2024-25 cohort
             </p>
