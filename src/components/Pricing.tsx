@@ -243,8 +243,8 @@ const Pricing = () => {
                 key={index}
                 variants={itemVariants}
                 className={`relative bg-white rounded-2xl sm:rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-300 border-2 ${plan.popular
-                    ? "border-orange-500 scale-100 lg:scale-105 ring-4 ring-orange-500/20"
-                    : "border-gray-200 hover:border-orange-300"
+                  ? "border-orange-500 scale-100 lg:scale-105 ring-4 ring-orange-500/20"
+                  : "border-gray-200 hover:border-orange-300"
                   }`}
               >
                 {plan.popular && (
@@ -296,8 +296,8 @@ const Pricing = () => {
                   <button
                     onClick={() => handlePayment(plan.paymentLink)}
                     className={`w-full py-3 sm:py-4 px-6 rounded-xl sm:rounded-2xl font-bold text-base sm:text-lg transition-all duration-200 ${plan.popular
-                        ? "bg-gradient-to-r from-orange-500 to-red-500 text-white hover:from-orange-600 hover:to-red-600 shadow-lg hover:shadow-xl hover:scale-105"
-                        : "bg-gray-900 text-white hover:bg-gray-800 hover:scale-105"
+                      ? "bg-gradient-to-r from-orange-500 to-red-500 text-white hover:from-orange-600 hover:to-red-600 shadow-lg hover:shadow-xl hover:scale-105"
+                      : "bg-gray-900 text-white hover:bg-gray-800 hover:scale-105"
                       }`}
                   >
                     {plan.cta}
@@ -366,17 +366,27 @@ const Pricing = () => {
                     variants={itemVariants}
                     onClick={() => setSelectedAddon(index)}
                     className={`p-6 rounded-2xl border-2 cursor-pointer transition-all duration-300 ${selectedAddon === index
-                        ? "border-orange-500 bg-orange-50 shadow-lg"
-                        : "border-gray-200 bg-white hover:border-orange-300"
+                      ? "border-orange-500 bg-orange-50 shadow-lg"
+                      : "border-gray-200 bg-white hover:border-orange-300"
                       }`}
                   >
                     <h4 className="text-lg font-bold text-gray-900 mb-2">{addon.label}</h4>
-                    <p className="text-3xl font-bold text-orange-600 mb-4"><span className="text-2x1 font-bold text-gray-700 mb-4">Total will come to</span> ${addon.price}</p>
-                    <p className="text-gray-600 text-sm mb-4">Add more applications to your plan</p>
+
+                    <p className="text-base sm:text-lg text-gray-700 font-semibold mb-1">
+                      Total will come to:
+                    </p>
+
+                    <p className="text-2xl sm:text-3xl font-bold text-orange-600 mb-4">
+                      ${addon.price}
+                    </p>
+
+                    <p className="text-gray-600 text-sm mb-4">
+                      Add more applications to your plan
+                    </p>
                     <button
                       className={`w-full py-2 px-4 rounded-lg font-semibold transition-all duration-200 ${selectedAddon === index
-                          ? "bg-orange-500 text-white hover:bg-orange-600"
-                          : "bg-gray-100 text-gray-900 hover:bg-gray-200"
+                        ? "bg-orange-500 text-white hover:bg-orange-600"
+                        : "bg-gray-100 text-gray-900 hover:bg-gray-200"
                         }`}
                     >
                       {selectedAddon === index ? "Selected" : "Select"}
@@ -414,7 +424,7 @@ const Pricing = () => {
         {activeView === "upgrade" && (
           <motion.section
             id="upgrade-section"
-            className="py-12 sm:py-20 bg-white border-t border-gray-200"
+            className="pt-6 pb-6 sm:pt-10 sm:pb-10 bg-gray-50"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
