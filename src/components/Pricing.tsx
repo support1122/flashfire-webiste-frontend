@@ -371,7 +371,7 @@ const Pricing = () => {
                       }`}
                   >
                     <h4 className="text-lg font-bold text-gray-900 mb-2">{addon.label}</h4>
-                    <p className="text-3xl font-bold text-orange-600 mb-4">Total will come to ${addon.price}</p>
+                    <p className="text-3xl font-bold text-orange-600 mb-4"><span className="text-2x1 font-bold text-gray-700 mb-4">Total will come to</span> ${addon.price}</p>
                     <p className="text-gray-600 text-sm mb-4">Add more applications to your plan</p>
                     <button
                       className={`w-full py-2 px-4 rounded-lg font-semibold transition-all duration-200 ${selectedAddon === index
