@@ -365,7 +365,7 @@ const Pricing = () => {
               </motion.div>
 
               <motion.div
-                className="grid grid-cols-1 md:grid-cols-3 gap-6"
+                className="grid grid-cols-1 md:grid-cols-3 gap-6 "
                 variants={containerVariants}
                 initial="hidden"
                 animate="visible"
@@ -466,7 +466,7 @@ const Pricing = () => {
 
 
               <motion.div
-                className="grid grid-cols-1 md:grid-cols-3 gap-6"
+                className="grid grid-cols-1 md:grid-cols-3 gap-6 justify-items-center"
                 variants={containerVariants}
                 initial="hidden"
                 animate="visible"
