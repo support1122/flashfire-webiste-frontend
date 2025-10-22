@@ -20,6 +20,11 @@ const Pricing = () => {
   const [activeView, setActiveView] = useState<"default" | "addons" | "upgrade">("default")
   const [selectedAddon, setSelectedAddon] = useState<number | null>(null)
 
+  const scrollToSection = (id: string) => {
+    const el = document.getElementById(id)
+    if (el) el.scrollIntoView({ behavior: "smooth", block: "start" })
+  }
+
   const plans: Plan[] = [
     {
       name: "Ignite",
@@ -79,11 +84,23 @@ const Pricing = () => {
     },
   ]
 
-  const addons = [
-    { label: "+250 Applications", value: 250, price: 99 },
-    { label: "+500 Applications", value: 500, price: 179 },
-    { label: "+1000 Applications", value: 1000, price: 299 },
-  ]
+  const addonsPricing = {
+    Ignite: [
+      { label: "+250 Apps", price: 130 },
+      { label: "+500 Apps", price: 220 },
+      { label: "+1000 Apps", price: 380 },
+    ],
+    Professional: [
+      { label: "+250 Apps", price: 120 },
+      { label: "+500 Apps", price: 200 },
+      { label: "+1000 Apps", price: 350 },
+    ],
+    Executive: [
+      { label: "+250 Apps", price: 110 },
+      { label: "+500 Apps", price: 190 },
+      { label: "+1000 Apps", price: 330 },
+    ],
+  }
 
   const upgradePaths = [
     {
@@ -123,11 +140,13 @@ const Pricing = () => {
     setSelectedPlan(planName)
     setActiveView("addons")
     setSelectedAddon(null)
+    setTimeout(() => scrollToSection("addons-section"), 200)
   }
 
   const handleUpgradePlan = (planName: string) => {
     setSelectedPlan(planName)
     setActiveView("upgrade")
+    setTimeout(() => scrollToSection("upgrade-section"), 200)
   }
 
   const handleCloseView = () => {
@@ -174,7 +193,6 @@ const Pricing = () => {
     <>
       <section id="pricing" className="scroll-mt-28 py-12 sm:py-20 bg-gradient-to-b from-white to-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Header */}
           <motion.div
             className="text-center mb-12 sm:mb-20"
             initial={{ opacity: 0, y: -20 }}
@@ -195,7 +213,6 @@ const Pricing = () => {
             </p>
           </motion.div>
 
-          {/* Pricing Cards */}
           <motion.div
             className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8"
             variants={containerVariants}
@@ -260,32 +277,22 @@ const Pricing = () => {
                     ))}
                   </ul>
 
-                  <div className="space-y-3">
+                  <div className={`grid ${plan.name === "Executive" ? "grid-cols-1" : "grid-cols-2"} gap-2`}>
                     <button
-                      onClick={() => handlePayment(plan.paymentLink)}
-                      className={`w-full py-3 sm:py-4 px-6 rounded-xl sm:rounded-2xl font-bold text-base sm:text-lg transition-all duration-200 ${
-                        plan.popular
-                          ? "bg-gradient-to-r from-orange-500 to-red-500 text-white hover:from-orange-600 hover:to-red-600 shadow-lg hover:shadow-xl hover:scale-105"
-                          : "bg-gray-900 text-white hover:bg-gray-800 hover:scale-105"
-                      }`}
+                      onClick={() => handleExploreMore(plan.name)}
+                      className="py-2 px-3 rounded-lg border border-orange-300 text-orange-600 hover:bg-orange-50 transition-colors text-sm font-medium"
                     >
-                      {plan.cta}
+                      Explore More
                     </button>
 
-                    <div className="grid grid-cols-2 gap-2">
-                      <button
-                        onClick={() => handleExploreMore(plan.name)}
-                        className="py-2 px-3 rounded-lg border border-orange-300 text-orange-600 hover:bg-orange-50 transition-colors text-sm font-medium"
-                      >
-                        Explore More
-                      </button>
+                    {plan.name !== "Executive" && (
                       <button
                         onClick={() => handleUpgradePlan(plan.name)}
                         className="py-2 px-3 rounded-lg border border-gray-300 text-gray-600 hover:bg-gray-50 transition-colors text-sm font-medium"
                       >
                         Upgrade Plan
                       </button>
-                    </div>
+                    )}
                   </div>
 
                   <p className="text-center text-sm text-gray-500 mt-4">Secure payment via PayPal</p>
@@ -300,6 +307,7 @@ const Pricing = () => {
       <AnimatePresence>
         {activeView === "addons" && (
           <motion.section
+            id="addons-section"
             className="py-12 sm:py-20 bg-white border-t border-gray-200"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -326,7 +334,7 @@ const Pricing = () => {
                 initial="hidden"
                 animate="visible"
               >
-                {addons.map((addon, index) => (
+                {addonsPricing[selectedPlan!].map((addon, index) => (
                   <motion.div
                     key={index}
                     variants={itemVariants}
@@ -339,7 +347,7 @@ const Pricing = () => {
                   >
                     <h4 className="text-lg font-bold text-gray-900 mb-2">{addon.label}</h4>
                     <p className="text-3xl font-bold text-orange-600 mb-4">${addon.price}</p>
-                    <p className="text-gray-600 text-sm mb-4">Add {addon.value} more applications to your plan</p>
+                    <p className="text-gray-600 text-sm mb-4">Add more applications to your plan</p>
                     <button
                       className={`w-full py-2 px-4 rounded-lg font-semibold transition-all duration-200 ${
                         selectedAddon === index
@@ -361,7 +369,8 @@ const Pricing = () => {
                 >
                   <p className="text-gray-700 mb-4">
                     <span className="font-semibold">Total for {selectedPlan}:</span> $
-                    {plans.find((p) => p.name === selectedPlan)!.price + addons[selectedAddon].price}
+                    {plans.find((p) => p.name === selectedPlan)!.price +
+                      addonsPricing[selectedPlan!][selectedAddon].price}
                   </p>
                   <button
                     onClick={() => handlePayment(plans.find((p) => p.name === selectedPlan)!.paymentLink)}
@@ -376,10 +385,11 @@ const Pricing = () => {
         )}
       </AnimatePresence>
 
-      {/* Upgrade Paths Section */}
+      {/* Upgrade Section */}
       <AnimatePresence>
         {activeView === "upgrade" && (
           <motion.section
+            id="upgrade-section"
             className="py-12 sm:py-20 bg-white border-t border-gray-200"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -398,6 +408,7 @@ const Pricing = () => {
                 </button>
               </motion.div>
 
+            
               <motion.div
                 className="grid grid-cols-1 md:grid-cols-3 gap-6"
                 variants={containerVariants}
