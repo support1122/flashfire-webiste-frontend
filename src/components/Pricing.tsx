@@ -213,7 +213,7 @@ const Pricing = () => {
 
   return (
     <>
-      <section id="pricing" className="scroll-mt-28 py-12 sm:py-20 bg-gradient-to-b from-white to-gray-50">
+      <section id="pricing" className="scroll-mt-28 mt-6 mb-6 sm:py-20 bg-gradient-to-b from-white to-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             className="text-center mb-12 sm:mb-20"
