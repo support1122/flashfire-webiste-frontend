@@ -213,7 +213,7 @@ const Pricing = () => {
 
   return (
     <>
-      <section id="pricing" className="scroll-mt-28 mt-6 mb-6 sm:py-20 bg-gradient-to-b from-white to-gray-50">
+      <section id="pricing" className="scroll-mt-20 mt-4 mb-2 sm:py-12 bg-gradient-to-b from-white to-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             className="text-center mb-12 sm:mb-20"
@@ -344,7 +344,7 @@ const Pricing = () => {
         {activeView === "addons" && (
           <motion.section
             id="addons-section"
-            className="pt-6 pb-6 sm:pt-10 sm:pb-10 bg-gray-50"
+            className="pt-2 pb-6 sm:pt-6 sm:pb-8 bg-gray-50"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
