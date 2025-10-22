@@ -4202,7 +4202,7 @@ image: "/images/blog10.jpeg",
   `
 },
 {
-  id: 6,
+  id: 29,
   slug: "do-career-fairs-still-work-in-2025-a-reality-check-for-job-seekers",
   title: "Do Career Fairs Still Work in 2025? A Reality Check for Job Seekers",
   excerpt: "The student centre buzzes with activity. Lines form in front of company booths — Google, Deloitte, IBM, and a handful of local startups. Students clutch printed resumes, rehearsing introductions under their breath. The excitement is palpable, but so is the anxiety.",
@@ -4347,7 +4347,7 @@ image: "/images/blog10.jpeg",
   `
 },
 {
-  id: 7,
+  id: 30,
   slug: "how-i-balanced-studies-and-extracurriculars-in-12th-grade-and-built-the-foundation-to-study-and-work-abroad-faster",
   title: "How I Balanced Studies and Extracurriculars in 12th Grade — and Built the Foundation to Study and Work Abroad Faster",
   excerpt: "A personal journey of lessons, discipline, and early preparation — powered by balance and clarity.",
@@ -4516,7 +4516,7 @@ image: "/images/blog10.jpeg",
   `
 },
 {
-  id: 8,
+  id: 31,
   slug: "when-plans-fall-through-how-international-students-can-build-their-own-backup-plan",
   title: "When Plans Fall Through: How International Students Can Build Their Own Backup Plan",
   excerpt: "Every year, thousands of international students arrive in the U.S. full of ambition and carefully mapped-out plans — scholarships, family funding, and a clear path to a great job. But what happens when one piece of that plan falters?",
@@ -4672,7 +4672,7 @@ image: "/images/blog10.jpeg",
   `
 },
 {
-  id: 9,
+  id: 32,
   slug: "before-you-book-that-one-way-ticket-home-read-this",
   title: "Before You Book That One-Way Ticket Home: Read This",
   excerpt: "For most international students, graduation in the United States is a moment suspended between pride and panic. Pride because you've done something few ever attempt — moving across continents, surviving cultural shocks, mastering an education system that runs on relentless performance.",
@@ -4770,7 +4770,7 @@ image: "/images/blog10.jpeg",
   `
 },
 {
-  id: 10,
+  id: 33,
   slug: "the-power-of-referrals-how-85-percent-of-us-jobs-are-filled-and-how-you-can-access-them-without-connections",
   title: "The Power of Referrals: How 85% of U.S. Jobs Are Filled — and How You Can Access Them Without Connections",
   excerpt: "Every year, thousands of international students step into the U.S. job market with strong résumés, ambitious goals, and unshakable determination — only to discover that talent alone doesn't guarantee opportunity.",
@@ -4949,7 +4949,7 @@ image: "/images/blog10.jpeg",
   `
 },
 {
-  id: 11,
+  id: 34,
   slug: "top-10-high-growth-us-careers-for-2025-2030-and-how-to-pivot-fast",
   title: "Top 10 High-Growth U.S. Careers for 2025–2030 (and How to Pivot Fast)",
   excerpt: "At Flashfire, we've tracked thousands of student job journeys across the U.S. over the past few years. One trend keeps repeating: the students who succeed aren't necessarily the smartest or most connected — they're the ones who pivot early, align with fast-growing fields, and act with focus.",
