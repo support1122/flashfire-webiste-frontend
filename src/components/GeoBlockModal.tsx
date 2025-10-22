@@ -32,13 +32,13 @@ const GeoBlockModal: React.FC<GeoBlockModalProps> = ({
         {/* Close Button */}
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 text-white hover:text-gray-600 transition p-1 z-10"
+          className="absolute top-4 right-4 text-white text-gray-600 transition p-1 z-10"
         >
           <X className="w-5 h-5" />
         </button>
 
         {/* Header */}
-        <div className="bg-gradient-to-br from-orange-500 to-red-600 p-6 text-white">
+        {/* <div className="bg-gradient-to-br from-orange-500 to-red-600 p-6 text-white">
           <div className="flex items-center gap-3">
             <div className="p-2 bg-white/20 rounded-lg">
               <Globe className="w-6 h-6" />
@@ -48,7 +48,7 @@ const GeoBlockModal: React.FC<GeoBlockModalProps> = ({
               <p className="text-orange-100 text-sm">We're expanding globally!</p>
             </div>
           </div>
-        </div>
+        </div> */}
 
         {/* Content */}
         <div className="p-6 text-center">
