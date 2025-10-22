@@ -466,7 +466,7 @@ const Pricing = () => {
 
 
               <motion.div
-                className="grid grid-cols-1 md:grid-cols-3 gap-6 justify-items-center"
+                className="flex justify-center items-center "
                 variants={containerVariants}
                 initial="hidden"
                 animate="visible"
