@@ -268,18 +268,16 @@ const Pricing = () => {
                     </div>
                   </div>
 
-                  <button
-                    onClick={() => handlePayment(plan.paymentLink)}
-                    className={`w-full py-3 sm:py-4 px-6 rounded-xl sm:rounded-2xl font-bold text-base sm:text-lg transition-all duration-200 ${
-                      plan.popular
-                        ? "bg-gradient-to-r from-orange-500 to-red-500 text-white hover:from-orange-600 hover:to-red-600 shadow-lg hover:shadow-xl hover:scale-105"
-                        : "bg-gray-900 text-white hover:bg-gray-800 hover:scale-105"
-                    }`}
-                  >
-                    {plan.cta}
-                  </button>
+                  <ul className="space-y-3 sm:space-y-4 mb-6 sm:mb-8">
+                    {plan.features.map((feature, featureIndex) => (
+                      <li key={featureIndex} className="flex items-start">
+                        <Check className="w-5 h-5 text-green-500 mr-3 mt-0.5 flex-shrink-0" />
+                        <span className="text-gray-700 text-sm sm:text-base">{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
 
-                  <div className={`grid ${plan.name === "Executive" ? "grid-cols-1" : "grid-cols-2"} gap-2 mt-3`}>
+                  <div className={`grid ${plan.name === "Executive" ? "grid-cols-1" : "grid-cols-2"} gap-2`}>
                     <button
                       onClick={() => handleExploreMore(plan.name)}
                       className="py-2 px-3 rounded-lg border border-orange-300 text-orange-600 hover:bg-orange-50 transition-colors text-sm font-medium"
@@ -304,192 +302,195 @@ const Pricing = () => {
           </motion.div>
         </div>
       </section>
+
       {/* Add-ons Section */}
-<AnimatePresence>
-  {activeView === "addons" && (
-    <motion.section
-      id="addons-section"
-      className="py-12 sm:py-20 bg-white border-t border-gray-200"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-    >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div
-          className="mb-8 flex items-center justify-between"
-          variants={slideUpVariants}
-          initial="hidden"
-          animate="visible"
-        >
-          <h3 className="text-2xl sm:text-3xl font-bold text-gray-900">
-            Add More Applications to {selectedPlan}
-          </h3>
-          <button onClick={handleCloseView} className="text-gray-500 hover:text-gray-700 transition-colors">
-            ✕
-          </button>
-        </motion.div>
-
-        <motion.div
-          className="grid grid-cols-1 md:grid-cols-3 gap-6"
-          variants={containerVariants}
-          initial="hidden"
-          animate="visible"
-        >
-          {addonsPricing[selectedPlan!].map((addon, index) => (
-            <motion.div
-              key={index}
-              variants={itemVariants}
-              onClick={() => setSelectedAddon(index)}
-              className={`p-6 rounded-2xl border-2 cursor-pointer transition-all duration-300 ${
-                selectedAddon === index
-                  ? "border-orange-500 bg-orange-50 shadow-lg"
-                  : "border-gray-200 bg-white hover:border-orange-300"
-              }`}
-            >
-              <h4 className="text-lg font-bold text-gray-900 mb-2">{addon.label}</h4>
-              <p className="text-3xl font-bold text-orange-600 mb-4">${addon.price}</p>
-              <p className="text-gray-600 text-sm mb-4">Add more applications to your plan</p>
-              <button
-                className={`w-full py-2 px-4 rounded-lg font-semibold transition-all duration-200 ${
-                  selectedAddon === index
-                    ? "bg-orange-500 text-white hover:bg-orange-600"
-                    : "bg-gray-100 text-gray-900 hover:bg-gray-200"
-                }`}
-              >
-                {selectedAddon === index ? "Selected" : "Select"}
-              </button>
-            </motion.div>
-          ))}
-        </motion.div>
-
-        {selectedAddon !== null && (
-          <motion.div
-            className="mt-8 p-6 bg-gradient-to-r from-orange-50 to-red-50 rounded-2xl border border-orange-200"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
+      <AnimatePresence>
+        {activeView === "addons" && (
+          <motion.section
+            id="addons-section"
+            className="py-12 sm:py-20 bg-white border-t border-gray-200"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
           >
-            <p className="text-gray-700 mb-4">
-              <span className="font-semibold">Total for {selectedPlan}:</span> $
-              {plans.find((p) => p.name === selectedPlan)!.price +
-                addonsPricing[selectedPlan!][selectedAddon].price}
-            </p>
-            <button
-              onClick={() => handlePayment(plans.find((p) => p.name === selectedPlan)!.paymentLink)}
-              className="w-full py-3 px-6 bg-gradient-to-r from-orange-500 to-red-500 text-white rounded-xl font-bold hover:from-orange-600 hover:to-red-600 transition-all duration-200 hover:scale-105"
-            >
-              Proceed to Checkout
-            </button>
-          </motion.div>
-        )}
-      </div>
-    </motion.section>
-  )}
-</AnimatePresence>
-
-{/* Upgrade Section */}
-<AnimatePresence>
-  {activeView === "upgrade" && (
-    <motion.section
-      id="upgrade-section"
-      className="py-12 sm:py-20 bg-white border-t border-gray-200"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-    >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div
-          className="mb-8 flex items-center justify-between"
-          variants={slideUpVariants}
-          initial="hidden"
-          animate="visible"
-        >
-          <h3 className="text-2xl sm:text-3xl font-bold text-gray-900">Upgrade from {selectedPlan}</h3>
-          <button onClick={handleCloseView} className="text-gray-500 hover:text-gray-700 transition-colors">
-            ✕
-          </button>
-        </motion.div>
-
-        <motion.div
-          className="grid grid-cols-1 md:grid-cols-3 gap-6"
-          variants={containerVariants}
-          initial="hidden"
-          animate="visible"
-        >
-          {upgradePaths
-            .filter((path) => path.from === selectedPlan)
-            .map((path, index) => (
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <motion.div
-                key={index}
-                variants={itemVariants}
-                className="p-6 rounded-2xl border-2 border-gray-200 bg-white hover:border-orange-300 transition-all duration-300"
+                className="mb-8 flex items-center justify-between"
+                variants={slideUpVariants}
+                initial="hidden"
+                animate="visible"
               >
-                <div className="flex items-center justify-between mb-4">
-                  <div>
-                    <p className="text-sm text-gray-600">From</p>
-                    <p className="text-lg font-bold text-gray-900">{path.from}</p>
-                  </div>
-                  <ChevronDown className="w-5 h-5 text-gray-400 rotate-90" />
-                  <div>
-                    <p className="text-sm text-gray-600">To</p>
-                    <p className="text-lg font-bold text-orange-600">{path.to}</p>
-                  </div>
-                </div>
-
-                <p className="text-gray-600 text-sm mb-4">{path.description}</p>
-
-                <div className="bg-gray-50 p-4 rounded-lg mb-4">
-                  <p className="text-xs text-gray-600 mb-2">Upgrade Price Formula:</p>
-                  <p className="text-sm font-mono text-gray-900">
-                    (${path.toPrice} - ${path.fromPrice}) × 0.9 = $
-                    {calculateUpgradePrice(path.fromPrice, path.toPrice)}
-                  </p>
-                </div>
-
-                <button
-                  onClick={() => handlePayment(plans.find((p) => p.name === path.to)!.paymentLink)}
-                  className="w-full py-2 px-4 bg-orange-500 text-white rounded-lg font-semibold hover:bg-orange-600 transition-all duration-200 hover:scale-105"
-                >
-                  Upgrade Now
+                <h3 className="text-2xl sm:text-3xl font-bold text-gray-900">
+                  Add More Applications to {selectedPlan}
+                </h3>
+                <button onClick={handleCloseView} className="text-gray-500 hover:text-gray-700 transition-colors">
+                  ✕
                 </button>
               </motion.div>
-            ))}
-        </motion.div>
-      </div>
-    </motion.section>
-  )}
-</AnimatePresence>
 
-{/* Risk-Free Guarantee Section */}
-<section className="py-12 bg-gradient-to-b from-gray-50 to-white">
-  <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-    <motion.div
-      className="bg-white rounded-2xl shadow-xl hover:shadow-2xl border-4 border-orange-300 p-6 sm:p-8 relative overflow-hidden"
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6 }}
-      viewport={{ once: true }}
-    >
-      <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-orange-100 to-transparent rounded-full -translate-y-16 translate-x-16"></div>
+              <motion.div
+                className="grid grid-cols-1 md:grid-cols-3 gap-6"
+                variants={containerVariants}
+                initial="hidden"
+                animate="visible"
+              >
+                {addonsPricing[selectedPlan!].map((addon, index) => (
+                  <motion.div
+                    key={index}
+                    variants={itemVariants}
+                    onClick={() => setSelectedAddon(index)}
+                    className={`p-6 rounded-2xl border-2 cursor-pointer transition-all duration-300 ${
+                      selectedAddon === index
+                        ? "border-orange-500 bg-orange-50 shadow-lg"
+                        : "border-gray-200 bg-white hover:border-orange-300"
+                    }`}
+                  >
+                    <h4 className="text-lg font-bold text-gray-900 mb-2">{addon.label}</h4>
+                    <p className="text-3xl font-bold text-orange-600 mb-4">${addon.price}</p>
+                    <p className="text-gray-600 text-sm mb-4">Add more applications to your plan</p>
+                    <button
+                      className={`w-full py-2 px-4 rounded-lg font-semibold transition-all duration-200 ${
+                        selectedAddon === index
+                          ? "bg-orange-500 text-white hover:bg-orange-600"
+                          : "bg-gray-100 text-gray-900 hover:bg-gray-200"
+                      }`}
+                    >
+                      {selectedAddon === index ? "Selected" : "Select"}
+                    </button>
+                  </motion.div>
+                ))}
+              </motion.div>
 
-      <div className="relative z-10">
-        <div className="flex items-start space-x-4">
-          <div className="flex-shrink-0">
-            <div className="w-12 h-12 bg-gradient-to-r from-green-500 to-emerald-500 rounded-full flex items-center justify-center shadow-lg">
-              <Check className="w-6 h-6 text-white" />
+              {selectedAddon !== null && (
+                <motion.div
+                  className="mt-8 p-6 bg-gradient-to-r from-orange-50 to-red-50 rounded-2xl border border-orange-200"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                >
+                  <p className="text-gray-700 mb-4">
+                    <span className="font-semibold">Total for {selectedPlan}:</span> $
+                    {plans.find((p) => p.name === selectedPlan)!.price +
+                      addonsPricing[selectedPlan!][selectedAddon].price}
+                  </p>
+                  <button
+                    onClick={() => handlePayment(plans.find((p) => p.name === selectedPlan)!.paymentLink)}
+                    className="w-full py-3 px-6 bg-gradient-to-r from-orange-500 to-red-500 text-white rounded-xl font-bold hover:from-orange-600 hover:to-red-600 transition-all duration-200 hover:scale-105"
+                  >
+                    Proceed to Checkout
+                  </button>
+                </motion.div>
+              )}
             </div>
-          </div>
-          <div className="flex-1">
-            <h3 className="text-xl font-bold text-gray-900 mb-2">100% Risk-Free Guarantee</h3>
-            <p className="text-gray-700 leading-relaxed">
-              <span className="font-semibold text-gray-900">Only jobs you approve.</span> Get 150–200 extra applications completely free if you don't receive interview calls from your initial applications.
-            </p>
-          </div>
+          </motion.section>
+        )}
+      </AnimatePresence>
+
+      {/* Upgrade Section */}
+      <AnimatePresence>
+        {activeView === "upgrade" && (
+          <motion.section
+            id="upgrade-section"
+            className="py-12 sm:py-20 bg-white border-t border-gray-200"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          >
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              <motion.div
+                className="mb-8 flex items-center justify-between"
+                variants={slideUpVariants}
+                initial="hidden"
+                animate="visible"
+              >
+                <h3 className="text-2xl sm:text-3xl font-bold text-gray-900">Upgrade from {selectedPlan}</h3>
+                <button onClick={handleCloseView} className="text-gray-500 hover:text-gray-700 transition-colors">
+                  ✕
+                </button>
+              </motion.div>
+
+            
+              <motion.div
+                className="grid grid-cols-1 md:grid-cols-3 gap-6"
+                variants={containerVariants}
+                initial="hidden"
+                animate="visible"
+              >
+                {upgradePaths
+                  .filter((path) => path.from === selectedPlan)
+                  .map((path, index) => (
+                    <motion.div
+                      key={index}
+                      variants={itemVariants}
+                      className="p-6 rounded-2xl border-2 border-gray-200 bg-white hover:border-orange-300 transition-all duration-300"
+                    >
+                      <div className="flex items-center justify-between mb-4">
+                        <div>
+                          <p className="text-sm text-gray-600">From</p>
+                          <p className="text-lg font-bold text-gray-900">{path.from}</p>
+                        </div>
+                        <ChevronDown className="w-5 h-5 text-gray-400 rotate-90" />
+                        <div>
+                          <p className="text-sm text-gray-600">To</p>
+                          <p className="text-lg font-bold text-orange-600">{path.to}</p>
+                        </div>
+                      </div>
+
+                      <p className="text-gray-600 text-sm mb-4">{path.description}</p>
+
+                      <div className="bg-gray-50 p-4 rounded-lg mb-4">
+                        <p className="text-xs text-gray-600 mb-2">Upgrade Price Formula:</p>
+                        <p className="text-sm font-mono text-gray-900">
+                          (${path.toPrice} - ${path.fromPrice}) × 0.9 = $
+                          {calculateUpgradePrice(path.fromPrice, path.toPrice)}
+                        </p>
+                      </div>
+
+                      <button
+                        onClick={() => handlePayment(plans.find((p) => p.name === path.to)!.paymentLink)}
+                        className="w-full py-2 px-4 bg-orange-500 text-white rounded-lg font-semibold hover:bg-orange-600 transition-all duration-200 hover:scale-105"
+                      >
+                        Upgrade Now
+                      </button>
+                    </motion.div>
+                  ))}
+              </motion.div>
+            </div>
+          </motion.section>
+        )}
+      </AnimatePresence>
+
+      {/* Risk-Free Guarantee Section */}
+      <section className="py-12 bg-gradient-to-b from-gray-50 to-white">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            className="bg-white rounded-2xl shadow-xl hover:shadow-2xl border-4 border-orange-300 p-6 sm:p-8 relative overflow-hidden"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+          >
+            <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-orange-100 to-transparent rounded-full -translate-y-16 translate-x-16"></div>
+
+            <div className="relative z-10">
+              <div className="flex items-start space-x-4">
+                <div className="flex-shrink-0">
+                  <div className="w-12 h-12 bg-gradient-to-r from-green-500 to-emerald-500 rounded-full flex items-center justify-center shadow-lg">
+                    <Check className="w-6 h-6 text-white" />
+                  </div>
+                </div>
+                <div className="flex-1">
+                  <h3 className="text-xl font-bold text-gray-900 mb-2">100% Risk-Free Guarantee</h3>
+                  <p className="text-gray-700 leading-relaxed">
+                    <span className="font-semibold text-gray-900">Only jobs you approve.</span> Get 150–200 extra
+                    applications completely free if you don't receive interview calls from your initial applications.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </motion.div>
         </div>
-      </div>
-    </motion.div>
-  </div>
-</section>
-</>
+      </section>
+    </>
   )
 }
 
