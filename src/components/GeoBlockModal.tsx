@@ -82,12 +82,12 @@ const GeoBlockModal: React.FC<GeoBlockModalProps> = ({
               I’ll Wait for Launch
             </button> */}
 
-            <button
+            {/* <button
               onClick={onProvideAnyway}
               className="w-full bg-gray-100 text-gray-700 py-3 px-4 rounded-lg font-medium hover:bg-gray-200 transition focus:ring-2 focus:ring-gray-500 focus:ring-offset-2"
             >
               Try Anyway
-            </button>
+            </button> */}
           </div>
 
           {/* Footer */}

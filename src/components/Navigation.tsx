@@ -39,6 +39,78 @@ const Navigation: React.FC<NavigationProps> = ({
     seconds: 0,
   });
 
+  // ----------------- Dynamic Slot Calculation -----------------
+  // Calculate remaining slots based on current date
+  // Starts with 5 slots on 1st, reduces by 1 every 10 days
+  const getRemainingSlots = () => {
+    const now = new Date();
+    const currentDay = now.getDate();
+    
+    // Start with 5 slots on 1st day of month
+    let slots = 5;
+    
+    // Reduce by 1 every 10 days
+    if (currentDay >= 11) slots--;
+    if (currentDay >= 21) slots--;
+    if (currentDay >= 25) slots--;
+    
+    // Ensure minimum of 1 slot
+    const finalSlots = Math.max(slots, 1);
+    
+    // Debug logging (remove in production)
+    console.log(`Current day: ${currentDay}, Remaining slots: ${finalSlots}`);
+    
+    return finalSlots;
+  };
+
+  // Test function to verify slot logic (remove in production)
+  const testSlotLogic = () => {
+    const testDays = [1, 10, 11, 20, 21, 24, 25, 30];
+    console.log('Testing slot logic:');
+    testDays.forEach(day => {
+      let slots = 5;
+      if (day >= 11) slots--;
+      if (day >= 21) slots--;
+      if (day >= 25) slots--;
+      slots = Math.max(slots, 1);
+      console.log(`Day ${day}: ${slots} slots`);
+    });
+  };
+
+  // Run test on component mount (remove in production)
+  useEffect(() => {
+    testSlotLogic();
+  }, []);
+
+  const [remainingSlots, setRemainingSlots] = useState(getRemainingSlots());
+
+  // Update slots when date changes (at midnight)
+  useEffect(() => {
+    const updateSlots = () => {
+      setRemainingSlots(getRemainingSlots());
+    };
+
+    // Update immediately
+    updateSlots();
+
+    // Calculate time until next midnight
+    const now = new Date();
+    const tomorrow = new Date(now);
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    tomorrow.setHours(0, 0, 0, 0);
+    const msUntilMidnight = tomorrow.getTime() - now.getTime();
+
+    // Set timeout for next midnight
+    const timeoutId = setTimeout(() => {
+      updateSlots();
+      // Then update every 24 hours
+      const intervalId = setInterval(updateSlots, 24 * 60 * 60 * 1000);
+      return () => clearInterval(intervalId);
+    }, msUntilMidnight);
+
+    return () => clearTimeout(timeoutId);
+  }, []);
+
   // End of current month at 23:59:59.999 local time
   const getEndOfCurrentMonth = () => {
     const now = new Date();
@@ -498,7 +570,7 @@ const Navigation: React.FC<NavigationProps> = ({
                   <span className="relative inline-flex rounded-full h-3 w-3 bg-white"></span>
                 </span>
                 <span className="font-bold text-white text-xs sm:text-base lg:text-lg tracking-wide whitespace-nowrap">
-                  Hurry! 4 Slots Remaining
+                  Hurry! {remainingSlots} Slots Remaining
                 </span>
               </div>
 
