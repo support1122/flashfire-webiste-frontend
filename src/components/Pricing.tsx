@@ -404,7 +404,7 @@ const Pricing = () => {
                     {/* Select Button */}
                     <button
                       onClick={() => handlePayment(plans.find((p) => p.name === selectedPlan)!.paymentLink)}
-                       className={`w-full py-2.5 px-4 rounded-xl font-semibold transition-all duration-200
+                      className={`w-full py-2.5 px-4 rounded-xl font-semibold transition-all duration-200
                         ${selectedAddon === index
                           ? "bg-gradient-to-r from-orange-500 to-red-500 text-white shadow-md hover:shadow-lg hover:scale-105"
                           : "bg-gray-100 text-gray-800 hover:bg-orange-50 hover:text-orange-600"
@@ -458,15 +458,22 @@ const Pricing = () => {
                 initial="hidden"
                 animate="visible"
               >
-                <h3 className="text-2xl sm:text-3xl font-bold text-gray-900">Upgrade from {selectedPlan}</h3>
-                <button onClick={handleCloseView} className="text-gray-500 hover:text-gray-700 transition-colors">
-                  ✕
-                </button>
+                <div className="flex justify-between w-full max-w-4xl items-center mb-4">
+                  <div className="flex-1"></div>
+                  <h3 className="text-2xl sm:text-3xl font-bold text-gray-900 flex-1 text-center">
+                    Upgrade from {selectedPlan}
+                  </h3>
+                  <div className="flex-1 text-right">
+                    <button onClick={handleCloseView} className="text-gray-500 hover:text-gray-700 transition-colors">
+                      ✕
+                    </button>
+                  </div>
+                </div>
               </motion.div>
 
 
               <motion.div
-                className="grid grid-cols-1 md:grid-cols-3 gap-6 "
+                className="grid grid-cols-1 md:grid-cols-3 gap-6 justify-center "
                 variants={containerVariants}
                 initial="hidden"
                 animate="visible"
