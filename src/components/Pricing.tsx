@@ -125,6 +125,25 @@ const Pricing = () => {
       description: "Jump to our most comprehensive plan",
     },
   ]
+  const teamMembers = [
+    {
+      name: "Adit Jain",
+      role: "Partner",
+      image: "https://res.cloudinary.com/drit9nkha/image/upload/v1753688852/Adit_f2qfe8.webp",
+      linkedin: "https://www.linkedin.com/in/adit-jain-907555218/",
+      description:
+        "Former Growth Associate with a background in operations, focused on solving user pain points through scalable, outcome-driven systems.",
+    },
+    {
+      name: "Pranjal Tripathi",
+      role: "CTO",
+      image: "https://res.cloudinary.com/drit9nkha/image/upload/v1753688852/pran_img_nbwdya.webp",
+      linkedin: "https://www.linkedin.com/in/pranjal-tripathi-a98048222/",
+      description:
+        "AI and automation specialist with 3+ years of experience, leading Flashfire's intelligent job-matching and automation systems.",
+    },
+  ]
+
 
   const handlePayment = (paymentLink: string) => {
     window.open(paymentLink, "_blank")
@@ -223,11 +242,10 @@ const Pricing = () => {
               <motion.div
                 key={index}
                 variants={itemVariants}
-                className={`relative bg-white rounded-2xl sm:rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-300 border-2 ${
-                  plan.popular
+                className={`relative bg-white rounded-2xl sm:rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-300 border-2 ${plan.popular
                     ? "border-orange-500 scale-100 lg:scale-105 ring-4 ring-orange-500/20"
                     : "border-gray-200 hover:border-orange-300"
-                }`}
+                  }`}
               >
                 {plan.popular && (
                   <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
@@ -240,9 +258,8 @@ const Pricing = () => {
                 <div className="p-6 sm:p-8">
                   <div className="text-center mb-6 sm:mb-8">
                     <div
-                      className={`inline-flex items-center space-x-2 p-3 rounded-2xl mb-4 ${
-                        plan.popular ? "bg-orange-100 text-orange-600" : "bg-gray-100 text-gray-600"
-                      }`}
+                      className={`inline-flex items-center space-x-2 p-3 rounded-2xl mb-4 ${plan.popular ? "bg-orange-100 text-orange-600" : "bg-gray-100 text-gray-600"
+                        }`}
                     >
                       {plan.icon}
                       <span className="font-semibold">{plan.name}</span>
@@ -276,13 +293,12 @@ const Pricing = () => {
                       </li>
                     ))}
                   </ul>
-                   <button
+                  <button
                     onClick={() => handlePayment(plan.paymentLink)}
-                    className={`w-full py-3 sm:py-4 px-6 rounded-xl sm:rounded-2xl font-bold text-base sm:text-lg transition-all duration-200 ${
-                      plan.popular
+                    className={`w-full py-3 sm:py-4 px-6 rounded-xl sm:rounded-2xl font-bold text-base sm:text-lg transition-all duration-200 ${plan.popular
                         ? "bg-gradient-to-r from-orange-500 to-red-500 text-white hover:from-orange-600 hover:to-red-600 shadow-lg hover:shadow-xl hover:scale-105"
                         : "bg-gray-900 text-white hover:bg-gray-800 hover:scale-105"
-                    }`}
+                      }`}
                   >
                     {plan.cta}
                   </button>
@@ -292,7 +308,7 @@ const Pricing = () => {
                       onClick={() => handleExploreMore(plan.name)}
                       className="py-2 px-3 rounded-lg border border-orange-300 text-orange-600 hover:bg-orange-50 transition-colors text-sm font-medium"
                     >
-                      Explore More
+                      Add More
                     </button>
 
                     {plan.name !== "Executive" && (
@@ -318,7 +334,7 @@ const Pricing = () => {
         {activeView === "addons" && (
           <motion.section
             id="addons-section"
-            className="py-8 sm:py-20 bg-gray-50 "
+            className="pt-6 pb-6 sm:pt-10 sm:pb-10 bg-gray-50"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -349,21 +365,19 @@ const Pricing = () => {
                     key={index}
                     variants={itemVariants}
                     onClick={() => setSelectedAddon(index)}
-                    className={`p-6 rounded-2xl border-2 cursor-pointer transition-all duration-300 ${
-                      selectedAddon === index
+                    className={`p-6 rounded-2xl border-2 cursor-pointer transition-all duration-300 ${selectedAddon === index
                         ? "border-orange-500 bg-orange-50 shadow-lg"
                         : "border-gray-200 bg-white hover:border-orange-300"
-                    }`}
+                      }`}
                   >
                     <h4 className="text-lg font-bold text-gray-900 mb-2">{addon.label}</h4>
-                    <p className="text-3xl font-bold text-orange-600 mb-4">${addon.price}</p>
+                    <p className="text-3xl font-bold text-orange-600 mb-4">Total will come to ${addon.price}</p>
                     <p className="text-gray-600 text-sm mb-4">Add more applications to your plan</p>
                     <button
-                      className={`w-full py-2 px-4 rounded-lg font-semibold transition-all duration-200 ${
-                        selectedAddon === index
+                      className={`w-full py-2 px-4 rounded-lg font-semibold transition-all duration-200 ${selectedAddon === index
                           ? "bg-orange-500 text-white hover:bg-orange-600"
                           : "bg-gray-100 text-gray-900 hover:bg-gray-200"
-                      }`}
+                        }`}
                     >
                       {selectedAddon === index ? "Selected" : "Select"}
                     </button>
@@ -418,7 +432,7 @@ const Pricing = () => {
                 </button>
               </motion.div>
 
-            
+
               <motion.div
                 className="grid grid-cols-1 md:grid-cols-3 gap-6"
                 variants={containerVariants}
@@ -447,10 +461,10 @@ const Pricing = () => {
 
                       <p className="text-gray-600 text-sm mb-4">{path.description}</p>
 
-                      <div className="bg-gray-50 p-4 rounded-lg mb-4">
-                        <p className="text-xs text-gray-600 mb-2">Upgrade Price Formula:</p>
-                        <p className="text-sm font-mono text-gray-900">
-                          (${path.toPrice} - ${path.fromPrice}) × 0.9 = $
+                      {/* ✅ Only show total upgrade price */}
+                      <div className="bg-orange-50 border border-orange-200 p-4 rounded-lg mb-4 text-center">
+                        <p className="text-gray-700 text-sm font-medium">
+                          <span className="font-semibold text-gray-900">Total Upgrade Price:</span> $
                           {calculateUpgradePrice(path.fromPrice, path.toPrice)}
                         </p>
                       </div>
@@ -498,6 +512,71 @@ const Pricing = () => {
               </div>
             </div>
           </motion.div>
+        </div>
+      </section>
+      <section className="py-16 bg-white">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Section Header */}
+          <div className="text-center mb-12">
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+              Led by Experts in <span className="text-orange-500">Product, AI, and Hiring Systems</span>
+            </h2>
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+              Flashfire is built by experts in automation, product, and hiring — designed to help job seekers land
+              offers faster, at scale.
+            </p>
+          </div>
+
+          {/* Team Members Grid */}
+          <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+            {teamMembers.map((member, index) => (
+              <div key={index} className="text-center">
+                {/* Profile Image */}
+                <div className="mb-6 relative inline-block">
+                  <div
+                    className={`w-40 h-40 rounded-full overflow-hidden ${member.name === "Pranjal Tripathi" ? "bg-cover bg-center" : ""
+                      }`}
+                    style={
+                      member.name === "Pranjal Tripathi"
+                        ? {
+                          backgroundImage: `url(${member.image})`,
+                          backgroundSize: "120%",
+                          backgroundPosition: "center",
+                        }
+                        : {}
+                    }
+                  >
+                    {member.name === "Adit Jain" && (
+                      <img
+                        src={member.image || "/placeholder.svg"}
+                        alt={member.name}
+                        className="w-full h-full object-cover object-[center_20%]"
+                      />
+                    )}
+                  </div>
+
+                  {/* LinkedIn Icon */}
+                  <a
+                    href={member.linkedin}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="absolute -bottom-2 -right-2 bg-blue-600 hover:bg-blue-700 text-white p-2 rounded-full shadow-lg transition-all duration-200 hover:scale-110"
+                  >
+                    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+                    </svg>
+                  </a>
+                </div>
+
+                {/* Member Info */}
+                <div>
+                  <h3 className="text-2xl font-bold text-gray-900 mb-2">{member.name}</h3>
+                  <p className="text-orange-500 font-semibold text-lg mb-4">{member.role}</p>
+                  <p className="text-gray-600 text-base leading-relaxed">{member.description}</p>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
     </>
