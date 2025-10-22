@@ -382,7 +382,7 @@ const Pricing = () => {
                       }`}
                   >
                     {/* Small glowing accent */}
-                    {/* <div className="absolute inset-x-0 top-0 h-1 rounded-t-2xl bg-gradient-to-r from-orange-400 to-red-400 opacity-0 group-hover:opacity-100 transition-opacity"></div> */}
+                    <div className="absolute inset-x-0 top-0 h-1 rounded-t-2xl bg-gradient-to-r from-orange-400 to-red-400 opacity-0 group-hover:opacity-100 transition-opacity"></div>
 
                     {/* Title */}
                     <h4 className="text-xl font-semibold text-gray-900 mb-3 flex items-center justify-center gap-2">
@@ -395,7 +395,7 @@ const Pricing = () => {
                     {/* Price Section */}
                     <div className="bg-orange-50 border border-orange-200 p-4 rounded-lg mb-4 text-center">
                         <p className="text-gray-700 text-sm font-medium">
-                          <span className="font-semibold text-gray-900">Total Upgrade Price:</span> $
+                          <span className="font-semibold text-gray-900">Total Price:</span> $
                          ${addon.price}
                         </p>
                       </div>
