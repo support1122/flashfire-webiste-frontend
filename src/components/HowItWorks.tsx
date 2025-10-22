@@ -5,7 +5,7 @@ import {GTagUTM} from '../utils/GTagUTM.ts';
 import { useNavigate } from 'react-router-dom';
 
 
-const HowItWorks = ({setSignupFormVisibility, handleSignupAttempt}) => {
+const HowItWorks = ({setSignupFormVisibility}) => {
   const navigate = useNavigate();
   const steps = [
     {
@@ -119,10 +119,7 @@ const HowItWorks = ({setSignupFormVisibility, handleSignupAttempt}) => {
                                     utm_campaign: 'Website',
                                   },
                                 });
-                                // Check geo-blocking before navigating
-                                if (handleSignupAttempt && handleSignupAttempt()) {
-                                  navigate('/signup');
-                                }
+                                navigate('/signup');
                                 // setSignupFormVisibility(true);
                               }}
               className="bg-white text-orange-600 px-6 sm:px-8 py-3 sm:py-4 rounded-full font-bold hover:bg-gray-50 transition-all duration-200 shadow-lg hover:scale-105"
