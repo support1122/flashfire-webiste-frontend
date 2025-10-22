@@ -287,7 +287,7 @@ const Pricing = () => {
                     {plan.cta}
                   </button>
 
-                  <div className={`grid ${plan.name === "Executive" ? "grid-cols-1" : "grid-cols-2"} gap-4`}>
+                  <div className={`grid ${plan.name === "Executive" ? "grid-cols-1" : "grid-cols-2"} gap-2 mt-4`}>
                     <button
                       onClick={() => handleExploreMore(plan.name)}
                       className="py-2 px-3 rounded-lg border border-orange-300 text-orange-600 hover:bg-orange-50 transition-colors text-sm font-medium"
