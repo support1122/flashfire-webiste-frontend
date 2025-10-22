@@ -12,18 +12,40 @@ const Blog = () => {
     const cacheKey = 'flashfire_blog_posts';
     const cached = localStorage.getItem(cacheKey);
     
+    // If cache exists, try to use it, but invalidate when code has newer posts
     if (cached) {
       try {
         const parsedPosts = JSON.parse(cached);
-        setCachedBlogPosts(parsedPosts);
+
+        // Invalidate cache when number of posts or any slug has changed
+        const cacheOutdated =
+          !Array.isArray(parsedPosts) ||
+          parsedPosts.length !== blogPosts.length ||
+          // quick slug set comparison
+          (() => {
+            const cachedSlugs = new Set(parsedPosts.map((p: any) => p.slug));
+            for (const p of blogPosts) {
+              if (!cachedSlugs.has(p.slug)) return true;
+            }
+            return false;
+          })();
+
+        if (cacheOutdated) {
+          localStorage.setItem(cacheKey, JSON.stringify(blogPosts));
+          setCachedBlogPosts(blogPosts);
+        } else {
+          setCachedBlogPosts(parsedPosts);
+        }
       } catch (error) {
         console.log('Error parsing cached blog posts:', error);
         // Fallback to original data
         localStorage.setItem(cacheKey, JSON.stringify(blogPosts));
+        setCachedBlogPosts(blogPosts);
       }
     } else {
       // First visit - cache the blog posts
       localStorage.setItem(cacheKey, JSON.stringify(blogPosts));
+      setCachedBlogPosts(blogPosts);
     }
   }, []);
 
