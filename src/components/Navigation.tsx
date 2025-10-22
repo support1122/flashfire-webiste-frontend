@@ -12,6 +12,7 @@ interface NavigationProps {
   setSignupFormVisibility: React.Dispatch<React.SetStateAction<boolean>>;
   setCalendlyModalVisibility: React.Dispatch<React.SetStateAction<boolean>>;
   handleBookingAttempt?: () => boolean;
+  handleSignupAttempt?: () => boolean;
 }
 
 type NavItem =
