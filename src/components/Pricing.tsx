@@ -381,9 +381,6 @@ const Pricing = () => {
                         : "border-gray-200 bg-white hover:shadow-lg hover:border-orange-300"
                       }`}
                   >
-                    {/* Small glowing accent */}
-                    <div className="absolute inset-x-0 top-0 h-1 rounded-t-2xl bg-gradient-to-r from-orange-400 to-red-400 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-
                     {/* Title */}
                     <h4 className="text-xl font-semibold text-gray-900 mb-3 flex items-center justify-center gap-2">
                       <span className="text-orange-500">⚡</span> {addon.label}
@@ -394,13 +391,10 @@ const Pricing = () => {
 
                     {/* Price Section */}
                     <div className="bg-orange-50 border border-orange-200 p-4 rounded-lg mb-4 text-center">
-                        <p className="text-gray-700 text-sm font-medium">
-                          <span className="font-semibold text-gray-900">Total Price:</span> $
-                         ${addon.price}
-                        </p>
-                      </div>
-
-                  
+                      <p className="text-gray-700 text-sm font-medium">
+                        <span className="font-semibold text-gray-900">Total Price:</span> ${addon.price}
+                      </p>
+                    </div>
 
                     {/* Description */}
                     <p className="text-gray-500 text-sm text-center mb-6">
@@ -409,9 +403,9 @@ const Pricing = () => {
 
                     {/* Select Button */}
                     <button
-                     onClick={() => handlePayment(plans.find((p) => p.name === selectedPlan)!.paymentLink)}
-                      className={`w-full py-2.5 px-4 rounded-xl font-semibold transition-all duration-200
-                      ${selectedAddon === index
+                      onClick={() => handlePayment(plans.find((p) => p.name === selectedPlan)!.paymentLink)}
+                       className={`w-full py-2.5 px-4 rounded-xl font-semibold transition-all duration-200
+                        ${selectedAddon === index
                           ? "bg-gradient-to-r from-orange-500 to-red-500 text-white shadow-md hover:shadow-lg hover:scale-105"
                           : "bg-gray-100 text-gray-800 hover:bg-orange-50 hover:text-orange-600"
                         }`}
