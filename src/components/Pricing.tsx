@@ -89,19 +89,19 @@ const Pricing = () => {
 
   const addonsPricing = {
     Ignite: [
-      { label: "+250 Apps", price: 130 },
-      { label: "+500 Apps", price: 220 },
-      { label: "+1000 Apps", price: 380 },
+      { label: "+250 Applications", price: 130 },
+      { label: "+500 Applications", price: 220 },
+      { label: "+1000 Applications", price: 380 },
     ],
     Professional: [
-      { label: "+250 Apps", price: 120 },
-      { label: "+500 Apps", price: 200 },
-      { label: "+1000 Apps", price: 350 },
+      { label: "+250 Applications", price: 120 },
+      { label: "+500 Applications", price: 200 },
+      { label: "+1000 Applications", price: 350 },
     ],
     Executive: [
-      { label: "+250 Apps", price: 110 },
-      { label: "+500 Apps", price: 190 },
-      { label: "+1000 Apps", price: 330 },
+      { label: "+250 Applications", price: 110 },
+      { label: "+500 Applications", price: 190 },
+      { label: "+1000 Applications", price: 330 },
     ],
   }
 
@@ -393,13 +393,14 @@ const Pricing = () => {
                     <div className="border-t border-gray-200 my-3"></div>
 
                     {/* Price Section */}
-                    <p className="text-gray-700 text-base mb-1 text-center font-medium">
-                      Total will come to:
-                    </p>
+                    <div className="bg-orange-50 border border-orange-200 p-4 rounded-lg mb-4 text-center">
+                        <p className="text-gray-700 text-sm font-medium">
+                          <span className="font-semibold text-gray-900">Total Upgrade Price:</span> $
+                         ${addon.price}
+                        </p>
+                      </div>
 
-                    <p className="text-3xl font-bold text-orange-600 text-center mb-3">
-                      ${addon.price}
-                    </p>
+                  
 
                     {/* Description */}
                     <p className="text-gray-500 text-sm text-center mb-6">
@@ -408,20 +409,21 @@ const Pricing = () => {
 
                     {/* Select Button */}
                     <button
+                     onClick={() => handlePayment(plans.find((p) => p.name === selectedPlan)!.paymentLink)}
                       className={`w-full py-2.5 px-4 rounded-xl font-semibold transition-all duration-200
                       ${selectedAddon === index
                           ? "bg-gradient-to-r from-orange-500 to-red-500 text-white shadow-md hover:shadow-lg hover:scale-105"
                           : "bg-gray-100 text-gray-800 hover:bg-orange-50 hover:text-orange-600"
                         }`}
                     >
-                      {selectedAddon === index ? "Selected ✓" : "Select"}
+                      {selectedAddon === index ? "Proceed to Checkout" : "Select Add-on"}
                     </button>
                   </motion.div>
 
                 ))}
               </motion.div>
 
-              {selectedAddon !== null && (
+              {/* {selectedAddon !== null && (
                 <motion.div
                   className="mt-8 p-6 bg-gradient-to-r from-orange-50 to-red-50 rounded-2xl border border-orange-200"
                   initial={{ opacity: 0, y: 20 }}
@@ -439,7 +441,7 @@ const Pricing = () => {
                     Proceed to Checkout
                   </button>
                 </motion.div>
-              )}
+              )} */}
             </div>
           </motion.section>
         )}
