@@ -276,6 +276,16 @@ const Pricing = () => {
                       </li>
                     ))}
                   </ul>
+                   <button
+                    onClick={() => handlePayment(plan.paymentLink)}
+                    className={`w-full py-3 sm:py-4 px-6 rounded-xl sm:rounded-2xl font-bold text-base sm:text-lg transition-all duration-200 ${
+                      plan.popular
+                        ? "bg-gradient-to-r from-orange-500 to-red-500 text-white hover:from-orange-600 hover:to-red-600 shadow-lg hover:shadow-xl hover:scale-105"
+                        : "bg-gray-900 text-white hover:bg-gray-800 hover:scale-105"
+                    }`}
+                  >
+                    {plan.cta}
+                  </button>
 
                   <div className={`grid ${plan.name === "Executive" ? "grid-cols-1" : "grid-cols-2"} gap-2`}>
                     <button
