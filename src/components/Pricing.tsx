@@ -375,33 +375,49 @@ const Pricing = () => {
                     key={index}
                     variants={itemVariants}
                     onClick={() => setSelectedAddon(index)}
-                    className={`p-6 rounded-2xl border-2 cursor-pointer transition-all duration-300 ${selectedAddon === index
-                      ? "border-orange-500 bg-orange-50 shadow-lg"
-                      : "border-gray-200 bg-white hover:border-orange-300"
+                    className={`relative group p-6 rounded-2xl border-2 cursor-pointer transition-all duration-300
+                    ${selectedAddon === index
+                        ? "border-orange-500 bg-gradient-to-br from-orange-50 via-white to-red-50 shadow-xl scale-[1.02]"
+                        : "border-gray-200 bg-white hover:shadow-lg hover:border-orange-300"
                       }`}
                   >
-                    <h4 className="text-lg font-bold text-gray-900 mb-2">{addon.label}</h4>
+                    {/* Small glowing accent */}
+                    <div className="absolute inset-x-0 top-0 h-1 rounded-t-2xl bg-gradient-to-r from-orange-400 to-red-400 opacity-0 group-hover:opacity-100 transition-opacity"></div>
 
-                    <p className="text-base sm:text-lg text-gray-700 font-semibold mb-1">
+                    {/* Title */}
+                    <h4 className="text-xl font-semibold text-gray-900 mb-3 flex items-center justify-center gap-2">
+                      <span className="text-orange-500">⚡</span> {addon.label}
+                    </h4>
+
+                    {/* Divider */}
+                    <div className="border-t border-gray-200 my-3"></div>
+
+                    {/* Price Section */}
+                    <p className="text-gray-700 text-base mb-1 text-center font-medium">
                       Total will come to:
                     </p>
 
-                    <p className="text-2xl sm:text-3xl font-bold text-orange-600 mb-4">
+                    <p className="text-3xl font-bold text-orange-600 text-center mb-3">
                       ${addon.price}
                     </p>
 
-                    <p className="text-gray-600 text-sm mb-4">
-                      Add more applications to your plan
+                    {/* Description */}
+                    <p className="text-gray-500 text-sm text-center mb-6">
+                      Add more applications to enhance your reach and visibility.
                     </p>
+
+                    {/* Select Button */}
                     <button
-                      className={`w-full py-2 px-4 rounded-lg font-semibold transition-all duration-200 ${selectedAddon === index
-                        ? "bg-orange-500 text-white hover:bg-orange-600"
-                        : "bg-gray-100 text-gray-900 hover:bg-gray-200"
+                      className={`w-full py-2.5 px-4 rounded-xl font-semibold transition-all duration-200
+                      ${selectedAddon === index
+                          ? "bg-gradient-to-r from-orange-500 to-red-500 text-white shadow-md hover:shadow-lg hover:scale-105"
+                          : "bg-gray-100 text-gray-800 hover:bg-orange-50 hover:text-orange-600"
                         }`}
                     >
-                      {selectedAddon === index ? "Selected" : "Select"}
+                      {selectedAddon === index ? "Selected ✓" : "Select"}
                     </button>
                   </motion.div>
+
                 ))}
               </motion.div>
 
