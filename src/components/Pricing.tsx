@@ -13,6 +13,7 @@ interface Plan {
   paymentLink: string
   features: string[]
   cta: string
+  badge?: string;
 }
 
 const Pricing = () => {
@@ -49,6 +50,7 @@ const Pricing = () => {
       applications: "500",
       price: 349,
       originalPrice: 449,
+      badge: "Economical",
       popular: false,
       description: "Most popular for mid-level professionals",
       paymentLink: "https://www.paypal.com/ncp/payment/SMTK5UYQYM4A8",
@@ -69,6 +71,7 @@ const Pricing = () => {
       price: 599,
       originalPrice: 699,
       popular: true,
+      // badge: "Best Value",
       description: "Perfect for entry-level professionals",
       paymentLink: "https://www.paypal.com/ncp/payment/CDRFGB6M566X8",
       features: [
@@ -255,6 +258,13 @@ const Pricing = () => {
                   </div>
                 )}
 
+                {plan.badge && !plan.popular && (
+                  <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
+                    <span className="bg-gradient-to-r from-green-500 to-emerald-500 text-white px-4 sm:px-6 py-2 rounded-full text-sm font-bold shadow-lg">
+                      💎 {plan.badge}
+                    </span>
+                  </div>
+                )}
                 <div className="p-6 sm:p-8">
                   <div className="text-center mb-6 sm:mb-8">
                     <div
