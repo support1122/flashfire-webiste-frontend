@@ -318,7 +318,7 @@ const Pricing = () => {
         {activeView === "addons" && (
           <motion.section
             id="addons-section"
-            className="py-12 sm:py-20 bg-white border-t border-gray-200"
+            className="py-8 sm:py-20 bg-gray-50 "
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
