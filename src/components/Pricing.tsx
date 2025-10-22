@@ -446,7 +446,7 @@ const Pricing = () => {
         {activeView === "upgrade" && (
           <motion.section
             id="upgrade-section"
-            className="pt-6 pb-6 sm:pt-10 sm:pb-10 bg-gray-50"
+            className="pt-2 pb-2 sm:pt-10 sm:pb-6 bg-gray-50"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
