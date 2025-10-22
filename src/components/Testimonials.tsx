@@ -268,7 +268,7 @@ const TestimonialsGrid = () => {
               thumbnail: "images/rijul.jpg",
               name: "Rijul J.",
               avatar: "images/rijul.jpg",
-              role: "",
+              role: "Wise",
               linkedinUrl: " https://www.linkedin.com/in/-rijuljain-/",
             },
             {
