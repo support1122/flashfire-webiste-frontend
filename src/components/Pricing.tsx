@@ -453,7 +453,7 @@ const Pricing = () => {
           >
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <motion.div
-                className="mb-8 flex items-center justify-between"
+                className="mb-10 flex flex-col items-center justify-center text-center"
                 variants={slideUpVariants}
                 initial="hidden"
                 animate="visible"
@@ -466,7 +466,7 @@ const Pricing = () => {
 
 
               <motion.div
-                className="flex justify-center items-center "
+                className="grid grid-cols-1 md:grid-cols-3 gap-6 "
                 variants={containerVariants}
                 initial="hidden"
                 animate="visible"
