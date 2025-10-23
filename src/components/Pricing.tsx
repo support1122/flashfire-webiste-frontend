@@ -484,7 +484,7 @@ const Pricing = () => {
                     <motion.div
                       key={index}
                       variants={itemVariants}
-                      className="p-6 rounded-2xl border-2 border-gray-200 bg-white hover:border-orange-300 transition-all duration-300"
+                      className="w-full sm:w-[360px] md:w-[400px] lg:w-[420px] h-[320px] flex flex-col justify-between p-6 rounded-2xl border-2 border-gray-200 bg-white hover:border-orange-300 transition-all duration-300 shadow-md hover:shadow-lg"
                     >
                       <div className="flex items-center justify-between mb-4">
                         <div>
