@@ -356,9 +356,9 @@ const Pricing = () => {
                 initial="hidden"
                 animate="visible"
               >
-                <h3 className="text-2xl sm:text-3xl font-bold text-gray-900">
+                {/* <h3 className="text-2xl sm:text-3xl font-bold text-gray-900">
                   Add More Applications to {selectedPlan}
-                </h3>
+                </h3> */}
                 <button onClick={handleCloseView} className="text-gray-500 hover:text-gray-700 transition-colors">
                   ✕
                 </button>
@@ -460,9 +460,9 @@ const Pricing = () => {
               >
                 <div className="flex justify-between w-full max-w-4xl items-center mb-4">
                   <div className="flex-1"></div>
-                  <h3 className="text-2xl sm:text-3xl font-bold text-gray-900 flex-1 text-center">
+                  {/* <h3 className="text-2xl sm:text-3xl font-bold text-gray-900 flex-1 text-center">
                     Upgrade from {selectedPlan}
-                  </h3>
+                  </h3> */}
                   <div className="flex-1 text-right">
                     <button onClick={handleCloseView} className="text-gray-500 hover:text-gray-700 transition-colors">
                       ✕
