@@ -20,6 +20,7 @@ function App() {
   const [countryInfo, setCountryInfo] = useState<{code: string, name: string} | null>(null);
   const [geoLoading, setGeoLoading] = useState(true);
   const [pendingAction, setPendingAction] = useState<null | 'signup' | 'calendly'>(null);
+  const [isBookingFlow, setIsBookingFlow] = useState(false);
   const location = useLocation();
 
   // Simple geolocation function using browser APIs only
@@ -114,6 +115,9 @@ function App() {
 
   // Handle booking attempts for Indian users
   const handleBookingAttempt = () => {
+    // Set booking flow state to prevent AI Optimizer notification
+    setIsBookingFlow(true);
+    
     // If geolocation is still loading, allow booking (fallback behavior)
     if (geoLoading) {
       console.log("⏳ Geolocation still loading, allowing booking");
@@ -152,10 +156,16 @@ function App() {
   // Close geo block modal
   const closeGeoBlockModal = () => {
     setShowGeoBlockModal(false);
+    setIsBookingFlow(false); // Reset booking flow state
     trackUserJourney('geo_block_modal_closed', 'geo_blocking', {
       country: countryInfo?.code || 'unknown',
       action: 'modal_closed'
     });
+  };
+
+  // Reset booking flow state when modal is closed
+  const handleCalendlyModalClose = () => {
+    setIsBookingFlow(false);
   };
 
 
@@ -362,13 +372,13 @@ function App() {
         handleBookingAttempt
       }} />
       {signupFormVisibility && <SignupForm setCalendlyUser= {setCalendlyUser} setSignupFormVisibility={setSignupFormVisibility} setCalendlyModalVisibility={setCalendlyModalVisibility} />}
-      <CalendlyModal user={calendlyUser} setCalendlyModalVisibility={setCalendlyModalVisibility} isVisible={calendlyModalVisibility}/>      
+      <CalendlyModal user={calendlyUser} setCalendlyModalVisibility={setCalendlyModalVisibility} isVisible={calendlyModalVisibility} onClose={handleCalendlyModalClose}/>      
       <GeoBlockModal 
         isVisible={showGeoBlockModal}
         onClose={closeGeoBlockModal}
         onProvideAnyway={handleProvideAnyway}
       />
-      <SalesPopup />
+      <SalesPopup isBookingFlow={isBookingFlow} />
       <Footer />
     </div>
   );
