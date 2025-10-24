@@ -23,6 +23,13 @@ function App() {
   const [isBookingFlow, setIsBookingFlow] = useState(false);
   const location = useLocation();
 
+  // Set booking flow state when CalendlyModal becomes visible
+  useEffect(() => {
+    if (calendlyModalVisibility) {
+      setIsBookingFlow(true);
+    }
+  }, [calendlyModalVisibility]);
+
   // Simple geolocation function using browser APIs only
   const detectUserCountry = async () => {
     try {
