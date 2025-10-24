@@ -20,8 +20,22 @@ export default function SalesPopup({ isBookingFlow = false }: { isBookingFlow?: 
   const [current, setCurrent] = useState(generateNotification());
   const [visitors, setVisitors] = useState(() => 300 + Math.floor(Math.random() * 300));
 
+  // Hide all notifications immediately when booking flow starts
+  useEffect(() => {
+    if (isBookingFlow) {
+      setVisibleSales(false);
+      setVisibleOptimizer(false);
+      setVisibleVisitors(false);
+    }
+  }, [isBookingFlow]);
+
   useEffect(() => {
   const showSequence = () => {
+    // Don't show any notifications if user is in booking flow
+    if (isBookingFlow) {
+      return;
+    }
+
     // Step 1: Show Sales Notification
     setCurrent(generateNotification());
     setVisibleSales(true);
@@ -30,7 +44,6 @@ export default function SalesPopup({ isBookingFlow = false }: { isBookingFlow?: 
     }, 3000); // Hide after 3s
 
     // Step 2: After 11s (3s shown + 8s delay), show Optimizer
-    // Only show AI Optimizer notification if user is NOT in booking flow
     setTimeout(() => {
       if (!isBookingFlow) {
         setVisibleOptimizer(true);
@@ -42,11 +55,13 @@ export default function SalesPopup({ isBookingFlow = false }: { isBookingFlow?: 
 
     // Step 3: After 22s (14s + 8s delay), show Visitors
     setTimeout(() => {
-      setVisitors(100 + Math.floor(Math.random() * 151));
-      setVisibleVisitors(true);
-      setTimeout(() => {
-        setVisibleVisitors(false);
-      }, 3000); // Hide after 3s
+      if (!isBookingFlow) {
+        setVisitors(100 + Math.floor(Math.random() * 151));
+        setVisibleVisitors(true);
+        setTimeout(() => {
+          setVisibleVisitors(false);
+        }, 3000); // Hide after 3s
+      }
     }, 22000);
   };
 
