@@ -27,8 +27,14 @@ const GeoBlockModal: React.FC<GeoBlockModalProps> = ({
   if (!isVisible) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
-      <div className="relative bg-white max-w-md w-full mx-4 rounded-2xl shadow-2xl overflow-hidden">
+    <div 
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/50"
+      onClick={onClose}
+    >
+      <div 
+        className="relative bg-white max-w-md w-full mx-4 rounded-2xl shadow-2xl overflow-hidden"
+        onClick={(e) => e.stopPropagation()}
+      >
         {/* Close Button */}
         <button
           onClick={onClose}
