@@ -300,7 +300,11 @@ try {
   AnimatePresence = framerMotion.AnimatePresence
 } catch (error) {
   // Fallback to regular div elements if framer-motion fails
-  motion = ({ children, ...props }: any) => <div {...props}>{children}</div>
+  motion = ({ children, className, style, ...props }: any) => {
+    // Filter out framer-motion specific props that might cause issues
+    const { initial, animate, exit, variants, transition, ...restProps } = props
+    return <div className={className} style={style} {...restProps}>{children}</div>
+  }
   AnimatePresence = ({ children }: any) => <>{children}</>
 }
 
