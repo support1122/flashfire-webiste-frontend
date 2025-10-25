@@ -620,6 +620,24 @@ const Pricing = () => {
           </div>
         </div>
       </section>
+       <section className="py-20 bg-gradient-to-b from-orange-50 to-white">
+        <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+          Why We Started <span className="text-orange-500">Flashfire</span>
+        </h2>
+
+        <p className="text-lg text-gray-600 leading-relaxed max-w-3xl mx-auto">
+          We started Flashfire because applying to hundreds of jobs manually felt broken. 
+          We saw talented graduates spending endless hours tailoring resumes, tracking 
+          applications, and still hearing nothing back. That frustration became our mission — 
+          to automate everything that stands between you and your next offer. 
+        </p>
+
+        <p className="text-lg text-gray-600 leading-relaxed max-w-3xl mx-auto mt-6">
+          Flashfire is built to give job seekers back their time, confidence, and clarity — 
+          while ensuring every application is smarter, faster, and truly personalized. 
+          It’s not just automation; it’s your 24/7 job-search partner.
+        </p>
+       </section>
     </>
   )
 }
