@@ -620,24 +620,46 @@ const Pricing = () => {
           </div>
         </div>
       </section>
-       <section className="py-20 bg-gradient-to-b from-orange-50 to-white">
+        <section className="py-20 bg-gradient-to-b from-white via-orange-50 to-white">
+      <motion.div
+        className="max-w-4xl mx-auto px-6 text-center"
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+        viewport={{ once: true }}
+      >
+        {/* Decorative Icon */}
+        <div className="flex justify-center mb-6">
+          <div className="w-16 h-16 rounded-full bg-orange-100 flex items-center justify-center shadow-inner">
+            <Heart className="w-8 h-8 text-orange-500" />
+          </div>
+        </div>
+
+        {/* Heading */}
         <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
           Why We Started <span className="text-orange-500">Flashfire</span>
         </h2>
 
-        <p className="text-lg text-gray-600 leading-relaxed max-w-3xl mx-auto">
-          We started Flashfire because applying to hundreds of jobs manually felt broken. 
-          We saw talented graduates spending endless hours tailoring resumes, tracking 
-          applications, and still hearing nothing back. That frustration became our mission — 
-          to automate everything that stands between you and your next offer. 
-        </p>
+        {/* Highlight Card */}
+        <div className="bg-white border border-orange-100 shadow-lg rounded-2xl p-8 sm:p-10">
+          <p className="text-lg md:text-xl text-gray-700 leading-relaxed font-medium">
+            We built <span className="text-orange-600 font-semibold">Flashfire</span> to solve the problem we once faced ourselves — 
+            spending hours applying, only to get silence in return.
+          </p>
+          <p className="text-lg md:text-xl text-gray-700 leading-relaxed mt-6 font-medium">
+            Our mission is simple: make job applications effortless, personalized, and 
+            results-driven for everyone chasing their next opportunity.
+          </p>
+        </div>
 
-        <p className="text-lg text-gray-600 leading-relaxed max-w-3xl mx-auto mt-6">
-          Flashfire is built to give job seekers back their time, confidence, and clarity — 
-          while ensuring every application is smarter, faster, and truly personalized. 
-          It’s not just automation; it’s your 24/7 job-search partner.
-        </p>
-       </section>
+        {/* Signature Line */}
+        <div className="mt-10">
+          <p className="text-gray-500 text-sm italic">
+            — Built with purpose by Adit Jain & Pranjal Tripathi
+          </p>
+        </div>
+      </motion.div>
+    </section>
     </>
   )
 }
