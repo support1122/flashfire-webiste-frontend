@@ -326,7 +326,7 @@ const Pricing = () => {
 
   const scrollToSection = (id: string) => {
     const el = document.getElementById(id)
-    if (el) el.scrollIntoView({ behavior: "smooth", block: "start" })
+    if (el) el.scrollIntoView({ behavior: "smooth", block: "center" })
   }
 
   const plans: Plan[] = [
@@ -468,13 +468,13 @@ const Pricing = () => {
     setSelectedPlan(planName)
     setActiveView("addons")
     setSelectedAddon(null)
-    setTimeout(() => scrollToSection("addons-section"), 200)
+    setTimeout(() => scrollToSection("addons-section"), 300)
   }
 
   const handleUpgradePlan = (planName: string) => {
     setSelectedPlan(planName)
     setActiveView("upgrade")
-    setTimeout(() => scrollToSection("upgrade-section"), 200)
+    setTimeout(() => scrollToSection("upgrade-section"), 300)
   }
 
   const handleCloseView = () => {
