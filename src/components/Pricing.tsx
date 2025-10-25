@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { Check, Zap, Crown, Rocket, ChevronDown } from "lucide-react"
+import { Check, Zap, Crown, Rocket, ChevronDown, Heart } from "lucide-react"
+
 
 interface Plan {
   name: string
