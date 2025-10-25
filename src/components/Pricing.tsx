@@ -290,9 +290,19 @@
 // export default Pricing
 
 import { useState } from "react"
-import * as framerMotion from "framer-motion"
-const { motion, AnimatePresence } = framerMotion
 import { Check, Zap, Crown, Rocket, ChevronDown } from "lucide-react"
+
+// Try to import framer-motion, fallback to div if it fails
+let motion: any, AnimatePresence: any
+try {
+  const framerMotion = require("framer-motion")
+  motion = framerMotion.motion
+  AnimatePresence = framerMotion.AnimatePresence
+} catch (error) {
+  // Fallback to regular div elements if framer-motion fails
+  motion = ({ children, ...props }: any) => <div {...props}>{children}</div>
+  AnimatePresence = ({ children }: any) => <>{children}</>
+}
 
 interface Plan {
   name: string
