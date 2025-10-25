@@ -1,7 +1,8 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { X, User, Phone, Mail} from 'lucide-react';
 import { createOrUpdateContact, trackSignupEvent, waitForCRMLoad } from '../utils/CRMTracking';
 import { useNavigate } from 'react-router-dom';
+import { loadFormData, saveFormData, clearFormData, FormData } from '../utils/LocalStorageUtils';
 import { 
   trackFormStart, 
   trackFormFieldFocus, 
@@ -20,7 +21,7 @@ interface SignupFormProps {
 
 function SignupForm({ setSignupFormVisibility, setCalendlyModalVisibility, setCalendlyUser }: SignupFormProps) {
   const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<FormData>({
     fullName: '',
     phone: '',
     countryCode: '+1',
@@ -28,6 +29,12 @@ function SignupForm({ setSignupFormVisibility, setCalendlyModalVisibility, setCa
     workAuthorization: ''
   });
   const navigate = useNavigate();
+
+  // Load form data from localStorage on component mount
+  useEffect(() => {
+    const savedData = loadFormData();
+    setFormData(savedData);
+  }, []);
 
   const countryCodes = [
     { code: '+1', country: 'USA', pattern: /^1/ },
@@ -49,13 +56,7 @@ function SignupForm({ setSignupFormVisibility, setCalendlyModalVisibility, setCa
   setSignupFormVisibility(false);
   navigate('/');
 // }
-    setFormData({
-      fullName: '',
-      phone: '',
-      countryCode: '+1',
-      email: '',
-      workAuthorization: ''
-    });
+    // Don't clear form data on close - keep it for next time
     // setSignupFormVisibility(false);
     // setCalendlyModalVisibility(true);
 
@@ -114,6 +115,9 @@ function SignupForm({ setSignupFormVisibility, setCalendlyModalVisibility, setCa
         // Track signup event
         trackSignupEvent(formData.email, 'Signup Form');
         
+        // Clear form data after successful submission
+        clearFormData();
+        
         setSignupFormVisibility(false);
       }
     } catch (error) {
@@ -164,17 +168,25 @@ function SignupForm({ setSignupFormVisibility, setCalendlyModalVisibility, setCa
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
+    let newFormData: FormData;
+    
     if (name === 'phone') {
       const numericValue = value.replace(/\D/g, '');
       if (numericValue.length <= 10) {
-        setFormData({
+        newFormData = {
           ...formData,
           [name]: numericValue
-        });
+        };
+      } else {
+        return; // Don't update if phone number is too long
       }
     } else {
-      setFormData({ ...formData, [name]: value });
+      newFormData = { ...formData, [name]: value };
     }
+    
+    setFormData(newFormData);
+    // Save to localStorage on every change
+    saveFormData(newFormData);
   };
 
   return (
