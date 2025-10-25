@@ -290,7 +290,8 @@
 // export default Pricing
 
 import { useState } from "react"
-import { motion, AnimatePresence } from "framer-motion"
+import * as framerMotion from "framer-motion"
+const { motion, AnimatePresence } = framerMotion
 import { Check, Zap, Crown, Rocket, ChevronDown } from "lucide-react"
 
 interface Plan {
