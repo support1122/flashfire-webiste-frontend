@@ -292,21 +292,18 @@
 import { useState } from "react"
 import { Check, Zap, Crown, Rocket, ChevronDown } from "lucide-react"
 
-// Try to import framer-motion, fallback to div if it fails
-let motion: any, AnimatePresence: any
-try {
-  const framerMotion = require("framer-motion")
-  motion = framerMotion.motion
-  AnimatePresence = framerMotion.AnimatePresence
-} catch (error) {
-  // Fallback to regular div elements if framer-motion fails
-  motion = ({ children, className, style, ...props }: any) => {
-    // Filter out framer-motion specific props that might cause issues
+// Replace framer-motion with regular divs to avoid build issues
+const motion = {
+  div: ({ children, className, style, ...props }: any) => {
     const { initial, animate, exit, variants, transition, ...restProps } = props
     return <div className={className} style={style} {...restProps}>{children}</div>
+  },
+  section: ({ children, className, style, ...props }: any) => {
+    const { initial, animate, exit, variants, transition, ...restProps } = props
+    return <section className={className} style={style} {...restProps}>{children}</section>
   }
-  AnimatePresence = ({ children }: any) => <>{children}</>
 }
+const AnimatePresence = ({ children }: any) => <>{children}</>
 
 interface Plan {
   name: string
@@ -486,39 +483,6 @@ const Pricing = () => {
     setSelectedAddon(null)
   }
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.2,
-      },
-    },
-  }
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.5, ease: "easeOut" },
-    },
-  }
-
-  const slideUpVariants = {
-    hidden: { opacity: 0, y: 40 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.6, ease: "easeOut" },
-    },
-    exit: {
-      opacity: 0,
-      y: 40,
-      transition: { duration: 0.3 },
-    },
-  }
 
   return (
     <>
@@ -526,9 +490,6 @@ const Pricing = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             className="text-center mb-12 sm:mb-20"
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
           >
             <div className="inline-flex items-center space-x-2 bg-orange-100 text-orange-800 px-4 py-2 rounded-full text-sm font-medium mb-4">
               <Zap className="w-4 h-4" />
@@ -546,14 +507,10 @@ const Pricing = () => {
 
           <motion.div
             className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8"
-            variants={containerVariants}
-            initial="hidden"
-            animate="visible"
           >
             {plans.map((plan, index) => (
               <motion.div
                 key={index}
-                variants={itemVariants}
                 className={`relative bg-white rounded-2xl sm:rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-300 border-2 ${plan.popular
                   ? "border-orange-500 scale-100 lg:scale-105 ring-4 ring-orange-500/20"
                   : "border-gray-200 hover:border-orange-300"
@@ -654,16 +611,10 @@ const Pricing = () => {
           <motion.section
             id="addons-section"
             className="-mt-4 pb-2 sm:-mt-4 sm:pb-8 bg-gray-50"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
           >
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <motion.div
                 className="mb-8 flex items-center justify-between"
-                variants={slideUpVariants}
-                initial="hidden"
-                animate="visible"
               >
                 {/* <h3 className="text-2xl sm:text-3xl font-bold text-gray-900">
                   Add More Applications to {selectedPlan}
@@ -677,14 +628,10 @@ const Pricing = () => {
 
               <motion.div
                 className="grid grid-cols-1 md:grid-cols-3 gap-5 "
-                variants={containerVariants}
-                initial="hidden"
-                animate="visible"
               >
                 {addonsPricing[selectedPlan!].map((addon, index) => (
                   <motion.div
                     key={index}
-                    variants={itemVariants}
                     onClick={() => setSelectedAddon(index)}
                     className={`relative group p-6 rounded-2xl border-2 cursor-pointer transition-all duration-300
                     ${selectedAddon === index
@@ -758,16 +705,10 @@ const Pricing = () => {
           <motion.section
             id="upgrade-section"
             className="pt-2 pb-2 sm:pt-6 sm:pb-8 bg-gray-50"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
           >
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <motion.div
                 className="mb-10 flex flex-col items-center justify-center text-center"
-                variants={slideUpVariants}
-                initial="hidden"
-                animate="visible"
               >
                 <div className="flex justify-between w-full max-w-4xl items-center mb-4">
                   <div className="flex-1"></div>
@@ -785,16 +726,12 @@ const Pricing = () => {
 
               <motion.div
                 className="flex flex-wrap justify-center items-stretch gap-6 "
-                variants={containerVariants}
-                initial="hidden"
-                animate="visible"
               >
                 {upgradePaths
                   .filter((path) => path.from === selectedPlan)
                   .map((path, index) => (
                     <motion.div
                       key={index}
-                      variants={itemVariants}
                       className="w-full sm:w-[360px] md:w-[400px] lg:w-[420px] h-[320px] flex flex-col justify-between p-6 rounded-2xl border-2 border-gray-200 bg-white hover:border-orange-300 transition-all duration-300 shadow-md hover:shadow-lg"
                     >
                       <div className="flex items-center justify-between mb-4">
