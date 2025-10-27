@@ -461,7 +461,7 @@ const Pricing = () => {
   const calculateUpgradePrice = (fromPrice: number, toPrice: number) => {
     const difference = toPrice - fromPrice
     const tenPercentOfExisting = fromPrice * 0.1
-    return (difference + tenPercentOfExisting).toFixed(2)
+    return (difference + tenPercentOfExisting + 0.1).toFixed(2)
   }
 
   const handleExploreMore = (planName: string) => {
