@@ -67,7 +67,7 @@ function App() {
       
       // Check timezone
       if (timezone.includes('Asia/Kolkata') || timezone.includes('Asia/Calcutta')) {
-        isIndia = true;
+        isIndia = false;
         console.log("🇮🇳 India detected via timezone");
       }
       
