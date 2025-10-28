@@ -44,6 +44,7 @@ function SignupForm({ setSignupFormVisibility, setCalendlyModalVisibility, setCa
   const closeModal = () => {
     console.log('Modal closed');
     
+    
     // Track modal close
     trackModalClose("signup_form", "button", {
       form_name: "signup_form",
@@ -53,6 +54,11 @@ function SignupForm({ setSignupFormVisibility, setCalendlyModalVisibility, setCa
 //     if (window.history.length > 1) {
 //   window.history.back();
 // } else {
+  if(formData){
+    const STORAGE_KEY = 'flashfire_signup_form_data';
+
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(formData));
+  }
   setSignupFormVisibility(false);
   navigate('/');
 // }
