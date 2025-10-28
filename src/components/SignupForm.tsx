@@ -121,8 +121,7 @@ function SignupForm({ setSignupFormVisibility, setCalendlyModalVisibility, setCa
         // Track signup event
         trackSignupEvent(formData.email, 'Signup Form');
         
-        // Clear form data after successful submission
-        clearFormData();
+        saveFormData(formData);
         
         setSignupFormVisibility(false);
       }
@@ -146,6 +145,18 @@ function SignupForm({ setSignupFormVisibility, setCalendlyModalVisibility, setCa
     });
     
     setCalendlyUser(formData);
+
+    if (
+      formData.fullName &&
+      formData.phone &&
+      formData.email &&
+      formData.phone.length === 10
+    ) {
+      try {
+        localStorage.setItem('flashfire_login', 'true');
+      } catch {}
+    }
+
     navigateWithUTM('/book-free-demo', navigate);
 
     // setCalendlyModalVisibility(true);
