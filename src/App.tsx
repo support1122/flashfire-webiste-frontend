@@ -9,12 +9,13 @@ import Footer from './components/Footer.tsx';
 import SalesPopup from './components/SalesPopUp.tsx';
 import GeoBlockModal from './components/GeoBlockModal.tsx';
 import { trackPageView, trackUserJourney } from './utils/PostHogTracking.ts';
+import { hasFormData, loadFormData } from './utils/LocalStorageUtils.ts';
 // import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 
 function App() {
   const [signupFormVisibility, setSignupFormVisibility] = useState(false);
   const [calendlyModalVisibility, setCalendlyModalVisibility] = useState(false);
-  const [calendlyUser, setCalendlyUser] = useState(null);
+  const [calendlyUser, setCalendlyUser] = useState<any | null>(null);
   const [showGeoBlockModal, setShowGeoBlockModal] = useState(false);
   const [isFromIndia, setIsFromIndia] = useState(false);
   const [countryInfo, setCountryInfo] = useState<{code: string, name: string} | null>(null);
@@ -331,7 +332,21 @@ function App() {
     });
     
     if (location.pathname === '/signup' || location.pathname === '/get-a-demo') {
-      
+      // If user has already provided details before, skip form and open Calendly directly
+      const hasSaved = hasFormData();
+
+      if (!geoLoading && !isFromIndia && hasSaved) {
+        const saved = loadFormData();
+        setCalendlyUser(saved);
+        if (handleBookingAttempt()) {
+          setCalendlyModalVisibility(true);
+          trackUserJourney('demo_modal_opened', 'demo_flow', {
+            modal_trigger: 'returning_user_autoload'
+          });
+        }
+        return;
+      }
+
       if (geoLoading) {
         setSignupFormVisibility(true);
         trackUserJourney('signup_modal_opened', 'signup_flow', {
@@ -353,6 +368,9 @@ function App() {
     } else if(location.pathname === '/book-free-demo'){
       // Check geolocation before opening booking modal
       if (handleBookingAttempt()) {
+        if (!calendlyUser && hasFormData()) {
+          setCalendlyUser(loadFormData());
+        }
         setCalendlyModalVisibility(true);
         trackUserJourney('demo_modal_opened', 'demo_flow', {
           modal_trigger: 'direct_navigation'
