@@ -330,7 +330,7 @@ function App() {
       page_url: location.pathname
     });
     
-    if (location.pathname === '/signup' || location.pathname === '/get-a-demo') {
+    if (location.pathname === '/signup' || location.pathname === '/get-a-demo' || location.pathname === '/get-started-now') {
       
       if (geoLoading) {
         setSignupFormVisibility(true);
