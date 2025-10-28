@@ -415,7 +415,7 @@ const Navigation: React.FC<NavigationProps> = ({
                 }}
                 className="bg-gradient-to-r from-orange-500 to-orange-600 text-white px-4 lg:px-6 py-2 lg:py-2.5 rounded-full font-semibold hover:from-orange-600 hover:to-orange-700 transition-all duration-200 shadow-lg hover:shadow-xl hover:scale-105 text-sm lg:text-base"
               >
-                Get Started Now
+                Get Started Now →
               </button>
             </div>
 
@@ -497,7 +497,7 @@ const Navigation: React.FC<NavigationProps> = ({
                   }}
                   className="bg-gradient-to-r from-orange-500 to-orange-600 text-white px-3 py-3 rounded-lg font-semibold hover:from-orange-600 hover:to-orange-700 transition-all duration-200 block text-center mt-4 w-full text-base"
                 >
-                  Get Started Now
+                  Get Started Now →
                 </button>
               </div>
             </div>
