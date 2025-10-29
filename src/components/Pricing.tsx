@@ -567,35 +567,34 @@ const Pricing = () => {
           <div className="space-y-6 text-gray-700 text-[1.1rem]">
             <p>
               I know how exhausting the job search can be. You keep sending out application after application,
-              waiting for replies, and slowly starting to wonder if it’s you. Especially in the U.S., where
-              hundreds apply for the same role, even the most talented people begin to lose hope.
+              waiting for replies, and slowly start to wonder if it’s you. Especially in the U.S., where hundreds
+              apply for the same role, even the most talented people begin to lose hope.
             </p>
 
             <p>
-              Flashfire was born from that same feeling. I watched my sister—smart, capable, and hardworking—
+              Flashfire was born from that same feeling. I watched my sister, smart, capable, and hardworking,
               apply to hundreds of roles and still get no response. It wasn’t her fault. The system had stopped
               seeing people for who they are.
             </p>
 
             <p className="border-l-4 border-orange-400 pl-4 italic">
-              The problem was never the people — it was the process.
+              The problem was never the people. It was the process.
             </p>
 
             <p>
-              That’s when <span className="font-semibold text-orange-600">Pranjal</span> joined me. He had been
-              through the same struggle — preparing hard, clearing rounds, yet falling short of the offer.
-              Not because he wasn’t good enough, but because the process wasn’t fair.
-              Instead of giving up, he decided to help build a better way forward.
+              That’s when <span className="font-semibold text-orange-600">Pranjal</span> joined me. He had been through
+              the same struggle, preparing hard, clearing rounds, yet still falling short of the offer. Not because he
+              wasn’t good enough, but because the process wasn’t fair. Instead of giving up, he decided to help build a
+              better way forward.
             </p>
 
             <p>
-              Together, we started building Flashfire — not just with code, but with belief, empathy, and
-              persistence.
+              Together, we started building Flashfire with belief, empathy, and persistence.
             </p>
 
             <p>
-              What began as a way to help one person is now helping hundreds. Flashfire helps people apply
-              smarter, tell their stories better, and finally hear that long-awaited “yes.”
+              What began as a way to help one person is now helping hundreds. Flashfire helps people apply smarter,
+              tell their stories better, and finally hear that long-awaited “yes.”
             </p>
           </div>
 
