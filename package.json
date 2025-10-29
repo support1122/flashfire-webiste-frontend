@@ -12,6 +12,7 @@
   "dependencies": {
     "cors": "^2.8.5",
     "dotenv": "^17.2.0",
+    "framer-motion": "^12.23.24",
     "jwt-decode": "^4.0.0",
     "lucide-react": "^0.344.0",
     "posthog-js": "^1.268.7",
