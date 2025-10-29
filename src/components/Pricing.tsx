@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { Check, Zap, Crown, Rocket, ChevronDown, Heart } from "lucide-react"
+import { Check, Zap, Crown, Rocket, ChevronDown, Linkedin } from "lucide-react"
 
 
 interface Plan {
@@ -640,19 +640,21 @@ const Pricing = () => {
                   </div>
                 </div>
 
-                {/* Member Name + Role */}
-                <h3 className="text-xl font-bold text-gray-900">{member.name}</h3>
-                <p className="text-black font-semibold mt-1">{member.role}</p>
-
-                {/* LinkedIn Text Link */}
-                <a
-                  href={member.linkedin}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block text-[#0A66C2] font-medium mt-3 underline hover:text-[#004182] transition"
-                >
-                  LinkedIn Profile
-                </a>
+                {/* Member Name + LinkedIn (row), Role below */}
+                <div className="mt-2 flex items-center justify-center gap-2">
+                  <h3 className="text-xl font-bold text-gray-900 text-center">{member.name}</h3>
+                  <a
+                    href={member.linkedin}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`${member.name} LinkedIn Profile`}
+                    title="LinkedIn"
+                    className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-[#E6F0FA] text-[#0A66C2] hover:bg-[#D9EAF7] focus:outline-none focus:ring-2 focus:ring-[#BFD7F2] transition"
+                  >
+                    <Linkedin className="w-3.5 h-3.5" />
+                  </a>
+                </div>
+                <p className="mt-1 text-sm text-gray-600 text-center">{member.role}</p>
               </div>
             ))}
           </div>
