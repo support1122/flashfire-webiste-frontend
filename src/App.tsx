@@ -368,26 +368,25 @@ function App() {
     // const location = useLocation();
   
   useEffect(() => {
-    // Track page views
     const pageName = location.pathname === '/' ? 'home' : location.pathname.slice(1);
     trackPageView(pageName, location.pathname, {
       page_url: location.pathname,
       page_title: document.title
     });
-    
-    // Track user journey
     trackUserJourney('page_view', pageName, {
       page_name: pageName,
       page_url: location.pathname
     });
-    
-    if (location.pathname === '/signup' || location.pathname === '/get-a-demo') {
-      // Respect geolocation before opening signup
+
+    const path = location.pathname;
+    const isSignup = path === '/signup' || path === '/en-ca/signup';
+    const isGetDemo = path === '/get-a-demo' || path === '/en-ca/get-a-demo';
+    const isBookDemo = path === '/book-free-demo' || path === '/en-ca/book-free-demo';
+
+    if (isSignup || isGetDemo) {
       if (geoLoading) {
         setSignupFormVisibility(true);
-        trackUserJourney('signup_modal_opened', 'signup_flow', {
-          modal_trigger: 'direct_navigation'
-        });
+        trackUserJourney('signup_modal_opened', 'signup_flow', { modal_trigger: 'direct_navigation' });
       } else if (isFromIndia) {
         setPendingAction('signup');
         setShowGeoBlockModal(true);
@@ -397,17 +396,12 @@ function App() {
         });
       } else {
         setSignupFormVisibility(true);
-        trackUserJourney('signup_modal_opened', 'signup_flow', {
-          modal_trigger: 'direct_navigation'
-        });
+        trackUserJourney('signup_modal_opened', 'signup_flow', { modal_trigger: 'direct_navigation' });
       }
-    } else if(location.pathname === '/book-free-demo'){
-      // Check geolocation before opening booking modal
+    } else if (isBookDemo) {
       if (handleBookingAttempt()) {
         setCalendlyModalVisibility(true);
-        trackUserJourney('demo_modal_opened', 'demo_flow', {
-          modal_trigger: 'direct_navigation'
-        });
+        trackUserJourney('demo_modal_opened', 'demo_flow', { modal_trigger: 'direct_navigation' });
       }
     } else {
       setSignupFormVisibility(false);
