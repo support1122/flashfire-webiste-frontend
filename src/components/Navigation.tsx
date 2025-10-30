@@ -28,6 +28,10 @@ const Navigation: React.FC<NavigationProps> = ({
   const location = useLocation();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  // Determine locale prefix based on current path
+  const isCanadaContext = location.pathname.startsWith('/en-ca');
+  const prefix = isCanadaContext ? '/en-ca' : '';
+  const isBookPage = location.pathname === '/book-free-demo' || location.pathname === '/en-ca/book-free-demo';
   // const [employerFormVisible, setEmployerFormVisible] = useState(false);
 
 
@@ -253,17 +257,17 @@ const Navigation: React.FC<NavigationProps> = ({
     if (el) {
       // Scroll if element exists
       el.scrollIntoView({ behavior: "smooth", block: "start" });
-      window.history.pushState({}, "", "/" + id);
+      window.history.pushState({}, "", `${prefix}/` + id);
     } else {
       // Navigate to home first
-      navigate("/");
+      navigate(`${prefix || '/'}`);
 
       // Wait for Home to mount, then scroll
       setTimeout(() => {
         const newEl = document.getElementById(id);
         if (newEl) {
           newEl.scrollIntoView({ behavior: "smooth", block: "start" });
-          window.history.pushState({}, "", "/" + id);
+          window.history.pushState({}, "", `${prefix}/` + id);
         }
       }, 100); // Delay allows DOM to render
     }
@@ -346,7 +350,7 @@ const Navigation: React.FC<NavigationProps> = ({
             {/* Logo */}
             <div className="flex items-center">
               <Link
-                to="/"
+                to={prefix || '/'}
                 className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-red-500 to-red-600 bg-clip-text text-transparent cursor-pointer hover:opacity-80 transition-opacity duration-200"
                 onClick={(e) => {
                   // If not on home, go home; if on home, scroll to top
@@ -379,7 +383,7 @@ const Navigation: React.FC<NavigationProps> = ({
                   return (
                     <Link
                       key={item.name}
-                      to={item.to}
+                      to={`${prefix}${item.to}`}
                       className="font-medium text-gray-700 transition-colors duration-200 hover:text-orange-600 text-sm lg:text-base focus:outline-none focus:ring-0 focus:text-orange-500"
                     >
                       {item.name}
@@ -410,7 +414,7 @@ const Navigation: React.FC<NavigationProps> = ({
                     button_location: "header_desktop",
                     navigation_type: "desktop"
                   });
-                  navigateWithUTM('/get-a-demo', navigate);
+                  navigateWithUTM(`${prefix}/get-a-demo`, navigate);
                 }}
                 className="bg-gradient-to-r from-orange-500 to-orange-600 text-white px-4 lg:px-6 py-2 lg:py-2.5 rounded-full font-semibold hover:from-orange-600 hover:to-orange-700 transition-all duration-200 shadow-lg hover:shadow-xl hover:scale-105 text-sm lg:text-base"
               >
@@ -491,7 +495,7 @@ const Navigation: React.FC<NavigationProps> = ({
                       button_location: "mobile_menu",
                       navigation_type: "mobile"
                     });
-                    navigateWithUTM('/get-a-demo', navigate);
+                    navigateWithUTM(`${prefix}/get-a-demo`, navigate);
                     setIsMenuOpen(false);
                   }}
                   className="bg-gradient-to-r from-orange-500 to-orange-600 text-white px-3 py-3 rounded-lg font-semibold hover:from-orange-600 hover:to-orange-700 transition-all duration-200 block text-center mt-4 w-full text-base"
@@ -587,7 +591,7 @@ const Navigation: React.FC<NavigationProps> = ({
                   10 Slots Left This September
                 </span> */}
               </div>
-              {location.pathname === '/book-free-demo' ? (
+              {isBookPage ? (
                 <button
                   onClick={() => {
                     trackButtonClick("Book Now", "navigation_banner_desktop", "cta", {
@@ -601,7 +605,7 @@ const Navigation: React.FC<NavigationProps> = ({
                   Book Now
                 </button>
               ) : (
-                <Link to={createLinkWithUTM('/book-free-demo')}>
+                <Link to={createLinkWithUTM(`${prefix}/book-free-demo`)}>
                   <button
                     onClick={() => {
                       trackButtonClick("Book Now", "navigation_banner_desktop", "cta", {
