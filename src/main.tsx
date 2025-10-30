@@ -15,6 +15,7 @@ import EmployerPage from './components/EmployerPage.tsx';
 import ProtectedCampaignManager from './components/ProtectedCampaignManager.tsx';
 // Canadian components
 import HomeCA from './components/Canada/Home.tsx';
+import { bootstrapCountryRedirectBeforeRender } from './utils/CountryRedirect.ts';
 
 const routes=createBrowserRouter([
   {
@@ -105,13 +106,15 @@ const options = {
 }
 
 
-createRoot(document.getElementById('root')!).render(
-  <StrictMode>
-  <PostHogProvider apiKey={import.meta.env.VITE_PUBLIC_POSTHOG_KEY} options={options}>
-    {/* <Router /> */}
-    {/* <ScrollToHash> */}
-    <RouterProvider router={routes} />
-    {/* </ScrollToHash> */}
-    </PostHogProvider>
-  </StrictMode>
-);
+async function startApp() {
+  await bootstrapCountryRedirectBeforeRender();
+  createRoot(document.getElementById('root')!).render(
+    <StrictMode>
+      <PostHogProvider apiKey={import.meta.env.VITE_PUBLIC_POSTHOG_KEY} options={options}>
+        <RouterProvider router={routes} />
+      </PostHogProvider>
+    </StrictMode>
+  );
+}
+
+startApp();
