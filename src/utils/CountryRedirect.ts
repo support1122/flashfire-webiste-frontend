@@ -2,18 +2,10 @@ const STORAGE_KEY = 'ff_country_code_v1';
 const CANADA_CODE = 'CA';
 
 function backendBaseUrl(): string | null {
-  // Prefer explicit env var
-  const envUrl = import.meta?.env?.VITE_API_BASE_URL as string | undefined;
-  console.log('[CountryRedirect] VITE_API_BASE_URL =', envUrl);
-  if (envUrl) {
-    const cleaned = envUrl.replace(/\/$/, '');
-    console.log('[CountryRedirect] using env base:', cleaned);
-    return cleaned;
-  }
-  // Default to local backend port 5000 if env not provided
-  const defaultBase = 'http://localhost:5000';
-  console.log('[CountryRedirect] using default base (5000):', defaultBase);
-  return defaultBase;
+  // Hardcoded backend base as requested
+  const base = 'https://flashfire-website-backend.onrender.com';
+  console.log('[CountryRedirect] using hardcoded backend base:', base);
+  return base;
 }
 
 function shouldForceHomeRedirect(pathname: string, countryCode: string): boolean {
