@@ -9,15 +9,15 @@ const HowItWorks = ({setSignupFormVisibility}) => {
   const navigate = useNavigate();
   const steps = [
     {
-      icon: <Linkedin className="w-8 h-8 text-orange-600" />,
-      title: "LinkedIn Optimization",
-      description: "We rewrite your LinkedIn to stand out in U.S. recruiter searches, using AI-powered keyword matching.",
-      step: "Step 1"
-    },
-    {
       icon: <FileText className="w-8 h-8 text-green-600" />,
       title: "Resume Tailoring",
       description: "Your resume is customized for each role with role-specific keywords and formatting recruiters love.",
+      step: "Step 1"
+    },
+    {
+      icon: <Linkedin className="w-8 h-8 text-orange-600" />,
+      title: "LinkedIn Optimization",
+      description: "We rewrite your LinkedIn to stand out in U.S. recruiter searches, using AI-powered keyword matching.",
       step: "Step 2"
     },
     {
