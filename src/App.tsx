@@ -440,6 +440,7 @@ function App() {
         setSignupFormVisibility, 
         setCalendlyModalVisibility,
         handleBookingAttempt,
+        handleSignupAttempt,
         isFromCanada
       }} />
       {signupFormVisibility && <SignupForm setCalendlyUser= {setCalendlyUser} setSignupFormVisibility={setSignupFormVisibility} setCalendlyModalVisibility={setCalendlyModalVisibility} />}

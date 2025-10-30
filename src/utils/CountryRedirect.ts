@@ -1,9 +1,10 @@
+import { backendUrl } from "./export";
+
 const STORAGE_KEY = 'ff_country_code_v1';
 const CANADA_CODE = 'CA';
 
 function backendBaseUrl(): string | null {
-  // Hardcoded backend base as requested
-  const base = 'https://flashfire-website-backend.onrender.com';
+  const base = backendUrl;
   console.log('[CountryRedirect] using hardcoded backend base:', base);
   return base;
 }
