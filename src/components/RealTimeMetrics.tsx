@@ -106,19 +106,19 @@ const RealTimeMetrics = () => {
             <button
              onClick={() => {GTagUTM({
                                   eventName: 'sign_up_click',
-                                  label: 'RealTimeMetrics_Signup_Button',
+                                  label: 'RealTimeMetrics_GetMeInterview_Button',
                                   utmParams: {
                                     utm_source: 'WEBSITE',
                                     utm_medium: 'REALTIME_METRICS_SECTION',
                                     utm_campaign: 'WEBSIE',
                                   },
                                 });
-                                navigateWithUTM('/signup', navigate);
+                                navigateWithUTM('/get-me-interview', navigate);
                                 // setSignupFormVisibility(true); // just opens modal/form
                               }}
               className="bg-gradient-to-r from-orange-500 to-orange-600 text-white px-6 sm:px-8 py-3 rounded-full font-bold hover:from-orange-600 hover:to-orange-700 transition-all duration-200 shadow-lg hover:scale-105 text-sm sm:text-base"
             >
-              Start Your Free Trial
+              Get me interview
             </button>
           </div>
         </div>
