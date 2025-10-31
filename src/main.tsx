@@ -41,6 +41,7 @@ const routes=createBrowserRouter([
       { path: 'termsofservice', element: <TermsOfService /> },
       { path: 'blogs', element: <BlogPage /> },
       { path: '/signup', element : <Home /> },
+      { path: '/get-me-interview', element : <Home /> },
       { path: '/get-a-demo', element : <Home /> },
       { path: '/get-started-now', element : <Home /> },
       { path: '/testimonials', element : <Home /> },
