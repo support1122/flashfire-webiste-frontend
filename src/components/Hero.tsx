@@ -11,7 +11,7 @@ import {
 } from "../utils/PostHogTracking.ts"
 import { navigateWithUTM } from "../utils/UTMUtils"
 
-const Hero = ({ setSignupFormVisibility }) => {
+const Hero = ({ setSignupFormVisibility }: { setSignupFormVisibility: React.Dispatch<React.SetStateAction<boolean>> }) => {
   const [isSuccessMatrixVisible, setIsSuccessMatrixVisible] = useState(false)
   const [isLoaded, setIsLoaded] = useState(false)
   const successMatrixRef = useRef<HTMLDivElement>(null)
@@ -277,7 +277,23 @@ const Hero = ({ setSignupFormVisibility }) => {
                     signup_source: "hero_main_button",
                     funnel_stage: "signup_intent"
                   });
-                  
+
+                  try {
+                    const hasSubmitted = localStorage.getItem('submitted') === 'true';
+                    const savedRaw = localStorage.getItem('flashfire_signup_form_data');
+                    let hasDetails = false;
+                    if (savedRaw) {
+                      try {
+                        const saved = JSON.parse(savedRaw);
+                        hasDetails = Boolean(saved?.fullName && saved?.email);
+                      } catch {}
+                    }
+                    if (hasSubmitted || hasDetails) {
+                      navigateWithUTM('/book-free-demo', navigate);
+                      return;
+                    }
+                  } catch {}
+
                   navigateWithUTM('/signup', navigate);
                 }}
                 className="group bg-gradient-to-r from-orange-500 to-orange-600 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold text-base sm:text-lg hover:from-orange-600 hover:to-orange-700 transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105 flex items-center space-x-2 w-full sm:w-auto justify-center pulse-glow transform"
