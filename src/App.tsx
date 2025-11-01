@@ -17,6 +17,7 @@ function App() {
   const [calendlyUser, setCalendlyUser] = useState(null);
   const [showGeoBlockModal, setShowGeoBlockModal] = useState(false);
   const [isFromIndia, setIsFromIndia] = useState(false);
+  const [isFromCanada, setIsFromCanada] = useState(false);
   const [countryInfo, setCountryInfo] = useState<{code: string, name: string} | null>(null);
   const [geoLoading, setGeoLoading] = useState(true);
   const [pendingAction, setPendingAction] = useState<null | 'signup' | 'calendly'>(null);
@@ -62,16 +63,34 @@ function App() {
       const language = navigator.language || navigator.languages?.[0];
       console.log("🗣️ Language detected:", language);
       
-      // Simple heuristics for India detection
+      // Simple heuristics for country detection
       let isIndia = false;
+      let isCanada = false;
       
-      // Check timezone
+      // Check timezone for India
       if (timezone.includes('Asia/Kolkata') || timezone.includes('Asia/Calcutta')) {
         isIndia = true;
         console.log("🇮🇳 India detected via timezone");
       }
       
-      // Check language
+      // Check timezone for Canada
+      if (timezone.includes('America/Toronto') || timezone.includes('America/Vancouver') || 
+          timezone.includes('America/Montreal') || timezone.includes('America/Edmonton') ||
+          timezone.includes('America/Winnipeg') || timezone.includes('America/Halifax') ||
+          timezone.includes('America/St_Johns') || timezone.includes('America/Regina') ||
+          timezone.includes('America/Yellowknife') || timezone.includes('America/Goose_Bay') ||
+          timezone.includes('America/Glace_Bay') || timezone.includes('America/Moncton') ||
+          timezone.includes('America/Nipigon') || timezone.includes('America/Thunder_Bay') ||
+          timezone.includes('America/Atikokan') || timezone.includes('America/Rainy_River') ||
+          timezone.includes('America/Cambridge_Bay') || timezone.includes('America/Creston') ||
+          timezone.includes('America/Dawson') || timezone.includes('America/Dawson_Creek') ||
+          timezone.includes('America/Fort_Nelson') || timezone.includes('America/Inuvik') ||
+          timezone.includes('America/Whitehorse')) {
+        isCanada = true;
+        console.log("🇨🇦 Canada detected via timezone");
+      }
+      
+      // Check language for India
       if (language.startsWith('hi') || language.startsWith('bn') || language.startsWith('te') || 
           language.startsWith('ta') || language.startsWith('gu') || language.startsWith('kn') || 
           language.startsWith('ml') || language.startsWith('pa') || language.startsWith('or')) {
@@ -79,24 +98,45 @@ function App() {
         console.log("🇮🇳 India detected via language");
       }
       
+      // Check language for Canada (French Canadian)
+      if (language.startsWith('fr-CA') || language.startsWith('fr-CA')) {
+        isCanada = true;
+        console.log("🇨🇦 Canada detected via language");
+      }
+      
       // Set fallback country info
+      let countryCode = 'US';
+      let countryName = 'United States';
+      
+      if (isIndia) {
+        countryCode = 'IN';
+        countryName = 'India';
+      } else if (isCanada) {
+        countryCode = 'CA';
+        countryName = 'Canada';
+      }
+      
       setCountryInfo({
-        code: isIndia ? 'IN' : 'US', // Default to US if not India
-        name: isIndia ? 'India' : 'United States'
+        code: countryCode,
+        name: countryName
       });
       
       setIsFromIndia(isIndia);
+      setIsFromCanada(isCanada);
       
       if (isIndia) {
         console.log("🇮🇳 Fallback: User likely from India");
+      } else if (isCanada) {
+        console.log("🇨🇦 Fallback: User likely from Canada");
       } else {
         console.log("🌎 Fallback: User likely from US (default)");
       }
       
     } catch (error) {
       console.log("❌ Fallback detection failed:", error);
-      // Ultimate fallback: assume not from India
+      // Ultimate fallback: assume not from India or Canada
       setIsFromIndia(false);
+      setIsFromCanada(false);
       setCountryInfo({ code: 'US', name: 'United States' });
     }
   };
@@ -106,16 +146,24 @@ function App() {
     detectUserCountry();
   }, []);
 
-  // Add a simple way to test India detection (for development)
+  // Add a simple way to test country detection (for development)
   useEffect(() => {
-    // Check for URL parameter to simulate India (for testing)
+    // Check for URL parameter to simulate country (for testing)
     const urlParams = new URLSearchParams(window.location.search);
     const testIndia = urlParams.get('test_india');
+    const testCanada = urlParams.get('test_canada');
     
     if (testIndia === 'true') {
       console.log("🧪 Testing: Simulating India location via URL parameter");
       setIsFromIndia(true);
+      setIsFromCanada(false);
       setCountryInfo({ code: 'IN', name: 'India' });
+      setGeoLoading(false);
+    } else if (testCanada === 'true') {
+      console.log("🧪 Testing: Simulating Canada location via URL parameter");
+      setIsFromIndia(false);
+      setIsFromCanada(true);
+      setCountryInfo({ code: 'CA', name: 'Canada' });
       setGeoLoading(false);
     }
   }, []);
@@ -141,13 +189,33 @@ function App() {
       });
       return false; // Block the booking
     }
-    return true; // Allow booking
+    return true; 
+  };
+
+
+  const handleSignupAttempt = () => {
+    if (geoLoading) {
+      console.log("⏳ Geolocation still loading, allowing signup");
+      return true;
+    }
+    
+    if (isFromIndia) {
+      console.log("🚫 Geo-blocking Indian user from signup");
+      setPendingAction('signup');
+      setShowGeoBlockModal(true);
+      trackUserJourney('geo_block_modal_opened', 'geo_blocking', {
+        country: countryInfo?.code || 'unknown',
+        blocked_reason: 'india_not_supported'
+      });
+      return false;
+    }
+    return true; 
   };
 
   // Handle "provide anyway" action
   const handleProvideAnyway = () => {
     setShowGeoBlockModal(false);
-    
+    // Proceed based on pending action
     if (pendingAction === 'calendly') {
       setCalendlyModalVisibility(true);
     } else if (pendingAction === 'signup') {
@@ -317,26 +385,25 @@ function App() {
     // const location = useLocation();
   
   useEffect(() => {
-    // Track page views
     const pageName = location.pathname === '/' ? 'home' : location.pathname.slice(1);
     trackPageView(pageName, location.pathname, {
       page_url: location.pathname,
       page_title: document.title
     });
-    
-    // Track user journey
     trackUserJourney('page_view', pageName, {
       page_name: pageName,
       page_url: location.pathname
     });
-    
-    if (location.pathname === '/signup' || location.pathname === '/get-me-interview' || location.pathname === '/get-a-demo' || location.pathname === '/get-started-now') {
-      
+
+    const path = location.pathname;
+    const isSignup = path === '/signup' || path === '/en-ca/signup';
+    const isGetDemo = path === '/get-a-demo' || path === '/en-ca/get-a-demo';
+    const isBookDemo = path === '/book-free-demo' || path === '/en-ca/book-free-demo';
+
+    if (isSignup || isGetDemo) {
       if (geoLoading) {
         setSignupFormVisibility(true);
-        trackUserJourney('signup_modal_opened', 'signup_flow', {
-          modal_trigger: 'direct_navigation'
-        });
+        trackUserJourney('signup_modal_opened', 'signup_flow', { modal_trigger: 'direct_navigation' });
       } else if (isFromIndia) {
         setPendingAction('signup');
         setShowGeoBlockModal(true);
@@ -346,37 +413,35 @@ function App() {
         });
       } else {
         setSignupFormVisibility(true);
-        trackUserJourney('signup_modal_opened', 'signup_flow', {
-          modal_trigger: 'direct_navigation'
-        });
+        trackUserJourney('signup_modal_opened', 'signup_flow', { modal_trigger: 'direct_navigation' });
       }
-    } else if(location.pathname === '/book-free-demo'){
-      // Check geolocation before opening booking modal
+    } else if (isBookDemo) {
       if (handleBookingAttempt()) {
         setCalendlyModalVisibility(true);
-        trackUserJourney('demo_modal_opened', 'demo_flow', {
-          modal_trigger: 'direct_navigation'
-        });
+        trackUserJourney('demo_modal_opened', 'demo_flow', { modal_trigger: 'direct_navigation' });
       }
     } else {
       setSignupFormVisibility(false);
     }
-  }, [location.pathname]);
+  }, [location.pathname, geoLoading, isFromIndia]);
 
   return (
     <div className="min-h-screen bg-white">
       <CalendlyPreloader />
       <Navigation 
-        setSignupFormVisibility={setSignupFormVisibility} 
+        setSignupFormVisibility={setSignupFormVisibility}
         setCalendlyModalVisibility={setCalendlyModalVisibility}
         handleBookingAttempt={handleBookingAttempt}
+        handleSignupAttempt={handleSignupAttempt}
       />
       <Outlet context={{
         signupFormVisibility,
         calendlyModalVisibility, 
         setSignupFormVisibility, 
         setCalendlyModalVisibility,
-        handleBookingAttempt
+        handleBookingAttempt,
+        handleSignupAttempt,
+        isFromCanada
       }} />
       {signupFormVisibility && <SignupForm setCalendlyUser= {setCalendlyUser} setSignupFormVisibility={setSignupFormVisibility} setCalendlyModalVisibility={setCalendlyModalVisibility} />}
       <CalendlyModal user={calendlyUser} setCalendlyModalVisibility={setCalendlyModalVisibility} isVisible={calendlyModalVisibility} onClose={handleCalendlyModalClose}/>      
