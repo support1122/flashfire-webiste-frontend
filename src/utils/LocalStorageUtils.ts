@@ -27,7 +27,6 @@ export const loadFormData = (): FormData => {
   } catch (error) {
     console.warn('Failed to load form data from localStorage:', error);
   }
-
   // Return default values if no saved data or error occurred
   return {
     fullName: '',

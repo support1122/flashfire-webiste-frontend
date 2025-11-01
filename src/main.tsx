@@ -1,32 +1,21 @@
-import { StrictMode, useState } from 'react';
+import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
-import Router from './components/Router.tsx';
 import './index.css';
-import {RouterProvider, createBrowserRouter, BrowserRouter, Routes, Route, Link} from 'react-router-dom';
-import ReactDom from 'react-dom/client';
+import {RouterProvider, createBrowserRouter} from 'react-router-dom';
 import App from './App.tsx'
 import PaymentPolicy from './components/PaymentPolicy';
 import RefundPolicy from './components/RefundPolicy';
 import PrivacyPolicy from './components/PrivacyPolicy';
 import TermsOfService from './components/TermsOfService';
 import BlogPage from './components/BlogPage.tsx';
-// import Home from './components/Home'
 import IndividualBlog from './components/IndividualBlog.tsx';
 import { PostHogProvider } from 'posthog-js/react'
-import Hero from './components/Hero.tsx';
-import Blog from './components/Blog.tsx';
-import Contact from './components/Contact.tsx';
-import Features from './components/Features.tsx';
-import Testimonials from './components/Testimonials.tsx';
-import Pricing from './components/Pricing.tsx';
-import FAQ from './components/FAQ.tsx';
 import Home from './components/Home.tsx';
-import HowItWorks from './components/HowItWorks.tsx';
-import SignupForm from './components/SignupForm.tsx';
-import EmployerForm from './components/EmployerForm.tsx';
 import EmployerPage from './components/EmployerPage.tsx';
-import CampaignManager from './components/CampaignManager.tsx';
 import ProtectedCampaignManager from './components/ProtectedCampaignManager.tsx';
+// Canadian components
+import HomeCA from './components/Canada/Home.tsx';
+import { bootstrapCountryRedirectBeforeRender } from './utils/CountryRedirect.ts';
 
 const routes=createBrowserRouter([
   {
@@ -50,6 +39,28 @@ const routes=createBrowserRouter([
       {path : '/pricing', element : <Home />},
       {path : '/features', element : <Home />},
       {path : '/book-free-demo', element : <Home />}
+    ],
+  },
+  // Canadian routes
+  {
+    path: '/en-ca',
+    element: <App />,
+    children: [
+      {path : '/en-ca', index: true, element: <HomeCA /> },
+      {path : '/en-ca/home', element : <HomeCA />},
+      { path: '/en-ca/paymentpolicy', element: <PaymentPolicy /> },
+      { path: '/en-ca/refundpolicy', element: <RefundPolicy /> },
+      { path: '/en-ca/privacypolicy', element: <PrivacyPolicy /> },
+      { path: '/en-ca/termsofservice', element: <TermsOfService /> },
+      { path: '/en-ca/blogs', element: <BlogPage /> },
+      { path: '/en-ca/signup', element : <HomeCA /> },
+      { path: '/en-ca/get-a-demo', element : <HomeCA /> },
+      { path: '/en-ca/testimonials', element : <HomeCA /> },
+      { path : '/en-ca/employers', element : <HomeCA />},
+      { path : '/en-ca/faq', element: <HomeCA />},
+      {path : '/en-ca/pricing', element : <HomeCA />},
+      {path : '/en-ca/features', element : <HomeCA />},
+      {path : '/en-ca/book-free-demo', element : <HomeCA />}
     ],
   },
   // Standalone blog reader pages (no navigation, no footer - clean reading experience)
@@ -97,13 +108,15 @@ const options = {
 }
 
 
-createRoot(document.getElementById('root')!).render(
-  <StrictMode>
-  <PostHogProvider apiKey={import.meta.env.VITE_PUBLIC_POSTHOG_KEY} options={options}>
-    {/* <Router /> */}
-    {/* <ScrollToHash> */}
-    <RouterProvider router={routes} />
-    {/* </ScrollToHash> */}
-    </PostHogProvider>
-  </StrictMode>
-);
+async function startApp() {
+  await bootstrapCountryRedirectBeforeRender();
+  createRoot(document.getElementById('root')!).render(
+    <StrictMode>
+      <PostHogProvider apiKey={import.meta.env.VITE_PUBLIC_POSTHOG_KEY} options={options}>
+        <RouterProvider router={routes} />
+      </PostHogProvider>
+    </StrictMode>
+  );
+}
+
+startApp();
