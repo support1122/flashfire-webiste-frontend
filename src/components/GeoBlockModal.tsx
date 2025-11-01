@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { X, Globe, MapPin, Calendar } from "lucide-react";
+import { X, Globe, MapPin } from "lucide-react";
 
 interface GeoBlockModalProps {
   isVisible: boolean;

@@ -1,0 +1,142 @@
+import React, { useState } from 'react';
+import { ChevronDown, ChevronUp, HelpCircle } from 'lucide-react';
+import { useOutletContext, useNavigate } from 'react-router-dom';
+import { GTagUTM } from '../../utils/GTagUTM.js';
+// import WhatsAppSupport from './WhatsappSupport.js';
+const FAQ = ({setSignupFormVisibility, handleSignupAttempt}) => {
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const navigate = useNavigate();
+  // const { setSignupFormVisibility } = useOutletContext<{
+  //   setSignupFormVisibility: React.Dispatch<React.SetStateAction<boolean>>;
+  // }>();
+  const faqs = [
+    {
+      question: " How is Flashfire priced and are there any hidden charges?",
+      answer: " You pay once upfront for the plan you choose. There are no hidden fees. Everything in your plan (resume optimization, job applications, LinkedIn help, and interview support) is included."
+    },
+    {
+      question: "Is there a refund policy if I'm not satisfied with the service?",
+      answer: "We prioritize your satisfaction. While we are unable to provide refunds, we ensure full value for your investment by applying to 150–200 additional job applications on your behalf. This way, you continue to get maximum benefit from the service you’ve chosen."
+    },
+    {
+      question: "What if I don't receive any interview calls?",
+      answer: "If you don't receive any interview calls by the end of your plan, we'll send 100+ extra applications and provide a free resume update. This promise is exclusive to our Premium Plan users. Your career is our priority — we won't leave you hanging."
+    },
+    {
+      question: "Why should I pay for Flashfire when I can apply to jobs on my own?",
+      answer: "Flashfire automates your entire job application process — from resume tailoring to mass applications and tracking. While you focus on interviews and skill-building, we apply to 1000+ high-matching roles on your behalf. Clients save ~200 hours and double their callback rate with us."
+    },
+    {
+      question: "What is Flashfire's success rate?",
+      answer: "Our users have a 90%+ chance of receiving interview calls within the first 4 weeks of using Flashfire. With targeted applications and optimized resumes, most land interviews faster than expected. Premium users see even stronger results."
+    },
+    {
+      question: "How is Flashfire different from other job platforms?",
+      answer: "Unlike typical job boards, we don't wait for you to apply — we apply for you, daily. Our AI + human experts personalize every resume and track each submission in your dashboard. No spam, no guessing, just results."
+    },
+    {
+      question: "Can I track my job applications and progress?",
+      answer: "Yes! You will receive dashboard credentials where you can track every application and its status in real time. Additionally, you’ll be added to a dedicated WhatsApp group, where a team of 4–5 people will manage your applications and keep you updated throughout the process."
+
+    },
+    {
+      question: "Is Flashfire right for U.S. students and job seekers?",
+      answer: "Absolutely. Flashfire is designed for OPT/CPT/H1B holders and international students. We know every application matters, and our team ensures you maximize your chances in a competitive U.S. market."
+    },
+    {
+      question: "How many applications do you send per day?",
+      answer: " It depends on the number of relevant job openings. Usually, our team applies to around 30 suitable jobs per day to ensure quality and precision."
+    },
+    
+  ];
+
+  const toggleFAQ = (index: number) => {
+    setOpenIndex(openIndex === index ? null : index);
+  };
+
+  return (
+   <section id="faq" className="scroll-mt-28 py-16 sm:py-24 bg-gradient-to-b from-white to-orange-50">
+
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-12 sm:mb-16">
+          <div className="inline-flex items-center space-x-2 bg-orange-100 text-orange-800 px-4 py-2 rounded-full text-sm font-medium mb-4">
+            <HelpCircle className="w-4 h-4" />
+            <span>Frequently Asked Questions</span>
+          </div>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-4 sm:mb-6">
+            Got Questions? We've Got Answers
+          </h2>
+          <p className="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto">
+            Everything you need to know about Flashfire's AI-powered job search automation.
+          </p>
+        </div>
+
+        <div className="space-y-4">
+          {faqs.map((faq, index) => (
+            <div
+              key={index}
+              className="bg-white hover:bg-orange-50 transition-colors duration-200 rounded-xl sm:rounded-2xl border border-gray-200 hover:border-orange-300 shadow-sm hover:shadow-md"
+            >
+              <button
+                className="w-full px-6 sm:px-8 py-4 sm:py-6 text-left flex justify-between items-center focus:outline-none"
+                onClick={() => toggleFAQ(index)}
+              >
+                <span className="text-base sm:text-lg font-semibold text-gray-900 pr-4">
+                  {faq.question}
+                </span>
+                {openIndex === index ? (
+                  <ChevronUp className="w-5 h-5 sm:w-6 sm:h-6 text-orange-600 flex-shrink-0" />
+                ) : (
+                  <ChevronDown className="w-5 h-5 sm:w-6 sm:h-6 text-orange-600 flex-shrink-0" />
+                )}
+              </button>
+              
+              {openIndex === index && (
+                <div className="px-6 sm:px-8 pb-4 sm:pb-6">
+                  <p className="text-gray-700 leading-relaxed text-sm sm:text-lg">
+                    {faq.answer}
+                  </p>
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+
+        {/* CTA Section */}
+        {/* <div className="mt-12 sm:mt-16 text-center">
+          <div className="bg-gradient-to-r from-orange-600 to-red-700 rounded-2xl sm:rounded-3xl p-8 sm:p-12 text-white">
+            <h3 className="text-2xl sm:text-3xl font-bold mb-4">
+              Still Have Questions?
+            </h3>
+            <p className="text-orange-100 mb-6 sm:mb-8 text-lg sm:text-xl max-w-2xl mx-auto">
+              Our team is here to help you understand how Flashfire can transform your job search and save you 150+ hours every month.
+            </p>
+            <button
+              onClick={() => {GTagUTM({
+                                  eventName: 'sign_up_click',
+                                  label: 'FAQ_SECTION_SIGNUP_Button',
+                                  utmParams: {
+                                    utm_source: 'WEBSITE',
+                                    utm_medium: 'FAQ_SECTION_SIGNUP_Button',
+                                    utm_campaign: 'WEBSITE',
+                                  },
+                                });
+                                // Check geo-blocking before navigating
+                                if (handleSignupAttempt && handleSignupAttempt()) {
+                                  navigate('/signup');
+                                }
+                                // setSignupFormVisibility(true); // just opens modal/form
+                              }}
+              className="bg-white text-orange-600 px-6 sm:px-8 py-3 sm:py-4 rounded-full font-bold hover:bg-gray-50 transition-colors duration-200 shadow-lg hover:scale-105"
+            >
+              Schedule a Free Consultation
+            </button>
+          </div>
+        </div> */}
+       {/* <WhatsAppSupport /> */}
+      </div>
+    </section>
+  );
+};
+
+export default FAQ;
