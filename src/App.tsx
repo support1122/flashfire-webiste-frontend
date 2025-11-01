@@ -398,9 +398,11 @@ function App() {
     const path = location.pathname;
     const isSignup = path === '/signup' || path === '/en-ca/signup';
     const isGetDemo = path === '/get-a-demo' || path === '/en-ca/get-a-demo';
+    const isGetMeInterview = path === '/get-me-interview';
+    const isGetStartedNow = path === '/get-started-now';
     const isBookDemo = path === '/book-free-demo' || path === '/en-ca/book-free-demo';
 
-    if (isSignup || isGetDemo) {
+    if (isSignup || isGetDemo || isGetMeInterview || isGetStartedNow) {
       if (geoLoading) {
         setSignupFormVisibility(true);
         trackUserJourney('signup_modal_opened', 'signup_flow', { modal_trigger: 'direct_navigation' });
