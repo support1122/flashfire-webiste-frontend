@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { us_cities, first_names, actions, products } from "../utils/PopupNotifications.js";
-import { Dot, RadioTower } from "lucide-react";
 
-export default function SalesPopup({ isBookingFlow = false }: { isBookingFlow?: boolean }) {
+export default function SalesPopup(
+  { isBookingFlow = false, isAnyModalOpen = false }:
+  { isBookingFlow?: boolean; isAnyModalOpen?: boolean }
+) {
   const generateNotification = () => {
-    const [city, state, lat, lng] = us_cities[Math.floor(Math.random() * us_cities.length)];
+    const [city, , lat, lng] = us_cities[Math.floor(Math.random() * us_cities.length)];
     const name = first_names[Math.floor(Math.random() * first_names.length)];
     const action = actions[Math.floor(Math.random() * actions.length)];
     const product = products[Math.floor(Math.random() * products.length)];
@@ -20,19 +22,21 @@ export default function SalesPopup({ isBookingFlow = false }: { isBookingFlow?: 
   const [current, setCurrent] = useState(generateNotification());
   const [visitors, setVisitors] = useState(() => 300 + Math.floor(Math.random() * 300));
 
-  // Hide all notifications immediately when booking flow starts
+  const isSuppressed = useMemo(() => isBookingFlow || isAnyModalOpen, [isBookingFlow, isAnyModalOpen]);
+
+  // Hide all notifications immediately when any blocking UI is active
   useEffect(() => {
-    if (isBookingFlow) {
+    if (isSuppressed) {
       setVisibleSales(false);
       setVisibleOptimizer(false);
       setVisibleVisitors(false);
     }
-  }, [isBookingFlow]);
+  }, [isSuppressed]);
 
   useEffect(() => {
   const showSequence = () => {
-    // Don't show any notifications if user is in booking flow
-    if (isBookingFlow) {
+    // Don't show any notifications if suppressed
+    if (isSuppressed) {
       return;
     }
 
@@ -71,7 +75,7 @@ export default function SalesPopup({ isBookingFlow = false }: { isBookingFlow?: 
   // Repeat every full cycle: 25s shown + 8s delay = 33s
   const interval = setInterval(showSequence, 33000);
   return () => clearInterval(interval);
-}, [isBookingFlow]);
+}, [isSuppressed]);
 
   return (
     <>
