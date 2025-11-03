@@ -1,1 +1,1 @@
-export const backendUrl : string = 'https://api.flashfirejobs.com/';
+export const backendUrl : string = 'https://api.flashfirejobs.com';
