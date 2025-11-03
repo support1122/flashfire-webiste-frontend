@@ -15,7 +15,7 @@ const Pricing = () => {
       originalPrice: "CA$389",
       popular: false,
       description: "For senior professionals & executives",
-      paymentLink: "https://www.paypal.com/ncp/payment/F6CESAWAYUYU2",
+      paymentLink: "https://www.paypal.com/ncp/payment/XE595XT8FUR3W",
       features: [
         "AI-powered job matching",
         "250 tailored applications",
@@ -32,7 +32,7 @@ const Pricing = () => {
       originalPrice: "CA$619",
       popular: true,
       description: "Most popular for mid-level professionals",
-      paymentLink: "https://www.paypal.com/ncp/payment/SMTK5UYQYM4A8",
+      paymentLink: "https://www.paypal.com/ncp/payment/XHDEFS696TUSW",
       features: [
         "Everything in Ignite",
         "500 tailored applications",
@@ -53,7 +53,7 @@ const Pricing = () => {
       popular: false,
       badge: "Premium",
       description: "Perfect for entry-level professionals",
-      paymentLink: "https://www.paypal.com/ncp/payment/CDRFGB6M566X8",
+      paymentLink: "https://www.paypal.com/ncp/payment/BDTDTA7CRXXWQ",
       features: [
         "Everything in Professional",
         "1000+ tailored applications",
