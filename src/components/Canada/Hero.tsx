@@ -269,7 +269,7 @@ const Hero = ({ setSignupFormVisibility, handleSignupAttempt }) => {
                   } catch {}
                   
                   // PostHog tracking
-                  trackButtonClick("Start My 7-Day Free Trial", "hero_cta", "cta", {
+                  trackButtonClick("Get me interview", "hero_cta", "cta", {
                     button_location: "hero_main_cta",
                     section: "hero_landing"
                   });
@@ -278,14 +278,11 @@ const Hero = ({ setSignupFormVisibility, handleSignupAttempt }) => {
                     funnel_stage: "signup_intent"
                   });
                   
-                  // Check geo-blocking before navigating
-                  if (handleSignupAttempt && handleSignupAttempt()) {
-                    navigateWithUTM('/signup', navigate);
-                  }
+                  navigateWithUTM('/get-me-interview', navigate);
                 }}
                 className="group bg-gradient-to-r from-orange-500 to-orange-600 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold text-base sm:text-lg hover:from-orange-600 hover:to-orange-700 transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105 flex items-center space-x-2 w-full sm:w-auto justify-center pulse-glow transform"
               >
-                <span>Start My 7-Day Free Trial</span>
+                <span>Get me interview</span>
                 <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform" />
               </button>
             </div>
