@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Calendar, Clock, ArrowRight } from 'lucide-react';
 import blogPosts from '../BLogsData.ts';
+import { trackButtonClick, trackNavigation, trackPageView } from '../utils/PostHogTracking';
 
 const Blog = () => {
   const [cachedBlogPosts, setCachedBlogPosts] = useState(blogPosts);
@@ -8,6 +9,13 @@ const Blog = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
     
+    // Track page view for blogs list
+    try {
+      trackPageView('blogs_list', undefined, {
+        page_section: 'blogs_overview'
+      });
+    } catch {}
+
     // Cache blog posts in localStorage for faster loading
     const cacheKey = 'flashfire_blog_posts';
     const cached = localStorage.getItem(cacheKey);
@@ -50,6 +58,18 @@ const Blog = () => {
   }, []);
 
   const openBlogPost = (post: any) => {
+    try {
+      trackButtonClick('Read Blog', 'blogs_list_card', 'link', {
+        blog_id: post.id,
+        blog_slug: post.slug,
+        blog_title: post.title,
+        blog_category: post.category
+      });
+      trackNavigation('blogs_list', `blog_detail:${post.slug}`, 'click', {
+        blog_id: post.id,
+        blog_slug: post.slug
+      });
+    } catch {}
     // Open the blog in a new tab with the slug URL
     window.open(`/blog/${post.slug}`, '_blank');
   };
