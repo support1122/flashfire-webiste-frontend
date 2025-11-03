@@ -23,6 +23,7 @@ function App() {
   const [pendingAction, setPendingAction] = useState<null | 'signup' | 'calendly'>(null);
   const [isBookingFlow, setIsBookingFlow] = useState(false);
   const location = useLocation();
+  const isAnyModalOpen = signupFormVisibility || calendlyModalVisibility || showGeoBlockModal;
 
   // Set booking flow state when CalendlyModal becomes visible
   useEffect(() => {
@@ -452,7 +453,7 @@ function App() {
         onClose={closeGeoBlockModal}
         onProvideAnyway={handleProvideAnyway}
       />
-      <SalesPopup isBookingFlow={isBookingFlow} />
+      <SalesPopup isBookingFlow={isBookingFlow} isAnyModalOpen={isAnyModalOpen} />
       <Footer />
     </div>
   );
