@@ -2,6 +2,7 @@
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import blogPosts from '../BLogsData.ts';
+import { trackPageView, trackScrollDepth, trackTimeOnPage } from '../utils/PostHogTracking';
 
 function IndividualBlog() {
   const { id, slug } = useParams();
@@ -13,6 +14,56 @@ function IndividualBlog() {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
+  // Track page view and reading engagement
+  useEffect(() => {
+    if (!selectedBlog) return;
+    const startedAt = Date.now();
+
+    try {
+      trackPageView('blog_detail', undefined, {
+        blog_id: selectedBlog.id,
+        blog_slug: selectedBlog.slug,
+        blog_title: selectedBlog.title,
+        blog_category: selectedBlog.category
+      });
+    } catch {}
+
+    // Scroll depth tracking at 25/50/75/100%
+    const marks = new Set<number>();
+    const onScroll = () => {
+      const doc = document.documentElement;
+      const scrollTop = window.scrollY || doc.scrollTop;
+      const height = doc.scrollHeight - doc.clientHeight;
+      if (height <= 0) return;
+      const percent = Math.min(100, Math.round((scrollTop / height) * 100));
+      const thresholds = [25, 50, 75, 100];
+      for (const t of thresholds) {
+        if (percent >= t && !marks.has(t)) {
+          marks.add(t);
+          try {
+            trackScrollDepth(t, 'blog_detail', {
+              blog_slug: selectedBlog.slug,
+              blog_id: selectedBlog.id
+            });
+          } catch {}
+        }
+      }
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    // Time on page on unmount
+    return () => {
+      window.removeEventListener('scroll', onScroll as any);
+      const timeSpentSec = Math.round((Date.now() - startedAt) / 1000);
+      try {
+        trackTimeOnPage(timeSpentSec, 'blog_detail', {
+          blog_slug: selectedBlog.slug,
+          blog_id: selectedBlog.id
+        });
+      } catch {}
+    };
+  }, [selectedBlog]);
 
   if (!selectedBlog) {
     return (
