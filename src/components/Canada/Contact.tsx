@@ -1,11 +1,33 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Mail, Calendar, MessageCircle, CheckCircle } from 'lucide-react';
 import { GTagUTM } from '../../utils/GTagUTM.js';
 import WhatsAppSupport from '../WhatsappSupport.js';
+import posthog from 'posthog-js';
+import { trackSectionView, trackButtonClick } from '../../utils/PostHogTracking.ts';
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 const Contact = ({ setSignupFormVisibility }) => {
+  useEffect(() => {
+    // Track section view (regular tracking)
+    trackSectionView("contact", {
+      section: "contact_section"
+    });
+    
+    // Track Canada-specific section view
+    try {
+      if (typeof posthog !== 'undefined' && posthog.capture) {
+        posthog.capture('canada_section_view', {
+          section_name: "contact",
+          section_location: "contact_section",
+          page_url: window.location.href,
+          timestamp: new Date().toISOString()
+        });
+      }
+    } catch (error) {
+      console.error('Canada section view tracking error:', error);
+    }
+  }, []);
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -25,6 +47,27 @@ const Contact = ({ setSignupFormVisibility }) => {
     setIsSubmitting(true);
 
     try {
+      // Track form submission (regular tracking)
+      trackButtonClick("Send Message", "contact_form", "cta", {
+        button_location: "contact_form_submit",
+        form_name: "contact_form"
+      });
+      
+      // Track Canada-specific form submission
+      try {
+        if (typeof posthog !== 'undefined' && posthog.capture) {
+          posthog.capture('canada_form_submit', {
+            form_name: "contact_form",
+            button_text: "Send Message",
+            button_location: "contact_form_submit",
+            page_url: window.location.href,
+            timestamp: new Date().toISOString()
+          });
+        }
+      } catch (error) {
+        console.error('Canada form submit tracking error:', error);
+      }
+
       let requestToServer = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/contact`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },

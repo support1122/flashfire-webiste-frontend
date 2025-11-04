@@ -1,12 +1,35 @@
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Linkedin, FileText, Rocket, Phone } from 'lucide-react';
 import {GTagUTM} from '../../utils/GTagUTM.ts';
 import { useNavigate } from 'react-router-dom';
+import posthog from 'posthog-js';
+import { trackSectionView } from '../../utils/PostHogTracking.ts';
 
 
 const HowItWorks = ({setSignupFormVisibility, handleSignupAttempt}) => {
   const navigate = useNavigate();
+
+  useEffect(() => {
+    // Track section view (regular tracking)
+    trackSectionView("how_it_works", {
+      section: "how_it_works_section"
+    });
+    
+    // Track Canada-specific section view
+    try {
+      if (typeof posthog !== 'undefined' && posthog.capture) {
+        posthog.capture('canada_section_view', {
+          section_name: "how_it_works",
+          section_location: "how_it_works_section",
+          page_url: window.location.href,
+          timestamp: new Date().toISOString()
+        });
+      }
+    } catch (error) {
+      console.error('Canada section view tracking error:', error);
+    }
+  }, []);
   const steps = [
     {
       icon: <Linkedin className="w-8 h-8 text-orange-600" />,

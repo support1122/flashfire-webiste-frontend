@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import blogPosts from '../BLogsData.ts';
 import { trackPageView, trackScrollDepth, trackTimeOnPage } from '../utils/PostHogTracking';
+import posthog from 'posthog-js';
 
 function IndividualBlog() {
   const { id, slug } = useParams();
@@ -14,6 +15,36 @@ function IndividualBlog() {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
+  // Track blog view with dedicated blog_view event
+  useEffect(() => {
+    if (!selectedBlog) return;
+    
+    try {
+      // Dedicated blog_view event for tracking blog views
+      if (typeof posthog !== 'undefined' && posthog.capture) {
+        posthog.capture('blog_view', {
+          blog_id: selectedBlog.id,
+          blog_slug: selectedBlog.slug,
+          blog_title: selectedBlog.title,
+          blog_category: selectedBlog.category,
+          blog_read_time: selectedBlog.readTime,
+          blog_date: selectedBlog.date,
+          page_url: window.location.href,
+          page_title: document.title,
+          timestamp: new Date().toISOString()
+        });
+        console.log('PostHog tracked: blog_view', {
+          blog_id: selectedBlog.id,
+          blog_slug: selectedBlog.slug,
+          blog_title: selectedBlog.title,
+          blog_category: selectedBlog.category
+        });
+      }
+    } catch (error) {
+      console.error('Blog view tracking error:', error);
+    }
+  }, [selectedBlog]);
 
   // Track page view and reading engagement
   useEffect(() => {

@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react"
 import { Play, Linkedin } from "lucide-react"
+import posthog from 'posthog-js';
+import { trackSectionView } from '../../utils/PostHogTracking.ts';
 
 const customStyles = `@keyframes bounce-gentle {
   0%, 100% { transform: translateY(0); }
@@ -218,6 +220,27 @@ const VideoTestimonial = ({ testimonial, index }) => {
 }
 
 const TestimonialsGrid = () => {
+  useEffect(() => {
+    // Track section view (regular tracking)
+    trackSectionView("testimonials", {
+      section: "testimonials_section"
+    });
+    
+    // Track Canada-specific section view
+    try {
+      if (typeof posthog !== 'undefined' && posthog.capture) {
+        posthog.capture('canada_section_view', {
+          section_name: "testimonials",
+          section_location: "testimonials_section",
+          page_url: window.location.href,
+          timestamp: new Date().toISOString()
+        });
+      }
+    } catch (error) {
+      console.error('Canada section view tracking error:', error);
+    }
+  }, []);
+
   return (
    <section id="testimonials" className="scroll-mt-28 bg-gradient-to-br from-orange-400 via-orange-500 to-red-500 min-h-screen py-16 px-6 overflow-hidden rounded-[3rem]">
 
