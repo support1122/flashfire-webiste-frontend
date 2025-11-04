@@ -1,11 +1,34 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { ChevronDown, ChevronUp, HelpCircle } from 'lucide-react';
 import { useOutletContext, useNavigate } from 'react-router-dom';
 import { GTagUTM } from '../../utils/GTagUTM.js';
+import posthog from 'posthog-js';
+import { trackSectionView, trackButtonClick } from '../../utils/PostHogTracking.ts';
 // import WhatsAppSupport from './WhatsappSupport.js';
 const FAQ = ({setSignupFormVisibility, handleSignupAttempt}) => {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    // Track section view (regular tracking)
+    trackSectionView("faq", {
+      section: "faq_section"
+    });
+    
+    // Track Canada-specific section view
+    try {
+      if (typeof posthog !== 'undefined' && posthog.capture) {
+        posthog.capture('canada_section_view', {
+          section_name: "faq",
+          section_location: "faq_section",
+          page_url: window.location.href,
+          timestamp: new Date().toISOString()
+        });
+      }
+    } catch (error) {
+      console.error('Canada section view tracking error:', error);
+    }
+  }, []);
   // const { setSignupFormVisibility } = useOutletContext<{
   //   setSignupFormVisibility: React.Dispatch<React.SetStateAction<boolean>>;
   // }>();
@@ -51,7 +74,34 @@ const FAQ = ({setSignupFormVisibility, handleSignupAttempt}) => {
   ];
 
   const toggleFAQ = (index: number) => {
+    const isOpening = openIndex !== index;
     setOpenIndex(openIndex === index ? null : index);
+    
+    // Track FAQ interaction (regular tracking)
+    if (isOpening) {
+      try {
+        trackButtonClick(`FAQ ${index + 1}`, "faq_item", "link", {
+          button_location: "faq_toggle",
+          faq_index: index,
+          faq_question: faqs[index].question
+        });
+      } catch {}
+      
+      // Track Canada-specific FAQ interaction
+      try {
+        if (typeof posthog !== 'undefined' && posthog.capture) {
+          posthog.capture('canada_faq_interaction', {
+            faq_index: index,
+            faq_question: faqs[index].question,
+            action: "opened",
+            page_url: window.location.href,
+            timestamp: new Date().toISOString()
+          });
+        }
+      } catch (error) {
+        console.error('Canada FAQ tracking error:', error);
+      }
+    }
   };
 
   return (

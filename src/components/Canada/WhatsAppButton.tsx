@@ -1,5 +1,6 @@
 import { GTagUTM } from '../../utils/GTagUTM';
 import { trackButtonClick, trackExternalLink } from '../../utils/PostHogTracking.ts';
+import posthog from 'posthog-js';
 
 const WhatsAppButton = () => {
   const handleWhatsAppClick = () => {
@@ -34,6 +35,22 @@ const WhatsAppButton = () => {
           link_type: "whatsapp_support",
           contact_method: "whatsapp"
         });
+        
+        try {
+          if (typeof posthog !== 'undefined' && posthog.capture) {
+            posthog.capture('canada_button_click', {
+              button_text: "WhatsApp Support",
+              button_location: "floating_button",
+              button_type: "icon",
+              button_location_detail: "floating_whatsapp",
+              contact_method: "whatsapp",
+              page_url: window.location.href,
+              timestamp: new Date().toISOString()
+            });
+          }
+        } catch (error) {
+          console.error('Canada button click tracking error:', error);
+        }
       }}
       className="fixed z-[60] bottom-4 sm:bottom-6 right-4 sm:right-6 bg-green-500 hover:bg-green-600 text-white p-3 sm:p-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-300  group"
       aria-label="Chat on WhatsApp"

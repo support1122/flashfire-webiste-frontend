@@ -9,9 +9,15 @@ import {
   trackSectionView,
   trackPageView 
 } from "../../utils/PostHogTracking.ts"
+import posthog from 'posthog-js';
 import { navigateWithUTM } from "../../utils/UTMUtils"
 
-const Hero = ({ setSignupFormVisibility, handleSignupAttempt }) => {
+interface HeroProps {
+  setSignupFormVisibility: (visible: boolean) => void;
+  handleSignupAttempt?: () => boolean;
+}
+
+const Hero = ({ setSignupFormVisibility, handleSignupAttempt }: HeroProps) => {
   const [isSuccessMatrixVisible, setIsSuccessMatrixVisible] = useState(false)
   const [isLoaded, setIsLoaded] = useState(false)
   const successMatrixRef = useRef<HTMLDivElement>(null)
@@ -24,20 +30,46 @@ const Hero = ({ setSignupFormVisibility, handleSignupAttempt }) => {
       ([entry]) => {
         if (entry.isIntersecting) {
           setIsSuccessMatrixVisible(true)
-          // Track section view
+          // Track section view (regular tracking)
           trackSectionView("success_matrix", {
             section: "hero_success_metrics"
           })
+          try {
+            if (typeof posthog !== 'undefined' && posthog.capture) {
+              posthog.capture('canada_section_view', {
+                section_name: "success_matrix",
+                section_location: "hero_success_metrics",
+                page_url: window.location.href,
+                timestamp: new Date().toISOString()
+              });
+            }
+          } catch (error) {
+            console.error('Canada section view tracking error:', error);
+          }
         }
       },
       { threshold: 0.05, rootMargin: "100px 0px" },
     )
     if (successMatrixRef.current) observer.observe(successMatrixRef.current)
     
-    // Track page view for hero section
+    // Track page view for hero section (regular tracking)
     trackPageView("hero", "home", {
       section: "hero_landing"
     })
+    
+    try {
+      if (typeof posthog !== 'undefined' && posthog.capture) {
+        posthog.capture('canada_page_view', {
+          page_name: "hero",
+          page_section: "home",
+          section_location: "hero_landing",
+          page_url: window.location.href,
+          timestamp: new Date().toISOString()
+        });
+      }
+    } catch (error) {
+      console.error('Canada page view tracking error:', error);
+    }
     
     return () => {
       clearTimeout(timer)
@@ -268,7 +300,7 @@ const Hero = ({ setSignupFormVisibility, handleSignupAttempt }) => {
                     });
                   } catch {}
                   
-                  // PostHog tracking
+                  // PostHog tracking (regular tracking)
                   trackButtonClick("Get me interview", "hero_cta", "cta", {
                     button_location: "hero_main_cta",
                     section: "hero_landing"
@@ -277,6 +309,23 @@ const Hero = ({ setSignupFormVisibility, handleSignupAttempt }) => {
                     signup_source: "hero_main_button",
                     funnel_stage: "signup_intent"
                   });
+                  
+                  // Canada-specific button click tracking
+                  try {
+                    if (typeof posthog !== 'undefined' && posthog.capture) {
+                      posthog.capture('canada_button_click', {
+                        button_text: "Get me interview",
+                        button_location: "hero_cta",
+                        button_type: "cta",
+                        button_location_detail: "hero_main_cta",
+                        section: "hero_landing",
+                        page_url: window.location.href,
+                        timestamp: new Date().toISOString()
+                      });
+                    }
+                  } catch (error) {
+                    console.error('Canada button click tracking error:', error);
+                  }
                   
                   navigateWithUTM('/get-me-interview', navigate);
                 }}

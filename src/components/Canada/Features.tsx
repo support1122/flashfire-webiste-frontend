@@ -1,11 +1,33 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Bot, FileText, Target, Zap, Shield, BarChart3, Linkedin } from 'lucide-react';
 import { useOutletContext } from 'react-router-dom';
 import { GTagUTM } from '../../utils/GTagUTM.js';
 import WhatsAppButton from './WhatsAppButton.js';
 import WhatsAppSupport from '../WhatsappSupport.js';
+import posthog from 'posthog-js';
+import { trackSectionView } from '../../utils/PostHogTracking.ts';
 
 const Features = ({ setSignupFormVisibility }) => {
+  useEffect(() => {
+    // Track section view (regular tracking)
+    trackSectionView("features", {
+      section: "features_section"
+    });
+    
+    // Track Canada-specific section view
+    try {
+      if (typeof posthog !== 'undefined' && posthog.capture) {
+        posthog.capture('canada_section_view', {
+          section_name: "features",
+          section_location: "features_section",
+          page_url: window.location.href,
+          timestamp: new Date().toISOString()
+        });
+      }
+    } catch (error) {
+      console.error('Canada section view tracking error:', error);
+    }
+  }, []);
   // const { setSignupFormVisibility } = useOutletContext<{
   //   setSignupFormVisibility: React.Dispatch<React.SetStateAction<boolean>>;
   // }>();

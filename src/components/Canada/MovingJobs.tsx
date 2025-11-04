@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { GTagUTM } from '../../utils/GTagUTM.js';
+import posthog from 'posthog-js';
+import { trackSectionView } from '../../utils/PostHogTracking.ts';
 
 interface MovingJobsProps {
   setSignupFormVisibility: (visible: boolean) => void;
@@ -14,6 +16,26 @@ interface Job {
 }
 
 const MovingJobs: React.FC<MovingJobsProps> = ({ setSignupFormVisibility, handleSignupAttempt }) => {
+  useEffect(() => {
+    // Track section view (regular tracking)
+    trackSectionView("moving_jobs", {
+      section: "moving_jobs_section"
+    });
+    
+    // Track Canada-specific section view
+    try {
+      if (typeof posthog !== 'undefined' && posthog.capture) {
+        posthog.capture('canada_section_view', {
+          section_name: "moving_jobs",
+          section_location: "moving_jobs_section",
+          page_url: window.location.href,
+          timestamp: new Date().toISOString()
+        });
+      }
+    } catch (error) {
+      console.error('Canada section view tracking error:', error);
+    }
+  }, []);
  
     const jobs: Job[] = [
       {

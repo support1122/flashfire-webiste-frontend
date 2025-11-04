@@ -1,7 +1,54 @@
 import { Check, Zap, Crown, Rocket } from "lucide-react"
+import posthog from 'posthog-js';
+import { trackButtonClick, trackSectionView } from '../../utils/PostHogTracking.ts';
+import { useEffect } from 'react';
 
 const Pricing = () => {
-  const handlePayment = (paymentLink: string) => {
+  useEffect(() => {
+
+    trackSectionView("pricing", {
+      section: "pricing_section"
+    });
+  
+    try {
+      if (typeof posthog !== 'undefined' && posthog.capture) {
+        posthog.capture('canada_section_view', {
+          section_name: "pricing",
+          section_location: "pricing_section",
+          page_url: window.location.href,
+          timestamp: new Date().toISOString()
+        });
+      }
+    } catch (error) {
+      console.error('Canada section view tracking error:', error);
+    }
+  }, []);
+
+  const handlePayment = (paymentLink: string, planName: string, planPrice: string) => {
+    // Track button click (regular tracking)
+    trackButtonClick(`Start Now - ${planName}`, "pricing_cta", "cta", {
+      button_location: "pricing_plan",
+      plan_name: planName,
+      plan_price: planPrice
+    });
+    
+    try {
+      if (typeof posthog !== 'undefined' && posthog.capture) {
+        posthog.capture('canada_button_click', {
+          button_text: `Start Now - ${planName}`,
+          button_location: "pricing_cta",
+          button_type: "cta",
+          button_location_detail: "pricing_plan",
+          plan_name: planName,
+          plan_price: planPrice,
+          page_url: window.location.href,
+          timestamp: new Date().toISOString()
+        });
+      }
+    } catch (error) {
+      console.error('Canada button click tracking error:', error);
+    }
+    
     // Open PayPal payment link in a new tab
     window.open(paymentLink, "_blank")
   }
@@ -173,7 +220,7 @@ const Pricing = () => {
                   </ul>
 
                   <button
-                    onClick={() => handlePayment(plan.paymentLink)}
+                    onClick={() => handlePayment(plan.paymentLink, plan.name, plan.price)}
                     className={`w-full py-3 sm:py-4 px-6 rounded-xl sm:rounded-2xl font-bold text-base sm:text-lg transition-all duration-200 ${
                       plan.popular
                         ? "bg-gradient-to-r from-orange-500 to-red-500 text-white hover:from-orange-600 hover:to-red-600 shadow-lg hover:shadow-xl hover:scale-105"
