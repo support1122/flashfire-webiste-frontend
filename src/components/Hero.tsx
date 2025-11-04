@@ -1,5 +1,6 @@
 
 import { useState, useEffect, useRef } from "react"
+import type { Dispatch, SetStateAction } from "react"
 import { ArrowRight, Sparkles } from "lucide-react"
 import { GTagUTM } from "../utils/GTagUTM.js"
 import { useNavigate } from "react-router-dom"
@@ -10,8 +11,9 @@ import {
   trackPageView 
 } from "../utils/PostHogTracking.ts"
 import { navigateWithUTM } from "../utils/UTMUtils"
+import AutoplayVideo from './AutoplayVideo'
 
-const Hero = ({ setSignupFormVisibility }) => {
+const Hero = ({ setSignupFormVisibility: _setSignupFormVisibility }: { setSignupFormVisibility: Dispatch<SetStateAction<boolean>> }) => {
   const [isSuccessMatrixVisible, setIsSuccessMatrixVisible] = useState(false)
   const [isLoaded, setIsLoaded] = useState(false)
   const successMatrixRef = useRef<HTMLDivElement>(null)
@@ -295,6 +297,9 @@ const Hero = ({ setSignupFormVisibility }) => {
           </div>
         </div>
       </section>
+
+      {/* Autoplay video section (second block on page) */}
+      <AutoplayVideo url="https://pub-9122bde92eac495f8beda15ee45552dd.r2.dev/test/ii.mp4" />
 
       {/* Success Matrix Section - unchanged */}
        <section className="relative bg-gradient-to-br from-orange-50 via-white to-red-50 py-16 sm:py-20 lg:py-24 overflow-hidden">
