@@ -11,6 +11,7 @@ import {
 } from "../../utils/PostHogTracking.ts"
 import posthog from 'posthog-js';
 import { navigateWithUTM } from "../../utils/UTMUtils"
+import AutoplayVideo from '../AutoplayVideo'
 
 interface HeroProps {
   setSignupFormVisibility: (visible: boolean) => void;
@@ -344,6 +345,9 @@ const Hero = ({ setSignupFormVisibility, handleSignupAttempt }: HeroProps) => {
           </div>
         </div>
       </section>
+
+      {/* Autoplay video section (second block on page) */}
+      <AutoplayVideo url="https://pub-9122bde92eac495f8beda15ee45552dd.r2.dev/test/ii.mp4" />
 
       {/* Success Matrix Section - unchanged */}
        <section className="relative bg-gradient-to-br from-orange-50 via-white to-red-50 py-16 sm:py-20 lg:py-24 overflow-hidden">
