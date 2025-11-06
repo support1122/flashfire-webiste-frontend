@@ -18,7 +18,7 @@ interface HeroProps {
   handleSignupAttempt?: () => boolean;
 }
 
-const Hero = ({ setSignupFormVisibility, handleSignupAttempt }: HeroProps) => {
+const Hero = ({ setSignupFormVisibility: _setSignupFormVisibility, handleSignupAttempt: _handleSignupAttempt }: HeroProps) => {
   const [isSuccessMatrixVisible, setIsSuccessMatrixVisible] = useState(false)
   const [isLoaded, setIsLoaded] = useState(false)
   const successMatrixRef = useRef<HTMLDivElement>(null)
