@@ -149,7 +149,7 @@ function App() {
     detectUserCountry();
   }, []);
 
-  // Show special offer modal after ~2.5s once per session; close/backdrop prevents re-showing
+  // Show special offer modal after 4s once per session; close/backdrop prevents re-showing
   useEffect(() => {
     const hasShown = sessionStorage.getItem('special_offer_shown') === 'true';
     if (hasShown) return;
@@ -161,7 +161,7 @@ function App() {
     };
 
     // initial delay
-    const timer = setTimeout(show, 2500);
+    const timer = setTimeout(show, 4000);
 
     // if other modals open, retry until free or user navigates away
     const retry = setInterval(() => {
