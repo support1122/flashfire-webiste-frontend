@@ -8,6 +8,7 @@ import Navigation from './components/Navigation.tsx';
 import Footer from './components/Footer.tsx';
 import SalesPopup from './components/SalesPopUp.tsx';
 import GeoBlockModal from './components/GeoBlockModal.tsx';
+import SpecialOfferModal from './components/SpecialOfferModal.tsx';
 import { trackPageView, trackUserJourney } from './utils/PostHogTracking.ts';
 // import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 
@@ -24,6 +25,7 @@ function App() {
   const [isBookingFlow, setIsBookingFlow] = useState(false);
   const location = useLocation();
   const isAnyModalOpen = signupFormVisibility || calendlyModalVisibility || showGeoBlockModal;
+  const [showSpecialOffer, setShowSpecialOffer] = useState(false);
 
   // Set booking flow state when CalendlyModal becomes visible
   useEffect(() => {
@@ -146,6 +148,40 @@ function App() {
   useEffect(() => {
     detectUserCountry();
   }, []);
+
+  // Show special offer modal after ~2.5s once per session; close/backdrop prevents re-showing
+  useEffect(() => {
+    const hasShown = sessionStorage.getItem('special_offer_shown') === 'true';
+    if (hasShown) return;
+
+    const show = () => {
+      if (!isAnyModalOpen) {
+        setShowSpecialOffer(true);
+      }
+    };
+
+    // initial delay
+    const timer = setTimeout(show, 2500);
+
+    // if other modals open, retry until free or user navigates away
+    const retry = setInterval(() => {
+      const alreadyMarked = sessionStorage.getItem('special_offer_shown') === 'true';
+      if (!isAnyModalOpen && !alreadyMarked) {
+        setShowSpecialOffer(true);
+        clearInterval(retry);
+      }
+    }, 1000);
+
+    return () => {
+      clearTimeout(timer);
+      clearInterval(retry);
+    };
+  }, [isAnyModalOpen]);
+
+  const handleSpecialOfferClose = () => {
+    setShowSpecialOffer(false);
+    sessionStorage.setItem('special_offer_shown', 'true');
+  };
 
   // Add a simple way to test country detection (for development)
   useEffect(() => {
@@ -452,6 +488,10 @@ function App() {
         isVisible={showGeoBlockModal}
         onClose={closeGeoBlockModal}
         onProvideAnyway={handleProvideAnyway}
+      />
+      <SpecialOfferModal
+        isVisible={showSpecialOffer}
+        onClose={handleSpecialOfferClose}
       />
       <SalesPopup isBookingFlow={isBookingFlow} isAnyModalOpen={isAnyModalOpen} />
       <Footer />
