@@ -88,6 +88,14 @@ const TermsOfService = () => {
               </p>
             </div>
 
+            <h3 className="text-xl font-semibold text-gray-900 mb-3">Plan Duration and Expiry</h3>
+            <p className="text-gray-700 mb-4">
+              Your dashboard and services will remain active for 6 months from the activation date. After this period, you’ll need to renew your plan to continue using the services, even if some applications are still pending.
+            </p>
+            <p className="text-gray-700 mb-6">
+              Any unused applications will automatically expire after 6 months, and the plan will no longer be valid.
+            </p>
+
             <h2 className="text-2xl font-bold text-gray-900 mb-4">6. Service Limitations</h2>
             <p className="text-gray-700 mb-6">
               Flashfire does not guarantee job offers, interview calls, hiring outcomes, or employer responses. Our service is designed to maximize your visibility and effectiveness, but we do not control third-party recruiter actions.
