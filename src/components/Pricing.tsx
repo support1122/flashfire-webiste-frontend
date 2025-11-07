@@ -278,7 +278,14 @@ const Pricing = () => {
                     </div>
 
                     <p className="text-gray-600 mb-4 text-sm sm:text-base">{plan.description}</p>
-
+                  {/* Black Friday Discount Badge */}
+                    <div className="mb-4 flex justify-center">
+                      <div className="relative inline-flex items-center gap-2 bg-gradient-to-r from-red-600 via-red-500 to-orange-600 text-white px-4 py-2 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
+                        <span className="text-xs sm:text-sm font-bold tracking-wide">🛍️ BLACK FRIDAY</span>
+                        <span className="text-xs sm:text-sm font-extrabold bg-white/20 px-2 py-0.5 rounded-full">$20 OFF</span>
+                      </div>
+                    </div>
+                    
                     <div className="mb-4">
                       <div className="flex items-center justify-center space-x-2">
                         <span className="text-3xl sm:text-4xl font-bold text-gray-900">${plan.price}</span>
