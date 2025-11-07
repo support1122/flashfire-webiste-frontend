@@ -152,30 +152,14 @@ function App() {
   // Show special offer modal after 4s once per session; close/backdrop prevents re-showing
   useEffect(() => {
     const hasShown = sessionStorage.getItem('special_offer_shown') === 'true';
-    if (hasShown) return;
+    if (hasShown || isAnyModalOpen) return;
 
-    const show = () => {
-      if (!isAnyModalOpen) {
-        setShowSpecialOffer(true);
-      }
-    };
+    const timer = setTimeout(() => {
+      setShowSpecialOffer(true);
+      sessionStorage.setItem('special_offer_shown', 'true');
+    }, 4000);
 
-    // initial delay
-    const timer = setTimeout(show, 4000);
-
-    // if other modals open, retry until free or user navigates away
-    const retry = setInterval(() => {
-      const alreadyMarked = sessionStorage.getItem('special_offer_shown') === 'true';
-      if (!isAnyModalOpen && !alreadyMarked) {
-        setShowSpecialOffer(true);
-        clearInterval(retry);
-      }
-    }, 1000);
-
-    return () => {
-      clearTimeout(timer);
-      clearInterval(retry);
-    };
+    return () => clearTimeout(timer);
   }, [isAnyModalOpen]);
 
   const handleSpecialOfferClose = () => {
