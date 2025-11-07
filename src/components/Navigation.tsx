@@ -50,80 +50,6 @@ const Navigation: React.FC<NavigationProps> = ({
         seconds: 0,
     });
 
-    // ----------------- Dynamic Slot Calculation -----------------
-    // Calculate remaining slots based on current date
-    // Starts with 5 slots on 1st, reduces by 1 every 10 days
-    const getRemainingSlots = () => {
-        const now = new Date();
-        const currentDay = now.getDate();
-
-        // Start with 5 slots on 1st day of month
-        let slots = 5;
-
-        // Reduce by 1 every 10 days
-        if (currentDay >= 11) slots--;
-        if (currentDay >= 21) slots--;
-        if (currentDay >= 25) slots--;
-
-        // Ensure minimum of 1 slot
-        const finalSlots = Math.max(slots, 1);
-
-        // Debug logging (remove in production)
-        console.log(
-            `Current day: ${currentDay}, Remaining slots: ${finalSlots}`
-        );
-
-        return finalSlots;
-    };
-
-    // Test function to verify slot logic (remove in production)
-    const testSlotLogic = () => {
-        const testDays = [1, 10, 11, 20, 21, 24, 25, 30];
-        console.log("Testing slot logic:");
-        testDays.forEach((day) => {
-            let slots = 5;
-            if (day >= 11) slots--;
-            if (day >= 21) slots--;
-            if (day >= 25) slots--;
-            slots = Math.max(slots, 1);
-            console.log(`Day ${day}: ${slots} slots`);
-        });
-    };
-
-    // Run test on component mount (remove in production)
-    useEffect(() => {
-        testSlotLogic();
-    }, []);
-
-    const [remainingSlots, setRemainingSlots] = useState(getRemainingSlots());
-
-    // Update slots when date changes (at midnight)
-    useEffect(() => {
-        const updateSlots = () => {
-            setRemainingSlots(getRemainingSlots());
-        };
-
-        // Update immediately
-        updateSlots();
-
-        // Calculate time until next midnight
-        const now = new Date();
-        const tomorrow = new Date(now);
-        tomorrow.setDate(tomorrow.getDate() + 1);
-        tomorrow.setHours(0, 0, 0, 0);
-        const msUntilMidnight = tomorrow.getTime() - now.getTime();
-
-        // Set timeout for next midnight
-        const timeoutId = setTimeout(() => {
-            updateSlots();
-            // Then update every 24 hours
-            const intervalId = setInterval(updateSlots, 24 * 60 * 60 * 1000);
-            return () => clearInterval(intervalId);
-        }, msUntilMidnight);
-
-        return () => clearTimeout(timeoutId);
-    }, []);
-
     // End of current month at 23:59:59.999 local time
     const getEndOfCurrentMonth = () => {
         const now = new Date();
@@ -250,13 +176,12 @@ const Navigation: React.FC<NavigationProps> = ({
                 { value: Two(timeLeft.seconds), label: "Secs" },
             ].map((item, idx) => (
                 <div key={idx} className="flex flex-col items-center">
-                    <div className="min-w-12 px-3 py-2 rounded-lg bg-white/30 text-white font-extrabold text-sm sm:text-base shadow-md">
+                    <div className="min-w-12 px-3 py-2 rounded-xl bg-gradient-to-br from-[#FFB347]/90 via-[#FF8066]/85 to-[#FF4E50]/90 text-white font-extrabold text-sm sm:text-base shadow-[0_10px_25px_-12px_rgba(255,99,71,0.9)] border border-white/20 backdrop-blur-[2px]">
                         {item.value}
                         <div className=" text-[10px] leading-tight text-white/80 font-normal">
                             {item.label}
                         </div>
                     </div>
-                    {/* <div className="mt-1 text-[10px] leading-tight text-white/90">{item.label}</div> */}
                 </div>
             ))}
         </div>
@@ -584,14 +509,10 @@ const Navigation: React.FC<NavigationProps> = ({
                 </div>
 
                 {/* Enhanced Consultation Banner */}
-                <div className="w-full h-16 bg-gradient-to-r from-orange-500  to-orange-600 shadow-lg relative overflow-hidden">
-                    {/* Background effects (unchanged) */}
-                    <div className="absolute inset-0 opacity-10">
-                        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent animate-pulse"></div>
-                        <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_30%_50%,rgba(255,255,255,0.1),transparent_50%)] animate-pulse"></div>
-                        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent animate-[shimmer_3s_ease-in-out_infinite]"></div>
-                        <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-full animate-[float_6s_ease-in-out_infinite]"></div>
-                        <div className="absolute bottom-0 left-1/4 w-24 h-24 bg-white/5 rounded-full animate-[float_4s_ease-in-out_infinite_reverse]"></div>
+                <div className="relative w-full bg-gradient-to-r from-orange-500 via-red-500 to-orange-600 shadow-[0_10px_40px_-12px_rgba(239,68,68,0.7)]">
+                    <div className="absolute inset-0 opacity-20">
+                        <div className="absolute inset-y-0 left-0 w-1/3 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.45),transparent_55%)]"></div>
+                        <div className="absolute inset-y-0 right-0 w-1/3 bg-[radial-gradient(circle_at_bottom,rgba(255,255,255,0.25),transparent_55%)]"></div>
                     </div>
 
                     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 h-full">
@@ -658,27 +579,20 @@ const Navigation: React.FC<NavigationProps> = ({
 
                         {/* Desktop Layout */}
                         <div className="hidden sm:flex h-full items-center justify-center space-x-1 sm:space-x-4 lg:space-x-8 text-nowrap">
-                            {/* Left: Arrow + text (unchanged) */}
+                            {/* Left: Arrow + text */}
                             <div className="flex items-center space-x-1 sm:space-x-3 lg:space-x-4">
                                 <span className="relative flex h-3 w-3">
                                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white/70 opacity-75"></span>
                                     <span className="relative inline-flex rounded-full h-3 w-3 bg-white"></span>
                                 </span>
                                 <span className="font-bold text-white text-xs sm:text-base lg:text-lg tracking-wide whitespace-nowrap">
-                                    Hurry! {remainingSlots} Slots Remaining
+                                    BLACK FRIDAY SALE
                                 </span>
                             </div>
 
-                            {/* Divider (unchanged) */}
-                            {/* <div className="w-px h-6 sm:h-6 lg:h-8 bg-white/50" /> */}
-
-                            {/* Middle: Countdown + "Just 1 Spot Left" (clock replaced) */}
+                            {/* Middle: Countdown */}
                             <div className="order-last sm:order-none">
                                 <Countdown />
-                                {/* <span className="font-bold text-white text-xs sm:text-base lg:text-lg tracking-wide whitespace-nowrap flex items-center">
-                  <span className="inline-block w-1.5 h-1.5 sm:w-2 sm:h-2 bg-red-300 rounded-full mr-1.5 sm:mr-2 animate-[breathe_1.5s_ease-in-out_infinite]"></span>
-                  10 Slots Left This September
-                </span> */}
                             </div>
                             {isBookPage ? (
                                 <button
