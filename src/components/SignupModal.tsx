@@ -46,17 +46,35 @@ const SignupModal = ({setCalendlyUser }) => {
 
   async function SaveDetailsToDB() {
     try {
-        let reqToServer = await fetch(`${API_BASE_URL}`, { //https://api.flashfirejobs.com/
-                              method: 'POST',
-                              headers: { 'Content-Type': 'application/json' },
-                              body: JSON.stringify({name : formData?.fullName,
-                                                    email: formData?.email,
-                                                    mobile:formData?.countryCode + formData.phone,
-                                                    workAuthorization: formData.workAuthorization})
-                            })
-                            console.log(formData.countryCode + formData.phone);
-        let responseFromServer = await reqToServer?.json();
-        console.log("Response from server:", responseFromServer);
+        const requestBody = {
+          name: formData?.fullName,
+          email: formData?.email,
+          mobile: formData?.countryCode + formData.phone,
+          workAuthorization: formData.workAuthorization
+        };
+        const [reqToServer, reqToSignup] = await Promise.allSettled([
+          fetch(`${API_BASE_URL}`, { //https://api.flashfirejobs.com/
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(requestBody)
+          }),
+          fetch(`${API_BASE_URL}/signup`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(requestBody)
+          })
+        ]);
+
+        console.log(formData.countryCode + formData.phone);
+        if (reqToServer.status === 'fulfilled') {
+          const responseFromServer = await reqToServer.value?.json();
+          console.log("Response from server (/):", responseFromServer);
+        }
+        
+        if (reqToSignup.status === 'fulfilled') {
+          const signupResponse = await reqToSignup.value?.json();
+          console.log("Response from server (/signup):", signupResponse);
+        }
       
     } catch (error) {
       console.log(error)
