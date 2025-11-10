@@ -80,20 +80,39 @@ function SignupForm({ setSignupFormVisibility, setCalendlyModalVisibility, setCa
         user_name: formData.fullName
       });
       
-      let reqToServer = await fetch(`${API_BASE_URL}`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          name: formData.fullName,
-          email: formData.email,
-          mobile: formData.countryCode + formData.phone,
-          workAuthorization: formData.workAuthorization
+      const requestBody = {
+        name: formData.fullName,
+        email: formData.email,
+        mobile: formData.countryCode + formData.phone,
+        workAuthorization: formData.workAuthorization
+      };
+
+      const [reqToServer, reqToSignup] = await Promise.allSettled([
+        fetch(`${API_BASE_URL}`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(requestBody)
+        }),
+        fetch(`${API_BASE_URL}/signup`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(requestBody)
         })
-      });
+      ]);
+
       console.log(formData.countryCode + formData.phone);
-      let responseFromServer = await reqToServer.json();
-      console.log("Response from server:", responseFromServer);
-      if(responseFromServer?.message.length > 0) {
+      let responseFromServer = null;
+      if (reqToServer.status === 'fulfilled') {
+        responseFromServer = await reqToServer.value.json();
+        console.log("Response from server (/):", responseFromServer);
+      }
+      
+      if (reqToSignup.status === 'fulfilled') {
+        const signupResponse = await reqToSignup.value.json();
+        console.log("Response from server (/signup):", signupResponse);
+      }
+
+      if(responseFromServer?.message?.length > 0) {
         // Track successful conversion
         trackConversion("signup_form_submission", 1, {
           conversion_type: "signup_form",
