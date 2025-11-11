@@ -25,7 +25,7 @@ type NavItem =
     | { name: "Blog" | "Employers"; type: "route"; to: string };
 
 const Navigation: React.FC<NavigationProps> = ({
-    setSignupFormVisibility,
+    setSignupFormVisibility: _setSignupFormVisibility,
     setCalendlyModalVisibility,
     handleBookingAttempt,
 }) => {
@@ -42,7 +42,7 @@ const Navigation: React.FC<NavigationProps> = ({
     // const [employerFormVisible, setEmployerFormVisible] = useState(false);
 
     // ----------------- Countdown (Days / Hrs / Mins / Secs) -----------------
-    // Monthly countdown that rolls over to the end of next month after expiry.
+    // Targeted countdown for Black Friday campaign (Nov 28, 2025 @ 00:00)
     const [timeLeft, setTimeLeft] = useState({
         days: 0,
         hours: 0,
@@ -50,113 +50,32 @@ const Navigation: React.FC<NavigationProps> = ({
         seconds: 0,
     });
 
-    // End of current month at 23:59:59.999 local time
-    const getEndOfCurrentMonth = () => {
-        const now = new Date();
-        const year = now.getFullYear();
-        const month = now.getMonth();
-        const lastDayOfMonth = new Date(year, month + 1, 0);
-        lastDayOfMonth.setHours(23, 59, 59, 999);
-        return lastDayOfMonth.getTime();
-    };
-
-    // End of next month at 23:59:59.999 local time
-    const getEndOfNextMonth = () => {
-        const now = new Date();
-        const year = now.getFullYear();
-        const month = now.getMonth();
-        const lastDayOfNextMonth = new Date(year, month + 2, 0);
-        lastDayOfNextMonth.setHours(23, 59, 59, 999);
-        return lastDayOfNextMonth.getTime();
-    };
+    const blackFridayTarget = new Date(2025, 10, 28, 0, 0, 0).getTime();
 
     useEffect(() => {
         const tick = () => {
             const now = Date.now();
-            const currentMonthEnd = getEndOfCurrentMonth();
+            const distance = blackFridayTarget - now;
 
-            if (now >= currentMonthEnd) {
-                // Month ended → countdown to end of next month
-                const nextMonthEnd = getEndOfNextMonth();
-                const distance = nextMonthEnd - now;
-                if (distance <= 0) {
-                    // Defensive: recompute once
-                    const retryDistance = getEndOfNextMonth() - now;
-                    if (retryDistance <= 0) {
-                        setTimeLeft({
-                            days: 0,
-                            hours: 0,
-                            minutes: 0,
-                            seconds: 0,
-                        });
-                        return;
-                    }
-                    const days = Math.floor(
-                        retryDistance / (1000 * 60 * 60 * 24)
-                    );
-                    const hours = Math.floor(
-                        (retryDistance % (1000 * 60 * 60 * 24)) /
-                            (1000 * 60 * 60)
-                    );
-                    const minutes = Math.floor(
-                        (retryDistance % (1000 * 60 * 60)) / (1000 * 60)
-                    );
-                    const seconds = Math.floor(
-                        (retryDistance % (1000 * 60)) / 1000
-                    );
-                    setTimeLeft({ days, hours, minutes, seconds });
-                    return;
-                }
-                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-                const hours = Math.floor(
-                    (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
-                );
-                const minutes = Math.floor(
-                    (distance % (1000 * 60 * 60)) / (1000 * 60)
-                );
-                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-                setTimeLeft({ days, hours, minutes, seconds });
-            } else {
-                // Still within current month → countdown to its end
-                const distance = currentMonthEnd - now;
-                if (distance <= 0) {
-                    const nextMonthEnd = getEndOfNextMonth();
-                    const nextDistance = nextMonthEnd - now;
-                    if (nextDistance <= 0) {
-                        setTimeLeft({
-                            days: 0,
-                            hours: 0,
-                            minutes: 0,
-                            seconds: 0,
-                        });
-                        return;
-                    }
-                    const days = Math.floor(
-                        nextDistance / (1000 * 60 * 60 * 24)
-                    );
-                    const hours = Math.floor(
-                        (nextDistance % (1000 * 60 * 60 * 24)) /
-                            (1000 * 60 * 60)
-                    );
-                    const minutes = Math.floor(
-                        (nextDistance % (1000 * 60 * 60)) / (1000 * 60)
-                    );
-                    const seconds = Math.floor(
-                        (nextDistance % (1000 * 60)) / 1000
-                    );
-                    setTimeLeft({ days, hours, minutes, seconds });
-                    return;
-                }
-                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-                const hours = Math.floor(
-                    (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
-                );
-                const minutes = Math.floor(
-                    (distance % (1000 * 60 * 60)) / (1000 * 60)
-                );
-                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-                setTimeLeft({ days, hours, minutes, seconds });
+            if (distance <= 0) {
+                setTimeLeft({
+                    days: 0,
+                    hours: 0,
+                    minutes: 0,
+                    seconds: 0,
+                });
+                return;
             }
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor(
+                (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+            );
+            const minutes = Math.floor(
+                (distance % (1000 * 60 * 60)) / (1000 * 60)
+            );
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            setTimeLeft({ days, hours, minutes, seconds });
         };
 
         // Initial calculation and interval update
@@ -176,12 +95,13 @@ const Navigation: React.FC<NavigationProps> = ({
                 { value: Two(timeLeft.seconds), label: "Secs" },
             ].map((item, idx) => (
                 <div key={idx} className="flex flex-col items-center">
-                    <div className="min-w-12 px-3 py-2 rounded-xl bg-gradient-to-br from-[#FFB347]/90 via-[#FF8066]/85 to-[#FF4E50]/90 text-white font-extrabold text-sm sm:text-base shadow-[0_10px_25px_-12px_rgba(255,99,71,0.9)] border border-white/20 backdrop-blur-[2px]">
+                    <div className="min-w-12 px-3 py-2 rounded-xl bg-white/15 backdrop-blur-sm text-white font-extrabold text-sm sm:text-base shadow-[0_12px_30px_-18px_rgba(255,255,255,0.8)] border border-white/30">
                         {item.value}
-                        <div className=" text-[10px] leading-tight text-white/80 font-normal">
+                        <div className=" text-[10px] leading-tight text-white/75 font-normal">
                             {item.label}
                         </div>
                     </div>
+                    {/* <div className="mt-1 text-[10px] leading-tight text-white/90">{item.label}</div> */}
                 </div>
             ))}
         </div>
@@ -247,31 +167,6 @@ const Navigation: React.FC<NavigationProps> = ({
         }
 
         if (closeMenu) setIsMenuOpen(false);
-    };
-
-    const openSignup = () => {
-        setSignupFormVisibility(true);
-        setIsMenuOpen(false);
-
-        // Track with both GTag and PostHog
-        safeTrack({
-            eventName: "sign_up_click",
-            label: "Header Sign Up Button",
-            utmParams: {
-                utm_source: "WEBSITE",
-                utm_medium: "NAVBAR_SIGNUP_BUTTON",
-                utm_campaign: "header_signup",
-            },
-        });
-
-        // PostHog tracking
-        trackButtonClick("Get Started Now", "navigation_header", "cta", {
-            button_location: "header",
-            navigation_type: "desktop",
-        });
-        trackModalOpen("signup_form", "navigation_button", {
-            trigger_source: "header_cta",
-        });
     };
 
     const openCalendly = () => {
@@ -508,94 +403,121 @@ const Navigation: React.FC<NavigationProps> = ({
                     )}
                 </div>
 
-                {/* Enhanced Consultation Banner */}
-                <div className="relative w-full bg-gradient-to-r from-orange-500 via-red-500 to-orange-600 shadow-[0_10px_40px_-12px_rgba(239,68,68,0.7)]">
-                    <div className="absolute inset-0 opacity-20">
-                        <div className="absolute inset-y-0 left-0 w-1/3 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.45),transparent_55%)]"></div>
-                        <div className="absolute inset-y-0 right-0 w-1/3 bg-[radial-gradient(circle_at_bottom,rgba(255,255,255,0.25),transparent_55%)]"></div>
+                {/* Black Friday Banner */}
+                <div className="relative w-full bg-gradient-to-r from-[#ff8724] via-[#ff5349] to-[#ff7d1f] shadow-[0_10px_40px_-12px_rgba(249,115,22,0.55)]">
+                    <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+                        {/* TOP LEFT */}
+                        <div className="absolute top-0 left-6 w-36 h-16 overflow-hidden">
+                            <div className="relative w-36 h-36 -translate-y-1/2">
+                                <div className="w-full h-full rounded-full bg-gradient-to-r from-white/90 via-white/55 to-white/20"></div>
+                                <div className="absolute inset-5 rounded-full bg-gradient-to-r from-[#ff8725] to-[#ff7d2b]"></div>
+                            </div>
+                        </div>
+                        {/* TOP RIGHT */}
+                        <div className="absolute top-0 right-6 w-36 h-20 overflow-hidden">
+                            <div className="relative w-36 h-36 -translate-y-1/2">
+                                <div className="w-full h-full rounded-full bg-gradient-to-r from-white/80 via-white/55 to-white/20"></div>
+                                <div className="absolute inset-5 rounded-full bg-gradient-to-r from-[#ff8725] to-[#ff7d2b]"></div>
+                            </div>
+                        </div>
+                        {/* BOTTOM LEFT */}
+                        <div className="absolute bottom-0 left-40 translate-y-1/2 w-28 h-[72px] overflow-hidden">
+                            <div className="relative w-28 h-28">
+                                <div className="w-full h-full rounded-full bg-gradient-to-r from-white/80 via-white/55 to-white/20"></div>
+                                <div className="absolute inset-5 rounded-full bg-gradient-to-r from-[#ff8725] to-[#ff7d2b]"></div>
+                            </div>
+                        </div>
+                        {/* BOTTOM RIGHT */}
+                        <div className="absolute bottom-0 right-40 translate-y-1/2 w-28 h-[72px] overflow-hidden">
+                            <div className="relative w-28 h-28">
+                                <div className="w-full h-full rounded-full bg-gradient-to-r from-white/80 via-white/55 to-white/20"></div>
+                                <div className="absolute inset-5 rounded-full bg-gradient-to-r from-[#ff8725] to-[#ff7d2b]"></div>
+                            </div>
+                        </div>
                     </div>
 
                     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 h-full">
                         {/* Mobile Layout */}
-                        <div className="sm:hidden h-full flex items-center justify-between gap-3 px-2">
-                            {/* Left: Countdown (replaces clock icon) */}
-                            <div className="flex-shrink-0">
-                                <Countdown />
+                        <div className="sm:hidden h-full flex flex-col gap-2 py-3 px-2">
+                            <div className="flex flex-wrap items-center justify-center gap-2 text-xs font-semibold text-white text-center">
+                                <span className="tracking-wide">
+                                    BLACK FRIDAY SALE
+                                </span>
+                                <span className="text-white/70">•</span>
+                                <span className="font-medium text-white">
+                                    Get flat $20 discount on all plans
+                                </span>
                             </div>
-
-                            {/* Middle: Only 1 Spot Remaining (unchanged) */}
-                            {/* <div className="flex-1 min-w-0 flex items-center justify-center">
-                <span className="inline-block w-2 h-2 bg-red-300 rounded-full mr-2 animate-[breathe_1.5s_ease-in-out_infinite]"></span>
-                <span className="text-white font-semibold text-sm opacity-95 truncate">
-                  10 Slots Left 
-                </span>
-              </div> */}
-
-                            {/* Right: Book Now */}
-                            <div className="flex-shrink-0">
-                                {location.pathname === "/book-free-demo" ? (
-                                    <button
-                                        onClick={() => {
-                                            trackButtonClick(
-                                                "Book Now",
-                                                "navigation_banner_mobile",
-                                                "cta",
-                                                {
-                                                    button_location:
-                                                        "banner_mobile",
-                                                    navigation_type:
-                                                        "mobile_banner",
-                                                }
-                                            );
-                                            openCalendly();
-                                        }}
-                                        className="rounded-full bg-white text-red-600 font-bold px-5 sm:px-6 py-2 shadow-lg hover:shadow-xl transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-white/80"
-                                    >
-                                        Book Now
-                                    </button>
-                                ) : (
-                                    <button
-                                        onClick={() => {
-                                            trackButtonClick(
-                                                "Book Now",
-                                                "navigation_banner_mobile",
-                                                "cta",
-                                                {
-                                                    button_location:
-                                                        "banner_mobile",
-                                                    navigation_type:
-                                                        "mobile_banner",
-                                                }
-                                            );
-                                            openCalendly();
-                                        }}
-                                        className="rounded-full bg-white text-red-600 font-bold px-5 sm:px-6 py-2 shadow-lg hover:shadow-xl transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-white/80"
-                                    >
-                                        Book Now
-                                    </button>
-                                )}
+                            <div className="flex items-center justify-between gap-3">
+                                <div className="flex-shrink-0">
+                                    <Countdown />
+                                </div>
+                                <div className="flex-shrink-0">
+                                    {isBookPage ? (
+                                        <button
+                                            onClick={() => {
+                                                trackButtonClick(
+                                                    "Book Now",
+                                                    "navigation_banner_mobile",
+                                                    "cta",
+                                                    {
+                                                        button_location:
+                                                            "banner_mobile",
+                                                        navigation_type:
+                                                            "mobile_banner",
+                                                    }
+                                                );
+                                                openCalendly();
+                                            }}
+                                            className="rounded-full bg-white text-red-600 font-bold px-5 sm:px-6 py-2 shadow-lg hover:shadow-xl transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-white/80"
+                                        >
+                                            Book Now
+                                        </button>
+                                    ) : (
+                                        <button
+                                            onClick={() => {
+                                                trackButtonClick(
+                                                    "Book Now",
+                                                    "navigation_banner_mobile",
+                                                    "cta",
+                                                    {
+                                                        button_location:
+                                                            "banner_mobile",
+                                                        navigation_type:
+                                                            "mobile_banner",
+                                                    }
+                                                );
+                                                openCalendly();
+                                            }}
+                                            className="rounded-full bg-white text-red-600 font-bold px-5 sm:px-6 py-2 shadow-lg hover:shadow-xl transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-white/80"
+                                        >
+                                            Book Now
+                                        </button>
+                                    )}
+                                </div>
                             </div>
                         </div>
 
                         {/* Desktop Layout */}
                         <div className="hidden sm:flex h-full items-center justify-center space-x-1 sm:space-x-4 lg:space-x-8 text-nowrap">
-              {/* Left: Arrow + text (unchanged) */}
-              <div className="flex items-center space-x-2 sm:space-x-3 lg:space-x-4">
-                <span className="relative flex h-3 w-3">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white/70 opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-3 w-3 bg-white"></span>
-                </span>
-                <span className="font-bold text-white text-xs sm:text-base lg:text-lg tracking-wide whitespace-nowrap">
-                  BLACK FRIDAY SALE
-                </span>
-                <span className="text-white/70 text-base sm:text-lg">•</span>
-                <span className="font-medium text-white text-xs sm:text-base lg:text-lg tracking-wide whitespace-nowrap">
-                  Get flat $20 discount on all plans
-                </span>
-                <span className="text-white/70 text-base sm:text-lg">•</span>
-              </div>
-
-                            {/* Middle: Countdown */}
+                            <div className="flex items-center space-x-2 sm:space-x-3 lg:space-x-4">
+                                <span className="relative flex h-3 w-3">
+                                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white/70 opacity-75"></span>
+                                    <span className="relative inline-flex rounded-full h-3 w-3 bg-white"></span>
+                                </span>
+                                <span className="font-bold text-white text-xs sm:text-base lg:text-lg tracking-wide whitespace-nowrap">
+                                    BLACK FRIDAY SALE
+                                </span>
+                                <span className="text-white/70 text-base sm:text-lg">
+                                    •
+                                </span>
+                                <span className="font-medium text-white text-xs sm:text-base lg:text-lg tracking-wide whitespace-nowrap">
+                                    Get flat $20 discount on all plans
+                                </span>
+                                <span className="text-white/70 text-base sm:text-lg">
+                                    •
+                                </span>
+                            </div>
                             <div className="order-last sm:order-none">
                                 <Countdown />
                             </div>
