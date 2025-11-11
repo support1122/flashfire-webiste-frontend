@@ -579,16 +579,21 @@ const Navigation: React.FC<NavigationProps> = ({
 
                         {/* Desktop Layout */}
                         <div className="hidden sm:flex h-full items-center justify-center space-x-1 sm:space-x-4 lg:space-x-8 text-nowrap">
-                            {/* Left: Arrow + text */}
-                            <div className="flex items-center space-x-1 sm:space-x-3 lg:space-x-4">
-                                <span className="relative flex h-3 w-3">
-                                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white/70 opacity-75"></span>
-                                    <span className="relative inline-flex rounded-full h-3 w-3 bg-white"></span>
-                                </span>
-                                <span className="font-bold text-white text-xs sm:text-base lg:text-lg tracking-wide whitespace-nowrap">
-                                    BLACK FRIDAY SALE
-                                </span>
-                            </div>
+              {/* Left: Arrow + text (unchanged) */}
+              <div className="flex items-center space-x-2 sm:space-x-3 lg:space-x-4">
+                <span className="relative flex h-3 w-3">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white/70 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-3 w-3 bg-white"></span>
+                </span>
+                <span className="font-bold text-white text-xs sm:text-base lg:text-lg tracking-wide whitespace-nowrap">
+                  BLACK FRIDAY SALE
+                </span>
+                <span className="text-white/70 text-base sm:text-lg">•</span>
+                <span className="font-medium text-white text-xs sm:text-base lg:text-lg tracking-wide whitespace-nowrap">
+                  Get flat $20 discount on all plans
+                </span>
+                <span className="text-white/70 text-base sm:text-lg">•</span>
+              </div>
 
                             {/* Middle: Countdown */}
                             <div className="order-last sm:order-none">
